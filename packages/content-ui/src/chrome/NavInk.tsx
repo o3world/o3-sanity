@@ -2,22 +2,21 @@
 
 import { useEffect } from 'react'
 
+import { dataBackground, forgetListener, lqipPixels } from './navInkImage'
+import {
+  averageLuminance,
+  LIGHT_LUMINANCE,
+  luminance,
+  sampledRegion,
+  type Box,
+} from './navInkSample'
+
 /**
  * The id `SiteNav` puts on its `<header>` and hands back here. The controller
  * styles nothing itself; it only decides which of the header's two skins is
  * live, and the CSS in `SiteNav` does the rest.
  */
 export const NAV_INK_TARGET = 'site-nav'
-
-/**
- * Perceived luminance above which a surface counts as light —
- * `0.299r + 0.587g + 0.114b > 140`, the prototype's threshold verbatim.
- *
- * It sits deliberately above mid-grey (127.5): `--color-bone` (#F1F0EC, ~240)
- * and white clear it easily, and every ink surface in the palette is nowhere
- * near it — `--color-ink` lands at 10.
- */
-const LIGHT_LUMINANCE = 140
 
 /**
  * Alpha at or above which a background is treated as the surface, rather than
@@ -33,12 +32,16 @@ const LIGHT_LUMINANCE = 140
 const OPAQUE_ALPHA = 0.9
 
 /**
- * Slack, in px, when asking whether a candidate spans the bar. Sub-pixel
- * layout and a rounded scrollbar gutter routinely leave a full-width band a
- * fraction short of the pill's own box; 1px absorbs that without letting
- * anything that is genuinely narrower through.
+ * How many columns the bar is read as.
+ *
+ * The bar is 900px wide and the things it crosses are not: a three-up card
+ * grid puts three pictures and two gutters under it at once, and one sample at
+ * the centre answers for whichever of the five it happens to land in. Nine
+ * columns is one per 100px of pill — fine enough that a card cannot be missed
+ * and coarse enough that the whole read is nine hit-tests against boxes the
+ * engine has already laid out.
  */
-const SPAN_TOLERANCE = 1
+const COLUMNS = 9
 
 /**
  * The surfaces this design paints a dark ground with, and the ones it paints
@@ -49,7 +52,7 @@ const SPAN_TOLERANCE = 1
  * computed style can report.
  *
  * A value in neither set is not guessed at: the walk falls through to the
- * computed background, which is what every element without a declaration gets.
+ * picture, and then to the computed background.
  */
 const DARK_SURFACES = new Set(['ink'])
 const LIGHT_SURFACES = new Set(['white', 'paper', 'bone'])
@@ -57,111 +60,109 @@ const LIGHT_SURFACES = new Set(['white', 'paper', 'bone'])
 /**
  * Is this element's ground light — or is it no ground at all (`null`)?
  *
- * `getComputedStyle` normalises every authored form to `rgb(r, g, b)` or
- * `rgba(r, g, b, a)` and nothing else, so two shapes are all the fallback has
- * to read.
+ * Three answers in order, because that is the order the browser paints in and
+ * the order of how much each one knows:
+ *
+ * 1. **The declaration.** `data-surface` is already how this design says what
+ *    an element's ground is — it is what re-points the text roles
+ *    (tokens/color.css), and the rule beside them is that whatever paints a
+ *    dark background sets `data-surface="ink"`. One attribute lookup, and it
+ *    is the only thing that can speak for a photograph under a gradient scrim,
+ *    where every colour in the stack is transparent.
+ * 2. **The picture.** `SanityImage` paints each photograph's LQIP as the
+ *    `<img>`'s own background, sized and positioned to match the `object-fit`
+ *    it carries — so the placeholder is a 20px stand-in for exactly what that
+ *    element shows, already in the document, and a `data:` URI that taints no
+ *    canvas. Read it and the bar knows the tone of the strip of picture it is
+ *    actually over, rather than the tone of the band behind it.
+ * 3. **The fill.** `getComputedStyle` normalises every authored form to
+ *    `rgb(r, g, b)` or `rgba(r, g, b, a)` and nothing else, so two shapes are
+ *    all this has to read.
+ *
+ * The fallthrough does the skipping that matters. A translucent overlay fails
+ * `OPAQUE_ALPHA` and the walk continues past it to what it is veiling. An
+ * element carrying only a gradient or a CDN url has a transparent
+ * background-color, so it is skipped too, and the element behind it is judged
+ * exactly.
+ *
+ * `undefined` is the fourth answer and a temporary one: a picture whose LQIP
+ * has not finished decoding. That column stays unread for a frame or two
+ * rather than being answered by the band behind the picture.
  */
-function groundOf(element: Element): boolean | null {
+function groundOf(element: Element, sample: Box, onReady: () => void): boolean | null | undefined {
   const declared = element.getAttribute('data-surface')
   if (declared) {
     if (DARK_SURFACES.has(declared)) return false
     if (LIGHT_SURFACES.has(declared)) return true
   }
-  const channels = getComputedStyle(element).backgroundColor.match(/[\d.]+/g)
+
+  const style = getComputedStyle(element)
+  const uri = dataBackground(style.backgroundImage)
+  if (uri) {
+    const pixels = lqipPixels(uri, onReady)
+    if (pixels === undefined) return undefined
+    if (pixels) {
+      const [x, y] = style.backgroundPosition.split(' ')
+      const region = sampledRegion(
+        sample,
+        element.getBoundingClientRect(),
+        pixels,
+        style.backgroundSize !== 'contain',
+        { x: x ?? '50%', y: y ?? x ?? '50%' },
+      )
+      const mean = region && averageLuminance(pixels, region)
+      if (mean !== null && mean !== undefined) return mean > LIGHT_LUMINANCE
+    }
+  }
+
+  const channels = style.backgroundColor.match(/[\d.]+/g)
   if (!channels || channels.length < 3) return null
   const [r, g, b, alpha] = channels.map(Number) as [number, number, number, number | undefined]
   if ((alpha ?? 1) < OPAQUE_ALPHA) return null
-  return r * 0.299 + g * 0.587 + b * 0.114 > LIGHT_LUMINANCE
+  return luminance(r, g, b) > LIGHT_LUMINANCE
 }
 
 /**
- * The nav's ink flip, carried from the prototype's `nav ink` script.
+ * The nav's ink flip.
  *
  * The bar is pinned, so it spends the page crossing bands: white copy over the
  * hero, unreadable two sections later over `bone`. On every scroll frame this
  * asks one question — what is actually underneath the bar right now? — and
  * answers it by toggling `data-ink="dark"` on the header. Nothing else about
- * the bar is touched from JS. The prototype wrote inline styles onto each link;
- * here the attribute is the whole API and the `group-data-` variants in
- * `SiteNav` carry the appearance, so the flipped skin is inspectable in the
- * class list rather than only in a debugger.
+ * the bar is touched from JS; the attribute is the whole API, and the
+ * `group-data-` variants in `SiteNav` carry the appearance, so the flipped skin
+ * is inspectable in the class list rather than only in a debugger.
  *
- * ── WHY A HIT-TEST, NOT A LIST ─────────────────────────────────────────────
+ * ── THE BAR IS READ IN COLUMNS ─────────────────────────────────────────────
  *
- * This used to collect `section, footer` on mount, keep the ones whose own
- * background-color read light, and ask whether any of their rects spanned the
- * bar. That is the prototype's algorithm and it is wrong on a real page, in
- * two ways that both showed up in the browser:
+ * `elementsFromPoint` at a column's centre returns the stack under that point,
+ * front to back, ending at `<body>` and `<html>`. Walk it, skip anything inside
+ * the header (the bar is fixed, so it is always first, and it would otherwise
+ * sample its own scrim), and take the FIRST element that reads as a ground at
+ * all. Falling off the end means nothing did, all the way down to `<html>` —
+ * the browser is painting its default canvas, which is white.
  *
- * - **It could only see light that a `<section>` declared itself.** A band left
- *   transparent over the document's white, a light-filled `<div>` that is not a
- *   section, the hero's bone dome — all light under the bar, none of them in
- *   the list, so the bar stayed white on white.
- * - **The list was built once.** The old comment here admitted the staleness
- *   and guessed it would not matter. It did.
+ * That is one column. The bar takes the answer the **majority** of its columns
+ * give, and a tie goes to dark, because the two skins fail asymmetrically: the
+ * light skin is white copy on a 20% black scrim, and the dark skin is
+ * `#232323` copy on a 10% one. Over the wrong ground the first is merely thin
+ * and the second disappears.
  *
- * So the question is asked of the page instead of a cache:
- * `elementsFromPoint` at the bar's vertical midpoint returns the stack under
- * that point, front to back, ending at `<body>` and `<html>`. Walk it, skip
- * anything inside the header (the bar is fixed, so it is always first, and it
- * would otherwise sample its own scrim), and take the FIRST element that reads
- * as a ground at all.
+ * Columns are what make the bar honest over things narrower than itself. A
+ * three-up card grid on a bone band is five different grounds at once — three
+ * near-black pictures and two gutters — and the bar is legible over it only if
+ * the pictures get a vote. A single white button on a dark hero gets its vote
+ * too, and loses eight to one.
  *
- * **A ground is a declaration, or failing that a fill.** `data-surface` is
- * already how this design says what an element's ground is — it is what
- * re-points the text roles (tokens/color.css), and the rule beside them is
- * that whatever paints a dark background sets `data-surface="ink"`. Reading it
- * here costs one attribute lookup and answers the case a fill cannot: a
- * full-bleed photograph under an ink scrim, whose darkness lives in pixels no
- * computed style reports. Everything undeclared falls back to
- * `background-color`, so a band that arrives from a new block type, a document
- * template or the footer is still classified without registering anything.
+ * ── KNOWN LIMITATION: PICTURES WITH NO LQIP ────────────────────────────────
  *
- * The fallback does the skipping that matters. A translucent overlay fails
- * `OPAQUE_ALPHA` and the walk continues past it to what it is veiling. An
- * element carrying only a background-image — a gradient wash, an undeclared
- * photo — has a transparent background-color, so it is skipped too: judging an
- * image cheaply is not possible, and the element behind it can be judged
- * exactly. An element with an image over an opaque fill is judged on the fill,
- * which is the honest answer available and the one the designer chose as its
- * base.
- *
- * **A candidate also has to be wide enough to BE the surface.** The hero's
- * white button and the bone insights cards both sit under the sample point on
- * the way past, and both won the walk on colour alone — a 180px button flipping
- * a 900px bar is a false positive that reads as a flicker while scrolling. So a
- * candidate must span the PILL horizontally. The pill and not the header: the
- * header is edge-to-edge at every width so the pill can centre inside it, and
- * measuring against that box asks whether a candidate covers the whole
- * viewport. A /work case-study card is 1248 of a 1600 window and covers the
- * 900px pill entirely, which is the only width the question is about; against
- * the header it failed, and the bar wore dark ink over a near-black card.
- * Anything narrower than the pill is furniture ON the band, and the walk
- * continues to what the furniture is sitting on.
- *
- * Falling off the end of the walk means nothing read as a ground all the way
- * down to `<html>` — the browser is painting its default canvas, which is
- * white. Light, therefore, and the bar flips. Horizontal position is the pill's
- * own centre: every band in this design is full-width, so one column answers
- * for the row.
- *
- * ── KNOWN LIMITATION: UNDECLARED PICTURES ──────────────────────────────────
- *
- * An `<img>` has no background-color, so where nothing around it declares a
- * surface the walk passes straight through to whatever contains it. Scrolling
- * an Insights article, the bar crosses the inline photographs still wearing the
- * light skin it took from the white column behind them.
- *
- * It is left that way on purpose. Reading the actual tone of a picture means
- * sampling pixels: a canvas draw per frame, and a CORS taint on every image
- * served from the CDN. The way out is the declaration, not a harder sampler —
- * an inline figure that wants the bar to know it is dark says so the same way
- * the case-study card does.
- *
- * **This is cheaper than what it replaced.** One `elementsFromPoint` plus a
- * short walk is a hit-test against boxes the engine has already laid out, where
- * the old sample called `getBoundingClientRect` on every band on the page,
- * every frame. Fewer forced reads, not more.
+ * The projections that ask for `metadata{lqip, isOpaque}` are the photographic
+ * fields; a logo field carries no LQIP, and neither does an asset with
+ * transparency (Sanity renders every LQIP onto a flat ground, which would
+ * report a plate the real asset never paints). Those elements have no ground
+ * of their own, so the walk passes through to whatever contains them — which is
+ * the right answer for a logo on a band, and a guess for anything else. The way
+ * out is the declaration, not a harder sampler.
  *
  * The flip is a colour state, not motion — it is not gated on
  * `prefers-reduced-motion`, and the SSR/no-JS output is simply the default dark
@@ -187,6 +188,8 @@ function groundOf(element: Element): boolean | null {
  *   neither a scroll nor a resize. `MutationObserver` sees the swap.
  * - **A restore from the back/forward cache.** The page comes back with its
  *   effects never re-run, so `pageshow` is the only signal there is.
+ * - **An LQIP finishing its decode.** The first frame over a picture cannot
+ *   read it yet; the decode says when it can.
  *
  * Everything funnels through `schedule`, so however many of them fire at once
  * the bar is still sampled at most once per frame.
@@ -194,43 +197,52 @@ function groundOf(element: Element): boolean | null {
 export function watchNavInk(header: HTMLElement): () => void {
   let frame = 0
 
+  // Declared before `isOverLight` needs it, and passed down to `groundOf` so a
+  // decode that lands after the sample can ask for another one.
+  const schedule = () => {
+    if (frame) return
+    frame = requestAnimationFrame(sample)
+  }
+
   const isOverLight = () => {
     // The PILL, not the header. The header is edge-to-edge at every width so
-    // that the pill can centre inside it, and measuring the span against that
-    // box asks whether a candidate covers the whole viewport — which a
-    // full-bleed case-study card, 1248 of a 1600 window, does not. It covers
-    // the 900px pill completely, which is the only width the question is about.
+    // that the pill can centre inside it, and the pill is the box that has to
+    // stay legible.
     const pill = header.querySelector('nav') ?? header
     const bar = pill.getBoundingClientRect()
     const midpoint = bar.bottom - bar.height / 2
-    for (const element of document.elementsFromPoint((bar.left + bar.right) / 2, midpoint)) {
-      if (header.contains(element)) continue
-      const light = groundOf(element)
-      if (light === null) continue
-      // Only measure the handful of elements that got this far, never the
-      // whole stack. `<body>` and `<html>` span everything, so the walk
-      // always terminates somewhere.
-      const box = element.getBoundingClientRect()
-      if (box.left > bar.left + SPAN_TOLERANCE || box.right < bar.right - SPAN_TOLERANCE) continue
-      return light
+    const slice = bar.width / COLUMNS
+
+    let light = 0
+    let read = 0
+    for (let column = 0; column < COLUMNS; column++) {
+      const left = bar.left + slice * column
+      const strip: Box = { left, right: left + slice, top: bar.top, bottom: bar.bottom }
+      let ground: boolean | null | undefined = true
+      for (const element of document.elementsFromPoint(left + slice / 2, midpoint)) {
+        if (header.contains(element)) continue
+        ground = groundOf(element, strip, schedule)
+        if (ground !== null) break
+        // A veil, a gradient, an element with no ground of its own: keep
+        // walking to what it is over.
+        ground = true
+      }
+      // Still decoding: this column has no answer yet, so it casts no vote.
+      if (ground === undefined) continue
+      read++
+      if (ground) light++
     }
-    // Nothing that reads as a ground under the bar, `<html>` included: the
-    // browser is painting its default canvas.
-    return true
+
+    // No column could be read at all — every one of them is over a picture
+    // still decoding. Hold the skin the server rendered rather than flip twice.
+    if (read === 0) return false
+    return light * 2 > read
   }
 
   const sample = () => {
     frame = 0
     if (isOverLight()) header.dataset.ink = 'dark'
     else delete header.dataset.ink
-  }
-
-  // Scroll fires far faster than the compositor paints, and a reflow can fire
-  // several of the triggers below at once. One sample per frame is all that
-  // can show up on screen either way.
-  const schedule = () => {
-    if (frame) return
-    frame = requestAnimationFrame(sample)
   }
 
   sample()
@@ -255,6 +267,7 @@ export function watchNavInk(header: HTMLElement): () => void {
     window.removeEventListener('pageshow', schedule)
     reflow.disconnect()
     swap.disconnect()
+    forgetListener(schedule)
   }
 }
 

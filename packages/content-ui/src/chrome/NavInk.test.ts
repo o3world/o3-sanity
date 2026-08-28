@@ -5,21 +5,26 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { watchNavInk } from './NavInk'
 
 /**
- * #318 — the bar came up in the wrong skin on some loads and stayed there.
+ * Two things this pins down.
  *
- * The failure was never the walk; it was WHEN the walk ran. The answer was
- * taken once at mount and refreshed only by `scroll` and `resize`, and a page
- * load changes the surface under a fixed bar in several ways that fire
- * neither: fonts and images settling, content streaming in, a client-side
- * route change under a layout that never unmounts, a back/forward-cache
- * restore. Every test here moves the band under the bar WITHOUT touching the
- * scroll position or the viewport, which is exactly the shape of the bug.
+ * **What the bar reads.** It is sampled in columns across the pill and takes
+ * the majority, so a card grid narrower than the bar still gets a vote and a
+ * button does not carry one. Every element here therefore carries a real
+ * horizontal extent, and the scripted `elementsFromPoint` answers per x — the
+ * failure those tests describe is invisible to a harness that hands the same
+ * stack to every column.
+ *
+ * **When it reads it** (#318). The answer used to be taken at mount and
+ * refreshed only by `scroll` and `resize`, and a page load changes the surface
+ * under a fixed bar in several ways that fire neither: fonts and images
+ * settling, content streaming in, a client-side route change under a layout
+ * that never unmounts, a back/forward-cache restore. Those tests move the band
+ * under the bar WITHOUT touching the scroll position or the viewport.
  *
  * jsdom has no layout engine, so the page is a script rather than a document:
- * `elementsFromPoint` returns whatever band the test has put under the bar,
- * and each element carries its own rect. That is honest here because the code
- * under test asks the browser exactly three questions — what is under this
- * point, what colour is it, how wide is it — and the bug is in none of them.
+ * each element carries its own rect and the stack is assembled from them. That
+ * is honest here because the code under test asks the browser exactly two
+ * questions — what is under this point, and what colour is it.
  */
 
 const DARK = 'rgb(3, 3, 3)'
@@ -27,7 +32,7 @@ const LIGHT = 'rgb(255, 255, 255)'
 
 /** The header: edge-to-edge, as it is at every width. */
 const BAR = { top: 64, bottom: 144, left: 0, right: 1440, width: 1440, height: 80 }
-/** The pill inside it: 900 centred, which is the box the walk measures against. */
+/** The pill inside it: 900 centred, which is the box the columns divide up. */
 const PILL = { top: 64, bottom: 144, left: 270, right: 1170, width: 900, height: 80 }
 
 function rect(box: Partial<DOMRect> & { top: number; bottom: number }) {
@@ -36,24 +41,39 @@ function rect(box: Partial<DOMRect> & { top: number; bottom: number }) {
 
 let header: HTMLElement
 let stop: () => void
-/** The stack `elementsFromPoint` answers with, front to back. */
-let stack: Element[] = []
+/** Everything on the page, front to back; each column takes what covers it. */
+let painted: Element[] = []
 
-/** A full-width opaque band, of the kind the walk is meant to stop on. */
-function band(color: string) {
+/** Anything the bar can be over: a band, a card, a plate, a button. */
+function plate({
+  color,
+  surface,
+  left = 0,
+  right = 1440,
+}: {
+  color?: string
+  surface?: string
+  left?: number
+  right?: number
+}) {
   const element = document.createElement('div')
-  element.style.backgroundColor = color
-  element.getBoundingClientRect = () => rect({ top: 0, bottom: 2000 })
+  if (color) element.style.backgroundColor = color
+  if (surface) element.dataset.surface = surface
+  element.getBoundingClientRect = () => rect({ top: 0, bottom: 2000, left, right })
   document.body.append(element)
+  painted.push(element)
   return element
 }
+
+/** A full-width opaque band, of the kind the walk stops on. */
+const band = (color: string) => plate({ color })
 
 /** One frame of the browser's, plus the microtask an observer wakes on. */
 const settle = () => new Promise((resolve) => setTimeout(resolve, 32))
 
 beforeEach(() => {
   document.body.innerHTML = ''
-  stack = []
+  painted = []
 
   header = document.createElement('header')
   header.id = 'site-nav'
@@ -65,7 +85,13 @@ beforeEach(() => {
 
   // jsdom implements neither, and the component's own triggers are what is
   // under test — so they are scripted rather than mocked away.
-  document.elementsFromPoint = () => [header, ...stack]
+  document.elementsFromPoint = (x: number) => [
+    header,
+    ...painted.filter((element) => {
+      const box = element.getBoundingClientRect()
+      return x >= box.left && x <= box.right
+    }),
+  ]
   globalThis.ResizeObserver = class {
     observe() {}
     unobserve() {}
@@ -75,9 +101,17 @@ beforeEach(() => {
 
 afterEach(() => stop?.())
 
+/** Wipe the page and repaint it, the way a route change or a reflow does. */
+function repaint(paint: () => void) {
+  document.body.innerHTML = ''
+  document.body.append(header)
+  painted = []
+  paint()
+}
+
 describe('the nav’s ink follows the surface under the bar', () => {
   it('reads the band it starts over', async () => {
-    stack = [band(DARK)]
+    band(DARK)
     stop = watchNavInk(header)
     await settle()
 
@@ -86,7 +120,7 @@ describe('the nav’s ink follows the surface under the bar', () => {
   })
 
   it('flips to dark ink over a light band', async () => {
-    stack = [band(LIGHT)]
+    band(LIGHT)
     stop = watchNavInk(header)
     await settle()
 
@@ -96,41 +130,37 @@ describe('the nav’s ink follows the surface under the bar', () => {
   it('re-reads when the page settles under it, with no scroll and no resize', async () => {
     // The load-order race: the bar samples in the hydration commit, and the
     // band it is over arrives (or changes height, or swaps) a moment later.
-    stack = [band(DARK)]
+    band(DARK)
     stop = watchNavInk(header)
     await settle()
     expect(header.dataset.ink).toBeUndefined()
 
-    document.body.innerHTML = ''
-    document.body.append(header)
-    stack = [band(LIGHT)]
+    repaint(() => band(LIGHT))
     await settle()
 
     expect(header.dataset.ink, 'the bar kept a skin the page no longer justifies').toBe('dark')
   })
 
   it('re-reads in the other direction too — white copy is not the safe default', async () => {
-    stack = [band(LIGHT)]
+    band(LIGHT)
     stop = watchNavInk(header)
     await settle()
     expect(header.dataset.ink).toBe('dark')
 
-    document.body.innerHTML = ''
-    document.body.append(header)
-    stack = [band(DARK)]
+    repaint(() => band(DARK))
     await settle()
 
     expect(header.dataset.ink).toBeUndefined()
   })
 
   it('re-reads on a back/forward-cache restore, where effects never re-run', async () => {
-    stack = [band(DARK)]
+    band(DARK)
     stop = watchNavInk(header)
     await settle()
 
     // The restored page is a different document state with the same mounted
     // component, and `pageshow` is the only signal it produces.
-    stack = [band(LIGHT)]
+    repaint(() => band(LIGHT))
     window.dispatchEvent(new Event('pageshow'))
     await settle()
 
@@ -138,12 +168,12 @@ describe('the nav’s ink follows the surface under the bar', () => {
   })
 
   it('stops sampling once the bar unmounts', async () => {
-    stack = [band(DARK)]
+    band(DARK)
     stop = watchNavInk(header)
     await settle()
 
     stop()
-    stack = [band(LIGHT)]
+    repaint(() => band(LIGHT))
     window.dispatchEvent(new Event('scroll'))
     await settle()
 
@@ -153,23 +183,8 @@ describe('the nav’s ink follows the surface under the bar', () => {
 
 describe('what counts as the surface', () => {
   it('sees through a translucent veil to the band it covers', async () => {
-    const veil = document.createElement('div')
-    veil.style.backgroundColor = 'rgba(255, 255, 255, 0.55)'
-    veil.getBoundingClientRect = () => rect({ top: 0, bottom: 2000 })
-    stack = [veil, band(DARK)]
-    stop = watchNavInk(header)
-    await settle()
-
-    expect(header.dataset.ink).toBeUndefined()
-  })
-
-  it('ignores furniture too narrow to be the band', async () => {
-    // A white button on a dark hero: light, opaque, and not the surface.
-    const button = document.createElement('a')
-    button.style.backgroundColor = LIGHT
-    button.getBoundingClientRect = () =>
-      rect({ top: 80, bottom: 128, left: 630, right: 810, width: 180 })
-    stack = [button, band(DARK)]
+    plate({ color: 'rgba(255, 255, 255, 0.55)' })
+    band(DARK)
     stop = watchNavInk(header)
     await settle()
 
@@ -180,10 +195,8 @@ describe('what counts as the surface', () => {
     // A /work case-study card: a photograph under a gradient scrim, so every
     // background-color in the stack is transparent and only the declaration
     // says the ground is dark.
-    const card = document.createElement('a')
-    card.dataset.surface = 'ink'
-    card.getBoundingClientRect = () => rect({ top: 0, bottom: 550, left: 176, right: 1424 })
-    stack = [card, band(LIGHT)]
+    plate({ surface: 'ink', left: 176, right: 1424 })
+    band(LIGHT)
     stop = watchNavInk(header)
     await settle()
 
@@ -191,34 +204,64 @@ describe('what counts as the surface', () => {
   })
 
   it('lets a declared light plate win over the dark band it sits on', async () => {
-    const plate = document.createElement('div')
-    plate.dataset.surface = 'bone'
-    plate.getBoundingClientRect = () => rect({ top: 0, bottom: 550 })
-    stack = [plate, band(DARK)]
+    plate({ surface: 'bone' })
+    band(DARK)
     stop = watchNavInk(header)
     await settle()
 
     expect(header.dataset.ink).toBe('dark')
   })
 
-  it('measures the span against the pill, not the edge-to-edge header', async () => {
-    // 1248 of a 1440 window: narrower than the header, wider than the pill,
-    // and the whole of what the bar is actually floating over.
-    const card = document.createElement('div')
-    card.style.backgroundColor = DARK
-    card.getBoundingClientRect = () => rect({ top: 0, bottom: 550, left: 96, right: 1344 })
-    stack = [card, band(LIGHT)]
+  it('treats the browser’s default canvas as light', async () => {
+    stop = watchNavInk(header)
+    await settle()
+
+    expect(header.dataset.ink).toBe('dark')
+  })
+})
+
+describe('the bar is read in columns, and takes the majority', () => {
+  it('keeps white copy over a card grid on a light band', async () => {
+    // The /insights feed: three near-black cards three-up on `bone`. Not one
+    // of them is as wide as the bar, and together they are what the bar is
+    // over — dark copy here is dark copy on a black photograph.
+    plate({ color: DARK, left: 176, right: 560 })
+    plate({ color: DARK, left: 592, right: 976 })
+    plate({ color: DARK, left: 1008, right: 1392 })
+    band(LIGHT)
     stop = watchNavInk(header)
     await settle()
 
     expect(header.dataset.ink).toBeUndefined()
   })
 
-  it('treats the browser’s default canvas as light', async () => {
-    stack = []
+  it('ignores furniture too narrow to carry the vote', async () => {
+    // A white button on a dark hero: light, opaque, and one column of nine.
+    plate({ color: LIGHT, left: 630, right: 810 })
+    band(DARK)
+    stop = watchNavInk(header)
+    await settle()
+
+    expect(header.dataset.ink).toBeUndefined()
+  })
+
+  it('still flips for a light band carrying one dark ornament', async () => {
+    plate({ color: DARK, left: 630, right: 810 })
+    band(LIGHT)
     stop = watchNavInk(header)
     await settle()
 
     expect(header.dataset.ink).toBe('dark')
+  })
+
+  it('takes a bare majority — half the bar being light is not one', async () => {
+    // A plate reaching four of the nine columns, over a dark band. The bar is
+    // more over the band than over the plate, so the band answers for it.
+    plate({ color: LIGHT, left: 0, right: 620 })
+    band(DARK)
+    stop = watchNavInk(header)
+    await settle()
+
+    expect(header.dataset.ink).toBeUndefined()
   })
 })
