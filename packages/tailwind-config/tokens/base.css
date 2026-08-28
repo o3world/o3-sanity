@@ -10,9 +10,16 @@
 /*
  * The prototype's nav deep-links to in-page anchors (#work, #platforms,
  * #insights, #footer). Smooth for users who allow motion; instant otherwise.
+ *
+ * `[data-anchor-glide]` is a load gate, and `<AnchorGlide />` from `@o3/ui` is
+ * the only thing that sets it. A smooth root turns the browser's own scroll to
+ * the URL's `#fragment` into an animation, and an animation started while the
+ * page is still laying itself out is cancelled and never retried — so a pasted
+ * deep link landed at the top of the document (#156). Unset until `load`, the
+ * arrival is instant and every jump link after it still glides.
  */
 @media (prefers-reduced-motion: no-preference) {
-  html {
+  html[data-anchor-glide] {
     scroll-behavior: smooth;
   }
 }

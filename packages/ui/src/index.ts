@@ -12,6 +12,9 @@ export {
   HOVER_TRANSITION,
 } from './motion'
 
+// AnchorGlide — the load gate on `html{scroll-behavior:smooth}` (#156)
+export { AnchorGlide, ANCHOR_GLIDE_SCRIPT } from './components/anchor-glide'
+
 // ArrowIcon — the O3 arrow glyph Button and the case-study chips draw
 export { ArrowIcon } from './components/arrow-icon'
 export type { ArrowIconProps } from './components/arrow-icon'
