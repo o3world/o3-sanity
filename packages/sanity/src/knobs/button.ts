@@ -11,6 +11,18 @@ import { defineObjectKnobs, knob } from '@o3/block-spec'
  *
  * Menu-only, like every instance knob — `barKnobs` never sees an object spec.
  *
+ * **THE BUTTON HAS ONE DESIGN AXIS, AND THAT IS A READING, NOT AN OVERSIGHT**
+ * (#131). No canonical frame draws an emphasis scale: every button axis in the
+ * file is size, fill/theme, state or breakpoint, and across all 9 canonical
+ * desktop and 5 mobile frames every band carries at most one button, whose
+ * fill tracks the band. The CTA band (`2177:1354`), where a secondary would
+ * live if anywhere, holds exactly one (`2209:2143`). The one Primary/Secondary
+ * vocabulary in the file (`2230:7645`) belongs to an imported client library
+ * and is not a scale. Build `primary | secondary | tertiary` when a canonical
+ * page frame draws two buttons of different weight in one band — not a card,
+ * not an imported library, not a hover state — and it costs one more `knob({})`
+ * entry here, because `contrast` was shaped so a second axis is additive.
+ *
  * `label`, `target` and `href` stay hand-written in `button.ts`. `href`'s gate
  * stays a closure as well: it reads whether a REFERENCE is filled in, which no
  * `showWhen` mode expresses, and an editorial field is allowed one where a knob
