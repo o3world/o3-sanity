@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 
 import { Pager } from './Pager'
 
-const href = (page: number) => (page <= 1 ? '/insights' : `/insights?page=${page}`)
+const href = (page: number) => (page <= 1 ? '/insights' : `/insights/page/${page}`)
 
 /** The visible run of the row, in order — numbers, ellipses and the two ends. */
 function labels(html: string): string[] {
@@ -16,9 +16,9 @@ describe('Pager', () => {
 
     expect(labels(html)).toEqual(['1', '2', '3', '4', 'Next'])
     expect(html).toContain('href="/insights"')
-    expect(html).toContain('href="/insights?page=2"')
-    expect(html).toContain('href="/insights?page=3"')
-    expect(html).toContain('href="/insights?page=4"')
+    expect(html).toContain('href="/insights/page/2"')
+    expect(html).toContain('href="/insights/page/3"')
+    expect(html).toContain('href="/insights/page/4"')
   })
 
   it('draws the state the kit draws — the near pages, an ellipsis, the last', () => {
@@ -44,7 +44,7 @@ describe('Pager', () => {
     // Attribute order is Next's, so the assertion is on the one element that
     // carries both rather than on the string between them.
     const current = html.match(/<a[^>]*aria-current="page"[^>]*>/)?.[0] ?? ''
-    expect(current).toContain('href="/insights?page=2"')
+    expect(current).toContain('href="/insights/page/2"')
     expect([...html.matchAll(/aria-current="page"/g)]).toHaveLength(1)
   })
 

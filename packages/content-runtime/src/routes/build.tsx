@@ -5,7 +5,10 @@ import { notFound } from 'next/navigation'
 
 import { currentReadMode, sanityFetch, type ReadMode } from '#live'
 import { getSiteSettings } from '../siteSettings'
-import { clampPage, pageRange, parsePage } from './pagination'
+import { pageRange } from './pagination'
+import { readIndexState } from './indexPaths'
+import { atLeastOne, publishedIndexTotal, publishedSlugs } from './staticParams'
+import { capToBudget, prerenderBudget } from './prerenderBudget'
 import { buildDocumentMetadata, type DocumentSeo, type SeoOverrides } from '../seo'
 import { hrefForDoc } from '../urls'
 
@@ -96,11 +99,24 @@ export interface SingletonRouteShim {
   readonly Page: () => Promise<JSX.Element>
 }
 
+/** The segments an index route can carry: its facet values, and its page. */
+export type IndexParams = Record<string, string | string[] | undefined>
+
+/**
+ * One shim, re-exported by every route file the index owns — the bare prefix,
+ * `page/[page]`, `<facet>/[<facet>]`, and the two composed. `Page` reads
+ * whatever segments its own file declares, so the four files differ only in
+ * which `generateStaticParams` they take.
+ */
 export interface IndexRouteShim {
   readonly generateMetadata: () => Promise<Metadata>
-  readonly Page: (props: {
-    searchParams: Promise<Record<string, string | string[] | undefined>>
-  }) => JSX.Element
+  readonly Page: (props: { params?: Promise<IndexParams> }) => JSX.Element
+  /** For `<prefix>/page/[page]`. */
+  readonly pageParams: () => Promise<Array<{ page: string }>>
+  /** For `<prefix>/<facet>/[<facet>]`. */
+  readonly facetParams: () => Promise<Array<Record<string, string>>>
+  /** For `<prefix>/<facet>/[<facet>]/page/[page]`. */
+  readonly facetPageParams: () => Promise<Array<Record<string, string>>>
 }
 
 interface BaseEntryLike<Q extends string> {
@@ -305,19 +321,33 @@ export function buildSingletonRoute<Q extends string>(
 }
 
 /**
- * Build a route shim for a paginated collection index (`?page=N`). The entry's query
- * returns `{ items, total }` in one round-trip (`$offset`/`$end` slice the
- * feed). The requested page is clamped against `total`; the rare
- * out-of-range request costs one refetch. Fetches are tagged per
- * `itemTypes` so an item edit invalidates the index that lists it.
+ * Build the route shims a paginated collection index serves from.
+ *
+ * The entry's query returns `{ items, total }` in one round-trip
+ * (`$offset`/`$end` slice the feed); fetches are tagged per `itemTypes`, so an
+ * item edit invalidates the index that lists it.
+ *
+ * **The state is in the path** (#370). A segment is part of the route key, so
+ * `/insights/page/2` and `/insights/category/design` are routes Next
+ * prerenders and the CDN holds. The scheme is `indexPaths.ts` and it is shared
+ * with the views, so a chip, a pager link and `generateStaticParams` cannot
+ * disagree about how this route spells itself.
  *
  * **Filtering is the same mechanism as paging** (#61): an entry declaring
- * `facets: ['category']` gets `$category` as a GROQ param and the renderer
- * gets it back as `facets.category`. The filter is therefore in the URL and
- * resolved on the server — no client state, no `use client` on the view, and a
- * filtered index is a linkable, crawlable page. It also composes with the
- * clamp for free: `total` counts the filtered feed, so `?category=design&page=9`
- * lands on the last page that category actually has.
+ * `facets: ['category']` gets `$category` as a GROQ param, a
+ * `category/[category]` segment pair, and `facets.category` back in the
+ * renderer.
+ *
+ * **A page that does not exist is not served.** A path is a claim that a page
+ * exists, so `/insights/page/900` is refused rather than answered with the
+ * last page — which would give that page a second address.
+ *
+ * The STATUS is the one thing the boundary costs. `notFound()` is called inside
+ * it, so a page that was prerendered answers 404 and one rendered on demand has
+ * already flushed its shell with a 200 and streams the not-found body into it.
+ * That is the same trade the dataset-unreadable case below makes, and it is the
+ * price of the hole: reading the segments above the boundary would make the
+ * shell itself dynamic, which is the property this route exists to keep.
  */
 export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRouteShim {
   const pageSize = entry.pageSize ?? 12
@@ -351,10 +381,10 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
    * entry's static SEO is the fallback, and Site Settings is the floor.
    *
    * `path` is the ENTRY's throughout, never the document's — the route owns
-   * the URL, so the canonical is the route's fact. It is what keeps `?page=2`
-   * and `?category=design` canonicalizing to the unpaginated index rather than
-   * being indexed as documents of their own, and it means no value an editor
-   * can type moves the page.
+   * the URL, so the canonical is the route's fact. It is what keeps
+   * `/insights/page/2` and `/insights/category/design` canonicalizing to the
+   * unpaginated index rather than being indexed as documents of their own, and
+   * it means no value an editor can type moves the page.
    */
   const generateMetadata: IndexRouteShim['generateMetadata'] = async () => {
     const read = metadataRead(await currentReadMode())
@@ -396,40 +426,44 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
   }
 
   /**
-   * The whole of an index is downstream of `?page=` and `?category=`, so the
-   * feed is the route's dynamic hole: it reads `searchParams`, and everything
-   * above the boundary — the chrome the `(site)` layout draws — prerenders
-   * into the shell the CDN serves. The feed itself is still a cached read, so
-   * a second visitor to the same page pays no Sanity request for it.
+   * The feed, behind the Suspense boundary.
+   *
+   * Its input is `params`, so a prerendered page of the collection is a static
+   * shell the CDN serves. A page nobody enumerated renders on demand once and
+   * is cached from then on, and the boundary is what that once streams into.
    */
-  const Feed = async ({
-    searchParams,
-  }: {
-    searchParams: Promise<Record<string, string | string[] | undefined>>
-  }) => {
-    const params = await searchParams
-    const requested = parsePage(params.page)
-    const facets = readFacets(facetNames, params)
+  const Feed = async ({ params }: { params?: Promise<IndexParams> }) => {
+    const state = readIndexState(facetNames, (await params) ?? {})
+    // Not a page: `page/0`, `page/two`, and `page/1`, which is the bare index
+    // wearing a second URL.
+    if (!state) notFound()
     const read = await currentReadMode()
 
-    const [initial, document] = await Promise.all([
-      fetchPage(requested, facets, read),
+    const [data, document] = await Promise.all([
+      fetchPage(state.page, state.facets, read),
       fetchDocument(read),
     ])
-    let data = initial
-    const total = (data as { total?: unknown } | null)?.total
-    const totalPages = Math.max(1, Math.ceil((typeof total === 'number' ? total : 0) / pageSize))
-    const page = clampPage(requested, totalPages)
-    if (page !== requested) data = await fetchPage(page, facets, read)
     // Inside the boundary, so the shell has already flushed with a 200: an
     // index whose dataset is unreadable renders the 404 body without the 404
     // status a detail route would send. It is the accepted cost of the hole.
     if (!data) notFound()
 
+    const total = (data as { total?: unknown } | null)?.total
+    const count = typeof total === 'number' ? total : 0
+    // A cut of the collection with nothing in it is not a page. The chips only
+    // offer facet values that have items, so an empty cut means a value the
+    // collection does not have — `/insights/category/anything-at-all`, which is
+    // an unbounded space of URLs a crawler would otherwise be handed 200s for.
+    // An empty collection, unfiltered, is a real page and keeps its empty state.
+    if (count === 0 && Object.values(state.facets).some(Boolean)) notFound()
+
+    const totalPages = Math.max(1, Math.ceil(count / pageSize))
+    if (state.page > totalPages) notFound()
+
     return renderEntry(entry, data, {
       slug: '',
-      pagination: { page, totalPages },
-      facets,
+      pagination: { page: state.page, totalPages },
+      facets: state.facets,
       document,
     })
   }
@@ -449,41 +483,81 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
     return <>{entry.chrome({ document, slot })}</>
   }
 
-  const Page: IndexRouteShim['Page'] = ({ searchParams }) => (
+  const Page: IndexRouteShim['Page'] = ({ params }) => (
     <>
       <Chrome slot="above" />
       {/* The entry's own picture of its feed, or nothing where it declares
           none — in which case the hole is whatever the layout's `<main>`
           paints until the feed arrives on the same response. */}
       <Suspense fallback={entry.fallback ?? null}>
-        <Feed searchParams={searchParams} />
+        <Feed params={params} />
       </Suspense>
       <Chrome slot="below" />
     </>
   )
 
-  return { generateMetadata, Page }
-}
-
-/**
- * The declared facets, read off the URL: first value wins where Next hands a
- * repeated parameter as an array, blank is the same as absent, and anything
- * the entry did not declare is ignored.
- *
- * **Absent is `null`, never `undefined`.** These go straight into GROQ params,
- * and an undefined variable is an error there rather than a null — so the
- * "unfiltered" arm of a query (`$category == null`) needs the value present
- * and empty, which is exactly the state a bare `/insights` is in.
- */
-function readFacets(
-  names: readonly string[],
-  searchParams: Record<string, string | string[] | undefined>,
-): Facets {
-  const facets: Record<string, string | null> = {}
-  for (const name of names) {
-    const raw = searchParams[name]
-    const value = (Array.isArray(raw) ? raw[0] : raw)?.trim()
-    facets[name] = value ? value : null
+  /**
+   * The one facet a path can carry a segment pair for.
+   *
+   * Both indexes that filter declare exactly one, and the scheme in
+   * `indexPaths.ts` composes any number of them into a path. What has no
+   * answer is how many of the CROSS-PRODUCT to prerender, which is a decision
+   * about how many URLs a collection should have rather than a line of code —
+   * so a second facet stops here rather than quietly enumerating one axis.
+   */
+  const soleFacet = (): string => {
+    const [name, ...rest] = facetNames
+    if (!name || rest.length > 0) {
+      throw new Error(
+        `buildIndexRoute: facet paths need exactly one declared facet, got ${facetNames.length}`,
+      )
+    }
+    return name
   }
-  return facets
+
+  /** Every page after the first, capped by the build's prerender budget. */
+  const pagesAfterFirst = async (facets: Facets): Promise<string[]> => {
+    const total = await publishedIndexTotal(entry.query, facets)
+    const totalPages = Math.max(1, Math.ceil(total / pageSize))
+    const pages = Array.from({ length: totalPages - 1 }, (_, index) => String(index + 2))
+    return capToBudget(pages, prerenderBudget())
+  }
+
+  const emptyFacets = (): Facets =>
+    Object.fromEntries(facetNames.map((name) => [name, null])) as Facets
+
+  const pageParams: IndexRouteShim['pageParams'] = async () => {
+    const pages = await pagesAfterFirst(emptyFacets())
+    return atLeastOne(
+      pages.map((page) => ({ page })),
+      { page: '2' },
+    )
+  }
+
+  const facetParams: IndexRouteShim['facetParams'] = async () => {
+    const name = soleFacet()
+    const query = entry.facetValues?.[name]
+    if (!query) throw new Error(`buildIndexRoute: no facetValues query declared for "${name}"`)
+    const values = await publishedSlugs(query)
+    return atLeastOne(
+      values.map((value) => ({ [name]: value })),
+      { [name]: 'none' },
+    )
+  }
+
+  const facetPageParams: IndexRouteShim['facetPageParams'] = async () => {
+    const name = soleFacet()
+    const query = entry.facetValues?.[name]
+    if (!query) throw new Error(`buildIndexRoute: no facetValues query declared for "${name}"`)
+    const values = await publishedSlugs(query)
+    const params: Array<Record<string, string>> = []
+    for (const value of values) {
+      for (const page of await pagesAfterFirst({ [name]: value } as Facets)) {
+        params.push({ [name]: value, page })
+      }
+    }
+    return atLeastOne(params, { [name]: 'none', page: '2' })
+  }
+
+  return { generateMetadata, Page, pageParams, facetParams, facetPageParams }
 }

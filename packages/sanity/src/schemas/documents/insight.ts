@@ -1,6 +1,8 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { briefsField } from '../blocks/fields'
 
+import { isReservedCollectionSlug, RESERVED_SLUG_MESSAGE } from './reservedSlugs'
+
 export const insight = defineType({
   name: 'insight',
   title: 'Insight',
@@ -11,7 +13,12 @@ export const insight = defineType({
       name: 'slug',
       type: 'slug',
       options: { source: 'title' },
-      validation: (rule) => rule.required(),
+      validation: (rule) =>
+        rule
+          .required()
+          .custom((slug) =>
+            isReservedCollectionSlug(slug?.current) ? RESERVED_SLUG_MESSAGE : true,
+          ),
     }),
     defineField({ name: 'excerpt', type: 'text', rows: 3, validation: (rule) => rule.required() }),
     defineField({

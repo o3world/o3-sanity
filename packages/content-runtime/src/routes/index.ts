@@ -11,6 +11,7 @@ export {
   buildSingletonRoute,
   type CatchAllRouteShim,
   type DetailRouteShim,
+  type IndexParams,
   type IndexRouteShim,
   type SingletonRouteShim,
 } from './build'
@@ -21,9 +22,16 @@ export {
   defineSingletonType,
 } from './define'
 export { docTag, typeTag } from './cacheTags'
+export {
+  indexHref,
+  indexQueryRedirects,
+  readIndexState,
+  type IndexRedirect,
+  type IndexState,
+} from './indexPaths'
 export { decodePathParam } from './decodePathParam'
-export { publishedSlugs } from './staticParams'
-export { clampPage, pageRange, parsePage } from './pagination'
+export { atLeastOne, publishedIndexTotal, publishedSlugs } from './staticParams'
+export { pageRange } from './pagination'
 export type {
   AnyCatchAllEntry,
   AnyDetailEntry,

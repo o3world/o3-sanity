@@ -6,6 +6,7 @@ import { buildIndexRoute } from '@o3/content-runtime/routes'
 import {
   anInsight,
   anInsightsPage,
+  expectNotFound,
   renderRoute,
   siteSettings,
   withSettings,
@@ -35,10 +36,10 @@ function manyInsights(count: number) {
   )
 }
 
-function render(data: unknown, searchParams?: Record<string, string>) {
+function render(data: unknown, params?: Record<string, string>) {
   return renderRoute(route, {
     data: withSettings(data, siteSettings({ title: 'O3XO' })),
-    searchParams,
+    params,
   })
 }
 
@@ -75,8 +76,8 @@ describe('the insights index route', () => {
       page: '2',
     })
 
-    expect(html).toContain('href="/insights?category=design"')
-    expect(html).toContain('href="/insights?category=design&amp;page=3"')
+    expect(html).toContain('href="/insights/category/design"')
+    expect(html).toContain('href="/insights/category/design/page/3"')
   })
 
   /**
@@ -104,8 +105,16 @@ describe('the insights index route', () => {
   })
 
   it('says the collection is empty rather than drawing an empty grid', async () => {
-    const { html } = await render(anInsightsPage([], 0, CATEGORIES), { category: 'nothing-here' })
+    const { html } = await render(anInsightsPage([], 0, CATEGORIES))
     expect(html).toContain('No insights under that filter yet.')
+  })
+
+  /** A cut with nothing in it is a category the collection does not have. */
+  it('404s a category the collection has nothing under', async () => {
+    await expectNotFound(route, {
+      data: withSettings(anInsightsPage([], 0, CATEGORIES), siteSettings({ title: 'O3XO' })),
+      params: { category: 'nothing-here' },
+    })
   })
 })
 

@@ -74,19 +74,7 @@ export function CaseStudyHero({
        */}
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,var(--color-ink-deep)_34%,transparent_100%)] lg:bg-[linear-gradient(0deg,var(--color-ink-deep)_15%,transparent_100%)]" />
 
-      {/*
-       * THE BLACK BAND, and it runs the whole row. `1710:2303` fills only the
-       * heading column, but the standfirst beside it is filled the same black
-       * (`2050:1232`) and would be unreadable on open photograph, so the band
-       * is what is behind the standfirst rather than the type's own colour.
-       * Drawing it on the row reproduces the group the two columns share,
-       * `2846:4538`: 1248 wide, as tall as the standfirst, hard-edged and
-       * flush at the gutter. `utility` is the palette's pure black; the
-       * section's own `ink-deep` is #030303.
-       *
-       * 1440 only — the 402 frame's `1906:924` has no fill.
-       */}
-      <div className="max-w-section lg:bg-utility relative mx-auto flex w-full flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+      <div className="max-w-section relative mx-auto flex w-full flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
         <div className="flex flex-col justify-center gap-4 lg:w-[571px]">
           {eyebrow ? (
             <Eyebrow size="lg" tone="brand">

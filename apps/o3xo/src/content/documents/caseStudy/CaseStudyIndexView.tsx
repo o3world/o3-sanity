@@ -2,6 +2,7 @@ import { CollectionHero } from '@o3/ui'
 import { brandConfig } from '@o3/sanity/brand'
 import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
+import { indexHref } from '@o3/content-runtime/routes/index-paths'
 
 import { Pager } from '@o3/content-ui'
 
@@ -14,8 +15,9 @@ interface CaseStudyIndexViewProps {
   readonly pagination: Pagination
 }
 
+/** `/case-studies`, `/case-studies/page/2` — the route's own scheme (#370). */
 function pageHref(page: number): string {
-  return page <= 1 ? prefix : `${prefix}?page=${page}`
+  return indexHref(prefix, { facets: {}, page })
 }
 
 /**

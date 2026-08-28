@@ -6,11 +6,15 @@ import { blockArrayMembers, type BlockArrays } from '../blocks/registry'
  * The editable chrome for a collection's index route — the bands above and
  * below a feed the route itself owns.
  *
- * A collection index is the one page shape whose middle cannot be authored.
- * `?page=` is one parameter per document, so two paginated listings on a page
+ * A collection index is the one page shape whose middle cannot be composed.
+ * A page is one path per document, so two paginated listings on a page
  * have no coherent answer to what page 3 means; the feed — chips, grid and
  * pager — therefore stays with the route, and this document holds everything
  * around it. `sectionsAbove` and `sectionsBelow` are named against that feed.
+ *
+ * What the document does say about the feed is which documents open it:
+ * `pinnedItems` orders the head, and the route's query pages over the joined
+ * sequence. That is an ordering, not a second listing — the feed is still one.
  *
  * A function rather than a constant for the same reason `page` is: the two
  * arrays take whichever roster the caller builds with (ADR 0028), so one
@@ -67,6 +71,56 @@ export const collectionIndex = (arrays: BlockArrays) =>
                 { value, ids: [id, `drafts.${id}`] },
               )
             return taken ? `Another collection index already covers "${value}".` : true
+          }),
+      }),
+      /**
+       * The head of the feed, in the editor's own order.
+       *
+       * The feed is still the route's — this names the documents it opens
+       * with, not a second listing. Everything the list does not name follows
+       * newest-first, so an empty array is the ordering the collection had
+       * before the field existed.
+       *
+       * Both collections' types are offered because one schema serves both
+       * indexes; `options.filter` narrows the picker to the collection this
+       * document is the index for, and the validation rule is what holds when
+       * `collection` is changed after the fact — the picker cannot retract a
+       * reference an editor already chose.
+       *
+       * A Sanity array is drag-orderable as it stands, which is the whole of
+       * the ordering mechanism: `sortable` is the default and no `orderable`
+       * field is stored.
+       */
+      defineField({
+        name: 'pinnedItems',
+        title: 'Pinned to the top of the feed',
+        type: 'array',
+        description:
+          'Entries listed here lead the feed, in this order. Everything else follows newest first. Leave it empty and the whole feed is newest first.',
+        of: [
+          defineArrayMember({
+            type: 'reference',
+            to: [{ type: 'insight' }, { type: 'caseStudy' }],
+            options: {
+              filter: ({ document }) => ({
+                filter: '_type == $collection',
+                params: { collection: document?.collection ?? 'insight' },
+              }),
+            },
+          }),
+        ],
+        validation: (rule) =>
+          rule.unique().custom(async (value, context) => {
+            const refs = (value as Array<{ _ref?: string }> | undefined) ?? []
+            const ids = refs.map((ref) => ref?._ref).filter(Boolean)
+            if (ids.length === 0) return true
+            const collection = (context.document as { collection?: string } | undefined)?.collection
+            const wrong = await context
+              .getClient({ apiVersion: '2024-10-01' })
+              .fetch<string[]>(`*[_id in $ids && _type != $collection].title`, { ids, collection })
+            return wrong.length > 0
+              ? `Not in this collection: ${wrong.join(', ')}. Remove them, or change the Collection field.`
+              : true
           }),
       }),
       defineField({

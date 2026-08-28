@@ -35,6 +35,7 @@
     "./dev-revalidate": "./src/devRevalidate.ts",
     "./live": "./src/live.ts",
     "./routes": "./src/routes/index.ts",
+    "./routes/index-paths": "./src/routes/indexPaths.ts",
     "./seo": "./src/seo.ts",
     "./site-settings": "./src/siteSettings.ts",
     "./urls": "./src/urls.ts"

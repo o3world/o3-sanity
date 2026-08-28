@@ -27,3 +27,38 @@ export async function publishedSlugs(query: string): Promise<string[]> {
   )
   return capToBudget(slugs, prerenderBudget())
 }
+
+/**
+ * How many items a collection index holds under a given filter, read at build
+ * time so `generateStaticParams` knows how many pages it has.
+ *
+ * It is the entry's own query with an empty slice — `[0...0]` returns no items
+ * and still counts the whole feed, so a page count costs one request and no
+ * documents.
+ */
+export async function publishedIndexTotal(
+  query: string,
+  facets: Record<string, string | null>,
+): Promise<number> {
+  'use cache'
+  const { data } = await sanityFetch({
+    query,
+    params: { offset: 0, end: 0, ...facets },
+    perspective: 'published',
+    stega: false,
+  })
+  const total = (data as { total?: unknown } | null)?.total
+  return typeof total === 'number' ? total : 0
+}
+
+/**
+ * The same list, guaranteed non-empty — `capToBudget`'s "a cap, never a zero"
+ * rule (`prerenderBudget.ts`) applied to a list the dataset can empty on its
+ * own: a collection with no second page, or a facet with no values yet.
+ *
+ * Both are real states rather than build failures, so the placeholder stands
+ * in. It prerenders a path that answers 404, which is what that URL means.
+ */
+export function atLeastOne<T>(params: T[], placeholder: T): T[] {
+  return params.length > 0 ? params : [placeholder]
+}

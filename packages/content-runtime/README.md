@@ -10,16 +10,17 @@ consumer of these modules, not a second copy of them.
 
 ## Exports
 
-| Subpath            | What it is                                                                                                                                                        |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `./routes`         | `buildDetailRoute` / `buildCatchAllRoute` / `buildSingletonRoute` / `buildIndexRoute`, the `define*Type` entry helpers, the entry types, and the cache-tag scheme |
-| `./blocks`         | `renderDispatchedBlocks`, `defineBlockRender`, `bindingsToRecord`, section anchors, and the generated-type pin points a registry is checked against               |
-| `./data-attribute` | `dataAttr` and the location builders Presentation resolves back to a field                                                                                        |
-| `./live`           | the draft-aware Sanity client: `sanityFetch`, `SanityLive`, `client`                                                                                              |
-| `./site-settings`  | `getSiteSettings`, one request-cached read                                                                                                                        |
-| `./seo`            | `buildDocumentMetadata` — one resolution chain for every routable type                                                                                            |
-| `./urls`           | `hrefForDoc` and `previewPathForDoc`                                                                                                                              |
-| `./base-url`       | `getBaseUrl` — the absolute origin sitemap, robots and OpenGraph URLs are built on                                                                                |
+| Subpath                | What it is                                                                                                                                                                           |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `./routes`             | `buildDetailRoute` / `buildCatchAllRoute` / `buildSingletonRoute` / `buildIndexRoute`, the `define*Type` entry helpers, the entry types, and the cache-tag scheme                    |
+| `./routes/index-paths` | the collection-index URL scheme — `indexHref`, `readIndexState`, `indexQueryRedirects` — with no server runtime behind it, so a `next.config.ts` or a client component can import it |
+| `./blocks`             | `renderDispatchedBlocks`, `defineBlockRender`, `bindingsToRecord`, section anchors, and the generated-type pin points a registry is checked against                                  |
+| `./data-attribute`     | `dataAttr` and the location builders Presentation resolves back to a field                                                                                                           |
+| `./live`               | the draft-aware Sanity client: `sanityFetch`, `SanityLive`, `client`                                                                                                                 |
+| `./site-settings`      | `getSiteSettings`, one request-cached read                                                                                                                                           |
+| `./seo`                | `buildDocumentMetadata` — one resolution chain for every routable type                                                                                                               |
+| `./urls`               | `hrefForDoc` and `previewPathForDoc`                                                                                                                                                 |
+| `./base-url`           | `getBaseUrl` — the absolute origin sitemap, robots and OpenGraph URLs are built on                                                                                                   |
 
 ## The app still owns the bindings
 
@@ -49,6 +50,13 @@ visitor who lands on a cold one pays a query. The build used to pay 288.
 The cap is never a zero: an empty `generateStaticParams` is
 `EmptyGenerateStaticParamsError` under Cache Components, so a collection with
 documents in it always prerenders at least one.
+
+A collection index enumerates the same way and under the same cap (#370). Its
+state is in the path — `/insights/page/2`, `/insights/category/design` — so
+each page and each facet value is a route, and `buildIndexRoute` returns one
+`generateStaticParams` per shape: `pageParams`, `facetParams`,
+`facetPageParams`. Page counts come from the entry's own query with an empty
+slice, and facet values from the `facetValues` query the entry declares.
 
 ## Stega belongs to draft mode, and nothing here turns it on
 

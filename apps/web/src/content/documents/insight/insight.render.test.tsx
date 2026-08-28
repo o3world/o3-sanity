@@ -148,16 +148,10 @@ describe('insight detail route', () => {
     expect(html).not.toContain('Keep reading.')
   })
 
-  it('omits the figure entirely when there is no featured image', async () => {
-    const { html } = await render(anInsight({ featuredImage: null }))
-    expect(html).not.toContain('<figure')
-  })
-
   /**
    * The hero is photographic since #90 (`2252:3554` / `2262:3859`): the
-   * featured image fills the band under a `#030303` scrim. There is no second
-   * image field, so the same asset serves the hero and the body figure — the
-   * hero cropped to the band, the figure whole.
+   * featured image fills the band under a `#030303` scrim. It is the only
+   * place that asset is drawn — the article column opens on the body (#371).
    */
   describe('the photographic hero', () => {
     const HERO_ID = '3333333333333333333333333333333333333333'
@@ -173,10 +167,13 @@ describe('insight detail route', () => {
         } as never,
       })
 
-    it('fills the band with the featured image, under the scrim', async () => {
+    it('draws the featured image once, in the band, under the scrim', async () => {
       const { html } = await render(withHero())
       const header = html.slice(0, html.indexOf('</header>'))
       expect(header).toContain(HERO_ID)
+      // The body used to repeat it at the top of the 822px column, which is
+      // the same photograph twice on one screen.
+      expect(html.slice(html.indexOf('</header>'))).not.toContain(HERO_ID)
       expect(header).toContain('linear-gradient(90deg,rgba(3,3,3,1)_0%,rgba(3,3,3,0.5)_100%)')
       expect(header).toContain(
         'lg:bg-[linear-gradient(90deg,rgba(3,3,3,1)_16.83%,rgba(3,3,3,0)_100%)]',

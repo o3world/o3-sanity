@@ -109,7 +109,7 @@ export interface Pagination {
 
 /**
  * The facet values a collection index was asked for, by URL parameter name —
- * `{ category: 'design' }` for `/insights?category=design`, and `null` for a
+ * `{ category: 'design' }` for `/insights/category/design`, and `null` for a
  * facet the URL does not name (#61).
  *
  * They are GROQ params as much as renderer props: the route builder spreads
@@ -189,7 +189,7 @@ export type RouteProvenance =
     }
 
 /**
- * A paginated collection index (`?page=N`). Unlike vtx-web,
+ * A paginated collection index (`<prefix>/page/N`). Unlike vtx-web,
  * o3 collection indexes have no backing document — the entry's `query` is a
  * combined `{ "items": ...[$offset...$end], "total": count(...) }` projection
  * and its SEO is static.
@@ -212,6 +212,17 @@ export interface IndexEntry<Q extends string = string> {
    * the query does not already answer by returning an empty feed.
    */
   readonly facets?: readonly string[]
+  /**
+   * For each declared facet, a GROQ query returning that facet's values as
+   * plain strings — the category slugs a chip can be, and so the
+   * `<facet>/[<facet>]` paths `generateStaticParams` prerenders (#370).
+   *
+   * Separate from the entry's own query, which returns the facet's values
+   * under whatever key its projection chose: a build enumerating paths wants a
+   * list of slugs, and asking for one is cheaper than teaching this package
+   * the shape of every index projection.
+   */
+  readonly facetValues?: Readonly<Record<string, string>>
   /**
    * A document to fetch alongside the feed, if this index has authored chrome
    * around it. Optional: an index without one renders the feed alone, which is

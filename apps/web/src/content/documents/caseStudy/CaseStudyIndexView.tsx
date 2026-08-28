@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 
 import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
+import { indexHref } from '@o3/content-runtime/routes/index-paths'
 
 import { Pager } from '@o3/content-ui'
 
@@ -19,8 +20,9 @@ interface CaseStudyIndexViewProps {
   readonly below?: ReactNode
 }
 
+/** `/work`, `/work/page/2` — the scheme the route reads back (#370). */
 function pageHref(page: number): string {
-  return page <= 1 ? '/work' : `/work?page=${page}`
+  return indexHref('/work', { facets: {}, page })
 }
 
 /**
@@ -44,7 +46,7 @@ function pageHref(page: number): string {
  * it a document for everything but the feed.
  *
  * The **feed stays the route's** for the reason it always was, now stated
- * precisely: `?page=` is one parameter per document, so a paginated listing
+ * precisely: a page is one path per document, so a paginated listing
  * cannot be a block an editor drops twice. `listingSection` projects pages by
  * `pageType` and could never have listed case studies anyway.
  *

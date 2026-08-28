@@ -244,12 +244,53 @@ export const INSIGHT_SLUGS_QUERY = defineQuery(
 )
 
 /**
+ * THE HEAD OF A COLLECTION FEED, AS ITS INDEX DOCUMENT ORDERS IT.
+ *
+ * `collectionIndex.pinnedItems` is a hand-ordered list of documents an editor
+ * wants first; everything the list does not name follows newest-first, which
+ * is the ordering the whole feed had before the field existed. An empty or
+ * absent list therefore changes nothing.
+ *
+ * Fragments rather than one expression, because GROQ has no way to name a
+ * sub-result: the ids are needed to exclude the pinned documents from the
+ * tail, and both halves are needed twice over (once for `items`, once for
+ * `total`). Consts and not functions — a function returns a widened `string`
+ * and the query stops being a `keyof SanityQueries` after typegen (TS#33304).
+ *
+ * The dereference is parenthesised before it is filtered —
+ * `(…pinnedItems[]->)[_type == "…"]` — so the predicate reads the resolved
+ * **documents**. Written without the parentheses it binds to the reference
+ * array instead and answers a list of nulls. Filtering there is what drops a
+ * reference pointing at nothing and one pointing at the other collection:
+ * both are states a dataset reaches without Studio — a deleted document, an
+ * API write — and neither may put a null in the feed or an extra in the
+ * count. `coalesce(…, [])` covers the third case, no index document at all,
+ * whose `+` operand would otherwise be null and take the feed with it.
+ */
+const INSIGHT_INDEX =
+  /* groq */ `*[_type == "collectionIndex" && collection == "insight"] | order(_id)[0]` as const
+const PINNED_INSIGHT_REFS = /* groq */ `coalesce(${INSIGHT_INDEX}.pinnedItems[]._ref, [])` as const
+const PINNED_INSIGHTS =
+  /* groq */ `coalesce((${INSIGHT_INDEX}.pinnedItems[]->)[_type == "insight"], [])` as const
+const UNPINNED_INSIGHTS =
+  /* groq */ `*[_type == "insight" && !(_id in ${PINNED_INSIGHT_REFS})]` as const
+
+const CASE_STUDY_INDEX =
+  /* groq */ `*[_type == "collectionIndex" && collection == "caseStudy"] | order(_id)[0]` as const
+const PINNED_CASE_STUDY_REFS =
+  /* groq */ `coalesce(${CASE_STUDY_INDEX}.pinnedItems[]._ref, [])` as const
+const PINNED_CASE_STUDIES =
+  /* groq */ `coalesce((${CASE_STUDY_INDEX}.pinnedItems[]->)[_type == "caseStudy"], [])` as const
+const UNPINNED_CASE_STUDIES =
+  /* groq */ `*[_type == "caseStudy" && !(_id in ${PINNED_CASE_STUDY_REFS})]` as const
+
+/**
  * The /insights index (#61), filtered by one category slug.
  *
  * `$category` is null on the unfiltered index, which the `== null` arm short-
  * circuits — the same shape `LATEST_INSIGHTS_QUERY` uses for its optional
  * category. Matching on the **slug** rather than the reference id is what lets
- * the filter live in the URL (`/insights?category=design`) instead of leaking
+ * the filter live in the URL (`/insights/category/design`) instead of leaking
  * a document id into it.
  *
  * `total` repeats the filter deliberately: the pager counts the filtered feed,
@@ -270,21 +311,50 @@ export const INSIGHT_SLUGS_QUERY = defineQuery(
  * frame draws five chips (AI, Design, Technology, 1682 Conference, Life at O3)
  * — a curated subset no schema field can express today, so this returns every
  * category that earns one and the bar wraps.
+ *
+ * **The unfiltered feed leads with the index's `pinnedItems`.** See
+ * `pinnedRefs` above; a category filter takes the plain date order.
  */
 export const INSIGHTS_PAGE_QUERY = defineQuery(`{
-  "items": *[_type == "insight" && ($category == null || $category in categories[]->slug.current)] | order(publishedAt desc) [$offset...$end]{${INSIGHT_CARD}},
-  "total": count(*[_type == "insight" && ($category == null || $category in categories[]->slug.current)]),
+  "items": select(
+    $category == null => (${PINNED_INSIGHTS} + (${UNPINNED_INSIGHTS} | order(publishedAt desc) [0...$end]))[$offset...$end]{${INSIGHT_CARD}},
+    *[_type == "insight" && $category in categories[]->slug.current] | order(publishedAt desc) [$offset...$end]{${INSIGHT_CARD}}
+  ),
+  "total": select(
+    $category == null => count(${PINNED_INSIGHTS}) + count(${UNPINNED_INSIGHTS}),
+    count(*[_type == "insight" && $category in categories[]->slug.current])
+  ),
   "categories": *[_type == "category" && slug.current != "uncategorized" && count(*[_type == "insight" && references(^._id)]) > 0] | order(title asc){title, "slug": slug.current}
 }`)
 
 /**
- * The /work index (#43). Ordered newest first on `publishedAt`, falling back
- * to `_createdAt` so the seeded case studies — which carry no publish date —
- * still take a stable position instead of sorting as nulls.
+ * The category slugs `/insights` has a filtered path for (#370).
+ *
+ * The same set the filter bar draws — every category with an article, minus
+ * WordPress's `uncategorized` sentinel — reduced to the slugs, because what
+ * reads it is `generateStaticParams` and a path is all it builds. The two
+ * conditions are repeated rather than shared: a fragment would have to be
+ * interpolated into both, and the `defineQuery` a build enumerates is the one
+ * that has to be readable on its own.
+ */
+export const INSIGHT_CATEGORY_SLUGS_QUERY = defineQuery(
+  `*[_type == "category" && slug.current != "uncategorized" && count(*[_type == "insight" && references(^._id)]) > 0].slug.current`,
+)
+
+/**
+ * The /work index (#43). The index document's `pinnedItems` lead, in the
+ * order they are listed; the rest follow newest first on `publishedAt`,
+ * falling back to `_createdAt` so the seeded case studies — which carry no
+ * publish date — still take a stable position instead of sorting as nulls.
+ *
+ * **The slice runs over the joined sequence**, so a page boundary may fall
+ * inside the pinned head or after it. The tail is capped at `[0...$end]`
+ * before the join: the page needs at most `$end` documents in total, and
+ * without the cap the whole collection is materialised to hand back nine.
  */
 export const CASE_STUDIES_PAGE_QUERY = defineQuery(`{
-  "items": *[_type == "caseStudy"] | order(coalesce(publishedAt, _createdAt) desc) [$offset...$end]{${CASE_STUDY_CARD}},
-  "total": count(*[_type == "caseStudy"])
+  "items": (${PINNED_CASE_STUDIES} + (${UNPINNED_CASE_STUDIES} | order(coalesce(publishedAt, _createdAt) desc) [0...$end]))[$offset...$end]{${CASE_STUDY_CARD}},
+  "total": count(${PINNED_CASE_STUDIES}) + count(${UNPINNED_CASE_STUDIES})
 }`)
 
 /**

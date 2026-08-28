@@ -1,27 +1,11 @@
 /**
- * Pagination helpers shared by `buildIndexRoute` and collection index views.
+ * The GROQ slice a page of a collection index is.
  *
- * `searchParams.page` arrives as `string | string[] | undefined` from
- * Next.js. These helpers normalize that into the 1-indexed page number +
- * the GROQ slice indices (`[$offset...$end]`, exclusive end) the collection index
- * queries consume.
+ * The page number itself comes from the path (`indexPaths.ts`), already
+ * validated — a segment that is not a page is a 404 rather than a value to
+ * round — so all that is left here is turning it into the `[$offset...$end]`
+ * (exclusive end) the index queries consume.
  */
-
-export function parsePage(input: string | string[] | undefined): number {
-  const raw = Array.isArray(input) ? input[0] : input
-  if (typeof raw !== 'string' || raw === '') return 1
-  const parsed = Math.floor(Number(raw))
-  if (!Number.isFinite(parsed) || parsed < 1) return 1
-  return parsed
-}
-
-export function clampPage(requested: number, totalPages: number): number {
-  if (totalPages <= 0) return 1
-  if (requested < 1) return 1
-  if (requested > totalPages) return totalPages
-  return requested
-}
-
 export function pageRange(
   page: number,
   pageSize: number,

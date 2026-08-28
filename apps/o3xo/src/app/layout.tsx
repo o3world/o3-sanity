@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import type React from 'react'
 import { Figtree } from 'next/font/google'
 
+import { AnchorGlide } from '@o3/ui'
 import { getBaseUrl } from '@o3/content-runtime/base-url'
 
 import '@/app/globals.css'
@@ -38,7 +39,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
      * app renders in O3's paint with no error anywhere.
      */
     <html lang="en" data-brand="o3xo" className={figtree.variable}>
-      <body className="text-fg bg-white font-sans antialiased">{children}</body>
+      <body className="text-fg bg-white font-sans antialiased">
+        {children}
+        <AnchorGlide />
+      </body>
     </html>
   )
 }

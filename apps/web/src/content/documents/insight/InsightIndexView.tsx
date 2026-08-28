@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { FilterChip } from '@o3/ui'
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
+import { indexHref } from '@o3/content-runtime/routes/index-paths'
 
 import { InsightCard } from '@o3/content-ui/cards'
 import { Pager } from '@o3/content-ui'
@@ -33,20 +34,17 @@ interface InsightIndexViewProps {
 }
 
 /**
- * `/insights` and `/insights?category=design&page=2` — one builder, so a chip
- * and a pager link can never disagree about how this route spells its state.
- * A chip resets the page (a new filter has no page 4 in common with the old
- * one); the pager keeps the filter.
+ * `/insights` and `/insights/category/design/page/2` — one builder over the
+ * route's own scheme (#370), so a chip, a pager link and the route cannot
+ * disagree about how this index spells its state. A chip resets the page (a
+ * new filter has no page 4 in common with the old one); the pager keeps the
+ * filter.
  */
 function insightsHref({
   category,
-  page,
+  page = 1,
 }: { category?: string | null; page?: number } = {}): string {
-  const params = new URLSearchParams()
-  if (category) params.set('category', category)
-  if (page && page > 1) params.set('page', String(page))
-  const query = params.toString()
-  return query ? `/insights?${query}` : '/insights'
+  return indexHref('/insights', { facets: { category: category ?? null }, page })
 }
 
 /**
@@ -80,7 +78,8 @@ function insightsHref({
  * at O3) rather than sample words — so the control filters on `category`, and
  * the chips come from the collection instead of from a hand-kept list here.
  *
- * It is **server-side and in the URL** (`?category=design`), which is what
+ * It is **server-side and in the path** (`/insights/category/design`, #370),
+ * which is what
  * makes a filtered index linkable, crawlable and free of client state. The
  * mechanism is `IndexEntry.facets` — see `@o3/content-runtime/routes`.
  *

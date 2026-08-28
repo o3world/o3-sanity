@@ -17,7 +17,7 @@ const meta = {
     layout: 'padded',
     design: figmaDesign('4404:1821', O3XO_FIGMA_FILE_KEY),
   },
-  args: { href: (page: number) => (page <= 1 ? '/insights' : `/insights?page=${page}`) },
+  args: { href: (page: number) => (page <= 1 ? '/insights' : `/insights/page/${page}`) },
   argTypes: {
     page: { control: { type: 'number', min: 1 } },
     totalPages: { control: { type: 'number', min: 0 } },
