@@ -197,6 +197,34 @@ Two things to know before touching either project:
   `xo-sanity-web` to the built-in mechanism would leave the CI-driven `o3` gate
   as the odd one out, so both stay on turbo until someone decides otherwise.
 
+## The revalidate webhook carries its own list of types
+
+Published visitors get freshness from one Sanity webhook — `next-revalidate` on
+`naorcr6k`, POSTing `{_type, "slug": slug.current}` to `/api/revalidate` on the
+production site. Its GROQ **filter names the document types by hand**:
+
+```
+_type in ["page","insight","caseStudy","collectionIndex","siteSettings",
+          "person","client","category","industry"]
+```
+
+A routed type missing from that list publishes to silence. The route handler is
+not the gap — it derives `sanity:<type>` from whatever payload arrives and
+flushes the routed types wholesale — so a type the filter drops never reaches
+it, and the page serves its prerender until something else publishes or the
+project redeploys. `collectionIndex` sat outside the list from #347 until
+2026-08-28, which is how a reordered `/work` feed stayed on the old order with
+nothing failing anywhere.
+
+Nothing checks this list against the schema (#374). When you add a document
+type that a route renders, add it here:
+
+```bash
+pnpm --filter @o3/sanity exec sanity hook list          # what is configured
+```
+
+`brief` is deliberately absent — authoring material, rendered by no route.
+
 ## `schema:check` is a gate, not a chore
 
 Production keeps itself honest. Every push to main deploys the schema and then
