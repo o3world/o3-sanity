@@ -135,18 +135,23 @@ const DRIVE_EASE = 0.12
  * On a fine pointer the track walks as it transits the viewport: the walk
  * maps onto the stretch of page scroll in which the rule and every column
  * are on screen — from fully entered (`WALK_FOOT_GAP` under the track's
- * foot) to the nav clearance from the top — with the track CHASING the
- * mapped target (`DRIVE_EASE`) rather than mirroring it, so the step lands
- * as a glide. The window is measured over the track rather than the whole
- * band: the header above it only has to have been seen, not to still be on
- * screen, and holding the walk for it would start the advance early on any
- * viewport short enough that band-plus-header never fits at once.
- * Nothing pins and nothing is held open: the section keeps exactly the
- * height it has, the page never stops moving, and the bands around this one
- * are undisturbed. On desktop two columns fit the view, so the walk IS one
- * step — the [1 2] framing hands over to [2 3] — and both framings are on
- * screen in full before and after it. The rule above reads `scrollLeft`, so
- * it keeps reporting the truth without knowing who moved the track.
+ * foot) to the nav clearance from the top. The mapping is STEPPED: the
+ * target is always a framing a snap would choose — each column's own start,
+ * the last pinned to the end of the travel — and each framing holds an
+ * equal share of the window, so every slide gets its dwell instead of the
+ * transit being spent between columns. The track CHASES each step
+ * (`DRIVE_EASE`) rather than flipping to it, which is what lands a
+ * hand-over as a glide into a rest. The window is measured over the track
+ * rather than the whole band: the header above it only has to have been
+ * seen, not to still be on screen, and holding the walk for it would start
+ * the advance early on any viewport short enough that band-plus-header
+ * never fits at once. Nothing pins and nothing is held open: the section
+ * keeps exactly the height it has, the page never stops moving, and the
+ * bands around this one are undisturbed. On desktop two columns fit the
+ * view, so the walk is one hand-over — [1 2] dwells, then [2 3] — while a
+ * one-column view walks all three framings on equal shares. The rule above
+ * reads `scrollLeft`, so it keeps reporting the truth without knowing who
+ * moved the track.
  *
  * **Snap is off wherever the drive can run at all, and it is a whole-visit
  * decision rather than a per-frame one.** A programmatic `scrollLeft` against
@@ -286,7 +291,25 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
         clearance + WALK_MIN_SPAN,
       )
       const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - clearance)))
-      const delta = progress * max - track.scrollLeft
+      // The walk is STEPPED, not proportional: the target is always a
+      // framing a snap would choose — each column's own start, with the
+      // final framing pinned to the end of the travel — and each framing
+      // holds an equal share of the window. Written proportionally, the
+      // track spends most of the transit between columns, all seam and no
+      // slide; stepped, every column gets its dwell and the chase below is
+      // what turns each hand-over into a glide.
+      const trackLeft = track.getBoundingClientRect().left
+      const stops: number[] = []
+      for (const column of track.children) {
+        const stop = Math.min(
+          column.getBoundingClientRect().left - trackLeft + track.scrollLeft,
+          max,
+        )
+        const last = stops[stops.length - 1]
+        if (last === undefined || stop - last > 1) stops.push(stop)
+      }
+      const framing = Math.min(stops.length - 1, Math.floor(progress * stops.length))
+      const delta = (stops[framing] ?? max) - track.scrollLeft
       // Settled — sub-pixel writes are a scroll event each and move nothing.
       if (Math.abs(delta) <= 0.5) return
       // The track CHASES the target instead of jumping to it: a wheel arrives
