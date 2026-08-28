@@ -46,7 +46,19 @@ export default async function SiteLayout({
           samples that white, flips the bar to its light skin, and flips back
           when the ink hero paints. Ink is the colour both index heroes arrive
           in, so what shows around the skeleton matches what fills it. */}
-      <main className="bg-ink min-h-screen">{children}</main>
+      <main
+        // No `utilityNavItems`, no strip — and the nav-offset token every
+        // clearance under the pill derives from (hero padding, sticky tops,
+        // jump-target margins) goes to zero with it. `SiteNav` zeroes the same
+        // token for the pill itself; the two read one settings fetch.
+        className={
+          (settings?.utilityNavItems ?? []).length > 0
+            ? 'bg-ink min-h-screen'
+            : 'bg-ink min-h-screen [--spacing-nav-offset:0px]'
+        }
+      >
+        {children}
+      </main>
       <SiteFooter settings={settings} brandMark={FOOTER_MARK} year={year} />
       {/* Draft sessions only: SanityLive is the delivery path for draft
           updates in Presentation (see live.ts). Published visitors get

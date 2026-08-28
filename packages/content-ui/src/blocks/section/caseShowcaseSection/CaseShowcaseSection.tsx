@@ -87,7 +87,10 @@ export function CaseShowcaseSection({
                * band is the flat stack it has always been, and the dim reads
                * the computed `position` and turns itself off.
                */
-              <div key={caseStudy._id} className="bg-black lg:sticky lg:top-40">
+              <div
+                key={caseStudy._id}
+                className="bg-black lg:sticky lg:top-[calc(var(--spacing-nav-offset)+96px)]"
+              >
                 <Card {...caseStudy} />
               </div>
             ))}

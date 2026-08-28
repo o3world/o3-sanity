@@ -57,7 +57,7 @@ export function CaseStudyHero({
       className={cn(
         // 819 fixed at 1440; the 402 frame hugs its content, so the band's
         // height there is the 164px pill clearance plus the copy.
-        'px-gutter bg-ink-deep relative isolate flex flex-col justify-end pb-16 pt-[164px] text-white lg:min-h-[819px]',
+        'px-gutter bg-ink-deep relative isolate flex flex-col justify-end pb-16 pt-[164px] text-white lg:min-h-[819px] lg:pt-[calc(var(--spacing-nav-offset)+100px)]',
         className,
       )}
     >

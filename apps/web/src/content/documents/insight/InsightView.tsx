@@ -130,7 +130,7 @@ export function InsightView({
           before #90, drawn when the document has no featured image to fill
           it. With an image it is only what shows while the photograph
           loads. */}
-      <header className="bg-ink-warm px-gutter relative isolate overflow-hidden pb-16 pt-[164px] text-white">
+      <header className="bg-ink-warm px-gutter relative isolate overflow-hidden pb-16 pt-[164px] text-white lg:pt-[calc(var(--spacing-nav-offset)+100px)]">
         {heroImage ? (
           <>
             <div className="absolute inset-0 -z-20">

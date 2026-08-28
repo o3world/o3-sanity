@@ -47,4 +47,5 @@ export function sectionAnchors(blocks: readonly SanityBlock[]): Map<string, stri
  * target, which is why it rides on the anchored wrapper rather than on the
  * band.
  */
-export const ANCHOR_OFFSET_CLASS = 'scroll-mt-20 lg:scroll-mt-40'
+export const ANCHOR_OFFSET_CLASS =
+  'scroll-mt-20 lg:scroll-mt-[calc(var(--spacing-nav-offset)+96px)]'

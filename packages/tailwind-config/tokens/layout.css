@@ -84,6 +84,22 @@
    * frame should use the matching band-* step instead. */
   --spacing-section-y: clamp(96px, calc(9.25vw + 58.8px), 192px);
 
+  /* ── Chrome clearance ──────────────────────────────────────────────────── */
+  /* nav-offset — how far the pinned nav pill sits from the viewport top at
+   * `lg`: the Utility Nav strip's 50px plus a 14px gap (`2250:1445`, #88).
+   * The strip is data-driven, so an app whose settings carry no
+   * `utilityNavItems` re-declares this as 0px (a `[--spacing-nav-offset:0px]`
+   * override on its chrome and its `<main>`) and every clearance derived from
+   * it follows.
+   *
+   * Derive AT THE USE SITE — `calc(var(--spacing-nav-offset) + 96px)` for the
+   * sticky/jump clearance under the pill, `+ 100px` for an ink hero's top
+   * padding. A derived token declared here would bake the root's 64px in at
+   * declaration time (a custom property substitutes its var() references
+   * where it is DEFINED, not where it is used) and no override could reach
+   * it. */
+  --spacing-nav-offset: 64px;
+
   /* ── Containers ────────────────────────────────────────────────────────── */
   /* section — 1248px: the 1440 design width less two 96px gutters. The
    * standard content column. Class-accessible via max-w-section. */

@@ -28,6 +28,13 @@ type Phase = 'static' | 'armed' | 'entered'
  * machinery it holds; and everything under prefers-reduced-motion. With no
  * JavaScript the effect never runs and the page is simply the server's, so no
  * `noscript` rule is needed.
+ *
+ * **Two elements: the outer stands still, the inner fades.** `className` and
+ * every spread prop land on the outer, which is what lets a caller paint it
+ * with the band's own ground (`SectionReveal` does) — an entrance that faded
+ * its own background would rise out of whatever sits behind the page, dark
+ * ground under a light band. Only the inner element ever carries opacity or
+ * translate.
  */
 export function Reveal({ delay = 0, className, style, children, ...rest }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
@@ -56,28 +63,26 @@ export function Reveal({ delay = 0, className, style, children, ...rest }: Revea
   }, [])
 
   return (
-    <div
-      ref={ref}
-      data-reveal=""
-      className={cn(
-        // Arming hides with no transition: it happens off-screen, and a fade
-        // there would still be mid-flight if the reader arrived early.
-        phase === 'armed' && 'translate-y-6 opacity-0 transition-none',
-        // `translate`, not `transform`: Tailwind v4 compiles `translate-y-*`
-        // to the independent `translate` property, which a transition naming
-        // `transform` does not reach (see `../motion.ts`). `translate-none`
-        // rather than `translate-y-0`: a settled reveal must leave no
-        // translation behind, because any value but `none` makes the element
-        // a containing block for the fixed and sticky descendants a band may
-        // hold.
-        phase === 'entered' &&
-          'duration-(--duration-reveal) translate-none opacity-100 transition-[opacity,translate] ease-out motion-reduce:transition-none',
-        className,
-      )}
-      style={delay ? { transitionDelay: `${delay}ms`, ...style } : style}
-      {...rest}
-    >
-      {children}
+    <div ref={ref} data-reveal="" className={className} style={style} {...rest}>
+      <div
+        className={cn(
+          // Arming hides with no transition: it happens off-screen, and a fade
+          // there would still be mid-flight if the reader arrived early.
+          phase === 'armed' && 'translate-y-6 opacity-0 transition-none',
+          // `translate`, not `transform`: Tailwind v4 compiles `translate-y-*`
+          // to the independent `translate` property, which a transition naming
+          // `transform` does not reach (see `../motion.ts`). `translate-none`
+          // rather than `translate-y-0`: a settled reveal must leave no
+          // translation behind, because any value but `none` makes the element
+          // a containing block for the fixed and sticky descendants a band may
+          // hold.
+          phase === 'entered' &&
+            'duration-(--duration-reveal) translate-none opacity-100 transition-[opacity,translate] ease-out motion-reduce:transition-none',
+        )}
+        style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+      >
+        {children}
+      </div>
     </div>
   )
 }

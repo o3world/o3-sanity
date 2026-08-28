@@ -42,6 +42,12 @@ import { ANCHOR_OFFSET_CLASS, sectionAnchors } from './anchors'
  */
 export interface DispatchedBlockWrapperProps extends HTMLAttributes<HTMLDivElement> {
   blockType: string
+  /**
+   * The block itself, so a wrapper can read what its band declares — its
+   * `surface`, in particular, is what lets an entrance wrapper stand on the
+   * band's own ground rather than the document's.
+   */
+  block: SanityBlock
   children: ReactNode
 }
 
@@ -102,7 +108,7 @@ export function renderDispatchedBlocks(opts: {
       ...(anchor ? { id: anchor, className: ANCHOR_OFFSET_CLASS } : {}),
     }
     return BlockWrapper ? (
-      <BlockWrapper key={block._key} blockType={block._type} {...wrapperProps}>
+      <BlockWrapper key={block._key} blockType={block._type} block={block} {...wrapperProps}>
         {rendered}
       </BlockWrapper>
     ) : (

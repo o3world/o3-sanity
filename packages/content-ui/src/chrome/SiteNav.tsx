@@ -50,13 +50,18 @@ interface SiteNavProps {
  * at every width: the ink flip below is a **pinned** bar's behaviour — a bar
  * that leaves never crosses a light band and has nothing to flip against.
  *
- * **The offset is 64px** (#88). The `Utility Nav` strip (`2250:1445`) sits
- * above the pill, and the Home frame draws the rebuilt `NavBar` (`2225:2967`, `ABSOLUTE` + `FIXED`) at
+ * **The offset is `--spacing-nav-offset`, and it exists for the strip** (#88).
+ * The `Utility Nav` strip (`2250:1445`) sits above the pill, and the Home
+ * frame draws the rebuilt `NavBar` (`2225:2967`, `ABSOLUTE` + `FIXED`) at
  * `y: 64` — the strip's 50px plus a 14px gap. `UtilityNav` renders that strip
  * in flow at the top of the document, so at rest the two sit exactly as the
- * frame draws them; the strip then scrolls away and the pill holds 64px, which
- * is what `FIXED` on that node means. Below `lg` there is no strip and the bar
- * still starts at `top-0`.
+ * frame draws them; the strip then scrolls away and the pill holds the offset,
+ * which is what `FIXED` on that node means. The strip is data
+ * (`utilityNavItems`), so when the settings carry none the pill zeroes the
+ * token instead of holding a gap under nothing — and the site layout zeroes it
+ * for `<main>` in the same breath, so the hero and sticky clearances derived
+ * from it follow. Below `lg` there is no strip and the bar still starts at
+ * `top-0`.
  *
  * **The cap is 900px, read off the rebuilt `NavBar` (`2225:2920`) on
  * 2026-08-14** (#91). The component itself is 900 × 80, and every canonical
@@ -119,6 +124,12 @@ const NAV_BUTTON_INK = 'group-data-[ink=dark]:bg-ink group-data-[ink=dark]:text-
 export function SiteNav({ settings, brandMark }: SiteNavProps) {
   const navItems = settings?.navItems ?? []
   const button = settings?.primaryButton ?? null
+  // The 64px offset exists to clear the Utility Nav strip, and the strip is
+  // data: no `utilityNavItems`, no strip, and the pill has nothing to sit
+  // below. The zero rides the same token the site's clearances derive from,
+  // so the pill and the heroes under it move together. The site layout makes
+  // the matching call for everything inside `<main>`.
+  const hasUtilityNav = (settings?.utilityNavItems ?? []).length > 0
 
   return (
     // Chrome declares its own surface: the pill is a dark scrim over whatever
@@ -133,7 +144,11 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
     <SurfaceProvider surface="ink">
       <header
         id={NAV_INK_TARGET}
-        className="lg:px-gutter group fixed inset-x-0 top-0 z-50 lg:top-[64px]"
+        className={
+          hasUtilityNav
+            ? 'lg:px-gutter lg:top-(--spacing-nav-offset) group fixed inset-x-0 top-0 z-50'
+            : 'lg:px-gutter lg:top-(--spacing-nav-offset) group fixed inset-x-0 top-0 z-50 [--spacing-nav-offset:0px]'
+        }
       >
         <NavInk />
         <nav

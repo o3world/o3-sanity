@@ -150,8 +150,13 @@ export function CollectionHero({
           // all five 402 instances of it against the 20 the older bands on the
           // same frames keep (see `--spacing-gutter-tight`).
           interior
-            ? cn(SURFACE_CLASS[painted], 'px-gutter-tight pt-[192px]')
-            : 'px-gutter bg-ink-warm pt-[164px] text-white',
+            ? cn(
+                SURFACE_CLASS[painted],
+                // 192 at the frame = the 64px nav offset + 128; derived so a
+                // page with no Utility Nav strip closes the gap with the pill.
+                'px-gutter-tight pt-[192px] lg:pt-[calc(var(--spacing-nav-offset)+128px)]',
+              )
+            : 'px-gutter bg-ink-warm pt-[164px] text-white lg:pt-[calc(var(--spacing-nav-offset)+100px)]',
           className,
         )}
       >

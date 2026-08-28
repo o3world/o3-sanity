@@ -204,10 +204,12 @@ describe('the homepage at 402 (ADR 0006)', () => {
     // Matched on the band's OWN class attribute, not on the document: the
     // utilities probe above de-duplicates, so the carousel would answer for
     // this band and the assertion would pass with the track gone.
-    const column = html.match(/<li[^>]*class="([^"]*lg:w-\[531px\][^"]*)"/)?.[1] ?? ''
+    const column = html.match(/<li[^>]*class="([^"]*lg:w-\[42\.548%\][^"]*)"/)?.[1] ?? ''
     expect(column, 'no track column was rendered').not.toBe('')
-    // 531 at 1440 (`2846:5480`), the full content column at 402 — where the
-    // frame's own column overruns the gutter by its right padding alone.
+    // The frame's 531 over its 1248 content column (`2846:5480`), held as a
+    // fraction so every lg viewport keeps the framing; the full content
+    // column at 402 — where the frame's own column overruns the gutter by its
+    // right padding alone.
     expect(column).toContain('w-full')
     // The hairline between columns is the one part that is `lg:` only: at 402
     // it falls outside the gutter, so it is drawn nowhere rather than at the

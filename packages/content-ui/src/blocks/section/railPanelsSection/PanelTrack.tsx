@@ -44,21 +44,26 @@ const ENTRANCE_DELAY = 120
 const ENTRANCE_STAGGER = 100
 
 /**
- * Where the walk ends: the band's top at the nav clearance every sticky
- * element on the page uses (`top-40`). Past this the column heads would
- * start leaving, so the last framing has to be settled by here.
+ * Where the walk ends when the clearance cannot be read: the track's top at
+ * the clearance every sticky element on the page uses
+ * (`--spacing-nav-offset` + 96px; 160px with the Utility Nav strip). Past
+ * this the column heads would start leaving, so the last framing has to be
+ * settled by here. The live value is read off the stage's own
+ * `scroll-margin-top`, which derives from the token.
  */
 const WALK_CLEARANCE = 160
 
 /**
- * Where the walk begins: this much room under the band's foot once it has
- * fully entered — the reader is looking at the whole band, at rest in its
- * first framing, before anything moves.
+ * Where the walk begins: this much room under the track's foot — the rule
+ * and every column fully on screen, at rest in the first framing, before
+ * anything moves. The track rather than the whole band, because a band
+ * whose header eats half a short viewport would otherwise start walking
+ * before the reader has seen what walks.
  */
 const WALK_FOOT_GAP = 48
 
 /**
- * The least page scroll the walk may be mapped onto. A tall band in a short
+ * The least page scroll the walk may be mapped onto. A tall track in a short
  * viewport squeezes the fully-visible stretch toward nothing, and a walk
  * compressed into a few pixels of scroll is a flip; below this the window
  * opens upward from `WALK_CLEARANCE` instead, trading a little head-room
@@ -127,11 +132,15 @@ const DRIVE_EASE = 0.12
  *
  * ## The advance
  *
- * On a fine pointer the track walks as the band transits the viewport: the
- * walk maps onto the stretch of page scroll in which the whole band is on
- * screen — from fully entered (`WALK_FOOT_GAP` under its foot) to
- * `WALK_CLEARANCE` from the top — with the track CHASING the mapped target
- * (`DRIVE_EASE`) rather than mirroring it, so the step lands as a glide.
+ * On a fine pointer the track walks as it transits the viewport: the walk
+ * maps onto the stretch of page scroll in which the rule and every column
+ * are on screen — from fully entered (`WALK_FOOT_GAP` under the track's
+ * foot) to the nav clearance from the top — with the track CHASING the
+ * mapped target (`DRIVE_EASE`) rather than mirroring it, so the step lands
+ * as a glide. The window is measured over the track rather than the whole
+ * band: the header above it only has to have been seen, not to still be on
+ * screen, and holding the walk for it would start the advance early on any
+ * viewport short enough that band-plus-header never fits at once.
  * Nothing pins and nothing is held open: the section keeps exactly the
  * height it has, the page never stops moving, and the bands around this one
  * are undisturbed. On desktop two columns fit the view, so the walk IS one
@@ -166,9 +175,10 @@ const DRIVE_EASE = 0.12
  * The columns arrive rather than sit there: opacity and a 24px rise, once, on
  * `--ease-spring` at `--duration-reveal`, each column `ENTRANCE_STAGGER` after
  * the one to its left. It is `Reveal`'s mechanic written onto the `<li>`
- * itself — both of that component's load-bearing branches included — because a
- * wrapper element between the `<ol>` and its items would cost the list its
- * semantics and the row its snap points.
+ * itself — the same inversion included: the server ships the columns painted,
+ * and only a track still below the viewport after hydration is hidden to earn
+ * the entrance — because a wrapper element between the `<ol>` and its items
+ * would cost the list its semantics and the row its snap points.
  *
  * **Spring rather than the house `ease-out`, because of what it composes
  * with.** `SectionReveal` already rises the whole band 24px on `ease-out`, and
@@ -193,9 +203,10 @@ const DRIVE_EASE = 0.12
  */
 export function PanelTrack({ items, label, header }: PanelTrackProps) {
   const stageRef = useRef<HTMLDivElement>(null)
+  const walkRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLOListElement>(null)
   const ruleRef = useRef<HTMLSpanElement>(null)
-  const [entered, setEntered] = useState(false)
+  const [entrance, setEntrance] = useState<'static' | 'armed' | 'entered'>('static')
   const [steerable, setSteerable] = useState(false)
 
   const sync = useCallback(() => {
@@ -220,21 +231,18 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
   useEffect(() => {
     const track = trackRef.current
     if (!track) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setEntered(true)
-      return
-    }
-    // `Reveal`'s fast path: a track already at or above the viewport plays now
-    // rather than waiting to re-enter, which it never would.
-    if (track.getBoundingClientRect().top < window.innerHeight) {
-      setEntered(true)
-      return
-    }
+    // `Reveal`'s inversion, column by column: the server ships the columns
+    // painted, and only a track still below the viewport after hydration is
+    // hidden to earn its entrance. Reduced motion and a track the reader can
+    // already see keep the server's paint, untransitioned.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (track.getBoundingClientRect().top < window.innerHeight) return
+    setEntrance('armed')
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            setEntered(true)
+            setEntrance('entered')
             io.disconnect()
           }
         }
@@ -247,8 +255,9 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
 
   useEffect(() => {
     const stage = stageRef.current
+    const walk = walkRef.current
     const track = trackRef.current
-    if (!stage || !track) return
+    if (!stage || !walk || !track) return
 
     const still = window.matchMedia('(prefers-reduced-motion: reduce)')
     const finger = window.matchMedia('(pointer: coarse)')
@@ -264,15 +273,19 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
       if (!live) return
       const max = travel()
       if (max <= 0) return
-      const rect = stage.getBoundingClientRect()
-      // The walk's window: the stretch of transit in which the whole band is
-      // on screen. Squeezed under WALK_MIN_SPAN (a tall band in a short
-      // viewport), it opens upward from the clearance instead.
+      const rect = walk.getBoundingClientRect()
+      // Where the last framing must be settled: the stage's scroll-margin-top
+      // resolves the nav-clearance token, so the walk ends where a sticky
+      // element would stop — under the pill wherever the pill sits.
+      const clearance = parseFloat(getComputedStyle(stage).scrollMarginTop) || WALK_CLEARANCE
+      // The walk's window: the stretch of transit in which the rule and every
+      // column are on screen. Squeezed under WALK_MIN_SPAN (a tall track in a
+      // short viewport), it opens upward from the clearance instead.
       const start = Math.max(
         window.innerHeight - rect.height - WALK_FOOT_GAP,
-        WALK_CLEARANCE + WALK_MIN_SPAN,
+        clearance + WALK_MIN_SPAN,
       )
-      const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - WALK_CLEARANCE)))
+      const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - clearance)))
       const delta = progress * max - track.scrollLeft
       // Settled — sub-pixel writes are a scroll event each and move nothing.
       if (Math.abs(delta) <= 0.5) return
@@ -362,11 +375,15 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
   const columns = Math.max(items.length, 1)
 
   return (
-    <div ref={stageRef} className="w-full">
+    // The scroll margin is not for scrolling to: it is how the drive reads the
+    // resolved nav-clearance token as pixels — `getComputedStyle` hands back
+    // an unresolved `calc()` for a custom property, and a resolved length for
+    // the real property it lands on.
+    <div ref={stageRef} className="w-full scroll-mt-[calc(var(--spacing-nav-offset)+96px)]">
       <div className="flex w-full flex-col gap-[18px]">
         {header}
 
-        <div className="flex w-full flex-col">
+        <div ref={walkRef} className="flex w-full flex-col">
           {/* Decorative: the `<ol>` under it already carries the count and the
           order, and a scroll position is not something to announce twice. */}
           <div aria-hidden="true" className="bg-line relative h-px w-full overflow-hidden">
@@ -399,7 +416,11 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
             tabIndex={0}
             aria-label={label ?? UNNAMED}
             className={cn(
-              'focus-visible:ring-brand flex gap-6 overflow-x-auto pt-16 [scrollbar-width:none] focus-visible:outline-none focus-visible:ring-2 lg:gap-[138px] [&::-webkit-scrollbar]:hidden',
+              // The frame's 138px gap over its 1248px content column, held as
+              // a fraction so every `lg` viewport keeps the frame's framing —
+              // two columns and the third off-canvas — instead of cutting at
+              // an arbitrary edge as the column narrows.
+              'focus-visible:ring-brand flex gap-6 overflow-x-auto pt-16 [scrollbar-width:none] focus-visible:outline-none focus-visible:ring-2 lg:gap-[11.058%] [&::-webkit-scrollbar]:hidden',
               // The server HTML is the snapping track, which is what a reader with
               // no JavaScript — and the visual-regression harness, which browses
               // with reduced motion — gets.
@@ -410,21 +431,21 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
               <li
                 key={panel.key}
                 data-sanity={panel.dataSanity}
-                // What each app's `noscript` rule targets: with no JavaScript the
-                // effect above never runs, so the stylesheet is the only thing
-                // that can show the column.
                 data-reveal=""
                 style={{ transitionDelay: `${ENTRANCE_DELAY + index * ENTRANCE_STAGGER}ms` }}
                 className={cn(
-                  'border-line flex w-full shrink-0 snap-start flex-col pb-8 lg:w-[531px] lg:border-r lg:pr-16',
-                  // `translate`, not `transform`: Tailwind v4 compiles
-                  // `translate-y-*` to the independent property (`@o3/ui`'s
-                  // `motion.ts`).
-                  'duration-(--duration-reveal) ease-spring transition-[opacity,translate]',
-                  'motion-reduce:transition-none',
-                  // `translate-none` rather than `translate-y-0`, so a settled
-                  // column leaves no containing block behind it.
-                  entered ? 'translate-none opacity-100' : 'translate-y-6 opacity-0',
+                  // The frame's 531px column over its 1248px content column,
+                  // a fraction for the same reason as the gap above.
+                  'border-line flex w-full shrink-0 snap-start flex-col pb-8 lg:w-[42.548%] lg:border-r lg:pr-16',
+                  // Armed off-screen with no transition; the entrance then
+                  // fades up on the spring. `translate`, not `transform`:
+                  // Tailwind v4 compiles `translate-y-*` to the independent
+                  // property (`@o3/ui`'s `motion.ts`), and `translate-none`
+                  // rather than `translate-y-0` so a settled column leaves no
+                  // containing block behind it.
+                  entrance === 'armed' && 'translate-y-6 opacity-0 transition-none',
+                  entrance === 'entered' &&
+                    'duration-(--duration-reveal) ease-spring translate-none opacity-100 transition-[opacity,translate] motion-reduce:transition-none',
                 )}
               >
                 <span
