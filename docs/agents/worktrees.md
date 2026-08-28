@@ -96,6 +96,14 @@ does four things:
 It is safe to re-run and will not overwrite an env file, a symlink, or a `.env`
 that is already there.
 
+### Draft mode did not engage, and the canvas never appeared
+
+A worktree whose env was copied by hand instead of provisioned has no `.env`,
+so draft mode's enable route cannot sign its cookie and `draftMode()` answers
+false inside the Presentation frame. The symptom is the site rendering with no
+hover bar, no `data-sanity` attributes, and no `canvas-notices` node in the DOM.
+It is not a code defect (#121): run `scripts/worktree-provision.sh` and reload.
+
 ### Published edits refresh without a webhook
 
 Sanity's publish webhook cannot reach `localhost`, so a published change used
