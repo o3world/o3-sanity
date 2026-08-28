@@ -152,9 +152,10 @@ export function CollectionHero({
           interior
             ? cn(
                 SURFACE_CLASS[painted],
-                // 192 at the frame = the 64px nav offset + 128; derived so a
-                // page with no Utility Nav strip closes the gap with the pill.
-                'px-gutter-tight pt-[192px] lg:pt-[calc(var(--spacing-nav-offset)+128px)]',
+                // 192 flat: the Interior Hero frames draw it against the
+                // strip-less pill at y: 32 (`2336:4477` under `2336:4382`),
+                // so it does not derive from the nav-offset token.
+                'px-gutter-tight pt-[192px]',
               )
             : 'px-gutter bg-ink-warm pt-[164px] text-white lg:pt-[calc(var(--spacing-nav-offset)+100px)]',
           className,

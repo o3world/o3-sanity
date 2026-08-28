@@ -88,9 +88,10 @@
   /* nav-offset — how far the pinned nav pill sits from the viewport top at
    * `lg`: the Utility Nav strip's 50px plus a 14px gap (`2250:1445`, #88).
    * The strip is data-driven, so an app whose settings carry no
-   * `utilityNavItems` re-declares this as 0px (a `[--spacing-nav-offset:0px]`
-   * override on its chrome and its `<main>`) and every clearance derived from
-   * it follows.
+   * `utilityNavItems` re-declares this as the 32px every strip-less interior
+   * frame draws (`NavBar` at y: 32 — `2336:4382`, `2250:2251`, `2250:2131`;
+   * a `[--spacing-nav-offset:32px]` override on its chrome and its `<main>`)
+   * and every clearance derived from it follows.
    *
    * Derive AT THE USE SITE — `calc(var(--spacing-nav-offset) + 96px)` for the
    * sticky/jump clearance under the pill, `+ 100px` for an ink hero's top

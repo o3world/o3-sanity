@@ -125,10 +125,12 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
   const navItems = settings?.navItems ?? []
   const button = settings?.primaryButton ?? null
   // The 64px offset exists to clear the Utility Nav strip, and the strip is
-  // data: no `utilityNavItems`, no strip, and the pill has nothing to sit
-  // below. The zero rides the same token the site's clearances derive from,
-  // so the pill and the heroes under it move together. The site layout makes
-  // the matching call for everything inside `<main>`.
+  // data: no `utilityNavItems`, no strip, and the pill takes the 32px the
+  // strip-less interior frames draw instead (`NavBar` at y: 32 on
+  // `2336:4382`, `2250:2251`, `2250:2131`). The value rides the same token
+  // the site's clearances derive from, so the pill and the heroes under it
+  // move together. The site layout makes the matching call for everything
+  // inside `<main>`.
   const hasUtilityNav = (settings?.utilityNavItems ?? []).length > 0
 
   return (
@@ -147,7 +149,7 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
         className={
           hasUtilityNav
             ? 'lg:px-gutter lg:top-(--spacing-nav-offset) group fixed inset-x-0 top-0 z-50'
-            : 'lg:px-gutter lg:top-(--spacing-nav-offset) group fixed inset-x-0 top-0 z-50 [--spacing-nav-offset:0px]'
+            : 'lg:px-gutter lg:top-(--spacing-nav-offset) group fixed inset-x-0 top-0 z-50 [--spacing-nav-offset:32px]'
         }
       >
         <NavInk />

@@ -49,12 +49,14 @@ export default async function SiteLayout({
       <main
         // No `utilityNavItems`, no strip — and the nav-offset token every
         // clearance under the pill derives from (hero padding, sticky tops,
-        // jump-target margins) goes to zero with it. `SiteNav` zeroes the same
-        // token for the pill itself; the two read one settings fetch.
+        // jump-target margins) drops to the strip-less 32px the interior
+        // frames draw (`2336:4382`, `2250:2251`, `2250:2131`, all at y: 32).
+        // `SiteNav` makes the same call for the pill itself; the two read one
+        // settings fetch.
         className={
           (settings?.utilityNavItems ?? []).length > 0
             ? 'bg-ink min-h-screen'
-            : 'bg-ink min-h-screen [--spacing-nav-offset:0px]'
+            : 'bg-ink min-h-screen [--spacing-nav-offset:32px]'
         }
       >
         {children}
