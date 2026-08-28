@@ -180,6 +180,7 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `story`           | A structured document's interleaved narrative array                                                 | `sections` (a page's flat composition), `chapters`   |
 | `sectionsAbove`   | A collection index's bands between the top of the page and the **feed**                             | `aboveContent`, `aboveFold`, `header`                |
 | `sectionsBelow`   | A collection index's bands between the **feed** and the footer                                      | `belowContent`, `footerSections`                     |
+| `pinnedItems`     | The documents a collection index puts at the head of its feed, in that order                        | `featured`, `sticky`, `order`, a boolean on the item |
 | `details`         | Term/description rows under a body (`chapter.details`)                                              | `specs`, `meta`, a second `body`                     |
 | `utilityNavItems` | The brand-property strip's links (`siteSettings`)                                                   | `properties`, `brandLinks`, a second `footerGroup`   |
 | `background`      | A brief's raw material — research, notes, transcripts                                               | `research`, `context`, `notes`                       |

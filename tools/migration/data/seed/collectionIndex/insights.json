@@ -3,6 +3,14 @@
   "_type": "collectionIndex",
   "title": "Insights index",
   "collection": "insight",
+  "pinnedItems": [
+    { "_type": "reference", "_key": "insight-10635", "_ref": "insight-wp-10635" },
+    { "_type": "reference", "_key": "insight-10623", "_ref": "insight-wp-10623" },
+    { "_type": "reference", "_key": "insight-10601", "_ref": "insight-wp-10601" },
+    { "_type": "reference", "_key": "insight-10590", "_ref": "insight-wp-10590" },
+    { "_type": "reference", "_key": "insight-10579", "_ref": "insight-wp-10579" },
+    { "_type": "reference", "_key": "insight-10569", "_ref": "insight-wp-10569" }
+  ],
   "sectionsAbove": [
     {
       "_type": "heroSection",

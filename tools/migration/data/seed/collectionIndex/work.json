@@ -3,6 +3,28 @@
   "_type": "collectionIndex",
   "title": "Work index",
   "collection": "caseStudy",
+  "pinnedItems": [
+    { "_type": "reference", "_key": "cs-10023", "_ref": "caseStudy-wp-10023" },
+    { "_type": "reference", "_key": "cs-10028", "_ref": "caseStudy-wp-10028" },
+    { "_type": "reference", "_key": "cs-10282", "_ref": "caseStudy-wp-10282" },
+    { "_type": "reference", "_key": "cs-5803", "_ref": "caseStudy-wp-5803" },
+    { "_type": "reference", "_key": "cs-5804", "_ref": "caseStudy-wp-5804" },
+    { "_type": "reference", "_key": "cs-5805", "_ref": "caseStudy-wp-5805" },
+    { "_type": "reference", "_key": "cs-5806", "_ref": "caseStudy-wp-5806" },
+    { "_type": "reference", "_key": "cs-5807", "_ref": "caseStudy-wp-5807" },
+    { "_type": "reference", "_key": "cs-5808", "_ref": "caseStudy-wp-5808" },
+    { "_type": "reference", "_key": "cs-5809", "_ref": "caseStudy-wp-5809" },
+    { "_type": "reference", "_key": "cs-5810", "_ref": "caseStudy-wp-5810" },
+    { "_type": "reference", "_key": "cs-6322", "_ref": "caseStudy-wp-6322" },
+    { "_type": "reference", "_key": "cs-6336", "_ref": "caseStudy-wp-6336" },
+    { "_type": "reference", "_key": "cs-6338", "_ref": "caseStudy-wp-6338" },
+    { "_type": "reference", "_key": "cs-6339", "_ref": "caseStudy-wp-6339" },
+    { "_type": "reference", "_key": "cs-6340", "_ref": "caseStudy-wp-6340" },
+    { "_type": "reference", "_key": "cs-8627", "_ref": "caseStudy-wp-8627" },
+    { "_type": "reference", "_key": "cs-8628", "_ref": "caseStudy-wp-8628" },
+    { "_type": "reference", "_key": "cs-8629", "_ref": "caseStudy-wp-8629" },
+    { "_type": "reference", "_key": "cs-9319", "_ref": "caseStudy-wp-9319" }
+  ],
   "sectionsAbove": [
     {
       "_type": "heroSection",
