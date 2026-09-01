@@ -154,18 +154,10 @@
   --color-fg-inverse-muted: rgba(255, 255, 255, 0.65);
 
   /* ── Chrome ────────────────────────────────────────────────────────────── */
-  /* rgba(3,3,3,0.2) — the floating NavBar's fill, at both widths
+  /* rgba(3,3,3,0.2) — the floating NavBar's dark skin, at both widths
    * (2225:2920 / 1814:1630). Sits over whatever the hero is showing, so it
-   * must stay an alpha. */
+   * must stay an alpha. The light skin is solid white and takes no token. */
   --color-scrim: rgba(3, 3, 3, 0.2);
-  /* rgba(3,3,3,0.10) — the same pill once it floats over a LIGHT band. The
-   * About frame is the anchor: its NavBar instance (`2250:2227`) overrides the
-   * component's own 20% fill to 10% of the same near-black rather than
-   * flipping to a white one, so the light skin is the dark scrim at half
-   * strength. Was rgba(255,255,255,0.55), carried from the prototype's nav-ink
-   * flip while no frame had answered it. Still an alpha, for the same reason
-   * --color-scrim is. */
-  --color-scrim-light: rgba(3, 3, 3, 0.1);
   /* rgba(0,0,0,0.10) — the hairline on the flipped pill; --color-on-ink-line's
    * opposite number, and the same NO CANONICAL ANCHOR note applies. */
   --color-on-light-line: rgba(0, 0, 0, 0.1);
