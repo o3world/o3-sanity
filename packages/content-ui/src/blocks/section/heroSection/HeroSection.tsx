@@ -53,6 +53,11 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
  * the animation, which `OrbitalSphere` is the implementation of. Its geometry
  * is what the sphere is seated to (see the call site); its pixels are not.
  *
+ * Two of the table's numbers are the frame's reading and NOT the band's: #396
+ * scales the graphic down about a tenth and #397 lifts the head of the column
+ * by the same, both landed at the call sites below. Neither is a drift to
+ * correct back toward the frame.
+ *
  * Both widths draw the same composition — a centred column with a standfirst.
  * What splits is the step, the measure and the rhythm.
  *
@@ -288,37 +293,42 @@ export function HeroSection({
         {showOrbs ? (
           /*
            * Only the sphere's cap is ever visible, and the `Graphic`
-           * (`1866:2412`) is where the frame draws it. Tracing the lit limb
-           * down that raster gives r ≈ 963 centred 640px below the band's foot
-           * — a sphere **133.75%** of the frame width, apex 323px up from the
-           * foot, which is where the button's own foot sits. Held in `vw` so
-           * the ratio survives any viewport, and anchored to the foot so the
-           * copy can grow above it.
+           * (`1866:2412`) is where the frame draws it. #396 rules the drawn
+           * globe about a tenth too large for the band, so the geometry the
+           * raster gives is scaled down uniformly and landed on round `vw`:
+           * **120vw** across at 1440, apex 20vw above the band's foot. Held in
+           * `vw` so the ratio survives any viewport, and anchored to the foot
+           * so the copy can grow above it.
            *
            * The ratio does NOT carry to 402: the band is barely a third the
-           * width but only a fourteenth shorter (874 against 940), so 80.7vw
-           * leaves a sliver. The proportion the eye reads is apex-height
-           * against band-height, so at 402 the sphere doubles and hangs lower
-           * to hold roughly the frame's quarter-of-the-band cap.
+           * width but only a fourteenth shorter (874 against 940), so a
+           * 1440-scale sphere leaves a sliver. The proportion the eye reads is
+           * apex-height against band-height, so at 402 the sphere is 148vw and
+           * hangs lower to hold roughly the same cap.
            */
           <OrbitalSphere
             preset="hero"
             motion="orbit"
-            className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-111.3vw] lg:w-[133.75vw]"
+            className="bottom-[-111vw] left-1/2 w-[148vw] -translate-x-1/2 lg:bottom-[-100vw] lg:w-[120vw]"
           />
         ) : null}
 
         {/*
          * The band's rhythm, read off both frames rather than centred inside a
-         * `min-h`: the headline starts 288px down at 1440 (`2089:4313`) and
-         * 173px down at 402 (`1814:1622`), and the graphic gets the 310 / 247
-         * underneath. Together with the copy that resolves to the frames'
-         * 940 / 874 band heights.
+         * `min-h`: the graphic gets 310px under the column at 1440
+         * (`2089:4316`) and 247px at 402 (`1814:1622`).
+         *
+         * The head is a step shallower than the frames' 288 / 173 — #397 rules
+         * the headline about a tenth too low — so it lands on the 4px spacing
+         * scale at 256 / 160. Both still clear the pinned pill, whose foot sits
+         * at 96px once `--spacing-nav-offset` resolves to the strip-less 32.
+         * The clearance is checked here, not derived: the band's head is a
+         * composition value that happens to be larger than the chrome needs.
          *
          * The column is centred at both widths — `1814:1622` centres on its
          * cross axis and every text node in it is centre-set.
          */}
-        <div className="max-w-content relative z-10 mx-auto flex flex-col items-center pb-[247px] pt-[173px] text-center lg:pb-[310px] lg:pt-[288px]">
+        <div className="max-w-content relative z-10 mx-auto flex flex-col items-center pb-[247px] pt-40 text-center lg:pb-[310px] lg:pt-64">
           {/*
            * 16 between the two headline blocks at 402 (`2975:8420` over
            * `2975:8419`); at 1440 they are set solid, one 76px step apart with
