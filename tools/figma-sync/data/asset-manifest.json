@@ -139,14 +139,14 @@
       "format": "png",
       "locked": false,
       "unresolved": true,
-      "note": "Not from Figma. Byte-identical to `prototype/assets/partner-amerigas.png` - the retired prototype (#33), which built its logo bar from `prototype/uploads/AmeriGas_logo.svg.webp` through its `<image-slot>` component onto a uniform 600x240 canvas. #25e4cd1 moved the twelve prototype images next to the seeds that reference them. None of the 163 distinct image fills in the Figma file hashes to these bytes. NO LONGER ON THE HOMEPAGE: the 2026-08 restructure (#89) replaced this partner and Aramark, and took the other four marks off their prototype rasters onto the frame's own fill originals. Kept because the `client` documents still reference them."
+      "note": "Not from Figma - the retired prototype (#33) built its logo bar from `prototype/uploads/AmeriGas_logo.svg.webp` through its `<image-slot>` component onto a uniform 600x240 canvas, and this is that raster alpha-trimmed to 580x90 so a width-filling tile draws the mark and not its canvas. None of the 163 distinct image fills in the Figma file carries this mark. Off the homepage since the 2026-08 restructure (#89), which took the other marks onto the frame's own fill originals; the `client` document and the /partners/sanity logo bar still reference it. Full colour - the strip greys it in CSS."
     },
     {
       "path": "tools/migration/data/seed/assets/partner-aramark.png",
       "format": "png",
       "locked": false,
       "unresolved": true,
-      "note": "Not from Figma. Byte-identical to `prototype/assets/partner-aramark.png`, composed from `prototype/uploads/Aramark_logo.png` on the same 600x240 canvas. Off the homepage since #89 - see `partner-amerigas.png`."
+      "note": "Not from Figma. Composed from `prototype/uploads/Aramark_logo.png` on the same 600x240 canvas, alpha-trimmed to 580x150. Off the homepage since #89 - see `partner-amerigas.png`."
     },
     {
       "path": "tools/migration/data/seed/assets/partner-caron.png",
