@@ -7,10 +7,9 @@ import { SITE_SETTINGS, STORY_YEAR } from '../testing/seedContent'
 import { SiteFooter } from './SiteFooter'
 
 /**
- * The footer, built to the canonical Home frame's `Footer` (`1680:2096`,
- * mobile `1814:1784`) — **not** to the `Footer` component on the Local
- * Components canvas (`1280:1885`), which #38 found stale: `#141414` against
- * the frame's `#030303`, and 64px of top padding against 96.
+ * The footer, built to the `Footer` component (`1280:1885`, mobile
+ * `2225:2671`) — black, `64px 96px`, with the `ink` 'O' bleeding off its left
+ * edge.
  *
  * Rendered from the real committed Site Settings document. Every string comes
  * from data (#19); the component decides only the year and the arrangement —
@@ -28,7 +27,7 @@ const meta = {
   component: SiteFooter,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('1680:2096'),
+    design: figmaDesign('1280:1885'),
   },
   // The mark comes from the app (#228) — O3's here, tight-bounded and taking
   // the footer's white through `currentColor` (`1280:1856`).
@@ -45,7 +44,7 @@ type Story = StoryObj<typeof meta>
 
 export const AsAuthored: Story = {}
 
-/** `1814:1784` — the 402 arrangement. */
+/** `2225:2671` — the 402 arrangement, where the 'O' centres on the left edge. */
 export const Mobile: Story = {
   globals: { backgrounds: { value: 'ink' }, viewport: { value: 'mobile' } },
 }
