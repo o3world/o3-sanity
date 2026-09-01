@@ -235,32 +235,32 @@ vocabulary from the token packages and fails the suite on a brand-only role.
 
 Single-context layout — `CONTEXT.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
 
-### Running the migration
+### Changing a dataset
 
-**Loading the dataset is your job, not a question to ask.** The pipeline —
-`extract → convert → load → verify` — is ordinary build-out work:
+**The site is in production mode (2026-09-01): a dataset change ships as a
+targeted migration, never a blanket `load` — whichever dataset.** Editors and
+content population own the datasets now, and `load` reverts whatever the seed
+files do not know about. Write a script or patch scoped to exactly the
+documents or assets your change is about, run it, and say on the ticket what
+it touched. The blanket pipeline (`extract → convert → load → verify`) is
+retired as everyday work; `pnpm --filter @o3/migration verify` remains useful
+as a read-only check.
 
-```bash
-pnpm --filter @o3/migration load     # data/{converted,translated,seed}/ → Sanity
-pnpm --filter @o3/migration verify   # is the dataset what data/ says it is?
-```
+The production protections still apply to targeted work there: ADR 0003 is
+inverted — what an editor wrote outranks the committed JSON. `pnpm
+dataset:drift` names the documents an editor changed (lock them with
+`-- --lock`, or port the edits into `data/`), `pnpm dataset:backup` writes a
+tarball, and `pnpm dataset:sync` pulls production's content into `development`
+without deleting anything. A `migration.locked` document is never touched in
+any mode, whichever dataset. See `docs/agents/ops.md` → "Production holds user
+content now".
 
-**That is true of `development` and no longer of `production`** (2026-08-27):
-editors author in `production` now, so there ADR 0003 inverts — what an editor
-wrote outranks the committed JSON, and `load` refuses the dataset without
-`--allow-production`. Before passing the flag, `pnpm dataset:drift` names the
-documents an editor changed (lock them with `-- --lock`, or port the edits into
-`data/`) and `pnpm dataset:backup` writes a tarball. `pnpm dataset:sync` pulls
-production's content into `development` without deleting anything. A
-`migration.locked` document is never touched in any mode, whichever dataset.
-See `docs/agents/ops.md` → "Production holds user content now".
+**After a targeted migration, look at the result in a browser.** Skipping the
+look once (#42's build-out) left a whole homepage reconciliation invisible:
+the seeds were correct, the dataset was stale, and every screenshot taken to
+check the work was of the old content.
 
-**Run it after touching anything under `data/`, then look at the result in a
-browser.** Skipping it once (#42's build-out) left a whole homepage
-reconciliation invisible: the seeds were correct, the dataset was stale, and
-every screenshot taken to check the work was of the old content.
-
-**Loading a dataset is your job; creating or deleting one is not.** Deleting a
+**Creating or deleting a dataset is never your job.** Deleting a
 dataset here is unrecoverable — backups are an Enterprise feature and are not
 enabled — and the Comments add-on (`production-comments`) is complimentary, so
 it never counts toward a plan's dataset limit. Both rules, the rebuild-from-
