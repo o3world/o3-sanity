@@ -21,7 +21,7 @@
  * `utility` (the kit's chrome black and O3's are both #000000), the
  * `on-ink-*` alphas and `fg-inverse-muted` (white at an alpha is
  * brand-neutral, and the kit's own `white/ 5%` / `white/ 20%` overlays
- * agree), and `scrim-light` / `on-light-line` (the same, inverted). The base
+ * agree), and `on-light-line` (the same, inverted). The base
  * theme's `[data-surface='ink']` block is left alone for the same reason: it
  * re-points the text roles to those white alphas, and an element's own
  * declaration beats one inherited from <html>, so a dark band inside an O3XO

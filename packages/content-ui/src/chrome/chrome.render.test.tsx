@@ -150,7 +150,9 @@ describe('the nav bar’s pinned, dark-ink default', () => {
   it('keeps the flipped skin one attribute away, not a second component', () => {
     // Fill, hairline and copy all hang off `data-ink="dark"` on the header,
     // which is the whole contract between NavInk and this file.
-    expect(navHtml).toContain('group-data-[ink=dark]:bg-scrim-light')
+    // The flipped fill is opaque white, not a scrim: grey chrome over a pale
+    // band reads as a smudge rather than a pill (#399).
+    expect(navHtml).toContain('group-data-[ink=dark]:bg-white')
     expect(navHtml).toContain('group-data-[ink=dark]:border-on-light-line')
     expect(navHtml).toContain('group-data-[ink=dark]:text-fg')
     expect(navHtml).toContain('duration-(--duration-ink)')
@@ -172,8 +174,8 @@ describe('the nav bar’s pinned, dark-ink default', () => {
       // light band under the bar.
       expect(button).toContain('bg-white')
       expect(button).toContain('text-ink')
-      // Flipped, it inverts with the links and the hairline. White on
-      // `--color-scrim-light` keeps the label and loses the button.
+      // Flipped, it inverts with the links and the hairline. White on the
+      // white pill keeps the label and loses the button.
       expect(button).toContain('group-data-[ink=dark]:bg-ink')
       expect(button).toContain('group-data-[ink=dark]:text-white')
     }

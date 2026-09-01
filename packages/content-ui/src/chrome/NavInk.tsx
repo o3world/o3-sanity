@@ -16,8 +16,8 @@ export const NAV_INK_TARGET = 'site-nav'
  * as something to see through.
  *
  * Read off the palette rather than picked: every background alpha this design
- * uses is far below it — `--color-scrim` is 0.2 and `--color-scrim-light` is
- * 0.1. The only 0.9+ alpha anywhere in color.css is
+ * uses is far below it — `--color-scrim`, the deepest, is 0.2. The only 0.9+
+ * alpha anywhere in color.css is
  * `--color-on-ink` at 0.92, which is a text colour and never a fill. So 0.9
  * separates "a band" from "a veil over a band" with the whole palette to spare,
  * while still accepting the near-opaque values `color-mix` rounding produces.
@@ -93,9 +93,12 @@ const LIGHT_SURFACES = new Set(['white', 'paper', 'bone'])
  *
  * The bar has two skins and they fail asymmetrically. White copy on
  * `--color-scrim` (20% black) survives almost any ground, because the scrim
- * darkens whatever is behind it. `#232323` on `--color-scrim-light` (10%)
- * needs the ground to be pale AND even. A photograph is the second thing's
- * enemy even when it is bright: measured on one article's picture, the strip
+ * darkens whatever is behind it. The light skin is opaque white, so its own
+ * ground is never the problem — but a white pill dropped over photography is
+ * a hole punched in the picture, and the hairline that shapes it needs the
+ * band around it to be pale AND even to read as chrome at all. A photograph
+ * is that second thing's enemy even when it is bright: measured on one
+ * article's picture, the strip
  * under the bar averaged 205 of 255 and still ran from 81 to 251 inside the
  * bar's own height, and the dark skin over it was unreadable (#372).
  *
