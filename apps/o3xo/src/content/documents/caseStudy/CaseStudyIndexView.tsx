@@ -1,4 +1,4 @@
-import { CollectionHero } from '@o3/ui'
+import { CollectionHero, Reveal } from '@o3/ui'
 import { brandConfig } from '@o3/sanity/brand'
 import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
@@ -51,7 +51,15 @@ export function CaseStudyIndexView({ items, pagination }: CaseStudyIndexViewProp
         <ul className="max-w-section mx-auto grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {(items ?? []).map((item) => (
             <li key={item._id}>
-              <CaseStudyCard {...item} />
+              {/* NO STAGGER, because this grid is two up as well as three
+                  (`sm:grid-cols-2 lg:grid-cols-3`). A per-column delay is one
+                  number, and one number cannot be right for both counts — at the
+                  width it does not match, the delays land across rows instead of
+                  along one and the entrance reads as a scatter. The feeds that
+                  stagger go straight from one column to three. */}
+              <Reveal>
+                <CaseStudyCard {...item} />
+              </Reveal>
             </li>
           ))}
         </ul>

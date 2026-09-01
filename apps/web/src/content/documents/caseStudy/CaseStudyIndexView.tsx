@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 
+import { Reveal } from '@o3/ui'
 import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
 import { indexHref } from '@o3/content-runtime/routes/index-paths'
@@ -85,10 +86,13 @@ export function CaseStudyIndexView({ items, pagination, above, below }: CaseStud
         <ul className="max-w-section mx-auto flex flex-col gap-12">
           {(items ?? []).map((item, index) => (
             <li key={item._id}>
-              {/* The first card's photograph is 1248 × 550 in the first screen
-                  of the index — the route's LCP element, and the only image on
-                  it that is preloaded. */}
-              <CaseStudyCard {...item} priority={index === 0} />
+              {/* One card per row, so there is no column to stagger against. */}
+              <Reveal>
+                {/* The first card's photograph is 1248 × 550 in the first screen
+                    of the index — the route's LCP element, and the only image on
+                    it that is preloaded. */}
+                <CaseStudyCard {...item} priority={index === 0} />
+              </Reveal>
             </li>
           ))}
         </ul>

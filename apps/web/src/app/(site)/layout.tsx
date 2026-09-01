@@ -1,5 +1,5 @@
 import type React from 'react'
-import { Suspense } from 'react'
+import { Suspense, ViewTransition } from 'react'
 import { draftMode } from 'next/headers'
 import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
@@ -76,7 +76,19 @@ async function Shell({ children, utility }: ShellProps) {
             : 'bg-ink min-h-screen [--spacing-nav-offset:32px]'
         }
       >
-        {children}
+        {/*
+         * THE CROSS-PAGE FADE (#403). One `<ViewTransition>` around the routed
+         * content and nothing else: a navigation replaces what is inside `<main>`
+         * and leaves the chrome standing, so the chrome is exactly what must not
+         * animate. The pseudo-element rules are in tokens/motion.css, where the
+         * root snapshot — nav, footer, ground — is held still and only this
+         * element crosses; `default="page"` is the class they name.
+         *
+         * `<Link>` navigation is a React Transition, which is what activates
+         * this; a browser with no View Transitions API navigates as it always
+         * did, with no fallback to write.
+         */}
+        <ViewTransition default="page">{children}</ViewTransition>
       </main>
       <SiteFooter settings={settings} brandMark={FOOTER_MARK} year={year} />
       {/* Nothing visible renders here for a published visitor, so `null` is an

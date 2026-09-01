@@ -26,6 +26,30 @@ export interface CarouselTrackProps {
 }
 
 /**
+ * THE TRACK RUNS OFF THE RIGHT EDGE OF THE SCREEN.
+ *
+ * The Blog set draws the row starting on the left gutter and continuing past
+ * the frame's right edge (`2134:1352`), and that bleed is the band's affordance:
+ * a row clipped on the content column reads as a row that ends, and the reader
+ * has only the prev/next pair to tell them otherwise.
+ *
+ * The margin is the distance from the 1248px column's right edge to the
+ * viewport's, negated, written as a `min()` of two terms rather than
+ * `calc(50% - 50vw)` — a percentage margin resolves against the containing
+ * block, so the tidy form is only right while the column is at its cap. Below
+ * the cap the column is the viewport less two gutters and the gutter is the
+ * whole distance; above it the column stops at 1248 and half of that is 624.
+ * `min()` of two negatives takes the larger distance, which is whichever is in
+ * force. `LayoutSection`'s bleeding media column is the same arithmetic.
+ *
+ * **From `sm` only, because below it the card IS the column.** A `basis-full`
+ * slide measures against the viewport, so widening the viewport below `sm`
+ * would make every card wider than the band's own column rather than sliding a
+ * neighbour into view.
+ */
+const BLEED_VIEWPORT_CLASS = 'sm:mr-[min(calc(-1*var(--spacing-gutter)),calc(624px-50vw))]'
+
+/**
  * The prev/next pair in the header row, hidden entirely when everything
  * already fits — a dead pair on a three-card row is worse than none. Its own
  * component because the visibility reads Embla's state, which only exists
@@ -52,14 +76,17 @@ function Controls() {
  * authored variant: a horizontal heading row had no space for them) — over
  * the overflowing track. See the amendment on ADR 0006.
  *
- * The carousel viewport is the SectionShell column itself, so scrolled cards
- * clip at the 1248px content edges — never past the margins. At that measure
- * the resting row is exactly three cards (394 × 3 + two 32px gaps = 1246);
- * the 1440 frame's bleed past the right edge is deliberately not kept, and
- * the prev/next controls carry the "this scrolls" affordance. Below `sm` the
- * same column is one card wide — a full-width square card in the tablet
- * range towers over its copy, so only below `sm` does the card fill the
- * column — and the controls page through them.
+ * The header sits in the standard 1248px column and the track starts on its
+ * left edge; only the track's viewport bleeds, and it bleeds to the right edge
+ * of the screen (`BLEED_VIEWPORT_CLASS`). At the design width the resting row
+ * is the frame's three cards on the column (394 × 3 + two 32px gaps = 1246)
+ * with the fourth crossing the margin. Below `sm` the card fills the column,
+ * the track does not bleed, and the controls page through them.
+ *
+ * **The band hosting this hands `CAROUSEL_BAND_CLASS` to its shell** — the
+ * bleed is measured in `vw` and needs the clip to stay off the scrollbar. It
+ * lives in `carouselBand.ts` because this module is client-side and a server
+ * component cannot read a constant across that line.
  */
 export function CarouselTrack({ heading, headingAttr, cards }: CarouselTrackProps) {
   return (
@@ -79,14 +106,19 @@ export function CarouselTrack({ heading, headingAttr, cards }: CarouselTrackProp
         <Controls />
       </div>
 
-      {/* The frame's 32px gap at both widths; each step is one card. */}
-      <CarouselContent className="gap-8">
-        {cards.map((card, index) => (
-          <CarouselItem key={index} className="sm:basis-[394px]">
-            {card}
-          </CarouselItem>
-        ))}
-      </CarouselContent>
+      {/* The wrapper is what widens Embla's viewport: `CarouselContent` clips
+          on its own parent's width, so the bleed belongs one level above it
+          rather than on the track. */}
+      <div className={BLEED_VIEWPORT_CLASS}>
+        {/* The frame's 32px gap at both widths; each step is one card. */}
+        <CarouselContent className="gap-8">
+          {cards.map((card, index) => (
+            <CarouselItem key={index} className="sm:basis-[394px]">
+              {card}
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </div>
     </Carousel>
   )
 }

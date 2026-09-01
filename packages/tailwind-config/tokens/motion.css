@@ -78,6 +78,10 @@
   --duration-ink: 350ms;
   /* .7s — the standard data-reveal opacity/transform transition. */
   --duration-reveal: 700ms;
+  /* .3s — the cross-page fade (#403). Shorter than a reveal on purpose: a
+   * band arriving is content, and a route change is the reader's own click
+   * answered. Anything at reveal length reads as the site hesitating. */
+  --duration-page: 300ms;
   /* .85s — the slower reveals: hero sub/CTA fade-up, the intro overlay's
    * slide-away, work-copy reveal (.8s sits between these two steps). */
   --duration-reveal-slow: 850ms;
@@ -274,5 +278,165 @@
     50% {
       opacity: calc(var(--po, 1) * 0.45);
     }
+  }
+}
+
+/*
+ * The opener's parallax — `HeroSection`'s orbital band (#398).
+ *
+ * Two layers on one clock, moving at different rates as the band scrolls off
+ * the top: the sphere trails the page and the copy column leads it, which is
+ * what reads as depth between them.
+ *
+ * SCROLL-DRIVEN CSS, AND FOR THE REASON THE ENTRANCES ARE KEYFRAMES. A
+ * scroll handler needs hydration, and the LCP element is inside the layer that
+ * would be waiting for it. `animation-timeline` runs off the compositor with
+ * no JavaScript at all, and at the range's start every keyframe below is the
+ * identity value — so the band's first paint is exactly what the server sent.
+ *
+ * A NAMED TIMELINE, NOT `view()` PER LAYER. Both layers have to read the same
+ * progress or they drift apart, and an anonymous `view()` on each would track
+ * each layer's own box. `hero-band` declares the timeline on the section and
+ * the two layers name it. The section clips its overflow, which makes it a
+ * scroll container for its children — one more reason the timeline is declared
+ * rather than resolved: a `view()` inside would resolve against the section
+ * instead of the document.
+ *
+ * `exit-crossing` is the range that starts at the top of the page. Progress 0
+ * is the moment the band's top edge meets the top of the viewport, progress 1
+ * the moment its bottom edge passes the same line — so the opener sits at 0
+ * before a reader has scrolled, and the effect is right wherever else the band
+ * is placed.
+ *
+ * NO FIGMA ANCHOR, AND THERE CANNOT BE ONE: the frames draw the band, not its
+ * movement. The homepage concept capture supplies what it is allowed to — that
+ * the two layers move, and which way each goes. The rates are chosen here and
+ * settled by looking at the band, the way `soft` and `spring` above were: a
+ * capture is read for sequence and intent, never for values.
+ *
+ * `@supports` is load-bearing rather than tidy. A browser that does not know
+ * `animation-timeline` ignores the property and keeps the rest of the
+ * declaration, so an unguarded rule would play the whole parallax once on load,
+ * on a timer, and leave the copy faded out.
+ */
+/*
+ * TOP LEVEL, NOT IN `@theme`. Tailwind emits a `@theme` keyframe only when the
+ * `--animate-*` variable naming it is used, and these two are reached from an
+ * `@utility` instead — declared in there they are tree-shaken out, and the
+ * utility then names keyframes that do not exist, which the browser treats as
+ * no animation at all rather than as an error.
+ */
+@keyframes hero-lag {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 12vh;
+  }
+}
+
+@keyframes hero-lead {
+  from {
+    translate: 0 0;
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  to {
+    translate: 0 -6vh;
+    opacity: 0;
+  }
+}
+
+/** Declares the opener's clock. Goes on the band both layers sit inside. */
+@utility hero-band {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      view-timeline-name: --hero-band;
+    }
+  }
+}
+
+/** The layer that trails the page — the sphere behind the copy. */
+@utility hero-lag {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation-name: hero-lag;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-timeline: --hero-band;
+      animation-range: exit-crossing 0% exit-crossing 100%;
+    }
+  }
+}
+
+/** The layer that leads it — the headline column. */
+@utility hero-lead {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation-name: hero-lead;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-timeline: --hero-band;
+      animation-range: exit-crossing 0% exit-crossing 100%;
+    }
+  }
+}
+
+/*
+ * The cross-page fade — `(site)/layout.tsx` (#403).
+ *
+ * A navigation replaces what is inside `<main>` and leaves the nav pill and
+ * the footer standing, so the transition is one crossfade over the routed
+ * content and a hard cut everywhere else. React's `<ViewTransition>` around
+ * `{children}` carries `default="page"`, which is the class these rules name;
+ * everything the page draws outside it stays in the `root` snapshot.
+ *
+ * THE ROOT SNAPSHOT IS HELD STILL, and that is what anchors the chrome. Left
+ * to itself the browser crossfades `root` as well, fading the pill and the
+ * footer into identical copies of themselves — a flicker with nothing to say.
+ * `display: none` on the old snapshot rather than a zero duration: two
+ * half-opaque copies of one fixed bar overlap for the length of the fade, and
+ * the pill's hairline doubles while they do.
+ *
+ * THE CROSSFADE ITSELF IS THE BROWSER'S, retimed and no more. Its default
+ * pairing already handles the two things a hand-written pair gets wrong — the
+ * `plus-lighter` blend that keeps a crossfade from dipping through grey at the
+ * half, and a group that carries the content's box from the old height to the
+ * new one. Only the duration is ours.
+ *
+ * No fallback to write: a browser without the View Transitions API runs the
+ * navigation it always ran, and none of these rules match anything.
+ */
+::view-transition-group(root) {
+  animation: none;
+}
+::view-transition-old(root) {
+  display: none;
+}
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-group(.page),
+::view-transition-old(.page),
+::view-transition-new(.page) {
+  animation-duration: var(--duration-page);
+  animation-timing-function: var(--ease-out);
+}
+
+/*
+ * A page swap under reduced motion is the swap with no animation, which is the
+ * browser's own behaviour once the durations go. Blanket, because a view
+ * transition is built from pseudo-elements no component can reach to opt one
+ * out.
+ */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }

@@ -1,4 +1,5 @@
 import type React from 'react'
+import { ViewTransition } from 'react'
 import { draftMode } from 'next/headers'
 import { EditorToolbar } from '@o3/editor-chrome/toolbar'
 import { SanityLive } from '@o3/content-runtime/live'
@@ -25,7 +26,21 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
           them. The mark is no longer a slot the layout fills, because the
           components are this brand's and reach for it themselves. */}
       <SiteNav settings={settings} />
-      <main className="min-h-screen">{children}</main>
+      <main className="min-h-screen">
+        {/*
+         * THE CROSS-PAGE FADE (#403). One `<ViewTransition>` around the routed
+         * content and nothing else: a navigation replaces what is inside `<main>`
+         * and leaves the chrome standing, so the chrome is exactly what must not
+         * animate. The pseudo-element rules are in tokens/motion.css, where the
+         * root snapshot — nav, footer, ground — is held still and only this
+         * element crosses; `default="page"` is the class they name.
+         *
+         * `<Link>` navigation is a React Transition, which is what activates
+         * this; a browser with no View Transitions API navigates as it always
+         * did, with no fallback to write.
+         */}
+        <ViewTransition default="page">{children}</ViewTransition>
+      </main>
       <SiteFooter settings={settings} year={year} />
       {/* Draft sessions only: SanityLive is the delivery path for draft
           updates in Presentation (see live.ts). Published visitors get

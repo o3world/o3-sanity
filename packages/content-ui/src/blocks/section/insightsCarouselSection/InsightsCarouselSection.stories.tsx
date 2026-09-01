@@ -9,11 +9,10 @@ import { InsightsCarouselSection } from './InsightsCarouselSection'
  * The Home frame's "Blog" band (`1683:2467`) — a heading row with two
  * `Icon / Surface` controls, and a card rail under it.
  *
- * **The frame's bleed is deliberately not kept.** It draws the row with no
- * side padding, running off the right edge; cards outside the margin read as a
- * layout mistake, and on a wide screen a gutter-only band grows far past the
- * content column. So the row lives in the standard 1248px column, which at the
- * design width is exactly the frame's three visible cards.
+ * **The row bleeds past the right edge of the screen**, as the frame draws it.
+ * The heading and the head of the row keep the standard 1248px column — at the
+ * design width that is the frame's three visible cards — and only the track's
+ * viewport reaches past the margin, so the fourth card crosses it.
  *
  * The query projects **both** a curated list and a latest fallback feed, and
  * curated wins when the editor picked any. Both arms have a story, because the

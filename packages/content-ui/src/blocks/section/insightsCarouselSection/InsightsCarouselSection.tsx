@@ -5,6 +5,7 @@ import { fieldAttr } from '@o3/content-runtime/data-attribute'
 import { getCard, type CardSlot } from '../../../cards/card-registry'
 import { resolveSurface } from '../../surface'
 
+import { CAROUSEL_BAND_CLASS } from './carouselBand'
 import { CarouselTrack } from './CarouselTrack'
 
 /**
@@ -29,12 +30,11 @@ type InsightsCarouselSectionProps = SectionProps<'insightsCarouselSection'> & Ca
  *   row     height 526, starts on the 96px gutter, gap 32, runs off the edge
  * ```
  *
- * The frame draws the band with no side padding and the row bleeding past
- * the right edge. That bleed is *not* kept — cards outside the margin read
- * as a layout mistake, and on wide screens a gutter-only band grows far past
- * the design's content column. So the band is an ordinary `SectionShell`:
- * the row lives in the standard 1248px column, which at the design width is
- * exactly the frame's three visible cards (see `CarouselTrack`).
+ * An ordinary `SectionShell` puts the header and the head of the row on the
+ * standard 1248px column; the track's viewport reaches past it to the right
+ * edge of the screen, which is the frame's own row (#401, and see
+ * `CarouselTrack`). The shell carries `CAROUSEL_BAND_CLASS` because that bleed
+ * is measured in `vw`.
  *
  * The query projects both a `curated` list and a `latest` fallback feed
  * (optionally category-filtered); curated wins when the editor picked any.
@@ -51,7 +51,12 @@ export function InsightsCarouselSection({
   const Card = getCard('insight', cardComponents)
 
   return (
-    <SectionShell surface={resolveSurface(surface, 'insightsCarouselSection')} top="md" bottom="md">
+    <SectionShell
+      surface={resolveSurface(surface, 'insightsCarouselSection')}
+      top="md"
+      bottom="md"
+      className={CAROUSEL_BAND_CLASS}
+    >
       <CarouselTrack
         heading={heading}
         headingAttr={fieldAttr(loc, 'heading')}

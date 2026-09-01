@@ -10,6 +10,13 @@ const nextConfig: NextConfig = {
   // the publish webhook is what invalidates this site, not a clock.
   cacheComponents: true,
   cacheLife: { default: sanity },
+  experimental: {
+    /*
+     * The cross-page fade (#403). React's `<ViewTransition>` is behind this
+     * flag; the site layout is the one place that renders one.
+     */
+    viewTransition: true,
+  },
   images: {
     // Sanity's image CDN does the resizing; Vercel's optimizer (billed per
     // transformation) is bypassed entirely. See the loader for the mechanics.

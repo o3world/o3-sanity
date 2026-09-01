@@ -82,13 +82,12 @@ export function InFlightSection({
   }
 
   return (
-    // The frame runs the card row off the right edge (the same bleed the Home
-    // Blog band draws), but the bleed is not kept — see the carousel's note:
-    // on wide screens a gutter-only band outgrows the content column. The row
-    // scrolls *inside* the standard 1248px shell, clipping at its edges, and
-    // at the design width rests at exactly three cards. At 402 the frame
-    // stacks the cards instead (`1906:347`), so the row only overflows
-    // from `lg`.
+    // The frame runs the card row off the right edge (`1906:347` stacks it at
+    // 402 instead, so the row only overflows from `lg`). The bleed is not kept
+    // here: the row scrolls inside the standard 1248px shell, clipping at its
+    // edges, and at the design width rests at exactly three cards. #401 restored
+    // the bleed on the Blog band and left this one alone; whether it follows is
+    // open.
     <SectionShell surface={resolveSurface(surface, 'inFlightSection')} top="sm" bottom="sm">
       <div className="flex flex-col gap-8 lg:gap-12">
         <Header heading={heading} subheading={subheading} loc={loc} />

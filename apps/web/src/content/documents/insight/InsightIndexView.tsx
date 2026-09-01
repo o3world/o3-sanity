@@ -8,6 +8,7 @@ import { indexHref } from '@o3/content-runtime/routes/index-paths'
 
 import { InsightCard } from '@o3/content-ui/cards'
 import { Pager } from '@o3/content-ui'
+import { Reveal } from '@o3/ui'
 
 type IndexData = NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 
@@ -155,10 +156,9 @@ export function InsightIndexView({
              * drew.
              *
              * The scroll clips at the 1248 column rather than bleeding past
-             * the gutter, which is where `CarouselTrack` and the "Keep
-             * reading" row already put the same edge. No `tabIndex` either:
-             * unlike those tracks this one is made of links, so tabbing
-             * through the chips scrolls them into view by itself.
+             * the gutter. No `tabIndex` either: unlike the card tracks this one
+             * is made of links, so tabbing through the chips scrolls them into
+             * view by itself.
              *
              * `scroll={false}` on every chip, because a chip is followed with
              * the bar on screen: the band above it is the same authored hero
@@ -209,10 +209,18 @@ export function InsightIndexView({
             <ul className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3">
               {items.map((item, index) => (
                 <li key={item._id}>
-                  {/* The first card sits in the first screen under the hero,
-                      the largest picture on the route. It is the only image
-                      here that is preloaded. */}
-                  <InsightCard {...item} priority={index === 0} />
+                  {/* The stagger is the card's COLUMN in the widest grid, not
+                      its place in the feed: twelve cards staggered end to end
+                      would keep the last one waiting most of a second after the
+                      reader reached it. Narrower widths keep the modulo and lose
+                      nothing — a stagger is only ever seen where cards enter
+                      together, and below `lg` they enter one at a time. */}
+                  <Reveal delay={(index % 3) * 80}>
+                    {/* The first card sits in the first screen under the hero,
+                        the largest picture on the route. It is the only image
+                        here that is preloaded. */}
+                    <InsightCard {...item} priority={index === 0} />
+                  </Reveal>
                 </li>
               ))}
             </ul>

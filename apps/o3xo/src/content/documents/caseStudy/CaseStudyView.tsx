@@ -1,4 +1,4 @@
-import { CaseChapter, CaseStudyHero, Eyebrow, Stat } from '@o3/ui'
+import { CaseChapter, CaseStudyHero, Eyebrow, Reveal, Stat } from '@o3/ui'
 import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { Blocks } from '@/content/blocks/Blocks'
@@ -88,6 +88,19 @@ function toRuns(story: readonly StoryMember[]): StoryRun[] {
  * all of them naming the same `story` field path: item-level `data-sanity`
  * attribution is keyed by `_key`, so Presentation still resolves every band to
  * its array item. `optimisticOrder` documents what a run costs mid-drag.
+ *
+ * THE BANDS THIS ROUTE BUILDS ITSELF WEAR THEIR OWN `Reveal` (#402).
+ *
+ * A page composed of blocks gets the scroll entrance from the dispatch seam —
+ * `SectionReveal` wraps every band on the way past. A document view draws its
+ * bands directly, so the seam never sees them and the entrance has to be
+ * asked for here. The narrative's `Blocks` runs still go through the seam and
+ * are not wrapped twice; the article body is not wrapped at all, because
+ * `Reveal` leaves anything taller than the viewport alone.
+ *
+ * Each wrapper carries the band's own ground, which is the rule `Reveal`
+ * states: the document's ground is ink, so a band fading up without one rises
+ * out of black.
  */
 export function CaseStudyView(props: CaseStudyViewProps) {
   const { _id, title, client, narrativeHeadline, stats, heroMedia, story, deliverables, next } =
@@ -120,15 +133,20 @@ export function CaseStudyView(props: CaseStudyViewProps) {
        * below supplies the space beneath.
        */}
       {stats?.length ? (
-        <section className="px-gutter pt-band-sm bg-white">
-          <ul className="max-w-article mx-auto flex w-full flex-col gap-6">
-            {stats.map((stat) => (
-              <li key={stat._key} className="border-line border-t pt-6 first:border-t-0 first:pt-0">
-                <Stat value={stat.value ?? ''} label={stat.label ?? ''} />
-              </li>
-            ))}
-          </ul>
-        </section>
+        <Reveal className="bg-white">
+          <section className="px-gutter pt-band-sm bg-white">
+            <ul className="max-w-article mx-auto flex w-full flex-col gap-6">
+              {stats.map((stat) => (
+                <li
+                  key={stat._key}
+                  className="border-line border-t pt-6 first:border-t-0 first:pt-0"
+                >
+                  <Stat value={stat.value ?? ''} label={stat.label ?? ''} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        </Reveal>
       ) : null}
 
       {/* The narrative, in the order it was authored (ADR 0018). */}
@@ -163,21 +181,27 @@ export function CaseStudyView(props: CaseStudyViewProps) {
 
       {/* No frame region — the schema's own "What we shipped" label. */}
       {deliverables?.length ? (
-        <section className="px-gutter pb-band-article bg-white">
-          <div className="max-w-article mx-auto flex w-full flex-col gap-6">
-            <Eyebrow size="lg">What we shipped</Eyebrow>
-            <ul className="grid gap-3 sm:grid-cols-2">
-              {deliverables.map((deliverable) => (
-                <li key={deliverable} className="border-line text-fg border-t pt-3">
-                  {deliverable}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+        <Reveal className="bg-white">
+          <section className="px-gutter pb-band-article bg-white">
+            <div className="max-w-article mx-auto flex w-full flex-col gap-6">
+              <Eyebrow size="lg">What we shipped</Eyebrow>
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {deliverables.map((deliverable) => (
+                  <li key={deliverable} className="border-line text-fg border-t pt-3">
+                    {deliverable}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        </Reveal>
       ) : null}
 
-      {next ? <NextCaseBand next={next} /> : null}
+      {next ? (
+        <Reveal className="bg-white">
+          <NextCaseBand next={next} />
+        </Reveal>
+      ) : null}
     </article>
   )
 }

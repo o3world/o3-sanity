@@ -7,6 +7,7 @@ import type { Pagination } from '@o3/content-runtime/routes'
 import { indexHref } from '@o3/content-runtime/routes/index-paths'
 
 import { InsightCard } from '@o3/content-ui/cards'
+import { Reveal } from '@o3/ui'
 import { Pager } from '@o3/content-ui'
 
 const { title: collectionTitle, prefix } = brandConfig().collections.insight
@@ -127,9 +128,17 @@ export function InsightIndexView({
              * the 402 Blog band uses (`1814:1738`).
              */
             <ul className="grid grid-cols-1 gap-x-8 gap-y-12 lg:grid-cols-3 lg:gap-y-16">
-              {items.map((item) => (
+              {items.map((item, index) => (
                 <li key={item._id}>
-                  <InsightCard {...item} />
+                  {/* The stagger is the card's COLUMN in the widest grid, not
+                      its place in the feed: twelve cards staggered end to end
+                      would keep the last one waiting most of a second after the
+                      reader reached it. Narrower widths keep the modulo and lose
+                      nothing — a stagger is only ever seen where cards enter
+                      together, and below `lg` they enter one at a time. */}
+                  <Reveal delay={(index % 3) * 80}>
+                    <InsightCard {...item} />
+                  </Reveal>
                 </li>
               ))}
             </ul>

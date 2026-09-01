@@ -66,6 +66,11 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
  * and let the sphere have the rest, so the two paddings are read values and
  * the height between them is whatever the copy needs.
  *
+ * **The band's two layers move at different rates as it scrolls off** — the
+ * sphere trails the page, the column leads it (#398). Both are scroll-driven
+ * CSS on one named timeline; the arithmetic and the reason it cannot be a
+ * scroll handler are in tokens/motion.css.
+ *
  * **The band's foot is a hard edge.** Neither frame draws a curve into the
  * section below: `2089:4316`'s children are the headline, the standfirst, the
  * button and the graphic, and `1814:1619` is the same with `clipsContent` on
@@ -288,7 +293,9 @@ export function HeroSection({
     <SurfaceProvider surface="ink">
       <section
         {...surfaceAttrs('ink')}
-        className="bg-ink px-gutter relative isolate overflow-hidden text-white"
+        /* `hero-band` declares the parallax clock the two layers below read;
+           it does nothing on its own. See tokens/motion.css. */
+        className="hero-band bg-ink px-gutter relative isolate overflow-hidden text-white"
       >
         {showOrbs ? (
           /*
@@ -306,11 +313,20 @@ export function HeroSection({
            * apex-height against band-height, so at 402 the sphere is 148vw and
            * hangs lower to hold roughly the same cap.
            */
-          <OrbitalSphere
-            preset="hero"
-            motion="orbit"
-            className="bottom-[-111vw] left-1/2 w-[148vw] -translate-x-1/2 lg:bottom-[-100vw] lg:w-[120vw]"
-          />
+          /*
+           * THE LAYER, NOT THE SPHERE, CARRIES THE PARALLAX. `hero-lag`
+           * animates `translate`, and the sphere already spends that property
+           * on its own centring — one element cannot hold both. The wrapper is
+           * `absolute inset-0`, so it is the section's padding box exactly and
+           * the sphere is seated where it always was.
+           */
+          <div className="hero-lag pointer-events-none absolute inset-0">
+            <OrbitalSphere
+              preset="hero"
+              motion="orbit"
+              className="bottom-[-111vw] left-1/2 w-[148vw] -translate-x-1/2 lg:bottom-[-100vw] lg:w-[120vw]"
+            />
+          </div>
         ) : null}
 
         {/*
@@ -328,7 +344,7 @@ export function HeroSection({
          * The column is centred at both widths — `1814:1622` centres on its
          * cross axis and every text node in it is centre-set.
          */}
-        <div className="max-w-content relative z-10 mx-auto flex flex-col items-center pb-[247px] pt-40 text-center lg:pb-[310px] lg:pt-64">
+        <div className="hero-lead max-w-content relative z-10 mx-auto flex flex-col items-center pb-[247px] pt-40 text-center lg:pb-[310px] lg:pt-64">
           {/*
            * 16 between the two headline blocks at 402 (`2975:8420` over
            * `2975:8419`); at 1440 they are set solid, one 76px step apart with

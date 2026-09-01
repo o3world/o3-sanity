@@ -1,8 +1,8 @@
-import { ArticleByline, Eyebrow, ReadingProgress, SectionShell } from '@o3/ui'
+import { ArticleByline, Eyebrow, Reveal, ReadingProgress, SectionShell } from '@o3/ui'
 import { brandConfig } from '@o3/sanity/brand'
 import type { INSIGHT_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { CarouselTrack, SanityImage } from '@o3/content-ui'
+import { CarouselTrack, CAROUSEL_BAND_CLASS, SanityImage } from '@o3/content-ui'
 import { PortableTextBody } from '@o3/content-ui/portable-text'
 import { getCard } from '@o3/content-ui/cards'
 import { formatMonthYear } from '@o3/content-ui/format-date'
@@ -55,12 +55,10 @@ type InsightViewProps = NonNullable<INSIGHT_QUERY_RESULT>
  * while it loads.
  *
  * "Keep reading" renders through the same `SectionShell` the Home Blog band
- * uses, so heading, controls and row all sit in the standard 1248px column and
- * the carousel viewport clips scrolled cards at the gutter line.
- * It used to build a bare `<section>` with no gutter, which put the heading on
- * the viewport edge and ran the row off both sides — one carousel rendering
- * two different ways. `CarouselTrack` records why the 1440 frame's bleed past
- * the right edge is not kept in either place.
+ * uses, so heading, controls and the head of the row all sit in the standard
+ * 1248px column and the track bleeds past the right edge of the screen exactly
+ * as it does there — one carousel, one rendering. `CarouselTrack` holds the
+ * arithmetic, and `CAROUSEL_BAND_CLASS` is the clip that bleed needs.
  *
  * Nav, footer and the closing CTA band are not this component's: the first two
  * come from `(site)/layout.tsx`, and the CTA band the desktop frame ends on is
@@ -89,6 +87,12 @@ type InsightViewProps = NonNullable<INSIGHT_QUERY_RESULT>
  * **Reading time is computed, never stored.** The value comes from the GROQ
  * projection (`INSIGHT_CARD.readingMinutes`), which is where the decision
  * and its arithmetic are recorded.
+ *
+ * THE ROUTE'S OWN BANDS WEAR THEIR OWN `Reveal` (#402). A block-composed page
+ * gets the scroll entrance from the dispatch seam; a document view draws its
+ * bands directly, so it asks for one. The article body is not wrapped —
+ * `Reveal` leaves anything taller than the viewport alone — and the wrapper
+ * carries the band's ground, because the document's ground is ink.
  */
 export function InsightView({
   title,
@@ -194,18 +198,20 @@ export function InsightView({
       </div>
 
       {keepReading.length ? (
-        <SectionShell surface="bone" top="sm" bottom="sm">
-          {/* `1751:1949` — the frame's own copy for this band. The mobile
-              frame heads it "The thinking behind the work.", which is the
-              /insights index's line; the desktop detail frame is the
-              canonical read for a detail page. */}
-          <CarouselTrack
-            heading="Keep reading."
-            cards={keepReading.map((item) => (
-              <Card key={item._id} {...item} />
-            ))}
-          />
-        </SectionShell>
+        <Reveal className="bg-bone">
+          <SectionShell surface="bone" top="sm" bottom="sm" className={CAROUSEL_BAND_CLASS}>
+            {/* `1751:1949` — the frame's own copy for this band. The mobile
+                frame heads it "The thinking behind the work.", which is the
+                /insights index's line; the desktop detail frame is the
+                canonical read for a detail page. */}
+            <CarouselTrack
+              heading="Keep reading."
+              cards={keepReading.map((item) => (
+                <Card key={item._id} {...item} />
+              ))}
+            />
+          </SectionShell>
+        </Reveal>
       ) : null}
     </article>
   )
