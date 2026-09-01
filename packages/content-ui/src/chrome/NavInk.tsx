@@ -224,6 +224,20 @@ function intrinsicSize(element: Element): { width: number; height: number } | nu
  *
  * Everything funnels through `schedule`, so however many of them fire at once
  * the bar is still sampled at most once per frame.
+ *
+ * ── A PAGE MID VIEW TRANSITION CANNOT BE READ ──────────────────────────────
+ *
+ * A cross-page fade captures the document and paints it as pseudo-elements,
+ * and a captured box stops hit-testing while that runs. So the column walk
+ * finds no band at all, falls through to the body's own white, and the bar
+ * takes the light skin over an ink hero. It then STAYS there: the DOM swap
+ * that scheduled the sample was the last thing to happen, so nothing asks
+ * again. The bar was white after every nav click for that reason.
+ *
+ * A sample taken then is not wrong about the page, it is early — so it is
+ * deferred rather than corrected, one frame at a time, until the capture is
+ * over. The bar holds the previous page's skin for the length of the fade,
+ * which is the right thing to hold: the fade is showing the previous page.
  */
 export function watchNavInk(header: HTMLElement): () => void {
   let frame = 0
@@ -232,6 +246,28 @@ export function watchNavInk(header: HTMLElement): () => void {
     if (frame) return
     frame = requestAnimationFrame(sample)
   }
+
+  /**
+   * Is the document being captured for a view transition right now?
+   *
+   * The transition's own animations are the only ones that run on a
+   * `::view-transition*` pseudo-element, so their presence is the state itself
+   * rather than a proxy for it — there is no flag on `document` to read, and
+   * the `ViewTransition` object belongs to whoever called
+   * `startViewTransition`. Cheap beside the nine hit-tests below it.
+   *
+   * `getAnimations` is checked for rather than assumed, and the answer where it
+   * is missing is `false` rather than a guess: a document that cannot enumerate
+   * its animations cannot run a view transition either, so there is nothing to
+   * wait for. That covers the older browser and the test DOM in one line.
+   */
+  const capturing = () =>
+    typeof document.getAnimations === 'function' &&
+    document
+      .getAnimations()
+      .some((animation) =>
+        (animation.effect as KeyframeEffect | null)?.pseudoElement?.startsWith('::view-transition'),
+      )
 
   const isOverLight = () => {
     // The PILL, not the header. The header is edge-to-edge at every width so
@@ -266,6 +302,11 @@ export function watchNavInk(header: HTMLElement): () => void {
 
   const sample = () => {
     frame = 0
+    // Early, not wrong: come back next frame and read the page that arrives.
+    if (capturing()) {
+      schedule()
+      return
+    }
     if (isOverLight()) header.dataset.ink = 'dark'
     else delete header.dataset.ink
   }

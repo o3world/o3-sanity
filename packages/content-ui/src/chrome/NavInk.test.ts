@@ -187,6 +187,48 @@ describe('the nav’s ink follows the surface under the bar', () => {
     expect(header.dataset.ink).toBe('dark')
   })
 
+  it('holds its skin while a view transition captures the page, then re-reads', async () => {
+    // The cross-page fade paints the document as pseudo-elements, and a
+    // captured box stops hit-testing — so the walk finds no band, falls through
+    // to the body's own white, and the bar takes the light skin over an ink
+    // hero. The swap that scheduled that sample is the last thing to happen, so
+    // nothing corrects it: the bar was white after every nav click.
+    band(DARK)
+    stop = watchNavInk(header)
+    await settle()
+    expect(header.dataset.ink).toBeUndefined()
+
+    // Mid-capture: the new page is ink too, but nothing under the bar answers.
+    const transition = { effect: { pseudoElement: '::view-transition-group(root)' } }
+    document.getAnimations = () => [transition] as unknown as Animation[]
+    repaint(() => {})
+    await settle()
+
+    expect(header.dataset.ink, 'the bar read a page that was not being painted').toBeUndefined()
+
+    // The capture ends and the arrived page is what gets read.
+    document.getAnimations = () => []
+    repaint(() => band(LIGHT))
+    await settle()
+
+    expect(header.dataset.ink).toBe('dark')
+  })
+
+  it('samples normally where the document cannot enumerate animations', async () => {
+    // No `getAnimations` means no view transitions either, so there is nothing
+    // to wait for and the bar must not stall waiting for one.
+    const enumerate = document.getAnimations
+    // @ts-expect-error — the older document this stands in for has no such method.
+    delete document.getAnimations
+
+    band(LIGHT)
+    stop = watchNavInk(header)
+    await settle()
+
+    expect(header.dataset.ink).toBe('dark')
+    document.getAnimations = enumerate
+  })
+
   it('stops sampling once the bar unmounts', async () => {
     band(DARK)
     stop = watchNavInk(header)
