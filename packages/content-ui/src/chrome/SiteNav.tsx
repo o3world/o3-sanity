@@ -164,13 +164,16 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
           // The 1440 pill carries a hairline at `--color-on-ink-line`; without
           // it the `bg-scrim` fill is invisible over a dark hero and the pill
           // stops reading as a pill at all. Flipped, both sides invert together:
-          // an opaque white fill under `--color-on-light-line`.
+          // an opaque white fill under `--color-on-light-line`. Below `lg` the
+          // bar is edge-to-edge and normally borderless, but flipped it needs
+          // the bottom hairline for the same reason the pill needs its ring —
+          // opaque white over a light band has no other edge.
           //
           // `color` lives here rather than on each link so the one transition on
           // this element carries the whole bar — the links, the hamburger's
           // `currentColor` bars and anything else added to the row inherit the
           // value mid-interpolation, and each keeps its own hover timing.
-          className="bg-scrim lg:border-on-ink-line lg:group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-nav duration-(--duration-ink) flex items-center justify-between px-5 py-2 text-white backdrop-blur-[14px] transition-[background-color,border-color,color] ease-out group-data-[ink=dark]:bg-white lg:mx-auto lg:w-full lg:max-w-[900px] lg:border lg:px-4 lg:py-4"
+          className="bg-scrim lg:border-on-ink-line group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-nav duration-(--duration-ink) flex items-center justify-between px-5 py-2 text-white backdrop-blur-[14px] transition-[background-color,border-color,color] ease-out group-data-[ink=dark]:bg-white max-lg:group-data-[ink=dark]:border-b lg:mx-auto lg:w-full lg:max-w-[900px] lg:border lg:px-4 lg:py-4"
         >
           <Link
             href="/"

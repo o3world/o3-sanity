@@ -33,7 +33,7 @@ function chips(category: string | null) {
     pagination: { page: 1, totalPages: 1 },
   })
 
-  return linksIn(tree).filter((link) => link.props.href.startsWith('/insights'))
+  return linksIn(tree)
 }
 
 describe('insights filter bar', () => {
@@ -50,6 +50,9 @@ describe('insights filter bar', () => {
   })
 
   it('keeps the reader in place from the unfiltered index too', () => {
-    for (const chip of chips(null)) expect(chip.props.scroll).toBe(false)
+    const followed = chips(null)
+
+    expect(followed.length).toBeGreaterThan(0)
+    for (const chip of followed) expect(chip.props.scroll).toBe(false)
   })
 })

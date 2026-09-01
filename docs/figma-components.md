@@ -305,10 +305,9 @@ the plate-less white mark at 148px (128 at 402, `2225:2613`). The "Go birds."
 badge (`1275:1631`) already reached the page as Site Settings' `copyrightNote`
 and gained the set's only state, the green hover.
 
-Two deltas #87 did not close, neither of them ticketed: the component draws the
-orbital ring as a filled `#0A0A0B` donut (`1320:117`) where the code strokes the
-dead frame's two rings in `rgba(255,255,255,0.2)`, and the legal row is `#AAA69E`
-against `--color-fg-subtle`'s `#A3A3A3`.
+One open delta: the legal row is `#AAA69E` against `--color-fg-subtle`'s
+`#A3A3A3`. The ring matches — `SiteFooter` draws the component's filled
+`#0A0A0B` donut (`1320:117`).
 
 ### The 402 nav's two extra parts
 

@@ -179,9 +179,9 @@ function intrinsicSize(element: Element): { width: number; height: number } | nu
  *
  * That is one column. The bar takes the answer the **majority** of its columns
  * give, and a tie goes to dark, because the two skins fail asymmetrically: the
- * light skin is white copy on a 20% black scrim, and the dark skin is
- * `#232323` copy on a 10% one. Over the wrong ground the first is merely thin
- * and the second disappears.
+ * dark skin is white copy on a 20% black scrim, and the light skin is dark
+ * copy on opaque white. Over the wrong ground the first is merely thin and
+ * the second is a floating white slab.
  *
  * Columns are what make the bar honest over things narrower than itself. A
  * three-up card grid on a bone band is five different grounds at once — three
