@@ -52,26 +52,21 @@ export function SiteFooter({ settings, brandMark, year }: SiteFooterProps) {
         className="px-gutter relative overflow-hidden bg-black py-16 text-white"
       >
         {/*
-         * The orbital arc: a 1275×1277 two-ring vector stroked at 2px in
-         * `rgba(255,255,255,0.2)`, bleeding off the left edge. Decorative and
-         * drawn exactly once, so it is inline SVG at the call site rather than a
-         * component.
-         *
-         * Carried from the dead frame footer (`1680:2097`). The component draws
-         * the ring as a FILLED `#0A0A0B` donut instead (`1320:117`) — a delta
-         * #87 left alone, being neither of the two it was scoped to.
+         * The 'O' the footer bleeds off its left edge — the component's
+         * `Vector` (`1320:117`, mobile `2225:2609`): a 1052×1053 donut FILLED
+         * `ink`, its ring 211.76 thick. It sits 40px below the footer's top
+         * edge at both widths; its left is -374.24 in the 1440 component and
+         * -526 in the 402 one, which puts the circle's centre exactly on that
+         * frame's left edge. Decorative and drawn once, so it is inline SVG at
+         * the call site rather than a component.
          */}
         <svg
-          viewBox="0 0 1276 1277"
-          fill="none"
+          viewBox="0 0 1052 1053"
           aria-hidden="true"
           focusable="false"
-          className="stroke-on-ink-line pointer-events-none absolute -left-[570px] top-[228px] h-[1277px] w-[1276px] lg:top-[148px]"
+          className="fill-ink pointer-events-none absolute -left-[526px] top-10 h-[1053px] w-[1052px] lg:-left-[374.24px]"
         >
-          <path
-            d="M637.572 1C988.607 1 1274.14 286.893 1274.14 638.463C1274.14 990.033 988.534 1276 637.572 1276C286.611 1276 1 989.959 1 638.463C1.0002 286.967 286.537 1 637.572 1ZM637.572 255.993C427.023 255.993 255.679 427.525 255.679 638.463C255.679 849.401 426.949 1021.01 637.572 1021.01C848.196 1021.01 1019.47 849.327 1019.47 638.463C1019.47 427.525 848.122 255.993 637.572 255.993Z"
-            strokeWidth="2"
-          />
+          <path d="M0 526.47C0 816.764 235.998 1053 526 1053C816.002 1053 1052 816.825 1052 526.47C1052 236.115 816.062 0 526 0C235.938 0 0 236.176 0 526.47ZM840.239 526.47C840.239 699.892 699.309 841.087 526 841.087C352.692 841.087 211.761 699.953 211.761 526.47C211.761 352.986 352.752 211.913 526 211.913C699.248 211.913 840.239 352.986 840.239 526.47Z" />
         </svg>
 
         <div className="max-w-section relative mx-auto flex w-full flex-col gap-12 lg:gap-32">

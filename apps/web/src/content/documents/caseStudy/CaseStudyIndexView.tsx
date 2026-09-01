@@ -63,7 +63,10 @@ export function CaseStudyIndexView({ items, pagination, above, below }: CaseStud
     <>
       {above}
 
-      <div className="px-gutter py-band-sm lg:py-band-md bg-white">
+      <div
+        id="feed"
+        className="px-gutter py-band-sm lg:py-band-md scroll-mt-20 bg-white lg:scroll-mt-[calc(var(--spacing-nav-offset)+96px)]"
+      >
         {/*
          * The band the frame draws has no heading — the hero's job, and the
          * hero is an authored band now. But each card's narrative line is an
@@ -90,10 +93,12 @@ export function CaseStudyIndexView({ items, pagination, above, below }: CaseStud
           ))}
         </ul>
 
+        {/* `#feed` for the same reason /insights carries it: the next page's
+            reading starts at the feed's head, clear of the pinned pill. */}
         <Pager
           page={page}
           totalPages={totalPages}
-          href={pageHref}
+          href={(target) => `${pageHref(target)}#feed`}
           className="max-w-section mx-auto mt-16"
         />
       </div>

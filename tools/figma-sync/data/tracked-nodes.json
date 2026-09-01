@@ -212,7 +212,7 @@
       "name": "Footer",
       "figmaName": "Footer",
       "codeComponent": "packages/content-ui/src/chrome/SiteFooter.tsx#SiteFooter",
-      "note": "Became canonical 2026-08: the Home frame's footer (`2435:1840`) is now an override-free instance of this component — the old frame footer `1680:2096` is gone, superseding #41's from-the-frame decision. `SiteFooter` was realigned to it in #87 — black band, 64px 96px, the plate-less white mark (`1280:1856`), \"Go birds.\" on hover. Two open deltas: the ring is a filled `#0A0A0B` donut (`1320:117`) where code strokes the dead frame's, and the legal row is `#AAA69E` against `--color-fg-subtle`."
+      "note": "Became canonical 2026-08: the Home frame's footer (`2435:1840`) is now an override-free instance of this component — the old frame footer `1680:2096` is gone, superseding #41's from-the-frame decision. `SiteFooter` was realigned to it in #87 — black band, 64px 96px, the plate-less white mark (`1280:1856`), \"Go birds.\" on hover. One open delta: the legal row is `#AAA69E` against `--color-fg-subtle`; the ring matches (`SiteFooter` draws the filled `#0A0A0B` donut, `1320:117`)."
     },
     {
       "nodeId": "264:573",

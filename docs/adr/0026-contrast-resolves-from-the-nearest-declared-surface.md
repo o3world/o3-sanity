@@ -178,7 +178,9 @@ Rename nothing; add the option.
   what the design file draws and what the shipped red also did, but it is now a
   consequence of the resolution rule rather than a choice, and a flipping
   button would need the surface to be a runtime value rather than a declared
-  one.
+  one. _(Since superseded: the flipped bar is opaque `bg-white` — the
+  `scrim-light` token is gone — and the button inverts with it via
+  `NAV_BUTTON_INK` in `SiteNav.tsx`.)_
 - **Risks / open questions:** existing instances keep their explicit fills —
   39 of 47 — so the site looks the same on the day this ships and Auto governs
   only new instances and the eight that never carried one. Migrating the 39 is

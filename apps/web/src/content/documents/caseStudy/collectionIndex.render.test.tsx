@@ -169,7 +169,7 @@ describe('the /work index', () => {
     })
 
     const current = paged.html.match(/<a[^>]*aria-current="page"[^>]*>/)?.[0] ?? ''
-    expect(current).toContain('href="/work/page/2"')
+    expect(current).toContain('href="/work/page/2#feed"')
     expect([...paged.html.matchAll(/aria-current="page"/g)]).toHaveLength(1)
   })
 })

@@ -99,9 +99,9 @@ export const TwoOnAPage: Story = {
  * The real call sites. Values below are copied from the renderers, not invented.
  * ------------------------------------------------------------------------- */
 
-/** The Home opener. The sphere is 133.75% of the frame width, hung so only its
- *  cap shows, on a band that closes on a hard edge. The ratio deliberately does
- *  not carry to 402 — see the component comment. */
+/** The Home opener. The sphere is 120% of the frame width, hung so only its cap
+ *  shows, on a band that closes on a hard edge. The ratio deliberately does not
+ *  carry to 402 — see the component comment. */
 export const HomeOpener: Story = {
   args: { preset: 'hero', motion: 'orbit' },
   globals: { backgrounds: { value: 'ink' } },
@@ -109,7 +109,7 @@ export const HomeOpener: Story = {
     <div className="bg-ink relative isolate h-[520px] overflow-hidden">
       <OrbitalSphere
         {...args}
-        className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-111.3vw] lg:w-[133.75vw]"
+        className="bottom-[-111vw] left-1/2 w-[148vw] -translate-x-1/2 lg:bottom-[-100vw] lg:w-[120vw]"
       />
     </div>
   ),

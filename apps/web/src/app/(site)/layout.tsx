@@ -1,28 +1,45 @@
 import type React from 'react'
+import { Suspense } from 'react'
 import { draftMode } from 'next/headers'
-import { EditorToolbar } from '@o3/editor-chrome/toolbar'
-import { SanityLive } from '@o3/content-runtime/live'
 import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
 import { currentYear } from '@/lib/currentYear'
-import { editorToolbarConfig } from '@/sanity/editorToolbar'
-import { VisualEditing } from '@/sanity/VisualEditing'
 import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
 import { SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
-export default async function SiteLayout({
-  children,
-  utility,
-}: {
+import { DraftTools } from './DraftTools'
+
+interface ShellProps {
   children: React.ReactNode
   /** The brand-property strip's slot — `@utility`, home only. */
   utility: React.ReactNode
-}) {
-  const [settings, { isEnabled: isDraft }, year] = await Promise.all([
-    getSiteSettings(),
-    draftMode(),
-    currentYear(),
-  ])
+}
+
+export default async function SiteLayout({ children, utility }: ShellProps) {
+  // `draftMode()` is the one request API a static shell may read: it answers
+  // `false` while prerendering and marks nothing dynamic. `cookies()` and the
+  // draft session's own reads are not, and they live in `DraftTools` and
+  // behind the boundary below (#409).
+  const { isEnabled: isDraft } = await draftMode()
+
+  // A draft session bypasses every `'use cache'` entry — that is what makes
+  // the preview show unpublished content — so in it the settings read is
+  // uncached IO, and Cache Components requires uncached IO to sit under a
+  // Suspense boundary. The published path is untouched: nothing in `Shell`
+  // suspends when the reads come from cache, so the shell is prerendered
+  // whole, with the nav in the first byte.
+  if (isDraft) {
+    return (
+      <Suspense fallback={<main className="bg-ink min-h-screen" />}>
+        <Shell utility={utility}>{children}</Shell>
+      </Suspense>
+    )
+  }
+  return <Shell utility={utility}>{children}</Shell>
+}
+
+async function Shell({ children, utility }: ShellProps) {
+  const [settings, year] = await Promise.all([getSiteSettings(), currentYear()])
 
   return (
     <>
@@ -62,20 +79,12 @@ export default async function SiteLayout({
         {children}
       </main>
       <SiteFooter settings={settings} brandMark={FOOTER_MARK} year={year} />
-      {/* Draft sessions only: SanityLive is the delivery path for draft
-          updates in Presentation (see live.ts). Published visitors get
-          freshness from the Sanity webhook → /api/revalidate instead, so
-          they hold no Live Content API connection. */}
-      {isDraft ? (
-        <>
-          <SanityLive includeDrafts />
-          <VisualEditing />
-        </>
-      ) : null}
-      {/* Renders nothing unless the visitor holds a Studio session (#60, #99).
-          `<VisualEditing />` above is what lets it tell Presentation's frame
-          from an ordinary tab — see shouldShowEditorToolbar. */}
-      <EditorToolbar isDraft={isDraft} config={editorToolbarConfig} />
+      {/* Nothing visible renders here for a published visitor, so `null` is an
+          honest fallback; the boundary exists so `DraftTools`' request-time
+          read cannot block the shell. */}
+      <Suspense fallback={null}>
+        <DraftTools />
+      </Suspense>
     </>
   )
 }

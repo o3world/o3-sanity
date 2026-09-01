@@ -126,7 +126,10 @@ export function InsightIndexView({
           it is off-system on both axes at once, which is the signature of a
           nudged layer rather than a rhythm. band-md is 128 at both widths by
           design (layout.css), so the band keeps it. */}
-      <div className="px-gutter py-band-md bg-bone">
+      <div
+        id="feed"
+        className="px-gutter py-band-md bg-bone scroll-mt-20 lg:scroll-mt-[calc(var(--spacing-nav-offset)+96px)]"
+      >
         <div className="max-w-section mx-auto flex flex-col gap-12">
           {/*
            * The band the frame draws has no heading — the hero's job, and the
@@ -156,13 +159,23 @@ export function InsightIndexView({
              * reading" row already put the same edge. No `tabIndex` either:
              * unlike those tracks this one is made of links, so tabbing
              * through the chips scrolls them into view by itself.
+             *
+             * `scroll={false}` on every chip, because a chip is followed with
+             * the bar on screen: the band above it is the same authored hero
+             * either way, so holding the scroll position leaves the reader
+             * looking at the bar with the refreshed feed under it. Next's
+             * default sends a new route to the top of the document, which
+             * throws them back above the hero to read the same filter they
+             * just used.
              */
             <nav
               aria-label="Filter by category"
               className="flex items-center gap-2.5 overflow-x-auto [scrollbar-width:none] lg:flex-wrap lg:overflow-x-visible [&::-webkit-scrollbar]:hidden"
             >
               <FilterChip asChild selected={!category} className="shrink-0">
-                <Link href={insightsHref()}>All</Link>
+                <Link href={insightsHref()} scroll={false}>
+                  All
+                </Link>
               </FilterChip>
               {categories.map((option) =>
                 option.slug ? (
@@ -172,7 +185,9 @@ export function InsightIndexView({
                     selected={category === option.slug}
                     className="shrink-0"
                   >
-                    <Link href={insightsHref({ category: option.slug })}>{option.title}</Link>
+                    <Link href={insightsHref({ category: option.slug })} scroll={false}>
+                      {option.title}
+                    </Link>
                   </FilterChip>
                 ) : null,
               )}
@@ -208,10 +223,16 @@ export function InsightIndexView({
             <p className="text-lead text-fg-muted">No insights under that filter yet.</p>
           )}
 
+          {/* `#feed` on the band above: a page link is followed from the feed's
+              foot, and the next page's reading starts at its head — not at the
+              document top above the hero, and not held at the foot the way a
+              chip holds at the bar. The hash is what makes that true without
+              JS; the band's scroll-mt keeps the target clear of the pinned
+              pill. */}
           <Pager
             page={page}
             totalPages={totalPages}
-            href={(target) => insightsHref({ category, page: target })}
+            href={(target) => `${insightsHref({ category, page: target })}#feed`}
             className="mt-4"
           />
         </div>

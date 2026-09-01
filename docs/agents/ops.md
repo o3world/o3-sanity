@@ -79,10 +79,12 @@ pnpm dataset:drift      # which pipeline-owned documents an editor changed (exit
 
 ## Rebuilding a dataset from scratch
 
-The pipeline owns its documents and the committed JSON under
-`tools/migration/data/` is the source of truth (ADR 0003), so a rebuild is
-ordinary work rather than a recovery operation. `load` recreates every unlocked
-pipeline-owned document; a `migration.locked` document is never touched.
+A scratch rebuild is the one place a blanket `load` still belongs — everyday
+dataset changes ship as targeted migrations instead (AGENTS.md → "Changing a
+dataset"). Within a rebuild, the pipeline owns its documents and the committed
+JSON under `tools/migration/data/` is the source of truth (ADR 0003). `load`
+recreates every unlocked pipeline-owned document; a `migration.locked`
+document is never touched.
 
 ```bash
 pnpm dataset development                 # point THIS CHECKOUT at the scratch dataset

@@ -1,11 +1,18 @@
 {
   "pairs": {
     "o3/pages-home--desktop/o3/1680:2134/frame-1440": {
-      "score": 0.21845,
+      "score": 0.2892,
       "tolerance": 0.005,
       "nodeHash": "1e2f9f533105b10689d7a91395c4e65a13daf53dd2720d2161db085f6c1fa9ef",
       "fileVersion": "2391349966960467923",
-      "acceptedAt": "2026-08-25"
+      "acceptedAt": "2026-09-01"
+    },
+    "o3/pages-home--mobile/o3/1814:1618/frame-402": {
+      "score": 0.3235,
+      "tolerance": 0.005,
+      "nodeHash": "c1168240eca6834f2400dda26862109ff3c24e1d811f5e0bf74dbb5265854a93",
+      "fileVersion": "2391349966960467923",
+      "acceptedAt": "2026-09-01"
     },
     "o3/pages-software-engineering--desktop/o3/2360:2879/frame-1440": {
       "score": 0.1704,

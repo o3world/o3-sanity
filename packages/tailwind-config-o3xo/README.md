@@ -51,8 +51,8 @@ Band rhythm, radii, motion, and the document-level base rules.
 
 Roles the kit paints the way O3 does are left out rather than restated: a
 restated value is one more place to drift. Each token file names the ones it
-skipped and why — `white`, `utility`, the `on-ink-*` alphas, `scrim-light`,
-`on-light-line`, the card scrims and the ink fade.
+skipped and why — `white`, `utility`, the `on-ink-*` alphas, `on-light-line`,
+the card scrims and the ink fade.
 
 ## Roles are shared; vocabularies may diverge
 
