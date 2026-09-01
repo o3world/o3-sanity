@@ -156,13 +156,23 @@ export function InsightIndexView({
              * reading" row already put the same edge. No `tabIndex` either:
              * unlike those tracks this one is made of links, so tabbing
              * through the chips scrolls them into view by itself.
+             *
+             * `scroll={false}` on every chip, because a chip is followed with
+             * the bar on screen: the band above it is the same authored hero
+             * either way, so holding the scroll position leaves the reader
+             * looking at the bar with the refreshed feed under it. Next's
+             * default sends a new route to the top of the document, which
+             * throws them back above the hero to read the same filter they
+             * just used.
              */
             <nav
               aria-label="Filter by category"
               className="flex items-center gap-2.5 overflow-x-auto [scrollbar-width:none] lg:flex-wrap lg:overflow-x-visible [&::-webkit-scrollbar]:hidden"
             >
               <FilterChip asChild selected={!category} className="shrink-0">
-                <Link href={insightsHref()}>All</Link>
+                <Link href={insightsHref()} scroll={false}>
+                  All
+                </Link>
               </FilterChip>
               {categories.map((option) =>
                 option.slug ? (
@@ -172,7 +182,9 @@ export function InsightIndexView({
                     selected={category === option.slug}
                     className="shrink-0"
                   >
-                    <Link href={insightsHref({ category: option.slug })}>{option.title}</Link>
+                    <Link href={insightsHref({ category: option.slug })} scroll={false}>
+                      {option.title}
+                    </Link>
                   </FilterChip>
                 ) : null,
               )}
