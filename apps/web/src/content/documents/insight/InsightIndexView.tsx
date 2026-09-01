@@ -126,7 +126,10 @@ export function InsightIndexView({
           it is off-system on both axes at once, which is the signature of a
           nudged layer rather than a rhythm. band-md is 128 at both widths by
           design (layout.css), so the band keeps it. */}
-      <div className="px-gutter py-band-md bg-bone">
+      <div
+        id="feed"
+        className="px-gutter py-band-md bg-bone scroll-mt-20 lg:scroll-mt-[calc(var(--spacing-nav-offset)+96px)]"
+      >
         <div className="max-w-section mx-auto flex flex-col gap-12">
           {/*
            * The band the frame draws has no heading — the hero's job, and the
@@ -220,10 +223,16 @@ export function InsightIndexView({
             <p className="text-lead text-fg-muted">No insights under that filter yet.</p>
           )}
 
+          {/* `#feed` on the band above: a page link is followed from the feed's
+              foot, and the next page's reading starts at its head — not at the
+              document top above the hero, and not held at the foot the way a
+              chip holds at the bar. The hash is what makes that true without
+              JS; the band's scroll-mt keeps the target clear of the pinned
+              pill. */}
           <Pager
             page={page}
             totalPages={totalPages}
-            href={(target) => insightsHref({ category, page: target })}
+            href={(target) => `${insightsHref({ category, page: target })}#feed`}
             className="mt-4"
           />
         </div>

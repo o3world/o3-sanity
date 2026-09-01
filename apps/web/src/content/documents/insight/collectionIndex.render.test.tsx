@@ -234,7 +234,7 @@ describe('insights index category filter', () => {
     })
 
     expect(html).toContain('href="/insights/category/design"')
-    expect(html).toContain('href="/insights/category/design/page/3"')
+    expect(html).toContain('href="/insights/category/design/page/3#feed"')
   })
 
   /** A chip is a fresh cut of the collection; page 4 of the old one is not in it. */
@@ -393,15 +393,15 @@ describe('insights index pager', () => {
   it('offers every page of the collection by number, not just the two neighbours', () => {
     // `page` above is this exact state: page 2 of 4 (#241).
     expect(page.html).toContain('href="/insights"')
-    expect(page.html).toContain('href="/insights/page/2"')
-    expect(page.html).toContain('href="/insights/page/3"')
-    expect(page.html).toContain('href="/insights/page/4"')
+    expect(page.html).toContain('href="/insights/page/2#feed"')
+    expect(page.html).toContain('href="/insights/page/3#feed"')
+    expect(page.html).toContain('href="/insights/page/4#feed"')
 
     // Scoped to the pager: the selected filter chip carries `aria-current`
     // too, and it is a different "current" — the cut on screen, not the page.
     const pager = page.html.slice(page.html.indexOf('aria-label="Pagination"'))
     const current = pager.match(/<a[^>]*aria-current="page"[^>]*>/)?.[0] ?? ''
-    expect(current).toContain('href="/insights/page/2"')
+    expect(current).toContain('href="/insights/page/2#feed"')
   })
 
   it('drops Previous on the first page and Next on the last', async () => {
