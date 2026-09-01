@@ -288,7 +288,7 @@ describe('the homepage at 402 (ADR 0006)', () => {
     // it is `textAlignHorizontal: CENTER`; `2089:4316` centres its column too.
     // Matched on the hero's own class attribute — `items-center` alone is on
     // half the cards on the page and would pass without the hero.
-    const heroClasses = html.match(/class="([^"]*pt-\[173px\][^"]*)"/)?.[1] ?? ''
+    const heroClasses = html.match(/class="([^"]*pb-\[247px\][^"]*)"/)?.[1] ?? ''
     expect(heroClasses, 'the hero band was not found at all').not.toBe('')
     expect(heroClasses).toContain('items-center')
     expect(heroClasses).toContain('text-center')
@@ -297,13 +297,13 @@ describe('the homepage at 402 (ADR 0006)', () => {
   })
 
   it('gives the hero band each frame’s own vertical rhythm', () => {
-    // 173 above / 247 below at 402 (`1814:1622` at y 173, 454 tall, in an 874
-    // band); 288 / 310 at 1440 (`2089:4313` at y 288, `2209:2223` ending at
-    // y 630 in a 940 band). Read values at both ends, so the band's height is
-    // the frames' rather than a `min-h` someone picked.
-    const heroClasses = html.match(/class="([^"]*pt-\[173px\][^"]*)"/)?.[1] ?? ''
-    expect(heroClasses).toContain('pb-[247px]')
-    expect(heroClasses).toContain('lg:pt-[288px]')
+    // The foot is the frame's: 247 below at 402 (`1814:1622` in an 874 band),
+    // 310 at 1440 (`2209:2223` ending at y 630 in a 940 band). The head is a
+    // step under it — 160 / 256 — because #397 rules the frames' 173 / 288 too
+    // deep by about a tenth. Both are on the 4px spacing scale.
+    const heroClasses = html.match(/class="([^"]*pb-\[247px\][^"]*)"/)?.[1] ?? ''
+    expect(heroClasses).toContain('pt-40')
+    expect(heroClasses).toContain('lg:pt-64')
     expect(heroClasses).toContain('lg:pb-[310px]')
   })
 
