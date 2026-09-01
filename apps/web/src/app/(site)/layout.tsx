@@ -1,5 +1,6 @@
 import type React from 'react'
 import { Suspense } from 'react'
+import { draftMode } from 'next/headers'
 import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
 import { currentYear } from '@/lib/currentYear'
@@ -8,17 +9,36 @@ import { SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
 import { DraftTools } from './DraftTools'
 
-export default async function SiteLayout({
-  children,
-  utility,
-}: {
+interface ShellProps {
   children: React.ReactNode
   /** The brand-property strip's slot — `@utility`, home only. */
   utility: React.ReactNode
-}) {
-  // Cached data only — no request-time API belongs in this body. `draftMode()`
-  // is one, and it lives in `DraftTools` behind the Suspense at the foot so a
-  // draft cookie cannot make every route blocking (#409).
+}
+
+export default async function SiteLayout({ children, utility }: ShellProps) {
+  // `draftMode()` is the one request API a static shell may read: it answers
+  // `false` while prerendering and marks nothing dynamic. `cookies()` and the
+  // draft session's own reads are not, and they live in `DraftTools` and
+  // behind the boundary below (#409).
+  const { isEnabled: isDraft } = await draftMode()
+
+  // A draft session bypasses every `'use cache'` entry — that is what makes
+  // the preview show unpublished content — so in it the settings read is
+  // uncached IO, and Cache Components requires uncached IO to sit under a
+  // Suspense boundary. The published path is untouched: nothing in `Shell`
+  // suspends when the reads come from cache, so the shell is prerendered
+  // whole, with the nav in the first byte.
+  if (isDraft) {
+    return (
+      <Suspense fallback={<main className="bg-ink min-h-screen" />}>
+        <Shell utility={utility}>{children}</Shell>
+      </Suspense>
+    )
+  }
+  return <Shell utility={utility}>{children}</Shell>
+}
+
+async function Shell({ children, utility }: ShellProps) {
   const [settings, year] = await Promise.all([getSiteSettings(), currentYear()])
 
   return (
