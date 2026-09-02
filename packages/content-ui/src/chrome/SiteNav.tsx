@@ -53,7 +53,7 @@ interface SiteNavProps {
  * **The offset is `--spacing-nav-offset`, and it exists for the strip** (#88).
  * The `Utility Nav` strip (`2250:1445`) sits above the pill, and the Home
  * frame draws the rebuilt `NavBar` (`2225:2967`, `ABSOLUTE` + `FIXED`) at
- * `y: 64` — the strip's 50px plus a 14px gap. `UtilityNav` renders that strip
+ * `y: 124` — the strip's 69px plus a 55px gap. `UtilityNav` renders that strip
  * in flow at the top of the document, so at rest the two sit exactly as the
  * frame draws them; the strip then scrolls away and the pill holds the offset,
  * which is what `FIXED` on that node means. The strip is data
@@ -152,10 +152,19 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
     <SurfaceProvider surface="ink">
       <header
         id={NAV_INK_TARGET}
+        // `NavInkFirstPaint` writes `data-ink` before hydration on a page that
+        // opens light, and hydration must leave it standing rather than warn.
+        suppressHydrationWarning
+        // `view-transition-name` lifts the bar out of the root snapshot during
+        // the cross-page fade (#403): the page group paints above root, so a
+        // bar captured in root spends the fade behind the crossfading page.
+        // Named, it is its own group, stacked above the page in paint order
+        // and live, and tokens/motion.css holds it still — see
+        // `::view-transition-*(site-nav)` there.
         className={
           hasUtilityNav
-            ? 'lg:px-gutter lg:top-(--spacing-nav-offset) group fixed inset-x-0 top-0 z-50'
-            : 'lg:px-gutter lg:top-(--spacing-nav-offset) group fixed inset-x-0 top-0 z-50 [--spacing-nav-offset:32px]'
+            ? 'lg:px-gutter lg:top-(--spacing-nav-offset) group fixed inset-x-0 top-0 z-50 [view-transition-name:site-nav]'
+            : 'lg:px-gutter lg:top-(--spacing-nav-offset) group fixed inset-x-0 top-0 z-50 [--spacing-nav-offset:32px] [view-transition-name:site-nav]'
         }
       >
         <NavInk />

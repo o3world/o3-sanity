@@ -427,6 +427,24 @@
 }
 
 /*
+ * THE NAV IS ITS OWN GROUP, AND IT IS LIVE. The bar is fixed over the top of
+ * `<main>`, and a group's snapshots paint above `root`'s — so a bar left in
+ * the root snapshot spends the fade behind the crossfading page and pops back
+ * when it ends. `SiteNav` names it (`view-transition-name: site-nav`), which
+ * makes it a group of its own, stacked above the page in paint order. Held
+ * still the same way root is: the old snapshot goes, the new one is the live
+ * element, so the ink flip `NavInk` starts at the swap is seen running over
+ * the fade rather than hidden under it.
+ */
+::view-transition-group(site-nav),
+::view-transition-new(site-nav) {
+  animation: none;
+}
+::view-transition-old(site-nav) {
+  display: none;
+}
+
+/*
  * A page swap under reduced motion is the swap with no animation, which is the
  * browser's own behaviour once the durations go. Blanket, because a view
  * transition is built from pseudo-elements no component can reach to opt one

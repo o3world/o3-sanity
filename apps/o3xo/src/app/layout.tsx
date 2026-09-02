@@ -37,8 +37,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
      * to `var(--color-*)`; `@o3/tailwind-config-o3xo` re-points those custom
      * properties under `:root[data-brand='o3xo']`. Drop the attribute and the
      * app renders in O3's paint with no error anywhere.
+     *
+     * `suppressHydrationWarning` is for `<AnchorGlide />`: it arms the gate on
+     * `load`, which on a dev server lands before hydration does, and React
+     * then finds `data-anchor-glide` on an element the server sent without
+     * it. It is one level deep, so nothing under `<html>` is excused by it.
      */
-    <html lang="en" data-brand="o3xo" className={figtree.variable}>
+    <html suppressHydrationWarning lang="en" data-brand="o3xo" className={figtree.variable}>
       <body className="text-fg bg-white font-sans antialiased">
         {children}
         <AnchorGlide />

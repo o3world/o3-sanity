@@ -2,14 +2,18 @@
 
 import { useEffect } from 'react'
 
-import { coversSample, LIGHT_LUMINANCE, luminance, type Box } from './navInkSample'
+import {
+  COLUMNS,
+  coversSample,
+  DARK_SURFACES,
+  LIGHT_LUMINANCE,
+  LIGHT_SURFACES,
+  luminance,
+  NAV_INK_TARGET,
+  type Box,
+} from './navInkSample'
 
-/**
- * The id `SiteNav` puts on its `<header>` and hands back here. The controller
- * styles nothing itself; it only decides which of the header's two skins is
- * live, and the CSS in `SiteNav` does the rest.
- */
-export const NAV_INK_TARGET = 'site-nav'
+export { NAV_INK_TARGET }
 
 /**
  * Alpha at or above which a background is treated as the surface, rather than
@@ -23,18 +27,6 @@ export const NAV_INK_TARGET = 'site-nav'
  * while still accepting the near-opaque values `color-mix` rounding produces.
  */
 const OPAQUE_ALPHA = 0.9
-
-/**
- * How many columns the bar is read as.
- *
- * The bar is 900px wide and the things it crosses are not: a three-up card
- * grid puts three pictures and two gutters under it at once, and one sample at
- * the centre answers for whichever of the five it happens to land in. Nine
- * columns is one per 100px of pill — fine enough that a card cannot be missed
- * and coarse enough that the whole read is nine hit-tests against boxes the
- * engine has already laid out.
- */
-const COLUMNS = 9
 
 /**
  * The `data:` URI a background-image is, or `null` for anything else — a
@@ -53,18 +45,16 @@ function pictureUri(backgroundImage: string): string | null {
 }
 
 /**
- * The surfaces this design paints a dark ground with, and the ones it paints
- * light. A band, a card or a plate that declares `data-surface` has already
- * answered the only question this file asks, so the declaration is read before
- * anything is measured — that is what lets the bar cross a full-bleed
- * photograph correctly, since the picture's darkness lives in pixels no
- * computed style can report.
- *
- * A value in neither set is not guessed at: the walk falls through to the
- * picture, and then to the computed background.
+ * What a `data-surface` value says about the ground under it: light, dark, or
+ * (`null`) nothing this file recognises — the vocabulary is `navInkSample`'s.
  */
-const DARK_SURFACES = new Set(['ink'])
-const LIGHT_SURFACES = new Set(['white', 'paper', 'bone'])
+function declaredGround(element: Element): boolean | null {
+  const declared = element.getAttribute('data-surface')
+  if (!declared) return null
+  if ((DARK_SURFACES as readonly string[]).includes(declared)) return false
+  if ((LIGHT_SURFACES as readonly string[]).includes(declared)) return true
+  return null
+}
 
 /**
  * Is this element's ground light — or is it no ground at all (`null`)?
@@ -77,7 +67,9 @@ const LIGHT_SURFACES = new Set(['white', 'paper', 'bone'])
  *    (tokens/color.css), and the rule beside them is that whatever paints a
  *    dark background sets `data-surface="ink"`. One attribute lookup, and it
  *    is the only thing that can speak for a photograph under a gradient scrim,
- *    where every colour in the stack is transparent.
+ *    where every colour in the stack is transparent. A value in neither list
+ *    is not guessed at: the walk falls through to the picture, and then to
+ *    the computed background.
  * 2. **The picture, which is never a light ground.** See below.
  * 3. **The fill.** `getComputedStyle` normalises every authored form to
  *    `rgb(r, g, b)` or `rgba(r, g, b, a)` and nothing else, so two shapes are
@@ -112,11 +104,8 @@ const LIGHT_SURFACES = new Set(['white', 'paper', 'bone'])
  * there, to whatever the element paints behind its own background image.
  */
 function groundOf(element: Element, sample: Box): boolean | null {
-  const declared = element.getAttribute('data-surface')
-  if (declared) {
-    if (DARK_SURFACES.has(declared)) return false
-    if (LIGHT_SURFACES.has(declared)) return true
-  }
+  const declared = declaredGround(element)
+  if (declared !== null) return declared
 
   const style = getComputedStyle(element)
   if (pictureUri(style.backgroundImage)) {
@@ -225,7 +214,7 @@ function intrinsicSize(element: Element): { width: number; height: number } | nu
  * Everything funnels through `schedule`, so however many of them fire at once
  * the bar is still sampled at most once per frame.
  *
- * ── A PAGE MID VIEW TRANSITION CANNOT BE READ ──────────────────────────────
+ * ── A PAGE MID VIEW TRANSITION CANNOT BE HIT-TESTED ────────────────────────
  *
  * A cross-page fade captures the document and paints it as pseudo-elements,
  * and a captured box stops hit-testing while that runs. So the column walk
@@ -234,10 +223,17 @@ function intrinsicSize(element: Element): { width: number; height: number } | nu
  * that scheduled the sample was the last thing to happen, so nothing asks
  * again. The bar was white after every nav click for that reason.
  *
- * A sample taken then is not wrong about the page, it is early — so it is
- * deferred rather than corrected, one frame at a time, until the capture is
- * over. The bar holds the previous page's skin for the length of the fade,
- * which is the right thing to hold: the fade is showing the previous page.
+ * But the page CAN be read: the DOM swap has happened, the new page is laid
+ * out, and its bands declare their grounds. So a sample taken mid-capture
+ * reads the declarations by geometry instead — which declared band each
+ * column's centre falls inside — and flips at the swap. That is when the
+ * flip belongs: the root snapshot holds the chrome still and live
+ * (tokens/motion.css), so the bar crosses to the arriving page's skin over
+ * the same 300ms the content crossfades, rather than wearing the old page's
+ * skin over the new page's hero for the fade and then flipping after it.
+ *
+ * Only a page that declares nothing under the bar is deferred, a frame at a
+ * time, to the hit-test that runs once the capture is over.
  */
 export function watchNavInk(header: HTMLElement): () => void {
   let frame = 0
@@ -269,10 +265,18 @@ export function watchNavInk(header: HTMLElement): () => void {
         (animation.effect as KeyframeEffect | null)?.pseudoElement?.startsWith('::view-transition'),
       )
 
-  const isOverLight = () => {
-    // The PILL, not the header. The header is edge-to-edge at every width so
-    // that the pill can centre inside it, and the pill is the box that has to
-    // stay legible.
+  /**
+   * The pill's columns, each answered by `ground` — `true` light, `false`
+   * dark, `null` unreadable — and the bar's verdict from them: light on a
+   * majority of the columns that answered, `null` when none did.
+   *
+   * The PILL, not the header. The header is edge-to-edge at every width so
+   * that the pill can centre inside it, and the pill is the box that has to
+   * stay legible.
+   */
+  const verdict = (
+    ground: (x: number, y: number, strip: Box) => boolean | null,
+  ): boolean | null => {
     const pill = header.querySelector('nav') ?? header
     const bar = pill.getBoundingClientRect()
     const midpoint = bar.bottom - bar.height / 2
@@ -283,31 +287,60 @@ export function watchNavInk(header: HTMLElement): () => void {
     for (let column = 0; column < COLUMNS; column++) {
       const left = bar.left + slice * column
       const strip: Box = { left, right: left + slice, top: bar.top, bottom: bar.bottom }
-      let ground = true
-      for (const element of document.elementsFromPoint(left + slice / 2, midpoint)) {
-        if (header.contains(element)) continue
-        const answer = groundOf(element, strip)
-        // A veil, a gradient, an element with no ground of its own: keep
-        // walking to what it is over.
-        if (answer === null) continue
-        ground = answer
-        break
-      }
+      const answer = ground(left + slice / 2, midpoint, strip)
+      if (answer === null) continue
       read++
-      if (ground) light++
+      if (answer) light++
     }
 
-    return light * 2 > read
+    return read ? light * 2 > read : null
+  }
+
+  /** What is painted under a point, front to back. */
+  const painted = (x: number, y: number, strip: Box): boolean => {
+    for (const element of document.elementsFromPoint(x, y)) {
+      if (header.contains(element)) continue
+      const answer = groundOf(element, strip)
+      // A veil, a gradient, an element with no ground of its own: keep
+      // walking to what it is over.
+      if (answer === null) continue
+      return answer
+    }
+    // Nothing did, all the way down to `<html>` — the browser is painting its
+    // default canvas, which is white.
+    return true
+  }
+
+  /**
+   * What is declared under a point, by geometry. Later in document order
+   * wins, which is the order the browser would paint the same boxes in: a
+   * card's plate over the band it sits on.
+   */
+  const declared = (x: number, y: number): boolean | null => {
+    let answer: boolean | null = null
+    for (const element of document.querySelectorAll('main [data-surface]')) {
+      const box = element.getBoundingClientRect()
+      if (x < box.left || x >= box.right || y < box.top || y >= box.bottom) continue
+      answer = declaredGround(element) ?? answer
+    }
+    return answer
   }
 
   const sample = () => {
     frame = 0
-    // Early, not wrong: come back next frame and read the page that arrives.
+    let light: boolean | null
     if (capturing()) {
-      schedule()
-      return
+      light = verdict(declared)
+      // Nothing declared under the bar: early, not wrong. Come back next
+      // frame and hit-test the page once it can be hit.
+      if (light === null) {
+        schedule()
+        return
+      }
+    } else {
+      light = verdict(painted)
     }
-    if (isOverLight()) header.dataset.ink = 'dark'
+    if (light) header.dataset.ink = 'dark'
     else delete header.dataset.ink
   }
 

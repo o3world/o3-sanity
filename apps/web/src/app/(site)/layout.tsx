@@ -5,7 +5,7 @@ import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
 import { currentYear } from '@/lib/currentYear'
 import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
-import { SiteFooter, SiteNav } from '@o3/content-ui/chrome'
+import { NavInkFirstPaint, SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
 import { DraftTools } from './DraftTools'
 
@@ -90,6 +90,9 @@ async function Shell({ children, utility }: ShellProps) {
          */}
         <ViewTransition default="page">{children}</ViewTransition>
       </main>
+      {/* After `<main>`, so the arriving page's bands are parsed when it reads
+          them, and inline, so it reads them before the first paint. */}
+      <NavInkFirstPaint />
       <SiteFooter settings={settings} brandMark={FOOTER_MARK} year={year} />
       {/* Nothing visible renders here for a published visitor, so `null` is an
           honest fallback; the boundary exists so `DraftTools`' request-time

@@ -352,6 +352,11 @@ five `SKILL.md` files with `skills-ref validate` — frontmatter that parses as 
 matches the directory, a description inside the limit. `claude plugin validate` checks the manifest
 and passes frontmatter that two YAML parsers reject, so it is not a substitute.
 
+### Code review
+
+`/code-review medium`, and no other level. `low` misses things, and `high`, `xhigh`, `max` and `ultra`
+cost more than a review on this repo returns. Run it before a merge, not after every edit.
+
 ### Testing
 
 Three layers — `unit` (`*.test.ts`), `render` (`*.render.test.tsx`), `stories` (`*.stories.tsx`).

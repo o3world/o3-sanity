@@ -40,6 +40,8 @@ function rect(box: Partial<DOMRect> & { top: number; bottom: number }) {
 }
 
 let header: HTMLElement
+/** The routed page's container: what the mid-capture read looks inside. */
+let main: HTMLElement
 let stop: () => void
 /** Everything on the page, front to back; each column takes what covers it. */
 let painted: Element[] = []
@@ -60,7 +62,7 @@ function plate({
   if (color) element.style.backgroundColor = color
   if (surface) element.dataset.surface = surface
   element.getBoundingClientRect = () => rect({ top: 0, bottom: 2000, left, right })
-  document.body.append(element)
+  main.append(element)
   painted.push(element)
   return element
 }
@@ -101,7 +103,8 @@ beforeEach(() => {
   const pill = document.createElement('nav')
   pill.getBoundingClientRect = () => rect(PILL)
   header.append(pill)
-  document.body.append(header)
+  main = document.createElement('main')
+  document.body.append(header, main)
 
   // jsdom implements neither, and the component's own triggers are what is
   // under test — so they are scripted rather than mocked away.
@@ -117,6 +120,8 @@ beforeEach(() => {
     unobserve() {}
     disconnect() {}
   }
+  // No view transition running unless a test starts one.
+  document.getAnimations = () => []
 })
 
 afterEach(() => stop?.())
@@ -124,7 +129,8 @@ afterEach(() => stop?.())
 /** Wipe the page and repaint it, the way a route change or a reflow does. */
 function repaint(paint: () => void) {
   document.body.innerHTML = ''
-  document.body.append(header)
+  main = document.createElement('main')
+  document.body.append(header, main)
   painted = []
   paint()
 }
@@ -187,18 +193,38 @@ describe('the nav’s ink follows the surface under the bar', () => {
     expect(header.dataset.ink).toBe('dark')
   })
 
-  it('holds its skin while a view transition captures the page, then re-reads', async () => {
-    // The cross-page fade paints the document as pseudo-elements, and a
-    // captured box stops hit-testing — so the walk finds no band, falls through
-    // to the body's own white, and the bar takes the light skin over an ink
-    // hero. The swap that scheduled that sample is the last thing to happen, so
-    // nothing corrects it: the bar was white after every nav click.
+  /**
+   * The cross-page fade paints the document as pseudo-elements, and a
+   * captured box stops hit-testing — so the walk finds no band, falls through
+   * to the body's own white, and the bar took the light skin over an ink hero.
+   * The swap that scheduled that sample was the last thing to happen, so
+   * nothing corrected it: the bar was white after every nav click.
+   */
+  it('flips at the swap, off the arriving page’s declarations, while a view transition runs', async () => {
     band(DARK)
     stop = watchNavInk(header)
     await settle()
     expect(header.dataset.ink).toBeUndefined()
 
-    // Mid-capture: the new page is ink too, but nothing under the bar answers.
+    // Mid-capture: nothing under the bar can be hit, but the new page is in
+    // the DOM and its opening band says what it is.
+    const transition = { effect: { pseudoElement: '::view-transition-group(root)' } }
+    document.getAnimations = () => [transition] as unknown as Animation[]
+    repaint(() => plate({ surface: 'paper' }))
+    painted = []
+    await settle()
+
+    expect(header.dataset.ink, 'the bar wore the old page’s skin over the new page').toBe('dark')
+  })
+
+  it('holds its skin while a view transition captures a page that declares nothing, then re-reads', async () => {
+    band(DARK)
+    stop = watchNavInk(header)
+    await settle()
+    expect(header.dataset.ink).toBeUndefined()
+
+    // Mid-capture, with no declaration to read: the walk would fall through to
+    // the body's white, and that is a page that is not being painted yet.
     const transition = { effect: { pseudoElement: '::view-transition-group(root)' } }
     document.getAnimations = () => [transition] as unknown as Animation[]
     repaint(() => {})
@@ -209,6 +235,23 @@ describe('the nav’s ink follows the surface under the bar', () => {
     // The capture ends and the arrived page is what gets read.
     document.getAnimations = () => []
     repaint(() => band(LIGHT))
+    await settle()
+
+    expect(header.dataset.ink).toBe('dark')
+  })
+
+  it('reads the plate over the band mid-capture, the way paint order would', async () => {
+    band(DARK)
+    stop = watchNavInk(header)
+    await settle()
+
+    const transition = { effect: { pseudoElement: '::view-transition-group(root)' } }
+    document.getAnimations = () => [transition] as unknown as Animation[]
+    repaint(() => {
+      plate({ surface: 'ink' })
+      plate({ surface: 'bone' })
+    })
+    painted = []
     await settle()
 
     expect(header.dataset.ink).toBe('dark')

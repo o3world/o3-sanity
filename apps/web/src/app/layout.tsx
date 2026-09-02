@@ -39,8 +39,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
      * Work from halfway down another page arrives halfway down that one. With
      * it, Next flips the property to `auto` for the one frame it needs and the
      * anchors keep their glide.
+     *
+     * `suppressHydrationWarning` is for `<AnchorGlide />`: it arms the gate on
+     * `load`, which on a dev server lands before hydration does, and React
+     * then finds `data-anchor-glide` on an element the server sent without
+     * it. It is one level deep, so nothing under `<html>` is excused by it.
      */
-    <html lang="en" data-scroll-behavior="smooth" className={figtree.variable}>
+    <html
+      suppressHydrationWarning
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={figtree.variable}
+    >
       <body className="text-fg bg-white font-sans antialiased">
         {children}
         <AnchorGlide />

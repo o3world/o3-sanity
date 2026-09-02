@@ -1,8 +1,32 @@
 /**
- * The arithmetic behind the nav's ink flip, kept apart from the DOM so it can
- * be tested without a layout engine: what a colour weighs, and whether a strip
- * of the bar lands on a picture or beside it.
+ * The arithmetic and the vocabulary behind the nav's ink flip, kept apart from
+ * the DOM so it can be tested without a layout engine and shared with the
+ * first-paint script: what a colour weighs, whether a strip of the bar lands
+ * on a picture or beside it, and which declared surfaces are which.
+ *
+ * No `'use client'` here on purpose. `NavInk` is a client module, and a server
+ * component importing a constant across that boundary gets a client reference
+ * rather than the value — so everything `NavInkFirstPaint` inlines lives here.
  */
+
+/**
+ * The id `SiteNav` puts on its `<header>` and hands back to the controllers.
+ * They style nothing themselves; each only decides which of the header's two
+ * skins is live, and the CSS in `SiteNav` does the rest.
+ */
+export const NAV_INK_TARGET = 'site-nav'
+
+/**
+ * How many columns the bar is read as.
+ *
+ * The bar is 900px wide and the things it crosses are not: a three-up card
+ * grid puts three pictures and two gutters under it at once, and one sample at
+ * the centre answers for whichever of the five it happens to land in. Nine
+ * columns is one per 100px of pill — fine enough that a card cannot be missed
+ * and coarse enough that the whole read is nine hit-tests against boxes the
+ * engine has already laid out.
+ */
+export const COLUMNS = 9
 
 /** A box in whatever space the caller is working in — viewport px, or image px. */
 export interface Box {
@@ -21,6 +45,20 @@ export interface Box {
  * near it — `--color-ink` lands at 10.
  */
 export const LIGHT_LUMINANCE = 140
+
+/**
+ * The surfaces this design paints a dark ground with, and the ones it paints
+ * light — the `data-surface` vocabulary the bar reads before it measures
+ * anything. A band, a card or a plate that declares one has already answered
+ * the only question the bar asks, which is what lets it cross a full-bleed
+ * photograph correctly, since a picture's darkness lives in pixels no
+ * computed style can report.
+ *
+ * Lists, not sets, because the first-paint script (`NavInkFirstPaint`) is a
+ * string and inlines them as JSON; a value in neither is not guessed at.
+ */
+export const DARK_SURFACES = ['ink'] as const
+export const LIGHT_SURFACES = ['white', 'paper', 'bone'] as const
 
 export function luminance(r: number, g: number, b: number): number {
   return r * 0.299 + g * 0.587 + b * 0.114
