@@ -5,17 +5,15 @@ import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
 import { currentYear } from '@/lib/currentYear'
 import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
-import { NavInkFirstPaint, SiteFooter, SiteNav } from '@o3/content-ui/chrome'
+import { NavInkFirstPaint, SiteFooter, SiteNav, UtilityNav } from '@o3/content-ui/chrome'
 
 import { DraftTools } from './DraftTools'
 
 interface ShellProps {
   children: React.ReactNode
-  /** The brand-property strip's slot — `@utility`, home only. */
-  utility: React.ReactNode
 }
 
-export default async function SiteLayout({ children, utility }: ShellProps) {
+export default async function SiteLayout({ children }: ShellProps) {
   // `draftMode()` is the one request API a static shell may read: it answers
   // `false` while prerendering and marks nothing dynamic. `cookies()` and the
   // draft session's own reads are not, and they live in `DraftTools` and
@@ -31,14 +29,14 @@ export default async function SiteLayout({ children, utility }: ShellProps) {
   if (isDraft) {
     return (
       <Suspense fallback={<main className="bg-ink min-h-screen" />}>
-        <Shell utility={utility}>{children}</Shell>
+        <Shell>{children}</Shell>
       </Suspense>
     )
   }
-  return <Shell utility={utility}>{children}</Shell>
+  return <Shell>{children}</Shell>
 }
 
-async function Shell({ children, utility }: ShellProps) {
+async function Shell({ children }: ShellProps) {
   const [settings, year] = await Promise.all([getSiteSettings(), currentYear()])
 
   return (
@@ -48,10 +46,15 @@ async function Shell({ children, utility }: ShellProps) {
           frame); the pill below it is fixed. That difference is why the two are
           siblings here rather than one component.
 
-          Home draws it and no interior frame does, so it arrives through the
-          `@utility` slot: the router decides which route fills it, which is
-          the only gate that survives a prerender. */}
-      {utility}
+          EVERY ROUTE DRAWS IT, and the strip is data rather than a route:
+          `utilityNavItems` decides whether there is one, which is the same
+          question `SiteNav` asks for the pill's resting offset and `<main>`
+          asks for its heroes' clearance. Those three used to disagree — the
+          strip was gated on the route through an `@utility` parallel slot
+          while the other two read the setting, so every interior page hung the
+          pill at 124px and padded its hero to clear a strip that was not
+          there. One source, one answer. */}
+      <UtilityNav settings={settings} />
       {/* The chrome draws no mark of its own (#228); these are this app's. */}
       <SiteNav settings={settings} brandMark={NAV_MARK} />
       {/* `bg-ink` is the DOCUMENT'S GROUND, not a band. Every band paints over
