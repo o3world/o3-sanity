@@ -385,6 +385,75 @@
 }
 
 /*
+ * The closer's parallax — `CtaSection`'s orbital band.
+ *
+ * One layer on the band's own clock: the sphere trails the page as the band
+ * crosses the viewport, so it reads as sitting behind the copy, which does not
+ * move. The copy, the ink fade strip and the band's height are untouched.
+ *
+ * SCROLL-DRIVEN CSS, NO HANDLER. `animation-timeline` runs off the compositor
+ * with no JavaScript, so the band ships in the server HTML already correct and
+ * nothing waits on hydration.
+ *
+ * A NAMED TIMELINE, NOT `view()` ON THE LAYER. The band clips its overflow,
+ * which makes it a scroll container for its children, and an anonymous `view()`
+ * inside would resolve against the band instead of the document.
+ *
+ * `cover` is the whole traversal — progress 0 as the band's top edge meets the
+ * viewport floor, 1 as its foot passes the ceiling — and the keyframes are
+ * symmetric about it, so at progress .5, the band centred in the viewport, the
+ * layer is at the identity translate and the globe is seated exactly where a
+ * browser without scroll-driven animation draws it.
+ *
+ * ±10% of the band's own height, downward with the scroll. A percentage
+ * translate resolves against the layer, which is the band's padding box, so the
+ * travel holds at every band height. Below the fold on every page it appears
+ * on, so nothing here is on the LCP path.
+ *
+ * NO FIGMA ANCHOR, AND THERE CANNOT BE ONE: the frames draw the band, not its
+ * movement. The rate is settled by looking at the band, the way the opener's
+ * is.
+ *
+ * `@supports` is load-bearing rather than tidy. A browser that does not know
+ * `animation-timeline` ignores that one property and keeps the rest of the
+ * declaration, so an unguarded rule would play the parallax once on load, on a
+ * timer, and leave the globe parked 10% low.
+ */
+/* TOP LEVEL, NOT IN `@theme`, for the reason the opener's keyframes carry: a
+ * `@theme` keyframe reached from an `@utility` rather than from `--animate-*`
+ * is tree-shaken out, and the utility then names nothing. */
+@keyframes cta-lag {
+  from {
+    translate: 0 -10%;
+  }
+  to {
+    translate: 0 10%;
+  }
+}
+
+/** Declares the closer's clock. Goes on the band the layer sits inside. */
+@utility cta-band {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      view-timeline-name: --cta-band;
+    }
+  }
+}
+
+/** The layer that trails the page — the sphere behind the copy. */
+@utility cta-lag {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation-name: cta-lag;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-timeline: --cta-band;
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+/*
  * The cross-page fade — `(site)/layout.tsx` (#403).
  *
  * A navigation replaces what is inside `<main>` and leaves the nav pill and

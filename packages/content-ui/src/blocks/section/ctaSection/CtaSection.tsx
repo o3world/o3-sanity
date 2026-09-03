@@ -72,7 +72,9 @@ export function CtaSection({
     <SurfaceProvider surface="ink">
       <section
         {...surfaceAttrs('ink')}
-        className={`bg-ink-deep px-gutter text-white ${DECORATED_BAND_CLASS}`}
+        /* `cta-band` declares the parallax clock the sphere's layer reads;
+           it does nothing on its own. See tokens/motion.css. */
+        className={`cta-band bg-ink-deep px-gutter text-white ${DECORATED_BAND_CLASS}`}
       >
         {picture}
         {/*
@@ -108,15 +110,26 @@ export function CtaSection({
         {showOrbs ? (
           <>
             {/*
-             * Red. Every closing band in the file draws the red globe — none of
-             * them draws the neutral one, whatever the grey export calls
-             * itself.
+             * THE LAYER, NOT THE SPHERE, CARRIES THE PARALLAX. `cta-lag`
+             * animates `translate`, and the sphere already spends that
+             * property on its own centring — one element cannot hold both.
+             * The wrapper is `absolute inset-0`, the band's padding box
+             * exactly, so the sphere is seated where it always was and the
+             * layer sits under the copy and the fade strip, both of which
+             * carry `z-10`.
              */}
-            <OrbitalSphere
-              preset="hero"
-              motion="orbit"
-              className="bottom-[4%] left-1/2 w-[150vw] -translate-x-1/2 lg:w-[90vw]"
-            />
+            <div className="cta-lag pointer-events-none absolute inset-0">
+              {/*
+               * Red. Every closing band in the file draws the red globe — none
+               * of them draws the neutral one, whatever the grey export calls
+               * itself.
+               */}
+              <OrbitalSphere
+                preset="hero"
+                motion="orbit"
+                className="bottom-[4%] left-1/2 w-[150vw] -translate-x-1/2 lg:w-[90vw]"
+              />
+            </div>
             {/* --gradient-ink-fade, transparent at the top: 172px at 1440
              * (`1928:6596`), 64 at 402 (`1928:6595`). */}
             <div className="bg-(image:--gradient-ink-fade) pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 lg:h-[172px]" />
