@@ -149,12 +149,16 @@ export function validateInquiry(input: InquiryInput): InquiryValidation {
  * was filled, and five fields answered in under three seconds. Both are
  * silent — a caller that drops a submission answers as though it sent, so a
  * bot learns nothing from the reply.
+ *
+ * `timed` is false for a native post, which cannot measure anything: the
+ * hydrated form always sends how long it was open, but a submit before
+ * hydration has no script to count with. That path keeps the honeypot and
+ * the route's rate limit, and gives up the timing check rather than the
+ * inquiry.
  */
-export function isSpam(input: InquiryInput): boolean {
+export function isSpam(input: InquiryInput, { timed = true }: { timed?: boolean } = {}): boolean {
   if (text(input.honeypot)) return true
-  // The form always sends how long it was open — a back/forward-cache restore
-  // keeps the page's JavaScript state — so a post without one did not come
-  // from the form. The client measures it, so there is no clock to read here.
+  if (!timed) return false
   if (typeof input.elapsedMs !== 'number' || !Number.isFinite(input.elapsedMs)) return true
   return input.elapsedMs < MINIMUM_FILL_MS
 }
@@ -286,6 +290,8 @@ export interface SubmitInquiryOptions {
   pageUri?: string
   pageName?: string
   ipAddress?: string
+  /** False for a native post, which has no elapsed time to check. */
+  timed?: boolean
 }
 
 /**
@@ -316,11 +322,12 @@ export async function submitInquiry({
   pageUri,
   pageName,
   ipAddress,
+  timed = true,
 }: SubmitInquiryOptions): Promise<InquiryResult> {
   const { ok, errors } = validateInquiry(input)
   if (!ok) return { status: 'invalid', errors }
 
-  if (isSpam(input)) return { status: 'dropped' }
+  if (isSpam(input, { timed })) return { status: 'dropped' }
 
   const { HUBSPOT_PORTAL_ID: portalId, HUBSPOT_FORM_GUID: formGuid } = env
   if (!portalId || !formGuid) return { status: 'unconfigured' }
@@ -374,6 +381,8 @@ function fromFormData(body: FormData): Record<string, unknown> {
   }
   // A checkbox posts only when it is checked, whatever its value.
   if ('consent' in source) source.consent = true
+  // The off-screen input posts under its own name; the parser reads one key.
+  if (HONEYPOT_FIELD in source) source.honeypot = source[HONEYPOT_FIELD]
   // Every field arrives as a string, and the timing check reads a number.
   if (typeof source.elapsedMs === 'string') source.elapsedMs = Number(source.elapsedMs)
   // A native post carries no list of options, so the reason is checked for
@@ -448,6 +457,7 @@ export async function handleInquiryRequest(
     pageUri: request.headers.get('referer') ?? undefined,
     pageName,
     ipAddress: ipAddress(request),
+    timed: !native,
   })
 
   if (native) return returnToPage(request, result.status === 'sent' || result.status === 'dropped')

@@ -475,9 +475,23 @@ describe('handleInquiryRequest', () => {
       expect(response.headers.get('location')).toBe('/contact?sent=1')
     })
 
-    it('drops a post with no elapsed time, and says the same thing back', async () => {
+    // A submit before hydration has no script to count with, so a native post
+    // is not timed. The honeypot still applies to it.
+    it('sends a post with no elapsed time', async () => {
       let called = false
       const response = await handle(form({ ...fields, elapsedMs: '' }), {
+        fetch: async () => {
+          called = true
+          return new Response('{}', { status: 200 })
+        },
+      })
+      expect(response.headers.get('location')).toBe('/contact?sent=1')
+      expect(called).toBe(true)
+    })
+
+    it('still drops a post that filled the honeypot', async () => {
+      let called = false
+      const response = await handle(form({ ...fields, [HONEYPOT_FIELD]: 'http://x.example' }), {
         fetch: async () => {
           called = true
           return new Response('{}', { status: 200 })
