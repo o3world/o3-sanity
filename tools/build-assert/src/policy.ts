@@ -34,6 +34,11 @@ export const RENDERING_POLICY: RenderingPolicy = {
       kind: 'inherent',
       reason: "the publish webhook's POST target",
     },
+    {
+      route: '/api/contact',
+      kind: 'inherent',
+      reason: "the contact form's POST target, which forwards to HubSpot",
+    },
   ],
 }
 

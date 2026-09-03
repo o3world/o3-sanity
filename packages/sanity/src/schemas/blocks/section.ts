@@ -589,14 +589,14 @@ export const inFlightSection = defineSectionBlock({
  * two ways to reach it under red micro-kickers. Every one of them is optional,
  * and a band with none draws the card alone.
  *
- * ⚠️ **There is no submission handler and no destination.** #58's other two
- * halves are open, so the renderer disables its submit and says so on the
- * page. This block is honest scaffolding, not a working form.
+ * **The form sends.** A submission posts to the app's `/api/contact` route,
+ * which validates it and forwards it to the HubSpot form the site's portal
+ * holds (#412).
  */
 export const formSection = defineSectionBlock({
   name: 'formSection',
   description:
-    'The inquiry band: a form card beside a rail carrying a portrait, a short quote and the ways to reach the studio. Reach for it on a page whose purpose is to start a conversation. The reasons list is the only part of the form’s shape an editor owns — and no submission handler exists yet, so the renderer disables the submit and says so on the page.',
+    'The inquiry band: a form card beside a rail carrying a portrait, a short quote and the ways to reach the studio. Reach for it on a page whose purpose is to start a conversation. The reasons list is the only part of the form’s shape an editor owns; a submission goes to HubSpot through the app’s contact route.',
   title: 'Form',
   knobs: formSectionKnobs,
   fields: [
@@ -628,7 +628,7 @@ export const formSection = defineSectionBlock({
       name: 'button',
       type: 'button',
       description:
-        'The submit. Leave its destination empty and it stays a control; give it one and it becomes a link like any other button. Disabled until #58 has a handler behind it.',
+        'The submit. Leave its destination empty and it stays a control; give it one and it becomes a link like any other button — and a link cannot send the form.',
       // Optional, not required(): the renderer absorbs absence with the same
       // 'Send message' fallback, so a missing value costs nothing (skill rule:
       // fields the renderer can absorb stay optional).

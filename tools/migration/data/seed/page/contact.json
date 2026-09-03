@@ -67,8 +67,6 @@
     "locked": false,
     "sourceId": "seed:contact",
     "extractedAt": "2026-08-01T02:52:53.395Z",
-    "figmaNode": "2960:7557",
-    "provisional": true,
-    "provisionalNote": "THE FORM CANNOT SEND. #58 built the fields only; no submission mechanism and no destination have been decided, so the submit is disabled and the form says so on the page. The email and phone in the rail are the only working conversion path. Cleared by #58's remaining halves: a handler (with a spam story) and somewhere for a submission to land."
+    "figmaNode": "2960:7557"
   }
 }

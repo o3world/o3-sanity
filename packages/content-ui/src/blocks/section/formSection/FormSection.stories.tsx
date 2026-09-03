@@ -13,12 +13,9 @@ import { FormSection } from './FormSection'
  * rail carries the portrait, the quote, the attribution and the studio's
  * address — the two bands that used to follow this one.
  *
- * ⚠️ **The submit path is stubbed.** `onSubmit` calls `preventDefault()`
- * unconditionally, the button is `aria-disabled` (focusable, so its notice is
- * announced) and a visible notice says why. `Interaction` below is where to
- * confirm all three still hold — a form that quietly discards what it collects
- * is worse than no form, and "tidy up that disabled button" is an easy thing
- * for a future pass to do by accident.
+ * The submit posts to the app's `/api/contact` route, which forwards to
+ * HubSpot (#412). No story reaches that route — Storybook has no app behind it
+ * — so `Sent` and `Failed` below open the card on each answer directly.
  *
  * The fields are **code**, not content (ADR 0014). The dropdown's options, the
  * submit's words and everything in the rail come from the document, which is
@@ -54,6 +51,18 @@ export const Mobile: Story = {
  */
 export const Interaction: Story = {
   args: seededSectionArgs('contact', 'formSection'),
+  globals: { backgrounds: { value: 'bone' } },
+}
+
+/** The answer a person gets once the submission is HubSpot's. */
+export const Sent: Story = {
+  args: { ...seededSectionArgs('contact', 'formSection'), initialStatus: 'sent' },
+  globals: { backgrounds: { value: 'bone' } },
+}
+
+/** The send failed. The values stay in the fields, so the button is a retry. */
+export const Failed: Story = {
+  args: { ...seededSectionArgs('contact', 'formSection'), initialStatus: 'error' },
   globals: { backgrounds: { value: 'bone' } },
 }
 

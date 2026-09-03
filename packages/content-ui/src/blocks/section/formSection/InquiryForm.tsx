@@ -1,6 +1,13 @@
 'use client'
 
-import { useState, type ChangeEvent, type FocusEvent, type FormEvent } from 'react'
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type FocusEvent,
+  type FormEvent,
+} from 'react'
 // Never the `next-sanity` barrel — it drags in @portabletext/react, which
 // cannot resolve under Storybook's Next preset. A lint rule enforces this.
 import { stegaClean } from '@sanity/client/stega'
@@ -11,55 +18,26 @@ import { cn } from '@o3/ui/lib/utils'
 import { ButtonLink } from '../../../ButtonLink'
 import type { ButtonLinkData } from '../../../buttonDestination'
 
-/**
- * The field set, fixed in code.
- *
- * Transcribed from **Gravity Form 1**, the form WordPress serves on
- * `/contact` today: first name and last name at half width, email, a Reason
- * dropdown, a message, and a newsletter opt-in. Recovered from the live
- * markup rather than the extract — the WP extract records the module as
- * `{ acf_fc_layout: "form", form_id: "1" }` and never captured the fields.
- *
- * Gravity's seventh input is a hidden `input_8` carrying the constant
- * `"O3 Website"` — a source tag for whatever reads the entries. It is not a
- * field a person fills in, so it is not reproduced here; whichever handler
- * #58 grows will have its own way of saying where a submission came from.
- */
-type FieldName = 'firstName' | 'lastName' | 'email' | 'reason' | 'message'
+import {
+  FAILED_MESSAGE,
+  HONEYPOT_FIELD,
+  INQUIRY_FIELDS,
+  SENT_MESSAGE,
+  validateField,
+  validateInquiry,
+  type InquiryField,
+} from './inquiry'
 
-/** Every one is `gfield_contains_required` on the live form. */
-const REQUIRED_MESSAGE: Record<FieldName, string> = {
-  firstName: 'Add your first name.',
-  lastName: 'Add your last name.',
-  email: 'Add your email address.',
-  reason: 'Pick a reason.',
-  message: 'Tell us what you need.',
-}
-
-/**
- * Deliberately loose. A browser's own `type="email"` check is looser still,
- * and every stricter pattern on the internet rejects a real address someone
- * owns. This catches the typo it can prove — no `@`, no dot after it — and
- * leaves the rest to the reply bouncing.
- */
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-function validate(field: FieldName, value: string): string | undefined {
-  const trimmed = value.trim()
-  if (!trimmed) return REQUIRED_MESSAGE[field]
-  if (field === 'email' && !EMAIL_PATTERN.test(trimmed)) {
-    return 'That email address doesn’t look right.'
-  }
-  return undefined
-}
-
-const EMPTY_VALUES: Record<FieldName, string> = {
+const EMPTY_VALUES: Record<InquiryField, string> = {
   firstName: '',
   lastName: '',
   email: '',
   reason: '',
   message: '',
 }
+
+/** Where the card is in a submission: the fields, the wait, or the answer. */
+export type InquiryStatus = 'idle' | 'submitting' | 'sent' | 'error'
 
 export interface InquiryFormProps {
   /** The Reason dropdown's options, in the order the editor set. */
@@ -72,47 +50,61 @@ export interface InquiryFormProps {
    * which is the same answer every other button gives.
    */
   button?: ButtonLinkData | null
+  /**
+   * Which state to open in. Stories only — a page always opens on `idle`, and
+   * the schema has no field for this.
+   */
+  initialStatus?: InquiryStatus
 }
 
 /** What the submit says when the document has not named it. */
 const SUBMIT_LABEL = 'Send message'
 
+/** The app's own route, in both brands: a relative path resolves to its host. */
+const ENDPOINT = '/api/contact'
+
 /**
- * The inquiry form's controls and their client-side state.
+ * The inquiry form's controls, its validation and its submission (#412).
  *
- * ⚠️ **THE SUBMIT PATH IS STUBBED — see #58.** This ticket built the fields
- * only; the mechanism (what receives a POST, and how spam is handled) and the
- * destination (inbox, CRM, storage) are both still open, and neither is
- * something a renderer gets to decide on the way past. So:
+ * The rules are `./inquiry`'s, which the app's `/api/contact` route reads too:
+ * what this component shows beside a field is what the route enforces before
+ * anything reaches HubSpot. Only the route's answer is authoritative — HubSpot
+ * validates nothing.
  *
- * - `onSubmit` calls `preventDefault()` unconditionally — that is the no-op,
- *   and it covers Enter in a text input as well as the button;
- * - the button is `aria-disabled` (focusable, so its notice is announced) and
- *   a visible notice above it says why. Both ride the control arm, so an
- *   editor who gives the submit a destination gets a link that goes there
- *   instead — which is a form with no submit, and visibly so;
- * - there is no success state, no optimistic message, and nothing that could
- *   be mistaken for "sent".
- *
- * A form that quietly discards what it collects is worse than no form. When
- * #58's other two halves land, this component gains a handler and loses the
- * notice — the fields, the labels and the validation stay as they are.
+ * Two things a person never sees ride along with the values. An off-screen
+ * text input a bot fills, and the moment the form mounted: a submission that
+ * trips either is dropped, and the answer is the same 200 a real one gets.
  */
-export function InquiryForm({ reasons, consentLabel, button }: InquiryFormProps) {
+export function InquiryForm({
+  reasons,
+  consentLabel,
+  button,
+  initialStatus = 'idle',
+}: InquiryFormProps) {
   const submit: ButtonLinkData = button?.label ? button : { ...(button ?? {}), label: SUBMIT_LABEL }
 
-  const [values, setValues] = useState<Record<FieldName, string>>(EMPTY_VALUES)
-  const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({})
+  const [values, setValues] = useState<Record<InquiryField, string>>(EMPTY_VALUES)
+  const [errors, setErrors] = useState<Partial<Record<InquiryField, string>>>({})
   const [consent, setConsent] = useState(false)
+  const [status, setStatus] = useState<InquiryStatus>(initialStatus)
+  const startedAt = useRef<number | null>(null)
+  const honeypot = useRef<HTMLInputElement>(null)
+  const form = useRef<HTMLFormElement>(null)
+
+  // In an effect, not in state's initializer: the server render and the first
+  // client render have to agree, and two clocks do not.
+  useEffect(() => {
+    startedAt.current = Date.now()
+  }, [])
 
   const handleBlur =
-    (field: FieldName) =>
+    (field: InquiryField) =>
     (event: FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      setErrors((previous) => ({ ...previous, [field]: validate(field, event.target.value) }))
+      setErrors((previous) => ({ ...previous, [field]: validateField(field, event.target.value) }))
     }
 
   const handleChange =
-    (field: FieldName) =>
+    (field: InquiryField) =>
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       const { value } = event.target
       setValues((previous) => ({ ...previous, [field]: value }))
@@ -120,17 +112,56 @@ export function InquiryForm({ reasons, consentLabel, button }: InquiryFormProps)
       // types tells them their email is wrong at the third character, which
       // they knew.
       setErrors((previous) =>
-        previous[field] ? { ...previous, [field]: validate(field, value) } : previous,
+        previous[field] ? { ...previous, [field]: validateField(field, value) } : previous,
       )
     }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    // #58: no handler, no destination. Nothing to send this to yet.
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    if (status === 'submitting') return
+
+    const cleanReasons = reasons.map((reason) => stegaClean(reason))
+    const submission = {
+      ...values,
+      reasons: cleanReasons,
+      ...(consentLabel ? { consent } : {}),
+      honeypot: honeypot.current?.value ?? '',
+      startedAt: startedAt.current,
+    }
+
+    const { ok, errors: found } = validateInquiry(submission)
+    if (!ok) {
+      setErrors(found)
+      // The first invalid control in the order the card draws them, so focus
+      // lands where reading would.
+      const first = INQUIRY_FIELDS.find((field) => found[field])
+      form.current?.querySelector<HTMLElement>(`#field-${first}`)?.focus()
+      return
+    }
+
+    setStatus('submitting')
+    try {
+      const response = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(submission),
+      })
+      setStatus(response.ok ? 'sent' : 'error')
+    } catch {
+      setStatus('error')
+    }
+  }
+
+  if (status === 'sent') {
+    return (
+      <p role="status" aria-live="polite" className="text-lead text-fg">
+        {SENT_MESSAGE}
+      </p>
+    )
   }
 
   return (
-    <form className="flex flex-col gap-5" noValidate onSubmit={handleSubmit}>
+    <form className="flex flex-col gap-5" noValidate onSubmit={handleSubmit} ref={form}>
       {/* The two names share a row at BOTH frame widths — `2975:10198` is a
           horizontal row of two 131-wide fields inside a 282 card at 402, so
           this never stacks. */}
@@ -202,9 +233,8 @@ export function InquiryForm({ reasons, consentLabel, button }: InquiryFormProps)
               // rendered word back to the field that wrote it; keeping them on
               // the child preserves click-to-edit. Keeping them on the VALUE
               // would mean the reason a submission carries silently differs
-              // from the one an editor typed, on drafts only, invisibly —
-              // which is the kind of thing found six months after the handler
-              // in #58 lands rather than before it.
+              // from the one an editor typed, on drafts only, invisibly — and
+              // the route checks the reason against the list it was sent.
               <option key={stegaClean(reason)} value={stegaClean(reason)}>
                 {reason}
               </option>
@@ -227,6 +257,21 @@ export function InquiryForm({ reasons, consentLabel, button }: InquiryFormProps)
         )}
       </FormField>
 
+      {/* The honeypot. Off-screen rather than `hidden`, because a bot reads
+          the DOM and skips what is display:none; unlabelled, out of the tab
+          order and hidden from the accessibility tree, so nobody who fills
+          this form can reach it. A value here drops the submission. */}
+      <input
+        ref={honeypot}
+        type="text"
+        name={HONEYPOT_FIELD}
+        defaultValue=""
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="pointer-events-none absolute left-[-9999px] size-px opacity-0"
+      />
+
       {consentLabel ? (
         // `2960:7818`: a 16px box with a 2.5 radius, 13px from its label.
         <div className="flex items-start gap-[13px]">
@@ -244,27 +289,24 @@ export function InquiryForm({ reasons, consentLabel, button }: InquiryFormProps)
         </div>
       ) : null}
 
-      {/*
-        The honest half of #58. Visible to everyone, and wired to the button as
-        its description — `aria-disabled` rather than `disabled` so the button
-        stays in the tab order and the description is actually announced when
-        focus lands on it (a natively-disabled control is skipped, so its
-        describedby is rarely read). The no-op is `onSubmit`'s unconditional
-        `preventDefault`, not the attribute. Delete both when the handler lands.
-      */}
       <div className="border-current/25 flex flex-col gap-4 border-t pt-6">
-        <p id="form-not-connected" className="text-legal text-current/70">
-          This form isn’t connected yet. Nothing you type here is sent anywhere — use the email or
-          phone on this page and a person will answer.
-        </p>
+        {status === 'error' ? (
+          // The values are still in the fields behind this, so the next press
+          // of the button is a retry rather than a re-typing.
+          <p role="alert" className="text-legal text-current/70">
+            {FAILED_MESSAGE}
+          </p>
+        ) : null}
         <div>
           <ButtonLink
             button={submit}
             size="large"
             control={{
               type: 'submit',
-              'aria-disabled': true,
-              'aria-describedby': 'form-not-connected',
+              // Busy, not gone: the button keeps its words and its place in
+              // the tab order while the request is in flight, and a second
+              // press is refused by `handleSubmit` rather than by the DOM.
+              'aria-disabled': status === 'submitting',
             }}
           />
         </div>

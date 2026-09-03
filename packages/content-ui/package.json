@@ -45,6 +45,7 @@
     "./chrome": "./src/chrome/index.ts",
     "./format-date": "./src/lib/format-date.ts",
     "./image-sizes": "./src/imageSizes.ts",
+    "./inquiry": "./src/blocks/section/formSection/inquiry.ts",
     "./portable-text": "./src/portable-text/PortableTextBody.tsx",
     "./testing": "./src/testing/index.ts",
     "./testing/seed": "./src/testing/seedContent.ts"

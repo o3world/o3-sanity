@@ -5,9 +5,16 @@ import { fieldAttr } from '@o3/content-runtime/data-attribute'
 import { SanityImage } from '../../../SanityImage'
 import { resolveSurface } from '../../surface'
 
-import { InquiryForm } from './InquiryForm'
+import { InquiryForm, type InquiryStatus } from './InquiryForm'
 
-type FormSectionProps = SectionProps<'formSection'>
+type FormSectionProps = SectionProps<'formSection'> & {
+  /**
+   * Which state the card opens in. Stories only, so the sent and failed
+   * answers are visible without a network; a page always opens on `idle` and
+   * the schema has no field for it.
+   */
+  initialStatus?: InquiryStatus
+}
 
 /**
  * Section block: the inquiry form band — `/contact`'s conversion path (#58),
@@ -32,8 +39,8 @@ type FormSectionProps = SectionProps<'formSection'>
  *
  * The submit is an ordinary `button` instance, so it offers everything any
  * other button does. **The fields are not** — see the schema's doc comment and
- * ADR 0014. The submit is disabled; #58 has neither a handler nor a
- * destination, and `InquiryForm` says so on the page rather than pretending.
+ * ADR 0014. Where a submission goes is `InquiryForm`'s: the app's
+ * `/api/contact` route, and HubSpot behind it.
  */
 export function FormSection({
   eyebrow,
@@ -48,6 +55,7 @@ export function FormSection({
   details,
   surface,
   loc,
+  initialStatus,
 }: FormSectionProps) {
   const resolved = resolveSurface(surface, 'formSection')
   const rail = Boolean(media || quote || attribution || details?.length)
@@ -86,7 +94,12 @@ export function FormSection({
             {/* The submit's fill is not passed down: the submit is an ordinary
                 button instance, so it resolves from the surface it stands on
                 the way every other button does. */}
-            <InquiryForm reasons={reasons ?? []} consentLabel={consentLabel} button={button} />
+            <InquiryForm
+              reasons={reasons ?? []}
+              consentLabel={consentLabel}
+              button={button}
+              initialStatus={initialStatus}
+            />
           </div>
 
           {rail ? (
@@ -160,10 +173,10 @@ const PHONE = /^[+(]?[\d\s().+-]{10,}$/
  * One line of the rail's lower half, as a link when it is reachable.
  *
  * The frame draws the address, the phone and the email as flat text
- * (`2960:7838`, `2960:7842`) — but the form cannot send yet (#58), so those
- * two are the page's only working conversion path and a printed one is not
- * one. The value's own shape decides, so nothing is authored twice; an address
- * matches neither pattern.
+ * (`2960:7838`, `2960:7842`) — but a printed address is not a way to reach
+ * anyone from a phone, and these are the two routes a reader who does not want
+ * to fill in a form has. The value's own shape decides, so nothing is authored
+ * twice; an address matches neither pattern.
  */
 function ContactLine({ value }: { value: string }) {
   const trimmed = value.trim()

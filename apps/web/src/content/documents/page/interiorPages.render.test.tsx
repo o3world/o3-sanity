@@ -519,26 +519,30 @@ describe('the seeded Contact page', () => {
     })
 
     /**
-     * **The stub, asserted.** #58 built the fields only; the mechanism and
-     * the destination are still open. The one thing this page must never do
-     * is look like it sends, so the button is `aria-disabled` (not native
-     * `disabled` — it stays in the tab order so its description is announced)
-     * and the reason sits on the page, wired to the button as its description.
-     * The no-op itself is client-side (`onSubmit` preventDefault), which
-     * server HTML can't show; what it can show is that no success state
-     * exists to be reached.
+     * **The wiring, asserted.** #412 gave the form a destination: it posts to
+     * `/api/contact`, which validates and forwards to HubSpot. So the submit
+     * is an ordinary enabled button and the "not connected" notice is gone —
+     * a page that still said it cannot send would be lying.
      *
-     * When #58's other halves land, this is the test that should fail.
+     * The honeypot is the half of the spam story server HTML can show. The
+     * other half — three seconds between mount and submit — is client-side
+     * and unit-tested in `inquiry.test.ts`.
      */
-    it('disables submit and says why, rather than pretending to send', () => {
-      expect(html).toContain('This form isn’t connected yet')
+    it('offers a working submit rather than a disabled one', () => {
+      expect(html).not.toContain('isn’t connected')
       // `disabled=""` / `aria-disabled="true"` — the rendered attribute forms;
       // a bare `\sdisabled` would also match the class string's `disabled:`
       // Tailwind variants.
-      expect(html).toMatch(/<button[^>]*\saria-disabled="true"/)
+      expect(html).not.toMatch(/<button[^>]*\saria-disabled="true"/)
       expect(html).not.toMatch(/<button[^>]*\sdisabled=""/)
-      expect(html).toMatch(/<button[^>]*aria-describedby="form-not-connected"/)
-      expect(html).toContain('id="form-not-connected"')
+    })
+
+    it('carries a honeypot input nobody using the form can reach', () => {
+      const honeypot = html.match(/<input[^>]*name="website"[^>]*>/)?.[0]
+      expect(honeypot, 'no honeypot input').toBeTruthy()
+      expect(honeypot).toContain('aria-hidden="true"')
+      expect(honeypot).toContain('tabindex="-1"')
+      expect(honeypot).toContain('left-[-9999px]')
     })
 
     it('still shows the submit’s words, so the intent stays legible', () => {

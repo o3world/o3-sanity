@@ -587,15 +587,14 @@ describe('committed seed content', () => {
     })
 
     /**
-     * The form has no handler and no destination yet, so the page stays
-     * provisional — and the note has to say which halves are still open, not
-     * just that something is. When #58's mechanism and destination land,
-     * this fails and the note gets rewritten with it.
+     * The form sends now (#412) — it posts to `/api/contact` and on to
+     * HubSpot — so the page carries no provisional marker. The only thing that
+     * marker ever named was the missing handler.
      */
-    it('still declares itself provisional, naming what is open', () => {
+    it('no longer declares itself provisional', () => {
       const migration = (contact?.migration ?? {}) as Partial<Migration>
-      expect(migration.provisional).toBe(true)
-      expect(migration.provisionalNote).toMatch(/#58/)
+      expect(migration.provisional).toBeUndefined()
+      expect(migration.provisionalNote).toBeUndefined()
     })
   })
 
