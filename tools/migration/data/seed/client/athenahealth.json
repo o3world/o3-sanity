@@ -1,0 +1,14 @@
+{
+  "_id": "client-seed-athenahealth",
+  "_type": "client",
+  "name": "athenahealth",
+  "logo": {
+    "_type": "image",
+    "_localSrc": "tools/migration/data/seed/assets/partner-athenahealth.svg"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:sanity-partner-strip",
+    "extractedAt": "2026-09-03T00:00:00Z"
+  }
+}

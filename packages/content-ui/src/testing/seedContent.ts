@@ -89,6 +89,25 @@ import clientLaColombe from '../../../../tools/migration/data/seed/client/la-col
 import clientVertex from '../../../../tools/migration/data/seed/client/vertex.json'
 import clientHireHeroes from '../../../../tools/migration/data/seed/client/hire-heroes-usa.json'
 
+// ── The fifteen marks the /partners/sanity strip draws ─────────────────────
+// Borrowed vendor artwork rather than seeded content — `brand-assets` fetches
+// each one and records where it came from.
+import clientPuma from '../../../../tools/migration/data/seed/client/puma.json'
+import clientFigma from '../../../../tools/migration/data/seed/client/figma.json'
+import clientArcteryx from '../../../../tools/migration/data/seed/client/arcteryx.json'
+import clientPinterest from '../../../../tools/migration/data/seed/client/pinterest.json'
+import clientShopify from '../../../../tools/migration/data/seed/client/shopify.json'
+import clientLoom from '../../../../tools/migration/data/seed/client/loom.json'
+import clientAnthropic from '../../../../tools/migration/data/seed/client/anthropic.json'
+import clientReplit from '../../../../tools/migration/data/seed/client/replit.json'
+import clientAthenahealth from '../../../../tools/migration/data/seed/client/athenahealth.json'
+import clientFrontier from '../../../../tools/migration/data/seed/client/frontier.json'
+import clientSamsung from '../../../../tools/migration/data/seed/client/samsung.json'
+import clientSiemens from '../../../../tools/migration/data/seed/client/siemens.json'
+import clientMoma from '../../../../tools/migration/data/seed/client/moma.json'
+import clientNordstrom from '../../../../tools/migration/data/seed/client/nordstrom.json'
+import clientNike from '../../../../tools/migration/data/seed/client/nike.json'
+
 // ── Industries those case studies carry ────────────────────────────────────
 import industryHealthcare from '../../../../tools/migration/data/seed/industry/healthcare.json'
 import industrySports from '../../../../tools/migration/data/seed/industry/sports.json'
@@ -157,6 +176,21 @@ const DOCUMENTS: readonly SeedDoc[] = [
   clientLaColombe,
   clientVertex,
   clientHireHeroes,
+  clientPuma,
+  clientFigma,
+  clientArcteryx,
+  clientPinterest,
+  clientShopify,
+  clientLoom,
+  clientAnthropic,
+  clientReplit,
+  clientAthenahealth,
+  clientFrontier,
+  clientSamsung,
+  clientSiemens,
+  clientMoma,
+  clientNordstrom,
+  clientNike,
   industryHealthcare,
   industrySports,
   industryTechnology,

@@ -1694,5 +1694,65 @@
   "file:tools/migration/data/seed/assets/utility-o3xo.png": {
     "sha256": "1a847e2d1fbb7ec5f126bb7b0ebc0be4289fda57",
     "assetId": "image-1a847e2d1fbb7ec5f126bb7b0ebc0be4289fda57-2545x669-png"
+  },
+  "file:tools/migration/data/seed/assets/partner-puma.svg": {
+    "sha256": "8b1eaf6dbb25c1b2d7f8034fcccea4a6a6825802",
+    "assetId": "image-8b1eaf6dbb25c1b2d7f8034fcccea4a6a6825802-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-figma.svg": {
+    "sha256": "be0afce37238a50a76735e9cb2ef7b7c0206308e",
+    "assetId": "image-be0afce37238a50a76735e9cb2ef7b7c0206308e-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-arcteryx.svg": {
+    "sha256": "9b315adc684ccf6f2b2b6f08488a053986a95ed8",
+    "assetId": "image-9b315adc684ccf6f2b2b6f08488a053986a95ed8-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-pinterest.svg": {
+    "sha256": "153c248ccb943316dbad30cb444a52b07eba59e7",
+    "assetId": "image-153c248ccb943316dbad30cb444a52b07eba59e7-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-shopify.svg": {
+    "sha256": "fc7a59146be63e8a19b296517c9672ae962948dd",
+    "assetId": "image-fc7a59146be63e8a19b296517c9672ae962948dd-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-loom.svg": {
+    "sha256": "7be57ff1649f02d929e59a07716680f2a34245f6",
+    "assetId": "image-7be57ff1649f02d929e59a07716680f2a34245f6-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-anthropic.svg": {
+    "sha256": "f0f987ba4ee01a00d167182be89621060491d8e3",
+    "assetId": "image-f0f987ba4ee01a00d167182be89621060491d8e3-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-replit.svg": {
+    "sha256": "a941f52cd38a50174cd2be686b42b43bb5cbc594",
+    "assetId": "image-a941f52cd38a50174cd2be686b42b43bb5cbc594-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-athenahealth.svg": {
+    "sha256": "243272d99846ec354bf40037c7eba6261f935e42",
+    "assetId": "image-243272d99846ec354bf40037c7eba6261f935e42-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-frontier.svg": {
+    "sha256": "4d87964e27151762734ff77a6e343c9efd88174c",
+    "assetId": "image-4d87964e27151762734ff77a6e343c9efd88174c-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-samsung.svg": {
+    "sha256": "e8403452f4f337afe9900a1bde9f9639dbe0d570",
+    "assetId": "image-e8403452f4f337afe9900a1bde9f9639dbe0d570-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-siemens.svg": {
+    "sha256": "7ad6e700ef83729185ccdecfb2412859e1dc411c",
+    "assetId": "image-7ad6e700ef83729185ccdecfb2412859e1dc411c-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-moma.svg": {
+    "sha256": "6e09f0bcd3b62228de111e56bec3b53df54a5133",
+    "assetId": "image-6e09f0bcd3b62228de111e56bec3b53df54a5133-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-nordstrom.svg": {
+    "sha256": "63bccd1ca0001367093ca1e507e031af4e35aaeb",
+    "assetId": "image-63bccd1ca0001367093ca1e507e031af4e35aaeb-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-nike.svg": {
+    "sha256": "52551aeec093fda9d4e06db33527827affa5e819",
+    "assetId": "image-52551aeec093fda9d4e06db33527827affa5e819-480x140-svg"
   }
 }

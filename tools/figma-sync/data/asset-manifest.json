@@ -297,6 +297,111 @@
       "export": "imageFill",
       "locked": false,
       "note": "Utility Nav `2250:1445` → the O3XO wordmark, drawn at 76×20 in the strip: white `O3`, brand-yellow `XO`, transparent ground. Exact: committed bytes hash to `1a847e2d1fbb7ec5f126bb7b0ebc0be4289fda57`, the node's `imageRef`."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-puma.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. PUMA's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-figma.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Figma's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-arcteryx.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Arc’teryx's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-pinterest.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Pinterest's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-shopify.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Shopify's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-loom.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Loom's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-anthropic.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Anthropic's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-replit.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Replit's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-athenahealth.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. athenahealth's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-frontier.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Frontier's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-samsung.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Samsung's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-siemens.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Siemens's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-moma.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. MoMA's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-nordstrom.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Nordstrom's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-nike.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Nike's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
     }
   ]
 }

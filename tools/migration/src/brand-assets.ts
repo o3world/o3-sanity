@@ -29,6 +29,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 
 import { BRAND_ASSETS } from './brand-assets-sources'
+import { MAX_INK_LUMA, darkestInk, normalizeLogoSvg } from './lib/logoCanvas'
 import { REPO_ROOT } from './lib/paths'
 
 const write = process.argv.includes('--write')
@@ -50,6 +51,24 @@ function assertImage(buf: Buffer, contentType: string | null, url: string) {
   }
 }
 
+/**
+ * A strip mark, centred on the partner canvas. Vector only, and loudly: the
+ * fit exists to give the row one optical size, and a vendor swapping an SVG
+ * for a PNG would quietly reintroduce the mismatch it removes.
+ */
+function fitToStrip(buf: Buffer, url: string): string {
+  const svg = buf.toString('utf8')
+  if (!/<svg\b/i.test(svg)) throw new Error(`${url} is not an SVG; the partner strip fit needs one`)
+  const ink = darkestInk(svg)
+  if (ink !== null && ink > MAX_INK_LUMA) {
+    throw new Error(
+      `${url} draws its darkest ink at luma ${ink.toFixed(2)} — too light for the bone surface.` +
+        ' This is usually a dimmed variant of the mark; find the full-strength file.',
+    )
+  }
+  return normalizeLogoSvg(svg)
+}
+
 async function main() {
   let changed = 0
   let added = 0
@@ -62,8 +81,9 @@ async function main() {
       headers: { 'user-agent': 'Mozilla/5.0 (o3-sanity brand-assets)', accept: 'image/*,*/*' },
     })
     if (!res.ok) throw new Error(`fetch ${asset.url}: ${res.status} ${res.statusText}`)
-    const buf = Buffer.from(await res.arrayBuffer())
+    let buf = Buffer.from(await res.arrayBuffer())
     assertImage(buf, res.headers.get('content-type'), asset.url)
+    if (asset.fit === 'partner-strip') buf = Buffer.from(fitToStrip(buf, asset.url), 'utf8')
 
     const before = existsSync(target) ? readFileSync(target) : null
     if (before && sha(before) === sha(buf)) {

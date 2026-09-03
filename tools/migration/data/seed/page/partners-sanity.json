@@ -45,12 +45,21 @@
       "layout": "bar",
       "heading": "Trusted brands using Sanity",
       "clients": [
-        { "_type": "reference", "_ref": "client-seed-vertex", "_key": "client-0" },
-        { "_type": "reference", "_ref": "client-seed-ironman", "_key": "client-1" },
-        { "_type": "reference", "_ref": "client-seed-chop", "_key": "client-2" },
-        { "_type": "reference", "_ref": "client-seed-aramark", "_key": "client-3" },
-        { "_type": "reference", "_ref": "client-seed-la-colombe", "_key": "client-4" },
-        { "_type": "reference", "_ref": "client-seed-amerigas", "_key": "client-5" }
+        { "_type": "reference", "_ref": "client-seed-puma", "_key": "client-puma" },
+        { "_type": "reference", "_ref": "client-seed-figma", "_key": "client-figma" },
+        { "_type": "reference", "_ref": "client-seed-arcteryx", "_key": "client-arcteryx" },
+        { "_type": "reference", "_ref": "client-seed-pinterest", "_key": "client-pinterest" },
+        { "_type": "reference", "_ref": "client-seed-shopify", "_key": "client-shopify" },
+        { "_type": "reference", "_ref": "client-seed-loom", "_key": "client-loom" },
+        { "_type": "reference", "_ref": "client-seed-anthropic", "_key": "client-anthropic" },
+        { "_type": "reference", "_ref": "client-seed-replit", "_key": "client-replit" },
+        { "_type": "reference", "_ref": "client-seed-athenahealth", "_key": "client-athenahealth" },
+        { "_type": "reference", "_ref": "client-seed-frontier", "_key": "client-frontier" },
+        { "_type": "reference", "_ref": "client-seed-samsung", "_key": "client-samsung" },
+        { "_type": "reference", "_ref": "client-seed-siemens", "_key": "client-siemens" },
+        { "_type": "reference", "_ref": "client-seed-moma", "_key": "client-moma" },
+        { "_type": "reference", "_ref": "client-seed-nordstrom", "_key": "client-nordstrom" },
+        { "_type": "reference", "_ref": "client-seed-nike", "_key": "client-nike" }
       ]
     },
     {

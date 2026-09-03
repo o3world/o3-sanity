@@ -26,7 +26,46 @@ export interface BrandAsset {
   readonly source: string
   /** What the vendor publishes about third-party use of the mark. */
   readonly terms: string
+  /**
+   * Centre the fetched mark on the partner strip's canvas before writing it
+   * (`lib/logoCanvas.ts`). Set on every row that lands in a `logoWallSection`
+   * tile, because that tile draws its artwork `w-full` and a 2:1 mark beside
+   * an 8.8:1 one would otherwise draw three times its height.
+   */
+  readonly fit?: 'partner-strip'
 }
+
+/**
+ * WHERE THE PARTNER-STRIP MARKS COME FROM.
+ *
+ * Fifteen of the rows below are the customer logo bar on sanity.io itself, and
+ * that is deliberate rather than convenient. The strip they fill sits under
+ * "Trusted brands using Sanity" on `/partners/sanity`, so the claim and the
+ * artwork want the same source: every mark here is one Sanity publishes as its
+ * own customer. Taking them off a press kit each would put us a generation
+ * ahead of, or behind, the list we are quoting.
+ *
+ * They are also the only set that is already a set. Each is trimmed to its own
+ * bounding box and drawn in Sanity's near-black (#1B1D27 / #272A2E) on
+ * transparent, which is what the tile's `grayscale` and the bone surface both
+ * want — a full-colour press PNG would need a knockout and a trim before it
+ * could sit in the row.
+ *
+ * One property of these URLs to know. They are content-addressed: the hash in
+ * the filename IS the file, so a mark Sanity redraws gets a new URL and this
+ * one keeps serving the old bytes rather than changing under us. The drift
+ * report will therefore never fire on this group; what goes stale is the
+ * *list*, and the way to check it is to re-read sanity.io's logo bar.
+ */
+const SANITY_LOGO_BAR =
+  'https://www.sanity.io/ (customer logo bar) and https://www.sanity.io/customers'
+
+const SANITY_LOGO_BAR_TERMS =
+  'Each mark belongs to the brand named, not to Sanity. Nominative use only —' +
+  ' naming brands that use Sanity, on a page about our Sanity practice. No' +
+  ' brand here publishes a licence covering this; none of the marks may be' +
+  ' recoloured, restyled or used to imply endorsement, and any brand asking is' +
+  ' removed from the strip rather than argued with.'
 
 export const BRAND_ASSETS: readonly BrandAsset[] = [
   {
@@ -73,5 +112,125 @@ export const BRAND_ASSETS: readonly BrandAsset[] = [
     source: 'https://github.com/sanity-io (org avatar) — sanity.io publishes no brand assets',
     terms:
       'Strictest of the three, and the one to get sign-off on. Sanity ToS 9.4: "Subscriber may not use Sanity\'s names, trademarks, trade names, service marks, insignia, or logos (“Marks”) without Sanity\'s prior written consent." No nominative-use carve-out is published.',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-puma.svg',
+    vendor: 'PUMA',
+    url: 'https://cdn.sanity.io/images/3do82whm/next/eeaa028ff98b13b53852fe2cc9de7bd882604ef7-61x36.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-figma.svg',
+    vendor: 'Figma',
+    url: 'https://cdn.sanity.io/images/3do82whm/next/68281c639e338a3752f561ae72a321abc6067a89-67x32.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-arcteryx.svg',
+    vendor: "Arc'teryx",
+    url: 'https://cdn.sanity.io/images/3do82whm/next/5afdf09b0d2e1d412ff66531206f625fc89d7568-139x32.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-pinterest.svg',
+    vendor: 'Pinterest',
+    url: 'https://cdn.sanity.io/images/3do82whm/next/e2c2894ffe26d29a16e4951666da6bd8b74336b1-124x30.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-shopify.svg',
+    vendor: 'Shopify',
+    url: 'https://cdn.sanity.io/images/3do82whm/next/43be86359947cdf8f90c88ec87abdca9f9e11fef-106x36.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-loom.svg',
+    vendor: 'Loom',
+    url: 'https://cdn.sanity.io/images/3do82whm/next/91a8d15ffae047c01af7d22c173609b1d336c094-122x36.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-anthropic.svg',
+    vendor: 'Anthropic',
+    url: 'https://cdn.sanity.io/images/3do82whm/next/6708b94d3f1898c0ee134446547b7316da4b8680-125x32.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-replit.svg',
+    vendor: 'Replit',
+    url: 'https://cdn.sanity.io/images/3do82whm/next/a71ff8b1111c402c1f9e53b7f935fc22a46a8635-140x32.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-athenahealth.svg',
+    vendor: 'athenahealth',
+    url: 'https://cdn.sanity.io/images/3do82whm/next/0b97644080fbb21135171bc696614de2b377a777-422x48.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-frontier.svg',
+    vendor: 'Frontier',
+    url: 'https://cdn.sanity.io/images/3do82whm/next/cb47ce83ad77319cfa192868c0bddffafe9e98d5-325x44.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-samsung.svg',
+    vendor: 'Samsung',
+    url: 'https://cdn.sanity.io/images/3do82whm/next/14c1267f7f08db829f9239587bc0030ca03c0b3f-325x50.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-siemens.svg',
+    vendor: 'Siemens',
+    url: 'https://cdn.sanity.io/images/3do82whm/next/2e6d47f6a1da3a65755f9e7ef2e850658f2d7a71-321x52.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-moma.svg',
+    vendor: 'MoMA',
+    url: 'https://cdn.sanity.io/images/3do82whm/next/8999d05556824a6802734991cd927f92d5f08523-119x32.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-nordstrom.svg',
+    vendor: 'Nordstrom',
+    url: 'https://cdn.sanity.io/images/3do82whm/next/1ee03162ff8802bdb949eb6c9a60088f0c94d5c2-383x48.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
+  },
+  {
+    file: 'tools/migration/data/seed/assets/partner-nike.svg',
+    vendor: 'Nike',
+    url: 'https://cdn.sanity.io/images/3do82whm/next/44149304b3991592a14651fad15d6569eeed4ab3-92x32.svg',
+    source: SANITY_LOGO_BAR,
+    terms: SANITY_LOGO_BAR_TERMS,
+    fit: 'partner-strip',
   },
 ]

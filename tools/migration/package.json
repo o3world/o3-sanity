@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "WordPress→Sanity migration pipeline (temporary — deleted post-migration). See docs/adr/0002, 0003.",
+  "description": "WordPress\u2192Sanity migration pipeline (temporary \u2014 deleted post-migration). See docs/adr/0002, 0003.",
   "scripts": {
     "extract": "tsx src/extract.ts",
     "brand-assets": "tsx src/brand-assets.ts",
     "convert": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" tsx src/convert.ts",
     "redirects": "tsx src/redirects.ts",
     "load": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/load.ts --with-user-token --",
+    "sync-docs": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/sync-docs.ts --with-user-token --",
     "drift": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/drift.ts --with-user-token --",
     "verify": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/verify.ts --with-user-token --",
     "typecheck": "tsc --noEmit"
