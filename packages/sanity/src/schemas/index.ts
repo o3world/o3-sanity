@@ -29,6 +29,7 @@ import {
   insightsCarouselSection,
   ctaSection,
   faqSection,
+  statsSection,
   featureGridSection,
   personGridSection,
   roleListSection,
@@ -72,6 +73,7 @@ const SECTION_SCHEMAS = {
   screenGridSection,
   listingSection,
   faqSection,
+  statsSection,
 } satisfies Record<SectionBlockName, unknown>
 
 /**

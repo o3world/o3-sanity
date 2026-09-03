@@ -1,4 +1,4 @@
-import { CaseChapter, CaseStudyHero, Eyebrow, Reveal, Stat } from '@o3/ui'
+import { CaseChapter, CaseStudyHero, Eyebrow, Reveal } from '@o3/ui'
 import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { Blocks } from '@/content/blocks/Blocks'
@@ -61,7 +61,6 @@ function toRuns(story: readonly StoryMember[]): StoryRun[] {
  * | Band            | Frame (1440 / 402)         | Field                            |
  * | --------------- | -------------------------- | -------------------------------- |
  * | Hero            | `1710:2301` / `1906:922`   | `heroMedia`, `client`, `title`, `narrativeHeadline` |
- * | Stats           | — **no frame region**      | `stats`                          |
  * | Story           | `1647:1714` / `1906:878`   | `story` — chapters, numbered by their order among chapters |
  * | ↳ details rows  | `2274:4009`                | `chapter.details`                |
  * | ↳ screen grids  | `2230:3315`, `2230:7559`   | `screenGridSection`              |
@@ -76,10 +75,16 @@ function toRuns(story: readonly StoryMember[]): StoryRun[] {
  * Coffee") is the card's, drawn by `CaseStudyCard` on `/work` and Home, and
  * the detail frame gives it no region.
  *
- * **Two bands here have no frame region at all**: `stats` and `deliverables`.
- * Both hold migrated fact (ADR 0007 — migration wins the facts), so they are
- * rendered in the frame's own vocabulary rather than dropped, and flagged on
- * #44 as a design conversation this rework does not close.
+ * **`stats` IS NOT A BAND HERE.** The frame gives it no region, and a fixed
+ * band after the hero is a position no design asked for and an editor cannot
+ * move. The field is the card's — its first stat is the showcase card's
+ * headline stat — and a case study that wants figures in its narrative places
+ * a `statGroup` inside a `layoutSection`, at the point in `story` the design
+ * puts them.
+ *
+ * **`deliverables` has no frame region either**, and stays: it holds migrated
+ * fact (ADR 0007 — migration wins the facts), so it is rendered in the frame's
+ * own vocabulary rather than dropped. Flagged on #44.
  *
  * **Why runs, and not one dispatcher.** `Blocks` is the only sanctioned entry
  * point to block rendering (an ESLint boundary says so), and a chapter is a
@@ -104,8 +109,7 @@ function toRuns(story: readonly StoryMember[]): StoryRun[] {
  * out of black.
  */
 export function CaseStudyView(props: CaseStudyViewProps) {
-  const { _id, title, client, narrativeHeadline, stats, heroMedia, story, deliverables, next } =
-    props
+  const { _id, title, client, narrativeHeadline, heroMedia, story, deliverables, next } = props
 
   const runs = toRuns(story ?? [])
 
@@ -128,29 +132,6 @@ export function CaseStudyView(props: CaseStudyViewProps) {
           />
         }
       />
-
-      {/*
-       * No frame region — see the note above. Set in the card's stat
-       * vocabulary (the 48px figure beside its label, `1883:3565`) and hung on
-       * the article measure so the page keeps one spine; the chapter band
-       * below supplies the space beneath.
-       */}
-      {stats?.length ? (
-        <Reveal className="bg-white">
-          <section className="px-gutter pt-band-sm bg-white">
-            <ul className="max-w-article mx-auto flex w-full flex-col gap-6">
-              {stats.map((stat) => (
-                <li
-                  key={stat._key}
-                  className="border-line border-t pt-6 first:border-t-0 first:pt-0"
-                >
-                  <Stat value={stat.value ?? ''} label={stat.label ?? ''} />
-                </li>
-              ))}
-            </ul>
-          </section>
-        </Reveal>
-      ) : null}
 
       {/* The narrative, in the order it was authored (ADR 0018). */}
       {runs.map((run) =>

@@ -39,7 +39,14 @@ export const CORE_SECTION_BLOCKS = [
  * half-known ones.
  */
 export const BRAND_SECTION_BLOCKS = {
-  o3: [],
+  /**
+   * `statsSection` — the stat row as a band of its own (#44). The Case Study
+   * frame gives figures no region, so the band answers to `1883:3565`'s stat
+   * vocabulary rather than to a frame; O3XO's kit plates each figure on
+   * `accent` (`Key Metric Card`, `4404:3916`) and draws no row, so it has
+   * nothing here to promote yet.
+   */
+  o3: ['statsSection'],
   /** `faqSection` — the kit's FAQ Accordion (`4406:7288`), which O3 draws nowhere (#248). */
   o3xo: ['faqSection'],
 } as const satisfies Readonly<Record<Brand, readonly string[]>>

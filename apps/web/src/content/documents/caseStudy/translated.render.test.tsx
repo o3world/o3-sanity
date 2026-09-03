@@ -63,12 +63,35 @@ describe('the translated La Colombe case study', () => {
     expect(html).toContain('<dl')
   })
 
-  it('renders every stat with its exact figure', () => {
-    // Verbatim from the source, typo included — the flag says so.
-    for (const stat of doc.stats as { value: string; label: string }[]) {
-      expect(html).toContain(stat.value)
+  it('draws the figures where the story places them, not after the hero', async () => {
+    // `stats` IS NOT A BAND. It is the card's field — its first stat is the
+    // showcase card's headline stat — and the detail route draws figures only
+    // where a `statsSection` sits in `story` (#44). So the committed
+    // translation, which carries no such band, renders none of them.
+    const stats = doc.stats as { _key: string; value: string; label: string }[]
+    expect(stats.length).toBeGreaterThan(0)
+    for (const stat of stats) {
+      expect(html, `${stat.value} should not be drawn without a stats band`).not.toContain(
+        stat.value,
+      )
     }
-    expect(html).toContain('conversation rate')
+
+    // The same figures through the band an editor places. Rendered here rather
+    // than added to the committed JSON: that corpus records what the WordPress
+    // translation derived, its `_meta` provenance is keyed by `story[N]`, and
+    // a band nothing sourced would shift every one of those paths.
+    const withBand = await renderRoute(route, {
+      data: withSettings(
+        { ...doc, story: [{ _type: 'statsSection', _key: 'stats-band', stats }, ...story] },
+        siteSettings(),
+      ),
+      params: { slug: 'la-colombe' },
+    })
+    // Verbatim from the source, typo included — the flag says so.
+    for (const stat of stats) {
+      expect(withBand.html).toContain(stat.value)
+    }
+    expect(withBand.html).toContain('conversation rate')
   })
 
   it('numbers the chapters from array order, not from the content', () => {
