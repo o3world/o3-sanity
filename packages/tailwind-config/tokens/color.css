@@ -154,16 +154,21 @@
   --color-fg-inverse-muted: rgba(255, 255, 255, 0.65);
 
   /* ── Chrome ────────────────────────────────────────────────────────────── */
-  /* rgba(3,3,3,0.2) — the floating NavBar's dark skin, at both widths
-   * (2225:2920 / 1814:1630). Sits over whatever the hero is showing, so it
-   * must stay an alpha. */
+  /* rgba(3,3,3,0.2) — the 402 bar's dark skin (`Links` 1814:1630). Sits over
+   * whatever the hero is showing, so it must stay an alpha. */
   --color-scrim: rgba(3, 3, 3, 0.2);
+  /* rgba(3,3,3,0.6) — the 1440 pill's dark skin (`NavBar` 2225:2920, as the
+   * Case Study frame instances it at 2250:2155). Three times the bar's
+   * density: the pill floats over photography, and the frame's GLASS wipes
+   * what is under it to a tone rather than a picture — see the 40px backdrop
+   * blur in `SiteNav`. */
+  --color-scrim-pill: rgba(3, 3, 3, 0.6);
   /* rgba(255,255,255,0.8) — the same pill once it floats over a LIGHT band.
    * White rather than a tint of the dark scrim, because a near-black at a low
    * alpha over a pale band is grey, and grey chrome reads as a smudge rather
    * than a pill. An alpha rather than paint, because both frames put a GLASS
    * effect on this bar and an opaque fill has nothing to blur: 80% is where
-   * the 14px backdrop blur still reads through the pill while the headlines
+   * the 40px backdrop blur still reads through the pill while the headlines
    * of the insights feed passing under it stay a ghost rather than competing
    * with the links. Brand-neutral, like the white alphas above, so no overlay
    * restates it. */

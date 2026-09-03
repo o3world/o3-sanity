@@ -135,9 +135,10 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     expect(navHtml).toContain('lg:px-4')
     expect(navHtml).toContain('lg:py-4')
     expect(navHtml).toContain('lg:gap-12')
-    // The fill is the same alpha at both widths, and the same one the frames
-    // carry — `--color-scrim` IS `rgba(3, 3, 3, 0.2)`.
-    expect(navHtml).toContain('bg-scrim')
+    // Two alphas, both the frames': `--color-scrim` is the 402 bar's 20%
+    // (`1814:1630`) and `--color-scrim-pill` the 1440 pill's 60% (`2225:2920`).
+    expect(navHtml).toContain('bg-scrim ')
+    expect(navHtml).toContain('lg:bg-scrim-pill')
     // 16px of padding only lands an 80px bar over a 48px box. The mark is the
     // app's (#228), so this is the mark `apps/web` hands in: a 64 box cropped
     // 8px a side, not a 64 drawing scaled down — `2225:2915` holds the same
@@ -148,8 +149,9 @@ describe('the nav bar’s pinned, dark-ink default', () => {
   })
 
   it('blurs whatever it is floating over', () => {
-    // The prototype's `backdrop-filter: blur(14px)`, carried deliberately.
-    expect(navHtml).toContain('backdrop-blur-[14px]')
+    // The Case Study frame's glass (`1710:2300`): the photograph under the
+    // pill is a tone, not a shape.
+    expect(navHtml).toContain('backdrop-blur-[40px]')
   })
 
   it('server-renders the dark skin, with no ink attribute at all', () => {

@@ -120,6 +120,9 @@
   /* `black/solid` at 20% — the floating pill NavBar's fill. Stays an alpha
    * for the reason the base theme's does: it sits over the hero. */
   --color-scrim: rgba(0, 0, 0, 0.2);
+  /* `black/solid` at 60% — the 1440 pill's denser skin, the base theme's
+   * `scrim-pill` in this brand's black. */
+  --color-scrim-pill: rgba(0, 0, 0, 0.6);
   /* #E5E7EB — `grey/91`. The carousel controls and other secondary button
    * fills. */
   --color-surface-muted: #e5e7eb;
