@@ -128,7 +128,10 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     // down the link row. 402 (`1814:1630`): a full-width square bar at
     // `8px 20px`. The corner and the padding are both `lg:` for that reason,
     // and the corner is a token because 12px is a value the design draws.
-    expect(navHtml).toContain('lg:rounded-nav')
+    // `3271:17013` draws the pill `40px 12px 12px 40px` — a round cap at the
+    // mark's end, `--radius-nav` at the button's.
+    expect(navHtml).toContain('lg:rounded-l-[40px]')
+    expect(navHtml).toContain('lg:rounded-r-nav')
     expect(navHtml).not.toContain('rounded-full')
     expect(navHtml).toContain('px-5')
     expect(navHtml).toContain('py-2')
