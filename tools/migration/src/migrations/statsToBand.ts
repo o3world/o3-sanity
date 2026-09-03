@@ -17,9 +17,20 @@
  * `layout: 'stacked'` because that is the shape the fixed band had — the ruled
  * column on the article measure. `columns` is one drag of the knob away.
  *
+ * **`migration.locked` DOES NOT APPLY HERE, and that is not an oversight.**
+ * The lock guards a document's content being replaced from outside it — the
+ * pipeline overwriting an editor's version with the committed JSON (ADR 0003:
+ * "the pipeline never touches a locked document"). This reads a case study's
+ * own `stats` and adds a band drawn from them. There is no outside version, so
+ * there is nothing for the lock to protect, and honouring it would leave the
+ * most carefully-tended case studies as the only ones with their figures
+ * missing — which is what it did to IRONMAN before this run.
+ *
+ * A targeted script whose new values come from `data/` or anywhere else
+ * outside the document is a different thing and must still stop at a lock.
+ *
  *   pnpm --filter @o3/migration stats-to-band                     # report only
  *   pnpm --filter @o3/migration stats-to-band -- --apply          # write
- *   pnpm --filter @o3/migration stats-to-band -- --apply --include-locked
  *
  * Read-only unless `--apply`. It refuses any dataset but `development` without
  * `--dataset <name>` spelled out, because the fix for a bad run here is a
@@ -31,7 +42,6 @@ const client = getCliClient({ apiVersion: '2026-07-01' })
 
 const argv = process.argv.slice(2)
 const apply = argv.includes('--apply')
-const includeLocked = argv.includes('--include-locked')
 const namedDataset = argv[argv.indexOf('--dataset') + 1]
 
 /** The band this migration writes, keyed off the document it came from. */
@@ -42,13 +52,12 @@ type Row = {
   _rev: string
   title?: string
   slug?: string
-  locked?: boolean
   stats?: Stat[] | null
   story?: StoryMember[] | null
 }
 
 const QUERY = /* groq */ `*[_type == "caseStudy" && count(stats) > 0]{
-  _id, _rev, title, "slug": slug.current, "locked": migration.locked, stats,
+  _id, _rev, title, "slug": slug.current, stats,
   story[]{_key, _type}
 } | order(title asc)`
 
@@ -91,10 +100,6 @@ async function main() {
     const already = (row.story ?? []).some((member) => member._type === 'statsSection')
     if (already) {
       skipped.push(`${row.title ?? row._id} — already opens with a stats band`)
-      continue
-    }
-    if (row.locked && !includeLocked) {
-      skipped.push(`${row.title ?? row._id} — migration.locked (pass --include-locked)`)
       continue
     }
     todo.push(row)
