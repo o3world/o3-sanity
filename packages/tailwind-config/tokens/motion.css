@@ -504,7 +504,10 @@
  * `<main>`, and a group's snapshots paint above `root`'s — so a bar left in
  * the root snapshot spends the fade behind the crossfading page and pops back
  * when it ends. `SiteNav` names it (`view-transition-name: site-nav`), which
- * makes it a group of its own, stacked above the page in paint order. Held
+ * makes it a group of its own, stacked above the page in paint order. THE NAME
+ * IS ON THE PILL, not the header around it: a named element is its own
+ * backdrop root, and on the header it left the pill's `backdrop-filter` with
+ * nothing to sample. Held
  * still the same way root is: the old snapshot goes, the new one is the live
  * element, so the ink flip `NavInk` starts at the swap is seen running over
  * the fade rather than hidden under it.

@@ -166,12 +166,12 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
         // `NavInkFirstPaint` writes `data-ink` before hydration on a page that
         // opens light, and hydration must leave it standing rather than warn.
         suppressHydrationWarning
-        // `view-transition-name` lifts the bar out of the root snapshot during
-        // the cross-page fade (#403): the page group paints above root, so a
-        // bar captured in root spends the fade behind the crossfading page.
-        // Named, it is its own group, stacked above the page in paint order
-        // and live, and tokens/motion.css holds it still — see
-        // `::view-transition-*(site-nav)` there.
+        // THE `view-transition-name` IS ON THE PILL BELOW, NOT HERE, and it
+        // cannot come back up. An element with one is its own backdrop root,
+        // so a name here left the pill's `backdrop-filter` with nothing behind
+        // it to sample and the glass never painted — on any page, ever. The
+        // header draws nothing itself; the pill is the whole visible bar, so
+        // naming it is also the tighter snapshot.
         //
         // With a strip, `top` is the pill riding up with it: the resting
         // offset less the scroll (`NavPin` writes `--nav-scroll`), floored at
@@ -181,8 +181,8 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
         // the start.
         className={
           hasUtilityNav
-            ? 'lg:px-gutter group fixed inset-x-0 top-0 z-50 [view-transition-name:site-nav] lg:top-[max(var(--spacing-nav-pinned),calc(var(--spacing-nav-offset)-var(--nav-scroll,0px)))]'
-            : 'lg:px-gutter lg:top-(--spacing-nav-pinned) group fixed inset-x-0 top-0 z-50 [view-transition-name:site-nav]'
+            ? 'lg:px-gutter group fixed inset-x-0 top-0 z-50 lg:top-[max(var(--spacing-nav-pinned),calc(var(--spacing-nav-offset)-var(--nav-scroll,0px)))]'
+            : 'lg:px-gutter lg:top-(--spacing-nav-pinned) group fixed inset-x-0 top-0 z-50'
         }
       >
         <NavInk />
@@ -201,7 +201,7 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
           // this element carries the whole bar — the links, the hamburger's
           // `currentColor` bars and anything else added to the row inherit the
           // value mid-interpolation, and each keeps its own hover timing.
-          className="bg-scrim lg:bg-scrim-pill lg:border-on-ink-line group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-r-nav duration-(--duration-ink) group-data-[ink=dark]:bg-scrim-light flex items-center justify-between px-5 py-2 text-white backdrop-blur-[40px] transition-[background-color,border-color,color] ease-out max-lg:group-data-[ink=dark]:border-b lg:mx-auto lg:w-full lg:max-w-[900px] lg:rounded-l-[40px] lg:border lg:px-4 lg:py-4"
+          className="bg-scrim lg:bg-scrim-pill lg:border-on-ink-line group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-r-nav duration-(--duration-ink) group-data-[ink=dark]:bg-scrim-light flex items-center justify-between px-5 py-2 text-white backdrop-blur-[40px] transition-[background-color,border-color,color] ease-out [view-transition-name:site-nav] max-lg:group-data-[ink=dark]:border-b lg:mx-auto lg:w-full lg:max-w-[900px] lg:rounded-l-[40px] lg:border lg:px-4 lg:py-4"
         >
           <Link
             href="/"

@@ -123,6 +123,22 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     expect(navHtml).not.toContain('lg:absolute')
   })
 
+  it('names the view transition on the pill, so the glass has a backdrop to blur', () => {
+    // AN ELEMENT WITH A `view-transition-name` IS ITS OWN BACKDROP ROOT. On
+    // the `<header>` the name left the pill's `backdrop-filter` with nothing
+    // behind it to sample, and the glass painted on no page at all while every
+    // computed style still read `blur(40px)`. The two have to be on the SAME
+    // element, which is what this asserts: the name and the blur travel
+    // together or the bar silently stops being glass.
+    const named = navHtml.match(/class="[^"]*\[view-transition-name:site-nav\][^"]*"/)
+    expect(named, 'nothing carries the view-transition name').not.toBeNull()
+    expect(named![0]).toContain('backdrop-blur-')
+
+    // And nothing ABOVE it carries one — an ancestor's name is the same bug.
+    const header = navHtml.slice(0, navHtml.indexOf('<nav'))
+    expect(header).not.toContain('view-transition-name')
+  })
+
   it('draws the corner, the padding and the row the frames draw (#152)', () => {
     // 1440 (`2225:2920`): 900 × 80, radius 12, 16px all round, a 48px gap
     // down the link row. 402 (`1814:1630`): a full-width square bar at
