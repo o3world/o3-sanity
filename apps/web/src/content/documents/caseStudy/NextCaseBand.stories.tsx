@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, within } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 
 import { seededSectionArgs } from '@o3/content-ui/testing/seed'
@@ -35,6 +36,18 @@ const [firstCase] = seededSectionArgs('index', 'caseShowcaseSection').caseStudie
 export const Desktop: Story = {
   args: { next: firstCase! },
   globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    // THE CHIP GOES WHERE THE CARD GOES. It reads as a control, so a click on
+    // it cannot be inert — but the card below is already an anchor to the same
+    // href, so the chip is hidden from the keyboard and from assistive
+    // technology and the band stays at one tab stop and one announcement.
+    const card = canvas.getByRole('link')
+    const chip = canvasElement.querySelector('a[aria-hidden="true"]')
+    await expect(chip).not.toBeNull()
+    await expect(chip).toHaveAttribute('tabindex', '-1')
+    await expect(chip?.getAttribute('href')).toBe(card.getAttribute('href'))
+  },
 }
 
 /**
