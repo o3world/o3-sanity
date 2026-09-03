@@ -79,18 +79,25 @@ pnpm dataset:drift      # which pipeline-owned documents an editor changed (exit
 
 ## Rebuilding a dataset from scratch
 
-A scratch rebuild is the one place a blanket `load` still belongs — everyday
-dataset changes ship as targeted migrations instead (AGENTS.md → "Changing a
-dataset"). Within a rebuild, the pipeline owns its documents and the committed
-JSON under `tools/migration/data/` is the source of truth (ADR 0003). `load`
-recreates every unlocked pipeline-owned document; a `migration.locked`
-document is never touched.
+**You cannot, for o3, and that is deliberate** (2026-09-03). `load` refuses the
+brand outright, in every dataset, with no flag —
+`tools/migration/src/lib/loadRetired.ts` carries the reasoning. There is no
+scratch dataset left to rebuild into: `development` mirrors `production` via
+`pnpm dataset:sync`, and both hold content no committed JSON knows about.
+
+To get a `development` that matches the live site, sync it. To change documents
+in it, write a targeted migration under `tools/migration/src/migrations/`
+(AGENTS.md → "Changing a dataset").
 
 ```bash
-pnpm dataset development                 # point THIS CHECKOUT at the scratch dataset
-pnpm --filter @o3/migration load         # data/{converted,translated,seed}/ → Sanity
-pnpm --filter @o3/migration verify       # is the dataset what data/ says it is?
+pnpm dataset development                 # point THIS CHECKOUT at development
+pnpm dataset:sync                        # production → development
+pnpm --filter @o3/migration verify       # read-only: is the dataset what data/ says it is?
 ```
+
+o3xo is unaffected — its only dataset holds nothing but the pipeline's output,
+so a rebuild there is still `pnpm --filter @o3/migration load -- --brand o3xo
+--allow-production`.
 
 `pnpm dataset` with no argument prints which dataset each entry point is
 pointed at. It rewrites four gitignored `.env.local` files at once — web app,
@@ -98,17 +105,16 @@ typegen, migration, guidance — because the loader resolves its dataset
 independently of the web app, and the two silently disagreeing is what once
 sent every load to production.
 
-The full pipeline, when the source data itself needs rebuilding:
+The extract and convert halves still run — they write files, not documents —
+but for o3 the chain now ends at the corpus rather than at the dataset:
 
 ```bash
 pnpm --filter @o3/migration extract      # WordPress → data/extract/
 pnpm --filter @o3/migration convert      # → data/converted/ (Portable Text, refs)
-pnpm --filter @o3/migration load
-pnpm --filter @o3/migration verify
 ```
 
-**Then look at it in a browser.** A load that succeeds against the wrong
-dataset looks exactly like one that worked.
+**Then look at it in a browser.** A targeted migration that succeeds against
+the wrong dataset looks exactly like one that worked.
 
 ## Everyday commands
 

@@ -237,14 +237,23 @@ Single-context layout — `CONTEXT.md` and `docs/adr/` at the repo root. See `do
 
 ### Changing a dataset
 
-**The site is in production mode (2026-09-01): a dataset change ships as a
-targeted migration, never a blanket `load` — whichever dataset.** Editors and
-content population own the datasets now, and `load` reverts whatever the seed
-files do not know about. Write a script or patch scoped to exactly the
-documents or assets your change is about, run it, and say on the ticket what
-it touched. The blanket pipeline (`extract → convert → load → verify`) is
-retired as everyday work; `pnpm --filter @o3/migration verify` remains useful
-as a read-only check.
+**The blanket `load` is GONE for o3 — the command refuses the brand outright,
+in every dataset, and there is no flag** (`tools/migration/src/lib/loadRetired.ts`,
+2026-09-03). Editors and content population own the datasets, `development`
+mirrors `production` via `pnpm dataset:sync`, and a load reverts whatever the
+seed files do not know about — so there is no longer a dataset where it is the
+harmless operation it once was.
+
+A dataset change ships as a **targeted migration**: a script under
+`tools/migration/src/migrations/`, scoped to exactly the documents or assets
+the change is about. `statsToBand.ts` is the worked example and the shape to
+copy — it reports before it writes, refuses a dataset it was not told about out
+loud, reruns as a no-op, and overwrites no field it did not come to change. Run
+it, then say on the ticket what it touched.
+
+`pnpm --filter @o3/migration verify` remains useful as a read-only check.
+`load` still serves **o3xo**, whose only dataset holds nothing but the
+pipeline's output and where no editor authors.
 
 The production protections still apply to targeted work there: ADR 0003 is
 inverted — what an editor wrote outranks the committed JSON. `pnpm
