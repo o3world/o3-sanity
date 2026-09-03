@@ -35,17 +35,22 @@ interface InsightIndexViewProps {
 }
 
 /**
- * `/insights` and `/insights/category/design/page/2` — one builder over the
- * route's own scheme (#370), so a chip, a pager link and the route cannot
- * disagree about how this index spells its state. A chip resets the page (a
- * new filter has no page 4 in common with the old one); the pager keeps the
- * filter.
+ * `/insights#feed` and `/insights/category/design/page/2#feed` — one builder
+ * over the route's own scheme (#370), so a chip, a pager link and the route
+ * cannot disagree about how this index spells its state. A chip resets the
+ * page (a new filter has no page 4 in common with the old one); the pager
+ * keeps the filter.
+ *
+ * Every link this bar and this pager draw lands the reader at the head of the
+ * feed, so `#feed` belongs to the builder rather than to each call. The band
+ * carries the id and the `scroll-mt` clearance; the hash is what makes the
+ * landing work with no JS in it.
  */
 function insightsHref({
   category,
   page = 1,
 }: { category?: string | null; page?: number } = {}): string {
-  return indexHref('/insights', { facets: { category: category ?? null }, page })
+  return `${indexHref('/insights', { facets: { category: category ?? null }, page })}#feed`
 }
 
 /**
@@ -160,22 +165,18 @@ export function InsightIndexView({
              * is made of links, so tabbing through the chips scrolls them into
              * view by itself.
              *
-             * `scroll={false}` on every chip, because a chip is followed with
-             * the bar on screen: the band above it is the same authored hero
-             * either way, so holding the scroll position leaves the reader
-             * looking at the bar with the refreshed feed under it. Next's
-             * default sends a new route to the top of the document, which
-             * throws them back above the hero to read the same filter they
-             * just used.
+             * A chip lands on `#feed`, the same anchor the pager follows: the
+             * band above it is the same authored hero either way, so what the
+             * reader wants to see after a filter is the bar with the refreshed
+             * feed under it. The band's `scroll-mt` keeps that head clear of
+             * the pinned pill.
              */
             <nav
               aria-label="Filter by category"
               className="flex items-center gap-2.5 overflow-x-auto [scrollbar-width:none] lg:flex-wrap lg:overflow-x-visible [&::-webkit-scrollbar]:hidden"
             >
               <FilterChip asChild selected={!category} className="shrink-0">
-                <Link href={insightsHref()} scroll={false}>
-                  All
-                </Link>
+                <Link href={insightsHref()}>All</Link>
               </FilterChip>
               {categories.map((option) =>
                 option.slug ? (
@@ -185,9 +186,7 @@ export function InsightIndexView({
                     selected={category === option.slug}
                     className="shrink-0"
                   >
-                    <Link href={insightsHref({ category: option.slug })} scroll={false}>
-                      {option.title}
-                    </Link>
+                    <Link href={insightsHref({ category: option.slug })}>{option.title}</Link>
                   </FilterChip>
                 ) : null,
               )}
@@ -231,16 +230,13 @@ export function InsightIndexView({
             <p className="text-lead text-fg-muted">No insights under that filter yet.</p>
           )}
 
-          {/* `#feed` on the band above: a page link is followed from the feed's
-              foot, and the next page's reading starts at its head — not at the
-              document top above the hero, and not held at the foot the way a
-              chip holds at the bar. The hash is what makes that true without
-              JS; the band's scroll-mt keeps the target clear of the pinned
-              pill. */}
+          {/* A page link is followed from the feed's foot, and the next page's
+              reading starts at its head rather than at the document top above
+              the hero — the `#feed` the href builder carries. */}
           <Pager
             page={page}
             totalPages={totalPages}
-            href={(target) => `${insightsHref({ category, page: target })}#feed`}
+            href={(target) => insightsHref({ category, page: target })}
             className="mt-4"
           />
         </div>

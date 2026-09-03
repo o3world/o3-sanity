@@ -38,21 +38,32 @@ function chips(category: string | null) {
 
 describe('insights filter bar', () => {
   /**
-   * A chip is clicked with the filter bar on screen, so the refreshed feed
-   * belongs under it — Next's default of scrolling a new route to the top
-   * throws the reader back above the hero instead.
+   * A chip is followed to read the cut it names, so the viewport belongs at
+   * the head of the feed — the bar itself, with the refreshed grid under it.
+   * Two ways to get that wrong: Next's default sends a new route to the top of
+   * the document, above the hero, and `scroll={false}` leaves the reader
+   * wherever they were, which from the foot of the feed is a page that appears
+   * not to have responded. `#feed` is the answer to both, and suppressing the
+   * scroll would switch it off.
    */
-  it('keeps the reader where the bar is when a chip is followed', () => {
-    const followed = chips('design')
+  it.each([
+    ['a filtered index', 'design'],
+    ['the unfiltered index', null],
+  ])('lands a chip at the head of the feed from %s', (_label, category) => {
+    const followed = chips(category)
 
     expect(followed.length).toBeGreaterThan(0)
-    for (const chip of followed) expect(chip.props.scroll).toBe(false)
+    for (const chip of followed) {
+      expect(chip.props.href).toMatch(/#feed$/)
+      expect(chip.props.scroll).not.toBe(false)
+    }
   })
 
-  it('keeps the reader in place from the unfiltered index too', () => {
-    const followed = chips(null)
+  it('resets the page when a chip changes the cut', () => {
+    const hrefs = chips('design').map((chip) => chip.props.href)
 
-    expect(followed.length).toBeGreaterThan(0)
-    for (const chip of followed) expect(chip.props.scroll).toBe(false)
+    expect(hrefs).toContain('/insights#feed')
+    expect(hrefs).toContain('/insights/category/artificial-intelligence-ai#feed')
+    expect(hrefs).toContain('/insights/category/design#feed')
   })
 })

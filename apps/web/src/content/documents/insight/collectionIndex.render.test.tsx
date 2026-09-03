@@ -203,9 +203,9 @@ describe('insights index category filter', () => {
       data: anInsightsPage(manyInsights(3), 3, CATEGORIES),
     })
 
-    expect(html).toContain('href="/insights"')
-    expect(html).toContain('href="/insights/category/artificial-intelligence-ai"')
-    expect(html).toContain('href="/insights/category/design"')
+    expect(html).toContain('href="/insights#feed"')
+    expect(html).toContain('href="/insights/category/artificial-intelligence-ai#feed"')
+    expect(html).toContain('href="/insights/category/design#feed"')
     expect(html).toContain('>All<')
     expect(html).toContain('>Design<')
   })
@@ -217,14 +217,14 @@ describe('insights index category filter', () => {
     })
     expect(html.match(/aria-current="page"/g)).toHaveLength(1)
     // The selected chip is Theme=Black (`2337:4542`): ink fill, white label.
-    expect(html).toMatch(/aria-current="page"[^>]*href="\/insights\/category\/design"/)
+    expect(html).toMatch(/aria-current="page"[^>]*href="\/insights\/category\/design#feed"/)
   })
 
   it('marks All as current when nothing is filtered', async () => {
     const { html } = await renderRoute(route, {
       data: anInsightsPage(manyInsights(3), 3, CATEGORIES),
     })
-    expect(html).toMatch(/aria-current="page"[^>]*href="\/insights"/)
+    expect(html).toMatch(/aria-current="page"[^>]*href="\/insights#feed"/)
   })
 
   it('keeps the filter on every pager link', async () => {
@@ -233,7 +233,7 @@ describe('insights index category filter', () => {
       params: { category: 'design', page: '2' },
     })
 
-    expect(html).toContain('href="/insights/category/design"')
+    expect(html).toContain('href="/insights/category/design#feed"')
     expect(html).toContain('href="/insights/category/design/page/3#feed"')
   })
 
@@ -243,7 +243,7 @@ describe('insights index category filter', () => {
       data: anInsightsPage(manyInsights(12), 40, CATEGORIES),
       params: { category: 'design', page: '2' },
     })
-    expect(html).toContain('href="/insights/category/artificial-intelligence-ai"')
+    expect(html).toContain('href="/insights/category/artificial-intelligence-ai#feed"')
     expect(html).not.toContain('/category/artificial-intelligence-ai/page/')
   })
 
@@ -392,7 +392,7 @@ describe('insights index composition', () => {
 describe('insights index pager', () => {
   it('offers every page of the collection by number, not just the two neighbours', () => {
     // `page` above is this exact state: page 2 of 4 (#241).
-    expect(page.html).toContain('href="/insights"')
+    expect(page.html).toContain('href="/insights#feed"')
     expect(page.html).toContain('href="/insights/page/2#feed"')
     expect(page.html).toContain('href="/insights/page/3#feed"')
     expect(page.html).toContain('href="/insights/page/4#feed"')
