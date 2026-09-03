@@ -20,11 +20,11 @@ export { NAV_INK_TARGET }
  * as something to see through.
  *
  * Read off the palette rather than picked: every background alpha this design
- * uses is far below it — `--color-scrim`, the deepest, is 0.2. The only 0.9+
- * alpha anywhere in color.css is
- * `--color-on-ink` at 0.92, which is a text colour and never a fill. So 0.9
- * separates "a band" from "a veil over a band" with the whole palette to spare,
- * while still accepting the near-opaque values `color-mix` rounding produces.
+ * uses is below it — `--color-scrim-light`, the densest, is 0.8. The only
+ * 0.9+ alpha anywhere in color.css is `--color-on-ink` at 0.92, which is a
+ * text colour and never a fill. So 0.9 separates "a band" from "a veil over a
+ * band", while still accepting the near-opaque values `color-mix` rounding
+ * produces.
  */
 const OPAQUE_ALPHA = 0.9
 
@@ -85,14 +85,13 @@ function declaredGround(element: Element): boolean | null {
  *
  * The bar has two skins and they fail asymmetrically. White copy on
  * `--color-scrim` (20% black) survives almost any ground, because the scrim
- * darkens whatever is behind it. The light skin is opaque white, so its own
- * ground is never the problem — but a white pill dropped over photography is
- * a hole punched in the picture, and the hairline that shapes it needs the
- * band around it to be pale AND even to read as chrome at all. A photograph
- * is that second thing's enemy even when it is bright: measured on one
- * article's picture, the strip
- * under the bar averaged 205 of 255 and still ran from 81 to 251 inside the
- * bar's own height, and the dark skin over it was unreadable (#372).
+ * darkens whatever is behind it. `#232323` on `--color-scrim-light` (white at
+ * 80%) needs the ground to be pale AND even: the scrim lifts a dark ground a
+ * long way, but not to white, and the hairline that shapes the pill needs an
+ * even band around it to read as chrome at all. A photograph is that second
+ * thing's enemy even when it is bright: measured on one article's picture, the
+ * strip under the bar averaged 205 of 255 and still ran from 81 to 251 inside
+ * the bar's own height, and the dark skin over it was unreadable (#372).
  *
  * So a picture is answered rather than sampled, and the answer is the skin
  * that survives it. That is also what the frames draw — the bar is glass over

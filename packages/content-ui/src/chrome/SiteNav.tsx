@@ -40,7 +40,7 @@ interface SiteNavProps {
  *
  * Both fills are `rgba(3,3,3,0.2)` — `bg-scrim`. It stays an alpha because it
  * sits over whatever the hero is showing, and both frames put a `GLASS` effect
- * over it. `blur(14px)` is the prototype's value for that glass, and it is
+ * over it; the flipped skin is an alpha for the same reason. `blur(14px)` is the prototype's value for that glass, and it is
  * what the bar needs to earn: a bar that never leaves crosses photography,
  * headlines and body copy all the way down the page, and a 20% scrim laid
  * straight over a paragraph is unreadable.
@@ -89,12 +89,13 @@ interface SiteNavProps {
  * mark, ink links. The button is the third element on the bar and inverts with
  * them — see below.
  *
- * **The light pill is white, not a scrim** (#399). The dark skin stays an
- * alpha because it floats over whatever the hero is showing; the light skin
- * does not, because a near-black at 10% over a pale band is grey, and grey
- * chrome over a white page reads as a smudge rather than a pill. So the flip
- * is scrim → paint, and the flipped bar is the only element on it that is
- * opaque.
+ * **The light pill is a white scrim, not a grey one and not paint.** Both
+ * skins are alphas, because the bar is glass at every width and an opaque
+ * fill has nothing to blur. What flips is the colour under the blur: a
+ * near-black at a low alpha over a pale band is grey, and grey chrome over a
+ * white page reads as a smudge rather than a pill, so the light skin is
+ * `--color-scrim-light`, white at 80%. Over a flat band it reads as a white
+ * pill; over anything with content in it, the 14px blur shows through.
  *
  * **The mark is the app's, and the bar sets no colour on it.** Both brands
  * render this bar and their marks are different drawings — O3XO's carries a
@@ -111,8 +112,8 @@ interface SiteNavProps {
  * Auto would have nothing to read exactly where the fill matters most.
  *
  * **The fill follows the ink flip, in CSS.** A white button on the flipped pill
- * is white on white: the label survives and the button's shape does not, which
- * is the one thing chrome cannot afford. So it inverts on the same `data-ink`
+ * is white on a white scrim: the label survives and the button's shape does
+ * not, which is the one thing chrome cannot afford. So it inverts on the same `data-ink`
  * signal the links and the hairline already ride, in `NAV_BUTTON_INK` below.
  *
  * It is CSS rather than a resolved value because the flip is: `NavInk` toggles
@@ -173,16 +174,16 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
           // The 1440 pill carries a hairline at `--color-on-ink-line`; without
           // it the `bg-scrim` fill is invisible over a dark hero and the pill
           // stops reading as a pill at all. Flipped, both sides invert together:
-          // an opaque white fill under `--color-on-light-line`. Below `lg` the
+          // `--color-scrim-light` under `--color-on-light-line`. Below `lg` the
           // bar is edge-to-edge and normally borderless, but flipped it needs
           // the bottom hairline for the same reason the pill needs its ring —
-          // opaque white over a light band has no other edge.
+          // a white scrim over a light band has no other edge.
           //
           // `color` lives here rather than on each link so the one transition on
           // this element carries the whole bar — the links, the hamburger's
           // `currentColor` bars and anything else added to the row inherit the
           // value mid-interpolation, and each keeps its own hover timing.
-          className="bg-scrim lg:border-on-ink-line group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-nav duration-(--duration-ink) flex items-center justify-between px-5 py-2 text-white backdrop-blur-[14px] transition-[background-color,border-color,color] ease-out group-data-[ink=dark]:bg-white max-lg:group-data-[ink=dark]:border-b lg:mx-auto lg:w-full lg:max-w-[900px] lg:border lg:px-4 lg:py-4"
+          className="bg-scrim lg:border-on-ink-line group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-nav duration-(--duration-ink) group-data-[ink=dark]:bg-scrim-light flex items-center justify-between px-5 py-2 text-white backdrop-blur-[14px] transition-[background-color,border-color,color] ease-out max-lg:group-data-[ink=dark]:border-b lg:mx-auto lg:w-full lg:max-w-[900px] lg:border lg:px-4 lg:py-4"
         >
           <Link
             href="/"
