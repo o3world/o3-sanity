@@ -89,7 +89,7 @@ export function CaseShowcaseSection({
                */
               <div
                 key={caseStudy._id}
-                className="bg-black lg:sticky lg:top-[calc(var(--spacing-nav-offset)+96px)]"
+                className="bg-black lg:sticky lg:top-[calc(var(--spacing-nav-pinned)+96px)]"
               >
                 <Card {...caseStudy} />
               </div>

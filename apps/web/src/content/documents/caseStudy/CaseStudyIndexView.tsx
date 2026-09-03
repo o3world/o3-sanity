@@ -66,7 +66,7 @@ export function CaseStudyIndexView({ items, pagination, above, below }: CaseStud
 
       <div
         id="feed"
-        className="px-gutter py-band-sm lg:py-band-md scroll-mt-20 bg-white lg:scroll-mt-[calc(var(--spacing-nav-offset)+96px)]"
+        className="px-gutter py-band-sm lg:py-band-md scroll-mt-20 bg-white lg:scroll-mt-[calc(var(--spacing-nav-pinned)+96px)]"
       >
         {/*
          * The band the frame draws has no heading — the hero's job, and the

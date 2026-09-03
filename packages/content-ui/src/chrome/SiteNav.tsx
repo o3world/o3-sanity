@@ -10,6 +10,7 @@ import { resolveButtonHref } from '../buttonDestination'
 import { MobileNavMenu } from './MobileNavMenu'
 import { NavLink } from './NavLink'
 import { NAV_INK_TARGET, NavInk } from './NavInk'
+import { NavPin } from './NavPin'
 
 interface SiteNavProps {
   settings: SITE_SETTINGS_QUERY_RESULT
@@ -55,13 +56,16 @@ interface SiteNavProps {
  * frame draws the rebuilt `NavBar` (`2225:2967`, `ABSOLUTE` + `FIXED`) at
  * `y: 124` — the strip's 69px plus a 55px gap. `UtilityNav` renders that strip
  * in flow at the top of the document, so at rest the two sit exactly as the
- * frame draws them; the strip then scrolls away and the pill holds the offset,
- * which is what `FIXED` on that node means. The strip is data
- * (`utilityNavItems`), so when the settings carry none the pill zeroes the
- * token instead of holding a gap under nothing — and the site layout zeroes it
- * for `<main>` in the same breath, so the hero and sticky clearances derived
- * from it follow. Below `lg` there is no strip and the bar still starts at
- * `top-0`.
+ * frame draws them. The strip then scrolls away, and the pill goes with it:
+ * `NavPin` reports the scroll and the header's `top` is the resting offset
+ * less that scroll, floored at `--spacing-nav-pinned` — the 32px the
+ * strip-less frames draw — so the frame's gap to the strip holds while the
+ * strip is on screen and the pill parks once it is gone (Nick, 2026-09-03: a
+ * pill holding the strip's room open over nothing was the launch review's
+ * first note). The strip is data (`utilityNavItems`), so when the settings
+ * carry none the pill is pinned from the start, and the site layout zeroes
+ * the resting token for `<main>` in the same breath so the heroes follow.
+ * Below `lg` there is no strip and the bar still starts at `top-0`.
  *
  * **The cap is 900px, read off the rebuilt `NavBar` (`2225:2920`) on
  * 2026-08-14** (#91). The component itself is 900 × 80, and every canonical
@@ -131,13 +135,11 @@ const NAV_BUTTON_INK = 'group-data-[ink=dark]:bg-ink group-data-[ink=dark]:text-
 export function SiteNav({ settings, brandMark }: SiteNavProps) {
   const navItems = settings?.navItems ?? []
   const button = settings?.primaryButton ?? null
-  // The offset exists to clear the Utility Nav strip, and the strip is
-  // data: no `utilityNavItems`, no strip, and the pill takes the 32px the
-  // strip-less interior frames draw instead (`NavBar` at y: 32 on
-  // `2336:4382`, `2250:2251`, `2250:2131`). The value rides the same token
-  // the site's clearances derive from, so the pill and the heroes under it
-  // move together. The site layout makes the matching call for everything
-  // inside `<main>`.
+  // The resting offset exists to clear the Utility Nav strip, and the strip
+  // is data: no `utilityNavItems`, no strip, and the pill sits at the pinned
+  // 32px the strip-less interior frames draw (`NavBar` at y: 32 on
+  // `2336:4382`, `2250:2251`, `2250:2131`) from the start. The site layout
+  // makes the matching call for the heroes inside `<main>`.
   const hasUtilityNav = (settings?.utilityNavItems ?? []).length > 0
 
   return (
@@ -162,13 +164,21 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
         // Named, it is its own group, stacked above the page in paint order
         // and live, and tokens/motion.css holds it still — see
         // `::view-transition-*(site-nav)` there.
+        //
+        // With a strip, `top` is the pill riding up with it: the resting
+        // offset less the scroll (`NavPin` writes `--nav-scroll`), floored at
+        // the pinned offset, so the frame's 55px gap to the strip holds while
+        // the strip is on screen and the pill parks at 32px once it is not.
+        // Without one there is nothing to ride, and the pill is pinned from
+        // the start.
         className={
           hasUtilityNav
-            ? 'lg:px-gutter lg:top-(--spacing-nav-offset) group fixed inset-x-0 top-0 z-50 [view-transition-name:site-nav]'
-            : 'lg:px-gutter lg:top-(--spacing-nav-offset) group fixed inset-x-0 top-0 z-50 [--spacing-nav-offset:32px] [view-transition-name:site-nav]'
+            ? 'lg:px-gutter group fixed inset-x-0 top-0 z-50 [view-transition-name:site-nav] lg:top-[max(var(--spacing-nav-pinned),calc(var(--spacing-nav-offset)-var(--nav-scroll,0px)))]'
+            : 'lg:px-gutter lg:top-(--spacing-nav-pinned) group fixed inset-x-0 top-0 z-50 [view-transition-name:site-nav]'
         }
       >
         <NavInk />
+        {hasUtilityNav ? <NavPin /> : null}
         <nav
           aria-label="Primary"
           // The 1440 pill carries a hairline at `--color-on-ink-line`; without

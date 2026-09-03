@@ -1,5 +1,3 @@
-import type { CSSProperties } from 'react'
-
 import { Eyebrow, SURFACE_CLASS, SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
 import type { SectionProps } from '@o3/content-runtime/blocks'
@@ -8,6 +6,7 @@ import { stegaClean } from '@sanity/client/stega'
 import { ButtonLink } from '../../../ButtonLink'
 import { SanityImage } from '../../../SanityImage'
 import { resolveSurface } from '../../surface'
+import { MarqueeTrack } from './MarqueeTrack'
 
 type LogoWallSectionProps = SectionProps<'logoWallSection'>
 
@@ -80,11 +79,12 @@ function marqueeCopies(count: number) {
  * ── THE STRIP MOVES ────────────────────────────────────────────────────────
  *
  * A row clipped at BOTH ends is a still of something travelling, and Nick
- * settled it as one (2026-08-25): the marks crawl left on `--animate-marquee`,
- * a lap per copy, pausing under a pointer and holding still under
+ * settled it as one (2026-08-25): the marks crawl left a copy per
+ * `--duration-marquee`, coming to rest under a pointer and picking up again
+ * when it leaves (`MarqueeTrack`), and holding still under
  * `prefers-reduced-motion`. Figma cannot say this either way — it draws stills
- * — so the period comes from the prototype's client row and the decision from
- * the ruling, not from the frame.
+ * — so the period is the motion token's and the decision is the ruling's,
+ * not the frame's.
  *
  * The marks are laid down `marqueeCopies` times and the track shifts by
  * exactly one copy, which is why the loop has no seam: at the end of a lap the
@@ -224,18 +224,7 @@ export function LogoWallSection({
            * It is margin, so it moves the track without joining its width —
            * every copy stays exactly one `copies`-th of the box.
            */}
-          <ul
-            style={{ '--marquee-shift': `-${(100 / copies).toFixed(4)}%` } as CSSProperties}
-            className={cn(
-              'animate-marquee flex shrink-0 flex-nowrap',
-              // A pointer on the strip is someone reading it, so the strip
-              // waits. Reduced motion stops it outright: the copies are
-              // identical and the track is centred, so a still marquee is the
-              // frame's own composition and nothing is lost.
-              'hover:[animation-play-state:paused] motion-reduce:animate-none',
-              !isBar && 'ml-px mt-px',
-            )}
-          >
+          <MarqueeTrack copies={copies} className={cn(!isBar && 'ml-px mt-px')}>
             {track.map(({ client, copy }) => (
               // `plates` — 280 × 280 with 64px of side padding at 1440, so the
               // artwork gets a 152px box (`1864:2395`); the smaller steps
@@ -278,7 +267,7 @@ export function LogoWallSection({
                 />
               </li>
             ))}
-          </ul>
+          </MarqueeTrack>
         </div>
 
         {button ? <ButtonLink button={button} size="large" /> : null}

@@ -65,7 +65,7 @@ describe('a quick-jump row', () => {
   it('offsets the target so it does not arrive under the pinned bar', () => {
     const html = page([band('a', 'how-we-work')])
     expect(html).toContain('scroll-mt-20')
-    expect(html).toContain('lg:scroll-mt-[calc(var(--spacing-nav-offset)+96px)]')
+    expect(html).toContain('lg:scroll-mt-[calc(var(--spacing-nav-pinned)+96px)]')
   })
 
   it('gives a repeated name to the first band only', () => {

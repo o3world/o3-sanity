@@ -85,22 +85,31 @@
   --spacing-section-y: clamp(96px, calc(9.25vw + 58.8px), 192px);
 
   /* ── Chrome clearance ──────────────────────────────────────────────────── */
-  /* nav-offset — how far the pinned nav pill sits from the viewport top at
-   * `lg`: the Utility Nav strip's 69px plus a 55px gap, read off the Home
-   * frame's `NavBar` at y: 124 (`2225:2967` in `1680:2134`).
+  /* nav-offset — where the nav pill RESTS at `lg`, before the page scrolls:
+   * the Utility Nav strip's 69px plus a 55px gap, read off the Home frame's
+   * `NavBar` at y: 124 (`2225:2967` in `1680:2134`). The strip is in flow and
+   * scrolls away, and the pill rides up with it until it parks at
+   * `--spacing-nav-pinned` (`SiteNav`, `NavPin`). So this token is the hero's
+   * business — `+ 100px` for an ink hero's top padding — and nothing that
+   * sits under the pill once the page has scrolled should read it.
+   *
    * The strip is data-driven, so an app whose settings carry no
    * `utilityNavItems` re-declares this as the 32px every strip-less interior
    * frame draws (`NavBar` at y: 32 — `2336:4382`, `2250:2251`, `2250:2131`;
-   * a `[--spacing-nav-offset:32px]` override on its chrome and its `<main>`)
-   * and every clearance derived from it follows.
+   * a `[--spacing-nav-offset:32px]` override on its `<main>`).
    *
-   * Derive AT THE USE SITE — `calc(var(--spacing-nav-offset) + 96px)` for the
-   * sticky/jump clearance under the pill, `+ 100px` for an ink hero's top
-   * padding. A derived token declared here would bake the root's 64px in at
-   * declaration time (a custom property substitutes its var() references
-   * where it is DEFINED, not where it is used) and no override could reach
-   * it. */
+   * Derive AT THE USE SITE. A derived token declared here would bake the
+   * root's value in at declaration time (a custom property substitutes its
+   * var() references where it is DEFINED, not where it is used) and no
+   * override could reach it. */
   --spacing-nav-offset: 124px;
+  /* nav-pinned — where the pill sits once the strip has scrolled off, and
+   * where it sits from the start on a page with no strip: the 32px of the
+   * strip-less frames. The clearance under the pinned pill —
+   * `calc(var(--spacing-nav-pinned) + 96px)` for a sticky top or a jump
+   * target's scroll margin — derives from this, not from nav-offset: anything
+   * pinned or jumped to is below the strip, where the pill is already parked. */
+  --spacing-nav-pinned: 32px;
 
   /* ── Containers ────────────────────────────────────────────────────────── */
   /* section — 1248px: the 1440 design width less two 96px gutters. The

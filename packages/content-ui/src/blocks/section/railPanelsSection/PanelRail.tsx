@@ -48,7 +48,7 @@ export interface PanelRailProps {
 export function PanelRail({ items, active, mode }: PanelRailProps) {
   if (mode === 'number') {
     return (
-      <ol className="hidden w-[82px] shrink-0 flex-col gap-4 self-start lg:sticky lg:top-[calc(var(--spacing-nav-offset)+96px)] lg:flex">
+      <ol className="hidden w-[82px] shrink-0 flex-col gap-4 self-start lg:sticky lg:top-[calc(var(--spacing-nav-pinned)+96px)] lg:flex">
         {items.map((item, index) => (
           <li key={item.key} className="flex justify-end">
             <span
@@ -69,7 +69,7 @@ export function PanelRail({ items, active, mode }: PanelRailProps) {
     <ol
       // `items-start` so the active stop's rule hangs below its own word
       // rather than stretching every stop to the tallest.
-      className="flex flex-wrap items-start gap-x-16 gap-y-3 lg:sticky lg:top-[calc(var(--spacing-nav-offset)+96px)] lg:w-[82px] lg:shrink-0 lg:flex-col lg:flex-nowrap lg:gap-8 lg:self-start"
+      className="flex flex-wrap items-start gap-x-16 gap-y-3 lg:sticky lg:top-[calc(var(--spacing-nav-pinned)+96px)] lg:w-[82px] lg:shrink-0 lg:flex-col lg:flex-nowrap lg:gap-8 lg:self-start"
     >
       {items.map((item, index) => {
         const isActive = index === active

@@ -134,7 +134,7 @@ export function InsightIndexView({
           design (layout.css), so the band keeps it. */}
       <div
         id="feed"
-        className="px-gutter py-band-md bg-bone scroll-mt-20 lg:scroll-mt-[calc(var(--spacing-nav-offset)+96px)]"
+        className="px-gutter py-band-md bg-bone scroll-mt-20 lg:scroll-mt-[calc(var(--spacing-nav-pinned)+96px)]"
       >
         <div className="max-w-section mx-auto flex flex-col gap-12">
           {/*

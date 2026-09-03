@@ -43,7 +43,7 @@ const ENTRANCE_STAGGER = 100
 /**
  * Where the walk ends when the clearance cannot be read: the track's top at
  * the clearance every sticky element on the page uses
- * (`--spacing-nav-offset` + 96px; 220px with the Utility Nav strip). Past
+ * (`--spacing-nav-pinned` + 96px, 128px). Past
  * this the column heads would start leaving, so the last framing has to be
  * settled by here. The live value is read off the stage's own
  * `scroll-margin-top`, which derives from the token.
@@ -355,7 +355,7 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
     // resolved nav-clearance token as pixels — `getComputedStyle` hands back
     // an unresolved `calc()` for a custom property, and a resolved length for
     // the real property it lands on.
-    <div ref={stageRef} className="w-full scroll-mt-[calc(var(--spacing-nav-offset)+96px)]">
+    <div ref={stageRef} className="w-full scroll-mt-[calc(var(--spacing-nav-pinned)+96px)]">
       <div className="flex w-full flex-col gap-[18px]">
         {header}
 

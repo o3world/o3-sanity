@@ -40,12 +40,12 @@ export function sectionAnchors(blocks: readonly SanityBlock[]): Map<string, stri
 /**
  * The offset a jump link needs to clear the pinned bar.
  *
- * `SiteNav` is `fixed` at every width — 64px down with the 80px pill below
- * `lg`'s utility strip, and flush at `top-0` on the square bar above it — so a
- * band scrolled to its own top arrives underneath it. `scroll-margin-top` is
+ * `SiteNav` is `fixed` at every width — parked at `--spacing-nav-pinned` at
+ * `lg` once the page has scrolled, flush at `top-0` on the square bar below it
+ * — so a band scrolled to its own top arrives underneath it. `scroll-margin-top` is
  * the browser's own answer and costs nothing to anything that is not a jump
  * target, which is why it rides on the anchored wrapper rather than on the
  * band.
  */
 export const ANCHOR_OFFSET_CLASS =
-  'scroll-mt-20 lg:scroll-mt-[calc(var(--spacing-nav-offset)+96px)]'
+  'scroll-mt-20 lg:scroll-mt-[calc(var(--spacing-nav-pinned)+96px)]'
