@@ -191,12 +191,12 @@
       "note": "No component — ADR 0009. Material Symbols glyphs are inline SVG (`ArrowIcon`, `CloseIcon`), never a string prop."
     },
     {
-      "nodeId": "2225:2920",
+      "nodeId": "3271:17013",
       "kind": "componentSet",
       "name": "NavBar",
       "figmaName": "NavBar",
       "codeComponent": "packages/content-ui/src/chrome/SiteNav.tsx#SiteNav",
-      "note": "A component, not a set. Rebuilt 2026-08: the old NavBar (`1710:2271`) was emptied to a bare pill and canonical frames now instance this node — same labels (Work · Live · Insights · Solutions · About + \"Let's talk\"). Source of record for the nav's display labels."
+      "note": "A two-variant set — `Property 1` = Dark (`2225:2920`, the node canonical frames instance) | Light (`3271:17012`). Both draw the pill at `40px 12px 12px 40px` and differ only in fill: Dark `rgba(3,3,3,0.6)`, Light `rgba(255,255,255,0.8)` — the bar's two skins, which `--color-scrim-pill` and `--color-scrim-light` carry. Source of record for the nav's display labels (Work · Live · Insights · Solutions · About + \"Let's talk\"), for the pill's radius, and for both scrims. Tracked at the SET from 2026-09-03: the manifest had `2225:2920`, which the Light variant's arrival demoted from set to child — the read-a-child-not-the-parent trap `docs/agents/figma.md` names."
     },
     {
       "nodeId": "2250:1445",
