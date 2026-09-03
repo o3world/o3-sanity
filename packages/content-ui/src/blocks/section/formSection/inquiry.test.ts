@@ -388,6 +388,21 @@ describe('handleInquiryRequest', () => {
     })
   })
 
+  // HubSpot files a submission from a domain its analytics does not know as
+  // spam, and previews live on vercel.app. A route that is not production
+  // says nothing about the page, and the submission is filed normally.
+  it('leaves the page out of the context when the route does not attribute it', async () => {
+    let body: string | undefined
+    await handle(post(good, { referer: 'https://o3-sanity-abc123-o3-world.vercel.app/contact' }), {
+      attributePage: false,
+      fetch: async (_url: string, init: RequestInit) => {
+        body = String(init.body)
+        return new Response('{}', { status: 200 })
+      },
+    })
+    expect(JSON.parse(String(body)).context).toEqual({ pageName: 'Contact — o3world.com' })
+  })
+
   it.each([
     ['a body that is not JSON', '{'],
     ['null', null],

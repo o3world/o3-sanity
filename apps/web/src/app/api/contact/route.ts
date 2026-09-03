@@ -13,5 +13,16 @@ import { serverEnv } from '@o3/env/server'
 /** How this page identifies itself in HubSpot's submission list. */
 const PAGE_NAME = 'Contact — o3world.com'
 
+/**
+ * Only production tells HubSpot which page a submission came from. HubSpot
+ * files a submission from an unregistered domain as spam, and every preview
+ * and the staging alias sit on vercel.app.
+ */
+const ATTRIBUTE_PAGE = process.env.VERCEL_ENV === 'production'
+
 export const POST = (request: Request) =>
-  handleInquiryRequest(request, { env: serverEnv, pageName: PAGE_NAME })
+  handleInquiryRequest(request, {
+    env: serverEnv,
+    pageName: PAGE_NAME,
+    attributePage: ATTRIBUTE_PAGE,
+  })

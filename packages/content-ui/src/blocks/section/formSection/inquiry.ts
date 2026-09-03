@@ -360,6 +360,14 @@ export interface InquiryRequestOptions {
   fetch?: typeof globalThis.fetch
   /** Injected for the same reason. */
   now?: () => number
+  /**
+   * Whether the referer is reported to HubSpot as the page the visitor was
+   * on. HubSpot files a submission from a page on a domain its analytics
+   * does not know as spam, and it never creates the contact, so only a host
+   * HubSpot knows should say where it is. A preview or staging deployment
+   * sends nothing and is filed like any other submission.
+   */
+  attributePage?: boolean
 }
 
 /**
@@ -425,7 +433,13 @@ function returnToPage(request: Request, sent: boolean): Response {
  */
 export async function handleInquiryRequest(
   request: Request,
-  { env, pageName, fetch = globalThis.fetch, now = Date.now }: InquiryRequestOptions,
+  {
+    env,
+    pageName,
+    fetch = globalThis.fetch,
+    now = Date.now,
+    attributePage = true,
+  }: InquiryRequestOptions,
 ): Promise<Response> {
   const native = !request.headers.get('content-type')?.includes('application/json')
 
@@ -454,7 +468,7 @@ export async function handleInquiryRequest(
     env,
     fetch,
     now: now(),
-    pageUri: request.headers.get('referer') ?? undefined,
+    pageUri: attributePage ? (request.headers.get('referer') ?? undefined) : undefined,
     pageName,
     ipAddress: ipAddress(request),
     timed: !native,
