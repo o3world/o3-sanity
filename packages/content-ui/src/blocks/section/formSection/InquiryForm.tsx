@@ -22,7 +22,9 @@ import {
   FAILED_MESSAGE,
   HONEYPOT_FIELD,
   INQUIRY_FIELDS,
+  nativeSubmitFailed,
   SENT_MESSAGE,
+  SENT_PARAM,
   validateField,
   validateInquiry,
   type InquiryField,
@@ -83,6 +85,10 @@ function optionValue(reason: string): string {
  * text input a bot fills, and how long the form was open before it was sent:
  * a submission that trips either is dropped, and the answer is the same 200 a
  * real one gets.
+ *
+ * Only this component's own `fetch` delivers. The `method` and `action` below
+ * catch a submit the browser resolves before the JavaScript arrives, and the
+ * route refuses that shape and sends the person back here to try again.
  */
 export function InquiryForm({
   reasons,
@@ -106,6 +112,18 @@ export function InquiryForm({
   // compared with another.
   useEffect(() => {
     mountedAt.current = Date.now()
+
+    // A submit that resolved before this component's JavaScript arrived is
+    // refused by the route and sent back here carrying `sent=0`. The query
+    // string is read from `window`, never from `useSearchParams`, because a
+    // page that reads the search params renders per request and the contact
+    // page is statically cached. The parameter is dropped again so a reload
+    // does not re-show a failure that already happened.
+    if (!nativeSubmitFailed(window.location.search)) return
+    setStatus('error')
+    const url = new URL(window.location.href)
+    url.searchParams.delete(SENT_PARAM)
+    window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`)
   }, [])
 
   const handleBlur =
@@ -175,7 +193,9 @@ export function InquiryForm({
       className="flex flex-col gap-5"
       // The submit the browser resolves on its own, before this component's
       // JavaScript arrives. Without them it GETs the page it is on and writes
-      // every field into the address bar, the message included.
+      // every field into the address bar, the message included. The route
+      // does not forward that post; it sends the person back here with the
+      // failure notice and the values still in the fields.
       method="post"
       action={ENDPOINT}
       noValidate

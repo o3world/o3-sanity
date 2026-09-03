@@ -1,3 +1,5 @@
+import { checkBotId } from 'botid/server'
+
 import { handleInquiryRequest } from '@o3/content-ui/inquiry'
 import { serverEnv } from '@o3/env/server'
 
@@ -20,9 +22,19 @@ const PAGE_NAME = 'Contact — o3world.com'
  */
 const ATTRIBUTE_PAGE = process.env.VERCEL_ENV === 'production'
 
-export const POST = (request: Request) =>
-  handleInquiryRequest(request, {
+/**
+ * BotID's verdict is read here rather than in the handler: `checkBotId` reads
+ * Vercel's own request context, and `@o3/content-ui/inquiry` reads no
+ * platform. `src/instrumentation-client.ts` is what makes this path
+ * classifiable.
+ */
+export async function POST(request: Request) {
+  const { isBot } = await checkBotId()
+
+  return handleInquiryRequest(request, {
     env: serverEnv,
     pageName: PAGE_NAME,
     attributePage: ATTRIBUTE_PAGE,
+    bot: isBot,
   })
+}

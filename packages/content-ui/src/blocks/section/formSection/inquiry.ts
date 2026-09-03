@@ -145,22 +145,51 @@ export function validateInquiry(input: InquiryInput): InquiryValidation {
 }
 
 /**
- * The two checks a bot fails and a person does not: an off-screen input that
- * was filled, and five fields answered in under three seconds. Both are
- * silent — a caller that drops a submission answers as though it sent, so a
- * bot learns nothing from the reply.
- *
- * `timed` is false for a native post, which cannot measure anything: the
- * hydrated form always sends how long it was open, but a submit before
- * hydration has no script to count with. That path keeps the honeypot and
- * the route's rate limit, and gives up the timing check rather than the
- * inquiry.
+ * A link, loosely and case-insensitively: either scheme, or the bare `www.`
+ * host a spam message writes when it is avoiding one. Nothing here parses a
+ * URL — the checks below only count how many there are and where.
  */
-export function isSpam(input: InquiryInput, { timed = true }: { timed?: boolean } = {}): boolean {
+const URL_PATTERN = /https?:\/\/|www\./gi
+
+/** How many links the message carries before it stops being a message. */
+const MESSAGE_URL_LIMIT = 3
+
+function urlCount(value: string): number {
+  return value.match(URL_PATTERN)?.length ?? 0
+}
+
+function hasUrl(value: string): boolean {
+  return urlCount(value) > 0
+}
+
+/**
+ * What a bot's submission looks like and a person's does not.
+ *
+ * Five checks, all silent: a caller that drops a submission answers as though
+ * it sent, so a bot learns nothing about which one it tripped.
+ *
+ * - the off-screen input was filled;
+ * - the form was answered in under three seconds, or carries no elapsed time
+ *   at all — the form always sends one, so its absence is a post nothing
+ *   measured;
+ * - a name carries a link;
+ * - the message is a link and nothing else;
+ * - the message carries three links or more.
+ *
+ * The last one has a floor rather than a ban because one or two links in a
+ * sentence is how a person shows you their site.
+ */
+export function isSpam(input: InquiryInput): boolean {
   if (text(input.honeypot)) return true
-  if (!timed) return false
   if (typeof input.elapsedMs !== 'number' || !Number.isFinite(input.elapsedMs)) return true
-  return input.elapsedMs < MINIMUM_FILL_MS
+  if (input.elapsedMs < MINIMUM_FILL_MS) return true
+
+  if (hasUrl(text(input.firstName)) || hasUrl(text(input.lastName))) return true
+
+  const message = text(input.message)
+  const words = message.split(/\s+/).filter(Boolean)
+  if (words.length === 1 && hasUrl(words[0]!)) return true
+  return urlCount(message) >= MESSAGE_URL_LIMIT
 }
 
 /**
@@ -290,8 +319,8 @@ export interface SubmitInquiryOptions {
   pageUri?: string
   pageName?: string
   ipAddress?: string
-  /** False for a native post, which has no elapsed time to check. */
-  timed?: boolean
+  /** BotID's verdict on the session that posted this. */
+  bot?: boolean
 }
 
 /**
@@ -308,11 +337,12 @@ function endpoint(portalId: string, formGuid: string): string {
 /**
  * One submission, from a parsed body to a status a route can answer with.
  *
- * The order is the point. Validation runs before anything is sent because
- * HubSpot accepts whatever it is given; the spam checks run before the
- * network so a bot costs nothing; and a failure never carries HubSpot's own
- * error body back out — that body names properties and portals, and the
- * person who filled the form can do nothing with it.
+ * The order is the point. BotID's verdict comes first, so a classified bot
+ * gets no field-by-field reply to learn the rules from; validation runs before
+ * anything is sent because HubSpot accepts whatever it is given; the content
+ * checks run before the network so a bot costs nothing; and a failure never
+ * carries HubSpot's own error body back out — that body names properties and
+ * portals, and the person who filled the form can do nothing with it.
  */
 export async function submitInquiry({
   input,
@@ -322,12 +352,14 @@ export async function submitInquiry({
   pageUri,
   pageName,
   ipAddress,
-  timed = true,
+  bot = false,
 }: SubmitInquiryOptions): Promise<InquiryResult> {
+  if (bot) return { status: 'dropped' }
+
   const { ok, errors } = validateInquiry(input)
   if (!ok) return { status: 'invalid', errors }
 
-  if (isSpam(input, { timed })) return { status: 'dropped' }
+  if (isSpam(input)) return { status: 'dropped' }
 
   const { HUBSPOT_PORTAL_ID: portalId, HUBSPOT_FORM_GUID: formGuid } = env
   if (!portalId || !formGuid) return { status: 'unconfigured' }
@@ -368,6 +400,20 @@ export interface InquiryRequestOptions {
    * sends nothing and is filed like any other submission.
    */
   attributePage?: boolean
+  /**
+   * BotID's verdict, which the app route asks for because `checkBotId` reads
+   * Vercel's own request context and this module reads no platform. The
+   * classified session is dropped and answered as though it sent.
+   *
+   * Two things to know before testing it. Local development always reports
+   * not-a-bot, so nothing here fires against `localhost`. And a deployed route
+   * classifies `curl` as a bot, because the verdict rests on a challenge the
+   * page's script runs — a real check means a `fetch` from the page itself.
+   *
+   * Basic only. Deep Analysis is a paid toggle in the Firewall dashboard and
+   * is off.
+   */
+  bot?: boolean
 }
 
 /**
@@ -381,40 +427,34 @@ function ipAddress(request: Request): string | undefined {
   return request.headers.get('x-real-ip')?.trim() || undefined
 }
 
-/** A native submit's fields, in the shape the parser reads. */
-function fromFormData(body: FormData): Record<string, unknown> {
-  const source: Record<string, unknown> = {}
-  for (const [name, value] of body.entries()) {
-    if (typeof value === 'string') source[name] = value
-  }
-  // A checkbox posts only when it is checked, whatever its value.
-  if ('consent' in source) source.consent = true
-  // The off-screen input posts under its own name; the parser reads one key.
-  if (HONEYPOT_FIELD in source) source.honeypot = source[HONEYPOT_FIELD]
-  // Every field arrives as a string, and the timing check reads a number.
-  if (typeof source.elapsedMs === 'string') source.elapsedMs = Number(source.elapsedMs)
-  // A native post carries no list of options, so the reason is checked for
-  // being answered and nothing more.
-  delete source.reasons
-  return source
-}
+/** The query a refused native post comes back on. */
+export const SENT_PARAM = 'sent'
+const NOT_SENT = '0'
 
 /**
- * A native submit's answer: back to the page it came from, carrying whether
- * the message went and nothing else. The values never enter the URL.
+ * A native submit's answer: back to the page it came from, carrying the
+ * failure and nothing else. The values never enter the URL.
  */
-function returnToPage(request: Request, sent: boolean): Response {
-  const answer = sent ? '1' : '0'
+function returnToPage(request: Request): Response {
   const referer = request.headers.get('referer')
   let location: string
   try {
     const url = new URL(referer ?? '')
-    url.searchParams.set('sent', answer)
+    url.searchParams.set(SENT_PARAM, NOT_SENT)
     location = url.toString()
   } catch {
-    location = `${FALLBACK_RETURN_PATH}?sent=${answer}`
+    location = `${FALLBACK_RETURN_PATH}?${SENT_PARAM}=${NOT_SENT}`
   }
   return new Response(null, { status: 303, headers: { location } })
+}
+
+/**
+ * Whether a page was loaded after a native post was refused, read from
+ * `window.location.search` — a query string, so the card learns this without a
+ * hook that would make the contact page render per request.
+ */
+export function nativeSubmitFailed(search: string): boolean {
+  return new URLSearchParams(search).get(SENT_PARAM) === NOT_SENT
 }
 
 /**
@@ -422,14 +462,17 @@ function returnToPage(request: Request, sent: boolean): Response {
  * with. Web-standard `Request` and `Response` throughout: an app route is a
  * line that names its brand and hands the request over.
  *
- * Two ways in. The card's own `fetch` posts JSON and reads the status back.
- * A submit the browser resolves itself — the form is on the page before its
- * JavaScript is — posts form-encoded, and is answered with a redirect back to
- * the page, because a body that came from a `<form>` has nowhere to render a
- * JSON answer.
+ * **Only JSON is delivered.** The card posts JSON and reads the status back.
+ * A form-encoded body is what the browser sends when someone submits before
+ * the page's JavaScript arrives — and it is the one shape a bot can post
+ * directly, having run no script and measured nothing, so it is never
+ * forwarded. It is answered with a redirect back to the page carrying
+ * `sent=0`, which the hydrated card reads as the failure notice: the values
+ * are still in the fields, and the next press is a retry over the path that
+ * does deliver.
  *
- * A dropped submission answers exactly as a sent one does, both ways. The spam
- * checks are only worth having while a bot cannot tell which one it tripped.
+ * A dropped submission answers exactly as a sent one does. The spam checks
+ * are only worth having while a bot cannot tell which one it tripped.
  */
 export async function handleInquiryRequest(
   request: Request,
@@ -439,29 +482,21 @@ export async function handleInquiryRequest(
     fetch = globalThis.fetch,
     now = Date.now,
     attributePage = true,
+    bot = false,
   }: InquiryRequestOptions,
 ): Promise<Response> {
-  const native = !request.headers.get('content-type')?.includes('application/json')
+  if (!request.headers.get('content-type')?.includes('application/json')) {
+    return returnToPage(request)
+  }
 
   let input: InquiryInput | null = null
-  if (native) {
-    try {
-      input = parseInquiryInput(fromFormData(await request.formData()))
-    } catch {
-      input = null
-    }
-  } else {
-    try {
-      input = parseInquiryInput(await request.json())
-    } catch {
-      input = null
-    }
+  try {
+    input = parseInquiryInput(await request.json())
+  } catch {
+    input = null
   }
 
-  if (!input) {
-    if (native) return returnToPage(request, false)
-    return Response.json({ status: 'invalid' }, { status: 400 })
-  }
+  if (!input) return Response.json({ status: 'invalid' }, { status: 400 })
 
   const result = await submitInquiry({
     input,
@@ -471,10 +506,8 @@ export async function handleInquiryRequest(
     pageUri: attributePage ? (request.headers.get('referer') ?? undefined) : undefined,
     pageName,
     ipAddress: ipAddress(request),
-    timed: !native,
+    bot,
   })
-
-  if (native) return returnToPage(request, result.status === 'sent' || result.status === 'dropped')
 
   switch (result.status) {
     case 'sent':

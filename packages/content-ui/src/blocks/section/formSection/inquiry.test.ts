@@ -6,6 +6,7 @@ import {
   HONEYPOT_FIELD,
   isSpam,
   MINIMUM_FILL_MS,
+  nativeSubmitFailed,
   parseInquiryInput,
   REASON_MESSAGE,
   submitInquiry,
@@ -122,6 +123,53 @@ describe('isSpam', () => {
   it('drops a submission whose elapsed time is not a finite number', () => {
     expect(isSpam({ ...filled(), elapsedMs: Number.NaN })).toBe(true)
     expect(isSpam({ ...filled(), elapsedMs: '9999' as unknown as number })).toBe(true)
+  })
+
+  const timed = { ...filled(), elapsedMs: 10_000 }
+
+  it.each([
+    ['a link in the first name', { firstName: 'Ada http://x.example' }],
+    ['a link in the last name', { lastName: 'HTTPS://X.EXAMPLE' }],
+    ['a bare www host in a name', { lastName: 'www.x.example' }],
+  ])('drops %s', (_label, spoiled) => {
+    expect(isSpam({ ...timed, ...spoiled })).toBe(true)
+  })
+
+  it('drops a message that is nothing but a link', () => {
+    expect(isSpam({ ...timed, message: '  https://x.example/offer  ' })).toBe(true)
+    expect(isSpam({ ...timed, message: 'www.x.example' })).toBe(true)
+  })
+
+  it('drops a message carrying three links', () => {
+    expect(
+      isSpam({
+        ...timed,
+        message: 'See http://a.example and http://b.example and www.c.example.',
+      }),
+    ).toBe(true)
+  })
+
+  it('keeps a message where two links sit in a sentence someone wrote', () => {
+    expect(
+      isSpam({
+        ...timed,
+        message:
+          'Our current site is https://acme.example and the brief is at www.acme.example/brief — could you take a look?',
+      }),
+    ).toBe(false)
+  })
+})
+
+describe('nativeSubmitFailed', () => {
+  it.each([
+    ['?sent=0', true],
+    ['?utm_source=x&sent=0', true],
+    ['?sent=1', false],
+    ['?sent=', false],
+    ['', false],
+    ['?other=0', false],
+  ])('reads %s as %s', (search, failed) => {
+    expect(nativeSubmitFailed(search)).toBe(failed)
   })
 })
 
@@ -296,6 +344,20 @@ describe('submitInquiry', () => {
     expect(called).toBe(false)
   })
 
+  it('drops a submission BotID classified as a bot, without calling HubSpot', async () => {
+    let called = false
+    const result = await call({
+      bot: true,
+      fetch: async () => {
+        called = true
+        return ok()
+      },
+    })
+
+    expect(result).toEqual({ status: 'dropped' })
+    expect(called).toBe(false)
+  })
+
   it('says so when the portal is not configured', async () => {
     let called = false
     const result = await call({
@@ -434,7 +496,27 @@ describe('handleInquiryRequest', () => {
     expect(await response.text()).not.toContain('secret')
   })
 
-  describe('a form-encoded post — the browser’s own submit, before hydration', () => {
+  it('answers a submission BotID classified as a bot exactly as a sent one', async () => {
+    let called = false
+    const response = await handle(post(good), {
+      bot: true,
+      fetch: async () => {
+        called = true
+        return sent()
+      },
+    })
+    expect(response.status).toBe(200)
+    expect(await response.json()).toEqual({ status: 'sent' })
+    expect(called).toBe(false)
+  })
+
+  /**
+   * The form posts JSON. A form-encoded body is what the browser sends when
+   * someone submits before hydration — and it is also the one shape a bot can
+   * post directly, with no script run and nothing to measure, so it delivers
+   * nothing.
+   */
+  describe('a form-encoded post', () => {
     const fields = {
       firstName: 'Ada',
       lastName: 'Lovelace',
@@ -444,76 +526,36 @@ describe('handleInquiryRequest', () => {
       elapsedMs: '10000',
     }
 
-    it('sends the person back where they came from, with the answer in the query', async () => {
+    it('never reaches HubSpot', async () => {
+      let called = false
+      await handle(form(fields, { referer: 'https://o3world.com/contact' }), {
+        fetch: async () => {
+          called = true
+          return sent()
+        },
+      })
+      expect(called).toBe(false)
+    })
+
+    it('sends the person back to the page they came from, with the failure in the query', async () => {
       const response = await handle(form(fields, { referer: 'https://o3world.com/contact' }))
       expect(response.status).toBe(303)
-      expect(response.headers.get('location')).toBe('https://o3world.com/contact?sent=1')
+      expect(response.headers.get('location')).toBe('https://o3world.com/contact?sent=0')
     })
 
     it('falls back to /contact when the browser sent no referer', async () => {
       const response = await handle(form(fields))
-      expect(response.headers.get('location')).toBe('/contact?sent=1')
-    })
-
-    it('reports a failed send in the same query, so nothing is silently lost', async () => {
-      const response = await handle(form(fields, { referer: 'https://o3world.com/contact' }), {
-        fetch: async () => new Response('', { status: 500 }),
-      })
-      expect(response.headers.get('location')).toBe('https://o3world.com/contact?sent=0')
+      expect(response.status).toBe(303)
+      expect(response.headers.get('location')).toBe('/contact?sent=0')
     })
 
     // The whole reason the form names a method and an action: a submit the
     // browser resolves on its own would otherwise GET the page it is on and
     // write every field, the message included, into the address bar.
-    it('sends an invalid post back with the answer alone, never the values', async () => {
-      const response = await handle(form({ ...fields, email: 'nope' }))
-      expect(response.status).toBe(303)
-      expect(response.headers.get('location')).toBe('/contact?sent=0')
-    })
-
-    it('reads a checked opt-in as the opt-in', async () => {
-      let body: string | undefined
-      await handle(form({ ...fields, consent: 'on' }), {
-        fetch: async (_url: string, init: RequestInit) => {
-          body = String(init.body)
-          return new Response('{}', { status: 200 })
-        },
-      })
-      const names = JSON.parse(String(body)).fields.map((field: { name: string }) => field.name)
-      expect(names).toContain('sign_up_for_mailing_list')
-    })
-
-    // No list rides along with a native post, so the reason is checked for
-    // being there and not against options the request never carried.
-    it('asks only that the reason is answered', async () => {
-      const response = await handle(form({ ...fields, reason: 'Something the page offered' }))
-      expect(response.headers.get('location')).toBe('/contact?sent=1')
-    })
-
-    // A submit before hydration has no script to count with, so a native post
-    // is not timed. The honeypot still applies to it.
-    it('sends a post with no elapsed time', async () => {
-      let called = false
-      const response = await handle(form({ ...fields, elapsedMs: '' }), {
-        fetch: async () => {
-          called = true
-          return new Response('{}', { status: 200 })
-        },
-      })
-      expect(response.headers.get('location')).toBe('/contact?sent=1')
-      expect(called).toBe(true)
-    })
-
-    it('still drops a post that filled the honeypot', async () => {
-      let called = false
-      const response = await handle(form({ ...fields, [HONEYPOT_FIELD]: 'http://x.example' }), {
-        fetch: async () => {
-          called = true
-          return new Response('{}', { status: 200 })
-        },
-      })
-      expect(response.headers.get('location')).toBe('/contact?sent=1')
-      expect(called).toBe(false)
+    it('carries the answer alone, never the values', async () => {
+      const location = (await handle(form(fields))).headers.get('location')
+      expect(location).not.toContain('Ada')
+      expect(location).not.toContain('portal')
     })
   })
 })

@@ -1,3 +1,4 @@
+import { withBotId } from 'botid/next/config'
 import type { NextConfig } from 'next'
 import { sanity } from 'next-sanity/live/cache-life'
 
@@ -58,4 +59,9 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default nextConfig
+/**
+ * BotID's rewrites and headers, which proxy the challenge through this origin
+ * so an ad-blocker cannot take the check out. It adds nothing else: the config
+ * above is what Next reads.
+ */
+export default withBotId(nextConfig)
