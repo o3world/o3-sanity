@@ -175,7 +175,16 @@ const SECTION_FIELDS = /* groq */ `
 
 export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings"][0]{
   title,
-  utilityNavItems[]{..., ${BUTTON_TARGET}},
+  ${
+    /* The strip's two member kinds. A `brandLogo`'s `logo` stays unexpanded —
+      it is a knocked-out mark, so it takes no LQIP, for the reason
+      `PHOTO_FIELDS` states above. */ ''
+  }
+  utilityNavItems[]{
+    ...,
+    _type == "button" => {${BUTTON_TARGET}},
+    _type == "brandLogo" => {button{..., ${BUTTON_TARGET}}}
+  },
   navItems[]{
     ...,
     _type == "button" => {${BUTTON_TARGET}},

@@ -44,6 +44,12 @@ import type { Settings } from './navItems'
  * `legalLinks`. O3XO draws no strip, so the same two links land here, which is
  * where its design puts them.
  *
+ * A strip member is either a word or a mark (`brandLogo`), and this row draws
+ * words: the destination a mark wraps is the same button, so it is unwrapped
+ * here rather than dropped. O3XO's own settings author none today; the union
+ * is O3's, and this is what keeps a shared field from deciding one brand's
+ * footer.
+ *
  * `footerGroups` and `socialLinks` are drawn by nothing here, and neither is an
  * omission: the kit's footer has no link columns, and o3xo.ai's has no social
  * links (the LinkedIn account in Site Settings comes from the site's
@@ -51,7 +57,14 @@ import type { Settings } from './navItems'
  */
 export function SiteFooter({ settings, year }: { settings: Settings | null; year: number }) {
   const legalName = settings?.legalName ?? settings?.title ?? 'O3XO'
-  const row = [...(settings?.utilityNavItems ?? []), ...(settings?.legalLinks ?? [])]
+  const row = [
+    ...(settings?.utilityNavItems ?? []).flatMap((item) => {
+      if (item._type !== 'brandLogo') return [item]
+      // The wrapper holds the `_key`; the row needs it on the link it draws.
+      return item.button ? [{ ...item.button, _key: item._key }] : []
+    }),
+    ...(settings?.legalLinks ?? []),
+  ]
 
   return (
     // Light chrome, outside the band system, so it says so: a button dropped

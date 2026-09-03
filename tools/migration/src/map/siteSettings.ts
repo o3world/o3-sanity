@@ -92,8 +92,9 @@ const FIGMA_NAV: readonly ChromeLink[] = [
 ]
 
 /**
- * The Utility Nav (`2250:1445`) — the brand-property strip the 2026-08 pass put
- * above the pill, reading O3 World · 1682 Conference · O3XO.
+ * The Utility Nav (`2250:1445`) as the Home frame instances it (`2250:1453`) —
+ * the brand-property strip above the pill: the words "O3 Family of Brands",
+ * then the 1682 Conference and O3XO marks.
  *
  * **Figma authors the labels; WordPress owns the destinations.** The text nodes
  * carry no hyperlink metadata, so the hrefs are the ones the site already
@@ -102,16 +103,31 @@ const FIGMA_NAV: readonly ChromeLink[] = [
  * "Everything else" column from the same two constants. Nothing here is
  * invented — the only new string is the wording, and that is Figma's to set.
  *
- * "O3 World" is this site, so it points at `/`. The frame gives all three links
- * the same fill (`#AAA69E`, State=Default), so the property you are ON gets no
- * highlight; the strip is a switcher, not a breadcrumb.
+ * "O3 Family of Brands" names the set rather than a member, and points at `/`
+ * because this site is where the set lives. The frame gives every member the
+ * same treatment, so the property you are ON gets no highlight; the strip is a
+ * switcher, not a breadcrumb.
+ *
+ * **A member carrying a `logo` is drawn as its mark, not its name** — a
+ * `brandLogo`, with the label surviving as what a screen reader reads. The two
+ * files are the fills the frame's rectangles carry, exported by imageRef and
+ * recorded in `tools/figma-sync/data/asset-manifest.json`; the labels below are
+ * still the wording each mark spells out.
  */
-const FIGMA_UTILITY_NAV: readonly ChromeLink[] = [
-  { href: '/', label: 'O3 World' },
+const FIGMA_UTILITY_NAV: readonly (ChromeLink & { logo?: string })[] = [
+  { href: '/', label: 'O3 Family of Brands' },
   // Figma capitalises the C; WordPress's menu title is "1682 conference", and
   // the footer keeps that. Chrome wording is Figma's (ADR 0007), per surface.
-  { href: CONFERENCE_PATH, label: '1682 Conference' },
-  { href: O3XO_URL, label: 'O3XO' },
+  {
+    href: CONFERENCE_PATH,
+    label: '1682 Conference',
+    logo: 'tools/migration/data/seed/assets/utility-1682.png',
+  },
+  {
+    href: O3XO_URL,
+    label: 'O3XO',
+    logo: 'tools/migration/data/seed/assets/utility-o3xo.png',
+  },
 ]
 
 /**
@@ -143,15 +159,28 @@ export const siteSettingsDoc = z.object({
   _type: z.literal('siteSettings'),
   title: z.string().min(1),
   // `href` is required here where `navItems` leaves it open: a brand-property
-  // link with no destination is the whole content of the strip missing.
+  // link with no destination is the whole content of the strip missing. That
+  // holds for a mark too — it is the same button, drawn as artwork.
   utilityNavItems: z
     .array(
-      z.object({
-        _type: z.literal('button'),
-        _key: z.string(),
-        label: z.string().min(1),
-        href: z.string().min(1),
-      }),
+      z.union([
+        z.object({
+          _type: z.literal('button'),
+          _key: z.string(),
+          label: z.string().min(1),
+          href: z.string().min(1),
+        }),
+        z.object({
+          _type: z.literal('brandLogo'),
+          _key: z.string(),
+          button: z.object({
+            _type: z.literal('button'),
+            label: z.string().min(1),
+            href: z.string().min(1),
+          }),
+          logo: z.object({ _type: z.literal('image'), _localSrc: z.string().min(1) }),
+        }),
+      ]),
     )
     .min(1),
   navItems: z.array(z.object({ _type: z.literal('button'), _key: z.string(), label: z.string() })),
@@ -239,6 +268,22 @@ function button(item: ResolvedItem, key: string, contrast?: 'dark' | 'light' | '
     label: item.label,
     href: item.href,
     ...(contrast ? { contrast } : {}),
+  }
+}
+
+/**
+ * One member of the strip: a `brandLogo` when the frame draws the property's
+ * mark, a plain `button` when it draws its name. `_localSrc` is the seed
+ * loader's marker for a committed file, resolved to an uploaded asset at load.
+ */
+function utilityNavItem(item: ChromeLink & { logo?: string }, key: string) {
+  if (!item.logo) return button(item, key)
+  return {
+    _type: 'brandLogo' as const,
+    // The wrapper holds the key; the button it wraps is a field, not a member.
+    _key: key,
+    button: { _type: 'button' as const, label: item.label, href: item.href },
+    logo: { _type: 'image' as const, _localSrc: item.logo },
   }
 }
 
@@ -335,7 +380,7 @@ export function mapSiteSettings(
     _id: 'siteSettings' as const,
     _type: 'siteSettings' as const,
     title: site.siteName,
-    utilityNavItems: FIGMA_UTILITY_NAV.map((item, i) => button(item, `utility-${i}`)),
+    utilityNavItems: FIGMA_UTILITY_NAV.map((item, i) => utilityNavItem(item, `utility-${i}`)),
     navItems: navItems.map((item, i) => button(item, `nav-${i}`)),
     primaryButton: {
       _type: 'button' as const,

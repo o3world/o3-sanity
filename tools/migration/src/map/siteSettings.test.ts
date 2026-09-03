@@ -147,16 +147,40 @@ describe('mapSiteSettings', () => {
     expect(doc.navItems.find((i) => i.label === 'Live')).toMatchObject({ href: '/live' })
   })
 
+  /**
+   * The strip's two member kinds carry the same button; a `brandLogo` wraps it,
+   * because the frame draws that property's mark in place of its name.
+   */
+  const stripButton = (item: ReturnType<typeof expectOk>['utilityNavItems'][number]) =>
+    item._type === 'brandLogo' ? item.button : item
+
   it('builds the utility strip Figma’s brand-property bar reads (#88)', () => {
     const doc = expectOk(mapSiteSettings(chrome(), SITE))
-    expect(doc.utilityNavItems.map((i) => i.label)).toEqual(['O3 World', '1682 Conference', 'O3XO'])
+    expect(doc.utilityNavItems.map((i) => stripButton(i).label)).toEqual([
+      'O3 Family of Brands',
+      '1682 Conference',
+      'O3XO',
+    ])
     // Figma authors the wording; the destinations are the ones WordPress
     // already publishes for the same two properties — the pair the footer's
     // "Everything else" column carries. `/` is this site.
-    expect(doc.utilityNavItems.map((i) => i.href)).toEqual([
+    expect(doc.utilityNavItems.map((i) => stripButton(i).href)).toEqual([
       '/',
       '/1682-conference-ai-innovation',
       'https://www.o3xo.ai/',
+    ])
+  })
+
+  it('draws the two properties Figma gives a mark as marks (`2250:1453`)', () => {
+    const doc = expectOk(mapSiteSettings(chrome(), SITE))
+    // The family line stays a word; the two properties become their logos,
+    // pointed at committed files the loader resolves to uploaded assets.
+    expect(doc.utilityNavItems.map((i) => i._type)).toEqual(['button', 'brandLogo', 'brandLogo'])
+    expect(
+      doc.utilityNavItems.flatMap((i) => (i._type === 'brandLogo' ? [i.logo._localSrc] : [])),
+    ).toEqual([
+      'tools/migration/data/seed/assets/utility-1682.png',
+      'tools/migration/data/seed/assets/utility-o3xo.png',
     ])
   })
 
@@ -166,7 +190,7 @@ describe('mapSiteSettings', () => {
     // (1680:2114). Collapsing them would be an editorial decision, not a
     // conversion one — the same call the Insights/Blog split already made.
     const doc = expectOk(mapSiteSettings(chrome(), SITE))
-    expect(doc.utilityNavItems.map((i) => i.label)).toContain('1682 Conference')
+    expect(doc.utilityNavItems.map((i) => stripButton(i).label)).toContain('1682 Conference')
     expect(doc.footerGroups[1]?.links.map((l) => l.label)).toContain('1682 conference')
   })
 

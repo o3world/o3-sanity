@@ -82,9 +82,21 @@ export type SiteSettings = {
   _rev: string
   title?: string
   utilityNavItems?: Array<
-    {
-      _key: string
-    } & Button
+    | ({
+        _key: string
+      } & Button)
+    | {
+        button?: Button
+        logo?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        _type: 'brandLogo'
+        _key: string
+      }
   >
   navItems?: Array<
     | ({
@@ -190,6 +202,22 @@ export type Button = {
   anchor?: string
   contrast?: 'auto' | 'dark' | 'light' | 'ghost'
   icon?: 'arrow' | 'external' | 'down' | 'none'
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top?: number
+  bottom?: number
+  left?: number
+  right?: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x?: number
+  y?: number
+  height?: number
+  width?: number
 }
 
 export type Industry = {
@@ -903,22 +931,6 @@ export type Page = {
   migration?: Migration
 }
 
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
-}
-
 export type IndustryReference = {
   _ref: string
   _type: 'reference'
@@ -1185,6 +1197,8 @@ export type AllSanitySchemaTypes =
   | CaseStudyReference
   | PageReference
   | Button
+  | SanityImageCrop
+  | SanityImageHotspot
   | Industry
   | Slug
   | CollectionIndex
@@ -1223,8 +1237,6 @@ export type AllSanitySchemaTypes =
   | ButtonGroup
   | BriefReference
   | Page
-  | SanityImageCrop
-  | SanityImageHotspot
   | IndustryReference
   | CaseStudy
   | Client
@@ -1241,35 +1253,73 @@ export type AllSanitySchemaTypes =
 
 // Source: src/queries.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[_type == "siteSettings"][0]{  title,  utilityNavItems[]{..., "target": target->{_type, title, "slug": slug.current}},  navItems[]{    ...,    _type == "button" => {"target": target->{_type, title, "slug": slug.current}},    _type == "navGroup" => {      items[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}},      button{..., "target": target->{_type, title, "slug": slug.current}}    }  },  primaryButton{..., "target": target->{_type, title, "slug": slug.current}},  footerTagline,  footerGroups[]{..., links[]{..., "target": target->{_type, title, "slug": slug.current}}},  socialsLabel,  socialLinks,  legalLinks[]{..., "target": target->{_type, title, "slug": slug.current}},  legalName,  copyrightNote,  defaultSeo}
+// Query: *[_type == "siteSettings"][0]{  title,    utilityNavItems[]{    ...,    _type == "button" => {"target": target->{_type, title, "slug": slug.current}},    _type == "brandLogo" => {button{..., "target": target->{_type, title, "slug": slug.current}}}  },  navItems[]{    ...,    _type == "button" => {"target": target->{_type, title, "slug": slug.current}},    _type == "navGroup" => {      items[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}},      button{..., "target": target->{_type, title, "slug": slug.current}}    }  },  primaryButton{..., "target": target->{_type, title, "slug": slug.current}},  footerTagline,  footerGroups[]{..., links[]{..., "target": target->{_type, title, "slug": slug.current}}},  socialsLabel,  socialLinks,  legalLinks[]{..., "target": target->{_type, title, "slug": slug.current}},  legalName,  copyrightNote,  defaultSeo}
 export type SITE_SETTINGS_QUERY_RESULT = {
   title: string | null
-  utilityNavItems: Array<{
-    _key: string
-    _type: 'button'
-    label?: string
-    target:
-      | {
-          _type: 'caseStudy'
-          title: string | null
-          slug: string | null
+  utilityNavItems: Array<
+    | {
+        button: {
+          _type: 'button'
+          label?: string
+          target:
+            | {
+                _type: 'caseStudy'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'insight'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'page'
+                title: string | null
+                slug: string | null
+              }
+            | null
+          href?: string
+          anchor?: string
+          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
+        } | null
+        logo?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
         }
-      | {
-          _type: 'insight'
-          title: string | null
-          slug: string | null
-        }
-      | {
-          _type: 'page'
-          title: string | null
-          slug: string | null
-        }
-      | null
-    href?: string
-    anchor?: string
-    contrast?: 'auto' | 'dark' | 'ghost' | 'light'
-    icon?: 'arrow' | 'down' | 'external' | 'none'
-  }> | null
+        _type: 'brandLogo'
+        _key: string
+      }
+    | {
+        _key: string
+        _type: 'button'
+        label?: string
+        target:
+          | {
+              _type: 'caseStudy'
+              title: string | null
+              slug: string | null
+            }
+          | {
+              _type: 'insight'
+              title: string | null
+              slug: string | null
+            }
+          | {
+              _type: 'page'
+              title: string | null
+              slug: string | null
+            }
+          | null
+        href?: string
+        anchor?: string
+        contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+        icon?: 'arrow' | 'down' | 'external' | 'none'
+      }
+  > | null
   navItems: Array<
     | {
         _key: string
@@ -7086,7 +7136,7 @@ export type SITEMAP_QUERY_RESULT = {
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "siteSettings"][0]{\n  title,\n  utilityNavItems[]{..., "target": target->{_type, title, "slug": slug.current}},\n  navItems[]{\n    ...,\n    _type == "button" => {"target": target->{_type, title, "slug": slug.current}},\n    _type == "navGroup" => {\n      items[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}},\n      button{..., "target": target->{_type, title, "slug": slug.current}}\n    }\n  },\n  primaryButton{..., "target": target->{_type, title, "slug": slug.current}},\n  footerTagline,\n  footerGroups[]{..., links[]{..., "target": target->{_type, title, "slug": slug.current}}},\n  socialsLabel,\n  socialLinks,\n  legalLinks[]{..., "target": target->{_type, title, "slug": slug.current}},\n  legalName,\n  copyrightNote,\n  defaultSeo\n}': SITE_SETTINGS_QUERY_RESULT
+    '*[_type == "siteSettings"][0]{\n  title,\n  \n  utilityNavItems[]{\n    ...,\n    _type == "button" => {"target": target->{_type, title, "slug": slug.current}},\n    _type == "brandLogo" => {button{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  navItems[]{\n    ...,\n    _type == "button" => {"target": target->{_type, title, "slug": slug.current}},\n    _type == "navGroup" => {\n      items[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}},\n      button{..., "target": target->{_type, title, "slug": slug.current}}\n    }\n  },\n  primaryButton{..., "target": target->{_type, title, "slug": slug.current}},\n  footerTagline,\n  footerGroups[]{..., links[]{..., "target": target->{_type, title, "slug": slug.current}}},\n  socialsLabel,\n  socialLinks,\n  legalLinks[]{..., "target": target->{_type, title, "slug": slug.current}},\n  legalName,\n  copyrightNote,\n  defaultSeo\n}': SITE_SETTINGS_QUERY_RESULT
     '*[_type == "insight" && slug.current == $slug][0]{\n  \n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  \n  "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n,\n  body[]{..., _type == "figure" => {..., image{..., asset->{_id, metadata{lqip, isOpaque}}}}},\n  seo,\n  "related": *[_type == "insight" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  \n  "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n  \n  "latest": select(count(*[_type == "insight" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0]) == 0 => *[_type == "insight" && _id != ^._id] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  \n  "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}, [])\n}': INSIGHT_QUERY_RESULT
     '*[_type == "insight" && defined(slug.current)].slug.current': INSIGHT_SLUGS_QUERY_RESULT
     '{\n  "items": select(\n    $category == null => (coalesce((*[_type == "collectionIndex" && collection == "insight"] | order(_id)[0].pinnedItems[]->)[_type == "insight"], []) + (*[_type == "insight" && !(_id in coalesce(*[_type == "collectionIndex" && collection == "insight"] | order(_id)[0].pinnedItems[]._ref, []))] | order(publishedAt desc) [0...$end]))[$offset...$end]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  \n  "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n    *[_type == "insight" && $category in categories[]->slug.current] | order(publishedAt desc) [$offset...$end]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  \n  "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}\n  ),\n  "total": select(\n    $category == null => count(coalesce((*[_type == "collectionIndex" && collection == "insight"] | order(_id)[0].pinnedItems[]->)[_type == "insight"], [])) + count(*[_type == "insight" && !(_id in coalesce(*[_type == "collectionIndex" && collection == "insight"] | order(_id)[0].pinnedItems[]._ref, []))]),\n    count(*[_type == "insight" && $category in categories[]->slug.current])\n  ),\n  "categories": *[_type == "category" && slug.current != "uncategorized" && count(*[_type == "insight" && references(^._id)]) > 0] | order(title asc){title, "slug": slug.current}\n}': INSIGHTS_PAGE_QUERY_RESULT

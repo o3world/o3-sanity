@@ -1686,5 +1686,13 @@
   "file:tools/migration/data/seed/assets/about-beyond-community.png": {
     "sha256": "2f07b310eca2ced2e83b6c01899fc0afd786cc21",
     "assetId": "image-2f07b310eca2ced2e83b6c01899fc0afd786cc21-1836x1424-png"
+  },
+  "file:tools/migration/data/seed/assets/utility-1682.png": {
+    "sha256": "c0d8bfd2557b4a29865157766e082fa9e9176ecf",
+    "assetId": "image-c0d8bfd2557b4a29865157766e082fa9e9176ecf-1992x720-png"
+  },
+  "file:tools/migration/data/seed/assets/utility-o3xo.png": {
+    "sha256": "1a847e2d1fbb7ec5f126bb7b0ebc0be4289fda57",
+    "assetId": "image-1a847e2d1fbb7ec5f126bb7b0ebc0be4289fda57-2545x669-png"
   }
 }

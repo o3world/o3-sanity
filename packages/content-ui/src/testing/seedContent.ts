@@ -287,8 +287,16 @@ function curatedInsight(ref: unknown): InsightCard | null {
   return id ? (CURATED_INSIGHTS.get(id) ?? null) : null
 }
 
-/** Site Settings as `SITE_SETTINGS_QUERY` returns them — the real committed document. */
-export const SITE_SETTINGS = settingsDoc as unknown as SITE_SETTINGS_QUERY_RESULT
+/**
+ * Site Settings as `SITE_SETTINGS_QUERY` returns them — the real committed
+ * document, with its markers resolved: the utility strip's `brandLogo` members
+ * carry a `_localSrc` where an asset reference belongs, and a renderer handed
+ * one raw draws nothing.
+ */
+export const SITE_SETTINGS = resolveAssetMarkers(
+  settingsDoc,
+  assetIdFor,
+) as unknown as SITE_SETTINGS_QUERY_RESULT
 
 /**
  * The year the footer prints in a story. Fixed rather than read off the

@@ -277,6 +277,26 @@
       "export": "render",
       "locked": true,
       "note": "Software-engineering service page `2360:2879` → Intro section `2360:2861` → the photo rectangle `2360:2871` (imageRef `594350a88ec7874bdc8ad4c2a8f36e3c35f2b60b`). Not exact, and LOCKED so a re-export cannot clobber the hand work: the API render comes back 4:3, so the committed file is the 1.5× render trimmed to the rectangle's own 3:2 and resampled to 1600×1066 — the width `Figure` actually requests. A fresh export would need the same trim and resample. Baseline-seeding conflict closed 2026-08-24: imageRef 594350a8 verified unchanged in the file; the hand-trimmed committed copy stands."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/utility-1682.png",
+      "nodeId": "3183:2961",
+      "figmaName": "1682",
+      "format": "png",
+      "scale": 1,
+      "export": "imageFill",
+      "locked": false,
+      "note": "Utility Nav `2250:1445` → the 1682 Conference mark, drawn at 55×20 in the strip. Exact: committed bytes hash to `c0d8bfd2557b4a29865157766e082fa9e9176ecf`, the node's `imageRef`. Not `about-beyond-1682.png` — that is the About card's crop, a different fill."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/utility-o3xo.png",
+      "nodeId": "3269:13421",
+      "figmaName": "image 21",
+      "format": "png",
+      "scale": 1,
+      "export": "imageFill",
+      "locked": false,
+      "note": "Utility Nav `2250:1445` → the O3XO wordmark, drawn at 76×20 in the strip: white `O3`, brand-yellow `XO`, transparent ground. Exact: committed bytes hash to `1a847e2d1fbb7ec5f126bb7b0ebc0be4289fda57`, the node's `imageRef`."
     }
   ]
 }

@@ -6,20 +6,34 @@
     {
       "_type": "button",
       "_key": "utility-0",
-      "label": "O3 World",
+      "label": "O3 Family of Brands",
       "href": "/"
     },
     {
-      "_type": "button",
+      "_type": "brandLogo",
       "_key": "utility-1",
-      "label": "1682 Conference",
-      "href": "/1682-conference-ai-innovation"
+      "button": {
+        "_type": "button",
+        "label": "1682 Conference",
+        "href": "/1682-conference-ai-innovation"
+      },
+      "logo": {
+        "_type": "image",
+        "_localSrc": "tools/migration/data/seed/assets/utility-1682.png"
+      }
     },
     {
-      "_type": "button",
+      "_type": "brandLogo",
       "_key": "utility-2",
-      "label": "O3XO",
-      "href": "https://www.o3xo.ai/"
+      "button": {
+        "_type": "button",
+        "label": "O3XO",
+        "href": "https://www.o3xo.ai/"
+      },
+      "logo": {
+        "_type": "image",
+        "_localSrc": "tools/migration/data/seed/assets/utility-o3xo.png"
+      }
     }
   ],
   "navItems": [

@@ -130,6 +130,44 @@ const navGroup = {
   preview: { select: { title: 'label' } },
 }
 
+/**
+ * A link the utility strip draws as its property's mark instead of its name —
+ * the 1682 and O3XO logos the Home instance (`2250:1453`) places beside "O3
+ * Family of Brands".
+ *
+ * Inline in `utilityNavItems` like `navGroup` is inline in `navItems`: it has
+ * no identity outside that array and no design options to declare, so it is an
+ * item (CONTEXT.md → Component, instance, slot). Its `button` carries the
+ * destination and the label, because where a link goes and what it is called
+ * are already solved fields — the label is what a screen reader reads in place
+ * of the mark.
+ *
+ * No width field. Both marks are drawn 20px tall and let their own proportions
+ * decide the rest (55 × 20 and 76 × 20), so height is the renderer's constant
+ * and width is the file's.
+ */
+const brandLogo = {
+  type: 'object' as const,
+  name: 'brandLogo',
+  title: 'Brand logo',
+  fields: [
+    defineField({
+      name: 'button',
+      title: 'Destination',
+      type: 'button',
+      description: 'Where the mark goes, and the name a screen reader reads instead of it.',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'logo',
+      type: 'image',
+      description: 'The property’s mark, knocked out for a black bar.',
+      validation: (rule) => rule.required(),
+    }),
+  ],
+  preview: { select: { title: 'button.label', media: 'logo' } },
+}
+
 export const siteSettings = defineType({
   name: 'siteSettings',
   title: 'Site Settings',
@@ -142,16 +180,22 @@ export const siteSettings = defineType({
     // `label` still overrides per link, like every other entry.
     /**
      * The brand-property strip above the nav pill (Figma `Utility Nav`,
-     * `2250:1445`): O3 World, 1682 Conference, O3XO. Its own field rather than
-     * a second `footerGroup` — the group's label has nowhere to go on a bar
-     * that shows only its links, and the strip's membership is the set of
-     * properties O3 runs, which is not the nav's concern.
+     * `2250:1445`): a line of text naming the family, then one mark per
+     * property. Its own field rather than a second `footerGroup` — the group's
+     * label has nowhere to go on a bar that shows only its links, and the
+     * strip's membership is the set of properties O3 runs, which is not the
+     * nav's concern.
+     *
+     * A member is either a `button` — a word — or a `brandLogo`, which is the
+     * same destination drawn as its mark. Additive, the way `navGroup` is
+     * additive to `navItems`: a brand whose strip is three words authors no
+     * logo, and the Home instance's own three members are one of each kind.
      */
     defineField({
       name: 'utilityNavItems',
       title: 'Utility nav',
       type: 'array',
-      of: [defineArrayMember({ type: 'button' })],
+      of: [defineArrayMember({ type: 'button' }), defineArrayMember(brandLogo)],
       description: 'The brand-property strip above the nav. Desktop only.',
     }),
     /**

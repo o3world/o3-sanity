@@ -13,12 +13,13 @@ import { UtilityNav } from './UtilityNav'
  * data, so a fixture here would be testing the fixture.
  *
  * Three brand properties, none of them highlighted: the frame gives all three
- * links the same fill, so being on O3 World is not a state the strip draws.
- * Hover takes brand red.
+ * members the same treatment, so being on O3 World is not a state the strip
+ * draws. The words hover to brand red; a mark, which has no text colour to take
+ * it to, fades instead.
  *
  * The strip is in flow and desktop-only. `WithTheNav` is the story worth
- * looking at — it is the only place the 14px gap between the strip and the
- * pinned pill is visible, and that gap is what fixes the pill at `top: 64px`.
+ * looking at — it is the only place the 55px gap between the strip and the
+ * pinned pill is visible, and that gap is what fixes the pill at `top: 124px`.
  */
 const meta = {
   title: 'Chrome/UtilityNav',
@@ -43,7 +44,7 @@ export const Default: Story = {
   ),
 }
 
-/** The chrome as the Home frame draws it: strip, 14px, pill. */
+/** The chrome as the Home frame draws it: strip, 55px, pill. */
 export const WithTheNav: Story = {
   globals: { backgrounds: { value: 'ink' } },
   render: (args) => (

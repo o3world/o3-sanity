@@ -8,6 +8,8 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { BrandMark } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
+import { resolveAssetMarkers } from '../testing'
+
 import { SiteFooter } from './SiteFooter'
 import { SiteNav } from './SiteNav'
 import { UtilityNav } from './UtilityNav'
@@ -23,7 +25,7 @@ import { UtilityNav } from './UtilityNav'
  * draws no mark of its own, so every O3-flavoured assertion in this file is
  * about what that app supplies through the seam.
  */
-const settings = JSON.parse(
+const settingsDoc = JSON.parse(
   readFileSync(
     join(
       dirname(fileURLToPath(import.meta.url)),
@@ -31,6 +33,17 @@ const settings = JSON.parse(
     ),
     'utf8',
   ),
+)
+
+/**
+ * The committed document carries `_localSrc` where `load` puts an asset
+ * reference — the utility strip's two marks are the only ones in this file —
+ * and a renderer handed a raw marker draws nothing. Ids are faked from the
+ * path: nothing here asserts on a URL, only that the mark reached the strip.
+ */
+const settings = resolveAssetMarkers(
+  settingsDoc,
+  (source) => `image-${'0'.repeat(40)}-${source.endsWith('.svg') ? '1x1-svg' : '1200x630-png'}`,
 ) as NonNullable<SITE_SETTINGS_QUERY_RESULT>
 
 const O3_NAV_MARK = <BrandMark size={64} className="lg:-m-2" />
@@ -217,20 +230,27 @@ describe('the nav bar’s pinned, dark-ink default', () => {
 /**
  * The brand-property strip (#88). It is the only piece of chrome that is NOT
  * pinned — the Home frame draws it in flow, above everything, with the pill
- * fixed 14px under it — so the assertions worth having are the ones that break
+ * fixed 55px under it — so the assertions worth having are the ones that break
  * if someone folds it into the nav's fixed header or gives one property a state
  * the frame does not draw.
  */
 describe('utility nav', () => {
   it('renders the three brand properties, in the frame’s order', () => {
-    expect(settings.utilityNavItems?.map((i) => i.label)).toEqual([
-      'O3 World',
-      '1682 Conference',
-      'O3XO',
-    ])
-    for (const item of settings.utilityNavItems ?? []) {
-      expect(utilityHtml, `strip is missing "${item.label}"`).toContain(item.label as string)
-    }
+    const items = settings.utilityNavItems ?? []
+    expect(
+      items.map((item) => (item._type === 'brandLogo' ? item.button?.label : item.label)),
+    ).toEqual(['O3 Family of Brands', '1682 Conference', 'O3XO'])
+  })
+
+  it('draws a property with a mark as that mark, and its name as the alt text', () => {
+    // `2250:1453` replaces the last two words with the properties' logos. The
+    // label is what survives for a screen reader — losing it would leave two
+    // unnamed links on a bar whose whole content is names.
+    expect(utilityHtml).toContain('O3 Family of Brands')
+    expect(utilityHtml).toContain('alt="1682 Conference"')
+    expect(utilityHtml).toContain('alt="O3XO"')
+    // 20px tall, width from the file's own proportions (55 × 20, 76 × 20).
+    expect((utilityHtml.match(/h-5 w-auto/g) ?? []).length).toBe(2)
   })
 
   it('points each property at the destination the site already publishes', () => {
@@ -244,7 +264,7 @@ describe('utility nav', () => {
   it('scrolls with the page instead of pinning like the pill', () => {
     // `2250:1453` is an in-flow child of the Home frame (`scrollBehavior:
     // SCROLLS`) where `NavBar` is `ABSOLUTE` + `FIXED`. A `fixed` here would
-    // also cover the top 50px of every hero for the length of the page.
+    // also cover the top 69px of every hero for the length of the page.
     expect(utilityHtml).not.toContain('fixed')
   })
 
@@ -256,14 +276,16 @@ describe('utility nav', () => {
   })
 
   it('highlights no property, because the frame highlights none', () => {
-    // All three links are State=Default at the same fill, so the strip is a
+    // Every member is State=Default at the same fill, so the strip is a
     // switcher, not a breadcrumb. `aria-current` would be a claim the design
     // does not make, and a second colour class would be one you could see.
+    // Two kinds of member, so two classes: the words and the marks. Within a
+    // kind they match, which is what "no property is highlighted" means here.
     expect(utilityHtml).not.toContain('aria-current')
     const links = utilityHtml.match(/<a [^>]*class="[^"]*"/g) ?? []
     expect(links.length).toBe(3)
     const classes = new Set(links.map((link) => link.match(/class="([^"]*)"/)?.[1]))
-    expect(classes.size, 'one property is styled differently from the others').toBe(1)
+    expect(classes.size, 'one property is styled differently from its kind').toBe(2)
   })
 
   it('takes the strip’s own tokens, not the pill’s scrim', () => {
@@ -277,8 +299,10 @@ describe('utility nav', () => {
   })
 
   it('hovers to brand red — a read state, not a house habit', () => {
-    // `2225:2893`, and the design's one canonical red-on-dark anchor.
+    // `2225:2893`, and the design's one canonical red-on-dark anchor. A mark
+    // has no text colour to take it to, so it fades over the same duration.
     expect(utilityHtml).toContain('hover:text-brand')
+    expect(utilityHtml).toContain('hover:opacity-70')
   })
 })
 
@@ -373,7 +397,11 @@ describe('every chrome destination is a route the build-out lands (#48)', () => 
   }
 
   const chromeHrefs = [
-    ...(settings.utilityNavItems ?? []),
+    // The strip is a union too: a member drawn as its mark keeps its
+    // destination one level in, on the `button` the `brandLogo` wraps.
+    ...(settings.utilityNavItems ?? []).map((item) =>
+      item._type === 'brandLogo' ? item.button : item,
+    ),
     // `navItems` is a union since O3XO's nav grew dropdowns: a member is a
     // button or a `navGroup`, and only the button half carries an href. O3
     // authors no group, so this narrowing drops nothing here — it is what

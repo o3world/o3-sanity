@@ -184,7 +184,11 @@ describe('the footer', () => {
   })
 
   it('is where the brand-property links live, because O3XO draws no strip', () => {
-    for (const link of settings.utilityNavItems ?? []) {
+    // A strip member O3 draws as a mark is a word here — this row has no
+    // artwork in it, so what lands is the button the `brandLogo` wraps.
+    for (const item of settings.utilityNavItems ?? []) {
+      const link = item._type === 'brandLogo' ? item.button : item
+      if (!link) continue
       expect(footerHtml, `the footer is missing "${link.label}"`).toContain(link.label as string)
       expect(footerHtml).toContain(`href="${link.href}"`)
     }

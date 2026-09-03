@@ -86,7 +86,8 @@
 
   /* ── Chrome clearance ──────────────────────────────────────────────────── */
   /* nav-offset — how far the pinned nav pill sits from the viewport top at
-   * `lg`: the Utility Nav strip's 50px plus a 14px gap (`2250:1445`, #88).
+   * `lg`: the Utility Nav strip's 69px plus a 55px gap, read off the Home
+   * frame's `NavBar` at y: 124 (`2225:2967` in `1680:2134`).
    * The strip is data-driven, so an app whose settings carry no
    * `utilityNavItems` re-declares this as the 32px every strip-less interior
    * frame draws (`NavBar` at y: 32 — `2336:4382`, `2250:2251`, `2250:2131`;
@@ -99,7 +100,7 @@
    * declaration time (a custom property substitutes its var() references
    * where it is DEFINED, not where it is used) and no override could reach
    * it. */
-  --spacing-nav-offset: 64px;
+  --spacing-nav-offset: 124px;
 
   /* ── Containers ────────────────────────────────────────────────────────── */
   /* section — 1248px: the 1440 design width less two 96px gutters. The

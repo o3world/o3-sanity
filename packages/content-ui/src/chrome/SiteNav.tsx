@@ -130,7 +130,7 @@ const NAV_BUTTON_INK = 'group-data-[ink=dark]:bg-ink group-data-[ink=dark]:text-
 export function SiteNav({ settings, brandMark }: SiteNavProps) {
   const navItems = settings?.navItems ?? []
   const button = settings?.primaryButton ?? null
-  // The 64px offset exists to clear the Utility Nav strip, and the strip is
+  // The offset exists to clear the Utility Nav strip, and the strip is
   // data: no `utilityNavItems`, no strip, and the pill takes the 32px the
   // strip-less interior frames draw instead (`NavBar` at y: 32 on
   // `2336:4382`, `2250:2251`, `2250:2131`). The value rides the same token
