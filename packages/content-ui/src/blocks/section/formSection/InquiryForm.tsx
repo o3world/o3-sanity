@@ -37,7 +37,7 @@ const EMPTY_VALUES: Record<InquiryField, string> = {
 }
 
 /** Where the card is in a submission: the fields, the wait, or the answer. */
-export type InquiryStatus = 'idle' | 'submitting' | 'sent' | 'error'
+export type FormStatus = 'idle' | 'submitting' | 'sent' | 'error'
 
 export interface InquiryFormProps {
   /** The Reason dropdown's options, in the order the editor set. */
@@ -54,7 +54,7 @@ export interface InquiryFormProps {
    * Which state to open in. Stories only — a page always opens on `idle`, and
    * the schema has no field for this.
    */
-  initialStatus?: InquiryStatus
+  initialStatus?: FormStatus
 }
 
 /** What the submit says when the document has not named it. */
@@ -62,6 +62,14 @@ const SUBMIT_LABEL = 'Send message'
 
 /** The app's own route, in both brands: a relative path resolves to its host. */
 const ENDPOINT = '/api/contact'
+
+/**
+ * What an option posts: the editor's words, stega-cleaned and trimmed, which
+ * is exactly what the route compares the submitted reason against.
+ */
+function optionValue(reason: string): string {
+  return stegaClean(reason).trim()
+}
 
 /**
  * The inquiry form's controls, its validation and its submission (#412).
@@ -72,8 +80,9 @@ const ENDPOINT = '/api/contact'
  * validates nothing.
  *
  * Two things a person never sees ride along with the values. An off-screen
- * text input a bot fills, and the moment the form mounted: a submission that
- * trips either is dropped, and the answer is the same 200 a real one gets.
+ * text input a bot fills, and how long the form was open before it was sent:
+ * a submission that trips either is dropped, and the answer is the same 200 a
+ * real one gets.
  */
 export function InquiryForm({
   reasons,
@@ -86,15 +95,17 @@ export function InquiryForm({
   const [values, setValues] = useState<Record<InquiryField, string>>(EMPTY_VALUES)
   const [errors, setErrors] = useState<Partial<Record<InquiryField, string>>>({})
   const [consent, setConsent] = useState(false)
-  const [status, setStatus] = useState<InquiryStatus>(initialStatus)
-  const startedAt = useRef<number | null>(null)
+  const [status, setStatus] = useState<FormStatus>(initialStatus)
+  const mountedAt = useRef<number | null>(null)
   const honeypot = useRef<HTMLInputElement>(null)
   const form = useRef<HTMLFormElement>(null)
 
   // In an effect, not in state's initializer: the server render and the first
-  // client render have to agree, and two clocks do not.
+  // client render have to agree. What the submission carries is the difference
+  // between this and the moment of the submit — both read here, so no clock is
+  // compared with another.
   useEffect(() => {
-    startedAt.current = Date.now()
+    mountedAt.current = Date.now()
   }, [])
 
   const handleBlur =
@@ -120,13 +131,12 @@ export function InquiryForm({
     event.preventDefault()
     if (status === 'submitting') return
 
-    const cleanReasons = reasons.map((reason) => stegaClean(reason))
     const submission = {
       ...values,
-      reasons: cleanReasons,
+      reasons: reasons.map(optionValue),
       ...(consentLabel ? { consent } : {}),
       honeypot: honeypot.current?.value ?? '',
-      startedAt: startedAt.current,
+      elapsedMs: mountedAt.current === null ? undefined : Date.now() - mountedAt.current,
     }
 
     const { ok, errors: found } = validateInquiry(submission)
@@ -161,7 +171,17 @@ export function InquiryForm({
   }
 
   return (
-    <form className="flex flex-col gap-5" noValidate onSubmit={handleSubmit} ref={form}>
+    <form
+      className="flex flex-col gap-5"
+      // The submit the browser resolves on its own, before this component's
+      // JavaScript arrives. Without them it GETs the page it is on and writes
+      // every field into the address bar, the message included.
+      method="post"
+      action={ENDPOINT}
+      noValidate
+      onSubmit={handleSubmit}
+      ref={form}
+    >
       {/* The two names share a row at BOTH frame widths — `2975:10198` is a
           horizontal row of two 131-wide fields inside a 282 card at 402, so
           this never stacks. */}
@@ -234,8 +254,9 @@ export function InquiryForm({
               // the child preserves click-to-edit. Keeping them on the VALUE
               // would mean the reason a submission carries silently differs
               // from the one an editor typed, on drafts only, invisibly — and
-              // the route checks the reason against the list it was sent.
-              <option key={stegaClean(reason)} value={stegaClean(reason)}>
+              // the route checks the reason against the list it was sent,
+              // exactly, on trimmed values.
+              <option key={optionValue(reason)} value={optionValue(reason)}>
                 {reason}
               </option>
             ))}
@@ -289,14 +310,18 @@ export function InquiryForm({
         </div>
       ) : null}
 
-      <div className="border-current/25 flex flex-col gap-4 border-t pt-6">
-        {status === 'error' ? (
-          // The values are still in the fields behind this, so the next press
-          // of the button is a retry rather than a re-typing.
-          <p role="alert" className="text-legal text-current/70">
-            {FAILED_MESSAGE}
-          </p>
-        ) : null}
+      <div className="border-current/25 flex flex-col border-t pt-6">
+        {/*
+          Always in the DOM, empty until there is something to say — the same
+          rule `FormField`'s message follows. A live region that appears only
+          when it has words was not live when the browser started watching it,
+          so the first failure of a session goes unannounced. The values are
+          still in the fields behind it, so the next press of the button is a
+          retry rather than a re-typing.
+        */}
+        <p role="alert" className="text-legal text-current/70 [&:not(:empty)]:mb-4">
+          {status === 'error' ? FAILED_MESSAGE : ''}
+        </p>
         <div>
           <ButtonLink
             button={submit}

@@ -111,12 +111,12 @@ Five things do not migrate. None of them is silent — each is reported as a
 2. **Embedded forms** (3 posts — HubSpot ×2, Gravity Forms ×1). Stripped, with
    the provider named so an editor can re-add a CTA. This was already a silent
    loss: block-tools discards `<script>` and `<form>` without a word.
-   **Still dropped after #58.** That ticket added `formSection`, but a section
-   block cannot appear inside an insight body — a body is Portable Text with
-   a closed inline-object set (`figure`, `embed`, `pullQuote`), never section
-   blocks (CONTEXT.md). Admitting a form into a body is its own schema
-   conversation, and the form it would admit still has no handler and no
-   destination ([ADR 0014](../../docs/adr/0014-form-fields-are-code-form-copy-is-content.md)).
+   **Still dropped after #58 and #412.** Those tickets added `formSection` and
+   gave it a destination — it posts to the app's `/api/contact` route, which
+   forwards to HubSpot — but a section block cannot appear inside an insight
+   body: a body is Portable Text with a closed inline-object set (`figure`,
+   `embed`, `pullQuote`), never section blocks (CONTEXT.md). Admitting a form
+   into a body is its own schema conversation.
 3. **Broken Yoast title templates** (1 post). See the SEO section below.
 4. **Code blocks** — nothing to drop. Zero `<pre>`, `<code>`, `wp-block-code`
    or highlighter classes in 272 bodies, which settles the open question from

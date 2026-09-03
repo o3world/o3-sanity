@@ -32,8 +32,8 @@ import {
  * tests carry a second job: they are the only place that says what the route
  * `/live` resolves to.
  *
- * Contact reads off `2960:7557` / `2975:10037` (#331) and stays provisional
- * only because the form cannot send. 1682 (#48) has no canonical frame at all
+ * Contact reads off `2960:7557` / `2975:10037` (#331), and its form posts to
+ * `/api/contact` (#412). 1682 (#48) has no canonical frame at all
  * — its copy is WordPress's and its composition assembled from existing
  * blocks. #48's gate is "every top-level link resolves", so like Live, these
  * tests are the durable proof the two routes resolve to their bands.
@@ -461,9 +461,9 @@ describe('the seeded Contact page', () => {
     expect(html).toContain(copy)
   })
 
-  // The form still cannot send (#58), so the rail's email and phone are the
-  // page's only WORKING conversion path — which is why they are links and not
-  // the flat text the frame draws.
+  // A printed address is not a way to reach anyone from a phone, and these are
+  // the two paths a reader who does not want to fill in the form has — which is
+  // why they are links and not the flat text the frame draws.
   it('keeps the email and phone reachable, not printed', () => {
     expect(html).toContain('href="mailto:hello@o3world.com"')
     expect(html).toContain('href="tel:2155924739"')
@@ -535,6 +535,18 @@ describe('the seeded Contact page', () => {
       // Tailwind variants.
       expect(html).not.toMatch(/<button[^>]*\saria-disabled="true"/)
       expect(html).not.toMatch(/<button[^>]*\sdisabled=""/)
+    })
+
+    /**
+     * Before the page's JavaScript arrives, the browser resolves the submit on
+     * its own. A form that names no method GETs the page it is on and writes
+     * every field into the address bar — the message included. Naming the
+     * method and the action posts it to the route instead.
+     */
+    it('names a method and an action, so a submit before hydration still posts', () => {
+      const form = html.match(/<form[^>]*>/)?.[0]
+      expect(form).toContain('method="post"')
+      expect(form).toContain('action="/api/contact"')
     })
 
     it('carries a honeypot input nobody using the form can reach', () => {

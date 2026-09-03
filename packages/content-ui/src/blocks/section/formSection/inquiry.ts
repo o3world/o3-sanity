@@ -1,17 +1,21 @@
 /**
- * The inquiry form's field set, its validation and its submission, as pure
- * functions.
+ * The inquiry form's field set, its validation, its submission, and the whole
+ * of what `/api/contact` answers.
  *
  * Both the browser and the app's `/api/contact` route read this module, so a
- * rule lives once: the client shows the error, the route enforces it.
+ * rule lives once: the client shows the error, the route enforces it. An app
+ * route is `handleInquiryRequest` plus the one brand fact it owns, the page's
+ * name.
  * **The route's enforcement is the only one there is** — a probe submission
  * carrying an invalid address and a field name HubSpot had never heard of came
  * back `Thanks for submitting the form.` (#412). The forms endpoint validates
  * nothing.
  *
- * Nothing here reads `process.env`, `fetch` or a brand: the environment, the
- * fetch and the page's name all arrive as parameters, which is what lets a
- * unit test drive the whole submission without a network.
+ * Nothing here reads `process.env`, `fetch`, a clock or a brand: the
+ * environment, the fetch, the time and the page's name all arrive as
+ * parameters, and the types are web-standard `Request` and `Response`. That is
+ * what lets a unit test drive a whole request without a network or a Next
+ * import.
  */
 
 /**
@@ -88,8 +92,12 @@ export interface InquiryInput {
   reasons?: readonly string[] | null
   /** The honeypot's value, under whatever name the client posted it. */
   honeypot?: string | null
-  /** When the form mounted, in ms since the epoch. */
-  startedAt?: number | null
+  /**
+   * How long the form was open before it was submitted, in ms. The client
+   * measures it against its own clock and sends the difference, so nothing
+   * here compares a browser's time of day with a server's.
+   */
+  elapsedMs?: number | null
 }
 
 export interface InquiryValidation {
@@ -111,7 +119,13 @@ export function validateField(
   const trimmed = text(value)
   if (!trimmed) return REQUIRED_MESSAGE[field]
   if (field === 'email' && !EMAIL_PATTERN.test(trimmed)) return EMAIL_MESSAGE
-  if (field === 'reason' && reasons?.length && !reasons.includes(trimmed)) return REASON_MESSAGE
+  if (field === 'reason') {
+    // An exact match against the trimmed options, and only ever against an
+    // array: `includes` on a string is a substring test, so a `reasons` that
+    // arrived as one would let `Ventures` pass for `Ventures request`.
+    const offered = Array.isArray(reasons) ? reasons.map(text) : []
+    if (offered.length && !offered.includes(trimmed)) return REASON_MESSAGE
+  }
   return undefined
 }
 
@@ -136,14 +150,46 @@ export function validateInquiry(input: InquiryInput): InquiryValidation {
  * silent — a caller that drops a submission answers as though it sent, so a
  * bot learns nothing from the reply.
  */
-export function isSpam(input: InquiryInput, now: number): boolean {
+export function isSpam(input: InquiryInput): boolean {
   if (text(input.honeypot)) return true
-  // The form always sends its mount time — a back/forward-cache restore keeps
-  // the page's JavaScript state — so a post without one did not come from the
-  // form. An old tab still carries the time it mounted with, which is far
-  // past the minimum.
-  if (typeof input.startedAt !== 'number') return true
-  return now - input.startedAt < MINIMUM_FILL_MS
+  // The form always sends how long it was open — a back/forward-cache restore
+  // keeps the page's JavaScript state — so a post without one did not come
+  // from the form. The client measures it, so there is no clock to read here.
+  if (typeof input.elapsedMs !== 'number' || !Number.isFinite(input.elapsedMs)) return true
+  return input.elapsedMs < MINIMUM_FILL_MS
+}
+
+/**
+ * A posted body as an `InquiryInput`, or `null` when it is not one.
+ *
+ * Nothing downstream may assume a shape a client chose, so this is the only
+ * place a body becomes typed and it never casts: anything but a plain object
+ * is refused, every text key is coerced to a trimmed string, and a `reasons`
+ * that is not an array becomes no list rather than something `includes` can be
+ * called on.
+ */
+export function parseInquiryInput(body: unknown): InquiryInput | null {
+  if (typeof body !== 'object' || body === null || Array.isArray(body)) return null
+  const source = body as Record<string, unknown>
+
+  const input: InquiryInput = {
+    firstName: text(source.firstName),
+    lastName: text(source.lastName),
+    email: text(source.email),
+    reason: text(source.reason),
+    message: text(source.message),
+    honeypot: text(source.honeypot),
+    reasons: Array.isArray(source.reasons) ? source.reasons.map(text) : [],
+  }
+
+  const elapsed = source.elapsedMs
+  if (typeof elapsed === 'number' && Number.isFinite(elapsed)) input.elapsedMs = elapsed
+
+  // Only when the key is there: a form that drew no checkbox posts none, and
+  // an opt-in nobody was shown is not a "no" to record.
+  if ('consent' in source) input.consent = Boolean(source.consent)
+
+  return input
 }
 
 /** HubSpot's contact object. Every property this form writes is one. */
@@ -242,6 +288,13 @@ export interface SubmitInquiryOptions {
   ipAddress?: string
 }
 
+/**
+ * How long HubSpot gets to answer. Past this the submission is `failed`, which
+ * the card offers as a retry — a request left hanging holds a serverless
+ * invocation open for as long as the platform allows.
+ */
+const HUBSPOT_TIMEOUT_MS = 10_000
+
 function endpoint(portalId: string, formGuid: string): string {
   return `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`
 }
@@ -267,7 +320,7 @@ export async function submitInquiry({
   const { ok, errors } = validateInquiry(input)
   if (!ok) return { status: 'invalid', errors }
 
-  if (isSpam(input, now)) return { status: 'dropped' }
+  if (isSpam(input)) return { status: 'dropped' }
 
   const { HUBSPOT_PORTAL_ID: portalId, HUBSPOT_FORM_GUID: formGuid } = env
   if (!portalId || !formGuid) return { status: 'unconfigured' }
@@ -277,10 +330,139 @@ export async function submitInquiry({
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(toHubSpotSubmission(input, { pageUri, pageName, ipAddress, now })),
+      signal: AbortSignal.timeout(HUBSPOT_TIMEOUT_MS),
     })
     if (!response.ok) return { status: 'failed' }
     return { status: 'sent' }
   } catch {
     return { status: 'failed' }
+  }
+}
+
+/**
+ * Where a native, JavaScript-free submit is sent back to when the browser
+ * named no referer.
+ */
+const FALLBACK_RETURN_PATH = '/contact'
+
+export interface InquiryRequestOptions {
+  env: InquiryEnv
+  /** The brand fact: how this app's contact page names itself in HubSpot. */
+  pageName?: string
+  /** Injected, so a unit test drives a whole request with no network. */
+  fetch?: typeof globalThis.fetch
+  /** Injected for the same reason. */
+  now?: () => number
+}
+
+/**
+ * The visitor's address for HubSpot's form analytics. It is a header a client
+ * can set, so it is reported and never trusted: nothing here decides anything
+ * by it.
+ */
+function ipAddress(request: Request): string | undefined {
+  const forwarded = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+  if (forwarded) return forwarded
+  return request.headers.get('x-real-ip')?.trim() || undefined
+}
+
+/** A native submit's fields, in the shape the parser reads. */
+function fromFormData(body: FormData): Record<string, unknown> {
+  const source: Record<string, unknown> = {}
+  for (const [name, value] of body.entries()) {
+    if (typeof value === 'string') source[name] = value
+  }
+  // A checkbox posts only when it is checked, whatever its value.
+  if ('consent' in source) source.consent = true
+  // Every field arrives as a string, and the timing check reads a number.
+  if (typeof source.elapsedMs === 'string') source.elapsedMs = Number(source.elapsedMs)
+  // A native post carries no list of options, so the reason is checked for
+  // being answered and nothing more.
+  delete source.reasons
+  return source
+}
+
+/**
+ * A native submit's answer: back to the page it came from, carrying whether
+ * the message went and nothing else. The values never enter the URL.
+ */
+function returnToPage(request: Request, sent: boolean): Response {
+  const answer = sent ? '1' : '0'
+  const referer = request.headers.get('referer')
+  let location: string
+  try {
+    const url = new URL(referer ?? '')
+    url.searchParams.set('sent', answer)
+    location = url.toString()
+  } catch {
+    location = `${FALLBACK_RETURN_PATH}?sent=${answer}`
+  }
+  return new Response(null, { status: 303, headers: { location } })
+}
+
+/**
+ * One request, from either app's `/api/contact`, to the response it answers
+ * with. Web-standard `Request` and `Response` throughout: an app route is a
+ * line that names its brand and hands the request over.
+ *
+ * Two ways in. The card's own `fetch` posts JSON and reads the status back.
+ * A submit the browser resolves itself — the form is on the page before its
+ * JavaScript is — posts form-encoded, and is answered with a redirect back to
+ * the page, because a body that came from a `<form>` has nowhere to render a
+ * JSON answer.
+ *
+ * A dropped submission answers exactly as a sent one does, both ways. The spam
+ * checks are only worth having while a bot cannot tell which one it tripped.
+ */
+export async function handleInquiryRequest(
+  request: Request,
+  { env, pageName, fetch = globalThis.fetch, now = Date.now }: InquiryRequestOptions,
+): Promise<Response> {
+  const native = !request.headers.get('content-type')?.includes('application/json')
+
+  let input: InquiryInput | null = null
+  if (native) {
+    try {
+      input = parseInquiryInput(fromFormData(await request.formData()))
+    } catch {
+      input = null
+    }
+  } else {
+    try {
+      input = parseInquiryInput(await request.json())
+    } catch {
+      input = null
+    }
+  }
+
+  if (!input) {
+    if (native) return returnToPage(request, false)
+    return Response.json({ status: 'invalid' }, { status: 400 })
+  }
+
+  const result = await submitInquiry({
+    input,
+    env,
+    fetch,
+    now: now(),
+    pageUri: request.headers.get('referer') ?? undefined,
+    pageName,
+    ipAddress: ipAddress(request),
+  })
+
+  if (native) return returnToPage(request, result.status === 'sent' || result.status === 'dropped')
+
+  switch (result.status) {
+    case 'sent':
+    case 'dropped':
+      return Response.json({ status: 'sent' })
+    case 'invalid':
+      return Response.json({ status: 'invalid', errors: result.errors }, { status: 400 })
+    case 'unconfigured':
+      return Response.json({ status: 'unconfigured' }, { status: 503 })
+    default:
+      // HubSpot's own error body names properties and portals, and the person
+      // who filled the form can do nothing with it. It stays here.
+      return Response.json({ status: 'failed' }, { status: 502 })
   }
 }

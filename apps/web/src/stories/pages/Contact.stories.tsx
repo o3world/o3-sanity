@@ -8,12 +8,9 @@ import { PageMockup } from '../PageMockup'
  * `/contact`, from `data/seed/page/contact.json`. Two bands: the interior hero
  * (`2960:7558`) and the form card beside its rail (`2960:7792`).
  *
- * The mockup also carries the state the page is actually in: the submit path
- * is stubbed (#58), and the notice saying so sits above a button that is
- * `aria-disabled` rather than `disabled`, so it stays focusable and its
- * description is announced. That is the thing to check has not quietly been
- * "tidied away" — a form that silently discards what it collects is worse than
- * no form.
+ * The form posts to the app's `/api/contact` route, which forwards the
+ * submission to HubSpot (#412). No mockup reaches that route — Storybook has
+ * no app behind it — so what this shows is the card as a page draws it.
  */
 const meta = {
   title: 'Pages/Contact',

@@ -5,7 +5,7 @@ import { fieldAttr } from '@o3/content-runtime/data-attribute'
 import { SanityImage } from '../../../SanityImage'
 import { resolveSurface } from '../../surface'
 
-import { InquiryForm, type InquiryStatus } from './InquiryForm'
+import { InquiryForm, type FormStatus } from './InquiryForm'
 
 type FormSectionProps = SectionProps<'formSection'> & {
   /**
@@ -13,7 +13,7 @@ type FormSectionProps = SectionProps<'formSection'> & {
    * answers are visible without a network; a page always opens on `idle` and
    * the schema has no field for it.
    */
-  initialStatus?: InquiryStatus
+  initialStatus?: FormStatus
 }
 
 /**
