@@ -179,37 +179,25 @@ export function HeroSection({
         decoration={
           showOrbs && !centred ? (
             /*
-             * THE TWO SURFACES HANG DIFFERENT SPHERES, and the geometry is
-             * read per surface rather than shared.
+             * ONE SEATING FOR EVERY SURFACE. The interior hero hangs its
+             * sphere in the same place whichever colour the band is painted;
+             * only the drawing changes with the surface, not the geometry.
              *
-             * On INK the art rides in the set's own frame — a flattened
-             * capture (`I2101:861;2846:4466` on Work, the same node on
-             * Insights and on Software Engineering `I2354:2583;2846:4466`),
-             * so its 1577 box is the capture's bounds and not the sphere's.
-             * The sphere inside it is what this is seated to: tracing the lit
-             * limb across the three exports gives **d ≈ 918, top edge 184px
-             * below the band's top** at BOTH widths, moving only sideways —
-             * left edge 639 on the 1440 frames and 205 on the 402 one
-             * (`I2107:1086;2960:6869`, the same capture slid 434 left). So the
-             * size is a literal, `lg` anchors to the right edge it overhangs
-             * by 117, and it is drawn at both widths.
+             * The geometry is the ink set's. The art rides in the set's own
+             * frame — a flattened capture (`I2101:861;2846:4466` on Work, the
+             * same node on Insights and on Software Engineering
+             * `I2354:2583;2846:4466`), so its 1577 box is the capture's bounds
+             * and not the sphere's. The sphere inside it is what this is
+             * seated to: tracing the lit limb across the three exports gives
+             * **d ≈ 918, top edge 184px below the band's top** at BOTH widths,
+             * moving only sideways — left edge 639 on the 1440 frames and 205
+             * on the 402 one (`I2107:1086;2960:6869`, the same capture slid
+             * 434 left). So the size is a literal, `lg` anchors to the right
+             * edge it overhangs by 117, and it is drawn at both widths.
              *
-             * On LIGHT it is the About band's own art
-             * (`I2960:6876;2960:6862`) — a 782 × 823 capture box, seated at
-             * x 743 of the 1440 frame, whose source traces a sphere of
-             * **d ≈ 720** at (124, 98) inside that box. So on 1440 it anchors
-             * to the band's TOP and overhangs the right edge by 147, the same
-             * top-and-right idiom the ink arm uses.
-             *
-             * **It is drawn at 402 too**, where the mobile frame slides the
-             * same capture rather than dropping it: the wrapper sits at x -46,
-             * y 40 and the capture at (93, 40) inside it (`I2975:9022;
-             * 2960:6866`), which puts the same 720 sphere at left 171, top 178
-             * — most of it past the right edge, with the lit arc crossing the
-             * copy's right shoulder.
-             *
-             * The hairline drawing rather than the lit rim, because the glow
-             * belongs to the dark bands (see `OrbitalSphere`).
+             * On the light surfaces it is the hairline drawing rather than the
+             * lit rim, because the glow belongs to the dark bands (see
+             * `OrbitalSphere`).
              */
             /*
              * THE BLOOM IS FADED OUT WHERE THE NAV SITS.
@@ -246,14 +234,10 @@ export function HeroSection({
                  same field on a shorter band. The line drawing still belongs to
                  the light surfaces, where a bloom has nothing to sit on. */
                 preset={band === 'ink' ? 'hero' : 'line'}
-                /* Both spheres are a literal size at both widths — that is the
-                 reading above, not an oversight: the frames slide the same
-                 capture sideways rather than rescaling it. */
-                className={
-                  band === 'ink'
-                    ? 'left-[205px] top-[184px] w-[918px] lg:left-auto lg:right-[-117px]'
-                    : 'left-[171px] top-[178px] w-[720px] lg:left-auto lg:right-[-147px] lg:top-[98px]'
-                }
+                /* A literal size at both widths — that is the reading above,
+                 not an oversight: the frames slide the same capture sideways
+                 rather than rescaling it. */
+                className="left-[205px] top-[184px] w-[918px] lg:left-auto lg:right-[-117px]"
               />
             </div>
           ) : null
