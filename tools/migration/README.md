@@ -19,6 +19,9 @@ pnpm --filter @o3/migration convert                      # data/extract/ → dat
 pnpm --filter @o3/migration redirects                    # data/extract/site/redirects.json → apps/web/src/lib/redirects.generated.ts
 pnpm --filter @o3/migration load                         # RETIRED for o3 — refuses the brand, no flag (src/lib/loadRetired.ts)
 pnpm --filter @o3/migration verify                       # is the dataset what data/ says it is?
+
+pnpm --filter @o3/migration stats-to-band                # targeted: stats field → a statsSection at story[0]
+pnpm --filter @o3/migration dev-mirrors-prod             # targeted: delete development documents production lacks
 ```
 
 ## Two brands, one pipeline (#217)

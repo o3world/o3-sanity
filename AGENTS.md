@@ -260,7 +260,16 @@ inverted — what an editor wrote outranks the committed JSON. `pnpm
 dataset:drift` names the documents an editor changed (lock them with
 `-- --lock`, or port the edits into `data/`), `pnpm dataset:backup` writes a
 tarball, and `pnpm dataset:sync` pulls production's content into `development`
-without deleting anything. A `migration.locked` document is never touched in
+without deleting anything.
+
+**To rehearse an op, sync is only half of it.** `dataset:sync` imports with
+`--replace`, so it overwrites what the two datasets share and leaves
+development-only documents standing — and what development holds that
+production does not is exactly what makes a rehearsal lie. `pnpm --filter
+@o3/migration dev-mirrors-prod -- --apply` removes them, and only ever runs
+against `development`. Sync, then mirror, then run the op: what you are looking
+at is what production will look like. Back development up first — a
+development-only document exists nowhere else. A `migration.locked` document is never touched in
 any mode, whichever dataset. See `docs/agents/ops.md` → "Production holds user
 content now".
 
