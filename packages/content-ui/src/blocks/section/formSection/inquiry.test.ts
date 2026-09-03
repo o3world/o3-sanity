@@ -94,8 +94,8 @@ describe('isSpam', () => {
     expect(isSpam({ ...filled(), startedAt: now - 3_000 }, now)).toBe(false)
   })
 
-  it('keeps a submission with no start time — an old tab, not a bot', () => {
-    expect(isSpam({ ...filled() }, now)).toBe(false)
+  it('drops a submission with no start time — the form always sends one', () => {
+    expect(isSpam({ ...filled() }, now)).toBe(true)
   })
 })
 

@@ -138,11 +138,12 @@ export function validateInquiry(input: InquiryInput): InquiryValidation {
  */
 export function isSpam(input: InquiryInput, now: number): boolean {
   if (text(input.honeypot)) return true
-  // No start time is a page restored from the back/forward cache or a tab
-  // open since yesterday, not a bot. Only a time that is present and too
-  // recent counts against a submission.
-  if (typeof input.startedAt === 'number' && now - input.startedAt < MINIMUM_FILL_MS) return true
-  return false
+  // The form always sends its mount time — a back/forward-cache restore keeps
+  // the page's JavaScript state — so a post without one did not come from the
+  // form. An old tab still carries the time it mounted with, which is far
+  // past the minimum.
+  if (typeof input.startedAt !== 'number') return true
+  return now - input.startedAt < MINIMUM_FILL_MS
 }
 
 /** HubSpot's contact object. Every property this form writes is one. */
