@@ -8,6 +8,7 @@ import { stegaClean } from '@sanity/client/stega'
 
 import { ButtonLink } from '../../../ButtonLink'
 import { SanityImage } from '../../../SanityImage'
+import { DECORATED_BAND_CLASS } from '../../decoration'
 import { sectionBackground } from '../../sectionBackground'
 import { resolveSurface } from '../../surface'
 
@@ -17,6 +18,7 @@ import { PanelGrid } from './PanelGrid'
 import { PanelPlate } from './PanelPlate'
 import { PanelRows } from './PanelRows'
 import { PanelTrack } from './PanelTrack'
+import { PLATE_BLEED_CLASS, PLATE_BLEED_SIZES } from './plateBleed'
 import { STATEMENT_STEP } from './statementStep'
 
 /**
@@ -143,6 +145,7 @@ export function RailPanelsSection({
   intro,
   layout,
   rail,
+  plate,
   panels,
   surface,
   backgroundMedia,
@@ -161,6 +164,7 @@ export function RailPanelsSection({
   const isGrid = chosenLayout === 'grid'
   const isTrack = chosenLayout === 'track'
   const mode = stegaClean(rail) === 'number' ? 'number' : 'label'
+  const bleeding = stegaClean(plate) === 'bleed'
   // Panel ids are namespaced by the section's own `_key`, read out of `loc`
   // (SectionProps strips `_key` from the section itself). Panel keys alone are
   // NOT unique on a page: duplicating a rail band in the Studio copies its
@@ -293,7 +297,15 @@ export function RailPanelsSection({
   return (
     // `2747:4486` — 128 above and below, and 128 between the header and the
     // band, at both widths.
-    <SectionShell surface={resolved} top="md" bottom="md" background={background}>
+    <SectionShell
+      surface={resolved}
+      top="md"
+      bottom="md"
+      background={background}
+      // A bleeding plate ends on the viewport's edge; the clip is what keeps it
+      // from pushing the page sideways over the scrollbar.
+      className={bleeding ? DECORATED_BAND_CLASS : undefined}
+    >
       <div className="flex flex-col gap-32">
         {header}
 
@@ -321,6 +333,7 @@ export function RailPanelsSection({
                   note={panel.note}
                   button={panel.button}
                   media={panel.media}
+                  plate={bleeding ? 'bleed' : 'square'}
                   dataSanity={itemAttr(loc, 'panels', panel._key)}
                 />
               ))
@@ -394,7 +407,19 @@ export function RailPanelsSection({
                     ) : null}
                   </div>
 
-                  {panel.media ? (
+                  {panel.media && bleeding ? (
+                    // The 402 row still has no room for it — the bleed is a
+                    // 1440 treatment here too.
+                    <div className={cn('hidden lg:block', PLATE_BLEED_CLASS)}>
+                      <SanityImage
+                        source={panel.media.image}
+                        alt={panel.media.alt}
+                        ratio="fill"
+                        width={1600}
+                        sizes={PLATE_BLEED_SIZES}
+                      />
+                    </div>
+                  ) : panel.media ? (
                     <SanityImage
                       source={panel.media.image}
                       alt={panel.media.alt}

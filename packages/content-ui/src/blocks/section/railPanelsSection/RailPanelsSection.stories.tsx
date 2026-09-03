@@ -150,6 +150,22 @@ export const RailMobile: Story = {
   parameters: { design: figmaDesign('2975:8188') },
 }
 
+/**
+ * `plate: bleed` — the plate keeps its left edge and runs off the right of
+ * the screen, which is where the frame's 491 plate already reaches at 1440
+ * (`2747:4503`); wider than that, the box grows with the viewport.
+ */
+export const RailBleed: Story = {
+  args: { ...seededSectionArgs('index', 'railPanelsSection', 0), plate: 'bleed' },
+  parameters: { design: figmaDesign('2747:4503') },
+}
+
+/** The same plate at 402: square, from the copy's left edge to the viewport's right. */
+export const RailBleedMobile: Story = {
+  args: { ...seededSectionArgs('index', 'railPanelsSection', 0), plate: 'bleed' },
+  globals: { viewport: { value: 'mobile' } },
+}
+
 export const CardsMobile: Story = {
   args: seededSectionArgs('solutions', 'railPanelsSection'),
   globals: { viewport: { value: 'mobile' } },

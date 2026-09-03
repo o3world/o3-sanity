@@ -3,6 +3,8 @@ import type { ComponentProps } from 'react'
 import { ButtonLink } from '../../../ButtonLink'
 import { SanityImage } from '../../../SanityImage'
 
+import { PLATE_BLEED_CLASS, PLATE_BLEED_SIZES } from './plateBleed'
+
 type ImageSource = ComponentProps<typeof SanityImage>['source']
 
 export interface PanelPlateProps {
@@ -18,6 +20,8 @@ export interface PanelPlateProps {
   note?: string | null
   button?: ComponentProps<typeof ButtonLink>['button']
   media?: { image?: ImageSource; alt?: string | null } | null
+  /** `bleed` runs the plate off the right edge of the screen — see `plateBleed.ts`. */
+  plate?: 'square' | 'bleed'
   dataSanity?: string
 }
 
@@ -32,9 +36,10 @@ export interface PanelPlateProps {
  *  402   column, gap 33    copy full width, plate under it
  * ```
  *
- * The frame's plate is 491 and overruns the panel column by the page gutter;
- * here it is the 395 the band's own sum leaves for it — 82 + 238 + 500 + 33 +
- * 395 = 1248, the standard content column.
+ * The frame's plate is 491 and overruns the panel column by the page gutter.
+ * `plate: square` draws the 395 the band's own sum leaves for it — 82 + 238 +
+ * 500 + 33 + 395 = 1248, the standard content column; `plate: bleed` draws the
+ * frame's 491 and keeps going to the viewport's edge (`plateBleed.ts`).
  *
  * **An empty plate holds the row open at 1440 and is drawn nowhere else.** The
  * frame's plates are flat grey on every panel — no picture is chosen yet — and
@@ -54,6 +59,7 @@ export function PanelPlate({
   note,
   button,
   media,
+  plate = 'square',
   dataSanity,
 }: PanelPlateProps) {
   return (
@@ -105,7 +111,17 @@ export function PanelPlate({
         ) : null}
       </div>
 
-      {media?.image ? (
+      {media?.image && plate === 'bleed' ? (
+        <div className={PLATE_BLEED_CLASS}>
+          <SanityImage
+            source={media.image}
+            alt={media.alt ?? ''}
+            ratio="fill"
+            width={1600}
+            sizes={PLATE_BLEED_SIZES}
+          />
+        </div>
+      ) : media?.image ? (
         <SanityImage
           source={media.image}
           alt={media.alt ?? ''}

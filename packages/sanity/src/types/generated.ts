@@ -637,6 +637,7 @@ export type RailPanelsSection = {
     _type: 'panel'
     _key: string
   }>
+  plate?: 'square' | 'bleed'
   surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
@@ -2940,6 +2941,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'panel'
           _key: string
         }> | null
+        plate?: 'bleed' | 'square'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -4171,6 +4173,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'panel'
           _key: string
         }> | null
+        plate?: 'bleed' | 'square'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -5573,6 +5576,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _type: 'panel'
           _key: string
         }> | null
+        plate?: 'bleed' | 'square'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -6961,6 +6965,7 @@ export type PAGE_QUERY_RESULT = {
           _type: 'panel'
           _key: string
         }> | null
+        plate?: 'bleed' | 'square'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'

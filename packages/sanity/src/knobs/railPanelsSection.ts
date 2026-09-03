@@ -65,6 +65,22 @@ export const railPanelsSectionKnobs = defineBlockKnobs({
       // `ORB_ONLY` precedent in `mark.ts`).
       showWhen: { at: 'layout', mode: 'oneOf', values: ['rail'], emptyMatches: true },
     }),
+    knob({
+      name: 'plate',
+      title: 'Plate',
+      description:
+        'Rail layout only — the shape of each panel’s picture. Square is the 395px plate beside the copy. To the right edge keeps that left edge and runs the picture off the right of the screen, cropped to the plate’s height; on a phone it runs from the copy’s edge to the right edge the same way.',
+      // Home's platforms frame (`2747:4503`) draws the plate at 491, which is
+      // the 395 the content column leaves for it plus the 96 gutter: the
+      // picture already meets the frame's right edge there. `square` is the
+      // plate the column's own sum allows; `bleed` is the frame's edge.
+      options: [
+        { value: 'square', title: 'Square' },
+        { value: 'bleed', title: 'To the right edge' },
+      ],
+      initialValue: 'square',
+      showWhen: { at: 'layout', mode: 'oneOf', values: ['rail'], emptyMatches: true },
+    }),
     surfaceKnob({ initialValue: 'white' }),
   ],
   /**
