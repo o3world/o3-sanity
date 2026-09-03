@@ -76,3 +76,52 @@ describe('the media band’s plain variant', () => {
     expect(render({ width: 'contained' })).toBe(render({ variant: 'plain', width: 'contained' }))
   })
 })
+
+/**
+ * `backgroundMedia` — the field every section block carries, which this band
+ * offered in Studio and drew nowhere (#239's injection reached the schema
+ * before this renderer).
+ */
+describe('the picture the media band sits on', () => {
+  const PICTURE = {
+    _type: 'backgroundMedia',
+    image: { asset: { _ref: 'image-abc0123456789abcdef0123456789abcdef0123-1440x790-png' } },
+  }
+
+  it('draws no background layer, and no stacking context, without one', () => {
+    const html = render({ variant: 'plain', width: 'contained' })
+    expect(html).not.toContain('aria-hidden')
+    // `isolate` traps a negative-z layer, so a band with no picture must not
+    // open one.
+    expect(html).not.toContain('isolate')
+  })
+
+  it('hangs the picture behind each of the three shapes', () => {
+    for (const props of [
+      { variant: 'plain', width: 'contained' },
+      { variant: 'plain', width: 'full-bleed' },
+      { variant: 'capture' },
+    ]) {
+      const html = render({ ...props, backgroundMedia: PICTURE })
+      expect(html, `${props.variant}/${props.width ?? '—'} drew no picture`).toContain('1440x790')
+      expect(html).toContain('isolate')
+    }
+  })
+
+  it('replaces the capture’s stage gradient rather than hiding under it', () => {
+    // The stage gradient is opaque, so a band cannot carry both. The frame's
+    // own stage (`1647:1720`) hangs its picture in exactly that slot.
+    const html = render({ variant: 'capture', backgroundMedia: PICTURE })
+    expect(html).not.toContain('--gradient-screen-stage')
+    // The stage's geometry and its foot shadow stay: only the fill moves.
+    expect(html).toContain('shadow-[inset_0_-16px_16px_0_rgba(0,0,0,0.05)]')
+    expect(html).toContain('lg:h-[700px]')
+  })
+
+  it('tints the picture by default and leaves it alone when told to', () => {
+    expect(render({ variant: 'plain', backgroundMedia: PICTURE })).toContain('bg-white/70')
+    expect(
+      render({ variant: 'plain', backgroundMedia: { ...PICTURE, tint: 'none' } }),
+    ).not.toContain('bg-white/70')
+  })
+})
