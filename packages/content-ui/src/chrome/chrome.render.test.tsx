@@ -155,7 +155,8 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     expect(navHtml).toContain('lg:py-4')
     expect(navHtml).toContain('lg:gap-12')
     // Two alphas, both the frames': `--color-scrim` is the 402 bar's 20%
-    // (`1814:1630`) and `--color-scrim-pill` the 1440 pill's 60% (`2225:2920`).
+    // (`1814:1630`) and `--color-scrim-pill` the 1440 pill's 45% (`2225:2920`,
+    // retuned from the frame's 60% — see the token).
     expect(navHtml).toContain('bg-scrim ')
     expect(navHtml).toContain('lg:bg-scrim-pill')
     // 16px of padding only lands an 80px bar over a 48px box. The mark is the
@@ -170,7 +171,8 @@ describe('the nav bar’s pinned, dark-ink default', () => {
   it('blurs whatever it is floating over', () => {
     // The Case Study frame's glass (`1710:2300`): the photograph under the
     // pill is a tone, not a shape.
-    expect(navHtml).toContain('backdrop-blur-[40px]')
+    expect(navHtml).toContain('backdrop-blur-[16px]')
+    expect(navHtml).toContain('backdrop-saturate-[1.25]')
   })
 
   it('server-renders the dark skin, with no ink attribute at all', () => {

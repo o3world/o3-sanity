@@ -157,22 +157,30 @@
   /* rgba(3,3,3,0.2) — the 402 bar's dark skin (`Links` 1814:1630). Sits over
    * whatever the hero is showing, so it must stay an alpha. */
   --color-scrim: rgba(3, 3, 3, 0.2);
-  /* rgba(3,3,3,0.6) — the 1440 pill's dark skin (`NavBar` 2225:2920, as the
-   * Case Study frame instances it at 2250:2155). Three times the bar's
-   * density: the pill floats over photography, and the frame's GLASS wipes
-   * what is under it to a tone rather than a picture — see the 40px backdrop
-   * blur in `SiteNav`. */
-  --color-scrim-pill: rgba(3, 3, 3, 0.6);
-  /* rgba(255,255,255,0.8) — the same pill once it floats over a LIGHT band.
+  /* rgba(3,3,3,0.45) — the 1440 pill's dark skin (`NavBar` 2225:2920, as the
+   * Case Study frame instances it at 2250:2155).
+   *
+   * NOT THE FRAME'S 60%, AND THE EFFECT IS WHY. The set puts a `GLASS` effect
+   * over that fill, and Figma's Glass refracts rather than covers — the fill
+   * under it is one input to a rendered result, not the result. We draw an
+   * alpha plus a backdrop blur, so transcribing 60% literally and dropping the
+   * effect gave a pill you could not see through at all: an opaque slab where
+   * the design has glass. 45% is where the photograph reads as shapes under
+   * the bar while white links hold. The alpha answers to the effect, which is
+   * what the frame actually declares. */
+  --color-scrim-pill: rgba(3, 3, 3, 0.45);
+  /* rgba(255,255,255,0.6) — the same pill once it floats over a LIGHT band.
    * White rather than a tint of the dark scrim, because a near-black at a low
    * alpha over a pale band is grey, and grey chrome reads as a smudge rather
-   * than a pill. An alpha rather than paint, because both frames put a GLASS
-   * effect on this bar and an opaque fill has nothing to blur: 80% is where
-   * the 40px backdrop blur still reads through the pill while the headlines
-   * of the insights feed passing under it stay a ghost rather than competing
-   * with the links. Brand-neutral, like the white alphas above, so no overlay
-   * restates it. */
-  --color-scrim-light: rgba(255, 255, 255, 0.8);
+   * than a pill.
+   *
+   * Retuned from the frame's 80% for the reason `--color-scrim-pill` carries:
+   * the fill sits under a `GLASS` effect and is not the rendered result. At
+   * 80% over a white page there is nothing to see through — the pill and the
+   * page are the same white. 60% keeps ink copy passing under it a ghost while
+   * the band still reads as a pill rather than as a hole. Brand-neutral, like
+   * the white alphas above, so no overlay restates it. */
+  --color-scrim-light: rgba(255, 255, 255, 0.6);
   /* rgba(0,0,0,0.10) — the hairline on the flipped pill; --color-on-ink-line's
    * opposite number, and the same NO CANONICAL ANCHOR note applies. */
   --color-on-light-line: rgba(0, 0, 0, 0.1);

@@ -40,10 +40,10 @@ interface SiteNavProps {
  * they are what makes the desktop bar 80px tall.
  *
  * The fills are alphas — `bg-scrim` on the 402 bar (`1814:1630`, 20%) and
- * `bg-scrim-pill` on the 1440 pill (`2225:2920`, 60%) — because both sit over
+ * `bg-scrim-pill` on the 1440 pill (`2225:2920`, 45%) — because both sit over
  * whatever the hero is showing, and both frames put a `GLASS` effect over
- * them; the flipped skin is an alpha for the same reason. The glass is a 40px
- * backdrop blur, read off the Case Study frame (`1710:2300`, which instances
+ * them; the flipped skin is an alpha for the same reason. The glass is a 16px
+ * backdrop blur under a 1.25 saturate, over the Case Study frame (`1710:2300`, which instances
  * the pill at `2250:2155` over a photograph): under the pill the rider's
  * helmet is a tone, not a shape. That is what the bar needs to earn — a bar
  * that never leaves crosses photography, headlines and body copy all the way
@@ -106,7 +106,7 @@ interface SiteNavProps {
  * fill has nothing to blur. What flips is the colour under the blur: a
  * near-black at a low alpha over a pale band is grey, and grey chrome over a
  * white page reads as a smudge rather than a pill, so the light skin is
- * `--color-scrim-light`, white at 80%. Over a flat band it reads as a white
+ * `--color-scrim-light`, white at 60%. Over a flat band it reads as a white
  * pill; over anything with content in it, the 40px blur shows through.
  *
  * **The mark is the app's, and the bar sets no colour on it.** Both brands
@@ -201,7 +201,7 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
           // this element carries the whole bar — the links, the hamburger's
           // `currentColor` bars and anything else added to the row inherit the
           // value mid-interpolation, and each keeps its own hover timing.
-          className="bg-scrim lg:bg-scrim-pill lg:border-on-ink-line group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-r-nav duration-(--duration-ink) group-data-[ink=dark]:bg-scrim-light flex items-center justify-between px-5 py-2 text-white backdrop-blur-[40px] transition-[background-color,border-color,color] ease-out [view-transition-name:site-nav] max-lg:group-data-[ink=dark]:border-b lg:mx-auto lg:w-full lg:max-w-[900px] lg:rounded-l-[40px] lg:border lg:px-4 lg:py-4"
+          className="bg-scrim lg:bg-scrim-pill lg:border-on-ink-line group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-r-nav duration-(--duration-ink) group-data-[ink=dark]:bg-scrim-light flex items-center justify-between px-5 py-2 text-white backdrop-blur-[16px] backdrop-saturate-[1.25] transition-[background-color,border-color,color] ease-out [view-transition-name:site-nav] max-lg:group-data-[ink=dark]:border-b lg:mx-auto lg:w-full lg:max-w-[900px] lg:rounded-l-[40px] lg:border lg:px-4 lg:py-4"
         >
           <Link
             href="/"

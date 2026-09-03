@@ -20,7 +20,7 @@ export { NAV_INK_TARGET }
  * as something to see through.
  *
  * Read off the palette rather than picked: every background alpha this design
- * uses is below it — `--color-scrim-light`, the densest, is 0.8. The only
+ * uses is below it — `--color-scrim-light`, the densest, is 0.6. The only
  * 0.9+ alpha anywhere in color.css is `--color-on-ink` at 0.92, which is a
  * text colour and never a fill. So 0.9 separates "a band" from "a veil over a
  * band", while still accepting the near-opaque values `color-mix` rounding
@@ -86,7 +86,7 @@ function declaredGround(element: Element): boolean | null {
  * The bar has two skins and they fail asymmetrically. White copy on
  * `--color-scrim` (20% black) survives almost any ground, because the scrim
  * darkens whatever is behind it. `#232323` on `--color-scrim-light` (white at
- * 80%) needs the ground to be pale AND even: the scrim lifts a dark ground a
+ * 60%) needs the ground to be pale AND even: the scrim lifts a dark ground a
  * long way, but not to white, and the hairline that shapes the pill needs an
  * even band around it to read as chrome at all. A photograph is that second
  * thing's enemy even when it is bright: measured on one article's picture, the
