@@ -4,6 +4,7 @@ import { stegaClean } from '@sanity/client/stega'
 
 import { SanityImage } from '../../../SanityImage'
 import { ARTICLE_COLUMN, FULL_BLEED } from '../../../imageSizes'
+import { sectionBackground } from '../../sectionBackground'
 import { resolveSurface } from '../../surface'
 
 type MediaSectionProps = SectionProps<'mediaSection'>
@@ -36,19 +37,37 @@ type MediaSectionProps = SectionProps<'mediaSection'>
  * supply the air and runs the media straight into the band below, so a media
  * block that opened with its own 164px would double it.
  *
+ * **A picture under the band is `backgroundMedia`**, the field every section
+ * carries — laid full-bleed behind the figure the way the hero and the CTA lay
+ * theirs. On `capture` it replaces the stage's gradient rather than sitting
+ * under it: the gradient is opaque, so a band cannot have both, and the frame's
+ * own stage (`1647:1720`) hangs its picture in exactly that slot.
+ *
  * The band builds its own `<section>` rather than using `SectionShell`,
  * because `full-bleed` has to escape the gutter the shell always applies.
  */
-export function MediaSection({ media, variant, width, surface }: MediaSectionProps) {
+export function MediaSection({
+  media,
+  variant,
+  width,
+  surface,
+  backgroundMedia,
+}: MediaSectionProps) {
   if (!media) return null
   const fullBleed = stegaClean(width) === 'full-bleed'
   const resolved = resolveSurface(surface, 'mediaSection')
   const surfaceClass = SURFACE_CLASS[resolved]
+  // `null` on every band that carries no picture — the same question
+  // `SectionShell` asks its `background` prop. `relative isolate` goes on the
+  // band only when there is something to position.
+  const picture = sectionBackground(backgroundMedia, resolved)
+  const bandClass = picture ? `${surfaceClass} relative isolate` : surfaceClass
 
   if (stegaClean(variant) === 'capture') {
     return (
       <SurfaceProvider surface={resolved}>
-        <section {...surfaceAttrs(resolved)} className={surfaceClass}>
+        <section {...surfaceAttrs(resolved)} className={bandClass}>
+          {picture}
           <figure>
             {/*
              * The stage: `--gradient-screen-stage` at 135° with the frame's
@@ -57,7 +76,11 @@ export function MediaSection({ media, variant, width, surface }: MediaSectionPro
              * the band shortens rather than scaling the capture, so the same
              * amount of page is legible at both widths (ADR 0006).
              */}
-            <div className="px-gutter bg-(image:--gradient-screen-stage) relative h-[520px] overflow-hidden pt-16 shadow-[inset_0_-16px_16px_0_rgba(0,0,0,0.05)] lg:h-[700px]">
+            <div
+              className={`px-gutter relative h-[520px] overflow-hidden pt-16 shadow-[inset_0_-16px_16px_0_rgba(0,0,0,0.05)] lg:h-[700px] ${
+                picture ? '' : 'bg-(image:--gradient-screen-stage)'
+              }`}
+            >
               <div className="max-w-article mx-auto w-full">
                 <SanityImage
                   source={media.image}
@@ -82,7 +105,8 @@ export function MediaSection({ media, variant, width, surface }: MediaSectionPro
   if (fullBleed) {
     return (
       <SurfaceProvider surface={resolved}>
-        <section {...surfaceAttrs(resolved)} className={surfaceClass}>
+        <section {...surfaceAttrs(resolved)} className={bandClass}>
+          {picture}
           <figure>
             <div className="relative aspect-[402/257] overflow-hidden lg:aspect-[1440/576]">
               <SanityImage
@@ -106,7 +130,8 @@ export function MediaSection({ media, variant, width, surface }: MediaSectionPro
 
   return (
     <SurfaceProvider surface={resolved}>
-      <section {...surfaceAttrs(resolved)} className={`${surfaceClass} px-gutter pb-band-article`}>
+      <section {...surfaceAttrs(resolved)} className={`${bandClass} px-gutter pb-band-article`}>
+        {picture}
         <figure className="max-w-article mx-auto w-full">
           <SanityImage
             source={media.image}

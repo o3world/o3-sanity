@@ -3,6 +3,13 @@
 Live site → Sanity pipeline, one extract source per brand. **Temporary** —
 deleted after the migration ships (ADR 0002, 0003).
 
+**The blanket `load` is retired for o3** (2026-09-03): it refuses the brand in
+every dataset, with no flag, because there is no longer a dataset where
+deleting and recreating every pipeline-owned document is harmless. An o3
+dataset change is a targeted script under `src/migrations/` — `statsToBand.ts`
+is the worked example. `src/lib/loadRetired.ts` carries the full reasoning, and
+o3xo still loads.
+
 ```sh
 pnpm --filter @o3/migration extract -- --posts all       # live WP → data/extract/ (terminus wp eval + ACF get_fields)
 pnpm --filter @o3/migration extract -- --slugs a,b       # …or exactly these posts, by slug
@@ -10,8 +17,11 @@ pnpm --filter @o3/migration extract -- --redirects       # …or just the redire
 pnpm --filter @o3/migration extract -- --ventures        # …or just the `ventures` CPT
 pnpm --filter @o3/migration convert                      # data/extract/ → data/converted/ (deterministic, fail-loud)
 pnpm --filter @o3/migration redirects                    # data/extract/site/redirects.json → apps/web/src/lib/redirects.generated.ts
-pnpm --filter @o3/migration load                         # data/{converted,translated,seed}/ → Sanity (sanity exec --with-user-token)
+pnpm --filter @o3/migration load                         # RETIRED for o3 — refuses the brand, no flag (src/lib/loadRetired.ts)
 pnpm --filter @o3/migration verify                       # is the dataset what data/ says it is?
+
+pnpm --filter @o3/migration stats-to-band                # targeted: stats field → a statsSection at story[0]
+pnpm --filter @o3/migration dev-mirrors-prod             # targeted: delete development documents production lacks
 ```
 
 ## Two brands, one pipeline (#217)

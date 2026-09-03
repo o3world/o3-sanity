@@ -21,6 +21,7 @@ import { buttonGroupKnobs } from './buttonGroup'
 import { caseShowcaseSectionKnobs } from './caseShowcaseSection'
 import { ctaSectionKnobs } from './ctaSection'
 import { faqSectionKnobs } from './faqSection'
+import { statsSectionKnobs } from './statsSection'
 import { featureGridSectionKnobs } from './featureGridSection'
 import { formSectionKnobs } from './formSection'
 import { heroSectionKnobs } from './heroSection'
@@ -44,6 +45,7 @@ export { caseShowcaseSectionKnobs } from './caseShowcaseSection'
 export { ctaSectionKnobs } from './ctaSection'
 export { decorationKnob } from './decoration'
 export { faqSectionKnobs } from './faqSection'
+export { statsSectionKnobs } from './statsSection'
 export { featureGridSectionKnobs } from './featureGridSection'
 export { formSectionKnobs } from './formSection'
 export { heroSectionKnobs } from './heroSection'
@@ -93,6 +95,7 @@ export const BLOCK_KNOBS: Readonly<Record<string, BlockKnobs>> = {
   [screenGridSectionKnobs.type]: screenGridSectionKnobs,
   [listingSectionKnobs.type]: listingSectionKnobs,
   [faqSectionKnobs.type]: faqSectionKnobs,
+  [statsSectionKnobs.type]: statsSectionKnobs,
 }
 
 /**

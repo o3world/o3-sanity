@@ -90,11 +90,16 @@ interface SiteNavProps {
  * sampling is the prototype's; the styling is CSS off one attribute rather
  * than the prototype's per-element inline writes.
  *
- * Nick's reference of both states (2026-08-02) is the answer sheet, and it is
- * a COLOUR answer sheet only — geometry, blur, hairlines, spacing and the link
- * treatment are as built. Dark pill: white mark, white links. Light pill: ink
- * mark, ink links. The button is the third element on the bar and inverts with
- * them — see below.
+ * Nick's reference of both states (2026-08-02) is the colour answer sheet:
+ * dark pill, white mark and white links; light pill, ink mark and ink links.
+ * The button is the third element on the bar and inverts with them — see
+ * below. Blur, hairlines, spacing and the link treatment are as built.
+ *
+ * **The radius is the set's, and it is asymmetric**: `40px 12px 12px 40px` on
+ * both variants of `3271:17013` — a round cap at the mark's end, the standard
+ * `--radius-nav` corner at the button's. 40 is half the pinned bar's height,
+ * so the cap closes on itself. The mobile bar is a full-width strip and takes
+ * no radius at all.
  *
  * **The light pill is a white scrim, not a grey one and not paint.** Both
  * skins are alphas, because the bar is glass at every width and an opaque
@@ -196,7 +201,7 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
           // this element carries the whole bar — the links, the hamburger's
           // `currentColor` bars and anything else added to the row inherit the
           // value mid-interpolation, and each keeps its own hover timing.
-          className="bg-scrim lg:bg-scrim-pill lg:border-on-ink-line group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-nav duration-(--duration-ink) group-data-[ink=dark]:bg-scrim-light flex items-center justify-between px-5 py-2 text-white backdrop-blur-[40px] transition-[background-color,border-color,color] ease-out max-lg:group-data-[ink=dark]:border-b lg:mx-auto lg:w-full lg:max-w-[900px] lg:border lg:px-4 lg:py-4"
+          className="bg-scrim lg:bg-scrim-pill lg:border-on-ink-line group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-r-nav duration-(--duration-ink) group-data-[ink=dark]:bg-scrim-light flex items-center justify-between px-5 py-2 text-white backdrop-blur-[40px] transition-[background-color,border-color,color] ease-out max-lg:group-data-[ink=dark]:border-b lg:mx-auto lg:w-full lg:max-w-[900px] lg:rounded-l-[40px] lg:border lg:px-4 lg:py-4"
         >
           <Link
             href="/"

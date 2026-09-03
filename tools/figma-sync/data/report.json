@@ -1,149 +1,30 @@
 {
   "schemaVersion": 1,
-  "ranAt": "2026-08-24T19:52:30.896Z",
-  "fileVersion": "2391349966960467923",
+  "ranAt": "2026-09-03T14:54:38.292Z",
+  "fileVersion": "2394769568920405467",
   "shortCircuited": false,
-  "changedFrames": [
-    {
-      "nodeId": "2960:7557",
-      "name": "Contact",
-      "route": "/contact",
-      "variant": "desktop",
-      "change": "added"
-    },
-    {
-      "nodeId": "2975:10037",
-      "name": "Contact",
-      "route": "/contact",
-      "variant": "mobile",
-      "change": "added"
-    },
-    {
-      "nodeId": "2975:8499",
-      "name": "Insight index",
-      "route": "/insights",
-      "variant": "mobile",
-      "change": "added"
-    },
-    {
-      "nodeId": "2975:9343",
-      "name": "Sanity partnership",
-      "route": "/partners/sanity",
-      "variant": "mobile",
-      "change": "added"
-    },
-    {
-      "nodeId": "2975:8865",
-      "name": "About",
-      "route": "/about",
-      "variant": "mobile",
-      "change": "added"
-    },
-    {
-      "nodeId": "1634:1167",
-      "name": "Work index",
-      "route": "/work",
-      "variant": "desktop",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1906:851",
-      "name": "Work index",
-      "route": "/work",
-      "variant": "mobile",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1710:2300",
-      "name": "Case Study detail",
-      "route": "/work/{slug}",
-      "variant": "desktop",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1906:928",
-      "name": "Case Study detail",
-      "route": "/work/{slug}",
-      "variant": "mobile",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1710:2823",
-      "name": "Insight detail",
-      "route": "/insights/{slug}",
-      "variant": "desktop",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1906:1046",
-      "name": "Insight detail",
-      "route": "/insights/{slug}",
-      "variant": "mobile",
-      "change": "modified"
-    },
-    {
-      "nodeId": "2336:4310",
-      "name": "Insight index",
-      "route": "/insights",
-      "variant": "desktop",
-      "change": "modified"
-    },
-    {
-      "nodeId": "2354:2446",
-      "name": "Sanity partnership",
-      "route": "/partners/sanity",
-      "variant": "desktop",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1644:1889",
-      "name": "Live",
-      "route": "/live",
-      "variant": "desktop",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1906:334",
-      "name": "Live",
-      "route": "/live",
-      "variant": "mobile",
-      "change": "modified"
-    }
-  ],
+  "changedFrames": [],
   "changedComponentSets": [
     {
-      "nodeId": "2846:5637",
-      "name": "Services",
+      "nodeId": "3271:17013",
+      "name": "NavBar",
       "route": null,
       "variant": null,
-      "codeComponent": "packages/content-ui/src/blocks/section/railPanelsSection/PanelTrack.tsx#PanelTrack",
+      "codeComponent": "packages/content-ui/src/chrome/SiteNav.tsx#SiteNav",
       "change": "added"
     },
     {
-      "nodeId": "2089:4169",
-      "name": "Case Study Card",
+      "nodeId": "2225:2920",
+      "name": "2225:2920",
       "route": null,
       "variant": null,
-      "codeComponent": "apps/web/src/components/cards/CaseStudyCard.tsx#CaseStudyCard",
-      "change": "added"
+      "codeComponent": null,
+      "change": "removed"
     }
   ],
   "untrackedFrames": [],
   "assets": {
-    "regenerated": [
-      {
-        "path": "tools/migration/data/seed/assets/about-beyond-community.png",
-        "nodeId": "2960:7144",
-        "export": "imageFill",
-        "reason": "new-to-baseline"
-      },
-      {
-        "path": "tools/migration/data/seed/assets/about-beyond-o3xo.png",
-        "nodeId": "2960:7142",
-        "export": "imageFill",
-        "reason": "new-to-baseline"
-      }
-    ],
+    "regenerated": [],
     "lockedConflicts": [],
     "failures": []
   },

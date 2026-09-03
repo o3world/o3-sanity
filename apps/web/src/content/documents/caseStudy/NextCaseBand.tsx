@@ -34,9 +34,10 @@ type NextCase = NonNullable<NonNullable<CASE_STUDY_QUERY_RESULT>['next']>
  * why `CASE_STUDY_QUERY`'s `next` is the card projection. At 402 the frame
  * still draws the photograph alone, with nothing over it.
  *
- * The heading row is text at both widths: at 1440 the card below it is the
- * anchor and carries its own CTA, so a heading link would be a second tab stop
- * to one href. At 402 the photograph is the tap target and names itself.
+ * The heading COPY is text at both widths — the card below it is the anchor
+ * and carries its own CTA, so a linked headline would be a second tab stop to
+ * one href. The chip beside it is a pointer-only link to that same href; see
+ * the note at it. At 402 the photograph is the tap target and names itself.
  */
 export function NextCaseBand({ next }: { next: NextCase }) {
   if (!next.slug) return null
@@ -52,15 +53,22 @@ export function NextCaseBand({ next }: { next: NextCase }) {
             <p className="text-display-xl font-display text-ink text-balance">{next.title}</p>
           </div>
           {/*
-           * `Icon / Surface` (`1710:2615`) as a non-interactive affordance —
-           * the card below is the anchor, so `CarouselControl`'s <button>
-           * would be a second tab stop to one href. The chip's geometry is
-           * that component's (58px circle, a 34.8px chip stroked at 1.45px
-           * with the design's one real 5.8px radius). Absent from the 402
-           * frame.
+           * `Icon / Surface` (`1710:2615`) — the chip's geometry is that
+           * component's (58px circle, a 34.8px chip stroked at 1.45px with the
+           * design's one real 5.8px radius). Absent from the 402 frame.
+           *
+           * IT IS A LINK THE KEYBOARD CANNOT REACH, and both halves of that
+           * are deliberate. It reads as a control, so a click on it has to go
+           * where the card goes — a chip that looks pressable and does nothing
+           * is the failure. But the card below is already an anchor to this
+           * same href, so `tabIndex={-1}` and `aria-hidden` keep the band at
+           * one tab stop and one announcement: the pointer gets a second
+           * target, assistive technology gets no duplicate.
            */}
-          <span
+          <Link
+            href={href}
             aria-hidden
+            tabIndex={-1}
             className="bg-surface-muted hidden size-[58px] shrink-0 items-center justify-center rounded-full lg:flex"
           >
             <span className="bg-surface-muted border-surface-muted text-ink flex size-[34.8px] items-center justify-center rounded-[5.8px] border-[1.45px]">
@@ -68,7 +76,7 @@ export function NextCaseBand({ next }: { next: NextCase }) {
                   off `1710:2615`. */}
               <ArrowIcon size={20} strokeWidth={2} />
             </span>
-          </span>
+          </Link>
         </div>
 
         <Link

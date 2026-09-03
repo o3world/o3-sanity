@@ -209,9 +209,13 @@ On-brand rewrite:
 ## Where the copy lives
 
 - Seed pages: `tools/migration/data/seed/page/*.json`; translated case
-  studies: `tools/migration/data/translated/caseStudy/*.json` — edits reach
-  the dataset via `pnpm --filter @o3/migration load` (the "production"
-  dataset is disposable early-alpha; just run it).
+  studies: `tools/migration/data/translated/caseStudy/*.json`. **Editing these
+  no longer reaches the dataset.** The blanket load that carried them there is
+  retired (AGENTS.md → Changing a dataset), and production holds editor content
+  that outranks the committed JSON (ADR 0003, inverted). Copy that has to land
+  in the dataset goes through MCP `patch_documents` or a targeted script under
+  `tools/migration/src/migrations/`; the files stay the record of what the
+  migration produced.
 - Live content: Sanity project `naorcr6k`, editable in the embedded studio at
   `/studio` or via MCP `patch_documents`.
 - Schema/field naming is governed by the `content-naming` skill — this skill

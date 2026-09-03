@@ -22,6 +22,7 @@ import { quoteSectionKnobs } from '../../knobs/quoteSection'
 import { railPanelsSectionKnobs } from '../../knobs/railPanelsSection'
 import { roleListSectionKnobs } from '../../knobs/roleListSection'
 import { screenGridSectionKnobs, screenKnobs } from '../../knobs/screenGridSection'
+import { statsSectionKnobs } from '../../knobs/statsSection'
 
 /**
  * The first block whose design options are declared rather than written out
@@ -838,6 +839,38 @@ export const listingSection = defineSectionBlock({
  * happens to end in a question mark, and inventing `question` / `answer` fields
  * would put two more synonyms in the lexicon for concepts it already names.
  */
+/**
+ * Figures as a band — `1883:3565`'s stat vocabulary, the large value over its
+ * label, in the two shapes the `layout` knob names.
+ *
+ * A band rather than a `statGroup` inside a `layoutSection`: figures in a
+ * narrative are a beat of their own, and reaching them through a layout column
+ * makes an editor build a grid to place one row. The base block stays for the
+ * case where stats sit BESIDE something in a column.
+ *
+ * The Case Study frame draws no stats region, so the band answers to the stat
+ * vocabulary and to its own two layouts rather than to a frame — #44's open
+ * design conversation, now at least authorable where the narrative wants it.
+ */
+export const statsSection = defineSectionBlock({
+  name: 'statsSection',
+  description:
+    'Proof as figures — two to four numbers laid across the band, each a large value over what it measures. Reach for it where a claim the page has already made lands harder as a number than as another sentence. The figures have to come from something real, and the first one is the one a reader remembers.',
+  title: 'Stats',
+  knobs: statsSectionKnobs,
+  fields: [
+    'layout',
+    defineField({
+      name: 'stats',
+      type: 'array',
+      of: [defineArrayMember({ type: 'stat' })],
+      description: 'Laid across at one step and stacked at 402. Four is the row\u2019s width.',
+      validation: (rule) => rule.required().min(1).max(4),
+    }),
+  ],
+  preview: { select: { title: 'stats.0.value', subtitle: 'stats.0.label' } },
+})
+
 export const faqSection = defineSectionBlock({
   name: 'faqSection',
   description:

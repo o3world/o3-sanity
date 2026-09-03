@@ -297,6 +297,9 @@ export type CollectionIndex = {
       } & ListingSection)
     | ({
         _key: string
+      } & StatsSection)
+    | ({
+        _key: string
       } & FaqSection)
   >
   sectionsBelow?: Array<
@@ -350,6 +353,9 @@ export type CollectionIndex = {
       } & ListingSection)
     | ({
         _key: string
+      } & StatsSection)
+    | ({
+        _key: string
       } & FaqSection)
   >
   seo?: Seo
@@ -366,6 +372,19 @@ export type FaqSection = {
     _type: 'question'
     _key: string
   }>
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
+  anchor?: string
+}
+
+export type StatsSection = {
+  _type: 'statsSection'
+  layout?: 'columns' | 'stacked'
+  stats?: Array<
+    {
+      _key: string
+    } & Stat
+  >
   surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
@@ -921,6 +940,9 @@ export type Page = {
       } & ListingSection)
     | ({
         _key: string
+      } & StatsSection)
+    | ({
+        _key: string
       } & FaqSection)
   >
   briefs?: Array<
@@ -1013,6 +1035,9 @@ export type CaseStudy = {
     | ({
         _key: string
       } & ListingSection)
+    | ({
+        _key: string
+      } & StatsSection)
     | ({
         _key: string
       } & FaqSection)
@@ -1204,6 +1229,7 @@ export type AllSanitySchemaTypes =
   | Slug
   | CollectionIndex
   | FaqSection
+  | StatsSection
   | ListingSection
   | ScreenGridSection
   | MediaSection
@@ -3066,6 +3092,35 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         } | null
         anchor?: string
       }
+    | {
+        _key: string
+        _type: 'statsSection'
+        layout?: 'columns' | 'stacked'
+        stats?: Array<
+          {
+            _key: string
+          } & Stat
+        >
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        backgroundMedia: {
+          _type: 'backgroundMedia'
+          image: {
+            asset: {
+              _id: string
+              metadata: {
+                lqip: string | null
+                isOpaque: boolean | null
+              } | null
+            } | null
+            media?: unknown
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          } | null
+          tint?: 'dim' | 'none'
+        } | null
+        anchor?: string
+      }
   > | null
   sectionsBelow: Array<
     | {
@@ -4278,6 +4333,35 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'screen'
           _key: string
         }> | null
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        backgroundMedia: {
+          _type: 'backgroundMedia'
+          image: {
+            asset: {
+              _id: string
+              metadata: {
+                lqip: string | null
+                isOpaque: boolean | null
+              } | null
+            } | null
+            media?: unknown
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          } | null
+          tint?: 'dim' | 'none'
+        } | null
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'statsSection'
+        layout?: 'columns' | 'stacked'
+        stats?: Array<
+          {
+            _key: string
+          } & Stat
+        >
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -5701,6 +5785,35 @@ export type CASE_STUDY_QUERY_RESULT = {
         } | null
         anchor?: string
       }
+    | {
+        _key: string
+        _type: 'statsSection'
+        layout?: 'columns' | 'stacked'
+        stats?: Array<
+          {
+            _key: string
+          } & Stat
+        >
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        backgroundMedia: {
+          _type: 'backgroundMedia'
+          image: {
+            asset: {
+              _id: string
+              metadata: {
+                lqip: string | null
+                isOpaque: boolean | null
+              } | null
+            } | null
+            media?: unknown
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          } | null
+          tint?: 'dim' | 'none'
+        } | null
+        anchor?: string
+      }
   > | null
   seo: Seo | null
   next: {
@@ -7070,6 +7183,35 @@ export type PAGE_QUERY_RESULT = {
           _type: 'screen'
           _key: string
         }> | null
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        backgroundMedia: {
+          _type: 'backgroundMedia'
+          image: {
+            asset: {
+              _id: string
+              metadata: {
+                lqip: string | null
+                isOpaque: boolean | null
+              } | null
+            } | null
+            media?: unknown
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          } | null
+          tint?: 'dim' | 'none'
+        } | null
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'statsSection'
+        layout?: 'columns' | 'stacked'
+        stats?: Array<
+          {
+            _key: string
+          } & Stat
+        >
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'

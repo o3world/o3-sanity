@@ -8,12 +8,15 @@
  * carrying a marker are resolved to uploaded assets via the brand's
  * `assets.json`.
  *
- *   pnpm --filter @o3/migration load
  *   pnpm --filter @o3/migration load -- --brand o3xo
  *
- * A load into `production` is refused unless `--allow-production` is passed
- * (`lib/prodGate.ts`): editors author in that dataset now, and a load reverts
- * their unlocked edits. Run `pnpm dataset:drift` first to see what it would cost.
+ * **RETIRED FOR o3, in every dataset, with no flag** (`lib/loadRetired.ts`).
+ * An o3 dataset change ships as a targeted script under `src/migrations/`
+ * instead. o3xo still builds its dataset this way — that brand's only dataset
+ * holds nothing but this pipeline's output and no editor authors in it.
+ *
+ * o3xo's dataset is named `production`, so a run still passes
+ * `--allow-production` (`lib/prodGate.ts`).
  *
  * Which corpus and which dataset both follow that one flag: `lib/paths.ts`
  * resolves the tree from it and `sanity.cli.ts` resolves the project from it,
@@ -28,6 +31,7 @@ import { getCliClient } from 'sanity/cli'
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 
 import { brandArg } from './lib/brandArg'
+import { loadRetired } from './lib/loadRetired'
 import { productionGate } from './lib/prodGate'
 import { plan } from './core/plan'
 import { readCorpus } from './core/read'
@@ -261,6 +265,15 @@ async function resolveAssets(node: unknown): Promise<unknown> {
 const DROPPED = Symbol('dropped')
 
 async function main() {
+  // Before the corpus is even read: retired for o3, in every dataset, with no
+  // flag (`lib/loadRetired.ts`). o3xo still builds its dataset this way.
+  const retired = loadRetired(brandArg())
+  if (retired) {
+    console.error(retired)
+    process.exitCode = 1
+    return
+  }
+
   // All three trees, all published (ADR 0016).
   const all = readCorpus<AnyDoc>().map((entry) => entry.document)
   // Said out loud before anything is written, because this command deletes and

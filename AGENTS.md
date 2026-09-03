@@ -237,23 +237,56 @@ Single-context layout — `CONTEXT.md` and `docs/adr/` at the repo root. See `do
 
 ### Changing a dataset
 
-**The site is in production mode (2026-09-01): a dataset change ships as a
-targeted migration, never a blanket `load` — whichever dataset.** Editors and
-content population own the datasets now, and `load` reverts whatever the seed
-files do not know about. Write a script or patch scoped to exactly the
-documents or assets your change is about, run it, and say on the ticket what
-it touched. The blanket pipeline (`extract → convert → load → verify`) is
-retired as everyday work; `pnpm --filter @o3/migration verify` remains useful
-as a read-only check.
+**The blanket `load` is GONE for o3 — the command refuses the brand outright,
+in every dataset, and there is no flag** (`tools/migration/src/lib/loadRetired.ts`,
+2026-09-03). Editors and content population own the datasets, `development`
+mirrors `production` via `pnpm dataset:sync`, and a load reverts whatever the
+seed files do not know about — so there is no longer a dataset where it is the
+harmless operation it once was.
+
+A dataset change ships as a **targeted migration**: a script under
+`tools/migration/src/migrations/`, scoped to exactly the documents or assets
+the change is about. `statsToBand.ts` is the worked example and the shape to
+copy — it reports before it writes, refuses a dataset it was not told about out
+loud, reruns as a no-op, and overwrites no field it did not come to change. Run
+it, then say on the ticket what it touched.
+
+`pnpm --filter @o3/migration verify` remains useful as a read-only check.
+`load` still serves **o3xo**, whose only dataset holds nothing but the
+pipeline's output and where no editor authors.
 
 The production protections still apply to targeted work there: ADR 0003 is
 inverted — what an editor wrote outranks the committed JSON. `pnpm
 dataset:drift` names the documents an editor changed (lock them with
 `-- --lock`, or port the edits into `data/`), `pnpm dataset:backup` writes a
 tarball, and `pnpm dataset:sync` pulls production's content into `development`
-without deleting anything. A `migration.locked` document is never touched in
-any mode, whichever dataset. See `docs/agents/ops.md` → "Production holds user
-content now".
+without deleting anything.
+
+**To rehearse an op, sync is only half of it.** `dataset:sync` imports with
+`--replace`, so it overwrites what the two datasets share and leaves
+development-only documents standing — and what development holds that
+production does not is exactly what makes a rehearsal lie. `pnpm --filter
+@o3/migration dev-mirrors-prod -- --apply` removes them, and only ever runs
+against `development`. Sync, then mirror, then run the op: what you are looking
+at is what production will look like. Back development up first — a
+development-only document exists nowhere else. See `docs/agents/ops.md` →
+"Production holds user content now".
+
+**What `migration.locked` guards is a document's content being REPLACED FROM
+OUTSIDE IT** — the pipeline overwriting an editor's version with the committed
+JSON. That is the scope ADR 0003 gives it ("the pipeline never touches a locked
+document, in any mode") and the scope `load` implements.
+
+It is not a freeze on the document. A **transformation** — a script whose only
+input is the document's own fields, moving or reshaping what is already there
+and overwriting nothing — is outside the rule, and skipping locked documents
+there just leaves the most carefully-tended pages as the broken ones.
+`statsToBand.ts` is the case: it reads a case study's own `stats` and adds a
+band drawn from them, so there is no outside version to lose.
+
+The test is where the new value comes from. From `data/` or any source outside
+the document, the lock applies and the run stops. From the document itself, it
+does not.
 
 **After a targeted migration, look at the result in a browser.** Skipping the
 look once (#42's build-out) left a whole homepage reconciliation invisible:

@@ -23,6 +23,8 @@ import {
 } from '@o3/content-ui/cards'
 
 import { StatGroup } from '@/components/blocks/StatGroup'
+
+import { StatsSection } from './statsSection/StatsSection'
 import { CaseStudyCard } from '@/components/cards/CaseStudyCard'
 
 // The renderers themselves are shared (@o3/content-ui); the binding below is
@@ -49,9 +51,9 @@ import {
 
 /**
  * The section blocks THIS brand renders — core plus o3's own extensions, which
- * are none (ADR 0028, `BRAND_SECTION_BLOCKS`). Binding a block off this roster
- * is a type error here rather than a missing renderer at runtime, which is what
- * keeps o3xo's `faqSection` out of this app.
+ * is `statsSection` (ADR 0028, `BRAND_SECTION_BLOCKS`). Binding a block off
+ * this roster is a type error here rather than a missing renderer at runtime,
+ * which is what keeps o3xo's `faqSection` out of this app.
  */
 type O3SectionBlockName = BrandSectionBlockName<'o3'>
 
@@ -149,6 +151,7 @@ export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('mediaSection', { component: MediaSection }),
   defineBlockRender('screenGridSection', { component: ScreenGridSection }),
   defineBlockRender('listingSection', { component: ListingSection }),
+  defineBlockRender('statsSection', { component: StatsSection }),
 ] satisfies ReadonlyArray<ClientBlockRenderBinding<O3SectionBlockName>>
 
 /**
