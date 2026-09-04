@@ -234,9 +234,19 @@ export async function arrivalRunning(page: Page) {
 export async function ordinaryPage(page: Page) {
   await settled(page)
   await expect(page.locator('main')).toHaveCSS('opacity', '1')
-  for (const foreground of await page.locator('main [data-route-foreground]:visible').all()) {
-    await expect(foreground).toHaveCSS('opacity', '1')
-  }
+  // Cached routes can become hidden between indexed locator assertions.
+  // Read the current visible set together, without retaining stale indices.
+  await expect
+    .poll(() =>
+      page
+        .locator('main [data-route-foreground]:visible')
+        .evaluateAll(
+          (foregrounds) =>
+            foregrounds.length > 0 &&
+            foregrounds.every((foreground) => getComputedStyle(foreground).opacity === '1'),
+        ),
+    )
+    .toBe(true)
   await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1)
   expect(
     await page.evaluate(
