@@ -597,7 +597,7 @@ export function OrbitalSphere({
              * Two periods that divide neither each other nor the turn, so the
              * field never visibly repeats.
              */
-            className={turning && arc.colored ? 'motion-reduce:animate-none' : undefined}
+            className={turning && arc.colored ? 'motion-reduce:animate-none!' : undefined}
             style={
               turning && arc.colored
                 ? {

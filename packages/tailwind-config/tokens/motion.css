@@ -276,15 +276,13 @@
  * geometry in the projection itself, so there is no `--animate-orbit` to
  * declare.
  */
-@theme {
-  @keyframes globe-pulse {
-    0%,
-    100% {
-      opacity: var(--po, 1);
-    }
-    50% {
-      opacity: calc(var(--po, 1) * 0.45);
-    }
+@keyframes globe-pulse {
+  0%,
+  100% {
+    opacity: var(--po, 1);
+  }
+  50% {
+    opacity: calc(var(--po, 1) * 0.45);
   }
 }
 

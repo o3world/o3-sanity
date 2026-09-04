@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, waitFor } from 'storybook/test'
 
 import { OrbitalSphere } from './orbital-sphere'
 
@@ -55,6 +56,9 @@ export const Presets: Story = {
       </div>
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    await expect(canvasElement.getAnimations({ subtree: true })).toHaveLength(0)
+  },
 }
 
 /** The same atom turning, with the coloured great circles breathing against it.
@@ -72,6 +76,40 @@ export const Turning: Story = {
       />
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const pulses = () =>
+      canvasElement
+        .getAnimations({ subtree: true })
+        .filter(
+          (animation): animation is CSSAnimation =>
+            animation instanceof CSSAnimation && animation.animationName === 'globe-pulse',
+        )
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      await expect(pulses()).toHaveLength(0)
+      return
+    }
+
+    await waitFor(() => expect(pulses()).toHaveLength(2))
+    for (const pulse of pulses()) {
+      const effect = pulse.effect as KeyframeEffect
+      const { delay = 0, duration } = effect.getTiming()
+      const arc = effect.target as Element
+      const currentTime = pulse.currentTime
+      pulse.pause()
+      try {
+        pulse.currentTime = delay
+        await expect(Number(getComputedStyle(arc).opacity)).toBeCloseTo(1)
+        pulse.currentTime = delay + Number(duration) / 2
+        await expect(Number(getComputedStyle(arc).opacity)).toBeCloseTo(0.45)
+        pulse.currentTime = delay + Number(duration)
+        await expect(Number(getComputedStyle(arc).opacity)).toBeCloseTo(1)
+      } finally {
+        pulse.currentTime = currentTime
+        pulse.play()
+      }
+    }
+  },
 }
 
 /** Two on one page. The export found its host by a hardcoded global element id,
