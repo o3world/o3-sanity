@@ -9,10 +9,10 @@
  * committed JSON in the same run, so the record matches the dataset the
  * removal (#421) will leave behind.
  *
- * **NOTHING READS THE NEW FIELD YET.** The renderers still draw
- * `featuredImage` when this runs, which is what makes it safe to run first:
- * the site renders exactly what it rendered before, and #419 then switches
- * the read chain over to a corpus that is already populated.
+ * **RUN THIS BEFORE THE RENDERERS REACH A DATASET.** Nothing reads
+ * `featuredImage` any more (#419), so an insight that still holds only that
+ * field draws no picture — on its card, in its hero band and in its share
+ * preview. Any dataset the site serves needs this run first.
  *
  * `featuredImage` is left in place on the document. This is a copy, not a
  * move: the dataset keeps its old field until #421 removes it on a count.

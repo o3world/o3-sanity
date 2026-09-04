@@ -107,7 +107,7 @@ describe('mapFramerInsight', () => {
   })
 
   it('carries the hero image as a source marker for the loader to upload', () => {
-    expect(doc.featuredImage).toEqual({
+    expect(doc.cardMedia).toEqual({
       _type: 'figure',
       image: { _type: 'image', _srcUrl: 'https://framerusercontent.com/images/abc123.png' },
       alt: 'Close-up of analog performance gauge meter',

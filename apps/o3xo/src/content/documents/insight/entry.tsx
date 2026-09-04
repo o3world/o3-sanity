@@ -29,7 +29,6 @@ export const insight = defineDetailType({
     return {
       title: p.title,
       description: p.excerpt,
-      // CONTEXT.md → Known drift: this field should be `heroMedia`.
       image: p.cardMedia,
       path: `${collectionPrefixes().insight}/${p.slug}`,
       ogType: 'article',

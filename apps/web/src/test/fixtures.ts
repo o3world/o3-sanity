@@ -88,7 +88,8 @@ export function aMigratedInsight(slug?: string): Insight {
     // of the archive is actually in.
     author: migratedPerson(doc.author?._ref),
     heroMedia: (doc.heroMedia ?? null) as Insight['heroMedia'],
-    cardMedia: (doc.cardMedia ?? null) as Insight['cardMedia'],
+    // The card chain, as `CARD_MEDIA` resolves it.
+    cardMedia: (doc.cardMedia ?? doc.heroMedia ?? null) as Insight['cardMedia'],
     seo: (doc.seo ?? null) as Insight['seo'],
   })
 }

@@ -259,7 +259,10 @@ function projectInsight(raw: SeedDoc): InsightCard {
     excerpt: doc.excerpt ?? null,
     publishedAt: doc.publishedAt ?? null,
     heroMedia: doc.heroMedia ?? null,
-    cardMedia: doc.cardMedia ?? null,
+    // The card chain, as `CARD_MEDIA` resolves it: a card draws `cardMedia`
+    // and falls back to the lead figure. This projects the document by hand,
+    // so it owes the same answer the query gives.
+    cardMedia: doc.cardMedia ?? doc.heroMedia ?? null,
     author: author
       ? { name: author.name, title: author.title ?? null, headshot: author.headshot ?? null }
       : null,
