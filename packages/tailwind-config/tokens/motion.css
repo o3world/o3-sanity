@@ -109,10 +109,10 @@
  * keeps a small strip from looking frantic.
  */
 :root {
-  /* 36s per copy — the strip ran at 44 and read sluggish beside the rest of
-     the page's motion. A fifth off, which is a change you notice as pace
-     rather than as a different animation. */
-  --duration-marquee: 36s;
+  /* 32s per copy, at the desktop tile width. Fast enough to read as pace
+     against the rest of the page's motion, slow enough that a mark stays
+     legible as it crosses. */
+  --duration-marquee: 32s;
 }
 
 @theme {
