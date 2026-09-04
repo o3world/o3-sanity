@@ -18,8 +18,8 @@
     "@o3/typescript-config": "workspace:*",
     "@storybook/nextjs-vite": "^10.4.1",
     "@types/node": "^22.0.0",
-    "@types/react": "^19.0.0",
-    "react": "^19.2.7",
+    "@types/react": "^19.2.18",
+    "react": "^19.2.8",
     "storybook": "^10.4.1",
     "typescript": "^5.7.0",
     "vite": "^7.0.0"

@@ -18,10 +18,10 @@
     "@sanity/mutate": "^0.18.1",
     "@sanity/visual-editing": "^5.7.3",
     "@vercel/stega": "^1.1.0",
-    "@types/react": "^19.0.0",
-    "next": "^16.2.4",
+    "@types/react": "^19.2.18",
+    "next": "^16.3.4",
     "next-sanity": "^13.2.3",
-    "react": "^19.2.7",
+    "react": "^19.2.8",
     "sanity": "6.8.0",
     "typescript": "^5.7.0"
   },

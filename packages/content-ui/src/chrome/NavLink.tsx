@@ -1,6 +1,6 @@
 'use client'
 
-import type { ComponentProps } from 'react'
+import { Suspense, type ComponentProps } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -17,14 +17,29 @@ import { cn } from '@o3/ui'
  *
  * Client, and only for `usePathname` — with no router context (the render
  * tests, a story) the hook returns null and every link draws its resting
- * state, which is the frame.
+ * state, which is the frame. The pathname read is isolated behind Suspense so
+ * it cannot block the App Router's prerendered shell; the fallback is the same
+ * link without the current-page enhancement.
  */
-export function NavLink({
-  href,
-  className,
-  children,
-  ...rest
-}: ComponentProps<typeof Link> & { href: string }) {
+type NavLinkProps = ComponentProps<typeof Link> & { href: string }
+
+export function NavLink(props: NavLinkProps) {
+  const { href, className, children, ...rest } = props
+
+  return (
+    <Suspense
+      fallback={
+        <Link href={href} className={className} {...rest}>
+          {children}
+        </Link>
+      }
+    >
+      <CurrentNavLink {...props} />
+    </Suspense>
+  )
+}
+
+function CurrentNavLink({ href, className, children, ...rest }: NavLinkProps) {
   const pathname = usePathname()
   const active = isCurrentSection(pathname, href)
 

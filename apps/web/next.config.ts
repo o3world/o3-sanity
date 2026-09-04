@@ -10,21 +10,6 @@ const nextConfig: NextConfig = {
   // next-sanity's own profile, which pins time-based revalidation to a year:
   // the publish webhook is what invalidates this site, not a clock.
   cacheComponents: true,
-  experimental: {
-    /*
-     * The cross-page fade (#403). React's `<ViewTransition>` is behind this
-     * flag; the site layout is the one place that renders one.
-     */
-    viewTransition: true,
-    /*
-     * The router's scroll-to-top, from the segment's own ref rather than from
-     * `findDOMNode`. React 19 hoists a page's `<title>` and `<meta>` into
-     * `<head>`, so the old handler starts its walk on a zero-height node in
-     * there and runs out of siblings having scrolled nothing. Flagged in 16.2
-     * and the default after it.
-     */
-    appNewScrollHandler: true,
-  },
   cacheLife: { default: sanity },
   images: {
     // Sanity's image CDN does the resizing; Vercel's optimizer (billed per

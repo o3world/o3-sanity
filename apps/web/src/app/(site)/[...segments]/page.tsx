@@ -5,6 +5,11 @@ import { CATCH_ALL_TYPES } from '@/content/documents'
 
 const route = buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY)
 
+// This route resolves URL segments before it can render content. Keep the
+// existing blocking navigation contract until partial prefetching is adopted
+// and the route has an intentional shell for unknown Sanity pages.
+export const instant = false
+
 /**
  * Known slugs prerender; an unknown one renders on demand and 404s if no
  * document matches it. The homepage is `buildSingletonRoute`'s, not this
