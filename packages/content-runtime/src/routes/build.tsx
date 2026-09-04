@@ -153,15 +153,17 @@ async function extractMetadata<Q extends string>(
 /**
  * The derivation for an entry that declares no `seo`. It leans on the field
  * lexicon being closed (CONTEXT.md → Naming): `title` is the document's own
- * name, `excerpt` is the short summary, `heroMedia` is the lead figure, and
- * `hrefForDoc` already owns URL construction for every routable type.
+ * name, `excerpt` is the short summary, and `cardMedia` is the figure the
+ * document shows in a small frame — which is what a social card crops to, and
+ * so what the preview draws before the lead figure. `hrefForDoc` already owns
+ * URL construction for every routable type.
  */
 function defaultDocumentSeo(doc: unknown): DocumentSeo {
   const d = (doc ?? {}) as Record<string, unknown>
   return {
     title: typeof d.title === 'string' ? d.title : null,
     description: typeof d.excerpt === 'string' ? d.excerpt : null,
-    image: (d.heroMedia ?? d.featuredImage ?? null) as DocumentSeo['image'],
+    image: (d.cardMedia ?? d.heroMedia ?? d.featuredImage ?? null) as DocumentSeo['image'],
     path: hrefForDoc({
       _type: typeof d._type === 'string' ? d._type : '',
       slug: typeof d.slug === 'string' ? d.slug : null,

@@ -27,6 +27,22 @@ const PHOTO_OBJECT_FIELDS = /* groq */ `..., image{${PHOTO_FIELDS}}` as const
 const BODY_FIELDS = /* groq */ `..., _type == "figure" => {${PHOTO_OBJECT_FIELDS}}` as const
 
 /**
+ * THE CARD-SIDE FALLBACK, EXPRESSED ONCE (#416).
+ *
+ * A document carries two figures with one job each: `heroMedia` leads the
+ * detail page, `cardMedia` is what it shows on cards and in feeds. Neither is
+ * required, so a card draws `cardMedia` and falls back to `heroMedia`.
+ *
+ * It resolves here rather than in each card renderer because every card
+ * consumer — the two collection feeds, the case showcase band, the insights
+ * carousel, the next-case band — reads one of the two card projections below.
+ * A consumer added later inherits the chain instead of having to remember it,
+ * and the payload still carries one figure: a card never draws a hero.
+ */
+const CARD_MEDIA =
+  /* groq */ `"cardMedia": coalesce(cardMedia, heroMedia){${PHOTO_OBJECT_FIELDS}}` as const
+
+/**
  * Shared card projections — single source for showcase blocks, listings, and
  * route pages. Exported so the web app's card registry can reference the same
  * fragments (`CARD_PROJECTIONS`) instead of duplicating them.
@@ -72,7 +88,7 @@ export const CASE_STUDY_CARD = /* groq */ `
   "slug": slug.current,
   narrativeHeadline,
   "headlineStat": stats[0],
-  heroMedia{${PHOTO_OBJECT_FIELDS}},
+  ${CARD_MEDIA},
   "client": client->{name, logo},
   "industries": industries[]->{title},
   industryDetail
@@ -397,6 +413,12 @@ export const LATEST_INSIGHTS_QUERY = defineQuery(
 
 export const CASE_STUDY_QUERY = defineQuery(`*[_type == "caseStudy" && slug.current == $slug][0]{
   ${CASE_STUDY_CARD},
+  ${
+    /* The card projection carries `cardMedia` and no hero — a card never
+      draws one. The detail page draws both sides, so it asks for the lead
+      figure by name on top of the spread. */ ''
+  }
+  heroMedia{${PHOTO_OBJECT_FIELDS}},
   stats,
   deliverables,
   ${

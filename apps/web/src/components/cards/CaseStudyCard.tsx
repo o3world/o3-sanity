@@ -61,7 +61,7 @@ export function CaseStudyCard(
     priority?: boolean
   },
 ) {
-  const { _type, title, slug, narrativeHeadline, headlineStat, heroMedia, client, priority } = card
+  const { _type, title, slug, narrativeHeadline, headlineStat, cardMedia, client, priority } = card
   const eyebrow = caseEyebrow(card)
 
   return (
@@ -104,7 +104,7 @@ export function CaseStudyCard(
     >
       <div className="absolute inset-0 -z-20">
         <SanityImage
-          source={heroMedia?.image}
+          source={cardMedia?.image}
           alt=""
           ratio="fill"
           width={1600}

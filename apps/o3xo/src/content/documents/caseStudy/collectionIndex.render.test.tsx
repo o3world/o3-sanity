@@ -54,7 +54,7 @@ function aBuffaloCase() {
       value: '2X',
       label: 'Revenue capacity from 3 AI solutions in < 6 months',
     },
-    heroMedia: {
+    cardMedia: {
       _type: 'figure',
       alt: 'Construction team reviewing architectural blueprints',
       image: {

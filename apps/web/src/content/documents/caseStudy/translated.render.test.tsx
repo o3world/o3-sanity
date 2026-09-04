@@ -173,7 +173,7 @@ describe('the next-project band', () => {
           next: {
             title: 'Built for the long run.',
             slug: 'case-studies-ironman-digital-experience-drupal-acquia',
-            heroMedia: (doc as { heroMedia?: unknown }).heroMedia,
+            cardMedia: (doc as { heroMedia?: unknown }).heroMedia,
             client: { name: 'IRONMAN' },
           },
         },

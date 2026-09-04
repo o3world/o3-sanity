@@ -180,6 +180,10 @@ export function aTranslatedCaseStudy(slug: string): Record<string, unknown> {
     client: deref(doc.client),
     industries: ((doc.industries ?? []) as unknown[]).map(deref).filter(Boolean),
     headlineStat: (doc.stats as unknown[] | undefined)?.[0] ?? null,
+    // The card chain, as `CARD_MEDIA` resolves it: a card draws `cardMedia`
+    // and falls back to the lead figure. This projects the document by hand,
+    // so it owes the same answer the query gives.
+    cardMedia: doc.cardMedia ?? doc.heroMedia ?? null,
     next: null,
   }
 }

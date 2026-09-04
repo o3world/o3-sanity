@@ -50,6 +50,12 @@ export const caseStudy = (arrays: BlockArrays) =>
         description:
           'The eyebrow’s second half, e.g. "Pediatric Systems" in "Healthcare · Pediatric Systems".',
       }),
+      /**
+       * The document's lead figure — the detail page's hero band and nothing
+       * else. Empty means nobody has chosen one yet, and the hero draws
+       * `cardMedia` instead (#417).
+       */
+      defineField({ name: 'heroMedia', type: 'figure' }),
       defineField({
         name: 'narrativeHeadline',
         type: 'text',
@@ -66,7 +72,13 @@ export const caseStudy = (arrays: BlockArrays) =>
         group: 'card',
         description: 'The first stat is the headline stat shown on showcase cards.',
       }),
-      defineField({ name: 'heroMedia', type: 'figure', group: 'card' }),
+      /**
+       * The figure this case study shows on cards and in feeds — the /work
+       * grid, a case showcase band, the next-case band at the foot of another
+       * study. Empty means nobody has chosen one yet, and the card draws
+       * `heroMedia` instead (#417).
+       */
+      defineField({ name: 'cardMedia', type: 'figure', group: 'card' }),
       /**
        * THE NARRATIVE IS ONE INTERLEAVED ARRAY — ADR 0018.
        *

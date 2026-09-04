@@ -23,7 +23,7 @@ type NextCase = NonNullable<NonNullable<CASE_STUDY_QUERY_RESULT>['next']>
  * image      full width × 362           1248 × 576
  * ```
  *
- * The image is the next case's `heroMedia`, plain — no scrim, no logo, no
+ * The image is the next case's `cardMedia`, plain — no scrim, no logo, no
  * copy over it (`1710:2616` renders as a bare photograph). That is what
  * separates this band from `CaseStudyCard`, which is the same photograph
  * carrying a whole card's worth of content.
@@ -68,8 +68,8 @@ export function NextCaseBand({ next }: { next: NextCase }) {
 
         <div className="relative aspect-square overflow-hidden lg:aspect-[1248/576]">
           <SanityImage
-            source={next.heroMedia?.image}
-            alt={next.heroMedia?.alt ?? ''}
+            source={next.cardMedia?.image}
+            alt={next.cardMedia?.alt ?? ''}
             ratio="fill"
             width={1600}
             sizes="(min-width: 1024px) 1248px, 100vw"

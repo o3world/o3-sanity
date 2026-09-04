@@ -54,7 +54,7 @@ describe('the case-study detail route', () => {
           slug: 'the-one-after',
           narrativeHeadline: null,
           headlineStat: null,
-          heroMedia: null,
+          cardMedia: null,
           client: null,
           industries: null,
           industryDetail: null,
