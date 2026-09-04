@@ -66,6 +66,6 @@ export const insight = defineType({
     },
   ],
   preview: {
-    select: { title: 'title', subtitle: 'publishedAt', media: 'featuredImage.image' },
+    select: { title: 'title', subtitle: 'publishedAt', media: 'cardMedia.image' },
   },
 })

@@ -124,7 +124,7 @@ describe('insights collection index route', () => {
         _id: `insight-${i}`,
         slug: `insight-${i}`,
         title: `Insight ${i}`,
-        featuredImage: {
+        cardMedia: {
           image: {
             _type: 'image',
             asset: { _type: 'reference', _ref: `image-${String(i).repeat(40)}-1200x800-jpg` },

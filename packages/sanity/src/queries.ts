@@ -58,7 +58,7 @@ export const INSIGHT_CARD = /* groq */ `
   "slug": slug.current,
   excerpt,
   publishedAt,
-  featuredImage{${PHOTO_OBJECT_FIELDS}},
+  ${CARD_MEDIA},
   ${
     /* `headshot` is here for the DETAIL byline (`1710:2946`), not the card —
       the card draws no author at all. It rides on the shared fragment because
@@ -242,6 +242,12 @@ const RELATED_INSIGHTS =
 
 export const INSIGHT_QUERY = defineQuery(`*[_type == "insight" && slug.current == $slug][0]{
   ${INSIGHT_CARD},
+  ${
+    /* The card projection carries `cardMedia` and no hero — a card never
+      draws one. The detail page draws both sides, so it asks for the lead
+      figure by name on top of the spread. */ ''
+  }
+  heroMedia{${PHOTO_OBJECT_FIELDS}},
   body[]{${BODY_FIELDS}},
   seo,
   "related": ${RELATED_INSIGHTS} | order(publishedAt desc)[0...8]{${INSIGHT_CARD}},

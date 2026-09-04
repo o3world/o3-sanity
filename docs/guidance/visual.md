@@ -79,14 +79,14 @@ and not something an image should imitate.
 ## Shape and size
 
 The insight card is square, and images that arrive at the wrong aspect or too
-small have to be redone. Generate square for an insight's `featuredImage`
-unless the block's schema description says otherwise, and generate large — an
-image can be cropped down and cannot be invented back up.
+small have to be redone. Generate square for an insight's `cardMedia` unless
+the block's schema description says otherwise, and generate large — an image
+can be cropped down and cannot be invented back up.
 
 **`generate_image` stops at 1024×1024**, and nothing in the toolchain raises
-that ceiling. The slots ask for more, and on an insight one asset fills all
-three of them, because the hero draws `featuredImage.image`
-(`apps/web/src/content/documents/insight/InsightView.tsx:121`):
+that ceiling. The slots ask for more, and on an insight one asset can still fill all three
+of them: the hero draws `heroMedia` and falls back to `cardMedia`, so an
+article with only a card picture draws it in the band too.
 
 | Slot           | Asks for | Where                                       |
 | -------------- | -------- | ------------------------------------------- |
@@ -97,11 +97,11 @@ three of them, because the hero draws `featuredImage.image`
 A generated image covers the square card's request and none of the others: 1024
 is well under the in-body figure's 1644 and under half the hero's 2400.
 
-**Compare the number to the slot before you prompt, not after.** Where the slot
-is an insight's `featuredImage`, the hero's 2400 is the request that governs and
-no generation will meet it, so the choice is the empty field and a note — taken
-before the first prompt rather than after the third one comes back the same
-size.
+**Compare the number to the slot before you prompt, not after.** Where an
+insight has only a `cardMedia` and no `heroMedia`, the hero's 2400 is the
+request that governs and no generation will meet it, so the choice is the empty
+field and a note — taken before the first prompt rather than after the third one
+comes back the same size.
 
 ## Writing the prompt
 

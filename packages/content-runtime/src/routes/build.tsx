@@ -163,7 +163,7 @@ function defaultDocumentSeo(doc: unknown): DocumentSeo {
   return {
     title: typeof d.title === 'string' ? d.title : null,
     description: typeof d.excerpt === 'string' ? d.excerpt : null,
-    image: (d.cardMedia ?? d.heroMedia ?? d.featuredImage ?? null) as DocumentSeo['image'],
+    image: (d.cardMedia ?? d.heroMedia ?? null) as DocumentSeo['image'],
     path: hrefForDoc({
       _type: typeof d._type === 'string' ? d._type : '',
       slug: typeof d.slug === 'string' ? d.slug : null,

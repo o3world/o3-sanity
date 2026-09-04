@@ -38,8 +38,8 @@ type InsightViewProps = NonNullable<INSIGHT_QUERY_RESULT>
  * linear gradient, left to right: opaque to 16.8% then clear at 1440
  * (`2252:3554`), opaque to 50% across the whole width at 402 (`2262:3859`) —
  * a narrow band has no clear side to keep legible, the same trade
- * `CaseStudyHero` makes. The photograph is the document's featured image; the
- * frames name no second image field and the schema has none.
+ * `CaseStudyHero` makes. The photograph is the document's lead figure, or the
+ * picture it shows on cards where no lead figure was chosen.
  *
  * The band it replaces was a flat `bg-ink-warm` strip with the `OrbitalSphere`
  * hung off it (`1715:1549`, a node that no longer resolves). **No
@@ -100,7 +100,8 @@ export function InsightView({
   author,
   categories,
   publishedAt,
-  featuredImage,
+  heroMedia,
+  cardMedia,
   readingMinutes,
   body,
   related,
@@ -122,16 +123,19 @@ export function InsightView({
   const keepReading = related?.length ? related : (latest ?? [])
   const Card = getCard('insight')
 
-  // The hero photograph (#90). No second image field exists on the document,
-  // and the frames name none — the featured image is the band's fill.
-  const heroImage = featuredImage?.image ?? null
+  // THE HERO-SIDE FALLBACK, EXPRESSED ONCE (#416). Neither figure is required
+  // and each stands in for the other: the band draws the lead figure, and an
+  // article whose editor has not chosen one draws the picture it shows on
+  // cards. The card side resolves in the projection (`CARD_MEDIA`) because it
+  // has many consumers; the hero has this one.
+  const heroImage = (heroMedia ?? cardMedia)?.image ?? null
 
   return (
     <article>
       <ReadingProgress />
 
       {/* `bg-ink-warm` is the no-image case: the flat band this hero was
-          before #90, drawn when the document has no featured image to fill
+          before #90, drawn when the document has no picture at all to fill
           it. With an image it is only what shows while the photograph
           loads. */}
       <header className="bg-ink-warm px-gutter relative isolate overflow-hidden pb-16 pt-[164px] text-white lg:pt-[calc(var(--spacing-nav-offset)+100px)]">
