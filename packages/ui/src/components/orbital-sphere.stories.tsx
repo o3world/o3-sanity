@@ -29,6 +29,33 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+async function expectJoinedCircles(svg: SVGSVGElement) {
+  const paths = [...svg.querySelectorAll('path')]
+  await expect(paths).toHaveLength(14)
+  for (let arc = 0; arc < paths.length; arc += 2) {
+    const pair = paths.slice(arc, arc + 2)
+    await expect(pair.reduce((length, path) => length + path.getTotalLength(), 0)).toBeGreaterThan(
+      500,
+    )
+    const ends = pair.flatMap((path) =>
+      [...path.getAttribute('d')!.matchAll(/M([^M]+)/g)].flatMap((match) => {
+        const points = [...match[1]!.matchAll(/(-?\d+(?:\.\d+)?)[ ,]+(-?\d+(?:\.\d+)?)/g)].map(
+          (point) => [Number(point[1]), Number(point[2])] as const,
+        )
+        return points.length > 1 ? [points[0]!, points.at(-1)!] : []
+      }),
+    )
+    await expect(ends.length).toBeGreaterThan(0)
+    for (const [index, point] of ends.entries()) {
+      await expect(
+        ends.some(
+          (other, j) => index !== j && Math.hypot(point[0] - other[0], point[1] - other[1]) <= 0.2,
+        ),
+      ).toBe(true)
+    }
+  }
+}
+
 /** The drawing itself, still, at each preset — not a composition any band draws,
  *  but the only way to see the atom rather than a crop of it. */
 export const Presets: Story = {
@@ -58,6 +85,11 @@ export const Presets: Story = {
   ),
   play: async ({ canvasElement }) => {
     await expect(canvasElement.getAnimations({ subtree: true })).toHaveLength(0)
+    const globes = [...canvasElement.querySelectorAll('svg')].filter(
+      (svg) => svg.querySelectorAll('path').length === 14,
+    )
+    await expect(globes).toHaveLength(3)
+    for (const svg of globes) await expectJoinedCircles(svg)
   },
 }
 
@@ -108,6 +140,141 @@ export const Turning: Story = {
         pulse.currentTime = currentTime
         pulse.play()
       }
+    }
+  },
+}
+
+/** A controlled display clock makes skipped geometry updates reproducible. */
+export const FramePacing: Story = {
+  ...Turning,
+  play: async ({ mount, canvasElement }) => {
+    const request = window.requestAnimationFrame
+    const cancel = window.cancelAnimationFrame
+    const now = performance.now
+    const frames = new Map<number, FrameRequestCallback>()
+    let time = 0
+    let handle = 0
+    window.requestAnimationFrame = (callback) => {
+      frames.set(--handle, callback)
+      return handle
+    }
+    window.cancelAnimationFrame = (id) => {
+      frames.delete(id)
+    }
+    performance.now = () => time
+    const step = (next: number) => {
+      time = next
+      const pending = [...frames.values()]
+      frames.clear()
+      pending.forEach((callback) => callback(time))
+    }
+    try {
+      await mount()
+      const geometry = () =>
+        [...canvasElement.querySelectorAll('path')].map((path) => path.getAttribute('d')).join('')
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const still = geometry()
+        step(1000)
+        await expect(geometry()).toBe(still)
+        await expect(canvasElement.getAnimations({ subtree: true })).toHaveLength(0)
+        return
+      }
+      step(0)
+      const initial = geometry()
+      step(1000 / 120)
+      await expect(geometry()).not.toBe(initial)
+      const next = geometry()
+      step(1000 / 60)
+      await expect(geometry()).not.toBe(next)
+
+      // Captured from the published renderer at stable 30Hz, including its
+      // first accepted step. Literals are independent of the new clock math.
+      const references = [
+        {
+          pointer: false,
+          dots: [
+            [609.6, 878.8, 2.2],
+            [675.1, 470.7, 2.1],
+            [574.1, 283.1, 3.2],
+            [368, 436.6, 2.3],
+          ],
+        },
+        {
+          pointer: true,
+          dots: [
+            [583.9, 851.9, 2.1],
+            [627.8, 435.9, 2.1],
+            [615.3, 308.1, 3.3],
+            [336.5, 418.9, 2.4],
+          ],
+        },
+      ]
+      for (const reference of references) {
+        for (const hz of [15, 30, 60, 120]) {
+          time = 0
+          await mount()
+          if (reference.pointer) {
+            window.dispatchEvent(
+              new MouseEvent('mousemove', {
+                clientX: innerWidth * 0.75,
+                clientY: innerHeight * 0.25,
+              }),
+            )
+          }
+          for (let tick = 0; tick <= hz; tick++) step((tick * 1000) / hz)
+          const svg = [...canvasElement.querySelectorAll('svg')].find(
+            (svg) => svg.querySelectorAll('path').length === 14,
+          )!
+          const dots = [...svg.querySelectorAll('circle')].slice(0, 4)
+          await expect(dots).toHaveLength(4)
+          for (const [index, dot] of dots.entries()) {
+            for (const [coordinate, attribute] of ['cx', 'cy', 'r'].entries()) {
+              await expect(Number(dot.getAttribute(attribute))).toBeCloseTo(
+                reference.dots[index]![coordinate]!,
+                1,
+              )
+            }
+          }
+        }
+      }
+      time = 0
+      await mount()
+      window.dispatchEvent(
+        new MouseEvent('mousemove', { clientX: innerWidth * 0.75, clientY: innerHeight * 0.25 }),
+      )
+      step(0)
+      const hidden = Object.getOwnPropertyDescriptor(document, 'hidden')
+      try {
+        Object.defineProperty(document, 'hidden', { configurable: true, value: true })
+        document.dispatchEvent(new Event('visibilitychange'))
+        const paused = geometry()
+        step(500)
+        await expect(geometry()).toBe(paused)
+      } finally {
+        if (hidden) Object.defineProperty(document, 'hidden', hidden)
+        else Reflect.deleteProperty(document, 'hidden')
+        document.dispatchEvent(new Event('visibilitychange'))
+      }
+      step(1000)
+      const svg = [...canvasElement.querySelectorAll('svg')].find(
+        (svg) => svg.querySelectorAll('path').length === 14,
+      )!
+      const dot = svg.querySelector('circle')!
+      // Published renderer with only two accepted paints: 0ms and 1000ms.
+      await expect(Number(dot.getAttribute('cx'))).toBe(606.6)
+      await expect(Number(dot.getAttribute('cy'))).toBe(873.7)
+      for (const angleTime of [15000, 30000, 60000]) {
+        step(angleTime)
+        await expectJoinedCircles(svg)
+      }
+    } finally {
+      frames.clear()
+      window.requestAnimationFrame = request
+      window.cancelAnimationFrame = cancel
+      performance.now = now
+      // Storybook's mount remounts the scene; leave its ordinary live clock
+      // running for someone inspecting this story after the assertions.
+      await mount()
     }
   },
 }

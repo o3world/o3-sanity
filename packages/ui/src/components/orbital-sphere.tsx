@@ -361,11 +361,33 @@ function arcPaths(
   let front = ''
   let penB = false
   let penF = false
+  let previous: ReturnType<typeof project> | undefined
   for (let m = 0; m <= SEGMENTS; m++) {
     const a = (m / SEGMENTS) * Math.PI * 2
     const q = project(rotateAbout(onCircle(arc, Math.cos(a), Math.sin(a)), cs, sn))
     const pt = `${q[0].toFixed(1)} ${q[1].toFixed(1)}`
-    if (q[2] >= 0) {
+    const frontFacing = q[2] >= 0
+    const previousFront = previous && previous[2] >= 0
+    if (previous && previousFront !== frontFacing) {
+      // Meet at z=0 instead of dropping the span between samples. Undo the
+      // perspective divide before interpolating along that original span.
+      const t = previous[2] / (previous[2] - q[2])
+      const from = previous
+      const boundary = ([0, 1] as const)
+        .map((axis) =>
+          (
+            C +
+            (from[axis] - C) * (1 - from[2] / FL) * (1 - t) +
+            (q[axis] - C) * (1 - q[2] / FL) * t
+          ).toFixed(1),
+        )
+        .join(' ')
+      front += `${previousFront ? ' L ' : ' M '}${boundary}`
+      back += `${previousFront ? ' M ' : ' L '}${boundary}`
+      penB = true
+      penF = true
+    }
+    if (frontFacing) {
       front += `${penF ? ' L ' : ' M '}${pt}`
       penF = true
       penB = false
@@ -374,6 +396,7 @@ function arcPaths(
       penB = true
       penF = false
     }
+    previous = q
   }
   return { back: back || 'M 0 0', front: front || 'M 0 0' }
 }
@@ -460,37 +483,38 @@ export function OrbitalSphere({
      * long pages and there is often more than one of them.
      */
     let visible = true
+    let previous: number | undefined
     const io = new IntersectionObserver(([entry]) => {
       visible = entry?.isIntersecting ?? true
+      if (!visible) previous = undefined
     })
     io.observe(host)
+    const onVisibility = () => {
+      previous = undefined
+    }
+    document.addEventListener('visibilitychange', onVisibility)
 
     const omega = (2 * Math.PI) / (70 / GEOMETRY.speed)
     const t0 = performance.now()
     let raf = 0
 
-    /*
-     * Half rate. The sphere completes one revolution every 233 seconds, so a
-     * frame at 60Hz advances any point by a fraction of a pixel — the extra
-     * thirty frames buy nothing anyone can see and cost a full pass of path
-     * rebuilding and attribute writes. The electrons are the fastest thing here
-     * and they still move well under a pixel per frame at 30.
-     */
-    const MIN_FRAME_MS = 1000 / 30
-    let painted = -Infinity
-
     const frame = (now: number) => {
       raf = requestAnimationFrame(frame)
-      if (!visible) return
-      /* A degree of slack, or a display running just under 60Hz drops to 15. */
-      if (now - painted < MIN_FRAME_MS - 2) return
-      painted = now
+      if (!visible || document.hidden) {
+        previous = undefined
+        return
+      }
+      // Preserve the former 30Hz electron/easing pace, including its first step,
+      // while drawing at display cadence. Paused time never becomes catch-up.
+      const referenceFrames = previous === undefined ? 1 : ((now - previous) * 30) / 1000
+      previous = now
 
       const t = (now - t0) / 1000
       const cs = Math.cos(t * omega)
       const sn = Math.sin(t * omega)
-      smoothX += (mx - smoothX) * 0.06
-      smoothY += (my - smoothY) * 0.06
+      const ease = 1 - 0.94 ** referenceFrames
+      smoothX += (mx - smoothX) * ease
+      smoothY += (my - smoothY) * ease
       const project = makeProjector(
         smoothX * 0.55 * GEOMETRY.mouseFollow,
         smoothY * 0.4 * GEOMETRY.mouseFollow,
@@ -506,7 +530,7 @@ export function OrbitalSphere({
         arc.dots.forEach((d, k) => {
           const el = dotRefs.current[ci]?.[k]
           if (!el) return
-          phaseRow[k] = (phaseRow[k] ?? 0) + (d.sp * GEOMETRY.speed) / 60
+          phaseRow[k] = (phaseRow[k] ?? 0) + ((d.sp * GEOMETRY.speed) / 60) * referenceFrames
           const at = dotAt(arc, d, phaseRow[k]!, cs, sn, project, palette.electronOpacity)
           el.setAttribute('cx', at.cx)
           el.setAttribute('cy', at.cy)
@@ -520,6 +544,7 @@ export function OrbitalSphere({
     return () => {
       cancelAnimationFrame(raf)
       window.removeEventListener('mousemove', onMove)
+      document.removeEventListener('visibilitychange', onVisibility)
       io.disconnect()
     }
   }, [arcs, palette, turning])
