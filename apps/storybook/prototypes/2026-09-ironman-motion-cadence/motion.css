@@ -1,0 +1,132 @@
+/* Authored 2026-09-04. Prototype values, not production motion tokens. */
+:root {
+  --cadence-duration: 560ms;
+  --cadence-gap: 100ms;
+  --cadence-distance: 20px;
+  --cadence-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+html {
+  scroll-behavior: auto;
+}
+body {
+  margin: 0;
+  background: white;
+}
+[data-scene] {
+  scroll-margin-top: 72px;
+}
+[data-beat] {
+  opacity: 1;
+  translate: none;
+}
+[data-beat][data-motion-state='armed'] {
+  opacity: 0;
+  translate: 0 var(--cadence-distance);
+}
+[data-beat][data-motion-state='entering'] {
+  animation: cadence-enter var(--cadence-duration) var(--cadence-ease) backwards;
+  animation-delay: calc(var(--beat-order, 0) * var(--cadence-gap));
+}
+[data-beat][data-motion-state='settled'] {
+  animation: none;
+}
+@keyframes cadence-enter {
+  from {
+    opacity: 0;
+    translate: 0 var(--cadence-distance);
+  }
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+.review-dock {
+  position: fixed;
+  z-index: 100;
+  bottom: 12px;
+  left: 50%;
+  translate: -50% 0;
+  width: min(720px, calc(100% - 24px));
+  border: 1px solid #777;
+  border-radius: 16px;
+  padding: 10px 14px;
+  color: white;
+  background: #151515;
+  font:
+    13px/1.45 Arial,
+    sans-serif;
+  box-shadow: 0 4px 24px #0003;
+  max-height: calc(100svh - 24px);
+  overflow-y: auto;
+}
+.review-dock summary {
+  cursor: pointer;
+}
+.review-dock strong {
+  font-weight: 700;
+}
+.review-dock p {
+  margin: 6px 0;
+}
+.review-dock fieldset {
+  border: 0;
+  margin: 8px 0;
+  padding: 0;
+}
+.review-dock button,
+.review-dock select {
+  border: 1px solid #777;
+  border-radius: 6px;
+  background: #303030;
+  color: white;
+  padding: 5px 8px;
+  font: inherit;
+  margin: 2px;
+}
+.review-dock button:focus-visible,
+.review-dock select:focus-visible,
+.review-dock summary:focus-visible {
+  outline: 3px solid #9adeff;
+  outline-offset: 3px;
+}
+.review-dock output {
+  display: block;
+  overflow-wrap: anywhere;
+}
+.capture-note {
+  padding: 48px max(20px, 5vw) 180px;
+  color: #232323;
+  background: #f1f0ec;
+  font:
+    16px/1.6 Arial,
+    sans-serif;
+}
+.capture-note h2 {
+  font-size: 24px;
+  margin: 0 0 16px;
+}
+.capture-note p {
+  max-width: 822px;
+  margin: 12px 0;
+}
+.capture-note a {
+  text-decoration: underline;
+}
+@media (max-width: 1023px) {
+  :root {
+    --cadence-distance: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-beat] {
+    opacity: 1 !important;
+    translate: none !important;
+    animation: none !important;
+  }
+}
+html[data-motion='reduce'] [data-beat],
+html[data-motion='still'] [data-beat] {
+  opacity: 1 !important;
+  translate: none !important;
+  animation: none !important;
+}
