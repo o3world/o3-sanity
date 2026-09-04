@@ -63,9 +63,10 @@ export const JS_BUDGET: JsBudget = {
   routes: [
     {
       route: '/studio/[[...tool]]',
-      bytes: 8_635_000,
-      // Measured at 7,849,537, plus 10% — a proportion rather than a chunk
-      // size, because nothing here is trying to keep a specific library out.
+      bytes: 9_677_000,
+      // Measured at 8,797,491 with the media browser plugin, plus 10% — a
+      // proportion rather than a chunk size, because nothing here is trying
+      // to keep a specific library out.
       // Nobody browses to the Studio by accident and no visitor pays for it;
       // what this entry buys is a warning when the editor doubles.
       reason: 'an editing application, reached only by editors',
