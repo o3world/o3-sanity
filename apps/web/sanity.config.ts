@@ -6,6 +6,7 @@ import {
   type PresentationPluginOptions,
 } from 'sanity/presentation'
 import { structureTool, type StructureResolver } from 'sanity/structure'
+import { media } from 'sanity-plugin-media'
 
 import {
   defaultToolFirst,
@@ -178,6 +179,11 @@ export default defineConfig({
     // page. `previewPathForDoc` is the app's own link builder — the route table
     // it reads is the one `hrefForDoc` and `mainDocumentRoutes` read.
     editorChrome({ types: ROUTABLE_TYPES, previewPath: previewPathForDoc }),
+    // A Media tool over the dataset's own assets — browse, tag, alt text,
+    // delete — and a matching source in every image picker. Tags live as
+    // `media.tag` documents; the desk structure above is explicit, so they
+    // never surface as a list.
+    media(),
   ],
   tools: (prev) => defaultToolFirst(prev, DEFAULT_PRESENTATION_TOOL_NAME),
 })
