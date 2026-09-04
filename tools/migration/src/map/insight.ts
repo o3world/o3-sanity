@@ -57,6 +57,7 @@ export const insightDoc = z.object({
    * — which is what keeps a WordPress insight from silently losing its date
    * and its ordering. */
   publishedAt: z.string().datetime(),
+  cardMedia: z.unknown().optional(),
   featuredImage: z.unknown().optional(),
   body: z.array(z.record(z.string(), z.unknown())).min(1),
   seo: seoObject.optional(),

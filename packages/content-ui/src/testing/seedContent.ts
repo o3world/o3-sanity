@@ -258,7 +258,9 @@ function projectInsight(raw: SeedDoc): InsightCard {
     slug: (doc.slug as { current?: string } | undefined)?.current ?? null,
     excerpt: doc.excerpt ?? null,
     publishedAt: doc.publishedAt ?? null,
-    featuredImage: doc.featuredImage ?? null,
+    // The committed corpus holds the picture as `cardMedia` since #418; the
+    // renderers still draw `featuredImage`, and #419 moves them over.
+    featuredImage: doc.cardMedia ?? null,
     author: author
       ? { name: author.name, title: author.title ?? null, headshot: author.headshot ?? null }
       : null,

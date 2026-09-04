@@ -1086,6 +1086,8 @@ export type Insight = {
     } & CategoryReference
   >
   publishedAt?: string
+  heroMedia?: Figure
+  cardMedia?: Figure
   featuredImage?: Figure
   body?: BodyText
   briefs?: Array<

@@ -70,7 +70,7 @@ export function aMigratedInsight(slug?: string): Insight {
     publishedAt: string
     body: unknown
     author?: { _ref: string }
-    featuredImage?: unknown
+    cardMedia?: unknown
     seo?: unknown
   }
 
@@ -86,7 +86,9 @@ export function aMigratedInsight(slug?: string): Insight {
     // (#32 item 1.1), so the default fixture author would hide the state most
     // of the archive is actually in.
     author: migratedPerson(doc.author?._ref),
-    featuredImage: (doc.featuredImage ?? null) as Insight['featuredImage'],
+    // The committed corpus holds the picture as `cardMedia` since #418; the
+    // renderers still draw `featuredImage`, and #419 moves them over.
+    featuredImage: (doc.cardMedia ?? null) as Insight['featuredImage'],
     seo: (doc.seo ?? null) as Insight['seo'],
   })
 }
