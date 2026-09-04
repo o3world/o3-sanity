@@ -2,6 +2,7 @@ import { createElement } from 'react'
 
 import type { Brand } from '@o3/sanity/brand'
 import type { Preview } from '@storybook/nextjs-vite'
+import type { ViewportParameters } from 'storybook/viewport'
 
 export interface StorybookPreviewOptions {
   /** The brand this host paints in until a story or the toolbar says otherwise. */
@@ -86,12 +87,12 @@ export function defineStorybookPreview({
         },
       },
       viewport: {
-        viewports: {
+        options: {
           mobile: { name: 'Mobile', styles: { width: '375px', height: '812px' } },
           tablet: { name: 'Tablet', styles: { width: '768px', height: '1024px' } },
           desktop: { name: 'Desktop', styles: { width: '1440px', height: '900px' } },
         },
-      },
+      } satisfies ViewportParameters['viewport'],
       // The three-surface system as a toolbar: stories set
       // `globals: { backgrounds: { value: 'ink' } }` to pin a surface.
       // Values are var() so the surface follows whichever brand token set the

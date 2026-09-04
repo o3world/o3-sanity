@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { expect } from 'storybook/test'
+import type { ViewportParameters } from 'storybook/viewport'
 
 import {
   elementPadding,
@@ -22,11 +23,13 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const geometryViewports = {
-  layout402: { name: 'Layout 402', styles: { width: '402px', height: '844px' } },
-  layout1440: { name: 'Layout 1440', styles: { width: '1440px', height: '900px' } },
-  layout1920: { name: 'Layout 1920', styles: { width: '1920px', height: '900px' } },
-}
+const geometryViewport = {
+  options: {
+    layout402: { name: 'Layout 402', styles: { width: '402px', height: '844px' } },
+    layout1440: { name: 'Layout 1440', styles: { width: '1440px', height: '900px' } },
+    layout1920: { name: 'Layout 1920', styles: { width: '1920px', height: '900px' } },
+  },
+} satisfies ViewportParameters['viewport']
 
 function GeometrySpecimen() {
   return (
@@ -223,7 +226,7 @@ export const Layout: Story = {
 
 /** Product-owned O3 geometry at the canonical 402px mobile viewport. */
 export const GeometryAt402: Story = {
-  parameters: { viewport: { viewports: geometryViewports } },
+  parameters: { viewport: geometryViewport },
   globals: { brand: 'o3', viewport: { value: 'layout402' } },
   render: () => <GeometrySpecimen />,
   play: async ({ canvasElement }) => {
@@ -240,7 +243,7 @@ export const GeometryAt402: Story = {
 
 /** The 1440px design viewport opens to 75px gutters and a 1290px stage. */
 export const GeometryAt1440: Story = {
-  parameters: { viewport: { viewports: geometryViewports } },
+  parameters: { viewport: geometryViewport },
   globals: { brand: 'o3', viewport: { value: 'layout1440' } },
   render: () => <GeometrySpecimen />,
   play: async ({ canvasElement }) => {
@@ -257,7 +260,7 @@ export const GeometryAt1440: Story = {
 
 /** The structural stage keeps growing after 1440, then caps at 1728px. */
 export const GeometryAt1920: Story = {
-  parameters: { viewport: { viewports: geometryViewports } },
+  parameters: { viewport: geometryViewport },
   globals: { brand: 'o3', viewport: { value: 'layout1920' } },
   render: () => <GeometrySpecimen />,
   play: async ({ canvasElement }) => {
