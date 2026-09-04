@@ -104,7 +104,7 @@ export function LayoutSection({
    */
   const header =
     eyebrow || heading || subheading ? (
-      <header className="flex flex-col gap-4">
+      <header className="flex flex-col gap-6">
         {eyebrow ? (
           <Eyebrow size="lg" tone="brand">
             {eyebrow}
@@ -164,8 +164,8 @@ export function LayoutSection({
       <div className="flex flex-col gap-12">
         {/*
          * The three-part band header the interior frames use everywhere
-         * (`1924:5344`): a brand-red eyebrow, the 48px heading, and a set-back
-         * second line at the same size. The subheading is `text-fg-muted`
+         * (`1924:5344`): a brand-red eyebrow, the 48px heading 24px under it
+         * (`2358:2761`), and a set-back second line at the same size. The subheading is `text-fg-muted`
          * rather than a smaller step — the frame keeps it at 36px and drops
          * the value, which is what makes it read as a continuation of the
          * heading rather than a standfirst.
