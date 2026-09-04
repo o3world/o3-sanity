@@ -32,7 +32,7 @@ type Story = StoryObj<typeof meta>
 
 const [firstCase] = seededSectionArgs('index', 'caseShowcaseSection').caseStudies ?? []
 
-/** 1248 × 550 card under a 634px heading row pinned flush right. */
+/** Structural-width card under a 634px heading row pinned flush right. */
 export const Desktop: Story = {
   args: { next: firstCase! },
   globals: { viewport: { value: 'desktop' } },
@@ -47,6 +47,10 @@ export const Desktop: Story = {
     await expect(chip).not.toBeNull()
     await expect(chip).toHaveAttribute('tabindex', '-1')
     await expect(chip?.getAttribute('href')).toBe(card.getAttribute('href'))
+    const title = canvas.getByText(firstCase!.title!)
+    await expect(title.parentElement!.getBoundingClientRect().width).toBe(576)
+    await expect(getComputedStyle(title).fontWeight).toBe('400')
+    await expect(getComputedStyle(chip!).borderRadius).toBe('0px')
   },
 }
 
@@ -59,4 +63,15 @@ export const Mobile: Story = {
   args: { next: firstCase! },
   globals: { viewport: { value: 'mobile' } },
   parameters: { design: figmaDesign('1906:1039') },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const title = canvas.getByText(firstCase!.title!)
+    await expect(getComputedStyle(title).fontSize).toBe('36px')
+    await expect(getComputedStyle(title).fontWeight).toBe('400')
+    await expect(canvas.getByRole('link')).toHaveAccessibleName(
+      ['Next project', firstCase!.client?.name].filter(Boolean).join(' — ') +
+        ': ' +
+        firstCase!.title,
+    )
+  },
 }

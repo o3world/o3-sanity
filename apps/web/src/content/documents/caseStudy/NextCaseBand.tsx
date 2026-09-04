@@ -18,12 +18,12 @@ type NextCase = NonNullable<NonNullable<CASE_STUDY_QUERY_RESULT>['next']>
  *
  * ```
  *            402                        1440
- * band       96px 20px, gap 24          64px 96px, gap 48
+ * band       96px 20px, gap 24          64px 75px, gap 48
  * heading    stacked, flush left        a 634px row pinned FLUSH RIGHT
  *   kicker   "NEXT PROJECT - IRONMAN"   ”
  *   title    36px                       48px
  *   control  absent                     58px `Icon / Surface` at the row's end
- * media      full-width 362 square,     the whole Case Study Card, 1248 × 550
+ * media      full-width 362 square,     the whole Case Study Card, 1290 × 550
  *            a bare photograph          (`2250:1564`, set `2089:4169`)
  * ```
  *
@@ -47,16 +47,16 @@ export function NextCaseBand({ next }: { next: NextCase }) {
   return (
     <section className="px-gutter pt-band-sm pb-band-sm bg-white lg:py-16">
       <div className="max-w-section mx-auto flex flex-col gap-6 lg:gap-12">
-        <div className="flex items-center justify-between gap-6 lg:ml-auto lg:w-[634px]">
-          <div className="flex flex-col gap-1.5 lg:w-[576px] lg:gap-3">
+        <div className="flex items-center justify-between lg:ml-auto lg:w-[634px]">
+          <div className="flex min-w-0 flex-col gap-1.5 lg:w-[576px] lg:gap-3">
             <Eyebrow size="lg">{label}</Eyebrow>
-            <p className="text-display-xl font-display text-ink text-balance font-normal">
+            <p className="font-display text-ink lg:text-display-xl text-balance text-[36px]/[1.2] font-normal">
               {next.title}
             </p>
           </div>
           {/*
            * `Icon / Surface` (`1710:2615`) — the chip's geometry is that
-           * component's (58px circle, a 34.8px chip stroked at 1.45px with the
+           * instance's (58px square, a 34.8px chip stroked at 1.45px with the
            * design's one real 5.8px radius). Absent from the 402 frame.
            *
            * IT IS A LINK THE KEYBOARD CANNOT REACH, and both halves of that
@@ -71,7 +71,7 @@ export function NextCaseBand({ next }: { next: NextCase }) {
             href={href}
             aria-hidden
             tabIndex={-1}
-            className="bg-surface-muted hidden size-[58px] shrink-0 items-center justify-center rounded-full lg:flex"
+            className="bg-surface-muted hidden size-[58px] shrink-0 items-center justify-center lg:flex"
           >
             <span className="bg-surface-muted border-surface-muted text-ink flex size-[34.8px] items-center justify-center rounded-[5.8px] border-[1.45px]">
               {/* The chip strokes the glyph at 2, not ArrowIcon's 2.2 — read
