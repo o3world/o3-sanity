@@ -57,6 +57,7 @@ export const insightDoc = z.object({
    * — which is what keeps a WordPress insight from silently losing its date
    * and its ordering. */
   publishedAt: z.string().datetime(),
+  cardMedia: z.unknown().optional(),
   featuredImage: z.unknown().optional(),
   body: z.array(z.record(z.string(), z.unknown())).min(1),
   seo: seoObject.optional(),
@@ -231,9 +232,12 @@ export function mapInsight(
       _key: `cat-${id}`,
     })),
     publishedAt: toIso(post.dateGmt),
+    // WordPress's featured image is, in this repo's vocabulary, the picture an
+    // article shows on cards (CONTEXT.md → Naming). A lead figure is a choice
+    // an editor makes here; the archive never carried one.
     ...(post.featuredImage
       ? {
-          featuredImage: {
+          cardMedia: {
             _type: 'figure',
             image: { _type: 'image', _wpSrc: normalizeUploadUrl(post.featuredImage.url) },
             alt: post.featuredImage.alt || post.title,
@@ -255,7 +259,7 @@ export function mapInsight(
     )
   }
   // Return the constructed literal, not zod's parsed output: `body` and
-  // `featuredImage` are typed loosely in the schema and parsing would widen
+  // `cardMedia` are typed loosely in the schema and parsing would widen
   // the written JSON's key order.
   return ok(doc, notes)
 }

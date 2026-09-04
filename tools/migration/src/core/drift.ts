@@ -99,10 +99,25 @@ export function deepEqual(a: unknown, b: unknown): boolean {
   return false
 }
 
+/**
+ * Fields the corpus deliberately no longer claims, by type — a deprecated
+ * field the dataset still holds and the committed JSON has already dropped.
+ * Without this the difference reads as an editor's work, and one deprecation
+ * puts 271 false lines in the report.
+ *
+ * `insight.featuredImage` goes from here when #421 removes the field.
+ */
+const DEPRECATED_FIELDS: Readonly<Record<string, readonly string[]>> = {
+  insight: ['featuredImage'],
+}
+
 /** The top-level fields where two copies of one document disagree. */
 export function diffFields(expected: AnyDoc, live: AnyDoc): string[] {
+  const deprecated = new Set(DEPRECATED_FIELDS[expected._type] ?? [])
   const keys = new Set([...Object.keys(expected), ...Object.keys(live)])
-  return [...keys].filter((key) => !SYSTEM_KEYS.has(key) && !deepEqual(expected[key], live[key]))
+  return [...keys].filter(
+    (key) => !SYSTEM_KEYS.has(key) && !deprecated.has(key) && !deepEqual(expected[key], live[key]),
+  )
 }
 
 /** One document the next load would damage, and how. */

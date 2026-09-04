@@ -34,7 +34,25 @@ export const insight = defineType({
       of: [defineArrayMember({ type: 'reference', to: [{ type: 'category' }] })],
     }),
     defineField({ name: 'publishedAt', type: 'datetime', validation: (rule) => rule.required() }),
-    defineField({ name: 'featuredImage', type: 'figure' }),
+    /**
+     * The document's lead figure — the detail page's hero and nothing else.
+     * Empty means nobody has chosen one yet, and the hero draws `cardMedia`
+     * instead (#416).
+     */
+    defineField({ name: 'heroMedia', type: 'figure' }),
+    /**
+     * The figure this insight shows on cards and in feeds — the /insights
+     * grid, the Insight Card wherever it appears, the related-articles
+     * carousel. Empty means nobody has chosen one yet, and the card draws
+     * `heroMedia` instead (#416).
+     */
+    defineField({ name: 'cardMedia', type: 'figure' }),
+    /** Deprecated. Removed by #421, once no insight in either dataset defines it. */
+    defineField({
+      name: 'featuredImage',
+      type: 'figure',
+      deprecated: { reason: 'Use heroMedia for the lead figure, cardMedia for the card.' },
+    }),
     defineField({ name: 'body', type: 'bodyText' }),
     briefsField(),
     defineField({ name: 'seo', type: 'seo' }),
@@ -48,6 +66,6 @@ export const insight = defineType({
     },
   ],
   preview: {
-    select: { title: 'title', subtitle: 'publishedAt', media: 'featuredImage.image' },
+    select: { title: 'title', subtitle: 'publishedAt', media: 'cardMedia.image' },
   },
 })

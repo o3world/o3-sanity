@@ -134,6 +134,26 @@ either app's `src/content/`. A block's renderer is **bound per app** wherever it
 renaming one is two bindings — `apps/web` and `apps/o3xo` — and the `satisfies` check in each
 registry is what fails when you do only one. Where the renderer itself belongs is the table below.
 
+### o3xo is retired
+
+**Do not build o3xo.** Do not add or change a component, a renderer, a story or
+a schema for it; do not update its docs; do not run its brand-scoped tooling
+(`pnpm figma:sync --brand o3xo`, `pnpm vr --brand o3xo`). A ticket that asks for
+o3xo work is a question for Nick, not work to pick up.
+
+**This rule outranks the guidance it contradicts** — the four-homes placement
+table below, [ADR 0028](./docs/adr/0028-o3xo-is-a-second-app-in-the-monorepo.md)
+and [ADR 0029](./docs/adr/0029-a-brand-only-block-lives-app-first-schema-included.md),
+and [`docs/figma-components-o3xo.md`](./docs/figma-components-o3xo.md). Those
+documents still describe how the brand split works, and they are still how you
+read existing code; they no longer describe work worth starting.
+
+Nothing is deleted and nothing is dropped from CI. The app still compiles and
+still renders from its own dataset, so a change to shared code carries o3xo
+along mechanically — enough to keep the build green, and no further. **Whether
+to delete the app is an open decision nobody has filed**, and it stays that way
+until Nick makes it.
+
 ### Where a component lives
 
 Four homes. Find the row, and the row answers the placement question without a ruling.

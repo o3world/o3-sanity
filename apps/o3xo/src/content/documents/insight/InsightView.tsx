@@ -100,7 +100,7 @@ export function InsightView({
   author,
   categories,
   publishedAt,
-  featuredImage,
+  cardMedia,
   readingMinutes,
   body,
   related,
@@ -129,7 +129,7 @@ export function InsightView({
 
   // The hero photograph (#90). No second image field exists on the document,
   // and the frames name none — the featured image is the band's fill.
-  const heroImage = featuredImage?.image ?? null
+  const heroImage = cardMedia?.image ?? null
 
   return (
     <article>

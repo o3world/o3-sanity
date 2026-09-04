@@ -53,7 +53,7 @@ const buffalo = aCaseStudyCard({
     value: '2X',
     label: 'Revenue capacity from 3 AI solutions in < 6 months',
   },
-  heroMedia: photograph,
+  cardMedia: photograph,
   industries: null,
   industryDetail: null,
 })

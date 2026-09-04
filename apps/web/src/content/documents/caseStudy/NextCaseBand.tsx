@@ -92,8 +92,8 @@ export function NextCaseBand({ next }: { next: NextCase }) {
           )}
         >
           <SanityImage
-            source={next.heroMedia?.image}
-            alt={next.heroMedia?.alt ?? ''}
+            source={next.cardMedia?.image}
+            alt={next.cardMedia?.alt ?? ''}
             ratio="fill"
             width={1600}
             sizes={CONTENT_COLUMN}

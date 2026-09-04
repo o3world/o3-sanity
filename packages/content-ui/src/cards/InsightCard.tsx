@@ -56,7 +56,7 @@ export function InsightCard({
   title,
   slug,
   publishedAt,
-  featuredImage,
+  cardMedia,
   readingMinutes,
   priority,
 }: InsightCardData & {
@@ -92,8 +92,8 @@ export function InsightCard({
           viewport-wide square. */}
       <div className="rounded-card bg-bone relative isolate aspect-square overflow-hidden sm:max-w-[395px]">
         <SanityImage
-          source={featuredImage?.image}
-          alt={featuredImage?.alt ?? ''}
+          source={cardMedia?.image}
+          alt={cardMedia?.alt ?? ''}
           ratio="fill"
           width={800}
           sizes={CARD_THREE_UP}

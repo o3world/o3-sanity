@@ -182,7 +182,7 @@ describe('mapInsight', () => {
         wpPost({ featuredImage: { url: 'https://o3.com/up/photo-768x432.jpg', alt: 'A photo' } }),
       ),
     )
-    expect(doc.featuredImage).toEqual({
+    expect(doc.cardMedia).toEqual({
       _type: 'figure',
       image: { _type: 'image', _wpSrc: 'https://o3.com/up/photo.jpg' },
       alt: 'A photo',
@@ -193,7 +193,7 @@ describe('mapInsight', () => {
     const doc = expectOk(
       map(wpPost({ featuredImage: { url: 'https://o3.com/up/p.jpg', alt: '' } })),
     )
-    expect((doc.featuredImage as { alt: string }).alt).toBe('A Post')
+    expect((doc.cardMedia as { alt: string }).alt).toBe('A Post')
   })
 
   describe('seo — overrides migrate, resolved defaults do not (#26)', () => {

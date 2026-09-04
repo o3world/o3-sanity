@@ -42,7 +42,7 @@ function caseDetail(card: Pick<CaseStudyCardData, 'industries' | 'industryDetail
  * the floor by `mt-auto` rather than by a fixed slot.
  */
 export function CaseStudyCard(card: CaseStudyCardData) {
-  const { _type, title, slug, narrativeHeadline, headlineStat, heroMedia, client } = card
+  const { _type, title, slug, narrativeHeadline, headlineStat, cardMedia, client } = card
   const detail = caseDetail(card)
 
   return (
@@ -53,8 +53,8 @@ export function CaseStudyCard(card: CaseStudyCardData) {
       {/* 378.66 × 271.52 in the frame — 7/5 to the pixel it is drawn at. */}
       <div className="aspect-[7/5] overflow-hidden">
         <SanityImage
-          source={heroMedia?.image}
-          alt={heroMedia?.alt}
+          source={cardMedia?.image}
+          alt={cardMedia?.alt}
           ratio="fill"
           width={800}
           sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"

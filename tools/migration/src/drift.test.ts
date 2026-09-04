@@ -75,6 +75,28 @@ describe('deepEqual and diffFields', () => {
     const live = { _id: 'x', _type: 't', title: 'Theirs', body: [1], _rev: 'r' } as AnyDoc
     expect(diffFields(stripSystem(expected), stripSystem(live))).toEqual(['title'])
   })
+
+  /**
+   * A deprecated field the dataset still holds and the corpus has already
+   * dropped is not an editor's work. One deprecation would otherwise put a
+   * line in the report for every document of its type (#418).
+   */
+  it('ignores a field the corpus deliberately no longer claims', () => {
+    const expected = { _id: 'insight-wp-1', _type: 'insight', cardMedia: { alt: 'a' } } as AnyDoc
+    const live = {
+      _id: 'insight-wp-1',
+      _type: 'insight',
+      cardMedia: { alt: 'a' },
+      featuredImage: { alt: 'a' },
+    } as AnyDoc
+    expect(diffFields(stripSystem(expected), stripSystem(live))).toEqual([])
+  })
+
+  it('still names it on a type that never deprecated it', () => {
+    const expected = { _id: 'page-seed-index', _type: 'page' } as AnyDoc
+    const live = { _id: 'page-seed-index', _type: 'page', featuredImage: { alt: 'a' } } as AnyDoc
+    expect(diffFields(stripSystem(expected), stripSystem(live))).toEqual(['featuredImage'])
+  })
 })
 
 describe('driftBetween', () => {

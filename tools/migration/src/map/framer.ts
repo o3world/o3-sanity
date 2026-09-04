@@ -227,9 +227,11 @@ export function mapFramerInsight(
           ],
         }
       : { categories: [] }),
+    // The Framer source's hero image is, in this repo's vocabulary, the picture
+    // an article shows on cards (CONTEXT.md → Naming).
     ...(src.heroImage
       ? {
-          featuredImage: {
+          cardMedia: {
             _type: 'figure',
             image: { _type: 'image', _srcUrl: src.heroImage.url },
             alt: src.heroImage.alt || src.title,
@@ -256,7 +258,7 @@ export function mapFramerInsight(
       })),
     )
   }
-  // The constructed literal, not zod's output: `body` and `featuredImage` are
+  // The constructed literal, not zod's output: `body` and `cardMedia` are
   // typed loosely in the gate and parsing would widen the written JSON.
   return ok(doc, notes)
 }

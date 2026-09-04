@@ -95,7 +95,7 @@ describe('the /work index', () => {
         _id: `caseStudy-${i}`,
         slug: `case-${i}`,
         title: `Case ${i}`,
-        heroMedia: {
+        cardMedia: {
           image: {
             _type: 'image',
             asset: { _type: 'reference', _ref: `image-${String(i).repeat(40)}-2400x1350-jpg` },

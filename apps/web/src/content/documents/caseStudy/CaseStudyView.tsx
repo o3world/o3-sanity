@@ -60,7 +60,7 @@ function toRuns(story: readonly StoryMember[]): StoryRun[] {
  *
  * | Band            | Frame (1440 / 402)         | Field                            |
  * | --------------- | -------------------------- | -------------------------------- |
- * | Hero            | `1710:2301` / `1906:922`   | `heroMedia`, `client`, `title`, `narrativeHeadline` |
+ * | Hero            | `1710:2301` / `1906:922`   | `heroMedia` (else `cardMedia`), `client`, `title`, `narrativeHeadline` |
  * | Story           | `1647:1714` / `1906:878`   | `story` — chapters, numbered by their order among chapters |
  * | ↳ details rows  | `2274:4009`                | `chapter.details`                |
  * | ↳ screen grids  | `2230:3315`, `2230:7559`   | `screenGridSection`              |
@@ -109,7 +109,15 @@ function toRuns(story: readonly StoryMember[]): StoryRun[] {
  * out of black.
  */
 export function CaseStudyView(props: CaseStudyViewProps) {
-  const { _id, title, client, narrativeHeadline, heroMedia, story, deliverables, next } = props
+  const { _id, title, client, narrativeHeadline, heroMedia, cardMedia, story, deliverables, next } =
+    props
+
+  // THE HERO-SIDE FALLBACK, EXPRESSED ONCE (#416). Neither figure is required
+  // and each stands in for the other: the hero draws the lead figure, and a
+  // study whose editor has not chosen one draws the picture it shows on cards.
+  // The card side resolves in the projection (`CARD_MEDIA`) because it has
+  // many consumers; the hero has this one.
+  const hero = heroMedia ?? cardMedia
 
   const runs = toRuns(story ?? [])
 
@@ -121,7 +129,7 @@ export function CaseStudyView(props: CaseStudyViewProps) {
         subheading={narrativeHeadline}
         media={
           <SanityImage
-            source={heroMedia?.image}
+            source={hero?.image}
             alt=""
             ratio="fill"
             width={2400}

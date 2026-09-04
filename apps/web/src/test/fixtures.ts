@@ -70,7 +70,8 @@ export function aMigratedInsight(slug?: string): Insight {
     publishedAt: string
     body: unknown
     author?: { _ref: string }
-    featuredImage?: unknown
+    heroMedia?: unknown
+    cardMedia?: unknown
     seo?: unknown
   }
 
@@ -86,7 +87,9 @@ export function aMigratedInsight(slug?: string): Insight {
     // (#32 item 1.1), so the default fixture author would hide the state most
     // of the archive is actually in.
     author: migratedPerson(doc.author?._ref),
-    featuredImage: (doc.featuredImage ?? null) as Insight['featuredImage'],
+    heroMedia: (doc.heroMedia ?? null) as Insight['heroMedia'],
+    // The card chain, as `CARD_MEDIA` resolves it.
+    cardMedia: (doc.cardMedia ?? doc.heroMedia ?? null) as Insight['cardMedia'],
     seo: (doc.seo ?? null) as Insight['seo'],
   })
 }
@@ -180,6 +183,10 @@ export function aTranslatedCaseStudy(slug: string): Record<string, unknown> {
     client: deref(doc.client),
     industries: ((doc.industries ?? []) as unknown[]).map(deref).filter(Boolean),
     headlineStat: (doc.stats as unknown[] | undefined)?.[0] ?? null,
+    // The card chain, as `CARD_MEDIA` resolves it: a card draws `cardMedia`
+    // and falls back to the lead figure. This projects the document by hand,
+    // so it owes the same answer the query gives.
+    cardMedia: doc.cardMedia ?? doc.heroMedia ?? null,
     next: null,
   }
 }

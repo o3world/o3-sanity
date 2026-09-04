@@ -29,8 +29,10 @@ export const insight = defineDetailType({
     return {
       title: p.title,
       description: p.excerpt,
-      // CONTEXT.md → Known drift: this field should be `heroMedia`.
-      image: p.featuredImage,
+      // The share preview follows the card chain: a card picture is chosen to
+      // represent the document in a small frame, which is the crop a social
+      // card takes. `cardMedia` arrives already falling back to the hero.
+      image: p.cardMedia,
       path: `${collectionPrefixes().insight}/${p.slug}`,
       ogType: 'article',
       publishedTime: p.publishedAt,

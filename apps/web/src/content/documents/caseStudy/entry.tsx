@@ -25,7 +25,10 @@ export const caseStudy = defineDetailType({
     return {
       title: cs.title,
       description: cs.narrativeHeadline,
-      image: cs.heroMedia,
+      // The share preview follows the card chain: a card picture is chosen to
+      // represent the document in a small frame, which is the crop a social
+      // card takes. `cardMedia` arrives already falling back to the hero.
+      image: cs.cardMedia,
       path: `${collectionPrefixes().caseStudy}/${cs.slug}`,
     }
   },

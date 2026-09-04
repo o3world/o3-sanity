@@ -149,25 +149,46 @@ describe('insight detail route', () => {
   })
 
   /**
-   * The hero is photographic since #90 (`2252:3554` / `2262:3859`): the
-   * featured image fills the band under a `#030303` scrim. It is the only
-   * place that asset is drawn — the article column opens on the body (#371).
+   * The hero is photographic since #90 (`2252:3554` / `2262:3859`): a picture
+   * fills the band under a `#030303` scrim. It is the only place that asset is
+   * drawn — the article column opens on the body (#371).
+   *
+   * Which picture is the hero-side half of the two-field chain (#419): the
+   * band draws `heroMedia` and falls back to `cardMedia`, so an article whose
+   * editor has not chosen a lead figure still opens on the picture it shows in
+   * the feed. The card-side half resolves in the projection and is asserted
+   * against a real GROQ evaluator in `packages/sanity/src/cardMedia.test.ts`.
    */
   describe('the photographic hero', () => {
     const HERO_ID = '3333333333333333333333333333333333333333'
-    const withHero = () =>
-      anInsight({
-        featuredImage: {
-          _type: 'figure',
-          image: {
-            _type: 'image',
-            asset: { _type: 'reference', _ref: `image-${HERO_ID}-2000x1200-jpg` },
-          },
-          alt: 'The lead photograph',
-        } as never,
-      })
+    const CARD_ID = '6666666666666666666666666666666666666666'
+    const figure = (id: string, alt: string) => ({
+      _type: 'figure',
+      image: { _type: 'image', asset: { _type: 'reference', _ref: `image-${id}-2000x1200-jpg` } },
+      alt,
+    })
+    const withHero = () => anInsight({ heroMedia: figure(HERO_ID, 'The lead photograph') as never })
 
-    it('draws the featured image once, in the band, under the scrim', async () => {
+    it('draws the lead figure when the editor has chosen one', async () => {
+      const { html } = await render(
+        anInsight({
+          heroMedia: figure(HERO_ID, 'The lead photograph') as never,
+          cardMedia: figure(CARD_ID, 'The tile') as never,
+        }),
+      )
+      const header = html.slice(0, html.indexOf('</header>'))
+      expect(header).toContain(HERO_ID)
+      expect(header).not.toContain(CARD_ID)
+    })
+
+    it('falls back to the card figure when no lead figure was chosen', async () => {
+      const { html } = await render(
+        anInsight({ heroMedia: null, cardMedia: figure(CARD_ID, 'The tile') as never }),
+      )
+      expect(html.slice(0, html.indexOf('</header>'))).toContain(CARD_ID)
+    })
+
+    it('draws the picture once, in the band, under the scrim', async () => {
       const { html } = await render(withHero())
       const header = html.slice(0, html.indexOf('</header>'))
       expect(header).toContain(HERO_ID)
@@ -186,7 +207,7 @@ describe('insight detail route', () => {
      * photograph nor the gradient is drawn.
      */
     it('falls back to the flat ink band, scrim and all, when there is no image', async () => {
-      const { html } = await render(anInsight({ featuredImage: null }))
+      const { html } = await render(anInsight({ heroMedia: null, cardMedia: null }))
       const header = html.slice(0, html.indexOf('</header>'))
       expect(header).toContain('bg-ink-warm')
       expect(header).not.toContain('linear-gradient')
@@ -296,14 +317,14 @@ describe('insight detail route', () => {
       })
     })
 
-    it('prefers the seo ogImage over the featured image for the social card', async () => {
+    it('prefers the seo ogImage over the document’s own picture for the social card', async () => {
       const asset = (ref: string) => ({
         _type: 'image' as const,
         asset: { _type: 'reference' as const, _ref: ref },
       })
       const { metadata } = await renderWithSettings(
         anInsight({
-          featuredImage: { _type: 'figure', image: asset(FALLBACK_IMAGE), alt: 'x' } as never,
+          cardMedia: { _type: 'figure', image: asset(FALLBACK_IMAGE), alt: 'x' } as never,
           seo: { _type: 'seo', ogImage: asset(OG_IMAGE) } as never,
         }),
       )
@@ -312,10 +333,10 @@ describe('insight detail route', () => {
       expect(images).not.toContain(FALLBACK_ID)
     })
 
-    it('falls back to the document’s featured image when seo has no ogImage', async () => {
+    it('falls back to the document’s card picture when seo has no ogImage', async () => {
       const { metadata } = await renderWithSettings(
         anInsight({
-          featuredImage: {
+          cardMedia: {
             _type: 'figure',
             image: { _type: 'image', asset: { _type: 'reference', _ref: FALLBACK_IMAGE } },
             alt: 'x',
