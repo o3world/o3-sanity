@@ -45,8 +45,8 @@ function useCarousel() {
  * shadcn's Carousel — Embla underneath — with two deliberate departures
  * (ADR 0008: shadcn's anatomy, O3's tokens):
  *
- * - **The arrows are `CarouselControl`**, Figma's `Icon / Surface`
- *   (`778:1862`), not shadcn's outline `Button`, and they are static rather
+ * - **The arrows are `CarouselControl`**, the Home Blog's `Icon Button`
+ *   (`2134:1352`), not shadcn's outline `Button`, and they are static rather
  *   than absolutely positioned: every frame that draws a carousel here puts
  *   the pair in the band's header row, never floating over the track.
  * - **No default slide spacing.** shadcn spaces slides with `-ml-4`/`pl-4`;
