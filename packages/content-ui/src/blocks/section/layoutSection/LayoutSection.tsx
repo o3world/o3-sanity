@@ -92,6 +92,7 @@ export function LayoutSection({
     ...baseComponents,
   }
   const bleeding = stegaClean(bleed) === 'end'
+  const showMolecule = resolveDecoration(decoration, 'layoutSection') === 'molecule'
   const columnCount = resolveColumns(columns)
   const columnClass = bleeding ? BLEED_COLUMN_CLASS : COLUMN_CLASSES[columnCount]
   const entries = items ?? []
@@ -110,7 +111,16 @@ export function LayoutSection({
             {eyebrow}
           </Eyebrow>
         ) : null}
-        {heading ? <DisplayHeading level={bleeding ? 'lg' : 'xl'}>{heading}</DisplayHeading> : null}
+        {heading ? (
+          <DisplayHeading
+            level={bleeding ? 'lg' : 'xl'}
+            // The redesigned Overview and molecule treatments use Light;
+            // generic layouts retain their unbound Regular heading (#350).
+            className={bleeding || showMolecule ? undefined : 'font-normal'}
+          >
+            {heading}
+          </DisplayHeading>
+        ) : null}
         {subheading ? (
           <p className="text-display-lg font-display text-fg-muted text-balance">{subheading}</p>
         ) : null}
@@ -131,7 +141,6 @@ export function LayoutSection({
     return <Component key={item._key} {...props} slotSizes={slotSizes} />
   }
   const resolved = resolveSurface(surface, 'layoutSection')
-  const showMolecule = resolveDecoration(decoration, 'layoutSection') === 'molecule'
   // The band's measure (`2960:6885`). `stegaClean` for the same reason
   // `resolveDecoration` does it: a draft-mode string fails a bare `===`.
   const measure = stegaClean(width) === 'article' ? 'article' : 'section'

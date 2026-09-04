@@ -161,11 +161,7 @@ export function LogoWallSection({
         <div className="flex w-full flex-col items-center gap-8 text-center">
           {eyebrow ? <Eyebrow size="lg">{eyebrow}</Eyebrow> : null}
           {heading ? (
-            // `font-light` is the call site's, not the token's: `Heading/h2` is
-            // Figtree Light on every redesigned frame, but `display-xl` still
-            // carries the 400-weight section headlines on the frames the
-            // redesign has not reached. See tokens/typography.css.
-            //
+            // Explicit Light also serves brands whose display tokens are Regular.
             // The bar band steps the heading down to `Heading/h3` (`2332:1711`)
             // — it is introducing the logos, not making the page's claim.
             //

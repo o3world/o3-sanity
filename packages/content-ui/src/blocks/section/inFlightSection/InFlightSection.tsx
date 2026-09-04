@@ -141,7 +141,9 @@ function Header({
       data-sanity={fieldAttr(loc, 'heading')}
       className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-8"
     >
-      {heading ? <DisplayHeading className="lg:max-w-[571px]">{heading}</DisplayHeading> : null}
+      {heading ? (
+        <DisplayHeading className="font-normal lg:max-w-[571px]">{heading}</DisplayHeading>
+      ) : null}
       {subheading ? (
         <p className="text-lead leading-[1.2] lg:w-[395px] lg:shrink-0">{subheading}</p>
       ) : null}
@@ -221,7 +223,7 @@ function EntryRow({ entry }: { entry: Entry }) {
             // between two bands of one frame, which reads as authoring drift.
             <Eyebrow className="text-fg-quiet">{entry.eyebrow}</Eyebrow>
           ) : null}
-          <DisplayHeading as="h3" level="lg" className="tracking-[-0.0222em]">
+          <DisplayHeading as="h3" level="lg" className="font-normal tracking-[-0.0222em]">
             {entry.heading}
           </DisplayHeading>
         </div>

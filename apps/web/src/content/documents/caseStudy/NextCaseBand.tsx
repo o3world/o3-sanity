@@ -50,7 +50,9 @@ export function NextCaseBand({ next }: { next: NextCase }) {
         <div className="flex items-center justify-between gap-6 lg:ml-auto lg:w-[634px]">
           <div className="flex flex-col gap-1.5 lg:w-[576px] lg:gap-3">
             <Eyebrow size="lg">{label}</Eyebrow>
-            <p className="text-display-xl font-display text-ink text-balance">{next.title}</p>
+            <p className="text-display-xl font-display text-ink text-balance font-normal">
+              {next.title}
+            </p>
           </div>
           {/*
            * `Icon / Surface` (`1710:2615`) — the chip's geometry is that
