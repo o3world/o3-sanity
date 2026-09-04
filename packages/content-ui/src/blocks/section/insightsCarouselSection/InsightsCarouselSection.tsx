@@ -31,7 +31,7 @@ type InsightsCarouselSectionProps = SectionProps<'insightsCarouselSection'> & Ca
  * ```
  *
  * An ordinary `SectionShell` puts the header and the head of the row on the
- * standard 1248px column; the track's viewport reaches past it to the right
+ * structural column; the track's viewport reaches past it to the right
  * edge of the screen, which is the frame's own row (#401, and see
  * `CarouselTrack`). The shell carries `CAROUSEL_BAND_CLASS` because that bleed
  * is measured in `vw`.

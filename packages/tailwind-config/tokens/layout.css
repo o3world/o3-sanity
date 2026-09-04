@@ -1,9 +1,10 @@
 /*
  * Layout — page gutter, containers, and the section rhythm.
  *
- * The canonical frames are a stack of full-bleed surface bands, each padded
- * from a 96px page gutter (Figma `Section/section-margin-left`). At the 1440
- * design width that leaves a 1248px content column.
+ * The canonical frames are a stack of full-bleed surface bands. Their values
+ * remain the source for the rhythm below; the horizontal frame is the one
+ * explicit product override. Issue #429 opens O3 from the frame's 96px inset
+ * to 75px at 1440 and lets structural compositions grow to a 1728px stage.
  *
  * SECTION RHYTHM IS NOT ONE VALUE. The prototype used a single
  * clamp(120px, 14vw, 200px) on every band; the frames hand-tune it per band
@@ -28,7 +29,7 @@
  * WHAT CHANGES BETWEEN THE TWO FRAME WIDTHS (ADR 0006). Reading the 402 Home
  * frame against the 1440 one, only two of these move:
  *
- *   gutter        20px → 96px
+ *   gutter        20px → 75px   (#429 product override of the 96px frame)
  *   band-lg      128px → 192px   (the 192 bands compress; 1814:1679)
  *   band-detail   64px → 128px   (the insight detail page; 2262:3818)
  *   band-sm       96px → 96px    unchanged
@@ -40,20 +41,19 @@
 
 @theme {
   /* ── Page gutter ───────────────────────────────────────────────────────── */
-  /* 96px at 1440 (Figma `Section/section-margin-left`), 20px at 402. The
-   * horizontal padding on every full-bleed band, and the reason a 1248px
-   * container yields exactly the 362px content column the mobile frame draws.
-   * Class-accessible via px-gutter. */
-  --spacing-gutter: clamp(20px, calc(7.32vw - 9.4px), 96px);
+  /* 20px at 402, 75px at 1440. This deliberately supersedes Figma's 96px O3
+   * desktop inset (#429) while retaining the mobile endpoint. Class-accessible
+   * via px-gutter. */
+  --spacing-gutter: clamp(20px, calc(5.299vw - 1.302px), 75px);
 
-  /* gutter-tight — 16px at 402, the same 96 at 1440. The 2026-08 `Interior
+  /* gutter-tight — 16px at 402, converging on the same 75px at 1440. The 2026-08 `Interior
    * Hero` set draws its band at 16 on every 402 frame that instances it —
    * /work `2107:1086`, /insights `2975:8500`, /about `2975:9022`,
    * /partners/sanity `2975:9501`, /contact `2975:10038` — as does the contact
    * form band (`2975:10195`), where the older bands beside them on the same
    * frames still read 20. Two values because the frames draw two, not because
    * one of them is stale. */
-  --spacing-gutter-tight: clamp(16px, calc(7.707vw - 14.98px), 96px);
+  --spacing-gutter-tight: clamp(16px, calc(5.684vw - 6.85px), 75px);
 
   /* ── Section rhythm ────────────────────────────────────────────────────── */
   /* The three vertical steps the frames actually use. 128 is bound to the
@@ -112,9 +112,13 @@
   --spacing-nav-pinned: 32px;
 
   /* ── Containers ────────────────────────────────────────────────────────── */
-  /* section — 1248px: the 1440 design width less two 96px gutters. The
-   * standard content column. Class-accessible via max-w-section. */
-  --container-section: 78rem; /* 1248px */
+  /* section — the structural stage. It fills the 1290px canvas between the
+   * 75px gutters at 1440 and keeps growing to 1728px on wider viewports.
+   * Class-accessible via max-w-section. */
+  --container-section: 108rem; /* 1728px */
+  /* Named half-stage for one-sided viewport bleeds. Keeping the half beside
+   * its source prevents components from baking in the previous 624px value. */
+  --container-section-half: 54rem; /* 864px */
   /* content — 1034px: the narrower measure for centered statements, taken
    * from the pull-quote column (1756:2085). The partners statement sets its
    * own 1026px width; that 8px is a call-site literal, not a second token.

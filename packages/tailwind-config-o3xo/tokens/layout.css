@@ -33,10 +33,10 @@
  *
  * ── WHAT THIS FILE DOES NOT CARRY ──────────────────────────────────────────
  *
- * Page gutter, band rhythm and containers. The kit's grid draws a 16 → 96
- * margin and a 1248px desktop container, which is what the base theme's
- * `--spacing-gutter` and `--container-section` already resolve to at each
- * end; the rhythm between bands is composition, and belongs with the bands.
+ * Band rhythm. The retired app still consumes the shared base theme, so the
+ * narrow brand block below retains the kit's 16/20 → 96 gutter and 1248px
+ * structural container after O3's #429 product override. It is mechanical
+ * isolation, not new O3XO design work.
  */
 
 @theme {
@@ -45,4 +45,11 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1640px;
+}
+
+:root[data-brand='o3xo'] {
+  --spacing-gutter: clamp(20px, calc(7.32vw - 9.4px), 96px);
+  --spacing-gutter-tight: clamp(16px, calc(7.707vw - 14.98px), 96px);
+  --container-section: 78rem;
+  --container-section-half: 39rem;
 }

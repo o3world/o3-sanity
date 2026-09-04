@@ -120,8 +120,8 @@ export const Overview: Story = {
             hero step.
           </li>
           <li>
-            <strong className="text-fg">Layout</strong> — the 96px gutter, per-band rhythm, and the
-            square-corner story.
+            <strong className="text-fg">Layout</strong> — the frame-derived per-band rhythm, the
+            explicit 75px O3 gutter override, and the square-corner story.
           </li>
           <li>
             <strong className="text-fg">Button spec</strong> — the Figma component beside the

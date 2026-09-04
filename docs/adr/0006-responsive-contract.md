@@ -372,3 +372,32 @@ The plates are also empty grey on every panel at both widths. The renderer
 holds that space at 1440, where the row would otherwise collapse onto the copy
 column, and draws nothing at 402, where there is no row to hold open. A panel
 whose picture the seed already carries draws it at both widths.
+
+---
+
+## Amendment 2026-09-04 — O3 opens its structural frame
+
+Issue #429 makes one deliberate product override to the endpoint rule above:
+O3 no longer adopts the canonical frame's 96px desktop gutter or 1248px
+structural cap. The mobile edge remains 20px at 402; it now interpolates to a
+75px ceiling at 1440. The tight edge remains 16px at 402 and converges on the
+same 75px ceiling. This is an explicit exception, not a new reading of Figma.
+All other frame-derived type, rhythm, surface, and component relationships in
+this ADR remain authoritative.
+
+The standard structural shell now fills the 1290px between those gutters at
+1440 and continues growing to a 1728px cap. On a 1920 viewport the cap is
+centred with 96px on each side. The 1034px statement measure and 822px article
+measure do not grow with it: they remain reading constraints nested inside the
+structural stage.
+
+One-sided bleeds continue to end at the viewport. Their capped-state offset
+reads `--container-section-half`, paired with `--container-section`, instead of
+embedding half of a historical stage in component code. Responsive image
+slots describe three intervals separately: fluid gutter below 1440, pinned
+75px gutter while the structural stage grows, and the 1728px cap from 1878.
+
+O3XO is retired under the current repository instructions, so no new runtime
+or visual-regression work is performed for it. Its existing 96px/1248px
+geometry is mechanically isolated by the brand token overlay so importing the
+shared base theme does not apply this O3 product override.

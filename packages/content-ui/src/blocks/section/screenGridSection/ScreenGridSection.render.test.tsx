@@ -30,6 +30,27 @@ const html = renderToStaticMarkup(
 
 const plates = html.match(/<li[^>]*>/g) ?? []
 
+const illustratedHtml = renderToStaticMarkup(
+  <ScreenGridSection
+    {...({
+      screens: SCREENS.map((screen, index) => ({
+        ...screen,
+        media: {
+          ...screen.media,
+          image: {
+            _type: 'image',
+            asset: {
+              _type: 'reference',
+              _ref: `image-${String(index + 1).repeat(40)}-1600x900-jpg`,
+            },
+          },
+        },
+      })),
+      surface: 'white',
+    } as unknown as SectionProps<'screenGridSection'>)}
+  />,
+)
+
 describe('the screen grid band', () => {
   it('draws one plate per screen', () => {
     expect(plates).toHaveLength(SCREENS.length)
@@ -65,6 +86,15 @@ describe('the screen grid band', () => {
       expect(plate).toContain('overflow-hidden')
       expect(plate).not.toContain('overflow-x-')
     }
+  })
+
+  it('declares the image slot after the plate padding changes at lg', () => {
+    expect(illustratedHtml).toContain(
+      'sizes="(min-width: 1440px) calc(100vw - 278px), (min-width: 1024px) calc(89.402vw - 125.396px), calc(90vw - 64px)"',
+    )
+    expect(illustratedHtml).toContain(
+      'sizes="(min-width: 1440px) calc(50vw - 219px), (min-width: 1024px) calc(44.701vw - 142.698px), calc(90vw - 64px)"',
+    )
   })
 
   it('falls back to the ink plate and a single column for values it does not know', () => {

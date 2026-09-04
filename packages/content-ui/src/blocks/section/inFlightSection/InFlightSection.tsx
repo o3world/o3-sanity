@@ -84,7 +84,7 @@ export function InFlightSection({
   return (
     // The frame runs the card row off the right edge (`1906:347` stacks it at
     // 402 instead, so the row only overflows from `lg`). The bleed is not kept
-    // here: the row scrolls inside the standard 1248px shell, clipping at its
+    // here: the row scrolls inside the standard structural shell, clipping at its
     // edges, and at the design width rests at exactly three cards. #401 restored
     // the bleed on the Blog band and left this one alone; whether it follows is
     // open.

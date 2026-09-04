@@ -113,14 +113,14 @@ export function SectionBackground({
 
 /** The container measures the frames use (tokens/layout.css). */
 export const SECTION_WIDTH_CLASS = {
-  /** 1248px — the 1440 design width less two 96px gutters. The standard shell. */
+  /** 1728px cap — the structural shell, 1290px between 75px gutters at 1440. */
   section: 'max-w-section',
   /** 1034px — the narrower measure for centred statements (the pull quote). */
   content: 'max-w-content',
   /**
    * 822px — the prose measure, for a band that is running copy rather than a
    * layout. About's "Why O3" is the anchor (`2960:6885`): the frame insets it
-   * to a 760px column where every other band on the page runs the full 1248.
+   * to a 760px column where the surrounding bands use the structural shell.
    */
   article: 'max-w-article',
   /** No measure — the band's own children decide. */
@@ -152,7 +152,7 @@ const PAD_BOTTOM = {
 export type BandStep = keyof typeof PAD_TOP
 
 const sectionShellVariants = cva(
-  // 96px at 1440, 20px at 402 — `--spacing-gutter`, not the prototype's 24px.
+  // 75px at 1440, 20px at 402 — the #429 O3 product edge.
   'px-gutter',
   {
     variants: {
@@ -170,7 +170,7 @@ export interface SectionShellProps extends HTMLAttributes<HTMLElement> {
   top?: BandStep
   /** Bottom band step. Defaults to `lg`. */
   bottom?: BandStep
-  /** Inner container measure; defaults to the standard 1248px shell. */
+  /** Inner container measure; defaults to the structural 1728px-capped shell. */
   width?: SectionWidth
   /** Extra classes for the inner container (the outer band takes className). */
   contentClassName?: string

@@ -36,6 +36,10 @@ const KIT_H1 = { desktop: '60px', mobile: '48px' }
 /** The kit's Layouts canvas (`4214:3643`) — Radix widths, min-width based. */
 const KIT_BREAKPOINTS = { sm: '520px', xl: '1280px', '2xl': '1640px' }
 
+/** O3's #429 product geometry and the retired app's retained kit geometry. */
+const O3_LAYOUT = { gutterMobile: '20px', gutterDesktop: '75px', stage: '108rem', half: '54rem' }
+const O3XO_LAYOUT = { gutterDesktop: '96px', stage: '78rem', half: '39rem' }
+
 /**
  * One app's stylesheet, compiled from the theme files it imports and the
  * utilities named. Only the tokens a named utility reaches are emitted, which
@@ -141,5 +145,29 @@ describe('the O3XO breakpoints', () => {
     const css = await build([BASE], ['sm:px-gutter', 'xl:px-gutter', '2xl:px-gutter'])
 
     expect(mediaWidths(css)).toEqual(['40rem', '80rem', '96rem'])
+  })
+})
+
+describe('the brand layout seam', () => {
+  const layoutUtilities = ['px-gutter', 'px-gutter-tight', 'max-w-section', 'max-w-section-half']
+
+  it('compiles O3 with the 75px edge and 1728px structural stage', async () => {
+    const css = await build([BASE], layoutUtilities)
+    const root = block(css, ':root, :host')
+
+    expect(declared(root, '--spacing-gutter')).toContain(O3_LAYOUT.gutterMobile)
+    expect(declared(root, '--spacing-gutter')).toContain(O3_LAYOUT.gutterDesktop)
+    expect(declared(root, '--container-section')).toBe(O3_LAYOUT.stage)
+    expect(declared(root, '--container-section-half')).toBe(O3_LAYOUT.half)
+  })
+
+  it('keeps the retired O3XO app on its existing explicit geometry override', async () => {
+    const css = await build([BASE, O3XO], layoutUtilities)
+    const brand = block(css, ":root[data-brand='o3xo']")
+
+    expect(declared(brand, '--spacing-gutter')).toContain(O3XO_LAYOUT.gutterDesktop)
+    expect(declared(brand, '--spacing-gutter-tight')).toContain(O3XO_LAYOUT.gutterDesktop)
+    expect(declared(brand, '--container-section')).toBe(O3XO_LAYOUT.stage)
+    expect(declared(brand, '--container-section-half')).toBe(O3XO_LAYOUT.half)
   })
 })

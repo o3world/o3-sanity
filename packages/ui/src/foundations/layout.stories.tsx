@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect } from 'storybook/test'
 
 import {
   elementPadding,
@@ -21,6 +22,76 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+const geometryViewports = {
+  layout402: { name: 'Layout 402', styles: { width: '402px', height: '844px' } },
+  layout1440: { name: 'Layout 1440', styles: { width: '1440px', height: '900px' } },
+  layout1920: { name: 'Layout 1920', styles: { width: '1920px', height: '900px' } },
+}
+
+function GeometrySpecimen() {
+  return (
+    <div data-layout-root className="w-full overflow-x-clip bg-white py-8">
+      <div data-standard-shell className="px-gutter w-full">
+        <div data-structural-stage className="max-w-section bg-brand/15 mx-auto h-12 w-full" />
+        <div data-statement-measure className="max-w-content bg-ink/10 mx-auto mt-4 h-8 w-full" />
+        <div data-article-measure className="max-w-article bg-ink/10 mx-auto mt-4 h-8 w-full" />
+      </div>
+      <div data-tight-shell className="px-gutter-tight mt-8 w-full">
+        <div className="bg-brand/15 h-8 w-full" />
+      </div>
+    </div>
+  )
+}
+
+function requiredElement(canvasElement: HTMLElement, selector: string): HTMLElement {
+  const element = canvasElement.querySelector<HTMLElement>(selector)
+  if (!element) throw new Error(`Missing layout specimen: ${selector}`)
+  return element
+}
+
+async function expectGeometry(
+  canvasElement: HTMLElement,
+  expected: {
+    viewport: number
+    gutter: number
+    tightGutter: number
+    stage: number
+    statement: number
+    article: number
+  },
+) {
+  const standard = requiredElement(canvasElement, '[data-standard-shell]')
+  const tight = requiredElement(canvasElement, '[data-tight-shell]')
+  const stage = requiredElement(canvasElement, '[data-structural-stage]')
+  const statement = requiredElement(canvasElement, '[data-statement-measure]')
+  const article = requiredElement(canvasElement, '[data-article-measure]')
+
+  await expect(document.documentElement.clientWidth, 'the story viewport').toBe(expected.viewport)
+  await expect(parseFloat(getComputedStyle(standard).paddingLeft), 'standard gutter').toBeCloseTo(
+    expected.gutter,
+    0,
+  )
+  await expect(parseFloat(getComputedStyle(tight).paddingLeft), 'tight gutter').toBeCloseTo(
+    expected.tightGutter,
+    0,
+  )
+  await expect(stage.getBoundingClientRect().width, 'structural stage').toBeCloseTo(
+    expected.stage,
+    0,
+  )
+  await expect(statement.getBoundingClientRect().width, 'statement measure').toBeCloseTo(
+    expected.statement,
+    0,
+  )
+  await expect(article.getBoundingClientRect().width, 'article measure').toBeCloseTo(
+    expected.article,
+    0,
+  )
+  await expect(document.documentElement.scrollWidth, 'no horizontal overflow').toBe(
+    document.documentElement.clientWidth,
+  )
+}
+
 /**
  * Gutter, container, spacing steps, per-band rhythm, and the corner story —
  * which is that there isn't one. The exploration is square.
@@ -31,10 +102,10 @@ export const Layout: Story = {
       title="Layout"
       intro={
         <>
-          The page gutter is <Mono>96px</Mono> (Figma <Mono>Section/section-margin-left</Mono>),
-          giving a <Mono>1248px</Mono> content column at the 1440px design width. Vertical rhythm is
-          hand-tuned per band rather than one shared value — <Mono>128px</Mono> and{' '}
-          <Mono>192px</Mono> do most of the work.
+          O3 uses a product-owned <Mono>75px</Mono> gutter and <Mono>1290px</Mono> structural canvas
+          at 1440, then grows to a <Mono>1728px</Mono> stage on wide screens. Figma&apos;s former
+          96px edge remains the evidence for the surrounding system; this is its explicit #429
+          override. Vertical rhythm is still hand-tuned per band.
         </>
       }
     >
@@ -65,10 +136,9 @@ export const Layout: Story = {
           </div>
         </div>
         <Callout>
-          <Mono>--container-section</Mono> was <Mono>1240px</Mono> with a <Mono>24px</Mono> gutter
-          and is now <Mono>1248px</Mono> with <Mono>--spacing-gutter: 96px</Mono>. The 8px width
-          difference was negligible; the gutter was not — 96px is what makes the frame read as
-          editorial.
+          <Mono>--container-section: 1728px</Mono> is structural, not a reading measure. It fills
+          the 1290px canvas at 1440 and caps at 1728px; <Mono>--container-content: 1034px</Mono> and{' '}
+          <Mono>--container-article: 822px</Mono> keep statements and prose readable inside it.
         </Callout>
       </Section>
 
@@ -149,4 +219,55 @@ export const Layout: Story = {
       </Section>
     </Page>
   ),
+}
+
+/** Product-owned O3 geometry at the canonical 402px mobile viewport. */
+export const GeometryAt402: Story = {
+  parameters: { viewport: { viewports: geometryViewports } },
+  globals: { brand: 'o3', viewport: { value: 'layout402' } },
+  render: () => <GeometrySpecimen />,
+  play: async ({ canvasElement }) => {
+    await expectGeometry(canvasElement, {
+      viewport: 402,
+      gutter: 20,
+      tightGutter: 16,
+      stage: 362,
+      statement: 362,
+      article: 362,
+    })
+  },
+}
+
+/** The 1440px design viewport opens to 75px gutters and a 1290px stage. */
+export const GeometryAt1440: Story = {
+  parameters: { viewport: { viewports: geometryViewports } },
+  globals: { brand: 'o3', viewport: { value: 'layout1440' } },
+  render: () => <GeometrySpecimen />,
+  play: async ({ canvasElement }) => {
+    await expectGeometry(canvasElement, {
+      viewport: 1440,
+      gutter: 75,
+      tightGutter: 75,
+      stage: 1290,
+      statement: 1034,
+      article: 822,
+    })
+  },
+}
+
+/** The structural stage keeps growing after 1440, then caps at 1728px. */
+export const GeometryAt1920: Story = {
+  parameters: { viewport: { viewports: geometryViewports } },
+  globals: { brand: 'o3', viewport: { value: 'layout1920' } },
+  render: () => <GeometrySpecimen />,
+  play: async ({ canvasElement }) => {
+    await expectGeometry(canvasElement, {
+      viewport: 1920,
+      gutter: 75,
+      tightGutter: 75,
+      stage: 1728,
+      statement: 1034,
+      article: 822,
+    })
+  },
 }

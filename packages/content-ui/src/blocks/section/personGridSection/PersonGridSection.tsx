@@ -3,6 +3,7 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 import { fieldAttr, itemAttr } from '@o3/content-runtime/data-attribute'
 
 import { SanityImage } from '../../../SanityImage'
+import { PERSON_GRID_COLUMN } from '../../../imageSizes'
 import { resolveSurface } from '../../surface'
 
 type PersonGridSectionProps = SectionProps<'personGridSection'>
@@ -94,12 +95,12 @@ export function PersonGridSection({
                   width={800}
                   /*
                    * The tile is a grid cell, fluid at every width: three up
-                   * from `lg` ((column − 64) / 3, which is 395 once the column
-                   * caps at 1248), two up from `sm` ((column − 32) / 2 ≈ 42vw),
+                   * from `lg` ((column − 64) / 3), two up from `sm`
+                   * ((column − 32) / 2 ≈ 44vw),
                    * one up below that (the column itself ≈ 90vw). The column
                    * and the 90vw stand-in are derived in `imageSizes.ts`.
                    */
-                  sizes="(min-width: 1440px) 395px, (min-width: 1024px) 28vw, (min-width: 640px) 42vw, 90vw"
+                  sizes={PERSON_GRID_COLUMN}
                 />
               </PortraitTile>
               <div className="flex flex-col gap-1.5">

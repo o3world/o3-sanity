@@ -10,7 +10,7 @@ import { InsightsCarouselSection } from './InsightsCarouselSection'
  * `Icon / Surface` controls, and a card rail under it.
  *
  * **The row bleeds past the right edge of the screen**, as the frame draws it.
- * The heading and the head of the row keep the standard 1248px column — at the
+ * The heading and the head of the row keep the standard structural column — at the
  * design width that is the frame's three visible cards — and only the track's
  * viewport reaches past the margin, so the fourth card crosses it.
  *

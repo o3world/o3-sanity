@@ -491,14 +491,16 @@ export const typeScale: readonly TypeSpec[] = [
 /* ── Layout ────────────────────────────────────────────────────────────────── */
 
 /**
- * The page gutter is 96px (Figma `Section/section-margin-left`), giving a
- * 1248px content column at the 1440px design width — not the prototype's
- * 24px gutter and 1240px max-width.
+ * O3's current product geometry. Figma records a 96px gutter and 1248px frame
+ * at 1440; #429 deliberately supersedes that one relationship with a 75px
+ * gutter, 1290px canvas, and 1728px wide-screen stage. The rest of this file's
+ * frame-derived readings remain authoritative.
  */
 export const layout = {
   designWidth: 1440,
-  gutter: 96,
-  contentWidth: 1248,
+  gutter: 75,
+  contentWidth: 1290,
+  stageMax: 1728,
 } as const
 
 export interface SectionRhythmSpec {
@@ -733,15 +735,16 @@ export const drift: readonly DriftSpec[] = [
     current: 'One token — clamp(120px, 14vw, 200px) vertical, 24px gutter',
     figma: 'Hand-tuned asymmetric padding per band (96/128/192 top-bottom), 96px gutter',
     impact:
-      'The gutter and the three steps are tokens now. The per-band asymmetry is composition a single token cannot express — SectionShell has to grow a rhythm variant, which is #41.',
+      'The three rhythm steps remain adopted. #429 later overrides only the O3 horizontal gutter to 75px; the per-band asymmetry remains composition a single token cannot express.',
     outcome: 'partial',
   },
   {
     concern: 'Container',
     current: '1240px (section) / 1100px (content)',
     figma: '1248px — the 1440 design width less two 96px gutters — and a 1034px statement measure',
-    impact: 'Both adopted.',
-    outcome: 'adopted',
+    impact:
+      'The 1034px statement measure remains adopted. #429 deliberately replaces the structural cap with 1728px while preserving the narrower reading measure.',
+    outcome: 'partial',
   },
   {
     concern: 'Button',

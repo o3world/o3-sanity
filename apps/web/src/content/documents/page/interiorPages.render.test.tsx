@@ -71,17 +71,23 @@ describe('the seeded About page', () => {
   /**
    * A picture declares the column it was placed in, not the widest column it
    * could have been placed in (#268). Every image on the page is a `mediaCard`
-   * in the three-column beyond band, so each asks for (1248 − 80) / 3 = 389 at
-   * the cap — the full 1248 would buy the 1920 candidate for a 389px box, and
+   * in the three-column beyond band, so each asks for (1728 − 80) / 3 ≈ 550 at
+   * the cap — the full 1728 would buy too large a candidate for that box, and
    * the 822px article measure belongs to a detail page.
    */
   it('sizes a card’s picture to its layout column, not to the whole content column', () => {
     const slots = declaredSizes(html)
     expect(
-      slots.filter((slot) => slot === '(min-width: 1440px) 389px, (min-width: 768px) 28vw, 90vw'),
+      slots.filter(
+        (slot) =>
+          slot ===
+          '(min-width: 1878px) 550px, (min-width: 1440px) calc(33.333vw - 76.667px), (min-width: 768px) 28vw, 90vw',
+      ),
     ).toHaveLength(3)
-    expect(slots).not.toContain('(min-width: 1440px) 1248px, 90vw')
-    expect(slots).not.toContain('(min-width: 1024px) 822px, 90vw')
+    expect(slots).not.toContain(
+      '(min-width: 1878px) 1728px, (min-width: 1440px) calc(100vw - 150px), 90vw',
+    )
+    expect(slots).not.toContain('(min-width: 917px) 822px, 90vw')
   })
 
   /**

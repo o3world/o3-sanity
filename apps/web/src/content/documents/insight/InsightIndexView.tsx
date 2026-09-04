@@ -218,7 +218,11 @@ export function InsightIndexView({
                     {/* The first card sits in the first screen under the hero,
                         the largest picture on the route. It is the only image
                         here that is preloaded. */}
-                    <InsightCard {...item} priority={index === 0} />
+                    <InsightCard
+                      {...item}
+                      priority={index === 0}
+                      mediaLayout="structural-three-up"
+                    />
                   </Reveal>
                 </li>
               ))}

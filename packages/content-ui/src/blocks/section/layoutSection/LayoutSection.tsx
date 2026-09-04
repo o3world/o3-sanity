@@ -55,12 +55,12 @@ const BLEED_COLUMN_CLASS = 'grid-cols-1 lg:grid-cols-[minmax(0,395px)_1fr]'
  * `calc(50% - 50vw)`: a percentage margin resolves against the grid AREA, not
  * the container, so the tidy version overshoots by however wide the copy column
  * is. Below the 1440 cap the container is the viewport less two gutters, so the
- * gutter is the whole distance; above it the container stops at 1248 and half
- * of that is 624. `min()` of two negatives takes the larger distance, which is
- * whichever of the two is in force.
+ * gutter is the whole distance; above it the container stops and the named
+ * half-stage token supplies the centred edge. `min()` of two negatives takes
+ * the larger distance, which is whichever of the two is in force.
  */
 const BLEED_MEDIA_CLASS =
-  'lg:mr-[min(calc(-1*var(--spacing-gutter)),calc(624px-50vw))] ' +
+  'lg:mr-[min(calc(-1*var(--spacing-gutter)),calc(var(--container-section-half)-50vw))] ' +
   'lg:aspect-[918/575] lg:overflow-hidden ' +
   'lg:[&_figure]:h-full lg:[&_img]:h-full lg:[&_img]:rounded-none lg:[&_img]:object-cover'
 

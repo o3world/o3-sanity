@@ -7,7 +7,7 @@ import { hrefForDoc } from '@o3/content-runtime/urls'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { SanityImage } from '../SanityImage'
-import { CARD_THREE_UP } from '../imageSizes'
+import { CARD_THREE_UP, STRUCTURAL_THREE_UP } from '../imageSizes'
 import { formatNumericDate } from '../lib/format-date'
 
 /**
@@ -59,6 +59,7 @@ export function InsightCard({
   cardMedia,
   readingMinutes,
   priority,
+  mediaLayout = 'fixed-card',
 }: InsightCardData & {
   /**
    * Preload this card's picture. Only the container knows whether the card is
@@ -66,7 +67,15 @@ export function InsightCard({
    * card and nothing else does, because the carousel bands sit below the fold.
    */
   priority?: boolean
+  /**
+   * The two real slots this shared card occupies. The default preserves the
+   * fixed 395px carousel/retired-app tile; O3's collection index opts into its
+   * structural three-up cell at `lg` without widening the one-column tablet
+   * state.
+   */
+  mediaLayout?: 'fixed-card' | 'structural-three-up'
 }) {
+  const isStructural = mediaLayout === 'structural-three-up'
   const meta = [
     readingMinutes ? `${readingMinutes} min${readingMinutes === 1 ? '' : 's'}` : null,
     showsPublishDates ? formatNumericDate(publishedAt) : null,
@@ -87,16 +96,18 @@ export function InsightCard({
         'focus-visible:ring-offset-transparent',
       )}
     >
-      {/* Capped at the three-up card's width from `sm` up, so a card laid out
-          in a one-column container keeps a card-sized tile instead of a
-          viewport-wide square. */}
-      <div className="rounded-card bg-bone relative isolate aspect-square overflow-hidden sm:max-w-[395px]">
+      <div
+        className={cn(
+          'rounded-card bg-bone relative isolate aspect-square w-full overflow-hidden sm:max-w-[395px]',
+          isStructural && 'lg:max-w-none',
+        )}
+      >
         <SanityImage
           source={cardMedia?.image}
           alt={cardMedia?.alt ?? ''}
           ratio="fill"
           width={800}
-          sizes={CARD_THREE_UP}
+          sizes={isStructural ? STRUCTURAL_THREE_UP : CARD_THREE_UP}
           priority={priority}
           className={cn('h-full w-full', CARD_MEDIA_ZOOM)}
         />
