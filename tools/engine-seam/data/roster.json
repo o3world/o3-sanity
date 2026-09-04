@@ -451,6 +451,11 @@
       ]
     },
     {
+      "path": "tools/perf-probe",
+      "verdict": "product-brand",
+      "why": "The local lab probe for o3world.com: fixed O3 routes and its mobile-menu interaction."
+    },
+    {
       "path": "tools/visual-regression",
       "verdict": "product-shared",
       "why": "compare/capture/freeze/git/affected are brand-free; the brand host registry is the product."

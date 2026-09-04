@@ -1,0 +1,21 @@
+{
+  "name": "@o3/perf-probe",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A repeatable, throttled browser probe for the four representative O3 routes (#390).",
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint src/",
+    "perf": "tsx src/cli.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@o3/typescript-config": "workspace:*",
+    "@types/node": "^24.0.0",
+    "playwright": "^1.62.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.10"
+  }
+}

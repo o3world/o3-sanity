@@ -71,6 +71,7 @@ export default defineConfig({
             'tools/build-assert/src/**/*.test.ts',
             'tools/engine-seam/src/**/*.test.ts',
             'tools/figma-sync/src/**/*.test.ts',
+            'tools/perf-probe/src/**/*.test.ts',
             'tools/visual-regression/src/**/*.test.ts',
             'tools/migration/src/**/*.test.ts',
             'tools/guidance/src/**/*.test.ts',
