@@ -29,6 +29,7 @@
     "frontier": "./scripts/frontier.sh",
     "knip": "knip --no-config-hints",
     "lint": "turbo run lint",
+    "motion:contract": "playwright test --config=apps/web/motion-contract/playwright.config.ts",
     "perf": "pnpm --filter @o3/perf-probe perf",
     "prepare": "[ -n \"$VERCEL\" ] || [ -n \"$CI\" ] || { lefthook install; bash scripts/worktree-provision.sh --no-install || true; }",
     "schema:check": "pnpm --filter @o3/sanity schema:check",

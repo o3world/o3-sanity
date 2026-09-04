@@ -29,12 +29,10 @@ import { CloseIcon } from '../close-icon'
  *   is the side the sites open (`MobileNavMenu`); the other three take their
  *   resting translate and no motion until someone gives them a pair.
  *
- *   The `motion-reduce` cancels are keyed to the same `data-[state]` as the
- *   animation they cancel, and that is load-bearing: a bare
- *   `motion-reduce:animate-none` is one class selector against the animation's
- *   class-plus-attribute, so it loses on specificity and the gate does not
- *   bite. With the animation gone Radix sees a computed `animation-name` of
- *   `none` and unmounts on the spot, so a reduced-motion close is instant.
+ *   Reduced motion keeps the animation's name but makes its duration zero.
+ *   Radix Presence matches that name to finish an exit; replacing it with
+ *   `none` mid-exit can strand the modal after an animationcancel event.
+ *   State-specific selectors keep the override at the animation's specificity.
  *
  * Surfaces are left to the caller: `SheetContent` defaults to the light band,
  * and the nav passes `bg-ink-deep` to match the bar it opens from.
@@ -65,7 +63,7 @@ function SheetOverlay({
       className={cn(
         'bg-ink-deep/60 fixed inset-0 z-50 opacity-0 data-[state=open]:opacity-100',
         'data-[state=open]:animate-scrim-in data-[state=closed]:animate-scrim-out',
-        'motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none',
+        'motion-reduce:data-[state=closed]:[animation-duration:0ms] motion-reduce:data-[state=open]:[animation-duration:0ms]',
         className,
       )}
       {...props}
@@ -93,7 +91,7 @@ function SheetContent({
           side === 'right' &&
             'inset-y-0 right-0 h-full w-3/4 translate-x-full data-[state=open]:translate-x-0 sm:max-w-sm',
           side === 'right' &&
-            'data-[state=open]:animate-sheet-in-right data-[state=closed]:animate-sheet-out-right motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none',
+            'data-[state=open]:animate-sheet-in-right data-[state=closed]:animate-sheet-out-right motion-reduce:data-[state=closed]:[animation-duration:0ms] motion-reduce:data-[state=open]:[animation-duration:0ms]',
           side === 'left' &&
             'inset-y-0 left-0 h-full w-3/4 -translate-x-full data-[state=open]:translate-x-0 sm:max-w-sm',
           side === 'top' &&

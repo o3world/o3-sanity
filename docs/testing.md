@@ -174,6 +174,43 @@ as its own job. See [the tool's README](../tools/build-assert/README.md).
 This is why no route needs its own "is it static?" test: staticness is checked once, for every route
 there is.
 
+## The production navigation contract
+
+One exception to the component-browser boundary covers page motion through the real App Router
+([ADR 0004](adr/0004-layered-test-approach.md#2026-09-04-addendum-a-production-navigation-contract)).
+Stories cannot reproduce a production route commit, retained route trees, or native history.
+
+```bash
+pnpm --filter @o3/web build
+pnpm build:assert
+pnpm exec playwright install chromium webkit firefox # once per Playwright version
+pnpm motion:contract
+```
+
+The contract starts the **built** O3 app itself, on `localhost` at the worktree's provisioned
+`WEB_PORT`. It refuses an occupied port. `MOTION_CONTRACT_PORT=3603 pnpm motion:contract` can choose
+another free O3 Sanity-registered port (3600–3609); using an arbitrary origin can break client reads
+through CORS and is not equivalent evidence. No dataset is written or seeded by this command.
+
+The matrix is Chromium, Playwright WebKit, and Firefox at 1440×1000 and touch-enabled 402×874,
+each with normal and reduced motion. The stationary mouse case is desktop/normal only; the
+preference-change case starts normal. The other journeys run in every profile. Missing animation
+APIs and JavaScript-disabled direct requests are separate fallback cases. These current engine
+builds do not prove every older supported version, branded Safari, or physical-device behavior.
+On macOS, WebKit's full-link traversal uses its native Option-Tab shortcut; ordinary Tab may move
+focus to browser chrome. No test changes system keyboard preferences.
+
+`apps/web/motion-contract/` records destination readiness separately from fade completion, real
+input while the page is fading, history/scroll/focus, nav ink, and hidden-route isolation. It is
+an integration checkpoint, not a new general E2E suite or a substitute for `pnpm test`. Run it when
+route motion, framework navigation, or the shell changes. The app's lint/typecheck includes it.
+
+Timing and browser-version attachments, failure traces/screenshots, and the HTML report stay in
+gitignored `test_output/motion-contract/`. Run a single profile with
+`pnpm motion:contract --project=webkit-mobile-no-preference` when investigating a failure. It reads
+the configured Sanity dataset, so missing published content or external service failures must be
+diagnosed rather than replaced by a fake route.
+
 ## What is deliberately not here
 
 - **No pixel-diff visual regression.** Baselines churn during an active redesign and drift across
@@ -181,4 +218,5 @@ there is.
   human call in Storybook, beside the `addon-designs` frame.
 - **No coverage thresholds.** They reward volume over judgement. Add a test when it would have
   caught something.
-- **No end-to-end browser suite.** CI already deploys a preview per PR; that is the smoke test.
+- **No general end-to-end browser suite.** The production navigation contract above is the narrow
+  exception. Deployment previews remain the broader smoke-test surface.

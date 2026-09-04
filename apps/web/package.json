@@ -6,7 +6,7 @@
     "build": "next build",
     "dev": "../../scripts/dev.sh web",
     "format": "prettier --write .",
-    "lint": "eslint src/",
+    "lint": "eslint src/ motion-contract/",
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },

@@ -1,5 +1,5 @@
 import type React from 'react'
-import { Suspense, ViewTransition } from 'react'
+import { Suspense } from 'react'
 import { draftMode } from 'next/headers'
 import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
@@ -8,6 +8,7 @@ import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
 import { NavInkFirstPaint, SiteFooter, SiteNav, UtilityNav } from '@o3/content-ui/chrome'
 
 import { DraftTools } from './DraftTools'
+import { RouteArrival } from './RouteArrival'
 
 interface ShellProps {
   children: React.ReactNode
@@ -67,6 +68,7 @@ async function Shell({ children }: ShellProps) {
           when the ink hero paints. Ink is the colour both index heroes arrive
           in, so what shows around the skeleton matches what fills it. */}
       <main
+        id="site-content"
         // No `utilityNavItems`, no strip — and the nav-offset token every
         // clearance under the pill derives from (hero padding, sticky tops,
         // jump-target margins) drops to the strip-less 32px the interior
@@ -79,20 +81,11 @@ async function Shell({ children }: ShellProps) {
             : 'bg-ink min-h-screen [--spacing-nav-offset:32px]'
         }
       >
-        {/*
-         * THE CROSS-PAGE FADE (#403). One `<ViewTransition>` around the routed
-         * content and nothing else: a navigation replaces what is inside `<main>`
-         * and leaves the chrome standing, so the chrome is exactly what must not
-         * animate. The pseudo-element rules are in tokens/motion.css, where the
-         * root snapshot — nav, footer, ground — is held still and only this
-         * element crosses; `default="page"` is the class they name.
-         *
-         * `<Link>` navigation is a React Transition, which is what activates
-         * this; a browser with no View Transitions API navigates as it always
-         * did, with no fallback to write.
-         */}
-        <ViewTransition default="page">{children}</ViewTransition>
+        {children}
       </main>
+      <Suspense fallback={null}>
+        <RouteArrival />
+      </Suspense>
       {/* After `<main>`, so the arriving page's bands are parsed when it reads
           them, and inline, so it reads them before the first paint. */}
       <NavInkFirstPaint />

@@ -66,3 +66,6 @@ ds-bundle/
 
 # Sanity request-log exports and other unshared local data.
 /private/
+
+# Local production-browser motion evidence.
+/test_output/

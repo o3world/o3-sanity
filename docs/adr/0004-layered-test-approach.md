@@ -60,3 +60,27 @@ Supporting decisions:
 - **Negative:** four new dev dependencies (`vitest`, `@vitest/browser`, `@vitest/browser-playwright`, `playwright`) plus `@storybook/addon-vitest`; CI grows a job that downloads Chromium on a cache miss.
 - **One-time churn:** the determinism fix rewrote every `_key` in `tools/migration/data/converted/` once. The dataset is disposable (ADR 0003), so this is a re-load, not a migration.
 - **Risks / open questions:** the contrast rule stays off until the palette decision lands — it should not be forgotten; `stegaClean` must be imported from `@sanity/client/stega`, not the `next-sanity` barrel, or block stories break (enforced by a lint rule).
+
+## 2026-09-04 addendum: a production navigation contract
+
+[Issue #428 — executable page-navigation motion](https://github.com/o3world/o3-sanity/issues/428)
+adds one Playwright contract against the built O3 App Router app. This is an explicit exception to
+the general no-E2E boundary, not a fourth layer for ordinary component tests.
+
+The failing behavior could not be reproduced by an isolated story: while a route snapshot faded,
+a real stationary-pointer click on the navigation was lost. The destination was ready, but its
+input was not. The contract must therefore keep production route commits, browser hit testing,
+history/scroll, and retained route trees real. No mocked router, duplicate destination, or synthetic
+click forwarding stands in for that seam.
+
+`pnpm motion:contract` reuses the installed Playwright dependency and runs three engines at desktop
+and touch-mobile sizes, with both motion preferences. API absence and JavaScript-disabled direct
+loads cover progressive enhancement. Input-time evidence and destination-readiness timestamps are
+separate from visual completion; a test that merely waits for a fade and then clicks would miss the
+original failure.
+
+The cost is a production build, installed browser binaries, and access to real published routes.
+Run it at navigation checkpoints alongside the existing suite and build assertion, not after every
+edit. Its evidence is local and ignored, with no screenshot baselines or coverage gate. The runner
+uses the worktree's registered Sanity origin and never mutates content. See [Testing](../testing.md)
+for commands and the browser-support limits.

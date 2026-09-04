@@ -5,7 +5,6 @@ import { useState } from 'react'
 import {
   MenuIcon,
   Sheet,
-  SheetClose,
   SheetContent,
   SheetTitle,
   SheetTrigger,
@@ -39,10 +38,10 @@ interface MobileNavMenuProps {
  * The only interactive part of the chrome, hence the one client component.
  */
 export function MobileNavMenu({ items, button }: MobileNavMenuProps) {
-  const [open, setOpen] = useState(false)
+  const [state, setState] = useState<'closed' | 'open' | 'navigated'>('closed')
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet open={state === 'open'} onOpenChange={(open) => setState(open ? 'open' : 'closed')}>
       <SheetTrigger
         aria-label="Open menu"
         // The frame draws the bars at `rgba(255,255,255,0.85)`. Expressed as
@@ -55,34 +54,37 @@ export function MobileNavMenu({ items, button }: MobileNavMenuProps) {
       </SheetTrigger>
 
       {/* The panel is its own dark field, portalled out of the bar — so it
-          declares the surface rather than inheriting the bar's. */}
-      <SurfaceProvider surface="ink">
-        <SheetContent
-          side="right"
-          {...surfaceAttrs('ink')}
-          className="bg-ink-deep w-full text-white sm:max-w-sm"
-        >
-          <SheetTitle className="sr-only">Menu</SheetTitle>
-          <nav aria-label="Menu" className="flex flex-col gap-8 px-5 pt-24">
-            {items.map((item, i) => (
-              // Closing on navigation is manual: a client-side route change does
-              // not unmount the portal, so the panel would survive the link.
-              <SheetClose asChild key={item._key ?? `nav-${i}`}>
-                <NavLink href={resolveButtonHref(item)} className="text-button text-white">
+          declares the surface rather than inheriting the bar's. Navigation
+          ends modal ownership immediately; manual closure retains the exit
+          animation. A retained exit can swallow a rapid touch on the trigger. */}
+      {state !== 'navigated' && (
+        <SurfaceProvider surface="ink">
+          <SheetContent
+            side="right"
+            {...surfaceAttrs('ink')}
+            className="bg-ink-deep w-full text-white sm:max-w-sm"
+          >
+            <SheetTitle className="sr-only">Menu</SheetTitle>
+            <nav aria-label="Menu" className="flex flex-col gap-8 px-5 pt-24">
+              {items.map((item, i) => (
+                <NavLink
+                  key={item._key ?? `nav-${i}`}
+                  href={resolveButtonHref(item)}
+                  className="text-button text-white"
+                  onNavigate={() => setState('navigated')}
+                >
                   {item.label}
                 </NavLink>
-              </SheetClose>
-            ))}
-            {button ? (
-              <SheetClose asChild>
+              ))}
+              {button ? (
                 <div className="mt-4 self-start">
-                  <ButtonLink button={button} />
+                  <ButtonLink button={button} onNavigate={() => setState('navigated')} />
                 </div>
-              </SheetClose>
-            ) : null}
-          </nav>
-        </SheetContent>
-      </SurfaceProvider>
+              ) : null}
+            </nav>
+          </SheetContent>
+        </SurfaceProvider>
+      )}
     </Sheet>
   )
 }

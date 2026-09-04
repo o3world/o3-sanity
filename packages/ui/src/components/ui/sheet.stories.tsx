@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 
 import { Button } from './button'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from './sheet'
@@ -50,6 +51,18 @@ export const MobileNavMenu: Story = {
       </SheetContent>
     </Sheet>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const page = within(canvasElement.ownerDocument.body)
+    const trigger = canvas.getByRole('button', { name: 'Open menu' })
+    await userEvent.click(trigger)
+    await expect(page.getByRole('dialog', { name: 'Menu' })).toBeVisible()
+    await userEvent.keyboard('{Escape}')
+    await waitFor(() =>
+      expect(page.queryByRole('dialog', { name: 'Menu' })).not.toBeInTheDocument(),
+    )
+    await expect(trigger).toHaveFocus()
+  },
 }
 
 /** The untranslated default surface, for anything that isn't the nav. */

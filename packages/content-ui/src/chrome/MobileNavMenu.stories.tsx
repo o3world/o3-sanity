@@ -17,10 +17,9 @@ import { MobileNavMenu } from './MobileNavMenu'
  * links. Only the vertical stack is a code decision. The Design tab here
  * points at the **closed** affordance, which is all the file actually has.
  *
- * Closing on navigation is manual: a client-side route change does not unmount
- * the portal, so without `SheetClose` the panel would survive the link. There
- * is no story that can prove that in isolation — it needs a router — but it is
- * the thing to remember before simplifying the links.
+ * App navigation dismisses the portal immediately; manual closure keeps its
+ * exit cadence. The production navigation contract covers that router-owned
+ * handoff, including a rapid touch reopening the menu during page arrival.
  */
 const meta = {
   title: 'Chrome/MobileNavMenu',

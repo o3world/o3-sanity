@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import type { ComponentProps } from 'react'
 import { stegaClean } from '@sanity/client/stega'
 
 import { resolveContrast } from '@o3/block-spec'
@@ -41,6 +42,7 @@ export function ButtonLink({
   size,
   className,
   control,
+  onNavigate,
 }: {
   button: ButtonLinkData | null | undefined
   /** `Button`'s authored size step. Base is what the frames draw; section headers use Large. */
@@ -60,6 +62,8 @@ export function ButtonLink({
    * somewhere ignores them.
    */
   control?: Pick<ButtonProps, 'type' | 'aria-disabled' | 'aria-describedby'>
+  /** App navigation only; modified clicks and external links stay native. */
+  onNavigate?: ComponentProps<typeof Link>['onNavigate']
 }) {
   // Before the early return: a hook cannot sit behind one.
   const surface = useSurface()
@@ -101,6 +105,7 @@ export function ButtonLink({
   return (
     <Link
       href={destination.href}
+      onNavigate={onNavigate}
       className={cn(buttonVariants({ variant: fill, size }), className)}
       // A URL that leaves the site opens beside the page the visitor was
       // reading, and `noopener` keeps the opened page off `window.opener`.
