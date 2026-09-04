@@ -74,7 +74,10 @@ export function CaseStudyHero({
        */}
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,var(--color-ink-deep)_34%,transparent_100%)] lg:bg-[linear-gradient(0deg,var(--color-ink-deep)_15%,transparent_100%)]" />
 
-      <div className="max-w-section relative mx-auto flex w-full flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+      <div
+        data-route-foreground=""
+        className="max-w-section relative mx-auto flex w-full flex-col items-start justify-between gap-8 lg:flex-row lg:items-end"
+      >
         <div className="flex flex-col justify-center gap-4 lg:w-[571px]">
           {eyebrow ? (
             <Eyebrow size="lg" tone="brand">

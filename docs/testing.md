@@ -201,9 +201,14 @@ On macOS, WebKit's full-link traversal uses its native Option-Tab shortcut; ordi
 focus to browser chrome. No test changes system keyboard preferences.
 
 `apps/web/motion-contract/` records destination readiness separately from fade completion, real
-input while the page is fading, history/scroll/focus, nav ink, and hidden-route isolation. It also
+input while live foreground content is fading, history/scroll/focus, nav ink, and hidden-route isolation. It also
 checks the complete destination nav skin on its first frame, and separately verifies that actual
-scrolling still interpolates its colors over 350ms. This is an integration checkpoint, not a new
+scrolling still interpolates its colors over 350ms. Within-run screenshot pixels at plain hero/feed
+gutters must match during active motion and after it settles: dark-to-dark, light-to-light, and
+mixed-surface arrivals cannot wash authored grounds. No screenshot baseline is maintained. The
+home hero's existing CSS entrance stays the sole owner when active; unmarked/custom foregrounds
+retain ordinary paint rather than being inferred from their surface. See [ADR 0030](adr/0030-route-arrival-animates-live-content.md).
+This is an integration checkpoint, not a new
 general E2E suite or a substitute for `pnpm test`. Run it when
 route motion, framework navigation, or the shell changes. The app's lint/typecheck includes it.
 

@@ -164,6 +164,7 @@ export function CollectionHero({
         {background}
         {decoration}
         <div
+          data-route-foreground=""
           className={cn(
             'max-w-section relative mx-auto flex flex-col gap-8',
             centred

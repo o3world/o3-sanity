@@ -328,7 +328,10 @@ export function HeroSection({
          * The column is centred at both widths — `1814:1622` centres on its
          * cross axis and every text node in it is centre-set.
          */}
-        <div className="hero-lead max-w-content relative z-10 mx-auto flex flex-col items-center pb-[247px] pt-40 text-center lg:pb-[310px] lg:pt-64">
+        <div
+          data-route-foreground=""
+          className="hero-lead max-w-content relative z-10 mx-auto flex flex-col items-center pb-[247px] pt-40 text-center lg:pb-[310px] lg:pt-64"
+        >
           {/*
            * 16 between the two headline blocks at 402 (`2975:8420` over
            * `2975:8419`); at 1440 they are set solid, one 76px step apart with

@@ -165,7 +165,10 @@ export function InsightView({
           </>
         ) : null}
 
-        <div className="max-w-section relative mx-auto flex flex-col gap-8">
+        <div
+          data-route-foreground=""
+          className="max-w-section relative mx-auto flex flex-col gap-8"
+        >
           <BackToInsights />
 
           <div className="flex flex-col gap-4">
@@ -202,7 +205,7 @@ export function InsightView({
           step, which compresses where band-md does not. */}
       <div className="px-gutter py-band-detail bg-white">
         {/* `1894:3908` — the body sits in an 822px column, centred. */}
-        <div className="max-w-article mx-auto">
+        <div data-route-foreground="" className="max-w-article mx-auto">
           {/* The band above already sets the 822px article measure (1710:2836);
               max-w-none keeps the body from being narrowed a second time. */}
           <PortableTextBody value={body} className="max-w-none" />

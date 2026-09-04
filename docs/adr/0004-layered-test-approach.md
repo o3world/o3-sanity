@@ -79,6 +79,10 @@ loads cover progressive enhancement. Input-time evidence and destination-readine
 separate from visual completion; a test that merely waits for a fade and then clicks would miss the
 original failure.
 
+The foreground-only arrival trial also compares actual plain-ground screenshot pixels while
+content is moving and once settled. This catches opacity washing authored backgrounds without
+adding persistent visual baselines or broadening the suite into a visual redesign oracle.
+
 The cost is a production build, installed browser binaries, and access to real published routes.
 Run it at navigation checkpoints alongside the existing suite and build assertion, not after every
 edit. Its evidence is local and ignored, with no screenshot baselines or coverage gate. The runner

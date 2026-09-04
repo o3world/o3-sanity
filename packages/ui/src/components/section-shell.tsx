@@ -226,7 +226,10 @@ export function SectionShell({
         {...rest}
       >
         {background}
-        <div className={cn('mx-auto w-full', SECTION_WIDTH_CLASS[width], contentClassName)}>
+        <div
+          data-route-foreground=""
+          className={cn('mx-auto w-full', SECTION_WIDTH_CLASS[width], contentClassName)}
+        >
           {children}
         </div>
       </section>

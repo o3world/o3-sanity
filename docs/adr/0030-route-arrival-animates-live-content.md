@@ -22,13 +22,18 @@ old content, and taking ownership of App Router state were rejected.
 Josh approved trying a live arrival fade, superseding the crossfade prescription for this route
 contract. Immediately usable content and navigation take priority over preserving two snapshots.
 
+The first trial faded `main`, including its ink ground, over the white document body. Work to
+Insights visibly lightened despite both heroes being dark. A production screenshot regression on
+`6a42fd37` measured the same gutter pixel at `[32,32,33]` during arrival and `[10,10,11]` settled.
+Josh approved a foreground-only trial: authored section backgrounds must remain solid.
+
 ## Decision
 
 The O3 site's persistent layout keeps complete server-rendered `main` content and live navigation
 as siblings. A null client component observes committed `usePathname` changes behind its own
 Suspense boundary, so unknown dynamic parameters cannot block the shell's prerender.
 
-On a pathname change, a layout effect animates the actual `main` from opacity 0.72 to 1 using
+On a pathname change, a layout effect animates eligible live foregrounds from opacity 0.72 to 1 using
 `--duration-page` (300ms) and `--ease-out`. It does not animate initial hydration, query/hash changes,
 or repeated navigation to the same path. Opacity never gates content readiness or hit testing.
 There is no exit phase, geometry change, artificial delay, or animation-owned navigation state.
@@ -41,9 +46,25 @@ surface changes retain the existing 350ms color transition; links and the CTA re
 cadence. This follows the pre-hydration script's instantaneous-paint technique without serializing
 a client closure into that script. Neither path takes ownership of scrolling or router state.
 
-The effect owns one Web Animation and one reduced-motion subscription. A new route or unmount
-cancels the old animation. Enabling reduced motion during a fade cancels it immediately. Reduced
-motion and missing `Element.animate` produce ordinary navigation; no inline opacity or forwards
+Existing transparent containers explicitly opt in with `data-route-foreground`: CollectionHero,
+CaseStudyHero, SectionShell's content slot, the orbital hero's copy column, and InsightView's hero
+and article body. Section fills, background slots, separately layered hero artwork and scrims, and
+`main` stay outside those targets. Artwork placed inside a content slot (such as a foreground
+MoleculeDecoration) arrives with that content; this trial does not move it to another layer.
+The annotation has no behavior outside O3's route observer. There is no surface inference or
+route-color table. Custom bands and feed-only views without a marker retain ordinary paint and
+their existing scroll reveals; streamed content absent at commit does not get a delayed arrival.
+
+Only foregrounds intersecting the viewport at commit are eligible. Hidden retained trees are
+excluded, nested markers select the innermost foreground, and an existing active opacity animation
+on an ancestor or descendant keeps ownership. In particular, the home hero's CSS entrances,
+including their delays, are not suppressed or stacked with another fade. A cached foreground with
+no active entrance can use the route cadence. The observer neither changes those CSS animations
+nor wraps Reveal's inner content, which could contain another band's ground.
+
+The effect owns the selected Web Animations and one reduced-motion subscription. A new route or
+unmount cancels them. Enabling reduced motion during a fade cancels them immediately. Reduced
+motion and missing `Element.animate` or `Element.getAnimations` produce ordinary navigation; no inline opacity or forwards
 fill remains after completion or cancellation. Existing Link prefetch, history, scrolling, focus,
 and Next's retained route trees remain framework-owned.
 
@@ -69,19 +90,28 @@ repairs to keep route navigation free of orphaned modals, not a new menu runtime
   for captured participants. Keeping it would need a larger architecture decision.
 - **No route motion:** remains the fallback. The live fade adds a small arrival cue without changing
   the navigation mechanism.
-- **Live arrival:** loses old/new overlap deliberately. Applying opacity to `main` creates a temporary
-  stacking context; nav/footer stay outside it. Existing inner reveals still own their motion and
-  require the separate motion-system audit.
+- **Whole-main opacity:** rejected after the rendered trial exposed background flashing. One dark
+  backing color would instead wash light pages, and one hero-color backing cannot preserve mixed
+  bands. Foreground-only opacity keeps the actual authored grounds painted throughout.
+- **Foreground arrival:** loses old/new overlap deliberately and creates temporary stacking contexts
+  only on selected content containers. Nav/footer remain outside. Existing active entrances win;
+  this is not a replacement for the separate scroll-motion audit.
 
 Basic [Element.animate](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate) predates
 the installed [Next browser floor](https://nextjs.org/docs/architecture/supported-browsers)
 (Chrome/Edge 111+, Firefox 111+, Safari 16.4+). Feature detection
 avoids raising that floor. Tests use current Chromium, Firefox, and Playwright's patched WebKit,
 not branded Safari or every historical version; physical-device and oldest-supported-version
-checks remain release evidence to collect, not claims made by this matrix.
+checks remain release evidence to collect, not claims made by this matrix. The guarded
+[Element.getAnimations](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAnimations)
+subtree query includes scheduled CSS entrances as well as currently advancing animations.
 
 The production contract in `apps/web/motion-contract/` is the acceptance seam. Its first-arrival
 sample checks actual nav, mark, inactive-link and CTA colors, not just the final `data-ink` value.
+Actual screenshot pixels at plain hero and feed gutters must match during active arrival and after
+settling, across dark-to-dark, light-to-light and mixed-surface journeys. These are within-run
+composition checks, not maintained screenshot baselines. Input timing observes the foreground
+animation rather than treating `main` opacity as readiness.
 Regular route arrivals also check the first-frame pin offset. Native history restoration can
 arrive after the layout effect; its color assertions remain first-frame, while its pin assertion
 waits for the existing scroll watcher. The repeated-cache journey has returned at zero in local

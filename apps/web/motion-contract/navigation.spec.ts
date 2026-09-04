@@ -52,9 +52,10 @@ test('a stationary pointer can navigate before the page fade finishes', async ({
   await page.keyboard.press('Enter')
   await page.waitForFunction(() =>
     document.getAnimations().some((animation) => {
+      if (animation instanceof CSSAnimation || animation instanceof CSSTransition) return false
       const effect = animation.effect as KeyframeEffect | null
       return (
-        (effect?.target === document.querySelector('main') ||
+        ((effect?.target instanceof Element && effect.target.matches('[data-route-foreground]')) ||
           effect?.pseudoElement?.startsWith('::view-transition')) &&
         animation.playState === 'running'
       )
@@ -243,6 +244,24 @@ test('rapid and repeated navigation leaves only the final page active', async ({
   await expectNoArrival(page, () => page.goto('/solutions#navigation-contract'))
 })
 
+test('an unavailable animation inspection API leaves ordinary navigation', async ({
+  page,
+}, info) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(Element.prototype, 'getAnimations', { value: undefined })
+  })
+  await page.goto('/work')
+  const sample = await navigate(
+    page,
+    '/solutions',
+    async () => (await navLink(page, 'Solutions')).click(),
+    info,
+  )
+  expect(sample.motionSeen).toBe(false)
+  expect(sample.readyNav?.color).toBe('rgb(35, 35, 35)')
+  await ordinaryPage(page)
+})
+
 test('enabling reduced motion cancels an active arrival without leaving dim content', async ({
   page,
 }, info) => {
@@ -254,7 +273,11 @@ test('enabling reduced motion cancels an active arrival without leaving dim cont
   await page.locator('main a[href="/work"]:visible').first().click()
   await arrivalRunning(page)
   await page.emulateMedia({ reducedMotion: 'reduce' })
-  await expect(page.locator('main')).toHaveCSS('opacity', '1', { timeout: 200 })
+  await expect(page.locator('main [data-route-foreground]:visible').first()).toHaveCSS(
+    'opacity',
+    '1',
+    { timeout: 200 },
+  )
   await ordinaryPage(page)
   const sample = await navigate(
     page,

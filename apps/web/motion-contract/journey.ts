@@ -9,6 +9,8 @@ type NavigationSample = {
   longestDuration: number
   navMovement: number
   readyOpacity: number | null
+  foregrounds: number
+  unsafeForegrounds: number
   readyScrollY: number | null
   readyNav: {
     color: string
@@ -49,8 +51,9 @@ export async function settled(page: Page) {
     () =>
       document.getAnimations().every((animation) => {
         const effect = animation.effect as KeyframeEffect | null
+        if (animation instanceof CSSAnimation || animation instanceof CSSTransition) return true
         const isRoute =
-          effect?.target === document.querySelector('main') ||
+          (effect?.target instanceof Element && effect.target.matches('[data-route-foreground]')) ||
           effect?.pseudoElement?.startsWith('::view-transition')
         return !isRoute || animation.playState === 'finished' || animation.playState === 'idle'
       }),
@@ -79,6 +82,8 @@ export async function navigate(
         longestDuration: 0,
         navMovement: 0,
         readyOpacity: null,
+        foregrounds: 0,
+        unsafeForegrounds: 0,
         readyScrollY: null,
         readyNav: null,
       }
@@ -88,7 +93,6 @@ export async function navigate(
       let quietFrames = 0
       const frame = () => {
         const now = performance.now()
-        const main = document.querySelector('main')
         const heading = [...document.querySelectorAll('main h1')].find((element) => {
           const box = element.getBoundingClientRect()
           return (
@@ -105,7 +109,9 @@ export async function navigate(
           (heading as HTMLElement).innerText !== previousHeading
         ) {
           sample.readyAt = now
-          sample.readyOpacity = Number(getComputedStyle(main!).opacity)
+          sample.readyOpacity = Number(
+            getComputedStyle(heading.closest('[data-route-foreground]') ?? heading).opacity,
+          )
           sample.readyScrollY = scrollY
           const nav = document.querySelector('nav[aria-label="Primary"]')!
           const button = [...nav.querySelectorAll('a[href="/contact"]')].find(
@@ -127,15 +133,26 @@ export async function navigate(
           }
         }
         const animations = document.getAnimations().filter((animation) => {
+          if (animation instanceof CSSAnimation || animation instanceof CSSTransition) return false
           const effect = animation.effect as KeyframeEffect | null
           return (
-            (effect?.target === main || effect?.pseudoElement?.startsWith('::view-transition')) &&
+            ((effect?.target instanceof Element &&
+              effect.target.matches('[data-route-foreground]')) ||
+              effect?.pseudoElement?.startsWith('::view-transition')) &&
             animation.playState === 'running'
           )
         })
         if (animations.length) {
           sample.motionSeen = true
+          sample.foregrounds = Math.max(sample.foregrounds, animations.length)
           for (const animation of animations) {
+            const target = (animation.effect as KeyframeEffect | null)?.target
+            if (
+              target instanceof Element &&
+              (target.querySelector('section[data-surface], [data-route-foreground]') ||
+                getComputedStyle(target).backgroundColor !== 'rgba(0, 0, 0, 0)')
+            )
+              sample.unsafeForegrounds++
             const duration = animation.effect?.getComputedTiming().duration
             if (typeof duration === 'number')
               sample.longestDuration = Math.max(sample.longestDuration, duration)
@@ -180,6 +197,10 @@ export async function navigate(
   const result = await page.evaluate(() => window.motionJourney.at(-1)!)
   expect(result.longestDuration, 'route cadence stays at or below 350ms').toBeLessThanOrEqual(350)
   expect(
+    result.unsafeForegrounds,
+    'arrival targets are transparent foregrounds, never another authored band',
+  ).toBe(0)
+  expect(
     result.navMovement,
     'the pinned navigation stays still during route motion',
   ).toBeLessThanOrEqual(1)
@@ -197,9 +218,12 @@ export async function arrivalRunning(page: Page) {
   await page.waitForFunction(
     () =>
       document.getAnimations().some((animation) => {
+        if (animation instanceof CSSAnimation || animation instanceof CSSTransition) return false
         const effect = animation.effect as KeyframeEffect | null
         return (
-          effect?.target === document.querySelector('main') && animation.playState === 'running'
+          effect?.target instanceof Element &&
+          effect.target.matches('[data-route-foreground]') &&
+          animation.playState === 'running'
         )
       }),
     null,
@@ -210,6 +234,9 @@ export async function arrivalRunning(page: Page) {
 export async function ordinaryPage(page: Page) {
   await settled(page)
   await expect(page.locator('main')).toHaveCSS('opacity', '1')
+  for (const foreground of await page.locator('main [data-route-foreground]:visible').all()) {
+    await expect(foreground).toHaveCSS('opacity', '1')
+  }
   await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1)
   expect(
     await page.evaluate(
@@ -240,7 +267,12 @@ export async function watchNextPointer(page: Page, ignoreControl?: string) {
       document.documentElement.dataset.pointerProof = JSON.stringify({
         trusted: event.isTrusted,
         control,
-        opacity: Number(getComputedStyle(document.querySelector('main')!).opacity),
+        opacity: Math.min(
+          1,
+          ...[...document.querySelectorAll('main [data-route-foreground]')]
+            .filter((element) => element.getClientRects().length > 0)
+            .map((element) => Number(getComputedStyle(element).opacity)),
+        ),
       })
       document.removeEventListener('pointerdown', record)
     }
@@ -273,7 +305,9 @@ export async function expectNoArrival(page: Page, action: () => Promise<unknown>
           function frame() {
             minimum = Math.min(
               minimum,
-              Number(getComputedStyle(document.querySelector('main')!).opacity),
+              ...[...document.querySelectorAll('main [data-route-foreground]')]
+                .filter((element) => element.getClientRects().length > 0)
+                .map((element) => Number(getComputedStyle(element).opacity)),
             )
             if (performance.now() - started > 450) resolve(minimum)
             else requestAnimationFrame(frame)
