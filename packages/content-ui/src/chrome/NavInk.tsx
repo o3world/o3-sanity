@@ -234,14 +234,7 @@ function intrinsicSize(element: Element): { width: number; height: number } | nu
  * Only a page that declares nothing under the bar is deferred, a frame at a
  * time, to the hit-test that runs once the capture is over.
  */
-export function watchNavInk(header: HTMLElement): () => void {
-  let frame = 0
-
-  const schedule = () => {
-    if (frame) return
-    frame = requestAnimationFrame(sample)
-  }
-
+function sampleNavInk(header: HTMLElement): boolean | null {
   /**
    * Is the document being captured for a view transition right now?
    *
@@ -325,22 +318,38 @@ export function watchNavInk(header: HTMLElement): () => void {
     return answer
   }
 
+  const light = capturing() ? verdict(declared) : verdict(painted)
+  if (light === null) return null
+  if (light) header.dataset.ink = 'dark'
+  else delete header.dataset.ink
+  return light
+}
+
+/** Settle the whole skin in this style pass, before a committed route paints. */
+export function settleNavInk(header: HTMLElement): void {
+  const style = document.createElement('style')
+  style.textContent = `#${CSS.escape(header.id)} *{transition:none!important}`
+  document.head.append(style)
+  try {
+    sampleNavInk(header)
+    // Descendants have their own hover transitions; flush those too before
+    // restoring the ordinary scroll/hover cadence. No frame holds this rule.
+    for (const element of header.querySelectorAll('*')) void getComputedStyle(element).color
+  } finally {
+    style.remove()
+  }
+}
+
+export function watchNavInk(header: HTMLElement): () => void {
+  let frame = 0
+  const schedule = () => {
+    if (frame) return
+    frame = requestAnimationFrame(sample)
+  }
   const sample = () => {
     frame = 0
-    let light: boolean | null
-    if (capturing()) {
-      light = verdict(declared)
-      // Nothing declared under the bar: early, not wrong. Come back next
-      // frame and hit-test the page once it can be hit.
-      if (light === null) {
-        schedule()
-        return
-      }
-    } else {
-      light = verdict(painted)
-    }
-    if (light) header.dataset.ink = 'dark'
-    else delete header.dataset.ink
+    // An unreadable capture is early, not wrong; retry once it can be read.
+    if (sampleNavInk(header) === null) schedule()
   }
 
   sample()

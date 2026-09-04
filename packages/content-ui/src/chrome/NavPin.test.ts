@@ -2,7 +2,7 @@
 
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { watchNavPin } from './NavPin'
+import { syncNavPin, watchNavPin } from './NavPin'
 
 /**
  * The header's `top` is CSS arithmetic over `--nav-scroll`; what this pins
@@ -43,6 +43,16 @@ describe('watchNavPin', () => {
 
   it('clamps at the resting offset once the pill has parked', async () => {
     const header = mount()
+    await scrollTo(3000)
+    expect(header.style.getPropertyValue('--nav-scroll')).toBe('124px')
+  })
+
+  it('keeps following scroll after a synchronous route restoration', async () => {
+    const header = mount()
+    await scrollTo(3000)
+    Object.defineProperty(window, 'scrollY', { value: 0, configurable: true })
+    syncNavPin(header)
+    expect(header.style.getPropertyValue('--nav-scroll')).toBe('0px')
     await scrollTo(3000)
     expect(header.style.getPropertyValue('--nav-scroll')).toBe('124px')
   })

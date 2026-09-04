@@ -184,6 +184,19 @@ test('browsers without animation APIs still navigate completely', async ({ page 
     info,
   )
   expect(sample.motionSeen).toBe(false)
+  const light = await navigate(
+    page,
+    '/solutions',
+    async () => (await navLink(page, 'Solutions')).press('Enter'),
+    info,
+  )
+  expect(light.readyNav).toMatchObject({
+    color: 'rgb(35, 35, 35)',
+    background: 'rgba(255, 255, 255, 0.6)',
+    button: 'rgb(255, 255, 255)',
+    buttonBackground: 'rgb(10, 10, 11)',
+  })
+  await navigate(page, '/work', async () => (await navLink(page, 'Work')).press('Enter'), info)
   await navigate(
     page,
     IRONMAN,
@@ -277,6 +290,133 @@ test('navigation ink follows the current surface across routes and restored scro
     })
   await expect(nav).toHaveCSS('color', 'rgb(35, 35, 35)')
   await ordinaryPage(page)
+})
+
+test('the destination nav skin is complete on the first arriving frame', async ({ page }, info) => {
+  const desktop = info.project.use.viewport!.width >= 1024
+  const lightSkin = {
+    color: 'rgb(35, 35, 35)',
+    background: 'rgba(255, 255, 255, 0.6)',
+    link: 'rgb(35, 35, 35)',
+    inactiveLink: desktop ? 'rgb(35, 35, 35)' : null,
+    button: 'rgb(255, 255, 255)',
+    buttonBackground: 'rgb(10, 10, 11)',
+  }
+  const darkSkin = {
+    color: 'rgb(255, 255, 255)',
+    background: desktop ? 'rgba(3, 3, 3, 0.45)' : 'rgba(3, 3, 3, 0.2)',
+    link: 'rgb(255, 255, 255)',
+    inactiveLink: desktop ? 'rgb(255, 255, 255)' : null,
+    button: 'rgb(10, 10, 11)',
+    buttonBackground: 'rgb(255, 255, 255)',
+  }
+  const atTop = desktop ? 124 : 0
+  const pinned = desktop ? 32 : 0
+  await page.goto('/work')
+  await ordinaryPage(page)
+  await page.mouse.move(1, 500)
+  const arrival = await navigate(
+    page,
+    '/solutions',
+    async () => (await navLink(page, 'Solutions')).press('Enter'),
+    info,
+  )
+  expect(arrival.readyNav).toEqual({ ...lightSkin, top: atTop })
+  const reverse = await navigate(
+    page,
+    '/insights',
+    async () => (await navLink(page, 'Insights')).press('Enter'),
+    info,
+  )
+  expect(reverse.readyNav).toEqual({ ...darkSkin, top: atTop })
+
+  await navigate(page, '/about', async () => (await navLink(page, 'About')).press('Enter'), info)
+  await page.evaluate(() => scrollTo({ top: 800, behavior: 'instant' }))
+  await expect.poll(async () => (await primary(page).boundingBox())!.y).toBe(pinned)
+  const reset = await navigate(
+    page,
+    '/solutions',
+    async () => (await navLink(page, 'Solutions')).press('Enter'),
+    info,
+  )
+  expect(reset.readyNav).toEqual({ ...lightSkin, top: atTop })
+
+  // A real scroll across surfaces still interpolates, after the route-only
+  // instantaneous pass has ended. Record the running CSS transition itself.
+  const scrollMotion = await page
+    .locator('main section[data-surface="ink"]:visible')
+    .first()
+    .evaluate(async (section) => {
+      const nav = document.querySelector('nav[aria-label="Primary"]')!
+      const start = getComputedStyle(nav).color
+      scrollTo({ top: section.getBoundingClientRect().top + scrollY + 150, behavior: 'instant' })
+      return new Promise<{ start: string; intermediate: string; duration: number }>(
+        (resolve, reject) => {
+          let frames = 0
+          const sample = () => {
+            const transition = nav
+              .getAnimations()
+              .find(
+                (animation) =>
+                  animation instanceof CSSTransition &&
+                  animation.transitionProperty === 'color' &&
+                  animation.playState === 'running',
+              )
+            const color = getComputedStyle(nav).color
+            if (transition && color !== start && color !== 'rgb(255, 255, 255)') {
+              resolve({
+                start,
+                intermediate: color,
+                duration: Number(transition.effect!.getComputedTiming().duration),
+              })
+            } else if (++frames < 90) requestAnimationFrame(sample)
+            else reject(new Error('No interpolated nav color during the actual scroll'))
+          }
+          requestAnimationFrame(sample)
+        },
+      )
+    })
+  expect(scrollMotion.start).toBe('rgb(35, 35, 35)')
+  expect(scrollMotion.duration).toBe(350)
+  await info.attach('scroll-nav-transition', {
+    body: JSON.stringify(scrollMotion),
+    contentType: 'application/json',
+  })
+  await expect(primary(page)).toHaveCSS('color', 'rgb(255, 255, 255)')
+  await page
+    .locator('main section[data-surface="paper"]:visible')
+    .first()
+    .evaluate((section) =>
+      scrollTo({ top: section.getBoundingClientRect().top + scrollY + 150, behavior: 'instant' }),
+    )
+  await expect(primary(page)).toHaveCSS('color', 'rgb(35, 35, 35)')
+  const scrollBefore = await page.evaluate(() => scrollY)
+  const work = await navigate(
+    page,
+    '/work',
+    async () => (await navLink(page, 'Work')).click(),
+    info,
+  )
+  expect(work.readyNav).toEqual({ ...darkSkin, top: atTop })
+  const back = await navigate(page, '/solutions', () => page.goBack(), info)
+  await info.attach('history-scroll', {
+    body: JSON.stringify({ before: scrollBefore, after: await page.evaluate(() => scrollY) }),
+    contentType: 'application/json',
+  })
+  // Native history scroll can land after the route's layout effect. Keep
+  // first-frame colors strict, but let the existing scroll watcher settle
+  // the pin. The separate deep-link case checks restoration itself strictly.
+  expect(back.readyNav).toMatchObject(lightSkin)
+  const backScroll = await page.evaluate(() => scrollY)
+  await expect
+    .poll(async () => (await primary(page).boundingBox())!.y)
+    .toBe(desktop ? Math.max(32, 124 - backScroll) : 0)
+  const forward = await navigate(page, '/work', () => page.goForward(), info)
+  expect(forward.readyNav).toMatchObject(darkSkin)
+  const forwardScroll = await page.evaluate(() => scrollY)
+  await expect
+    .poll(async () => (await primary(page).boundingBox())!.y)
+    .toBe(desktop ? Math.max(32, 124 - forwardScroll) : 0)
 })
 
 test('a manual mobile menu exit finishes when reduced motion changes', async ({ page }, info) => {

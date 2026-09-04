@@ -33,6 +33,14 @@ On a pathname change, a layout effect animates the actual `main` from opacity 0.
 or repeated navigation to the same path. Opacity never gates content readiness or hit testing.
 There is no exit phase, geometry change, artificial delay, or animation-owned navigation state.
 
+The destination's nav skin settles in that same layout effect, before the fade and before the
+reduced-motion/API guards. The existing pin writer reads the current browser scroll position,
+then the existing ground sampler selects the skin. A header-scoped stylesheet disables nav and
+descendant transitions for one forced style pass and is removed synchronously. Scroll-driven
+surface changes retain the existing 350ms color transition; links and the CTA retain their hover
+cadence. This follows the pre-hydration script's instantaneous-paint technique without serializing
+a client closure into that script. Neither path takes ownership of scrolling or router state.
+
 The effect owns one Web Animation and one reduced-motion subscription. A new route or unmount
 cancels the old animation. Enabling reduced motion during a fade cancels it immediately. Reduced
 motion and missing `Element.animate` produce ordinary navigation; no inline opacity or forwards
@@ -72,5 +80,11 @@ avoids raising that floor. Tests use current Chromium, Firefox, and Playwright's
 not branded Safari or every historical version; physical-device and oldest-supported-version
 checks remain release evidence to collect, not claims made by this matrix.
 
-The production contract in `apps/web/motion-contract/` is the acceptance seam. Final design
-acceptance requires rendered review; this trial does not authorize production website promotion.
+The production contract in `apps/web/motion-contract/` is the acceptance seam. Its first-arrival
+sample checks actual nav, mark, inactive-link and CTA colors, not just the final `data-ink` value.
+Regular route arrivals also check the first-frame pin offset. Native history restoration can
+arrive after the layout effect; its color assertions remain first-frame, while its pin assertion
+waits for the existing scroll watcher. The repeated-cache journey has returned at zero in local
+checks; this trial neither changes that scroll policy nor establishes whether it predates the work.
+Final design acceptance requires rendered review; this trial does not authorize production website
+promotion.

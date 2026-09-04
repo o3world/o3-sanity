@@ -201,8 +201,10 @@ On macOS, WebKit's full-link traversal uses its native Option-Tab shortcut; ordi
 focus to browser chrome. No test changes system keyboard preferences.
 
 `apps/web/motion-contract/` records destination readiness separately from fade completion, real
-input while the page is fading, history/scroll/focus, nav ink, and hidden-route isolation. It is
-an integration checkpoint, not a new general E2E suite or a substitute for `pnpm test`. Run it when
+input while the page is fading, history/scroll/focus, nav ink, and hidden-route isolation. It also
+checks the complete destination nav skin on its first frame, and separately verifies that actual
+scrolling still interpolates its colors over 350ms. This is an integration checkpoint, not a new
+general E2E suite or a substitute for `pnpm test`. Run it when
 route motion, framework navigation, or the shell changes. The app's lint/typecheck includes it.
 
 Timing and browser-version attachments, failure traces/screenshots, and the HTML report stay in

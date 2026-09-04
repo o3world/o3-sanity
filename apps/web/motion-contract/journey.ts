@@ -9,6 +9,16 @@ type NavigationSample = {
   longestDuration: number
   navMovement: number
   readyOpacity: number | null
+  readyScrollY: number | null
+  readyNav: {
+    color: string
+    background: string
+    link: string
+    inactiveLink: string | null
+    button: string
+    buttonBackground: string
+    top: number
+  } | null
 }
 
 declare global {
@@ -69,6 +79,8 @@ export async function navigate(
         longestDuration: 0,
         navMovement: 0,
         readyOpacity: null,
+        readyScrollY: null,
+        readyNav: null,
       }
       window.motionJourney ??= []
       window.motionJourney.push(sample)
@@ -94,6 +106,25 @@ export async function navigate(
         ) {
           sample.readyAt = now
           sample.readyOpacity = Number(getComputedStyle(main!).opacity)
+          sample.readyScrollY = scrollY
+          const nav = document.querySelector('nav[aria-label="Primary"]')!
+          const button = [...nav.querySelectorAll('a[href="/contact"]')].find(
+            (element) => element.getBoundingClientRect().width > 0,
+          )!
+          const link = nav.querySelector('a[aria-label$=" home"]')!
+          const inactiveLink = nav.querySelector('a[href="/about"]')!
+          sample.readyNav = {
+            color: getComputedStyle(nav).color,
+            background: getComputedStyle(nav).backgroundColor,
+            link: getComputedStyle(link).color,
+            inactiveLink:
+              inactiveLink.getBoundingClientRect().width > 0
+                ? getComputedStyle(inactiveLink).color
+                : null,
+            button: getComputedStyle(button).color,
+            buttonBackground: getComputedStyle(button).backgroundColor,
+            top: nav.getBoundingClientRect().top,
+          }
         }
         const animations = document.getAnimations().filter((animation) => {
           const effect = animation.effect as KeyframeEffect | null

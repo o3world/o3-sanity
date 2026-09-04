@@ -23,17 +23,18 @@ import { NAV_INK_TARGET } from './navInkSample'
  * style mutation on every scroll frame for nothing. A page with no strip
  * never mounts this; its pill sits at the pinned offset from the start.
  */
+export function syncNavPin(header: HTMLElement): void {
+  const rest = parseFloat(getComputedStyle(header).getPropertyValue('--spacing-nav-offset')) || 0
+  const scrolled = `${Math.min(Math.max(window.scrollY, 0), rest)}px`
+  if (header.style.getPropertyValue('--nav-scroll') !== scrolled)
+    header.style.setProperty('--nav-scroll', scrolled)
+}
+
 export function watchNavPin(header: HTMLElement): () => void {
   let frame = 0
-  let last = -1
-
   const write = () => {
     frame = 0
-    const rest = parseFloat(getComputedStyle(header).getPropertyValue('--spacing-nav-offset')) || 0
-    const scrolled = Math.min(Math.max(window.scrollY, 0), rest)
-    if (scrolled === last) return
-    last = scrolled
-    header.style.setProperty('--nav-scroll', `${scrolled}px`)
+    syncNavPin(header)
   }
 
   const schedule = () => {

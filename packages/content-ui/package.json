@@ -43,6 +43,8 @@
     ".": "./src/index.ts",
     "./cards": "./src/cards/index.ts",
     "./chrome": "./src/chrome/index.ts",
+    "./chrome/nav-ink": "./src/chrome/NavInk.tsx",
+    "./chrome/nav-pin": "./src/chrome/NavPin.tsx",
     "./format-date": "./src/lib/format-date.ts",
     "./image-sizes": "./src/imageSizes.ts",
     "./inquiry": "./src/blocks/section/formSection/inquiry.ts",

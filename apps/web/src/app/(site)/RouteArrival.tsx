@@ -2,6 +2,8 @@
 
 import { useLayoutEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
+import { NAV_INK_TARGET, settleNavInk } from '@o3/content-ui/chrome/nav-ink'
+import { syncNavPin } from '@o3/content-ui/chrome/nav-pin'
 
 /** Animate the live destination, never a snapshot that can capture its input. */
 export function RouteArrival() {
@@ -11,6 +13,12 @@ export function RouteArrival() {
   useLayoutEffect(() => {
     if (previousPathname.current === pathname) return
     previousPathname.current = pathname
+
+    const header = document.getElementById(NAV_INK_TARGET)
+    if (header) {
+      syncNavPin(header)
+      settleNavInk(header)
+    }
 
     const main = document.getElementById('site-content')
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
