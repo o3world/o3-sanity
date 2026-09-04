@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, within } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 import { BrandMark } from '@o3/ui'
 
@@ -24,7 +25,7 @@ import { SiteNav } from './SiteNav'
  * white copy. `ScrollsOverBands` is the story that actually shows the flip;
  * scroll it.
  *
- * Two widths, structurally different (ADR 0006): a 900 × 80 bar at 1440 with a
+ * Two widths, structurally different (ADR 0006): a structural-width desktop bar with a
  * 12px corner, a full-width square bar at 402 with the links behind
  * "Open menu".
  *
@@ -50,24 +51,74 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+/** #444: the desktop pill shares the structural stage, including its wide-screen cap. */
+export const AlignedWithContent: Story = {
+  globals: { brand: 'o3', viewport: { value: 'desktop' } },
+  render: (args) => (
+    <div className="bg-ink px-gutter h-[420px] pt-64">
+      <SiteNav {...args} />
+      <div data-content-stage className="max-w-section mx-auto h-12 w-full bg-white/10" />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const nav = canvasElement.querySelector('#site-nav > nav')!
+    const content = canvasElement.querySelector('[data-content-stage]')!
+    await expect(nav.getBoundingClientRect().left).toBeCloseTo(
+      content.getBoundingClientRect().left,
+      0,
+    )
+    await expect(nav.getBoundingClientRect().right).toBeCloseTo(
+      content.getBoundingClientRect().right,
+      0,
+    )
+    await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
+  },
+}
+
+export const AlignedOnWideScreens: Story = {
+  ...AlignedWithContent,
+  globals: { brand: 'o3', viewport: { value: 'wide' } },
+  parameters: {
+    viewport: {
+      options: { wide: { name: 'Wide desktop', styles: { width: '1920px', height: '900px' } } },
+    },
+  },
+}
+
 /** The default skin: white copy on the `bg-scrim` pill, over an ink band. */
 export const OverInk: Story = {
+  parameters: { nextjs: { appDirectory: true, navigation: { pathname: '/' } } },
   globals: { backgrounds: { value: 'ink' } },
   render: (args) => (
     <div className="bg-ink h-[420px]">
       <SiteNav {...args} />
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const home = within(canvasElement).getByRole('link', { name: / home$/ })
+    await expect(home).toHaveAttribute('aria-current', 'page')
+    await expect(getComputedStyle(home).color).toBe('rgb(235, 16, 0)')
+  },
 }
 
 /** The flipped skin: over bone, the bar takes `--color-fg` and inverts its hairline. */
 export const OverBone: Story = {
+  parameters: { nextjs: { appDirectory: true, navigation: { pathname: '/work' } } },
   globals: { backgrounds: { value: 'bone' } },
   render: (args) => (
     <div className="bg-bone h-[420px]">
       <SiteNav {...args} />
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const home = within(canvasElement).getByRole('link', { name: / home$/ })
+    await expect(home).not.toHaveAttribute('aria-current')
+    await expect(getComputedStyle(home).color).not.toBe('rgb(235, 16, 0)')
+    await expect(within(canvasElement).getByRole('link', { name: 'Work' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    )
+  },
 }
 
 /**
@@ -102,6 +153,12 @@ export const Mobile: Story = {
       <SiteNav {...args} />
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const nav = canvasElement.querySelector('#site-nav > nav')!
+    await expect(nav.getBoundingClientRect().left).toBe(0)
+    await expect(nav.getBoundingClientRect().width).toBe(document.documentElement.clientWidth)
+    await expect(within(canvasElement).getByRole('button', { name: 'Open menu' })).toBeVisible()
+  },
 }
 
 /** No primary button authored — the row must close up rather than leave a gap. */
