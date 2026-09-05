@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { usePathname } from '@storybook/nextjs-vite/navigation.mock'
 import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 import { BrandMark } from '@o3/ui'
@@ -111,6 +112,10 @@ export const OverInk: Story = {
 
 /** The flipped skin: over bone, the bar takes `--color-fg` and inverts its hairline. */
 export const OverBone: Story = {
+  beforeEach: () => {
+    usePathname.mockReturnValue('/work')
+    return () => usePathname.mockReset()
+  },
   parameters: { nextjs: { appDirectory: true, navigation: { pathname: '/work' } } },
   globals: { backgrounds: { value: 'bone' } },
   render: (args) => (

@@ -10,7 +10,7 @@ import { NavInkFirstPaint, SiteFooter, SiteNav, UtilityNav } from '@o3/content-u
 import { DraftTools } from './DraftTools'
 import { RouteArrival } from './RouteArrival'
 import { GlobeProvider } from '@/components/globe/GlobeProvider'
-import '@/components/prototypes/spatial-globe/spatial-globe.css'
+import '@/components/globe/scene.css'
 
 interface ShellProps {
   children: React.ReactNode
@@ -42,11 +42,11 @@ export default async function SiteLayout({ children }: ShellProps) {
 async function Shell({ children }: ShellProps) {
   const [settings, year] = await Promise.all([getSiteSettings(), currentYear()])
 
-  const prototypeChrome = process.env.NODE_ENV !== 'production'
-  const navSettings = prototypeChrome && settings ? { ...settings, utilityNavItems: [] } : settings
+  const spatialEnabled = process.env.O3_SPATIAL_GLOBE_ENABLED === '1'
+  const navSettings = spatialEnabled && settings ? { ...settings, utilityNavItems: [] } : settings
 
   return (
-    <GlobeProvider enabled={prototypeChrome}>
+    <GlobeProvider enabled={spatialEnabled}>
       {/* The brand-property strip sits IN the document above everything else
           and scrolls away with it (`2250:1453` is an in-flow child of the Home
           frame); the pill below it is fixed. That difference is why the two are
@@ -60,7 +60,7 @@ async function Shell({ children }: ShellProps) {
           while the other two read the setting, so every interior page hung the
           pill at 124px and padded its hero to clear a strip that was not
           there. One source, one answer. */}
-      {!prototypeChrome && <UtilityNav settings={settings} />}
+      {!spatialEnabled && <UtilityNav settings={settings} />}
       {/* The chrome draws no mark of its own (#228); these are this app's. */}
       <SiteNav settings={navSettings} brandMark={NAV_MARK} />
       {/* `bg-ink` is the DOCUMENT'S GROUND, not a band. Every band paints over
@@ -74,7 +74,7 @@ async function Shell({ children }: ShellProps) {
           in, so what shows around the skeleton matches what fills it. */}
       <main
         id="site-content"
-        data-spatial-layout={prototypeChrome ? 'true' : undefined}
+        data-spatial-layout={spatialEnabled ? 'true' : undefined}
         // No `utilityNavItems`, no strip — and the nav-offset token every
         // clearance under the pill derives from (hero padding, sticky tops,
         // jump-target margins) drops to the strip-less 32px the interior
@@ -95,7 +95,7 @@ async function Shell({ children }: ShellProps) {
       {/* After `<main>`, so the arriving page's bands are parsed when it reads
           them, and inline, so it reads them before the first paint. */}
       <NavInkFirstPaint />
-      {prototypeChrome && (
+      {spatialEnabled && (
         <div className="spatial-footer-properties">
           <UtilityNav settings={settings} />
         </div>

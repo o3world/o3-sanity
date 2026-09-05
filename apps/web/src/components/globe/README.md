@@ -2,7 +2,7 @@
 
 `GlobeProvider` supplies the O3 GPU renderer through `OrbitalRendererContext`. Every existing `OrbitalSphere` placement inherits it: homepage and interior heroes, closing CTA bands, and quote decorations. The shared UI component owns the seeded geometry, palette, layout, motion setting, and SVG fallback. The app owns vgpu, the sky, and GPU lifecycle; other apps keep the SVG renderer.
 
-The provider is currently enabled only in the development shell. This is a local integration, not staging activation. The approved appearance is saved at `4530b605` before extraction.
+The provider is enabled in development and in preview/staging builds when `O3_SPATIAL_GLOBE=1`. The web deployment workflow supplies that flag; Turbo includes it in the cache key. Next bakes the resulting boolean into the build so request-time rendering uses the same choice as prerendered pages. `VERCEL_ENV=production` always disables the scene. The production promotion workflow is unchanged. The approved appearance is saved at `4530b605` before extraction.
 
 Each instance waits until near the viewport before importing and starting the renderer. React owns its canvas through a portal, avoiding the earlier imperative insertion into an unhydrated hero. While the GPU initializes, the scene stays hidden. Its sky, rails, and SVG glow reveal together after the first GPU frame; the moving SVG is reserved for failure or unavailable GPU support. Abort disposes GPU resources and listeners; intersection and document visibility pause frame submission, and resize observation refreshes geometry. Reduced motion and `motion="still"` draw a fixed frame.
 
@@ -12,4 +12,6 @@ Validation: 3,113 unit/render tests passed. Browser inspection covered homepage 
 
 The production build and rendering-strategy assertion passed with the existing production gate disabled; every route remained inside its configured budget. Ten globe story checks passed, including renderer handoff and SVG recovery.
 
-Before staging activation: benchmark GPU/frame cost on physical mobile hardware and with multiple visible instances, exercise actual device loss and reduced-motion settings, and review quote/background placements with representative content. Instances currently own separate GPU devices; offscreen pausing is verified, but GPU timing and memory are not benchmarked. These limits are not a claim of production readiness.
+Staging device checks: benchmark GPU/frame cost on physical mobile hardware and with multiple visible instances, exercise actual device loss and reduced-motion settings, and review quote/background placements with representative content. Instances currently own separate GPU devices; offscreen pausing is verified, but GPU timing and memory are not benchmarked. These limits are not a claim of production readiness.
+
+Build the enabled release locally with `O3_SPATIAL_GLOBE=1 VERCEL_ENV=preview pnpm --filter @o3/web build`, then run `pnpm build:assert`. `scene.css` owns the accepted hero, navigation, and utility-link placement alongside the renderer.

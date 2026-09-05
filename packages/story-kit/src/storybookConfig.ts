@@ -127,7 +127,25 @@ function viteFinal(cfg: InlineConfig, configDir: string): InlineConfig {
   )
   // Per-package `@/*`-style aliases resolve via each file's nearest
   // tsconfig.json `paths`.
-  cfg.plugins = [...(cfg.plugins ?? []), tsconfigPaths()]
+  cfg.plugins = [
+    ...(cfg.plugins ?? []),
+    tsconfigPaths(),
+    {
+      // The Next plugin adds test aliases after viteFinal. Keep that later
+      // layer and next/image's explicit compiled import on the host React too.
+      name: 'o3-test-react-identity',
+      enforce: 'post',
+      config() {
+        if (process.env.VITEST !== 'true') return
+        return {
+          test: { alias: reactEntries },
+          resolve: {
+            alias: [{ find: /^next\/dist\/compiled\/react$/, replacement: reactEntries.react }],
+          },
+        }
+      },
+    },
+  ]
 
   // ── The same pin, for the dependency PRE-BUNDLE ────────────────────────
   //
