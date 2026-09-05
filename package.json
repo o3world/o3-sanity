@@ -43,7 +43,8 @@
     "typegen": "pnpm --filter @o3/sanity typegen",
     "verify": "turbo run lint typecheck build --affected",
     "vr": "pnpm --filter @o3/visual-regression run vr",
-    "wt": "./scripts/worktree.sh"
+    "wt": "./scripts/worktree.sh",
+    "globe:prototype": "pnpm --filter @o3/web exec next dev --port 3611"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",

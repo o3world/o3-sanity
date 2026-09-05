@@ -9,6 +9,7 @@ import { NavInkFirstPaint, SiteFooter, SiteNav, UtilityNav } from '@o3/content-u
 
 import { DraftTools } from './DraftTools'
 import { RouteArrival } from './RouteArrival'
+import { SpatialGlobePrototype } from '@/components/prototypes/spatial-globe/SpatialGlobePrototype'
 
 interface ShellProps {
   children: React.ReactNode
@@ -55,6 +56,11 @@ async function Shell({ children }: ShellProps) {
           while the other two read the setting, so every interior page hung the
           pill at 124px and padded its hero to clear a strip that was not
           there. One source, one answer. */}
+      {process.env.NODE_ENV !== 'production' && (
+        <Suspense fallback={null}>
+          <SpatialGlobePrototype />
+        </Suspense>
+      )}
       <UtilityNav settings={settings} />
       {/* The chrome draws no mark of its own (#228); these are this app's. */}
       <SiteNav settings={settings} brandMark={NAV_MARK} />
