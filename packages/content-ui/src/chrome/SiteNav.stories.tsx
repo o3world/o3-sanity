@@ -51,13 +51,13 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** The desktop pill shares the structural stage at the 1440px design width. */
+/** The desktop pill shares the hero's inner content measure. */
 export const AlignedWithContent: Story = {
   globals: { brand: 'o3', viewport: { value: 'desktop' } },
   render: (args) => (
     <div className="bg-ink px-gutter h-[420px] pt-64">
       <SiteNav {...args} />
-      <div data-content-stage className="max-w-section mx-auto h-12 w-full bg-white/10" />
+      <div data-content-stage className="max-w-content mx-auto h-12 w-full bg-white/10" />
     </div>
   ),
   play: async ({ canvasElement }) => {
@@ -86,8 +86,8 @@ export const AlignedOnWideScreens: Story = {
   },
   play: async ({ canvasElement }) => {
     const nav = canvasElement.querySelector('#site-nav > nav')!.getBoundingClientRect()
-    await expect(nav.width).toBe(1290)
-    await expect(nav.left).toBeCloseTo((document.documentElement.clientWidth - 1290) / 2, 0)
+    await expect(nav.width).toBe(1034)
+    await expect(nav.left).toBeCloseTo((document.documentElement.clientWidth - 1034) / 2, 0)
     await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
     await expect(within(canvasElement).getByRole('link', { name: 'Let’s talk' })).toBeVisible()
   },
