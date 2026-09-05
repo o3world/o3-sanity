@@ -2,6 +2,7 @@
 import { draw, frame, init, surface } from 'vgpu'
 import type { OrbitalRendererProps } from '@o3/ui'
 import { resolveColor } from './resolve-color'
+import { createCtaParallax } from './cta-parallax'
 import { dotShader, orbitMaskShader, orbitShader, shootingStarShader, starsShader } from './shaders'
 
 export async function startSpatialGlobe(
@@ -58,6 +59,7 @@ export async function startSpatialGlobe(
       ? draw(gpu, { shader: shootingStarShader, vertices: 6, blend: 'alpha' })
       : undefined
     const previewShootingStar = new URLSearchParams(location.search).has('shooting-star-preview')
+    let ctaParallax: ReturnType<typeof createCtaParallax> | undefined
     let raf = 0
     let dead = false
     let ready = false
@@ -87,6 +89,7 @@ export async function startSpatialGlobe(
       dead = true
       signal.removeEventListener('abort', cleanup)
       cancelAnimationFrame(raf)
+      ctaParallax?.dispose()
       observer.disconnect()
       resizeObserver.disconnect()
       window.removeEventListener('pointermove', pointer)
@@ -193,6 +196,7 @@ export async function startSpatialGlobe(
         sy = 0
       }
       const heroBounds = hero.getBoundingClientRect()
+      ctaParallax?.update(heroBounds, document.documentElement.clientHeight, dt, isStill())
       const overhang = heroStars ? Math.max(0, heroBounds.top + scrollY) : 0
       if (heroStars) {
         hero.style.setProperty('--spatial-sky-overhang', `${overhang}px`)
@@ -315,6 +319,8 @@ export async function startSpatialGlobe(
         cleanup()
         return
       }
+      const ctaLayer = hero.matches('.cta-band') ? globe.closest<HTMLElement>('.cta-lag') : null
+      if (ctaLayer) ctaParallax = createCtaParallax(ctaLayer)
       observer.observe(options.stars ? hero : (globe.closest('section') ?? globe))
       resizeObserver.observe(globe)
       resizeObserver.observe(hero)
