@@ -3,6 +3,7 @@
 import type { ReactNode } from 'react'
 
 import {
+  cn,
   Carousel,
   CarouselContent,
   CarouselItem,
@@ -20,6 +21,8 @@ export interface CarouselTrackProps {
    * block and therefore has no location at all.
    */
   headingAttr?: string
+  /** The hero step applies on desktop; both bands use display-xl on mobile. */
+  headingSize?: 'xl' | 'hero'
   /** Pre-rendered cards. Server components stay on the server; only the
       scrolling shell is client-side. */
   cards: readonly ReactNode[]
@@ -89,7 +92,12 @@ function Controls() {
  * lives in `carouselBand.ts` because this module is client-side and a server
  * component cannot read a constant across that line.
  */
-export function CarouselTrack({ heading, headingAttr, cards }: CarouselTrackProps) {
+export function CarouselTrack({
+  heading,
+  headingAttr,
+  headingSize = 'xl',
+  cards,
+}: CarouselTrackProps) {
   return (
     <Carousel opts={{ align: 'start' }}>
       {/* One row at 1440 with the buttons pushed to the far edge, stacked at
@@ -100,7 +108,14 @@ export function CarouselTrack({ heading, headingAttr, cards }: CarouselTrackProp
         className="mb-12 flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between"
       >
         {heading ? (
-          <h2 className="text-display-xl font-display text-balance">{heading}</h2>
+          <h2
+            className={cn(
+              'text-display-xl font-display text-balance',
+              headingSize === 'hero' && 'lg:text-hero',
+            )}
+          >
+            {heading}
+          </h2>
         ) : (
           <span />
         )}
