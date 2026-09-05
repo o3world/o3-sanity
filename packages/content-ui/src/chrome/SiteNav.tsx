@@ -70,10 +70,10 @@ interface SiteNavProps {
  * the resting token for `<main>` in the same breath so the heroes follow.
  * Below `lg` there is no strip and the bar still starts at `top-0`.
  *
- * **O3's desktop pill follows the structural content edges** (#444, Josh,
- * 2026-09-04). This deliberately supersedes the 900px width in `2225:2920`
- * without changing height, padding, radii or link spacing. `--container-nav`
- * reads the section cap for O3; the retired brand retains its 900px cap.
+ * **O3's desktop pill follows the inner content measure** (#446, Josh,
+ * 2026-09-04), superseding #444's wider structural-stage alignment.
+ * `--container-nav` shares the hero's 1034px content cap without changing
+ * height, padding, radii or link spacing. The retired brand retains its 900px cap.
  *
  * ── INK FLIP ───────────────────────────────────────────────────────────────
  *
