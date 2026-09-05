@@ -6,17 +6,9 @@
  * host, and the toolbar is the standing paint-leak test (ADR 0028). */
 @import '@o3/tailwind-config-o3xo/theme.css';
 
-/* Figtree. apps/web will load it via next/font/google and set --font-figtree
- * on <html>; @storybook/nextjs-vite has NO next/font support, so Storybook
- * self-hosts it. theme.css's font stacks read
- *   var(--font-figtree, Figtree), 'Helvetica Neue', …
- * Custom properties substitute where they are DECLARED (at :root), so if
- * --font-figtree is undefined there the stack silently falls through to the
- * plain 'Figtree' family name — which is only available when a <link> loaded
- * it. Fontsource, not a Google Fonts <link>, because a network font is a
- * flake vector for offline dev and future CI screenshots; same upstream
- * files Google serves, so metrics match next/font exactly. */
-@import '@fontsource-variable/figtree';
+/* preview.ts imports Fontsource directly so Vite bundles its relative font
+ * assets before Tailwind processes this stylesheet. The website uses
+ * next/font; Storybook self-hosts the same font for offline rendering. */
 
 :root {
   /* The family name the @fontsource-variable package registers. Feeding the
