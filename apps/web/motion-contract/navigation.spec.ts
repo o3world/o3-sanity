@@ -173,6 +173,7 @@ test('back, forward and a deep link retain usable content and keyboard focus', a
 })
 
 test('browsers without animation APIs still navigate completely', async ({ page }, info) => {
+  const desktop = info.project.use.viewport!.width >= 1024
   await page.addInitScript(() => {
     Object.defineProperty(document, 'startViewTransition', { value: undefined })
     Object.defineProperty(Element.prototype, 'animate', { value: undefined })
@@ -194,8 +195,8 @@ test('browsers without animation APIs still navigate completely', async ({ page 
   expect(light.readyNav).toMatchObject({
     color: 'rgb(35, 35, 35)',
     background: 'rgba(255, 255, 255, 0.6)',
-    button: 'rgb(255, 255, 255)',
-    buttonBackground: 'rgb(10, 10, 11)',
+    button: desktop ? 'rgb(255, 255, 255)' : null,
+    buttonBackground: desktop ? 'rgb(10, 10, 11)' : null,
   })
   await navigate(page, '/work', async () => (await navLink(page, 'Work')).press('Enter'), info)
   await navigate(
@@ -322,16 +323,16 @@ test('the destination nav skin is complete on the first arriving frame', async (
     background: 'rgba(255, 255, 255, 0.6)',
     link: 'rgb(35, 35, 35)',
     inactiveLink: desktop ? 'rgb(35, 35, 35)' : null,
-    button: 'rgb(255, 255, 255)',
-    buttonBackground: 'rgb(10, 10, 11)',
+    button: desktop ? 'rgb(255, 255, 255)' : null,
+    buttonBackground: desktop ? 'rgb(10, 10, 11)' : null,
   }
   const darkSkin = {
     color: 'rgb(255, 255, 255)',
     background: desktop ? 'rgba(3, 3, 3, 0.45)' : 'rgba(3, 3, 3, 0.2)',
     link: 'rgb(255, 255, 255)',
     inactiveLink: desktop ? 'rgb(255, 255, 255)' : null,
-    button: 'rgb(10, 10, 11)',
-    buttonBackground: 'rgb(255, 255, 255)',
+    button: desktop ? 'rgb(10, 10, 11)' : null,
+    buttonBackground: desktop ? 'rgb(255, 255, 255)' : null,
   }
   const atTop = desktop ? 124 : 0
   const pinned = desktop ? 32 : 0

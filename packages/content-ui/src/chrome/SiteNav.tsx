@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import Link from 'next/link'
 
 import { SurfaceProvider } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
@@ -30,10 +31,10 @@ interface SiteNavProps {
  *
  * |        | 402 (`1814:1630`)                 | 1440 (`2225:2920`)                |
  * | ------ | --------------------------------- | --------------------------------- |
- * | Shape  | full-width square bar, `8px 20px` | structural-width bar, `16px`     |
+ * | Shape  | full-width bar, fluid gutters     | structural-width bar, `16px`     |
  * | Mark   | 64 (`1814:1631`)                  | 48 (`2225:2915`)                  |
  * | Links  | behind "Open menu"                | five inline, in a 643px row       |
- * | Button | inline, beside the hamburger      | inline, ending the row            |
+ * | Button | inside the opened menu            | inline, ending the row            |
  *
  * The 16px padding and the 48px mark are one measurement, not two: together
  * they are what makes the desktop bar 80px tall.
@@ -195,17 +196,16 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
           // this element carries the whole bar — the links, the hamburger's
           // `currentColor` bars and anything else added to the row inherit the
           // value mid-interpolation, and each keeps its own hover timing.
-          className="bg-scrim lg:bg-scrim-pill lg:border-on-ink-line group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-r-nav duration-(--duration-ink) group-data-[ink=dark]:bg-scrim-light lg:max-w-nav flex items-center justify-between px-5 py-2 text-white backdrop-blur-[16px] backdrop-saturate-[1.25] transition-[background-color,border-color,color] ease-out [view-transition-name:site-nav] max-lg:group-data-[ink=dark]:border-b lg:mx-auto lg:w-full lg:rounded-l-[40px] lg:border lg:px-4 lg:py-4"
+          className="bg-scrim lg:bg-scrim-pill lg:border-on-ink-line group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-r-nav duration-(--duration-ink) group-data-[ink=dark]:bg-scrim-light lg:max-w-nav px-gutter flex items-center justify-between py-2 text-white backdrop-blur-[16px] backdrop-saturate-[1.25] transition-[background-color,border-color,color] ease-out [view-transition-name:site-nav] max-lg:group-data-[ink=dark]:border-b lg:mx-auto lg:w-full lg:rounded-l-[40px] lg:border lg:px-4 lg:py-4"
         >
-          <NavLink
+          <Link
             href="/"
             aria-label={`${settings?.title ?? 'O3'} home`}
             className="focus-visible:ring-brand shrink-0 focus-visible:outline-none focus-visible:ring-2"
           >
-            {/* The mark inherits the nav ink off-home and the existing
-              current-page brand red on the homepage (#444). */}
+            {/* The mark follows the nav ink on every route (#446). */}
             {brandMark}
-          </NavLink>
+          </Link>
 
           {/* 1440: the 643px row (`2225:2740`), five links and the button at a
             48px gap. `contents` promotes the list items to flex children, so
@@ -235,11 +235,9 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
             {button ? <ButtonLink button={button} className={NAV_BUTTON_INK} /> : null}
           </div>
 
-          {/* 402: button + hamburger, 32px apart (`1814:1632`). The 402 bar
-            crosses the same bands the pill does, so its button flips on the
-            same terms. */}
-          <div className="flex items-center gap-8 lg:hidden">
-            {button ? <ButtonLink button={button} className={NAV_BUTTON_INK} /> : null}
+          {/* #446: Josh moved the mobile button into the menu only,
+            superseding its inline placement in `1814:1632`. */}
+          <div className="lg:hidden">
             <MobileNavMenu items={navItems} button={button} />
           </div>
         </nav>

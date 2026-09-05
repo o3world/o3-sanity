@@ -17,17 +17,16 @@ import { BrandMark } from '@o3/ui'
  */
 
 /**
- * **The drawn mark is 38.84px at both widths** — `1814:1631` is a 64 box and
- * `2225:2915` a 48 one, but the vector inside each is the same geometry at the
- * same scale, the 48 box being the 64 box cropped 8px on every side. So the box
- * shrinks at `lg` and the mark does not: `-m-2` takes 8 off each edge of a box
- * that stays 64, which is the crop itself rather than a second size. Scaling the
- * svg to 48 instead drew the mark at 29 — three quarters of the frame's.
- *
- * The 48px box is what makes the pill 80 tall, and it still does: the button is
- * 48 too, so the row's height is unchanged either way.
+ * The drawn mark stays 38.84px at both widths (`1814:1631`, `2225:2915`).
+ * #446 trims the old tile's empty SVG space so the ink starts at the link's
+ * left edge. The wrapper retains the 64px mobile touch target and the 48px
+ * desktop footprint, keeping the header height unchanged.
  */
-export const NAV_MARK = <BrandMark size={64} className="lg:-m-2" />
+export const NAV_MARK = (
+  <span className="flex size-16 items-center lg:size-12">
+    <BrandMark trim size={38.84} />
+  </span>
+)
 
 /** The footer's vector, tight-bounded: 128 at 402, 148 at 1440 (`1280:1856`, `2225:2613`). */
 export const FOOTER_MARK = <BrandMark trim size={128} className="lg:size-[148px]" />
