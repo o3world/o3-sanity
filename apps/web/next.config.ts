@@ -4,9 +4,13 @@ import { sanity } from 'next-sanity/live/cache-life'
 
 import { indexRedirects } from './src/lib/indexRedirects'
 import { GENERATED_REDIRECTS } from './src/lib/redirects.generated'
+import { spatialGlobeEnabled } from './src/components/globe/rollout'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  env: {
+    O3_SPATIAL_GLOBE_ENABLED: spatialGlobeEnabled(process.env) ? '1' : '0',
+  },
   // next-sanity's own profile, which pins time-based revalidation to a year:
   // the publish webhook is what invalidates this site, not a clock.
   cacheComponents: true,

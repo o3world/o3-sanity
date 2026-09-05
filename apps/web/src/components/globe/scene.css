@@ -1,0 +1,96 @@
+.spatial-globe-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+}
+[data-spatial-ready] .hero-lag > div > svg:first-child {
+  visibility: hidden;
+}
+[data-spatial-still] .hero-lag,
+[data-spatial-still] .hero-lag svg * {
+  animation: none !important;
+}
+
+/* Let the same sky reach the utility links, keeping the globe's existing crop. */
+[data-spatial-chrome] .hero-band {
+  overflow: visible;
+  clip-path: inset(calc(-1 * var(--spatial-sky-overhang, 0px)) 0 0);
+}
+[data-spatial-chrome] .hero-band .hero-lag {
+  overflow: hidden;
+}
+[data-spatial-chrome] nav[aria-label='O3 properties'] {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border-color: transparent;
+}
+[data-spatial-chrome] #site-nav:not([data-ink='dark']) > nav {
+  background: color-mix(
+    in srgb,
+    var(--color-scrim-pill) calc(var(--spatial-nav-solid, 0) * 100%),
+    transparent
+  );
+  border-color: var(--color-on-ink-line);
+  backdrop-filter: blur(calc(16px * var(--spatial-nav-solid, 0))) saturate(1.25);
+}
+
+[data-spatial-chrome] body {
+  background: var(--color-ink);
+}
+
+/* Keep the property links available in the prototype's footer at every size. */
+.spatial-footer-properties nav[aria-label='O3 properties'] {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  min-height: 69px;
+  padding-block: 24px;
+  border: 0;
+}
+
+/* Reserve a separate globe row after the naturally sized text column. */
+[data-spatial-layout] .hero-band:has(.hero-lead) {
+  display: grid;
+  grid-template-rows: auto minmax(180px, 1fr);
+  overflow: clip;
+  min-height: 100svh;
+}
+
+[data-spatial-layout] .hero-band:has(.hero-lead) .hero-lead {
+  grid-row: 1;
+  min-width: 0;
+  padding-bottom: clamp(48px, 5vw, 64px);
+}
+
+[data-spatial-layout] .hero-band:has(.hero-lead) .hero-lag {
+  position: relative;
+  inset: auto;
+  grid-row: 2;
+  grid-column: 1;
+  overflow: visible;
+  margin-inline: calc(-1 * var(--spacing-gutter));
+  min-height: 180px;
+}
+
+[data-spatial-layout] .hero-band:has(.hero-lead) .hero-lag > div {
+  top: 16px;
+  bottom: auto;
+}
+
+/* Static, fine dithering breaks up quantized dark glow bands without blur. */
+[data-spatial-layout] .hero-band:has(.hero-lead)::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Cpath fill='%23808080' filter='url(%23n)' d='M0 0h192v192H0z'/%3E%3C/svg%3E");
+  background-size: 192px 192px;
+  mix-blend-mode: soft-light;
+  opacity: 0.12;
+  mask-image: linear-gradient(to bottom, transparent 25%, black 70%);
+}

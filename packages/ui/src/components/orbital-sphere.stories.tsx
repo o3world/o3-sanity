@@ -1,3 +1,6 @@
+import { createContext, useContext, useEffect, useState } from 'react'
+import { OrbitalRendererContext } from './orbital-sphere-renderer'
+import type { OrbitalRendererProps } from './orbital-sphere-renderer'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { expect, waitFor } from 'storybook/test'
 
@@ -380,4 +383,51 @@ export const PullQuotePair: Story = {
       />
     </div>
   ),
+}
+
+const RendererReady = createContext<boolean | undefined>(undefined)
+function HandoffProbe({ onReady }: OrbitalRendererProps) {
+  const ready = useContext(RendererReady)
+  useEffect(() => {
+    onReady(ready)
+  }, [ready, onReady])
+  return null
+}
+function HandoffExample() {
+  const [ready, setReady] = useState<boolean | undefined>(undefined)
+  return (
+    <>
+      <button onClick={() => setReady(!ready)}>Toggle renderer readiness</button>
+      <RendererReady.Provider value={ready}>
+        <OrbitalRendererContext.Provider value={HandoffProbe}>
+          <div className="bg-ink relative h-[500px]">
+            <OrbitalSphere motion="orbit" className="inset-0 w-[400px]" />
+          </div>
+        </OrbitalRendererContext.Provider>
+      </RendererReady.Provider>
+    </>
+  )
+}
+
+/** The pending scene stays hidden; success reveals the glow and failure restores SVG. */
+export const RendererHandoff: Story = {
+  render: () => <HandoffExample />,
+  play: async ({ canvasElement }) => {
+    const button = canvasElement.querySelector('button')!
+    const globe = canvasElement.querySelector('[data-orbital-preset]')!
+    const moving = globe.querySelector('svg')!
+    await expect(getComputedStyle(moving).visibility).toBe('hidden')
+    await expect(globe.hasAttribute('data-orbital-loading')).toBe(true)
+    await expect(getComputedStyle(globe.querySelector('svg:last-of-type')!).opacity).toBe('0')
+    button.click()
+    await waitFor(() => expect(globe.getAttribute('data-orbital-gpu')).toBe('true'))
+    await expect(getComputedStyle(moving).visibility).toBe('hidden')
+    await expect(getComputedStyle(globe.querySelector('svg:last-of-type')!).opacity).toBe('1')
+    for (const group of moving.querySelectorAll('g')) {
+      await expect(group.style.animation).toBe('')
+    }
+    button.click()
+    await waitFor(() => expect(getComputedStyle(moving).visibility).toBe('visible'))
+    await expect(globe.hasAttribute('data-orbital-gpu')).toBe(false)
+  },
 }

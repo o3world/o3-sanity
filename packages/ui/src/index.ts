@@ -182,3 +182,6 @@ export { SurfaceProvider, useSurface } from './components/surface-context'
 // Stat
 export { Stat, statLabelVariants } from './components/stat'
 export type { StatProps } from './components/stat'
+
+export { OrbitalRendererContext } from './components/orbital-sphere-renderer'
+export type { OrbitalRendererProps } from './components/orbital-sphere-renderer'

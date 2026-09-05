@@ -29,7 +29,8 @@
     "react-dom": "^19.2.8",
     "sanity": "6.8.0",
     "sanity-plugin-media": "6.1.8",
-    "styled-components": "^6.1.0"
+    "styled-components": "^6.1.0",
+    "vgpu": "0.4.0"
   },
   "devDependencies": {
     "@o3/render-kit": "workspace:*",
@@ -41,6 +42,7 @@
     "@types/node": "^22.0.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
+    "@webgpu/types": "^0.1.72",
     "path-to-regexp": "^8.4.2",
     "storybook": "^10.4.1",
     "tailwindcss": "^4.2.4",
