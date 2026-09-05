@@ -145,6 +145,8 @@ test('the home entrance remains the sole opacity owner on fresh and cached arriv
     expect(proof.route + proof.nested, 'home keeps an actual arrival cue').toBeGreaterThan(0)
     await ordinaryPage(page)
     await (await navLink(page, 'Work')).click()
+    // The outgoing Home page can still satisfy ordinaryPage before Work commits.
+    await expect(page).toHaveURL(/\/work\/?$/)
     await ordinaryPage(page)
   }
 })

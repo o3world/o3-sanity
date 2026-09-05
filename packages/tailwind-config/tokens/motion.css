@@ -535,3 +535,37 @@
     animation-delay: 0s !important;
   }
 }
+
+/* Accepted IRONMAN chapter cadence (#430). Static design values are unchanged. */
+:root {
+  --duration-sequence: 560ms;
+  --delay-sequence: 100ms;
+}
+@keyframes sequence-enter {
+  from {
+    opacity: 0;
+    translate: 0 var(--sequence-travel);
+  }
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+[data-reveal-sequence] {
+  --sequence-travel: 12px;
+}
+@media (min-width: 1024px) {
+  [data-reveal-sequence] {
+    --sequence-travel: 20px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-sequence-phase='armed'] {
+    opacity: 0;
+    translate: 0 var(--sequence-travel);
+  }
+  [data-sequence-phase='entered'] {
+    animation: sequence-enter var(--duration-sequence) var(--ease-out) backwards;
+    animation-delay: calc(var(--sequence-order) * var(--delay-sequence));
+  }
+}

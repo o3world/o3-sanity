@@ -185,3 +185,5 @@ export type { StatProps } from './components/stat'
 
 export { OrbitalRendererContext } from './components/orbital-sphere-renderer'
 export type { OrbitalRendererProps } from './components/orbital-sphere-renderer'
+
+export { RevealSequence } from './components/reveal-sequence'

@@ -15,7 +15,7 @@ import { toEmbedSrc } from './embedSrc'
  * runs at two measures: the article column on a detail page, and a
  * `layoutSection` column when a `richText` block holds a figure (#268).
  */
-function componentsFor(figureSizes: string): PortableTextComponents {
+function componentsFor(figureSizes: string, leadKey?: string): PortableTextComponents {
   return {
     block: {
       /*
@@ -24,7 +24,14 @@ function componentsFor(figureSizes: string): PortableTextComponents {
        * padding above the container gap — 64 over it, 32 under. Margins
        * collapse between siblings here, so `my-8` is 32, not 64.
        */
-      normal: ({ children }) => <p className="text-fg my-8">{children}</p>,
+      normal: ({ children, value }) => (
+        <p
+          data-reveal-step={leadKey && value._key === leadKey ? 'lead' : undefined}
+          className="text-fg my-8"
+        >
+          {children}
+        </p>
+      ),
       // Heading/h3 (2050:1312): 32/38 at 402 → 36/44 at 1440. The shared
       // display-lg weight applies, but its legacy 18px mobile floor does not.
       h2: ({ children }) => (
@@ -132,9 +139,12 @@ export function PortableTextBody({
   value,
   className,
   figureSizes,
+  revealLead = false,
 }: {
   value: unknown
   className?: string
+  /** Let a surrounding RevealSequence pace the opening paragraph; preserve all block spacing. */
+  revealLead?: boolean
   /**
    * The slot a `figure` in this body occupies, when it is not the article
    * measure — a `richText` block passes its column's (#268).
@@ -142,13 +152,25 @@ export function PortableTextBody({
   figureSizes?: string
 }) {
   if (!value || !Array.isArray(value) || value.length === 0) return null
+  const first = value[0] as { _type?: string; _key?: string; style?: string; listItem?: string }
+  const leadKey =
+    revealLead &&
+    first?._type === 'block' &&
+    !first.listItem &&
+    (!first.style || first.style === 'normal')
+      ? first._key
+      : undefined
   return (
     <div
       className={cn('text-body max-w-prose [&>:first-child]:mt-0 [&>:last-child]:mb-0', className)}
     >
       <PortableText
         value={value as Parameters<typeof PortableText>[0]['value']}
-        components={figureSizes ? componentsFor(figureSizes) : ARTICLE_COMPONENTS}
+        components={
+          figureSizes || leadKey
+            ? componentsFor(figureSizes ?? ARTICLE_COLUMN, leadKey)
+            : ARTICLE_COMPONENTS
+        }
       />
     </div>
   )
