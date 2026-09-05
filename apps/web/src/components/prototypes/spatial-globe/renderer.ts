@@ -53,6 +53,7 @@ export async function startSpatialGlobe(
     window.removeEventListener('scroll', wake)
     document.removeEventListener('visibilitychange', wake)
     reduced.removeEventListener('change', wake)
+    hero.style.removeProperty('--spatial-sky-overhang')
     delete hero.dataset.spatialReady
     delete document.documentElement.dataset.spatialChrome
     document.documentElement.style.removeProperty('--spatial-nav-solid')
@@ -111,6 +112,7 @@ export async function startSpatialGlobe(
     const heroBounds = hero.getBoundingClientRect()
     if (mode === 'depth') {
       const overhang = Math.max(0, heroBounds.top + scrollY)
+      hero.style.setProperty('--spatial-sky-overhang', `${overhang}px`)
       canvas.style.top = `-${overhang}px`
       canvas.style.height = `calc(100% + ${overhang}px)`
     }
@@ -154,10 +156,8 @@ export async function startSpatialGlobe(
             pass.draw(stars, {
               instances: mode === 'depth' ? 1400 : Math.round(180 * Math.min(1, h.width / 1200)),
             })
-          rings.forEach((ring, i) => {
-            pass.draw(ring)
-            electrons[i]!.forEach((dot) => pass.draw(dot))
-          })
+          rings.forEach((ring) => pass.draw(ring))
+          electrons.forEach((orbit) => orbit.forEach((dot) => pass.draw(dot)))
         }),
       )
       hero.dataset.spatialReady = 'true'

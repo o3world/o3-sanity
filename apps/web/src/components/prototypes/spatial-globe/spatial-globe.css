@@ -80,6 +80,7 @@
 /* Let the same sky reach the utility links, keeping the globe's existing crop. */
 [data-spatial-chrome] .hero-band {
   overflow: visible;
+  clip-path: inset(calc(-1 * var(--spatial-sky-overhang, 0px)) 0 0);
 }
 [data-spatial-chrome] .hero-band .hero-lag {
   overflow: hidden;

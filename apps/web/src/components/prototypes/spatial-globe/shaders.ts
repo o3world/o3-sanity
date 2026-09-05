@@ -77,7 +77,7 @@ export const dotShader =
   result.position = clip(q.xy+c*extent);
   result.uv = c*extent;
   let opacity = select(0.22,select(min(1.0,p.v.w+0.35),1.0,p.dot.z>0.5),q.z>=0.0);
-  result.color = vec4f(p.color.rgb,opacity*p.color.a);
+  result.color = vec4f(p.color.rgb*(0.5+0.5*opacity)*p.color.a,1.0);
   return result;
 }
 @fragment fn fs_main(i: Out) -> @location(0) vec4f {
@@ -87,7 +87,18 @@ export const dotShader =
   let solid = 1.0-smoothstep(radius-0.6,radius+0.6,d);
   let sigma = max(1.0,3.0*p.globe.z);
   let glow = exp(-max(0.0,d-radius)*max(0.0,d-radius)/(2.0*sigma*sigma))*0.34*p.dot.z;
-  return vec4f(i.color.rgb,i.color.a*max(solid,glow));
+  // Analytic sphere normal gives a rounded surface without changing the
+  // orbit center. Opaque cores occlude the rail; only the halo is translucent.
+  let xy=i.uv/max(radius,0.4);
+  let normal=normalize(vec3f(xy.x,-xy.y,sqrt(max(0.0,1.0-dot(xy,xy)))));
+  let light=normalize(vec3f(-0.45,0.6,0.8));
+  let diffuse=max(0.0,dot(normal,light));
+  let halfVector=normalize(light+vec3f(0,0,1));
+  let specular=pow(max(0.0,dot(normal,halfVector)),28.0)*0.4;
+  let material=i.color.rgb*(0.35+0.65*diffuse)+vec3f(specular);
+  let alpha=max(solid,glow);
+  let color=mix(i.color.rgb,material,solid);
+  return vec4f(color,alpha);
 }
 `
 export const distantStarsShader = /* wgsl */ `

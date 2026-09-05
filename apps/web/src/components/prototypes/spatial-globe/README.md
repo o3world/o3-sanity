@@ -25,3 +25,5 @@ This preview is for visual judgment. GPU device-loss recovery, physical mobile p
 Sources: `packages/ui/src/components/orbital-sphere.tsx`, the official globe exports, `docs/research/globe-frame-cadence-and-vgpu.md`, and vgpu's public API documentation. Visual verdict pending.
 
 Follow-up: Spatial stars now extends behind the utility logos. The nav keeps its existing border while its background and blur are transparent at the top, returning progressively on scroll. Ambient dust and circulation run at 1.7 times the initial speed. These changes are scoped to the spatial comparison and restore on teardown.
+
+Globe dots are drawn after all rails so lines cannot paint across them. Their centers share the rail projection, and opaque cores use analytic sphere normals, diffuse lighting, and a small specular highlight. These are shaded sphere impostors, not mesh geometry.
