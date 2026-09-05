@@ -7,7 +7,7 @@
  * reshape them — bump `schemaVersion` if that ever stops being true.
  */
 
-export type TrackedKind = 'pageFrame' | 'componentSet'
+export type TrackedKind = 'pageFrame' | 'componentFrame' | 'componentSet'
 export type TrackedVariant = 'desktop' | 'mobile'
 
 export interface TrackedNode {

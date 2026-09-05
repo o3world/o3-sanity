@@ -35,12 +35,13 @@
  * `figma:sync` does not track, a story naming no node, a node marked
  * `unpairable`. A new pairing is listed rather than red because there is no
  * accepted score for it to have worsened past — calling it drift would report a
- * measurement nobody made. It is never silent, and `--strict` (what CI runs)
+ * measurement nobody made. It is never silent, and `--strict`
  * turns the list red so an unaccepted pairing cannot merge unnoticed.
  *
  * Pure end to end: four plain objects in, a plan out. `ledger-file.ts` reads and
  * writes the JSON and does nothing else.
  */
+import { sourceKey, type SourceEvidence } from './ledger-check'
 import type { BrandBaseline, MissingNode } from './export-cache'
 import { frameKey, type FrameScore, type UnkeyedPairing } from './frame-score'
 import type { Brand, StoryEntry } from './storybook'
@@ -71,6 +72,7 @@ export interface LedgerEntry {
   readonly nodeHash: string | null
   /** The design file's version at acceptance, as `figma:sync` recorded it. */
   readonly fileVersion: string | null
+  readonly source?: string
   readonly acceptedAt: string
   /** One line: why this pairing is accepted at a score that is not near zero. */
   readonly reason?: string
@@ -82,7 +84,10 @@ export interface UnpairableEntry {
 }
 
 export interface Ledger {
+  readonly sources?: Readonly<Record<string, SourceEvidence>>
   readonly pairs: Readonly<Record<string, LedgerEntry>>
+  /** Reviewed reference fixtures: source freshness only, never a visual score. */
+  readonly references?: Readonly<Record<string, { source: string; nodeHash: string | null }>>
   /** Keyed `<design brand>/<node>`: debris is a property of the node, not a pair. */
   readonly unpairable: Readonly<Record<string, UnpairableEntry>>
 }
@@ -123,17 +128,34 @@ export function serializeLedger(ledger: Ledger): string {
     nodeHash: entry.nodeHash,
     fileVersion: entry.fileVersion,
     acceptedAt: entry.acceptedAt,
+    ...(entry.source === undefined ? {} : { source: entry.source }),
     ...(entry.reason === undefined ? {} : { reason: entry.reason }),
   }))
   const unpairable = sorted(ledger.unpairable, (entry) => ({ reason: entry.reason }))
-  return `${JSON.stringify({ pairs, unpairable }, null, 2)}\n`
+  const used = new Set([
+    ...Object.values(ledger.pairs).map((entry) => entry.source),
+    ...Object.values(ledger.references ?? {}).map((entry) => entry.source),
+  ])
+  const sources = ledger.sources
+    ? Object.fromEntries(
+        Object.entries(ledger.sources)
+          .filter(([key]) => used.has(key))
+          .sort(([a], [b]) => a.localeCompare(b)),
+      )
+    : undefined
+  return `${JSON.stringify({ pairs, unpairable, ...(sources ? { sources } : {}), ...(ledger.references ? { references: sorted(ledger.references, (entry) => entry) } : {}) }, null, 2)}\n`
 }
 
 /** An absent or empty file is an empty ledger — the honest starting state. */
 export function parseLedger(text: string): Ledger {
   if (text.trim() === '') return EMPTY_LEDGER
   const parsed = JSON.parse(text) as Partial<Ledger>
-  return { pairs: parsed.pairs ?? {}, unpairable: parsed.unpairable ?? {} }
+  return {
+    pairs: parsed.pairs ?? {},
+    unpairable: parsed.unpairable ?? {},
+    ...(parsed.sources ? { sources: parsed.sources } : {}),
+    ...(parsed.references ? { references: parsed.references } : {}),
+  }
 }
 
 // ── acceptance ────────────────────────────────────────────────────────────────
@@ -167,9 +189,12 @@ export function acceptScores(input: {
   /** Today, as `YYYY-MM-DD`. Passed in so the writer stays pure. */
   readonly at: string
   readonly tolerance?: number
+  readonly sources?: Readonly<Record<string, SourceEvidence>>
+  readonly reason?: string
 }): AcceptResult {
   const byBrand = new Map(input.baselines.map((baseline) => [baseline.brand, baseline]))
   const pairs: Record<string, LedgerEntry> = { ...input.ledger.pairs }
+  const sources = { ...input.ledger.sources }
   const added: string[] = []
   const updated: string[] = []
   const unchanged: string[] = []
@@ -187,13 +212,19 @@ export function acceptScores(input: {
     })
     const baseline = byBrand.get(score.brand)
     const previous = pairs[key]
+    const source = input.sources?.[score.storyId]
+    const keyOfSource = source ? sourceKey(source) : undefined
+    if (source && keyOfSource) sources[keyOfSource] = source
     const next: LedgerEntry = {
       score: round(score.ratio),
       tolerance: previous?.tolerance ?? input.tolerance ?? DEFAULT_TOLERANCE,
       nodeHash: baseline?.hashes?.[score.nodeId] ?? null,
       fileVersion: baseline?.version ?? null,
       acceptedAt: input.at,
-      ...(previous?.reason === undefined ? {} : { reason: previous.reason }),
+      ...(keyOfSource ? { source: keyOfSource } : {}),
+      ...((input.reason ?? previous?.reason) === undefined
+        ? {}
+        : { reason: input.reason ?? previous?.reason }),
     }
 
     if (!previous) {
@@ -202,7 +233,9 @@ export function acceptScores(input: {
     } else if (
       previous.score === next.score &&
       previous.nodeHash === next.nodeHash &&
-      previous.fileVersion === next.fileVersion
+      previous.fileVersion === next.fileVersion &&
+      JSON.stringify(previous.source) === JSON.stringify(next.source) &&
+      previous.reason === next.reason
     ) {
       unchanged.push(key)
     } else {
@@ -212,7 +245,7 @@ export function acceptScores(input: {
   }
 
   return {
-    ledger: { pairs, unpairable: input.ledger.unpairable },
+    ledger: { ...input.ledger, pairs, ...(Object.keys(sources).length ? { sources } : {}) },
     added: added.sort(),
     updated: updated.sort(),
     unchanged: unchanged.sort(),
@@ -426,7 +459,7 @@ function acceptedHashes(
  * Whether the process exits non-zero.
  *
  * The reds always fail. `--strict` adds the pairings nobody has accepted, which
- * is the half CI runs: locally a new pairing is a prompt to go and look at it,
+ * also used by the offline CI freshness check: locally a new pairing prompts review,
  * on a branch it is work that has not been reviewed yet.
  */
 export function isFailing(plan: VerdictPlan, options: { readonly strict: boolean }): boolean {

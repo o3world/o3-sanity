@@ -21,6 +21,7 @@ import {
   type Affected,
 } from './affected'
 import { assetCacheDir, forgetErrorResponses, forgetUnreachable, type AssetCache } from './assets'
+import { EMPTY_COVERAGE, readCoveragePolicy, type CoveragePolicy } from './coverage-policy'
 import { captureAll, captureKey, type Shot, type Viewport } from './capture'
 import { compare, type Comparison } from './compare'
 import {
@@ -47,6 +48,7 @@ import {
 } from './frame-score'
 import { changedFiles, ensureBaseCheckout, git, repoRoot, resolveBase, shortSha } from './git'
 import { acceptScores, formatVerdicts, isFailing, ledgerKey, planVerdicts } from './ledger'
+import { captureSourceEvidence, checkLedger, readSourceState, sourceKey } from './ledger-check'
 import { LEDGER_FILE, readLedger, writeLedger } from './ledger-file'
 import { formatInventory, type PairingRow } from './pairing'
 import { writeReport } from './report'
@@ -91,7 +93,9 @@ Options
   --brand <o3|o3xo>     which Storybook host to build and capture (default: o3)
   --figma               compare against Figma rather than the merge base (#326)
   --accept              write this run's scores into the ledger (#339); with --story, only those
-  --strict              also fail on a pairing nobody has accepted — what CI runs
+  --reason <text>            Record the review reason with --accept
+  --ledger-only              Check accepted source/design freshness; no build, browser or exports
+  --strict              also fail on a pairing nobody has accepted — used with --ledger-only in CI
   --base <ref>          baseline ref (default: main)
   --all                 ignore the change graph, take every story
   --story <substring>   compare stories matching id or title, repeatable; implies --all scope
@@ -159,6 +163,7 @@ async function scoreAgainstFigma(options: {
   brand: Brand
   brands: readonly Brand[]
   pairings: readonly PairingRow[]
+  policy: CoveragePolicy
   exportsDir: string
   exports: Map<string, FrameExport>
   reasons: Map<string, string>
@@ -174,6 +179,7 @@ async function scoreAgainstFigma(options: {
   verbose: boolean
   open: boolean
   accept: boolean
+  reason?: string
   strict: boolean
 }): Promise<void> {
   const { brand } = options
@@ -187,6 +193,7 @@ async function scoreAgainstFigma(options: {
 
   log(`  building ${host} for the working tree`)
   const build = path.join(cache, 'build', 'current')
+  const beforeBuild = options.accept ? readSourceState(root, brand) : undefined
   await buildStorybook(root, brand, build, options.verbose)
   const index = readIndex(build)
 
@@ -195,14 +202,32 @@ async function scoreAgainstFigma(options: {
   // construction. With one, the scope is what was asked for — and a story that
   // turns out to name no frame is a row on the report rather than a silence.
   const paired = new Set(options.pairings.map((row) => row.storyId).filter(Boolean) as string[])
+  const measuredPairings = options.pairings.filter(
+    (pair) => !options.policy.referenceOnly[`${pair.storyId}/${pair.nodeId}`],
+  )
+  const measuredIds = new Set(measuredPairings.map((pair) => pair.storyId))
   const stories = index
     .filter(options.wanted)
-    .filter((entry) => options.scoped || paired.has(entry.id))
+    .filter((entry) => (options.scoped || paired.has(entry.id)) && measuredIds.has(entry.id))
 
+  const sourcesByFile = options.accept
+    ? captureSourceEvidence(
+        root,
+        readStats(build),
+        index
+          .filter((entry) => options.pairings.some((pair) => pair.storyId === entry.id))
+          .map((entry) => entryPath(entry, host)),
+        brand,
+        beforeBuild,
+      )
+    : {}
+  const sources = Object.fromEntries(
+    index.map((entry) => [entry.id, sourcesByFile[entryPath(entry, host)]!]),
+  )
   let ledger = readLedger()
   const scored = planFrameScoring({
     stories,
-    pairings: options.pairings,
+    pairings: measuredPairings,
     exports: options.exports,
     reasons: options.reasons,
   })
@@ -268,6 +293,11 @@ async function scoreAgainstFigma(options: {
       const captured = await captureAll({
         baseUrl: url,
         stories: group.stories,
+        contentStories: new Set(
+          measuredPairings
+            .filter((pair) => pair.match === 'componentFrame')
+            .map((pair) => pair.storyId!),
+        ),
         viewports: [group.viewport],
         dir: shotsDir,
         settleMs: options.settleMs,
@@ -310,8 +340,63 @@ async function scoreAgainstFigma(options: {
       scores,
       baselines: options.baselines,
       at: new Date().toISOString().slice(0, 10),
+      sources,
+      reason: options.reason,
     })
-    const wrote = writeLedger(result.ledger)
+    const afterSources = captureSourceEvidence(
+      root,
+      readStats(build),
+      Object.keys(sourcesByFile),
+      brand,
+    )
+    if (JSON.stringify(afterSources) !== JSON.stringify(sourcesByFile))
+      throw new Error('Rendering sources changed during capture; refusing stale acceptance')
+    const measuredFiles = new Set(plan.targets.map((target) => entryPath(target.story, host)))
+    const referenceKeys = new Set(
+      options.pairings
+        .filter((pair) => options.policy.referenceOnly[`${pair.storyId}/${pair.nodeId}`])
+        .map((pair) => `${pair.storyId}/${pair.nodeId}`),
+    )
+    const references = Object.fromEntries(
+      Object.entries(ledger.references ?? {}).filter(
+        ([key]) => options.scoped || referenceKeys.has(key),
+      ),
+    )
+    const acceptedSources = { ...result.ledger.sources }
+    for (const pair of options.pairings) {
+      const key = `${pair.storyId}/${pair.nodeId}`
+      if (!options.policy.referenceOnly[key] || (options.scoped && !measuredFiles.has(pair.file)))
+        continue
+      const source = sourcesByFile[pair.file]
+      if (!source) throw new Error(`No built source evidence for reference ${key}`)
+      const keyOfSource = sourceKey(source)
+      acceptedSources[keyOfSource] = source
+      references[key] = {
+        source: keyOfSource,
+        nodeHash:
+          options.baselines.find((baseline) => baseline.brand === pair.designBrand)?.hashes?.[
+            pair.nodeId
+          ] ?? null,
+      }
+    }
+    const pairKeys = new Set(
+      plan.targets.map((target) =>
+        ledgerKey({
+          host: brand,
+          storyId: target.story.id,
+          designBrand: target.brand,
+          nodeId: target.nodeId,
+          viewport: target.viewport.name,
+        }),
+      ),
+    )
+    const pairs = Object.fromEntries(
+      Object.entries(result.ledger.pairs).filter(
+        ([key]) => options.scoped || !key.startsWith(`${brand}/`) || pairKeys.has(key),
+      ),
+    )
+    const accepted = { ...result.ledger, pairs, sources: acceptedSources, references }
+    const wrote = writeLedger(accepted)
     log(
       `\nLedger (${path.relative(root, LEDGER_FILE)})\n\n` +
         `  ${result.added.length} added · ${result.updated.length} re-accepted · ` +
@@ -319,7 +404,7 @@ async function scoreAgainstFigma(options: {
         (wrote ? '' : '\n  the file did not change — nothing to review'),
     )
     for (const key of [...result.added, ...result.updated]) log(`    ${key}`)
-    ledger = result.ledger
+    ledger = accepted
   }
 
   const verdicts = verdictsOf(scores)
@@ -377,7 +462,9 @@ async function main(): Promise<void> {
       brand: { type: 'string' },
       figma: { type: 'boolean', default: false },
       accept: { type: 'boolean', default: false },
+      reason: { type: 'string' },
       strict: { type: 'boolean', default: false },
+      'ledger-only': { type: 'boolean', default: false },
       base: { type: 'string', default: 'main' },
       all: { type: 'boolean', default: false },
       story: { type: 'string', multiple: true, default: [] },
@@ -406,6 +493,20 @@ async function main(): Promise<void> {
     throw new Error(`unknown brand ${values.brand} — expected one of ${BRANDS.join(', ')}`)
   }
 
+  if (
+    values['ledger-only'] &&
+    (!values.figma ||
+      !values.strict ||
+      values.accept ||
+      values.list ||
+      values.story.length > 0 ||
+      (values.brand && values.brand !== 'o3'))
+  ) {
+    throw new Error(
+      '--ledger-only requires --figma --strict, the full O3 inventory, and no --accept/--list/--story',
+    )
+  }
+
   // Applied to the current index and to the baseline's deleted stories alike,
   // so `--story hero` cannot come back with someone else's removed carousel.
   const needles = values.story.map((needle) => needle.toLowerCase())
@@ -421,17 +522,38 @@ async function main(): Promise<void> {
   // feeds (#337) need neither a build nor a browser, so they answer before
   // anything below spends twelve seconds on Storybook.
   if (values.figma) {
-    const brands = values.brand ? [values.brand] : BRANDS
+    const brands = values.brand ? [values.brand] : values['ledger-only'] ? ['o3' as const] : BRANDS
     const inventory = readInventory(brands)
+    const policy = (values.brand ?? 'o3') === 'o3' ? readCoveragePolicy(repoRoot()) : EMPTY_COVERAGE
     log(`\nfigma pairings — ${brands.join(', ')}\n`)
     log(formatInventory(inventory))
+    if (values['ledger-only']) {
+      const failures = checkLedger({
+        root: repoRoot(),
+        host: 'o3',
+        inventory,
+        ledger: readLedger(),
+        baselines: readBaselines(['o3']),
+        policy,
+      })
+      log(
+        '\nOffline ledger: checks accepted source/design freshness; does not measure new pixels.\n',
+      )
+      for (const failure of failures) log(`  ${failure}`)
+      log(`\n  ${failures.length} acceptance or coverage failures\n`)
+      if (failures.length > 0) process.exitCode = 1
+      return
+    }
     // `--list` is read-only: it says what the run is about and touches
     // nothing, so it stays answerable with no token and no network.
     if (values.list) return
 
     const dir = exportDir(repoRoot())
     if (values.refresh) fs.rmSync(dir, { recursive: true, force: true })
-    const plan = planFrameExports(inventory.pairings, brands, dir)
+    const measuredPairings = inventory.pairings.filter(
+      (pair) => !policy.referenceOnly[`${pair.storyId}/${pair.nodeId}`],
+    )
+    const plan = planFrameExports(measuredPairings, brands, dir)
     log(
       `\n  ${plan.fetch.length} to fetch · ${plan.fresh.length} cached · ` +
         `${plan.unknown.length} unplaceable`,
@@ -444,6 +566,7 @@ async function main(): Promise<void> {
       brand: values.brand ?? 'o3',
       brands,
       pairings: inventory.pairings,
+      policy,
       exportsDir: dir,
       reasons: exportReasons(plan, outcome),
       exports: readFrameExports(dir, plan, outcome, values.brand ?? 'o3'),
@@ -457,6 +580,7 @@ async function main(): Promise<void> {
       verbose: values.verbose,
       open: values.open,
       accept: values.accept,
+      reason: values.reason,
       strict: values.strict,
     })
     return

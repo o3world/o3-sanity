@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react'
+import { figmaDesign } from '@o3/story-kit'
+
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { heroSectionKnobs } from '@o3/sanity/knobs'
@@ -83,7 +85,10 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 /** Every knob the hero declares, as a control. Turn one, the block redraws. */
-export const Playground = kit.Playground as Story
+export const Playground = {
+  ...kit.Playground,
+  parameters: { ...kit.Playground.parameters, design: figmaDesign('2089:4316') },
+} as Story
 
 /**
  * Composition against alignment — the block's first two knobs, gridded. The

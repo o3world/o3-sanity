@@ -11,7 +11,7 @@ import path from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
 
 import { planExports, type BrandBaseline } from './export-cache'
-import { ensureExports, readCachedExports } from './figma-exports'
+import { ensureExports, readCachedExports, exportDir } from './figma-exports'
 import type { PairingRow } from './pairing'
 
 import type { FigmaClient } from '@o3/figma-sync/figma-api'
@@ -30,8 +30,10 @@ afterEach(() => {
 /** Counts what it was asked for, and draws every node but the ones named. */
 function stubClient(undrawable: readonly string[] = []) {
   const calls: string[][] = []
+  const renderOptions: unknown[] = []
   const client = {
-    async getRenderUrls(_fileKey: string, nodeIds: readonly string[]) {
+    async getRenderUrls(_fileKey: string, nodeIds: readonly string[], options: unknown) {
+      renderOptions.push(options)
       calls.push([...nodeIds])
       return new Map(
         nodeIds.map((nodeId) => [
@@ -44,7 +46,7 @@ function stubClient(undrawable: readonly string[] = []) {
       return new TextEncoder().encode(url)
     },
   } as unknown as FigmaClient
-  return { client, calls }
+  return { client, calls, renderOptions }
 }
 
 function pairing(nodeId: string, storyId: string): PairingRow {
@@ -148,4 +150,14 @@ describe('ensureExports', () => {
     await ensureExports({ dir, plan: rest, client: resumed.client })
     expect(resumed.calls.flat()).toEqual(['2:2'])
   })
+})
+
+it('exports frame bounds at the synchronized version in a separate cache namespace', async () => {
+  const dir = tempDir()
+  const stub = stubClient()
+  await ensureExports({ plan: plan(baseline, dir), dir, client: stub.client })
+  expect(stub.renderOptions).toEqual([
+    { format: 'png', scale: 1, absoluteBounds: true, version: '1' },
+  ])
+  expect(exportDir('/repo')).toBe('/repo/.vr/figma/png-x1-absolute')
 })

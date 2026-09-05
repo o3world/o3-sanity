@@ -32,7 +32,7 @@ function toRepoPath(moduleId: string, storybookDir: string): string | null {
   // Virtual modules (`virtual:/@storybook/...`), rollup's `\0`-prefixed ids and
   // anything inside a package directory are not files anyone edits.
   if (!moduleId.startsWith('./') || moduleId.includes('\0')) return null
-  const resolved = path.normalize(path.join(storybookDir, moduleId.slice(2)))
+  const resolved = path.normalize(path.join(storybookDir, moduleId.slice(2).split('?')[0]!))
   return resolved.includes('node_modules') ? null : resolved
 }
 

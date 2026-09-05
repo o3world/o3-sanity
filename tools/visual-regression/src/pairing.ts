@@ -16,12 +16,14 @@
  * the reads and the writes. That is what lets the whole model be tested with
  * no Storybook build, no browser and no network.
  */
+import ts from 'typescript'
+
 import { storyNameFromExport, toId } from 'storybook/internal/csf'
 
 import type { Brand } from './storybook'
 
 /** A manifest entry's kind, in `tools/figma-sync/src/types.ts`'s vocabulary. */
-export type TrackedKind = 'pageFrame' | 'componentSet'
+export type TrackedKind = 'pageFrame' | 'componentFrame' | 'componentSet'
 
 /** The half of a manifest entry the pairing model reads. */
 export interface TrackedEntry {
@@ -101,89 +103,107 @@ export interface Inventory {
 /** `figmaDesign`'s default second argument. */
 const DEFAULT_FILE_KEY_REF = 'FIGMA_FILE_KEY'
 
-/**
- * `figmaDesign('1710:2609')` or `figmaDesign('4404:1821', O3XO_FIGMA_FILE_KEY)`.
- * The node id is a string literal in every call, which is what makes the
- * declaration readable without evaluating the module.
- */
-const CALL = /figmaDesign\(\s*['"]([^'"]+)['"]\s*(?:,\s*([A-Za-z_$][\w$]*)\s*)?\)/g
-
-/** `title: 'Content/Blocks/…'` — a host's own `main.ts` never autotitles here. */
-const TITLE = /(^|[\s{,])title:\s*['"]([^'"]+)['"]/
-
-/**
- * Storybook indexes every non-default export of a CSF file as a story. Only
- * the capitalised ones are taken here: a lower-case `export const` in these
- * files is a fixture or a helper, and misreading one costs a phantom row.
- */
-const STORY_EXPORT = /^export const ([A-Z]\w*)/gm
-
-/** A URL-shaped id (`1680-2134`) says the same node as `1680:2134`. */
-function normalizeNodeId(nodeId: string): string {
-  return nodeId.replaceAll('-', ':')
-}
-
-/**
- * Comments blanked to spaces rather than removed, so every offset below still
- * points at the same character. A `figmaDesign` call in a doc comment or a
- * commented-out story is prose, not a declaration.
- */
-function blankComments(source: string): string {
-  return source.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, (match) => match.replace(/[^\n]/g, ' '))
-}
-
-function matchesWithIndex(
-  source: string,
-  pattern: RegExp,
-): { index: number; match: RegExpExecArray }[] {
-  const found: { index: number; match: RegExpExecArray }[] = []
-  const scanner = new RegExp(pattern.source, pattern.flags)
-  let match: RegExpExecArray | null
-  while ((match = scanner.exec(source)) !== null) found.push({ index: match.index, match })
-  return found
-}
-
-/**
- * Every pairing one story file declares, in export order.
- *
- * A `figmaDesign` call before the first story export belongs to the meta and
- * is inherited by every story that does not set its own — which is Storybook's
- * own parameter precedence, and the reason `NextCaseBand`'s Desktop story
- * needs no `design` of its own.
- */
+/** Read CSF declarations as syntax; comments and unrelated calls are not design parameters. */
 export function extractPairings(
   file: string,
   source: string,
   hosts: readonly Brand[],
 ): DeclaredPairing[] {
-  const text = blankComments(source)
-  const calls = matchesWithIndex(text, CALL)
-  if (calls.length === 0) return []
-
-  const exports = matchesWithIndex(text, STORY_EXPORT)
-  const title = TITLE.exec(text)?.[2] ?? null
-
-  const firstExport = exports[0]?.index ?? text.length
-  const metaCall = calls.find((call) => call.index < firstExport)
-
-  return exports.flatMap(({ index, match }, position) => {
-    const exportName = match[1]!
-    const end = exports[position + 1]?.index ?? text.length
-    const own = calls.find((call) => call.index > index && call.index < end)
-    const call = own ?? metaCall
-    if (!call) return []
-    return [
-      {
-        storyId: title ? toId(title, storyNameFromExport(exportName)) : null,
-        title,
-        exportName,
-        nodeId: normalizeNodeId(call.match[1]!),
-        fileKeyRef: call.match[2] ?? DEFAULT_FILE_KEY_REF,
-        file,
-        declaredOn: own ? ('story' as const) : ('meta' as const),
-        hosts,
-      },
-    ]
+  const tree = ts.createSourceFile(file, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
+  const variables = new Map<string, ts.Expression>()
+  const stories: { name: string; value: ts.Expression }[] = []
+  const names = new Set<string>()
+  let meta: ts.Expression | undefined
+  for (const statement of tree.statements) {
+    if (
+      ts.isImportDeclaration(statement) &&
+      ts.isStringLiteral(statement.moduleSpecifier) &&
+      statement.moduleSpecifier.text === '@o3/story-kit'
+    ) {
+      const bindings = statement.importClause?.namedBindings
+      if (bindings && ts.isNamedImports(bindings))
+        for (const binding of bindings.elements) {
+          if ((binding.propertyName?.text ?? binding.name.text) === 'figmaDesign')
+            names.add(binding.name.text)
+        }
+    }
+    if (ts.isVariableStatement(statement)) {
+      for (const declaration of statement.declarationList.declarations) {
+        if (!ts.isIdentifier(declaration.name) || !declaration.initializer) continue
+        variables.set(declaration.name.text, declaration.initializer)
+        if (
+          statement.modifiers?.some((modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword) &&
+          /^[A-Z]/.test(declaration.name.text)
+        )
+          stories.push({ name: declaration.name.text, value: declaration.initializer })
+      }
+    }
+    if (ts.isExportAssignment(statement) && !statement.isExportEquals) meta = statement.expression
+  }
+  function unwrap(
+    value: ts.Expression | undefined,
+    seen = new Set<ts.Expression>(),
+  ): ts.Expression | undefined {
+    if (!value || seen.has(value)) return undefined
+    seen.add(value)
+    if (ts.isIdentifier(value)) return unwrap(variables.get(value.text), seen)
+    if (
+      ts.isAsExpression(value) ||
+      ts.isSatisfiesExpression(value) ||
+      ts.isParenthesizedExpression(value)
+    )
+      return unwrap(value.expression, seen)
+    return value
+  }
+  function property(value: ts.Expression | undefined, name: string): ts.Expression | undefined {
+    const object = unwrap(value)
+    if (!object || !ts.isObjectLiteralExpression(object)) return undefined
+    for (const prop of [...object.properties].reverse()) {
+      if (
+        ts.isPropertyAssignment(prop) &&
+        (ts.isIdentifier(prop.name) || ts.isStringLiteral(prop.name)) &&
+        prop.name.text === name
+      )
+        return prop.initializer
+    }
+    return undefined
+  }
+  function pairing(value: ts.Expression | undefined) {
+    const call = unwrap(property(property(value, 'parameters'), 'design'))
+    if (
+      !call ||
+      !ts.isCallExpression(call) ||
+      !ts.isIdentifier(call.expression) ||
+      !names.has(call.expression.text)
+    )
+      return null
+    const node = call.arguments[0]
+    if (!node || !ts.isStringLiteral(node) || !/^\d+[:-]\d+$/.test(node.text)) return null
+    const ref = call.arguments[1]
+    return {
+      nodeId: node.text.replaceAll('-', ':'),
+      fileKeyRef: ref && ts.isIdentifier(ref) ? ref.text : DEFAULT_FILE_KEY_REF,
+    }
+  }
+  const titleValue = property(meta, 'title')
+  const title = titleValue && ts.isStringLiteral(titleValue) ? titleValue.text : null
+  const inherited = pairing(meta)
+  return stories.flatMap(({ name, value }) => {
+    const own = pairing(value)
+    const pair = property(property(value, 'parameters'), 'design') === undefined ? inherited : own
+    return pair
+      ? [
+          {
+            ...pair,
+            file,
+            hosts,
+            title,
+            storyId: title ? toId(title, storyNameFromExport(name)) : null,
+            exportName: name,
+            declaredOn: own ? ('story' as const) : ('meta' as const),
+          },
+        ]
+      : []
   })
 }
 
@@ -191,8 +211,8 @@ export function extractPairings(
  * The inventory: every pairing joined to the manifest that watches the file it
  * names, every component set nobody paired, and the page-frame pairings.
  *
- * Coverage is reported, never gated (spec #326) — an uncovered set is a row,
- * not a failure, and the list is never capped.
+ * The inventory reports every uncovered set. The offline ledger gate applies
+ * the reviewed coverage policy to those rows; this listing remains read-only.
  *
  * `files` is every design file the join may need; `report` is the subset the
  * run is about. The two differ under `--brand`: a shared story can name either
