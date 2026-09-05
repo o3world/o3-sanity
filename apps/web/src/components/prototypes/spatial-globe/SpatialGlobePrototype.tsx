@@ -16,6 +16,7 @@ export function SpatialGlobePrototype() {
   const search = useSearchParams()
   const router = useRouter()
   const path = usePathname()
+  const dotStyle = search.get('dots') === 'sphere' ? 'sphere' : 'glow'
   const requested = search.get('spatial')
   const mode = modes.some(([key]) => key === requested) ? requested : null
   const [status, setStatus] = useState('Loading scene…')
@@ -32,7 +33,7 @@ export function SpatialGlobePrototype() {
     import('./renderer')
       .then(({ startSpatialGlobe }) => {
         if (!abort.signal.aborted)
-          return startSpatialGlobe(canvas, hero, globe, mode, abort.signal, setStatus)
+          return startSpatialGlobe(canvas, hero, globe, mode, dotStyle, abort.signal, setStatus)
       })
       .catch((error) => {
         if (!abort.signal.aborted) setStatus(`Original globe · ${String(error)}`)
@@ -42,7 +43,7 @@ export function SpatialGlobePrototype() {
       canvas.remove()
       delete hero.dataset.spatialReady
     }
-  }, [mode, path])
+  }, [mode, path, dotStyle])
   const switchTo = (next: string) => {
     setStatus('Loading scene…')
     const query = new URLSearchParams(search.toString())
@@ -60,6 +61,18 @@ export function SpatialGlobePrototype() {
           </button>
         ))}
       </div>
+      {mode !== 'original' && (
+        <button
+          onClick={() => {
+            setStatus('Loading scene…')
+            const query = new URLSearchParams(search.toString())
+            query.set('dots', dotStyle === 'sphere' ? 'glow' : 'sphere')
+            router.replace(`${path}?${query}`, { scroll: false })
+          }}
+        >
+          Dots: {dotStyle === 'sphere' ? 'Shaded' : 'Glow'}
+        </button>
+      )}
       <span className="spatial-review-status" role="status">
         {mode === 'original' ? 'Existing renderer' : status}
       </span>

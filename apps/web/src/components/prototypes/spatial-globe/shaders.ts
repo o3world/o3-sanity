@@ -91,13 +91,18 @@ export const dotShader =
   // orbit center. Opaque cores occlude the rail; only the halo is translucent.
   let xy=i.uv/max(radius,0.4);
   let normal=normalize(vec3f(xy.x,-xy.y,sqrt(max(0.0,1.0-dot(xy,xy)))));
-  let light=normalize(vec3f(-0.45,0.6,0.8));
+  // The surrounding globe supplies broad red light from its center, rather
+  // than a separate white key light in the upper corner of every bead.
+  let inward=p.globe.xy-q.xy;
+  let light=normalize(vec3f(inward.x,-inward.y,max(1.0,length(inward)*0.25)));
   let diffuse=max(0.0,dot(normal,light));
-  let halfVector=normalize(light+vec3f(0,0,1));
-  let specular=pow(max(0.0,dot(normal,halfVector)),28.0)*0.4;
-  let material=i.color.rgb*(0.35+0.65*diffuse)+vec3f(specular);
+  let warmth=vec3f(1.0,0.063,0.0);
+  let softRim=pow(1.0-normal.z,2.0)*diffuse;
+  let material=i.color.rgb*(0.62+0.22*normal.z)+warmth*(0.09*diffuse+0.07*softRim);
   let alpha=max(solid,glow);
-  let color=mix(i.color.rgb,material,solid);
+  let luminous=i.color.rgb*(0.92+0.08*normal.z);
+  let core=select(luminous,material,p.dot.w>0.5);
+  let color=mix(i.color.rgb,core,solid);
   return vec4f(color,alpha);
 }
 `
@@ -164,9 +169,9 @@ fn turn(q:vec3f, yaw:f32, pitch:f32) -> vec3f {
  let azimuth=hash(n)*6.2831853;
  let latitude=hash(n+1.0);
  let radial=sqrt(1.0-latitude*latitude);
- let radius=500.0+2600.0*pow(hash(n+2.0),0.3333333);
+ let radius=280.0+3500.0*pow(hash(n+2.0),0.55);
  var world=vec3f(cos(azimuth)*radial,sin(azimuth)*radial,-latitude)*radius;
- let near=1.0-smoothstep(500.0,3100.0,radius);
+ let near=1.0-smoothstep(280.0,3780.0,radius);
  let dust=smoothstep(0.42,0.94,hash(n+4.0));
  let time=p.motion.x*1.7;
  let phase=hash(n+5.0)*6.2831853;
@@ -184,7 +189,7 @@ fn turn(q:vec3f, yaw:f32, pitch:f32) -> vec3f {
  let perspective=focal/max(400.0,distance);
  let pixel=world.xy*perspective+vec2f(p.viewport.x*0.5,p.viewport.y*0.43);
  let proximity=clamp(1450.0/max(400.0,distance),0.2,1.3);
- let pointRadius=(0.45+hash(n+7.0)*0.85+dust*near*3.2)*proximity;
+ let pointRadius=clamp((0.4+hash(n+7.0)*0.65+dust*near*0.35)*proximity,0.25,1.05);
  let extent=max(1.2,pointRadius*4.0);
  var o:Out;
  let point=pixel+c*extent;
@@ -194,14 +199,14 @@ fn turn(q:vec3f, yaw:f32, pitch:f32) -> vec3f {
  let edge=1.0-smoothstep(0.74,1.0,pixel.y/p.viewport.y);
  let quiet=1.0-0.68*exp(-pow((pixel.x/p.viewport.x-0.5)*3.0,2.0))*smoothstep(0.08,0.22,pixel.y/p.viewport.y)*(1.0-smoothstep(0.5,0.72,pixel.y/p.viewport.y));
  let visibility=smoothstep(450.0,900.0,distance);
- let brightness=(0.3+hash(n+8.0)*0.65)*mix(1.0,0.36,dust)*edge*quiet*visibility;
- o.color=vec4f(mix(vec3f(0.68,0.75,0.9),vec3f(1.0,0.88,0.77),hash(n+9.0)),brightness);
+ let brightness=(0.16+pow(hash(n+8.0),2.8)*0.78)*mix(1.0,0.65,dust)*edge*quiet*visibility;
+ o.color=vec4f(mix(vec3f(0.88,0.92,1.0),vec3f(1.0,0.95,0.88),hash(n+9.0)),brightness);
  return o;
 }
 @fragment fn fs_main(i:Out)->@location(0) vec4f {
  let d=length(i.uv);
- let light=exp(-d*d*2.4)+exp(-d*d*0.5)*0.13;
- let dust=exp(-d*d*0.65)*0.64;
+ let light=exp(-d*d*2.4)+exp(-d*d*0.7)*0.025;
+ let dust=exp(-d*d*1.8)*0.78;
  return vec4f(i.color.rgb,i.color.a*mix(light,dust,i.softness));
 }
 `

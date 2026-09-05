@@ -8,6 +8,7 @@ export async function startSpatialGlobe(
   hero: HTMLElement,
   globe: HTMLElement,
   mode: string,
+  dotStyle: string,
   signal: AbortSignal,
   report: (message: string) => void,
 ) {
@@ -27,7 +28,7 @@ export async function startSpatialGlobe(
   const stars = draw(gpu, {
     shader: mode === 'depth' ? starsShader : distantStarsShader,
     vertices: 6,
-    instances: mode === 'depth' ? 1400 : 180,
+    instances: mode === 'depth' ? 1900 : 180,
     blend: 'alpha',
   })
   let raf = 0
@@ -144,7 +145,12 @@ export async function startSpatialGlobe(
           p: {
             ...shared,
             color: [...rgb(dot.col), pulse],
-            dot: [isStill() ? dot.t : phases[i]![j], dot.r, Number(dot.glow), 0],
+            dot: [
+              isStill() ? dot.t : phases[i]![j],
+              dot.r,
+              Number(dot.glow),
+              Number(dotStyle === 'sphere'),
+            ],
           },
         }),
       )
@@ -154,7 +160,7 @@ export async function startSpatialGlobe(
         f.pass({ target, clear: [0, 0, 0, 0] }, (pass) => {
           if (mode !== 'globe')
             pass.draw(stars, {
-              instances: mode === 'depth' ? 1400 : Math.round(180 * Math.min(1, h.width / 1200)),
+              instances: mode === 'depth' ? 1900 : Math.round(180 * Math.min(1, h.width / 1200)),
             })
           rings.forEach((ring) => pass.draw(ring))
           electrons.forEach((orbit) => orbit.forEach((dot) => pass.draw(dot)))

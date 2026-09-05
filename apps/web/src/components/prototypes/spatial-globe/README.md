@@ -27,3 +27,5 @@ Sources: `packages/ui/src/components/orbital-sphere.tsx`, the official globe exp
 Follow-up: Spatial stars now extends behind the utility logos. The nav keeps its existing border while its background and blur are transparent at the top, returning progressively on scroll. Ambient dust and circulation run at 1.7 times the initial speed. These changes are scoped to the spatial comparison and restore on teardown.
 
 Globe dots are drawn after all rails so lines cannot paint across them. Their centers share the rail projection, and opaque cores use analytic sphere normals, diffuse lighting, and a small specular highlight. These are shaded sphere impostors, not mesh geometry.
+
+Latest visual direction: a fine star field rather than large dust bokeh. Spatial stars uses 1900 points distributed across a wider continuous depth range, with tightly capped point sizes, restrained halos, near-neutral colors, and mostly dim stars. Dots: Glow / Shaded compares luminous rail dots with the earlier sphere treatment; Glow is the default.
