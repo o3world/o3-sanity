@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, within } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 
 import { PageMockup } from '../PageMockup'
@@ -28,9 +29,24 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+async function expectAlignedNavMark(canvasElement: HTMLElement, targetSize: number) {
+  const home = within(canvasElement).getByRole('link', { name: / home$/ })
+  const target = home.getBoundingClientRect()
+  const paths = Array.from(home.querySelectorAll('svg path'), (path) =>
+    path.getBoundingClientRect(),
+  )
+  const left = Math.min(...paths.map((path) => path.left))
+  const right = Math.max(...paths.map((path) => path.right))
+  await expect(left).toBeCloseTo(target.left, 0)
+  await expect(right - left).toBeCloseTo(38.84, 0)
+  await expect(target.width).toBe(targetSize)
+  await expect(target.height).toBe(targetSize)
+}
+
 export const Desktop: Story = {
   args: { page: 'index' },
   globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => expectAlignedNavMark(canvasElement, 48),
 }
 
 /**
@@ -44,4 +60,5 @@ export const Mobile: Story = {
   args: { page: 'index' },
   globals: { viewport: { value: 'mobile' } },
   parameters: { design: figmaDesign('1814:1618') },
+  play: async ({ canvasElement }) => expectAlignedNavMark(canvasElement, 64),
 }

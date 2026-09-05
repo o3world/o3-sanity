@@ -149,7 +149,8 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     expect(navHtml).toContain('lg:rounded-l-[40px]')
     expect(navHtml).toContain('lg:rounded-r-nav')
     expect(navHtml).not.toContain('rounded-full')
-    expect(navHtml).toContain('px-5')
+    // The approved mobile refinement shares the page's fluid gutter (#446).
+    expect(navHtml).toContain('px-gutter')
     expect(navHtml).toContain('py-2')
     expect(navHtml).toContain('lg:px-4')
     expect(navHtml).toContain('lg:py-4')
@@ -159,10 +160,8 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     // retuned from the frame's 60% — see the token).
     expect(navHtml).toContain('bg-scrim ')
     expect(navHtml).toContain('lg:bg-scrim-pill')
-    // 16px of padding only lands an 80px bar over a 48px box. The mark is the
-    // app's (#228), so this is the mark `apps/web` hands in: a 64 box cropped
-    // 8px a side, not a 64 drawing scaled down — `2225:2915` holds the same
-    // vector at the same scale the 402 bar's does.
+    // The shared chrome preserves the supplied mark. The app-owned mark's
+    // artwork alignment and hit target are covered by its Home stories.
     expect(navMark).toContain('lg:-m-2')
     expect(navMark).not.toContain('lg:size-12')
     expect(navMark).toContain('width="64"')
@@ -201,9 +200,10 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     //
     // They are anchors: the nav button carries a destination, and a button
     // with one renders a link. `rounded-btn` is the button's own base class,
-    // which is what separates the two of them from the plain nav links.
+    // which separates the desktop CTA from the plain nav links. The mobile
+    // CTA is inside the menu, not duplicated in the collapsed header.
     const buttons = (navHtml.match(/<a [^>]*>/g) ?? []).filter((b) => b.includes('rounded-btn'))
-    expect(buttons.length, 'the nav button was not found at all').toBe(2) // 1440 + 402
+    expect(buttons.length, 'only the desktop CTA belongs in the collapsed header').toBe(1)
     for (const button of buttons) {
       // The resolved skin, and the only one a server, no-JS or jsdom render
       // ever draws — `data-ink` exists solely because a browser measured a

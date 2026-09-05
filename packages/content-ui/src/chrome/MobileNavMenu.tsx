@@ -48,7 +48,7 @@ export function MobileNavMenu({ items, button }: MobileNavMenuProps) {
         // opacity on an inherited `currentColor` rather than as a white at an
         // alpha, so the 402 bar's ink flip (SiteNav) reaches the hamburger the
         // same way it reaches the links — 85% of whichever ink is live.
-        className="focus-visible:ring-brand duration-(--duration-hover) -mr-2 opacity-85 transition-opacity ease-out hover:opacity-70 focus-visible:outline-none focus-visible:ring-2"
+        className="focus-visible:ring-brand duration-(--duration-hover) opacity-85 transition-opacity ease-out hover:opacity-70 focus-visible:outline-none focus-visible:ring-2"
       >
         <MenuIcon />
       </SheetTrigger>

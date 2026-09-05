@@ -17,8 +17,8 @@ type NavigationSample = {
     background: string
     link: string
     inactiveLink: string | null
-    button: string
-    buttonBackground: string
+    button: string | null
+    buttonBackground: string | null
     top: number
   } | null
 }
@@ -116,7 +116,7 @@ export async function navigate(
           const nav = document.querySelector('nav[aria-label="Primary"]')!
           const button = [...nav.querySelectorAll('a[href="/contact"]')].find(
             (element) => element.getBoundingClientRect().width > 0,
-          )!
+          )
           const link = nav.querySelector('a[aria-label$=" home"]')!
           const inactiveLink = nav.querySelector('a[href="/about"]')!
           sample.readyNav = {
@@ -127,8 +127,8 @@ export async function navigate(
               inactiveLink.getBoundingClientRect().width > 0
                 ? getComputedStyle(inactiveLink).color
                 : null,
-            button: getComputedStyle(button).color,
-            buttonBackground: getComputedStyle(button).backgroundColor,
+            button: button ? getComputedStyle(button).color : null,
+            buttonBackground: button ? getComputedStyle(button).backgroundColor : null,
             top: nav.getBoundingClientRect().top,
           }
         }
