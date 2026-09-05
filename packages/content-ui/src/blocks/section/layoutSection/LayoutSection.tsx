@@ -77,6 +77,7 @@ function resolveColumns(value: number | null | undefined): 1 | 2 | 3 {
 export function LayoutSection({
   eyebrow,
   heading,
+  headingLevel,
   subheading,
   columns,
   bleed,
@@ -92,6 +93,9 @@ export function LayoutSection({
     ...baseComponents,
   }
   const bleeding = stegaClean(bleed) === 'end'
+  const selectedHeadingLevel = stegaClean(headingLevel)
+  const explicitHeadingLevel = selectedHeadingLevel === 'xl' || selectedHeadingLevel === 'lg'
+  const resolvedHeadingLevel = explicitHeadingLevel ? selectedHeadingLevel : bleeding ? 'lg' : 'xl'
   const showMolecule = resolveDecoration(decoration, 'layoutSection') === 'molecule'
   const columnCount = resolveColumns(columns)
   const columnClass = bleeding ? BLEED_COLUMN_CLASS : COLUMN_CLASSES[columnCount]
@@ -113,10 +117,10 @@ export function LayoutSection({
         ) : null}
         {heading ? (
           <DisplayHeading
-            level={bleeding ? 'lg' : 'xl'}
+            level={resolvedHeadingLevel}
             // The redesigned Overview and molecule treatments use Light;
             // generic layouts retain their unbound Regular heading (#350).
-            className={bleeding || showMolecule ? undefined : 'font-normal'}
+            className={explicitHeadingLevel || bleeding || showMolecule ? undefined : 'font-normal'}
           >
             {heading}
           </DisplayHeading>

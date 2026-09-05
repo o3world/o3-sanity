@@ -17,6 +17,18 @@ export const layoutSectionKnobs = defineBlockKnobs({
   tier: 'section',
   knobs: [
     knob({
+      name: 'headingLevel',
+      title: 'Heading size',
+      description:
+        'Choose the visual hierarchy independently of image placement. Automatic preserves the existing layout treatment; the heading remains an h2.',
+      options: [
+        { value: 'auto', title: 'Automatic' },
+        { value: 'xl', title: 'Section heading (48px / 40px)' },
+        { value: 'lg', title: 'Supporting heading (36px / 18px)' },
+      ],
+      initialValue: 'auto',
+    }),
+    knob({
       name: 'columns',
       title: 'Columns',
       // Declared as strings and stored as numbers. `valueType` is what makes
