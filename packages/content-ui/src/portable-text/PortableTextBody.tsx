@@ -25,7 +25,13 @@ function componentsFor(figureSizes: string): PortableTextComponents {
        * collapse between siblings here, so `my-8` is 32, not 64.
        */
       normal: ({ children }) => <p className="text-fg my-8">{children}</p>,
-      h2: ({ children }) => <h2 className="text-display-md font-display mb-8 mt-16">{children}</h2>,
+      // Heading/h3 (2050:1312): 32/38 at 402 → 36/44 at 1440. The shared
+      // display-lg weight applies, but its legacy 18px mobile floor does not.
+      h2: ({ children }) => (
+        <h2 className="font-display mb-8 mt-16 text-[clamp(32px,calc(0.3854vw_+_30.4507px),36px)] leading-[clamp(38px,calc(0.578vw_+_35.6764px),44px)] [font-weight:var(--text-display-lg--font-weight)]">
+          {children}
+        </h2>
+      ),
       h3: ({ children }) => <h3 className="mb-3 mt-8 text-xl font-medium">{children}</h3>,
       blockquote: ({ children }) => (
         <blockquote className="border-brand text-fg-muted my-8 border-l-2 pl-6 text-lg">
