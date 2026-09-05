@@ -1,35 +1,27 @@
-# Spatial globe prototype
+# Spatial globe baseline
 
-Question: does the current orbital globe gain a sense of space when it sits within a quiet star field?
+Run `pnpm globe:prototype`, then open http://localhost:3611/. The saved spatial scene is the sole development homepage treatment. The old `?spatial=depth&dots=sphere` link still shows this baseline; comparison parameters and controls are no longer used. Add `?spatial-still` for a fixed-frame review. OS reduced motion also stops the GPU animation and pointer response.
 
-Run `pnpm globe:prototype`, then open http://localhost:3611/?spatial=depth.
+## Saved appearance
 
-The bottom controls switch between spatial stars, a more distant field, the GPU globe alone, and the original SVG. The URL preserves the selection. Append `&spatial-still` for a fixed-frame review. OS reduced motion also stops the GPU animation and pointer response.
+The scene contains 1900 crisp stars across a continuous spherical volume, with varied sizes, bright centers, slow circulation, and damped cursor response. Near and distant points move by different amounts without discrete depth bands. Star drift retains the approved 1.7× pace.
 
-This is a development-only experiment on the existing homepage, tracked by GitHub issue 448. It is isolated from the abandoned navigation prototype. The branch starts at the approved main baseline 34c1c563. No schema, content, dataset, or shared component was changed.
+The seven seeded globe rails retain the original projection and orbit layout. Shaded dots draw above every rail, using opaque cores with soft red illumination. These are analytic sphere impostors, not mesh geometry. The static SVG bloom remains above the moving GPU artwork.
 
-## Rendering
+The sky extends behind the utility logos. The primary nav keeps its border, with transparent background and blur at the top; its surface returns progressively on scroll. The globe remains cropped at the hero's bottom edge.
 
-vgpu 0.4.0 draws the seven seeded great circles and their electrons from the original geometry in a transparent canvas. Projection, orbit rotation, and pointer tilt run in vertex shaders. The static SVG bloom remains in its existing position above the moving artwork. The original moving SVG is hidden only after the GPU submits a frame and is restored on teardown or GPU failure.
+## Checkpoint and scope
 
-The prototype copies the original seed generator, including its random-number draw order. It uses 288 samples per circle instead of 72 to explore smoother contours. Electron halos use a shader approximation of the Gaussian glow, and colored-orbit breathing uses a cosine approximation of the CSS easing. This is not pixel-identical parity or a finished production port.
+The exact approved version, including its comparison controls, remains at local tag `checkpoint/spatial-stars-bright` (commit `a7709d46`). This cleanup adopts that appearance as the single baseline. Neither the checkpoint nor this cleanup authorizes production adoption.
 
-The stars occupy different depths and respond to the same damped pointer signal. Nearer stars move farther than distant stars. In Spatial stars, particles occupy a continuous spherical volume with slow circulation and independent dust eddies. Softness, drift, and perspective separation vary continuously rather than in depth bands. Cursor movement turns the viewpoint and adds a small translation. Distant stars retains the earlier, quieter comparison. Both fields fade toward the bottom of the hero. Copy and navigation retain their current layout and motion.
+This is development-only work for GitHub issue 448, isolated from the abandoned navigation prototype. The branch starts at approved main baseline `34c1c563`. No schema, dataset, content, or shared component was changed. Nothing was merged, pushed, or deployed.
 
-## Validation and limits
+## Implementation and limits
 
-Rendered in the in-app browser at desktop and 402px mobile widths. Confirmed the GPU canvas replaces the moving SVG, the original comparison restores it, and leaving for Work removes the canvas and review controls. The fixed-frame preview remained at frame zero across observations. TypeScript and focused lint pass; no prototype tests were added.
+vgpu 0.4.0 renders to a transparent canvas. The seed generator preserves the original random-number draw order. The rails use 288 samples rather than 72; electron halos approximate Gaussian glow, and colored-orbit breathing approximates CSS easing. This is not pixel-identical parity with the original export.
 
-This preview is for visual judgment. GPU device-loss recovery, physical mobile performance, precise image parity, and production bundle budgets have not been verified. The hidden SVG animation remains mounted while the GPU scene runs, so this prototype is not a renderer-performance benchmark. Port 3611 uses published content; draft authentication was not configured there. Nothing was merged, pushed, or deployed.
+The original SVG remains available before GPU initialization and on failure or teardown. Its hidden animation remains mounted during GPU rendering, so this prototype is not a renderer-performance benchmark. Device-loss recovery, physical mobile performance, production bundle budgets, and exact image parity remain unverified. Port 3611 uses published content; draft authentication was not configured.
 
-Sources: `packages/ui/src/components/orbital-sphere.tsx`, the official globe exports, `docs/research/globe-frame-cadence-and-vgpu.md`, and vgpu's public API documentation. Visual verdict pending.
+Browser checks cover desktop/mobile appearance, the fixed-frame preview, and route cleanup. Formatting, lint, and typechecks validate the local code. No new tests were added for the visual prototype.
 
-Follow-up: Spatial stars now extends behind the utility logos. The nav keeps its existing border while its background and blur are transparent at the top, returning progressively on scroll. Ambient dust and circulation run at 1.7 times the initial speed. These changes are scoped to the spatial comparison and restore on teardown.
-
-Globe dots are drawn after all rails so lines cannot paint across them. Their centers share the rail projection, and opaque cores use analytic sphere normals, diffuse lighting, and a small specular highlight. These are shaded sphere impostors, not mesh geometry.
-
-Latest visual direction: a fine star field rather than large dust bokeh. Spatial stars uses 1900 points distributed across a wider continuous depth range, with tightly capped point sizes, restrained halos, near-neutral colors, and mostly dim stars. Dots: Glow / Shaded compares luminous rail dots with the earlier sphere treatment; Glow is the default.
-
-## Approved visual save spot
-
-Josh marked the bright, crisp star field as a save spot. Local tag: `checkpoint/spatial-stars-bright`. Review URL: http://localhost:3611/?spatial=depth&dots=sphere. This captures varied star sizes with bright centers, continuous depth and drift, shaded globe dots above their rails, and the outlined transparent nav. This is a visual checkpoint, not production approval.
+Sources: `packages/ui/src/components/orbital-sphere.tsx`, the official globe exports, `docs/research/globe-frame-cadence-and-vgpu.md`, and vgpu's public API documentation.

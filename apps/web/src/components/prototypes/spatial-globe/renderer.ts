@@ -1,16 +1,13 @@
 /// <reference types="@webgpu/types" />
 import { draw, frame, init, surface } from 'vgpu'
 import { buildArcs, rgb } from './geometry'
-import { distantStarsShader, dotShader, orbitShader, starsShader } from './shaders'
+import { dotShader, orbitShader, starsShader } from './shaders'
 
 export async function startSpatialGlobe(
   canvas: HTMLCanvasElement,
   hero: HTMLElement,
   globe: HTMLElement,
-  mode: string,
-  dotStyle: string,
   signal: AbortSignal,
-  report: (message: string) => void,
 ) {
   const gpu = await init({ powerPreference: 'low-power' })
   if (signal.aborted) {
@@ -26,9 +23,9 @@ export async function startSpatialGlobe(
     arc.dots.map(() => draw(gpu, { shader: dotShader, vertices: 6, blend: 'alpha' })),
   )
   const stars = draw(gpu, {
-    shader: mode === 'depth' ? starsShader : distantStarsShader,
+    shader: starsShader,
     vertices: 6,
-    instances: mode === 'depth' ? 1900 : 180,
+    instances: 1900,
     blend: 'alpha',
   })
   let raf = 0
@@ -64,7 +61,7 @@ export async function startSpatialGlobe(
   }
   const fail = (error: unknown) => {
     if (dead) return
-    report(
+    console.warn(
       `Original globe · GPU unavailable (${error instanceof Error ? error.message : String(error)})`,
     )
     cleanup()
@@ -111,12 +108,10 @@ export async function startSpatialGlobe(
       sy = 0
     }
     const heroBounds = hero.getBoundingClientRect()
-    if (mode === 'depth') {
-      const overhang = Math.max(0, heroBounds.top + scrollY)
-      hero.style.setProperty('--spatial-sky-overhang', `${overhang}px`)
-      canvas.style.top = `-${overhang}px`
-      canvas.style.height = `calc(100% + ${overhang}px)`
-    }
+    const overhang = Math.max(0, heroBounds.top + scrollY)
+    hero.style.setProperty('--spatial-sky-overhang', `${overhang}px`)
+    canvas.style.top = `-${overhang}px`
+    canvas.style.height = `calc(100% + ${overhang}px)`
     const h = canvas.getBoundingClientRect()
     const g = globe.getBoundingClientRect()
     const viewport = [h.width, h.height, 0, 0]
@@ -132,7 +127,7 @@ export async function startSpatialGlobe(
       dot: [0, 0, 0, 0],
     }
     stars.set({
-      p: { viewport, motion: [isStill() ? 0 : elapsed, sx, sy, mode === 'depth' ? 1 : 0.3] },
+      p: { viewport, motion: [isStill() ? 0 : elapsed, sx, sy, 1] },
     })
     arcs.forEach((arc, i) => {
       // Keep the export's slow colored-orbit breathing.
@@ -145,12 +140,7 @@ export async function startSpatialGlobe(
           p: {
             ...shared,
             color: [...rgb(dot.col), pulse],
-            dot: [
-              isStill() ? dot.t : phases[i]![j],
-              dot.r,
-              Number(dot.glow),
-              Number(dotStyle === 'sphere'),
-            ],
+            dot: [isStill() ? dot.t : phases[i]![j], dot.r, Number(dot.glow), 0],
           },
         }),
       )
@@ -158,23 +148,18 @@ export async function startSpatialGlobe(
     try {
       frame(gpu, (f) =>
         f.pass({ target, clear: [0, 0, 0, 0] }, (pass) => {
-          if (mode !== 'globe')
-            pass.draw(stars, {
-              instances: mode === 'depth' ? 1900 : Math.round(180 * Math.min(1, h.width / 1200)),
-            })
+          pass.draw(stars)
           rings.forEach((ring) => pass.draw(ring))
           electrons.forEach((orbit) => orbit.forEach((dot) => pass.draw(dot)))
         }),
       )
       hero.dataset.spatialReady = 'true'
-      if (mode === 'depth') {
-        document.documentElement.dataset.spatialChrome = 'true'
-        const mobile = innerWidth < 1024
-        document.documentElement.style.setProperty(
-          '--spatial-nav-solid',
-          String(Math.min(1, Math.max(0, (scrollY - (mobile ? 30 : 100)) / (mobile ? 130 : 240)))),
-        )
-      }
+      document.documentElement.dataset.spatialChrome = 'true'
+      const mobile = innerWidth < 1024
+      document.documentElement.style.setProperty(
+        '--spatial-nav-solid',
+        String(Math.min(1, Math.max(0, (scrollY - (mobile ? 30 : 100)) / (mobile ? 130 : 240)))),
+      )
       canvas.style.opacity = '1'
       canvas.dataset.frame = String(Math.round(elapsed * 1000))
       if (!isStill()) raf = requestAnimationFrame(tick)
@@ -203,7 +188,7 @@ export async function startSpatialGlobe(
     window.addEventListener('scroll', wake, { passive: true })
     document.addEventListener('visibilitychange', wake)
     reduced.addEventListener('change', wake)
-    report(isStill() ? 'vGPU · still frame' : 'vGPU · live 3D')
+    canvas.dataset.renderer = 'vgpu'
     wake()
   } catch (error) {
     fail(error)

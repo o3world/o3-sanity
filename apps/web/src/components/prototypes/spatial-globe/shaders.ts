@@ -100,52 +100,10 @@ export const dotShader =
   let softRim=pow(1.0-normal.z,2.0)*diffuse;
   let material=i.color.rgb*(0.62+0.22*normal.z)+warmth*(0.09*diffuse+0.07*softRim);
   let alpha=max(solid,glow);
-  let luminous=i.color.rgb*(0.92+0.08*normal.z);
-  let core=select(luminous,material,p.dot.w>0.5);
-  let color=mix(i.color.rgb,core,solid);
+  let color=mix(i.color.rgb,material,solid);
   return vec4f(color,alpha);
 }
 `
-export const distantStarsShader = /* wgsl */ `
-struct Params { viewport: vec4f, motion: vec4f }
-@group(0) @binding(0) var<uniform> p: Params;
-struct Out {
- @builtin(position) position: vec4f,
- @location(0) uv: vec2f,
- @location(1) color: vec4f,
-}
-fn hash(n:f32) -> f32 { return fract(sin(n*127.1+311.7)*43758.5453); }
-@vertex fn vs_main(@builtin(vertex_index) v:u32, @builtin(instance_index) instance:u32) -> Out {
- let n = f32(instance)+1837.0;
- let corners=array<vec2f,6>(vec2f(-1,-1),vec2f(1,-1),vec2f(-1,1),vec2f(-1,1),vec2f(1,-1),vec2f(1,1));
- let c=corners[v];
- let depth=0.15+hash(n+3.0)*0.85;
- // World positions span a deep volume; perspective and camera displacement
- // make near stars travel farther than the distant field.
- let z=-300.0-depth*2200.0;
- let perspective=1650.0/(1650.0-z);
- let world=vec2f((hash(n)-0.5)*p.viewport.x/perspective*1.15,hash(n+1.0)*p.viewport.y/perspective);
- let camera=vec2f(p.motion.y,p.motion.z)*90.0*p.motion.w;
- let pixel=world*perspective-camera*perspective+vec2f(p.viewport.x*0.5,0);
- let radius=(0.45+hash(n+4.0)*0.85)*mix(1.25,0.6,depth);
- let extent=radius*4.0;
- var o: Out;
- let point=pixel+c*extent;
- o.position=vec4f(point.x/p.viewport.x*2.0-1.0,1.0-point.y/p.viewport.y*2.0,0,1);
- o.uv=c*4.0;
- let edge=1.0-smoothstep(0.76,1.0,pixel.y/p.viewport.y);
- let quiet=1.0-0.65*exp(-pow((pixel.x/p.viewport.x-0.5)*3.0,2.0))*smoothstep(0.08,0.22,pixel.y/p.viewport.y)*(1.0-smoothstep(0.5,0.72,pixel.y/p.viewport.y));
- let brightness=(0.25+hash(n+7.0)*0.6)*edge*quiet;
- o.color=vec4f(mix(vec3f(0.67,0.74,0.9),vec3f(1.0,0.91,0.84),hash(n+9.0)),brightness);
- return o;
-}
-@fragment fn fs_main(i:Out)->@location(0) vec4f {
- let d=length(i.uv);
- let alpha=exp(-d*d*2.4)+exp(-d*d*0.5)*0.13;
- return vec4f(i.color.rgb,i.color.a*alpha);
-}
-`
-
 // Continuous spherical volume: no depth bands or screen-space particle sheets.
 export const starsShader = /* wgsl */ `
 struct Params { viewport: vec4f, motion: vec4f }
@@ -154,7 +112,6 @@ struct Out {
  @builtin(position) position: vec4f,
  @location(0) uv: vec2f,
  @location(1) color: vec4f,
- @location(2) softness: f32,
 }
 fn hash(n:f32) -> f32 { return fract(sin(n*127.1+311.7)*43758.5453); }
 fn turn(q:vec3f, yaw:f32, pitch:f32) -> vec3f {
@@ -195,7 +152,6 @@ fn turn(q:vec3f, yaw:f32, pitch:f32) -> vec3f {
  let point=pixel+c*extent;
  o.position=vec4f(point.x/p.viewport.x*2.0-1.0,1.0-point.y/p.viewport.y*2.0,0,1);
  o.uv=c*4.0;
- o.softness=dust;
  let edge=1.0-smoothstep(0.74,1.0,pixel.y/p.viewport.y);
  let quiet=1.0-0.68*exp(-pow((pixel.x/p.viewport.x-0.5)*3.0,2.0))*smoothstep(0.08,0.22,pixel.y/p.viewport.y)*(1.0-smoothstep(0.5,0.72,pixel.y/p.viewport.y));
  let visibility=smoothstep(450.0,900.0,distance);
