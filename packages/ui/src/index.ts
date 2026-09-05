@@ -187,3 +187,5 @@ export { OrbitalRendererContext } from './components/orbital-sphere-renderer'
 export type { OrbitalRendererProps } from './components/orbital-sphere-renderer'
 
 export { RevealSequence } from './components/reveal-sequence'
+
+export { LayeredMediaReveal } from './components/layered-media-reveal'

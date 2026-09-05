@@ -1,4 +1,4 @@
-import { SURFACE_CLASS, SurfaceProvider, surfaceAttrs } from '@o3/ui'
+import { SURFACE_CLASS, SurfaceProvider, surfaceAttrs, RevealSequence } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { itemAttr } from '@o3/content-runtime/data-attribute'
 import { stegaClean } from '@sanity/client/stega'
@@ -6,7 +6,7 @@ import { stegaClean } from '@sanity/client/stega'
 import { SanityImage } from '../../../SanityImage'
 import { resolveSurface } from '../../surface'
 
-type ScreenGridSectionProps = SectionProps<'screenGridSection'>
+type ScreenGridSectionProps = SectionProps<'screenGridSection'> & { sequence?: boolean }
 
 /**
  * Section block: tiled product screenshots on gradient plates — the case-study
@@ -73,57 +73,70 @@ function spanOf(value: string | null | undefined): Span {
   return stegaClean(value) === 'wide' ? 'wide' : 'standard'
 }
 
-export function ScreenGridSection({ screens, surface, loc }: ScreenGridSectionProps) {
+export function ScreenGridSection({
+  screens,
+  surface,
+  loc,
+  sequence = false,
+}: ScreenGridSectionProps) {
   if (!screens?.length) return null
 
   const resolved = resolveSurface(surface, 'screenGridSection')
 
+  const grid = (
+    <ul className="mx-auto grid w-full gap-8 lg:grid-cols-2">
+      {screens.map((screen) => {
+        const span = spanOf(screen.span)
+        return (
+          <li
+            key={screen._key}
+            data-reveal-boundary={sequence ? '' : undefined}
+            // The tile's own path. This band has no header to attribute —
+            // it is screens and nothing else.
+            data-sanity={itemAttr(loc, 'screens', screen._key)}
+            className={`aspect-4/3 relative overflow-hidden rounded-[32px] ${TONE_CLASS[toneOf(screen.tone)]} ${SPAN_CLASS[span]}`}
+          >
+            <div
+              data-reveal-step={sequence ? 'screen' : undefined}
+              className="absolute inset-x-0 top-0 flex justify-center px-8 pt-8 lg:px-16 lg:pt-16"
+            >
+              <SanityImage
+                source={screen.media?.image}
+                alt={screen.media?.alt}
+                width={1600}
+                className="w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.25)]"
+                /*
+                 * The plate is the tile less its padding — 32px a side
+                 * below `lg`, 64px above — and this band takes the gutter
+                 * without `max-w-section`, so the tile keeps growing past
+                 * the structural stage cap.
+                 *
+                 *   wide      the whole column less 64 before `lg`, then
+                 *             less 128; 100vw − 2×75 − 128 once pinned
+                 *   standard  half of it, less half the 32px gap:
+                 *             45vw − 144, and 50vw − 219 once pinned
+                 *
+                 * At 1440 that is 1162 and 501 after the #429 gutter
+                 * override. The 90vw stand-in is derived in
+                 * `imageSizes.ts`.
+                 */
+                sizes={
+                  span === 'wide'
+                    ? '(min-width: 1440px) calc(100vw - 278px), (min-width: 1024px) calc(89.402vw - 125.396px), calc(90vw - 64px)'
+                    : '(min-width: 1440px) calc(50vw - 219px), (min-width: 1024px) calc(44.701vw - 142.698px), calc(90vw - 64px)'
+                }
+              />
+            </div>
+          </li>
+        )
+      })}
+    </ul>
+  )
+
   return (
     <SurfaceProvider surface={resolved}>
       <section {...surfaceAttrs(resolved)} className={`${SURFACE_CLASS[resolved]} px-gutter py-8`}>
-        <ul className="mx-auto grid w-full gap-8 lg:grid-cols-2">
-          {screens.map((screen) => {
-            const span = spanOf(screen.span)
-            return (
-              <li
-                key={screen._key}
-                // The tile's own path. This band has no header to attribute —
-                // it is screens and nothing else.
-                data-sanity={itemAttr(loc, 'screens', screen._key)}
-                className={`aspect-4/3 relative overflow-hidden rounded-[32px] ${TONE_CLASS[toneOf(screen.tone)]} ${SPAN_CLASS[span]}`}
-              >
-                <div className="absolute inset-x-0 top-0 flex justify-center px-8 pt-8 lg:px-16 lg:pt-16">
-                  <SanityImage
-                    source={screen.media?.image}
-                    alt={screen.media?.alt}
-                    width={1600}
-                    className="w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.25)]"
-                    /*
-                     * The plate is the tile less its padding — 32px a side
-                     * below `lg`, 64px above — and this band takes the gutter
-                     * without `max-w-section`, so the tile keeps growing past
-                     * the structural stage cap.
-                     *
-                     *   wide      the whole column less 64 before `lg`, then
-                     *             less 128; 100vw − 2×75 − 128 once pinned
-                     *   standard  half of it, less half the 32px gap:
-                     *             45vw − 144, and 50vw − 219 once pinned
-                     *
-                     * At 1440 that is 1162 and 501 after the #429 gutter
-                     * override. The 90vw stand-in is derived in
-                     * `imageSizes.ts`.
-                     */
-                    sizes={
-                      span === 'wide'
-                        ? '(min-width: 1440px) calc(100vw - 278px), (min-width: 1024px) calc(89.402vw - 125.396px), calc(90vw - 64px)'
-                        : '(min-width: 1440px) calc(50vw - 219px), (min-width: 1024px) calc(44.701vw - 142.698px), calc(90vw - 64px)'
-                    }
-                  />
-                </div>
-              </li>
-            )
-          })}
-        </ul>
+        {sequence ? <RevealSequence boundaries="items">{grid}</RevealSequence> : grid}
       </section>
     </SurfaceProvider>
   )
