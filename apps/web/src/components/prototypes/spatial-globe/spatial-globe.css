@@ -94,36 +94,3 @@
   opacity: 0.12;
   mask-image: linear-gradient(to bottom, transparent 25%, black 70%);
 }
-
-/* Contract bloom offsets, widths, and blur around the 340-unit limb. */
-[data-spatial-layout]
-  .hero-band:has(.hero-lead)
-  .hero-lag
-  > div
-  > svg:last-child
-  > circle:nth-of-type(1) {
-  r: 343px;
-  stroke-width: 7px;
-  filter: blur(7px) !important;
-}
-[data-spatial-layout]
-  .hero-band:has(.hero-lead)
-  .hero-lag
-  > div
-  > svg:last-child
-  > circle:nth-of-type(2) {
-  r: 342px;
-  stroke-width: 10px;
-  filter: blur(9px) !important;
-}
-
-[data-spatial-layout]
-  .hero-band:has(.hero-lead)
-  .hero-lag
-  > div
-  > svg:last-child
-  > circle:nth-of-type(3) {
-  r: 341px;
-  stroke-width: 1.5px;
-  filter: blur(3px) !important;
-}

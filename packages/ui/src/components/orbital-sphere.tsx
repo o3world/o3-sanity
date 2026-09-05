@@ -1,7 +1,9 @@
 'use client'
 
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { HTMLAttributes } from 'react'
+
+import { useOrbitalRenderer } from './orbital-sphere-renderer'
 
 import { cn } from '../lib/utils'
 
@@ -211,7 +213,7 @@ interface Dot {
   glow: boolean
 }
 
-interface Arc {
+export interface OrbitalArc {
   u: [number, number, number]
   v: [number, number, number]
   col: string
@@ -241,7 +243,7 @@ const cross = (
  * returns descriptors instead of writing `innerHTML`, so the structure renders
  * on the server and the animation only moves attributes afterwards.
  */
-function buildArcs(palette: Palette): Arc[] {
+function buildArcs(palette: Palette): OrbitalArc[] {
   let seed = GEOMETRY.seed
   const rand = () => {
     seed = (seed * 16807) % 2147483647
@@ -249,7 +251,7 @@ function buildArcs(palette: Palette): Arc[] {
   }
   const vary = (v: number, amt: number) => v * (1 + (rand() - 0.5) * 2 * GEOMETRY.randomness * amt)
 
-  const arcs: Arc[] = []
+  const arcs: OrbitalArc[] = []
   let electrons = 0
 
   for (let i = 0; i < GEOMETRY.lines; i++) {
@@ -339,7 +341,7 @@ function makeProjector(al: number, be: number) {
   }
 }
 
-const onCircle = (arc: Arc, ct: number, st: number): [number, number, number] => [
+const onCircle = (arc: OrbitalArc, ct: number, st: number): [number, number, number] => [
   (arc.u[0] * ct + arc.v[0] * st) * R,
   (arc.u[1] * ct + arc.v[1] * st) * R,
   (arc.u[2] * ct + arc.v[2] * st) * R,
@@ -352,7 +354,7 @@ const onCircle = (arc: Arc, ct: number, st: number): [number, number, number] =>
  * rather than an empty limb.
  */
 function arcPaths(
-  arc: Arc,
+  arc: OrbitalArc,
   cs: number,
   sn: number,
   project: ReturnType<typeof makeProjector>,
@@ -403,7 +405,7 @@ function arcPaths(
 
 /** Where a dot sits at phase `t`, and how bright it is from there. */
 function dotAt(
-  arc: Arc,
+  arc: OrbitalArc,
   d: Dot,
   t: number,
   cs: number,
@@ -427,6 +429,8 @@ export function OrbitalSphere({
   className,
   ...rest
 }: OrbitalSphereProps) {
+  const Renderer = useOrbitalRenderer()
+  const [gpuReady, setGpuReady] = useState(false)
   const palette = PALETTES[preset]
   const arcs = useMemo(() => buildArcs(palette), [palette])
 
@@ -453,7 +457,7 @@ export function OrbitalSphere({
   const turning = motion === 'orbit'
 
   useEffect(() => {
-    if (!turning) return
+    if (!turning || gpuReady) return
     const host = hostRef.current
     if (!host) return
 
@@ -547,7 +551,7 @@ export function OrbitalSphere({
       document.removeEventListener('visibilitychange', onVisibility)
       io.disconnect()
     }
-  }, [arcs, palette, turning])
+  }, [arcs, palette, turning, gpuReady])
 
   /*
    * `useId` is deliberately not used for the filter ids. The blur radii are the
@@ -565,10 +569,22 @@ export function OrbitalSphere({
   return (
     <div
       ref={hostRef}
+      data-orbital-preset={preset}
+      data-orbital-gpu={gpuReady || undefined}
       aria-hidden="true"
       className={cn('pointer-events-none absolute aspect-square', className)}
       {...rest}
     >
+      {Renderer && (
+        <Renderer
+          hostRef={hostRef}
+          arcs={arcs}
+          preset={preset}
+          motion={motion}
+          opacity={palette.opacity}
+          onReady={setGpuReady}
+        />
+      )}
       {/*
        * THE MOVING HALF. Nothing but the great circles and their electrons —
        * hairline strokes, cheap to repaint at whatever rate the loop asks for.
@@ -597,7 +613,7 @@ export function OrbitalSphere({
          */
         viewBox="260 260 680 680"
         className="absolute inset-0 h-full w-full overflow-visible"
-        style={LAYER_STYLE(palette.opacity)}
+        style={{ ...LAYER_STYLE(palette.opacity), visibility: gpuReady ? 'hidden' : undefined }}
       >
         <defs>
           {blurs.map((sd, n) => (
@@ -622,9 +638,11 @@ export function OrbitalSphere({
              * Two periods that divide neither each other nor the turn, so the
              * field never visibly repeats.
              */
-            className={turning && arc.colored ? 'motion-reduce:animate-none!' : undefined}
+            className={
+              turning && !gpuReady && arc.colored ? 'motion-reduce:animate-none!' : undefined
+            }
             style={
-              turning && arc.colored
+              turning && !gpuReady && arc.colored
                 ? {
                     /* The keyframe dips to 45% of this, the way the export's
                        `--po` does. The arcs carry their own stroke opacity, so

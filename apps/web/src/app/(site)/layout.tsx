@@ -9,7 +9,8 @@ import { NavInkFirstPaint, SiteFooter, SiteNav, UtilityNav } from '@o3/content-u
 
 import { DraftTools } from './DraftTools'
 import { RouteArrival } from './RouteArrival'
-import { SpatialGlobePrototype } from '@/components/prototypes/spatial-globe/SpatialGlobePrototype'
+import { GlobeProvider } from '@/components/globe/GlobeProvider'
+import '@/components/prototypes/spatial-globe/spatial-globe.css'
 
 interface ShellProps {
   children: React.ReactNode
@@ -45,7 +46,7 @@ async function Shell({ children }: ShellProps) {
   const navSettings = prototypeChrome && settings ? { ...settings, utilityNavItems: [] } : settings
 
   return (
-    <>
+    <GlobeProvider enabled={prototypeChrome}>
       {/* The brand-property strip sits IN the document above everything else
           and scrolls away with it (`2250:1453` is an in-flow child of the Home
           frame); the pill below it is fixed. That difference is why the two are
@@ -59,11 +60,6 @@ async function Shell({ children }: ShellProps) {
           while the other two read the setting, so every interior page hung the
           pill at 124px and padded its hero to clear a strip that was not
           there. One source, one answer. */}
-      {process.env.NODE_ENV !== 'production' && (
-        <Suspense fallback={null}>
-          <SpatialGlobePrototype />
-        </Suspense>
-      )}
       {!prototypeChrome && <UtilityNav settings={settings} />}
       {/* The chrome draws no mark of its own (#228); these are this app's. */}
       <SiteNav settings={navSettings} brandMark={NAV_MARK} />
@@ -111,6 +107,6 @@ async function Shell({ children }: ShellProps) {
       <Suspense fallback={null}>
         <DraftTools />
       </Suspense>
-    </>
+    </GlobeProvider>
   )
 }

@@ -1,3 +1,5 @@
+> The approved snapshot is `4530b605`. The renderer has since moved to `../../globe/`; see that directory for current integration and validation status. This document records the prototype tuning.
+
 # Spatial globe baseline
 
 Run `pnpm globe:prototype`, then open http://localhost:3611/. The saved spatial scene is the sole development homepage treatment. The old `?spatial=depth&dots=sphere` link still shows this baseline; comparison parameters and controls are no longer used. Add `?spatial-still` for a fixed-frame review. OS reduced motion also stops the GPU animation and pointer response.
