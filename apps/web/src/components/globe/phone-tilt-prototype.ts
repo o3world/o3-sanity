@@ -17,7 +17,7 @@ export function startPhoneTiltPrototype(
   let neutral: { beta: number; gamma: number; angle: number } | undefined
   const relative = (value: number, origin: number) => ((value - origin + 540) % 360) - 180
   const normalize = (degrees: number) =>
-    Math.sign(degrees) * Math.min(1, Math.max(0, Math.abs(degrees) - 1.25) / 18) * 0.55
+    Math.sign(degrees) * Math.min(1, Math.max(0, Math.abs(degrees) - 1.25) / 18) * 1.1
   const orientation = (event: DeviceOrientationEvent) => {
     if (!active() || !coarse.matches) {
       neutral = undefined
