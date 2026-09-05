@@ -430,7 +430,9 @@ export function OrbitalSphere({
   ...rest
 }: OrbitalSphereProps) {
   const Renderer = useOrbitalRenderer()
-  const [gpuReady, setGpuReady] = useState(false)
+  const [gpuReady, setGpuReady] = useState<boolean | undefined>(undefined)
+  const loading = !!Renderer && gpuReady === undefined
+  const svgActive = !Renderer || gpuReady === false
   const palette = PALETTES[preset]
   const arcs = useMemo(() => buildArcs(palette), [palette])
 
@@ -457,7 +459,7 @@ export function OrbitalSphere({
   const turning = motion === 'orbit'
 
   useEffect(() => {
-    if (!turning || gpuReady) return
+    if (!turning || !svgActive) return
     const host = hostRef.current
     if (!host) return
 
@@ -551,7 +553,7 @@ export function OrbitalSphere({
       document.removeEventListener('visibilitychange', onVisibility)
       io.disconnect()
     }
-  }, [arcs, palette, turning, gpuReady])
+  }, [arcs, palette, turning, svgActive])
 
   /*
    * `useId` is deliberately not used for the filter ids. The blur radii are the
@@ -571,10 +573,17 @@ export function OrbitalSphere({
       ref={hostRef}
       data-orbital-preset={preset}
       data-orbital-gpu={gpuReady || undefined}
+      data-orbital-renderer={Renderer ? 'true' : undefined}
+      data-orbital-loading={loading || undefined}
       aria-hidden="true"
       className={cn('pointer-events-none absolute aspect-square', className)}
       {...rest}
     >
+      {Renderer && (
+        <noscript>
+          <style>{`[data-orbital-loading][data-orbital-preset="${preset}"] > svg { visibility: visible !important; opacity: ${palette.opacity} !important; }`}</style>
+        </noscript>
+      )}
       {Renderer && (
         <Renderer
           hostRef={hostRef}
@@ -614,7 +623,10 @@ export function OrbitalSphere({
          */
         viewBox="260 260 680 680"
         className="absolute inset-0 h-full w-full overflow-visible"
-        style={{ ...LAYER_STYLE(palette.opacity), visibility: gpuReady ? 'hidden' : undefined }}
+        style={{
+          ...LAYER_STYLE(loading ? 0 : palette.opacity),
+          visibility: svgActive ? undefined : 'hidden',
+        }}
       >
         <defs>
           {blurs.map((sd, n) => (
@@ -640,10 +652,10 @@ export function OrbitalSphere({
              * field never visibly repeats.
              */
             className={
-              turning && !gpuReady && arc.colored ? 'motion-reduce:animate-none!' : undefined
+              turning && svgActive && arc.colored ? 'motion-reduce:animate-none!' : undefined
             }
             style={
-              turning && !gpuReady && arc.colored
+              turning && svgActive && arc.colored
                 ? {
                     /* The keyframe dips to 45% of this, the way the export's
                        `--po` does. The arcs carry their own stroke opacity, so
@@ -707,7 +719,7 @@ export function OrbitalSphere({
       <svg
         viewBox="260 260 680 680"
         className="absolute inset-0 h-full w-full overflow-visible"
-        style={LAYER_STYLE(palette.opacity)}
+        style={LAYER_STYLE(loading ? 0 : palette.opacity)}
       >
         <defs>
           <radialGradient id={`globe-${preset}-shade`} cx="38%" cy="32%" r="75%">

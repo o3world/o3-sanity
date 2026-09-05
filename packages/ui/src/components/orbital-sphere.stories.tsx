@@ -385,7 +385,7 @@ export const PullQuotePair: Story = {
   ),
 }
 
-const RendererReady = createContext(false)
+const RendererReady = createContext<boolean | undefined>(undefined)
 function HandoffProbe({ onReady }: OrbitalRendererProps) {
   const ready = useContext(RendererReady)
   useEffect(() => {
@@ -394,7 +394,7 @@ function HandoffProbe({ onReady }: OrbitalRendererProps) {
   return null
 }
 function HandoffExample() {
-  const [ready, setReady] = useState(false)
+  const [ready, setReady] = useState<boolean | undefined>(undefined)
   return (
     <>
       <button onClick={() => setReady(!ready)}>Toggle renderer readiness</button>
@@ -409,17 +409,20 @@ function HandoffExample() {
   )
 }
 
-/** SVG remains available until the renderer succeeds, and returns on failure. */
+/** The pending scene stays hidden; success reveals the glow and failure restores SVG. */
 export const RendererHandoff: Story = {
   render: () => <HandoffExample />,
   play: async ({ canvasElement }) => {
     const button = canvasElement.querySelector('button')!
     const globe = canvasElement.querySelector('[data-orbital-preset]')!
     const moving = globe.querySelector('svg')!
-    await expect(getComputedStyle(moving).visibility).toBe('visible')
+    await expect(getComputedStyle(moving).visibility).toBe('hidden')
+    await expect(globe.hasAttribute('data-orbital-loading')).toBe(true)
+    await expect(getComputedStyle(globe.querySelector('svg:last-of-type')!).opacity).toBe('0')
     button.click()
     await waitFor(() => expect(globe.getAttribute('data-orbital-gpu')).toBe('true'))
     await expect(getComputedStyle(moving).visibility).toBe('hidden')
+    await expect(getComputedStyle(globe.querySelector('svg:last-of-type')!).opacity).toBe('1')
     for (const group of moving.querySelectorAll('g')) {
       await expect(group.style.animation).toBe('')
     }

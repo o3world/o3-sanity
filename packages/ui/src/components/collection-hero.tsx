@@ -138,6 +138,7 @@ export function CollectionHero({
   return (
     <SurfaceProvider surface={painted}>
       <section
+        data-collection-hero={variant}
         {...surfaceAttrs(painted)}
         className={cn(
           'pb-band-sm relative isolate overflow-hidden lg:pb-16',

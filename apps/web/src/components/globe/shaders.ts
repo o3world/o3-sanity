@@ -139,14 +139,14 @@ struct Out {
 }
 fn hash(n:f32) -> f32 { return fract(sin(n*127.1+311.7)*43758.5453); }
 @vertex fn vs_main(@builtin(vertex_index) v:u32, @builtin(instance_index) instance:u32) -> Out {
- let n=f32(instance)+1837.0;
+ let n=f32(instance)+1837.0+select(0.0,1900.0,p.viewport.w>0.5);
  let corners=array<vec2f,6>(vec2f(-1,-1),vec2f(1,-1),vec2f(-1,1),vec2f(-1,1),vec2f(1,-1),vec2f(1,1));
  let c=corners[v];
  let azimuth=hash(n)*6.2831853;
  let latitude=hash(n+1.0)*2.0-1.0;
  let radial=sqrt(1.0-latitude*latitude);
- let nearbyDust=instance>=4000u;
- let backfield=instance>=1900u && !nearbyDust;
+ let nearbyDust=instance>=4000u && p.viewport.w<0.5;
+ let backfield=(instance>=1900u || p.viewport.w>0.5) && !nearbyDust;
  let radius=select(select(10000.0*pow(900.0,pow(hash(n+2.0),0.65)),5000000.0+4000000.0*hash(n+2.0),backfield),8000.0+12000.0*hash(n+2.0),nearbyDust);
  var world=vec3f(cos(azimuth)*radial,sin(azimuth)*radial,-latitude)*radius;
  let near=1.0-smoothstep(5000.0,24000.0,radius);

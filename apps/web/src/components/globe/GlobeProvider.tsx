@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom'
 import { OrbitalRendererContext } from '@o3/ui'
 import type { OrbitalRendererProps } from '@o3/ui'
 import './globe.css'
+import { observeGlobeAvailability } from './observe-globe-availability'
 
 function GlobeRenderer({
   hostRef,
@@ -16,29 +17,43 @@ function GlobeRenderer({
   electronOpacity,
   onReady,
 }: OrbitalRendererProps) {
-  const [placement, setPlacement] = useState<{ target: HTMLElement; stars: boolean } | null>(null)
+  const [placement, setPlacement] = useState<{
+    target: HTMLElement
+    stars: boolean
+    quietStars: boolean
+    interiorStars: boolean
+  } | null>(null)
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
   useEffect(() => {
     const host = hostRef.current
     if (!host) return
-    const hero = host.closest<HTMLElement>('.hero-band')
-    const stars = location.pathname === '/' && !!hero?.querySelector('.hero-lead')
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setPlacement({ target: stars ? hero! : host, stars })
-          observer.disconnect()
-        }
-      },
-      { rootMargin: '100px' },
+    const hero = host.closest<HTMLElement>('.hero-band, [data-collection-hero="interior"]')
+    const heroStars = location.pathname === '/' && !!hero?.querySelector('.hero-lead')
+    const cta = host.closest<HTMLElement>('.cta-band')
+    const interiorStars = !!hero && !heroStars && preset === 'hero'
+    const quietStars = !!cta || interiorStars
+    const stars = heroStars || quietStars
+    const target = heroStars || interiorStars ? hero! : (cta ?? host)
+    return observeGlobeAvailability(
+      host,
+      stars ? target : (host.closest('section') ?? host),
+      (available) => setPlacement(available ? { target, stars, quietStars, interiorStars } : null),
     )
-    observer.observe(stars ? hero! : (host.closest('section') ?? host))
-    return () => observer.disconnect()
-  }, [hostRef])
+  }, [hostRef, preset])
   useEffect(() => {
     const host = hostRef.current
     if (!canvas || !placement || !host) return
     const controller = new AbortController()
+    onReady(undefined)
+    const timeout = setTimeout(() => {
+      onReady(false)
+      controller.abort()
+    }, 10000)
+    const reportReady: OrbitalRendererProps['onReady'] = (ready) => {
+      if (controller.signal.aborted) return
+      if (ready !== undefined) clearTimeout(timeout)
+      onReady(ready)
+    }
     import('./renderer')
       .then(({ startSpatialGlobe }) => {
         if (!controller.signal.aborted)
@@ -48,21 +63,33 @@ function GlobeRenderer({
             motion,
             opacity,
             electronOpacity,
-            onReady,
+            onReady: reportReady,
             stars: placement.stars,
+            quietStars: placement.quietStars,
           })
       })
       .catch(() => {
-        if (!controller.signal.aborted) onReady(false)
+        reportReady(false)
       })
-    return () => controller.abort()
+    return () => {
+      clearTimeout(timeout)
+      controller.abort()
+    }
   }, [canvas, placement, hostRef, arcs, preset, motion, opacity, electronOpacity, onReady])
   return placement
     ? createPortal(
         <canvas
           ref={setCanvas}
           aria-hidden="true"
-          className={placement.stars ? 'spatial-globe-canvas' : 'orbital-globe-canvas'}
+          className={
+            placement.interiorStars
+              ? 'interior-starfield-canvas'
+              : placement.quietStars
+                ? 'cta-starfield-canvas'
+                : placement.stars
+                  ? 'spatial-globe-canvas'
+                  : 'orbital-globe-canvas'
+          }
         />,
         placement.target,
       )

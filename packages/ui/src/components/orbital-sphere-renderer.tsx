@@ -11,7 +11,7 @@ export interface OrbitalRendererProps {
   motion: 'still' | 'orbit'
   opacity: number
   electronOpacity: number
-  onReady: (ready: boolean) => void
+  onReady: (ready: boolean | undefined) => void
 }
 
 export const OrbitalRendererContext = createContext<ComponentType<OrbitalRendererProps> | null>(
