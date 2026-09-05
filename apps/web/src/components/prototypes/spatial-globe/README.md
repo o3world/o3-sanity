@@ -29,3 +29,7 @@ Follow-up: Spatial stars now extends behind the utility logos. The nav keeps its
 Globe dots are drawn after all rails so lines cannot paint across them. Their centers share the rail projection, and opaque cores use analytic sphere normals, diffuse lighting, and a small specular highlight. These are shaded sphere impostors, not mesh geometry.
 
 Latest visual direction: a fine star field rather than large dust bokeh. Spatial stars uses 1900 points distributed across a wider continuous depth range, with tightly capped point sizes, restrained halos, near-neutral colors, and mostly dim stars. Dots: Glow / Shaded compares luminous rail dots with the earlier sphere treatment; Glow is the default.
+
+## Approved visual save spot
+
+Josh marked the bright, crisp star field as a save spot. Local tag: `checkpoint/spatial-stars-bright`. Review URL: http://localhost:3611/?spatial=depth&dots=sphere. This captures varied star sizes with bright centers, continuous depth and drift, shaded globe dots above their rails, and the outlined transparent nav. This is a visual checkpoint, not production approval.

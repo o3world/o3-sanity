@@ -189,7 +189,7 @@ fn turn(q:vec3f, yaw:f32, pitch:f32) -> vec3f {
  let perspective=focal/max(400.0,distance);
  let pixel=world.xy*perspective+vec2f(p.viewport.x*0.5,p.viewport.y*0.43);
  let proximity=clamp(1450.0/max(400.0,distance),0.2,1.3);
- let pointRadius=clamp((0.4+hash(n+7.0)*0.65+dust*near*0.35)*proximity,0.25,1.05);
+ let pointRadius=clamp((0.55+pow(hash(n+7.0),2.0)*1.55+dust*near*0.45)*proximity,0.38,1.85);
  let extent=max(1.2,pointRadius*4.0);
  var o:Out;
  let point=pixel+c*extent;
@@ -199,14 +199,18 @@ fn turn(q:vec3f, yaw:f32, pitch:f32) -> vec3f {
  let edge=1.0-smoothstep(0.74,1.0,pixel.y/p.viewport.y);
  let quiet=1.0-0.68*exp(-pow((pixel.x/p.viewport.x-0.5)*3.0,2.0))*smoothstep(0.08,0.22,pixel.y/p.viewport.y)*(1.0-smoothstep(0.5,0.72,pixel.y/p.viewport.y));
  let visibility=smoothstep(450.0,900.0,distance);
- let brightness=(0.16+pow(hash(n+8.0),2.8)*0.78)*mix(1.0,0.65,dust)*edge*quiet*visibility;
+ let prominence=smoothstep(0.65,0.98,hash(n+7.0));
+ let backgroundLight=(0.3+pow(hash(n+8.0),1.8)*0.7)*mix(1.0,0.8,dust)*quiet;
+ let brightness=mix(backgroundLight,0.98,prominence)*edge*visibility;
  o.color=vec4f(mix(vec3f(0.88,0.92,1.0),vec3f(1.0,0.95,0.88),hash(n+9.0)),brightness);
  return o;
 }
 @fragment fn fs_main(i:Out)->@location(0) vec4f {
  let d=length(i.uv);
- let light=exp(-d*d*2.4)+exp(-d*d*0.7)*0.025;
- let dust=exp(-d*d*1.8)*0.78;
- return vec4f(i.color.rgb,i.color.a*mix(light,dust,i.softness));
+ // A solid point with a one-pixel antialiased boundary, not a Gaussian blob.
+ let edge=max(fwidth(d)*0.5,0.035);
+ let coverage=1.0-smoothstep(0.85-edge,0.85+edge,d);
+ let core=1.0-smoothstep(0.0,0.7,d);
+ return vec4f(mix(i.color.rgb,vec3f(1.0),core*0.75),i.color.a*coverage);
 }
 `
