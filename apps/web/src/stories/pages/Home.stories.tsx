@@ -29,15 +29,18 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-async function expectAlignedNavMark(canvasElement: HTMLElement, targetSize: number) {
+async function expectAlignedNavMark(canvasElement: HTMLElement, targetSize: number, leftInset = 0) {
   const home = within(canvasElement).getByRole('link', { name: / home$/ })
   const target = home.getBoundingClientRect()
   const paths = Array.from(home.querySelectorAll('svg path'), (path) =>
     path.getBoundingClientRect(),
-  )
+  ).filter((box) => box.width > 0)
   const left = Math.min(...paths.map((path) => path.left))
   const right = Math.max(...paths.map((path) => path.right))
-  await expect(left).toBeCloseTo(target.left, 0)
+  await expect(left - target.left).toBeCloseTo(leftInset, 1)
+  if (targetSize === 48) {
+    await expect(Math.min(...paths.map((path) => path.top)) - target.top).toBeCloseTo(8.59, 1)
+  }
   await expect(right - left).toBeCloseTo(38.84, 0)
   await expect(target.width).toBe(targetSize)
   await expect(target.height).toBe(targetSize)
@@ -46,7 +49,7 @@ async function expectAlignedNavMark(canvasElement: HTMLElement, targetSize: numb
 export const Desktop: Story = {
   args: { page: 'index' },
   globals: { viewport: { value: 'desktop' } },
-  play: async ({ canvasElement }) => expectAlignedNavMark(canvasElement, 48),
+  play: async ({ canvasElement }) => expectAlignedNavMark(canvasElement, 48, 8.6),
 }
 
 /**
