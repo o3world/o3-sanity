@@ -157,6 +157,7 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `slug`            | URL segment(s); required on every routable type                                                     | —                                                         |
 | `eyebrow`         | Small label above a heading                                                                         | `kicker` (reserved: `chapter.kicker`), `label`            |
 | `heading`         | A block's primary display text                                                                      | `title`, `headline`                                       |
+| `headingLevel`    | A layout section’s visual heading step, independent of media bleed                                  | HTML heading rank                                         |
 | `subheading`      | The secondary line under a `heading`                                                                | `subtitle`, `deck`                                        |
 | `body`            | Long-form prose (`text` or `bodyText`)                                                              | `content`, `description`, `copy`                          |
 | `excerpt`         | Short summary shown on cards and listings                                                           | `summary`, `intro`, `teaser`                              |

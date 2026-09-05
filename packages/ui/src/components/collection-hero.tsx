@@ -212,7 +212,7 @@ export function CollectionHero({
                     ? aside
                       ? 'text-display-xl font-light'
                       : 'text-interior-hero'
-                    : 'text-display-xl'),
+                    : 'text-display-xl font-normal'),
               )}
             >
               {heading}

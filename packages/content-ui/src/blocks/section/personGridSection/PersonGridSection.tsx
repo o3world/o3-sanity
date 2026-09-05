@@ -58,7 +58,7 @@ export function PersonGridSection({
                 {eyebrow}
               </Eyebrow>
             ) : null}
-            {heading ? <DisplayHeading>{heading}</DisplayHeading> : null}
+            {heading ? <DisplayHeading className="font-normal">{heading}</DisplayHeading> : null}
           </header>
         ) : null}
 

@@ -70,7 +70,7 @@ export function RoleListSection({ eyebrow, heading, roles, surface, loc }: RoleL
                     <Eyebrow className="text-fg-quiet">{role.eyebrow}</Eyebrow>
                   ) : null}
                   {role.heading ? (
-                    <DisplayHeading as="h3" level="lg" className="tracking-[-0.0222em]">
+                    <DisplayHeading as="h3" level="lg" className="font-normal tracking-[-0.0222em]">
                       {role.heading}
                     </DisplayHeading>
                   ) : null}

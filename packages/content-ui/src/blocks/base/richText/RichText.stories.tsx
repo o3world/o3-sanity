@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, within } from 'storybook/test'
 
 import type { BaseProps } from '@o3/content-runtime/blocks'
 import { seedImage } from '../../../testing/seedContent'
@@ -25,7 +26,14 @@ type Body = NonNullable<BaseProps<'richText'>['body']>
 const meta = {
   title: 'Content/Blocks/Base/RichText',
   component: RichText,
-  parameters: { layout: 'padded' },
+  parameters: {
+    layout: 'padded',
+    viewport: {
+      options: {
+        mobile: { name: 'Figma mobile', styles: { width: '402px', height: '874px' } },
+      },
+    },
+  },
 } satisfies Meta<typeof RichText>
 
 export default meta
@@ -61,6 +69,15 @@ export const Paragraphs: Story = {
 
 /** Headings inside a passage. `h2` and `h3` only; the page owns `h1`. */
 export const Headings: Story = {
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', { level: 2 })
+    const style = getComputedStyle(heading)
+    await expect(parseFloat(style.fontSize)).toBeCloseTo(36, 1)
+    await expect(parseFloat(style.lineHeight)).toBeCloseTo(44, 1)
+    await expect(style.fontWeight).toBe('300')
+    await expect(style.marginBottom).toBe('32px')
+  },
   args: {
     body: [
       block('h2', 'What we found'),
@@ -68,6 +85,19 @@ export const Headings: Story = {
       block('h3', 'Where it started'),
       block('normal', 'Three teams, three vocabularies, one CMS trying to hold all of them.'),
     ] as unknown as Body,
+  },
+}
+
+export const HeadingsMobile: Story = {
+  args: Headings.args,
+  globals: { viewport: { value: 'mobile' } },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', { level: 2 })
+    const style = getComputedStyle(heading)
+    await expect(parseFloat(style.fontSize)).toBeCloseTo(32, 1)
+    await expect(parseFloat(style.lineHeight)).toBeCloseTo(38, 1)
+    await expect(style.fontWeight).toBe('300')
+    await expect(heading.scrollWidth).toBeLessThanOrEqual(heading.clientWidth)
   },
 }
 

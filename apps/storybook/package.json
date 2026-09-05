@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "../../scripts/dev.sh storybook",
     "storybook": "../../scripts/dev.sh storybook",
-    "build": "storybook build",
-    "build-storybook": "storybook build",
+    "build": "storybook build && node scripts/assert-fonts.mjs",
+    "build-storybook": "pnpm build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "typecheck": "tsc --noEmit",

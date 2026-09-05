@@ -77,6 +77,7 @@ function resolveColumns(value: number | null | undefined): 1 | 2 | 3 {
 export function LayoutSection({
   eyebrow,
   heading,
+  headingLevel,
   subheading,
   columns,
   bleed,
@@ -92,6 +93,10 @@ export function LayoutSection({
     ...baseComponents,
   }
   const bleeding = stegaClean(bleed) === 'end'
+  const selectedHeadingLevel = stegaClean(headingLevel)
+  const explicitHeadingLevel = selectedHeadingLevel === 'xl' || selectedHeadingLevel === 'lg'
+  const resolvedHeadingLevel = explicitHeadingLevel ? selectedHeadingLevel : bleeding ? 'lg' : 'xl'
+  const showMolecule = resolveDecoration(decoration, 'layoutSection') === 'molecule'
   const columnCount = resolveColumns(columns)
   const columnClass = bleeding ? BLEED_COLUMN_CLASS : COLUMN_CLASSES[columnCount]
   const entries = items ?? []
@@ -110,7 +115,16 @@ export function LayoutSection({
             {eyebrow}
           </Eyebrow>
         ) : null}
-        {heading ? <DisplayHeading level={bleeding ? 'lg' : 'xl'}>{heading}</DisplayHeading> : null}
+        {heading ? (
+          <DisplayHeading
+            level={resolvedHeadingLevel}
+            // The redesigned Overview and molecule treatments use Light;
+            // generic layouts retain their unbound Regular heading (#350).
+            className={explicitHeadingLevel || bleeding || showMolecule ? undefined : 'font-normal'}
+          >
+            {heading}
+          </DisplayHeading>
+        ) : null}
         {subheading ? (
           <p className="text-display-lg font-display text-fg-muted text-balance">{subheading}</p>
         ) : null}
@@ -131,7 +145,6 @@ export function LayoutSection({
     return <Component key={item._key} {...props} slotSizes={slotSizes} />
   }
   const resolved = resolveSurface(surface, 'layoutSection')
-  const showMolecule = resolveDecoration(decoration, 'layoutSection') === 'molecule'
   // The band's measure (`2960:6885`). `stegaClean` for the same reason
   // `resolveDecoration` does it: a draft-mode string fails a bare `===`.
   const measure = stegaClean(width) === 'article' ? 'article' : 'section'

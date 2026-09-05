@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, within } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 
 import { LayoutSection } from '@o3/content-ui'
@@ -109,4 +110,61 @@ export const WithMolecule: Story = {
 export const OverviewWithPhoto: Story = {
   args: seededSectionArgs('solutions-software-engineering', 'layoutSection', 0),
   parameters: { design: figmaDesign('2360:2861') },
+}
+
+/** The About heading keeps its hierarchy when the photo placement changes. */
+const aboutHeading = {
+  ...seededSectionArgs('solutions-software-engineering', 'layoutSection', 0),
+  eyebrow: 'Why O3',
+  heading: 'Built to go end to end on purpose',
+  headingLevel: 'xl' as const,
+}
+
+export const AboutHeadingWithPhoto: Story = {
+  args: aboutHeading,
+  globals: { viewport: { value: 'desktop' } },
+  parameters: { design: figmaDesign('2960:6890') },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', { name: aboutHeading.heading })
+    await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(48, 0)
+    await expect(getComputedStyle(heading).fontWeight).toBe('300')
+  },
+}
+
+export const AboutHeadingMobile: Story = {
+  ...AboutHeadingWithPhoto,
+  globals: { viewport: { value: 'mobile' } },
+  parameters: { design: figmaDesign('2975:9043') },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', { name: aboutHeading.heading })
+    await expect(getComputedStyle(heading).fontSize).toBe('40px')
+    await expect(getComputedStyle(heading).fontWeight).toBe('300')
+    await expect(heading.scrollWidth).toBeLessThanOrEqual(heading.clientWidth)
+  },
+}
+
+export const AboutHeadingWithoutBleed: Story = {
+  ...AboutHeadingMobile,
+  args: { ...aboutHeading, bleed: 'none' },
+}
+
+/** No stored setting: existing Engineering Overview keeps its current size. */
+export const OverviewAutomaticMobile: Story = {
+  ...OverviewWithPhoto,
+  globals: { viewport: { value: 'mobile' } },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', { name: 'Overview' })
+    await expect(getComputedStyle(heading).fontSize).toBe('18px')
+    await expect(getComputedStyle(heading).fontWeight).toBe('300')
+  },
+}
+
+export const LegacyHeading: Story = {
+  args: { ...aboutHeading, headingLevel: 'auto', bleed: 'none' },
+  globals: { viewport: { value: 'mobile' } },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', { name: aboutHeading.heading })
+    await expect(getComputedStyle(heading).fontSize).toBe('40px')
+    await expect(getComputedStyle(heading).fontWeight).toBe('400')
+  },
 }

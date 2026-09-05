@@ -7,18 +7,11 @@
  *
  * TWO THINGS CHANGED WHEN THESE MOVED FROM THE PROTOTYPE TO FIGMA:
  *
- *   1. DISPLAY WEIGHT IS 400, not 300. Figtree Regular carries every display
- *      size in the canonical frames. There is no Light on the page.
- *      ⚠️ 2026-08-13: THE REDESIGNED FRAMES PUT LIGHT BACK. Figma now carries
- *      named heading styles, and all three are Figtree Light 300 —
- *      `Heading/h1` 64/76 (Home hero, `2089:4313`), `Heading/h2` 48/58
- *      (partners, `1864:2393`) and `Heading/h3` 36/44 (Solutions overview,
- *      `2360:2868`). `--text-hero` has followed, because it has one consumer
- *      and both its anchors moved. `display-xl` and `display-lg` have NOT:
- *      they carry every section headline on frames the redesign has not
- *      reached, which still read 400, so the two bands built against the new
- *      styles set `font-light` at the call site and the ramp-wide flip is a
- *      token pass of its own (#350 holds the reading and the stragglers).
+ *   1. Named headings use Figtree Light 300: `Heading/h1` 64/76
+ *      (`2089:4313`), `Heading/h2` 48/58 (`1864:2393`) and `Heading/h3`
+ *      36/44 (`2360:2868`). The display and CTA tokens carry that weight.
+ *      Older unbound headings and stat figures retain Regular explicitly
+ *      at their consumers (#350).
  *   2. LINE HEIGHT IS 1.2 nearly everywhere, replacing the prototype's
  *      1.05 → 1.3 spread.
  *
@@ -144,14 +137,13 @@
    * mobile) with its own -1px tracking on top. Kept as a separate token
    * because the tracking differs and because the type-scale enum names it.
    *
-   * Home's own band (`1680:2088` / `1814:1777`) is un-migrated and still
-   * draws the old 60/64.8/-1.4 and 40/48 — the token follows the component
-   * the other seven frames instance. Tracking is -1px ABSOLUTE at both
-   * widths (read off the 64 and the 36 alike), so it ships in px, not em. */
+   * The current component and Home headline (`1680:2088`) use Light 300.
+   * Tracking is -1px ABSOLUTE at both widths (read off the 64 and the 36
+   * alike), so it ships in px, not em. */
   --text-cta: clamp(36px, calc(2.7vw + 25.15px), 64px);
   --text-cta--line-height: clamp(44px, calc(3.083vw + 31.61px), 76px);
   --text-cta--letter-spacing: -1px;
-  --text-cta--font-weight: 400;
+  --text-cta--font-weight: 300;
 
   /* interior-hero — 64px. The `Interior Hero` component's headline
    * (`2107:1051`), which every interior page opens on: 64/76 Light at -1px of
@@ -196,22 +188,19 @@
    * `2975:8190` and `2975:8360` bind this same pair and were never switched —
    * the file header has the rule.
    *
-   * WEIGHT IS 400 while the step is still drawn unbound at 400/57.6 on the
-   * frames the redesign has not reached (Live `1751:2042`, About `1927:6434`,
-   * Solutions `1925:6110`) and on the case-study stat figure (`2089:3966`),
-   * which takes -1px of its own on top. `Heading/h2` is Light, so the bands
-   * built against it set `font-light` at the call site; #350 owns the flip. */
+   * Light follows Heading/h2. Unbound Regular headings and stat figures
+   * declare font-normal at their consumers (#350). */
   --text-display-xl: clamp(40px, calc(0.77vw + 36.9px), 48px);
   --text-display-xl--line-height: clamp(48px, calc(0.963vw + 44.13px), 58px);
   --text-display-xl--letter-spacing: 0;
-  --text-display-xl--font-weight: 400;
+  --text-display-xl--font-weight: 300;
 
-  /* display-lg — 36px. The 01/02/03 rail numerals and `DisplayHeading`'s `lg`
-   * step. */
+  /* display-lg — 36px. Heading/h3 is Light (`2360:2868`). Rail numerals
+   * use their own explicit 36px step and keep Regular. */
   --text-display-lg: clamp(18px, calc(1.73vw + 11px), 36px);
   --text-display-lg--line-height: 1.2;
   --text-display-lg--letter-spacing: 0;
-  --text-display-lg--font-weight: 400;
+  --text-display-lg--font-weight: 300;
 
   /* display-md — 28px. The case-study problem statement inside the card,
    * white over the scrim (1883:3562).

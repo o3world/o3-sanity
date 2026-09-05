@@ -58,7 +58,7 @@ export type { CaseStudyHeroProps } from './components/case-study-hero'
 export { CaseChapter } from './components/case-chapter'
 export type { CaseChapterDetail, CaseChapterProps } from './components/case-chapter'
 
-// CarouselControl — Figma's `Icon / Surface` (778:1862)
+// CarouselControl — the Home Blog's 48px Icon Button (2134:1352)
 export { CarouselControl } from './components/carousel-control'
 export type { CarouselControlProps } from './components/carousel-control'
 

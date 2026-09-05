@@ -1,3 +1,4 @@
+import '@fontsource-variable/figtree'
 import '../globals.css'
 
 import { defineStorybookPreview } from '@o3/story-kit/storybook-preview'

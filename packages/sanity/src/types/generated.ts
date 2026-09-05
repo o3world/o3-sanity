@@ -456,6 +456,7 @@ export type LayoutSection = {
         _key: string
       } & Mark)
   >
+  headingLevel?: 'auto' | 'xl' | 'lg'
   bleed?: 'none' | 'end'
   width?: 'section' | 'article'
   surface?: 'white' | 'paper' | 'bone' | 'ink'
@@ -2680,6 +2681,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
               >
             }
         > | null
+        headingLevel?: 'auto' | 'lg' | 'xl'
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
@@ -3941,6 +3943,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
               >
             }
         > | null
+        headingLevel?: 'auto' | 'lg' | 'xl'
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
@@ -5391,6 +5394,7 @@ export type CASE_STUDY_QUERY_RESULT = {
               >
             }
         > | null
+        headingLevel?: 'auto' | 'lg' | 'xl'
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
@@ -6809,6 +6813,7 @@ export type PAGE_QUERY_RESULT = {
               >
             }
         > | null
+        headingLevel?: 'auto' | 'lg' | 'xl'
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
         surface?: 'bone' | 'ink' | 'paper' | 'white'

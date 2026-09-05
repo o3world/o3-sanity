@@ -16,7 +16,8 @@
     "dev-mirrors-prod": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/devMirrorsProduction.ts --with-user-token --",
     "drift": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/drift.ts --with-user-token --",
     "verify": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/verify.ts --with-user-token --",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "about-heading": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/aboutHeading.ts --with-user-token --"
   },
   "dependencies": {
     "@o3/block-spec": "workspace:*",

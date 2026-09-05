@@ -52,7 +52,7 @@ const HEADER_SHAPE = {
   },
   wide: {
     wrapper: 'gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-8',
-    heading: 'text-display-xl lg:w-[571px]',
+    heading: 'text-display-xl font-normal lg:w-[571px]',
     // 30px against the 24px step on the Solutions band — 1.25 rather than
     // 1.2, and the only value the three headers disagree on.
     intro: 'text-lead leading-[1.2] lg:w-[607px] lg:leading-[1.25]',
