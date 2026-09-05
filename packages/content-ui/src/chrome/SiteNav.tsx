@@ -73,7 +73,8 @@ interface SiteNavProps {
  * **O3's desktop pill follows the structural content edges** (#444, Josh,
  * 2026-09-04). This deliberately supersedes the 900px width in `2225:2920`
  * without changing height, padding, radii or link spacing. `--container-nav`
- * reads the section cap for O3; the retired brand retains its 900px cap.
+ * caps O3 at its 1290px design-width span on larger screens (#446);
+ * the retired brand retains its 900px cap.
  *
  * ── INK FLIP ───────────────────────────────────────────────────────────────
  *

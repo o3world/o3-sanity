@@ -116,8 +116,8 @@
    * 75px gutters at 1440 and keeps growing to 1728px on wider viewports.
    * Class-accessible via max-w-section. */
   --container-section: 108rem; /* 1728px */
-  /* #444 aligns O3's desktop nav with the structural stage. */
-  --container-nav: var(--container-section);
+  /* #446 keeps the 1440px layout's nav width as its large-screen cap. */
+  --container-nav: 80.625rem; /* 1290px */
   /* Named half-stage for one-sided viewport bleeds. Keeping the half beside
    * its source prevents components from baking in the previous 624px value. */
   --container-section-half: 54rem; /* 864px */

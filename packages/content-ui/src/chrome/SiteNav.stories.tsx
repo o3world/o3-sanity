@@ -51,7 +51,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** #444: the desktop pill shares the structural stage, including its wide-screen cap. */
+/** The desktop pill shares the structural stage at the 1440px design width. */
 export const AlignedWithContent: Story = {
   globals: { brand: 'o3', viewport: { value: 'desktop' } },
   render: (args) => (
@@ -83,6 +83,13 @@ export const AlignedOnWideScreens: Story = {
     viewport: {
       options: { wide: { name: 'Wide desktop', styles: { width: '1920px', height: '900px' } } },
     },
+  },
+  play: async ({ canvasElement }) => {
+    const nav = canvasElement.querySelector('#site-nav > nav')!.getBoundingClientRect()
+    await expect(nav.width).toBe(1290)
+    await expect(nav.left).toBeCloseTo((document.documentElement.clientWidth - 1290) / 2, 0)
+    await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
+    await expect(within(canvasElement).getByRole('link', { name: 'Let’s talk' })).toBeVisible()
   },
 }
 
