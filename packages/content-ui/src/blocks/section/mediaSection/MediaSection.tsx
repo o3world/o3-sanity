@@ -1,4 +1,4 @@
-import { SURFACE_CLASS, SurfaceProvider, surfaceAttrs } from '@o3/ui'
+import { SURFACE_CLASS, SurfaceProvider, surfaceAttrs, LayeredMediaReveal } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { stegaClean } from '@sanity/client/stega'
 
@@ -7,7 +7,7 @@ import { ARTICLE_COLUMN, FULL_BLEED } from '../../../imageSizes'
 import { sectionBackground } from '../../sectionBackground'
 import { resolveSurface } from '../../surface'
 
-type MediaSectionProps = SectionProps<'mediaSection'>
+type MediaSectionProps = SectionProps<'mediaSection'> & { sequence?: boolean }
 
 /**
  * Section block: a full-width figure moment, built to the Case Study frame's
@@ -52,6 +52,7 @@ export function MediaSection({
   width,
   surface,
   backgroundMedia,
+  sequence = false,
 }: MediaSectionProps) {
   if (!media) return null
   const fullBleed = stegaClean(width) === 'full-bleed'
@@ -68,35 +69,21 @@ export function MediaSection({
       <SurfaceProvider surface={resolved}>
         <section {...surfaceAttrs(resolved)} className={bandClass}>
           {picture}
-          <figure>
-            {/*
-             * The stage: `--gradient-screen-stage` at 135° with the frame's
-             * `inset 0 -16px 16px rgba(0,0,0,0.05)` foot, 64px of top padding,
-             * and a fixed height it clips at. 700 is the 1440 value; below `lg`
-             * the band shortens rather than scaling the capture, so the same
-             * amount of page is legible at both widths (ADR 0006).
-             */}
-            <div
-              className={`px-gutter relative h-[520px] overflow-hidden pt-16 shadow-[inset_0_-16px_16px_0_rgba(0,0,0,0.05)] lg:h-[700px] ${
-                picture ? '' : 'bg-(image:--gradient-screen-stage)'
-              }`}
-            >
-              <div className="max-w-article mx-auto w-full">
-                <SanityImage
-                  source={media.image}
-                  alt={media.alt}
-                  width={1650}
-                  className="w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.4)]"
-                  sizes={ARTICLE_COLUMN}
-                />
-              </div>
-            </div>
-            {media.caption ? (
-              <figcaption className="text-fg-subtle px-gutter mt-4 text-sm">
-                {media.caption}
-              </figcaption>
-            ) : null}
-          </figure>
+          <LayeredMediaReveal
+            enabled={sequence}
+            className={`px-gutter relative h-[520px] overflow-hidden pt-16 shadow-[inset_0_-16px_16px_0_rgba(0,0,0,0.05)] lg:h-[700px] ${picture ? '' : 'bg-(image:--gradient-screen-stage)'}`}
+            foregroundClassName="max-w-article mx-auto w-full"
+            caption={media.caption}
+            captionClassName="text-fg-subtle px-gutter mt-4 text-sm"
+          >
+            <SanityImage
+              source={media.image}
+              alt={media.alt}
+              width={1650}
+              className="w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.4)]"
+              sizes={ARTICLE_COLUMN}
+            />
+          </LayeredMediaReveal>
         </section>
       </SurfaceProvider>
     )

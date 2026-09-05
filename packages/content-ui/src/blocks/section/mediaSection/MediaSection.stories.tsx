@@ -98,3 +98,17 @@ export const ContainedOnInk: Story = {
 export const NoMedia: Story = {
   args: { ...seededSectionArgs('ventures-urvin', 'mediaSection'), media: null },
 }
+
+/** Scroll into the authored composition; reduced motion leaves the same layout still. */
+export const Sequence: Story = {
+  args: { ...Capture.args, sequence: true },
+  decorators: [
+    (Story) => (
+      <div>
+        <div className="min-h-screen" />
+        <Story />
+        <div className="h-screen" />
+      </div>
+    ),
+  ],
+}

@@ -136,3 +136,17 @@ export const Mobile: Story = {
 export const NoScreens: Story = {
   args: { surface: 'white', screens: [] },
 }
+
+/** Scroll into the authored composition; reduced motion leaves the same layout still. */
+export const Sequence: Story = {
+  args: { ...Default.args, sequence: true },
+  decorators: [
+    (Story) => (
+      <div>
+        <div className="min-h-screen" />
+        <Story />
+        <div className="h-screen" />
+      </div>
+    ),
+  ],
+}

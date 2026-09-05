@@ -1,3 +1,4 @@
+import { CaseStudyMediaSection, CaseStudyScreenGridSection } from './caseStudyMotion'
 // The client-safe block components: base blocks + every section block.
 // Shared by the server BLOCK_MAP (registry.ts) and the client
 // BLOCK_COMPONENTS (ClientBlockRenderer.tsx) so both derive from one
@@ -41,12 +42,10 @@ import {
   LayoutSection,
   ListingSection,
   LogoWallSection,
-  MediaSection,
   PersonGridSection,
   QuoteSection,
   RailPanelsSection,
   RoleListSection,
-  ScreenGridSection,
 } from '@o3/content-ui'
 
 /**
@@ -152,8 +151,8 @@ export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('inFlightSection', { component: InFlightSection }),
   defineBlockRender('formSection', { component: FormSection }),
   defineBlockRender('layoutSection', { component: LayoutSectionWithBaseRoster }),
-  defineBlockRender('mediaSection', { component: MediaSection }),
-  defineBlockRender('screenGridSection', { component: ScreenGridSection }),
+  defineBlockRender('mediaSection', { component: CaseStudyMediaSection }),
+  defineBlockRender('screenGridSection', { component: CaseStudyScreenGridSection }),
   defineBlockRender('listingSection', { component: ListingSection }),
   defineBlockRender('statsSection', { component: StatsSection }),
 ] satisfies ReadonlyArray<ClientBlockRenderBinding<O3SectionBlockName>>
