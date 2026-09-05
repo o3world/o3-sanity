@@ -342,7 +342,8 @@ export async function startSpatialGlobe(
               const dx = x - lastTilt.x
               const dy = y - lastTilt.y
               const distance = Math.hypot(dx, dy)
-              if (distance >= 0.02) {
+              // About 1.3 degrees of tilt must accumulate before redirecting the coast.
+              if (distance >= 0.08) {
                 targetSpinX = dy / distance
                 targetSpinY = -dx / distance
                 targetSpinZ = 0
