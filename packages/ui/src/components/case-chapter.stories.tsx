@@ -1,11 +1,28 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { figmaDesign } from '@o3/story-kit'
+import { expect, within } from 'storybook/test'
 
 import { CaseChapter } from './case-chapter'
 
 const meta = {
   title: 'Case Study/CaseChapter',
   component: CaseChapter,
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'fullscreen', design: figmaDesign('2274:4004') },
+  play: async ({ canvasElement, globals }) => {
+    // These measurements belong to the O3 canonical frames.
+    if (globals.brand !== 'o3') return
+    const heading = within(canvasElement).getByRole('heading', { level: 2 })
+    const chapter = heading.closest('section')!
+    const desktop = window.innerWidth >= 1024
+    await expect(getComputedStyle(chapter).paddingTop).toBe(desktop ? '128px' : '96px')
+    await expect(getComputedStyle(chapter).paddingBottom).toBe(desktop ? '128px' : '96px')
+    await expect(getComputedStyle(heading).fontWeight).toBe(desktop ? '300' : '400')
+    if (window.innerWidth >= 1440) {
+      await expect(getComputedStyle(heading).fontSize).toBe('48px')
+    } else if (window.innerWidth <= 402) {
+      await expect(getComputedStyle(heading).fontSize).toBe('40px')
+    }
+  },
 } satisfies Meta<typeof CaseChapter>
 
 export default meta

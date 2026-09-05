@@ -34,31 +34,14 @@ export interface CaseChapterProps {
 }
 
 /**
- * One numbered chapter of a case study — the frame's repeating article band
- * (`1647:1714`, `1890:3864`, `1894:3892`; mobile `1906:878`, `1906:947`,
- * `1906:990`), #44.
+ * One numbered chapter of a case study. Desktop overview `2274:4004` and
+ * chapter `2230:3267` use 128px vertical padding and Heading/h2 (48/58 Light).
+ * Mobile chapters `1906:878`, `1906:947`, `1906:990` retain 96px padding
+ * and the unbound 40/48 Regular title. The desktop treatment starts at `lg`.
  *
- * ```
- *          402                     1440
- * band     96px 20px               164px 0        white
- * column   full width, gap 32      822px, gap 24  centred
- *   head   gap 8                   gap 12
- *   kicker 16px uppercase #636363  18px #757575
- *   title  40px                    36px
- *   body   16px / 1.6 #232323      20px / 1.6
- * ```
- *
- * **822px is the article measure**, not `--container-content` (1034): the
- * frame reserves the wider column for centred statements like the pull quote
- * and drops to 822 for anything meant to be read as prose.
- *
- * Everything here sits on tokens: the band on `band-article` (164px at 1440,
- * 96px at 402 — between `band-md` and `band-lg`), the measure on
- * `--container-article`, and the type on `text-body-heading` / `text-body` —
- * the steps #45 minted from the same frame family (`1894:3912` is a chapter
- * heading). `body-heading` is the design's one descending step: 40px at 402,
- * 36px at 1440, where the chapter title sits deliberately below the 48px
- * page title.
+ * The 822px article measure, body type, details and mobile spacing remain
+ * independent of the heading correction (#440). `band-article` still serves
+ * media bands; chapters use the existing `band-sm` / `band-md` steps.
  *
  * The kicker holds at the 18px section step at both widths, following ADR
  * 0006's rule that small UI text does not scale — the mobile frame's 16px is
@@ -86,11 +69,13 @@ export function CaseChapter({
   const label = [number, kicker].filter(Boolean).join(' — ')
 
   return (
-    <section className={cn('px-gutter py-band-article bg-white', className)}>
+    <section className={cn('px-gutter py-band-sm lg:py-band-md bg-white', className)}>
       <div className="max-w-article mx-auto flex w-full flex-col gap-8 lg:gap-6">
         <div className="flex flex-col gap-2 lg:gap-3">
           {label ? <Eyebrow size="lg">{label}</Eyebrow> : null}
-          <h2 className="font-display text-ink text-body-heading text-balance">{title}</h2>
+          <h2 className="font-display text-ink text-body-heading lg:text-display-xl text-balance">
+            {title}
+          </h2>
         </div>
         {children ? <div className="text-fg text-body">{children}</div> : null}
         {details?.length ? (
