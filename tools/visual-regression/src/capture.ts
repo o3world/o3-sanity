@@ -158,6 +158,7 @@ async function captureStory(
   viewport: Viewport,
   dir: string,
   settleMs: number,
+  contentBounds: boolean,
 ): Promise<Shot> {
   const file = shotFile(dir, entry.id, viewport.name)
   const shot: Shot = {
@@ -212,7 +213,11 @@ async function captureStory(
     )
 
     fs.mkdirSync(path.dirname(file), { recursive: true })
-    await page.screenshot({ path: file, fullPage: true, animations: 'disabled', scale: 'css' })
+    if (contentBounds)
+      await page
+        .locator('#storybook-root')
+        .screenshot({ path: file, animations: 'disabled', scale: 'css' })
+    else await page.screenshot({ path: file, fullPage: true, animations: 'disabled', scale: 'css' })
   } catch (error) {
     shot.error = error instanceof Error ? error.message.split('\n')[0] : String(error)
   }
@@ -237,6 +242,8 @@ export async function captureAll(options: {
   assetDir: string
   /** Shared by both sides of a comparison, so both replay the same bytes. */
   assetCache: AssetCache
+  /** Figma bands use their rendered root bounds instead of the viewport minimum. */
+  contentStories?: ReadonlySet<string>
   onProgress?: (done: number, total: number) => void
 }): Promise<Shot[]> {
   const jobs = options.viewports.flatMap((viewport) =>
@@ -305,6 +312,7 @@ export async function captureAll(options: {
             job.viewport,
             options.dir,
             options.settleMs,
+            options.contentStories?.has(job.entry.id) ?? false,
           ),
         )
         done += 1

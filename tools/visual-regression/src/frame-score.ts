@@ -155,7 +155,7 @@ export function frameKey(brand: Brand | string, nodeId: string): string {
  * `stories` is the run's scope — the Storybook index, already filtered by
  * `--story` and by `vr:skip`. A story with no pairing is `unpaired` and a
  * pairing with no export is `unkeyed`: both are rows on the report, neither is
- * a failure (spec #326 → Coverage is reported, never gated).
+ * a failure here; the offline ledger gate separately enforces coverage.
  *
  * One target per (story, node). Two stories citing one frame each get their
  * own comparison against the same export, which is what a component set with
@@ -286,6 +286,7 @@ export function scoreFrame(options: {
     diffDir: path.join(options.diffDir, options.nodeId.replaceAll(':', '-')),
     threshold: options.threshold,
     maxDiffRatio: -1,
+    flattenAlpha: true,
   })
 
   return {

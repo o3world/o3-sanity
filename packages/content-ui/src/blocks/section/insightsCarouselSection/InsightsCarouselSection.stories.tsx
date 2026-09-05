@@ -79,6 +79,7 @@ export const EmptyFeed: Story = {
 }
 
 export const Mobile: Story = {
+  parameters: { design: figmaDesign('2204:1145') },
   args: seededSectionArgs('index', 'insightsCarouselSection'),
   globals: { backgrounds: { value: 'bone' }, viewport: { value: 'mobile' } },
   play: async ({ canvasElement }) => {

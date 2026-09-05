@@ -43,7 +43,7 @@ export interface FigmaClient {
   getRenderUrls(
     fileKey: string,
     nodeIds: readonly string[],
-    options: { format: AssetFormat; scale: number },
+    options: { format: AssetFormat; scale: number; absoluteBounds?: boolean; version?: string },
   ): Promise<Map<string, string | null>>
   /**
    * `/v1/files/:key/images` — the file's image library, `imageRef` → URL of the
@@ -138,12 +138,14 @@ export function createFigmaClient(
       return document.children ?? []
     },
 
-    async getRenderUrls(fileKey, nodeIds, { format, scale }) {
+    async getRenderUrls(fileKey, nodeIds, { format, scale, absoluteBounds, version }) {
       const ids = nodeIds.map(encodeURIComponent).join(',')
+      const bounds = absoluteBounds ? '&use_absolute_bounds=true' : ''
+      const revision = version ? `&version=${encodeURIComponent(version)}` : ''
       const { err, images } = await get<{
         err: string | null
         images: Record<string, string | null>
-      }>(`/images/${fileKey}?ids=${ids}&format=${format}&scale=${scale}`)
+      }>(`/images/${fileKey}?ids=${ids}&format=${format}&scale=${scale}${bounds}${revision}`)
       // A 200 with `err` set is how this endpoint reports a bad request.
       if (err) throw new Error(`Figma /images returned an error: ${err}`)
       return new Map(nodeIds.map((nodeId) => [nodeId, images[nodeId] ?? null]))

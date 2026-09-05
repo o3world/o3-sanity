@@ -17,7 +17,7 @@ A run builds Storybook twice — once for your working tree, once for the baseli
 the affected stories in headless Chromium at 402px and 1440px, diffs the pixels, and opens an HTML
 report with side-by-side, slider, onion-skin, and diff views.
 
-Nothing leaves the machine and nothing is committed. Everything lives in `.vr/`, which is gitignored.
+Ordinary pixel runs keep their artifacts in gitignored `.vr/`. Figma acceptance writes the reviewed ledger described below; its scores, source fingerprints and coverage policy are committed.
 
 ## Which host
 
@@ -165,7 +165,7 @@ Three sections, plus a coverage count:
 - **Page-level pairings** — the story cites a whole page frame. Fine for a page mockup story, a
   target for anything smaller: the tighter the node, the more a comparison means.
 - **Uncovered component sets** — tracked in the manifest, paired by no story. Printed whole, never
-  capped. Coverage is reported, never gated, so a missing pairing is a row and not a failure.
+  capped. The inventory remains read-only; the offline CI gate below checks coverage against the reviewed policy.
 
 It needs no Storybook build and no browser. A pairing is declared by
 `parameters: { design: figmaDesign('1710:2609') }`, and the node id is a string literal in every
@@ -180,7 +180,7 @@ resolve. `figmaDesign`'s second argument picks the design file, so an O3XO pairi
 ### Frame exports
 
 Each paired node is drawn once through Figma's images API and cached under
-`.vr/figma/png-x1/<brand>/<node>@<hash>.png`. The hash is the node's own `figma:sync` baseline hash,
+`.vr/figma/png-x1-absolute/<brand>/<node>@<hash>.png`. The hash is the node's own `figma:sync` baseline hash,
 so the filename **is** the cache key: an unchanged node is a hit, a node the sync re-hashed misses
 and re-fetches, and nothing else in the directory moves. Steady state is zero API calls, and the
 token is read only when there is something to fetch — a warm run needs no key at all.
@@ -227,7 +227,7 @@ authority and the browser is told to match it. The floor is 320px, the narrowest
 answers for: an icon set exports at 24px, and a 24px-wide browser renders a story no design ever
 described.
 
-**The score is the diff-pixel ratio over the comparison canvas**, through `compare.ts` unchanged —
+**The score is the diff-pixel ratio over the comparison canvas**, through `compare.ts` with Figma-only alpha normalization —
 same pixelmatch, same `--threshold`, same union canvas. Pixel identity is unreachable across two
 renderers, so the number is relative: stable run to run under the existing freeze, and therefore
 comparable against its own earlier self. That is all the ledger asks of it. Nothing in `frame-score`
@@ -298,7 +298,7 @@ captured, never scored and never red. It is listed, with the reason the ledger g
 `unaccepted-change` is red even when the score passes: a score measured against a frame the design
 has since replaced is not evidence about anything. Everything else is a row on a list — a pairing
 nobody has accepted, a node `figma:sync` does not track, a story naming no node, a node marked
-unpairable. Coverage is reported, never gated.
+unpairable. The inventory reports coverage; the offline CI gate enforces the reviewed coverage policy.
 
 **A pairing with no ledger entry is listed as `new`, not red.** There is no accepted score for it to
 have worsened past, and calling it drift would report a measurement nobody made. It is never silent:
@@ -348,7 +348,7 @@ an earlier run timed out on, and — under `--figma` — empties the frame expor
 ```
 .vr/
   base/                    detached worktree at the baseline commit
-  figma/png-x1/<brand>/    frame exports, keyed by node id and sync baseline hash
+  figma/png-x1-absolute/<brand>/    frame exports, keyed by node id and sync baseline hash
   <brand>/
     build/current/         Storybook build of the working tree
     build/base-<sha>/      Storybook build of the baseline, cached per commit
@@ -378,3 +378,82 @@ screenshots. Sharing one directory across every worktree is safe because a Sanit
 content-addressed — the hash in the path names the bytes, the transform is in the query string, and
 the cache hashes the whole URL. It is also what keeps the second brand's first run, and a fresh
 worktree's, from re-fetching 256 images.
+
+## The offline CI gate
+
+The `figma-ledger` job in `.github/workflows/checks.yml` runs:
+
+```bash
+pnpm vr --figma --brand o3 --strict --ledger-only
+```
+
+It needs no browser, Storybook build, Figma token or exports. It checks that the source and committed
+Figma hashes still match the inputs of reviewed measurements. It **does not measure new pixels or
+poll live Figma**. A design edit becomes visible to it when `figma:sync` updates the committed
+baseline. A code change, including a 10px padding edit, invalidates its affected acceptance and names
+the story and changed source file. Even an improvement needs a new review.
+
+At acceptance, the Storybook build's module graph supplies each story's transitive source files.
+The ledger hashes those files plus shared preview/build configuration, CSS, public assets, package
+manifests, lockfile and capture implementation. A new import changes the importing file; deletions
+fail too. Global source inputs come from Git's tracked and nonignored file roster, so generated
+local build products do not make the same source fail in CI. A missing graph, source fingerprint,
+tracked node, synced hash, accepted measurement or required review reason fails closed.
+
+`data/figma-coverage.json` separates three forms of evidence:
+
+- `componentCoverage` credits a tracked component through a measured frame containing a verified
+  instance. Each mapping records its ancestry evidence; standalone component strips are never
+  compared to unrelated full-page scenes.
+- `inactiveSets` records exact retired, nested or unavailable references and their reviewed design
+  hashes. They are reported exceptions, **not measured coverage**. A changed design hash requires
+  reviewing that classification again.
+- `referenceOnly` names exact story/node pairs used by stress states, interaction fixtures or
+  unavailable legacy designs. Their built source snapshots live separately in `ledger.references`,
+  without visual scores. They still fail by story name when their source changes.
+
+The policy itself is a hashed acceptance input. There is no catch-all exemption, and new references
+or component sets must be classified or measured. The O3XO app is retired; this job runs only O3 and
+does not change the existing compatibility checks. Captured prototypes are outside this gate.
+
+To review and update affected measurements:
+
+```bash
+pnpm figma:sync                                   # when Figma changed; inspect its metadata/asset diff
+pnpm vr --figma --brand o3 --story <story> --no-open
+pnpm vr --figma --brand o3 --story <story> --accept --reason "Reviewed current variance and the reason it is recorded" --no-open
+pnpm vr --figma --brand o3 --strict --ledger-only
+```
+
+Review the report before accepting. The second run takes fresh captures; `--ledger-only` cannot
+accept anything. An unscoped `--accept` also refreshes the separately reviewed reference fixtures;
+a scoped accept refreshes reference fixtures only in the measured stories' files. A reference-only
+file needs the unscoped run, which must produce real measurements. Source changes during the build or capture
+abort acceptance. Commit the resulting ledger with the reviewed code or design change. A changed
+global input requires reviewing and recapturing all affected pairs.
+
+Section story modules must export a real `parameters.design: figmaDesign(nodeId)` on their metadata
+or a canonical story. ESLint rejects a new uncited module; a comment, import or unused helper call
+does not count. Stress variants need no invented Figma counterpart. Two existing modules have exact
+provenance exceptions: StatsSection is authored from case-study content with no canonical frame;
+ListingSection has no seeded instance after ADR 0013 retired `/services`.
+
+For this baseline, 91 O3 nodes were fetched in full at Figma version `2395446971141267709`.
+The metadata-only refresh preserved product assets: all 15 asset-source hashes matched the prior
+baseline. The two heading-only text references and three deleted legacy nodes remain explicit
+reference-only entries rather than being mislabelled as frames.
+
+Figma exports use the synchronized file version and `use_absolute_bounds=true`, so overflow
+outside the frame does not widen the browser viewport. Their cache lives in
+`.vr/figma/png-x1-absolute/`; older render-bounds exports cannot be reused. Page frames keep full-page
+screenshots; component frames capture the rendered Storybook root without the viewport's empty
+minimum height. The comparison composites transparency onto the story's white canvas inside each
+image's bounds before padding the union, so real width/height differences still count. Ordinary
+merge-base visual regression keeps its existing capture and alpha behavior.
+
+Source snapshots are deduplicated in `sources`; each accepted pair or reference points to the
+snapshot captured with its build. An unscoped real acceptance also prunes removed pairings and
+references; until that review, removing a citation or story fails the offline gate by name.
+Initial acceptance records reviewed current variance as well as approved departures. A green
+freshness gate does not assert that every existing typography, image, or layout difference has
+been approved as design parity.

@@ -11,6 +11,18 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  figma-ledger:
+    name: Figma acceptance freshness
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Check the O3 design ledger without browsers or Figma access
+        run: pnpm vr --figma --brand o3 --strict --ledger-only
+
   checks:
     name: ${{ matrix.task }}
     runs-on: ubuntu-latest

@@ -46,6 +46,7 @@ export interface CachedExport {
 
 /** One node to draw, and the stories waiting on it. */
 export interface ExportRequest {
+  readonly fileVersion?: string
   readonly brand: Brand
   readonly fileKey: string
   readonly nodeId: string
@@ -169,6 +170,7 @@ export function planExports(
       nodeId: row.nodeId,
       hash,
       file: exportFile(brand, row.nodeId, hash),
+      fileVersion: baseline.version || undefined,
       stories,
     }
     const hit = cachedHashes.get(key)

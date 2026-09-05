@@ -1,27 +1,347 @@
 {
   "schemaVersion": 1,
-  "ranAt": "2026-09-03T14:54:38.292Z",
-  "fileVersion": "2394769568920405467",
+  "ranAt": "2026-09-05T04:40:03.273Z",
+  "fileVersion": "2395446971141267709",
   "shortCircuited": false,
-  "changedFrames": [],
-  "changedComponentSets": [
+  "changedFrames": [
     {
-      "nodeId": "3271:17013",
-      "name": "NavBar",
+      "nodeId": "1647:1720",
+      "name": "Section - Image",
       "route": null,
       "variant": null,
-      "codeComponent": "packages/content-ui/src/chrome/SiteNav.tsx#SiteNav",
+      "change": "added"
+    },
+    {
+      "nodeId": "1647:1721",
+      "name": "Container",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1680:2132",
+      "name": "Frame 2611286",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1683:2656",
+      "name": "Section - Case Studies",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1710:1800",
+      "name": "Frame 2611290",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1710:2609",
+      "name": "Section - Next",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1732:1409",
+      "name": "Frame 2611289",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1751:1994",
+      "name": "Blog",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1814:1636",
+      "name": "Open menu",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1864:2390",
+      "name": "Section - Partners",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1906:1039",
+      "name": "Frame 2611307",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1906:342",
+      "name": "Case studies",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1906:579",
+      "name": "Frame 2611290",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1906:900",
+      "name": "Frame 2611248",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1906:947",
+      "name": "Frame 2611249",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1925:6061",
+      "name": "Frame 2611289",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1925:6108",
+      "name": "Frame 2611206",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "1927:6435",
+      "name": "Frame 2611350",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2089:4316",
+      "name": "Section - Hero",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2124:72",
+      "name": "Device=Desktop",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2134:1352",
+      "name": "Blog",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2177:1353",
+      "name": "Device=Mobile",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2204:1145",
+      "name": "Property 1=Mobile",
+      "route": null,
+      "variant": null,
       "change": "added"
     },
     {
       "nodeId": "2225:2920",
-      "name": "2225:2920",
+      "name": "Property 1=Dark",
       "route": null,
       "variant": null,
-      "codeComponent": null,
-      "change": "removed"
+      "change": "added"
+    },
+    {
+      "nodeId": "2230:3315",
+      "name": "Section - Images",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2230:7559",
+      "name": "Section - Image",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2274:4004",
+      "name": "Section",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2332:1708",
+      "name": "Section - Sanity Client Partners",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2334:2122",
+      "name": "Frame 2611367",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2336:4477",
+      "name": "Interior Hero",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2341:2250",
+      "name": "Frame 2611383",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2354:2530",
+      "name": "Frame 2611390",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2357:2690",
+      "name": "Frame 2611390",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2358:2788",
+      "name": "Frame 2611395",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2360:2861",
+      "name": "Intro section",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2401:3185",
+      "name": "Interior Hero",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2747:4486",
+      "name": "Section",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2747:4503",
+      "name": "Container",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2748:4767",
+      "name": "Quote",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2748:4804",
+      "name": "Quote",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2749:6863",
+      "name": "Section",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2846:5480",
+      "name": "Services",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2960:6876",
+      "name": "Interior Hero – White",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2960:6885",
+      "name": "Why O3",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2960:7792",
+      "name": "section",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2975:10195",
+      "name": "section",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2975:8188",
+      "name": "Section",
+      "route": null,
+      "variant": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "2975:8355",
+      "name": "Services",
+      "route": null,
+      "variant": null,
+      "change": "added"
     }
   ],
+  "changedComponentSets": [],
   "untrackedFrames": [],
   "assets": {
     "regenerated": [],

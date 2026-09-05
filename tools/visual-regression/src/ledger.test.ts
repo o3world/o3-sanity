@@ -223,7 +223,7 @@ describe('a pairing nobody has accepted', () => {
     expect(isFailing(verdicts, { strict: false })).toBe(false)
   })
 
-  it('fails the run under --strict, which is what CI runs', () => {
+  it('fails the scored run under --strict', () => {
     const verdicts = plan({ scores: [score()] })
     expect(isFailing(verdicts, { strict: true })).toBe(true)
   })
