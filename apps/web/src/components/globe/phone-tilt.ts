@@ -1,19 +1,19 @@
-/** PROTOTYPE: does gentle phone tilt feel like the existing cursor steering?
+/** Phone tilt feeds the same easing as cursor steering.
  * No permission requests, controls, or persistence. ?tilt=off compares ambient motion.
  */
-export function startPhoneTiltPrototype(
+export function startPhoneTilt(
   canvas: HTMLCanvasElement,
   active: () => boolean,
   steer: (x: number, y: number, reset?: boolean) => void,
 ) {
   const coarse = matchMedia('(pointer: coarse)')
   if (!window.isSecureContext || !coarse.matches || !('DeviceOrientationEvent' in window)) {
-    canvas.dataset.tiltPrototype = 'unavailable'
+    canvas.dataset.phoneTilt = 'unavailable'
     return () => {
-      delete canvas.dataset.tiltPrototype
+      delete canvas.dataset.phoneTilt
     }
   }
-  canvas.dataset.tiltPrototype = 'listening'
+  canvas.dataset.phoneTilt = 'listening'
   let neutral: { beta: number; gamma: number; angle: number } | undefined
   const relative = (value: number, origin: number) => ((value - origin + 540) % 360) - 180
   const normalize = (degrees: number) =>
@@ -21,7 +21,7 @@ export function startPhoneTiltPrototype(
   const orientation = (event: DeviceOrientationEvent) => {
     if (!active() || !coarse.matches) {
       neutral = undefined
-      canvas.dataset.tiltPrototype = 'paused'
+      canvas.dataset.phoneTilt = 'paused'
       return
     }
     const { beta, gamma } = event
@@ -38,7 +38,7 @@ export function startPhoneTiltPrototype(
       normalize(dx * Math.cos(radians) + dy * Math.sin(radians)),
       normalize(dy * Math.cos(radians) - dx * Math.sin(radians)),
     )
-    canvas.dataset.tiltPrototype = 'active'
+    canvas.dataset.phoneTilt = 'active'
   }
   const reset = () => {
     neutral = undefined
@@ -48,6 +48,6 @@ export function startPhoneTiltPrototype(
   return () => {
     window.removeEventListener('deviceorientation', orientation)
     document.removeEventListener('visibilitychange', reset)
-    delete canvas.dataset.tiltPrototype
+    delete canvas.dataset.phoneTilt
   }
 }

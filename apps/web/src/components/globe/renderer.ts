@@ -3,7 +3,7 @@ import { draw, frame, init, surface } from 'vgpu'
 import type { OrbitalRendererProps } from '@o3/ui'
 import { resolveColor } from './resolve-color'
 import { createGlobeParallax } from './globe-parallax'
-import { startPhoneTiltPrototype } from './phone-tilt-prototype'
+import { startPhoneTilt } from './phone-tilt'
 import { dotShader, orbitMaskShader, orbitShader, shootingStarShader, starsShader } from './shaders'
 
 export async function startSpatialGlobe(
@@ -333,7 +333,7 @@ export async function startSpatialGlobe(
       resizeObserver.observe(hero)
       if (new URLSearchParams(location.search).get('tilt') !== 'off') {
         let lastTilt: { x: number; y: number } | undefined
-        stopTilt = startPhoneTiltPrototype(
+        stopTilt = startPhoneTilt(
           canvas,
           () => visible && !document.hidden && !isStill(),
           (x, y, reset) => {
