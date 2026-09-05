@@ -41,6 +41,9 @@ export default async function SiteLayout({ children }: ShellProps) {
 async function Shell({ children }: ShellProps) {
   const [settings, year] = await Promise.all([getSiteSettings(), currentYear()])
 
+  const prototypeChrome = process.env.NODE_ENV !== 'production'
+  const navSettings = prototypeChrome && settings ? { ...settings, utilityNavItems: [] } : settings
+
   return (
     <>
       {/* The brand-property strip sits IN the document above everything else
@@ -61,9 +64,9 @@ async function Shell({ children }: ShellProps) {
           <SpatialGlobePrototype />
         </Suspense>
       )}
-      <UtilityNav settings={settings} />
+      {!prototypeChrome && <UtilityNav settings={settings} />}
       {/* The chrome draws no mark of its own (#228); these are this app's. */}
-      <SiteNav settings={settings} brandMark={NAV_MARK} />
+      <SiteNav settings={navSettings} brandMark={NAV_MARK} />
       {/* `bg-ink` is the DOCUMENT'S GROUND, not a band. Every band paints over
           it, so the only time it is seen is beside a skeleton: the index routes
           stream their feed into a Suspense boundary whose fallback holds the
@@ -75,6 +78,7 @@ async function Shell({ children }: ShellProps) {
           in, so what shows around the skeleton matches what fills it. */}
       <main
         id="site-content"
+        data-spatial-layout={prototypeChrome ? 'true' : undefined}
         // No `utilityNavItems`, no strip — and the nav-offset token every
         // clearance under the pill derives from (hero padding, sticky tops,
         // jump-target margins) drops to the strip-less 32px the interior
@@ -82,7 +86,7 @@ async function Shell({ children }: ShellProps) {
         // `SiteNav` makes the same call for the pill itself; the two read one
         // settings fetch.
         className={
-          (settings?.utilityNavItems ?? []).length > 0
+          (navSettings?.utilityNavItems ?? []).length > 0
             ? 'bg-ink min-h-screen'
             : 'bg-ink min-h-screen [--spacing-nav-offset:32px]'
         }
@@ -95,6 +99,11 @@ async function Shell({ children }: ShellProps) {
       {/* After `<main>`, so the arriving page's bands are parsed when it reads
           them, and inline, so it reads them before the first paint. */}
       <NavInkFirstPaint />
+      {prototypeChrome && (
+        <div className="spatial-footer-properties">
+          <UtilityNav settings={settings} />
+        </div>
+      )}
       <SiteFooter settings={settings} brandMark={FOOTER_MARK} year={year} />
       {/* Nothing visible renders here for a published visitor, so `null` is an
           honest fallback; the boundary exists so `DraftTools`' request-time

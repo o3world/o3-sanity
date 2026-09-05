@@ -1,7 +1,7 @@
 /// <reference types="@webgpu/types" />
 import { draw, frame, init, surface } from 'vgpu'
 import { buildArcs, rgb } from './geometry'
-import { dotShader, orbitShader, starsShader } from './shaders'
+import { dotShader, orbitShader, shootingStarShader, starsShader } from './shaders'
 
 export async function startSpatialGlobe(
   canvas: HTMLCanvasElement,
@@ -25,14 +25,17 @@ export async function startSpatialGlobe(
   const stars = draw(gpu, {
     shader: starsShader,
     vertices: 6,
-    instances: 1900,
+    instances: 4000,
     blend: 'alpha',
   })
+  const shootingStar = draw(gpu, { shader: shootingStarShader, vertices: 6, blend: 'alpha' })
+  const previewShootingStar = new URLSearchParams(location.search).has('shooting-star-preview')
   let raf = 0
   let dead = false
   let visible = true
   let previous: number | undefined
   let elapsed = 0
+  let skyRise = 0
   let mx = 0,
     my = 0,
     sx = 0,
@@ -116,7 +119,8 @@ export async function startSpatialGlobe(
     const g = globe.getBoundingClientRect()
     const viewport = [h.width, h.height, 0, 0]
     const geometry = [g.left - h.left + g.width / 2, g.top - h.top + g.height / 2, g.width / 680, 0]
-    const motion = [isStill() ? 0 : elapsed, sx, sy, 0]
+    const scrollOrbit = isStill() ? 0 : Math.min(1, Math.max(0, scrollY / heroBounds.height)) * 0.08
+    const motion = [isStill() ? 0 : elapsed, -sx * 0.045, sy * 0.032 + scrollOrbit, 0]
     const params = {
       viewport,
       globe: geometry,
@@ -126,8 +130,19 @@ export async function startSpatialGlobe(
       color: [1, 1, 1, 1],
       dot: [0, 0, 0, 0],
     }
+    const targetSkyRise = Math.min(heroBounds.height, Math.max(0, -heroBounds.top)) * 0.12
+    skyRise = isStill() ? 0 : skyRise + (targetSkyRise - skyRise) * (1 - 0.94 ** (dt * 30))
+    const skyViewport = [h.width, h.height, skyRise, 0]
+    const skyMotion = [isStill() ? 0 : elapsed, -sx * 0.045, sy * 0.032, 0]
     stars.set({
-      p: { viewport, motion: [isStill() ? 0 : elapsed, sx, sy, 1] },
+      p: { viewport: skyViewport, motion: skyMotion, globe: geometry },
+    })
+    shootingStar.set({
+      p: {
+        viewport: skyViewport,
+        globe: geometry,
+        motion: [...skyMotion.slice(0, 3), Number(previewShootingStar)],
+      },
     })
     arcs.forEach((arc, i) => {
       // Keep the export's slow colored-orbit breathing.
@@ -149,6 +164,7 @@ export async function startSpatialGlobe(
       frame(gpu, (f) =>
         f.pass({ target, clear: [0, 0, 0, 0] }, (pass) => {
           pass.draw(stars)
+          if (!isStill()) pass.draw(shootingStar)
           rings.forEach((ring) => pass.draw(ring))
           electrons.forEach((orbit) => orbit.forEach((dot) => pass.draw(dot)))
         }),
@@ -174,7 +190,7 @@ export async function startSpatialGlobe(
   signal.addEventListener('abort', cleanup, { once: true })
   try {
     await Promise.all(
-      [...rings, ...electrons.flat(), stars].map((item) =>
+      [...rings, ...electrons.flat(), stars, shootingStar].map((item) =>
         item.compile({ colors: [navigator.gpu.getPreferredCanvasFormat()], sampleCount: 1 }),
       ),
     )

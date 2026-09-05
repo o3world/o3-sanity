@@ -1,6 +1,24 @@
 // Prototype shaders: project the original 3D orbit coordinates, then draw
 // anti-aliased screen-space ribbons and electron billboards.
-const common = /* wgsl */ `
+const camera = /* wgsl */ `
+// World-to-view rotation for a camera orbiting the globe at distance 1650.
+fn orbitView(q: vec3f, yaw: f32, pitch: f32) -> vec3f {
+  let x = q.x*cos(yaw)+q.z*sin(yaw);
+  let z = -q.x*sin(yaw)+q.z*cos(yaw);
+  return vec3f(x,q.y*cos(pitch)-z*sin(pitch),q.y*sin(pitch)+z*cos(pitch));
+}
+// Blend toward an angular lens so peripheral motion follows a rounded dome.
+// Shared by the sky and rails; the central globe keeps almost identical scale.
+fn domeProject(xy: vec2f, distance: f32, focal: f32) -> vec2f {
+  let radius = length(xy);
+  let depth = max(100.0,distance);
+  let angular = atan(radius/depth)/max(radius,0.001);
+  return xy*focal*mix(1.0/depth,angular,0.75);
+}
+`
+const common =
+  camera +
+  /* wgsl */ `
 struct Params {
   viewport: vec4f,
   globe: vec4f,
@@ -21,17 +39,11 @@ fn project(theta: f32) -> vec4f {
   let axis = normalize(vec3f(0.32,1.0,0.18));
   let angle = p.motion.x * 6.2831853 / (70.0/0.3);
   let q = original*cos(angle) + cross(axis,original)*sin(angle) + axis*dot(axis,original)*(1.0-cos(angle));
-  let a = p.motion.y*0.44;
-  let b = p.motion.z*0.32;
-  let x = q.x*cos(a)+q.z*sin(a);
-  let z0 = -q.x*sin(a)+q.z*cos(a);
-  let y = q.y*cos(b)-z0*sin(b);
-  let z = q.y*sin(b)+z0*cos(b);
-  let perspective = 1650.0/(1650.0-z);
-  let xy = vec2f(x,y)*perspective;
   let tilt = -17.0*3.14159265/180.0;
-  let rotated = vec2f(xy.x*cos(tilt)-xy.y*sin(tilt), (xy.x*sin(tilt)+xy.y*cos(tilt))*cos(11.0*3.14159265/180.0));
-  return vec4f(p.globe.xy + rotated*p.globe.z, z, perspective);
+  let posed = vec3f(q.x*cos(tilt)-q.y*sin(tilt), (q.x*sin(tilt)+q.y*cos(tilt))*cos(11.0*3.14159265/180.0), q.z);
+  let view = orbitView(posed,p.motion.y,p.motion.z);
+  let perspective = 1650.0/(1650.0-view.z);
+  return vec4f(p.globe.xy + domeProject(view.xy,1650.0-view.z,1650.0*p.globe.z), view.z, perspective);
 }
 fn clip(pixel: vec2f) -> vec4f {
   return vec4f(pixel.x/p.viewport.x*2.0-1.0, 1.0-pixel.y/p.viewport.y*2.0, 0.0, 1.0);
@@ -57,12 +69,14 @@ export const orbitShader =
   var result: Out;
   result.position = clip(point.xy+offset);
   result.uv = vec2f(c.y*(width+1.0),width);
-  result.color = vec4f(p.color.rgb,p.color.a*select(0.28,1.0,point.z>=0.0));
+  result.color = vec4f(p.color.rgb,p.color.a*mix(0.28,1.0,smoothstep(-55.0,55.0,point.z)));
   return result;
 }
 @fragment fn fs_main(i: Out) -> @location(0) vec4f {
   let coverage = 1.0-smoothstep(max(0.0,i.uv.y-0.7),i.uv.y+0.7,abs(i.uv.x));
-  return vec4f(i.color.rgb,i.color.a*coverage);
+  // Dim rails through their color, not transparency: their covered pixels
+  // still occlude the star field, including the subdued back hemisphere.
+  return vec4f(i.color.rgb*i.color.a,coverage);
 }
 `
 export const dotShader =
@@ -72,11 +86,11 @@ export const dotShader =
   let q = project(p.dot.x);
   let c = corner(vertex);
   let radius = max(0.4,p.dot.y*q.w)*p.globe.z;
-  let extent = radius + select(1.0,3.0*p.globe.z*3.0,p.dot.z>0.5);
+  let extent = radius + 1.0;
   var result: Out;
   result.position = clip(q.xy+c*extent);
   result.uv = c*extent;
-  let opacity = select(0.22,select(min(1.0,p.v.w+0.35),1.0,p.dot.z>0.5),q.z>=0.0);
+  let opacity = mix(0.22,select(min(1.0,p.v.w+0.35),1.0,p.dot.z>0.5),smoothstep(-55.0,55.0,q.z));
   result.color = vec4f(p.color.rgb*(0.5+0.5*opacity)*p.color.a,1.0);
   return result;
 }
@@ -85,10 +99,8 @@ export const dotShader =
   let radius = max(0.4,p.dot.y*q.w)*p.globe.z;
   let d = length(i.uv);
   let solid = 1.0-smoothstep(radius-0.6,radius+0.6,d);
-  let sigma = max(1.0,3.0*p.globe.z);
-  let glow = exp(-max(0.0,d-radius)*max(0.0,d-radius)/(2.0*sigma*sigma))*0.34*p.dot.z;
   // Analytic sphere normal gives a rounded surface without changing the
-  // orbit center. Opaque cores occlude the rail; only the halo is translucent.
+  // orbit center. Opaque cores occlude the rail.
   let xy=i.uv/max(radius,0.4);
   let normal=normalize(vec3f(xy.x,-xy.y,sqrt(max(0.0,1.0-dot(xy,xy)))));
   // The surrounding globe supplies broad red light from its center, rather
@@ -99,14 +111,16 @@ export const dotShader =
   let warmth=vec3f(1.0,0.063,0.0);
   let softRim=pow(1.0-normal.z,2.0)*diffuse;
   let material=i.color.rgb*(0.62+0.22*normal.z)+warmth*(0.09*diffuse+0.07*softRim);
-  let alpha=max(solid,glow);
+  let alpha=solid;
   let color=mix(i.color.rgb,material,solid);
   return vec4f(color,alpha);
 }
 `
 // Continuous spherical volume: no depth bands or screen-space particle sheets.
-export const starsShader = /* wgsl */ `
-struct Params { viewport: vec4f, motion: vec4f }
+export const starsShader =
+  camera +
+  /* wgsl */ `
+struct Params { viewport: vec4f, motion: vec4f, globe: vec4f }
 @group(0) @binding(0) var<uniform> p: Params;
 struct Out {
  @builtin(position) position: vec4f,
@@ -114,50 +128,52 @@ struct Out {
  @location(1) color: vec4f,
 }
 fn hash(n:f32) -> f32 { return fract(sin(n*127.1+311.7)*43758.5453); }
-fn turn(q:vec3f, yaw:f32, pitch:f32) -> vec3f {
- let x=q.x*cos(yaw)+q.z*sin(yaw);
- let z=-q.x*sin(yaw)+q.z*cos(yaw);
- return vec3f(x,q.y*cos(pitch)-z*sin(pitch),q.y*sin(pitch)+z*cos(pitch));
-}
 @vertex fn vs_main(@builtin(vertex_index) v:u32, @builtin(instance_index) instance:u32) -> Out {
  let n=f32(instance)+1837.0;
  let corners=array<vec2f,6>(vec2f(-1,-1),vec2f(1,-1),vec2f(-1,1),vec2f(-1,1),vec2f(1,-1),vec2f(1,1));
  let c=corners[v];
  let azimuth=hash(n)*6.2831853;
- let latitude=hash(n+1.0);
+ let latitude=hash(n+1.0)*2.0-1.0;
  let radial=sqrt(1.0-latitude*latitude);
- let radius=280.0+3500.0*pow(hash(n+2.0),0.55);
+ let backfield=instance>=1900u;
+ let radius=select(5000.0*pow(900.0,pow(hash(n+2.0),0.65)),2500000.0+2000000.0*hash(n+2.0),backfield);
  var world=vec3f(cos(azimuth)*radial,sin(azimuth)*radial,-latitude)*radius;
- let near=1.0-smoothstep(280.0,3780.0,radius);
+ let near=1.0-smoothstep(5000.0,24000.0,radius);
  let dust=smoothstep(0.42,0.94,hash(n+4.0));
  let time=p.motion.x*1.7;
  let phase=hash(n+5.0)*6.2831853;
- // A slow common circulation with local, asynchronous eddies. Drift grows
- // continuously toward nearby dust; distant lights stay almost anchored.
- world=turn(world,time*0.0018,time*0.00065);
- let flow=time*(0.035+0.018*hash(n+6.0));
- world+=vec3f(sin(flow+phase)-sin(phase),cos(flow*0.73+phase)-cos(phase),sin(flow*0.51+phase)-sin(phase))*(12.0+65.0*dust)*(0.3+near);
- // Turning the view produces curved travel across the dome. A small camera
- // translation adds perspective separation without sliding whole layers.
- world-=vec3f(p.motion.y*45.0,p.motion.z*35.0,0);
- world=turn(world,-p.motion.y*0.045,-p.motion.z*0.032);
- let distance=1450.0-world.z;
- let focal=max(p.viewport.x,p.viewport.y)*0.95;
- let perspective=focal/max(400.0,distance);
- let pixel=world.xy*perspective+vec2f(p.viewport.x*0.5,p.viewport.y*0.43);
- let proximity=clamp(1450.0/max(400.0,distance),0.2,1.3);
- let pointRadius=clamp((0.55+pow(hash(n+7.0),2.0)*1.55+dust*near*0.45)*proximity,0.38,1.85);
- let extent=max(1.2,pointRadius*4.0);
+ // Sparse nearby dust drifts independently inside the surrounding volume.
+ let flow=time*(0.035+0.018*hash(n+6.0))*(1.0+2.0*near*dust);
+ world+=vec3f(sin(flow+phase)-sin(phase),cos(flow*0.73+phase)-cos(phase),sin(flow*0.51+phase)-sin(phase))*650.0*dust*near*near;
+ // One full ambient turn per twenty-five minutes, before interactive camera motion.
+ let spinAxis=normalize(vec3f(0.16,1.0,0.08));
+ let spinAngle=p.motion.x*6.2831853/1500.0;
+ world=world*cos(spinAngle)+cross(spinAxis,world)*sin(spinAngle)+spinAxis*dot(spinAxis,world)*(1.0-cos(spinAngle));
+ world=orbitView(world,p.motion.y,p.motion.z);
+ let distance=1650.0-world.z;
+ // All six vertices take the same branch: a clipped, degenerate triangle
+ // never reaches fragment shading. Keep the existing near-plane fade.
  var o:Out;
+ o.position=vec4f(2.0,2.0,0.0,1.0);
+ o.uv=vec2f(0.0);
+ o.color=vec4f(0.0);
+ if (distance<=100.0) { return o; }
+ let focal=max(p.viewport.x,p.viewport.y)*0.5;
+ let radiusOnView=length(world.xy);
+ let angular=atan(radiusOnView/max(100.0,distance));
+ let pixel=world.xy/max(0.001,radiusOnView)*angular*focal+vec2f(p.viewport.x*0.5,p.viewport.y*0.43-p.viewport.z);
+ let depth=clamp(log(radius/5000.0)/log(900.0),0.0,1.0);
+ let pointRadius=clamp((0.55+pow(hash(n+7.0),2.0)*1.3)*mix(1.08,0.8,depth)*select(1.0,0.7,backfield),0.38,1.85);
+ let extent=max(1.2,pointRadius*4.0);
+ if (pixel.x < -extent || pixel.x > p.viewport.x+extent || pixel.y < -extent || pixel.y > p.viewport.y+extent) { return o; }
  let point=pixel+c*extent;
  o.position=vec4f(point.x/p.viewport.x*2.0-1.0,1.0-point.y/p.viewport.y*2.0,0,1);
  o.uv=c*4.0;
- let edge=1.0-smoothstep(0.74,1.0,pixel.y/p.viewport.y);
- let quiet=1.0-0.68*exp(-pow((pixel.x/p.viewport.x-0.5)*3.0,2.0))*smoothstep(0.08,0.22,pixel.y/p.viewport.y)*(1.0-smoothstep(0.5,0.72,pixel.y/p.viewport.y));
- let visibility=smoothstep(450.0,900.0,distance);
+ let edge=1.0-smoothstep(0.92,1.0,pixel.y/p.viewport.y);
+ let visibility=smoothstep(100.0,400.0,distance);
  let prominence=smoothstep(0.65,0.98,hash(n+7.0));
- let backgroundLight=(0.3+pow(hash(n+8.0),1.8)*0.7)*mix(1.0,0.8,dust)*quiet;
- let brightness=mix(backgroundLight,0.98,prominence)*edge*visibility;
+ let backgroundLight=(0.3+pow(hash(n+8.0),1.8)*0.7)*mix(1.0,0.8,dust)*mix(1.0,0.72,depth);
+ let brightness=mix(backgroundLight,0.98,prominence)*edge*visibility*select(1.0,0.72,backfield);
  o.color=vec4f(mix(vec3f(0.88,0.92,1.0),vec3f(1.0,0.95,0.88),hash(n+9.0)),brightness);
  return o;
 }
@@ -168,5 +184,49 @@ fn turn(q:vec3f, yaw:f32, pitch:f32) -> vec3f {
  let coverage=1.0-smoothstep(0.85-edge,0.85+edge,d);
  let core=1.0-smoothstep(0.0,0.7,d);
  return vec4f(mix(i.color.rgb,vec3f(1.0),core*0.75),i.color.a*coverage);
+}
+`
+
+export const shootingStarShader =
+  camera +
+  /* wgsl */ `
+struct Params { viewport: vec4f, motion: vec4f, globe: vec4f }
+@group(0) @binding(0) var<uniform> p: Params;
+struct Out {
+ @builtin(position) position: vec4f,
+ @location(0) uv: vec2f,
+ @location(1) opacity: f32,
+}
+fn hash(n:f32) -> f32 { return fract(sin(n*127.1+311.7)*43758.5453); }
+fn skyPoint(world:vec3f) -> vec2f {
+ let view=orbitView(world,p.motion.y,p.motion.z);
+ let r=length(view.xy);
+ let angle=atan(r/max(100.0,1650.0-view.z));
+ return view.xy/max(r,0.001)*angle*max(p.viewport.x,p.viewport.y)*0.5+vec2f(p.viewport.x*0.5,p.viewport.y*0.43-p.viewport.z);
+}
+@vertex fn vs_main(@builtin(vertex_index) vertex:u32) -> Out {
+ let cycle=select(floor(p.motion.x/32.0),0.0,p.motion.w>0.5);
+ let age=select(p.motion.x-cycle*32.0-(8.0+hash(cycle+41.0)*10.0),0.14,p.motion.w>0.5);
+ let streakVisible=age>=0.0 && age<0.5;
+ let corners=array<vec2f,6>(vec2f(0,-1),vec2f(1,-1),vec2f(0,1),vec2f(0,1),vec2f(1,-1),vec2f(1,1));
+ let c=corners[vertex];
+ let focal=max(p.viewport.x,p.viewport.y)*0.5;
+ let offset=vec2f((hash(cycle+3.0)-0.5)*p.viewport.x*0.7,(hash(cycle+5.0)*0.25-0.35)*p.viewport.y);
+ let angle=length(offset)/focal;
+ let world=vec3f(normalize(offset)*sin(angle),-cos(angle))*500000.0;
+ let direction=normalize(vec3f(select(-1.0,1.0,hash(cycle+7.0)>0.5),0.3+hash(cycle+9.0)*0.35,0));
+ let head=skyPoint(world+direction*clamp(age,0.0,0.5)*350000.0);
+ let tail=skyPoint(world+direction*(clamp(age,0.0,0.5)*350000.0-30000.0));
+ let tangent=normalize(head-tail);
+ let point=mix(tail,head,c.x)+vec2f(-tangent.y,tangent.x)*c.y*0.8;
+ var o:Out;
+ o.position=vec4f(point.x/p.viewport.x*2.0-1.0,1.0-point.y/p.viewport.y*2.0,0,1);
+ o.uv=c;
+ o.opacity=select(0.0,smoothstep(0.0,0.035,age)*(1.0-smoothstep(0.28,0.5,age))*0.65,streakVisible);
+ return o;
+}
+@fragment fn fs_main(i:Out)->@location(0) vec4f {
+ let coverage=1.0-smoothstep(0.15,1.0,abs(i.uv.y));
+ return vec4f(0.88,0.94,1.0,coverage*pow(i.uv.x,1.6)*i.opacity);
 }
 `
