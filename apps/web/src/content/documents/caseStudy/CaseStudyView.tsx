@@ -142,13 +142,19 @@ export function CaseStudyView(props: CaseStudyViewProps) {
       />
 
       {/* The narrative, in the order it was authored (ADR 0018). */}
-      {runs.map((run) =>
-        run.kind === 'chapter' ? (
+      {runs.map((run) => {
+        // The IRONMAN tracer is the opt-in; broader rollout follows its review.
+        const sequence =
+          run.kind === 'chapter' &&
+          _id.replace(/^drafts\./, '') === 'caseStudy-wp-10028' &&
+          run.number === '01'
+        return run.kind === 'chapter' ? (
           <CaseChapter
             key={run.chapter._key}
             number={run.number}
             kicker={run.chapter.kicker}
             title={run.chapter.title}
+            sequence={sequence}
             details={run.chapter.details?.map((detail) => ({
               // Sanity's array-member key, carried so a reordered row keeps
               // its React identity rather than inheriting the one at its
@@ -158,7 +164,11 @@ export function CaseStudyView(props: CaseStudyViewProps) {
               body: detail.body,
             }))}
           >
-            <PortableTextBody value={run.chapter.body} className="max-w-none" />
+            <PortableTextBody
+              value={run.chapter.body}
+              revealLead={sequence}
+              className="max-w-none"
+            />
           </CaseChapter>
         ) : (
           <Blocks
@@ -168,8 +178,8 @@ export function CaseStudyView(props: CaseStudyViewProps) {
             documentType="caseStudy"
             fieldPath="story"
           />
-        ),
-      )}
+        )
+      })}
 
       {/* No frame region — the schema's own "What we shipped" label. */}
       {deliverables?.length ? (
