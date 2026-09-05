@@ -80,3 +80,50 @@
   top: 16px;
   bottom: auto;
 }
+
+/* Static, fine dithering breaks up quantized dark glow bands without blur. */
+[data-spatial-layout] .hero-band:has(.hero-lead)::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Cpath fill='%23808080' filter='url(%23n)' d='M0 0h192v192H0z'/%3E%3C/svg%3E");
+  background-size: 192px 192px;
+  mix-blend-mode: soft-light;
+  opacity: 0.12;
+  mask-image: linear-gradient(to bottom, transparent 25%, black 70%);
+}
+
+/* Contract bloom offsets, widths, and blur around the 340-unit limb. */
+[data-spatial-layout]
+  .hero-band:has(.hero-lead)
+  .hero-lag
+  > div
+  > svg:last-child
+  > circle:nth-of-type(1) {
+  r: 343px;
+  stroke-width: 7px;
+  filter: blur(7px) !important;
+}
+[data-spatial-layout]
+  .hero-band:has(.hero-lead)
+  .hero-lag
+  > div
+  > svg:last-child
+  > circle:nth-of-type(2) {
+  r: 342px;
+  stroke-width: 10px;
+  filter: blur(9px) !important;
+}
+
+[data-spatial-layout]
+  .hero-band:has(.hero-lead)
+  .hero-lag
+  > div
+  > svg:last-child
+  > circle:nth-of-type(3) {
+  r: 341px;
+  stroke-width: 1.5px;
+  filter: blur(3px) !important;
+}

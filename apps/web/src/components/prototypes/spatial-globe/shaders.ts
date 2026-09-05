@@ -53,7 +53,7 @@ fn corner(index: u32) -> vec2f {
   return corners[index%6u];
 }
 `
-export const orbitShader =
+const orbitVertex =
   common +
   /* wgsl */ `
 @vertex fn vs_main(@builtin(vertex_index) vertex: u32) -> Out {
@@ -72,11 +72,21 @@ export const orbitShader =
   result.color = vec4f(p.color.rgb,p.color.a*mix(0.28,1.0,smoothstep(-55.0,55.0,point.z)));
   return result;
 }
+`
+export const orbitMaskShader =
+  orbitVertex +
+  /* wgsl */ `
 @fragment fn fs_main(i: Out) -> @location(0) vec4f {
   let coverage = 1.0-smoothstep(max(0.0,i.uv.y-0.7),i.uv.y+0.7,abs(i.uv.x));
-  // Dim rails through their color, not transparency: their covered pixels
-  // still occlude the star field, including the subdued back hemisphere.
-  return vec4f(i.color.rgb*i.color.a,coverage);
+  return vec4f(0.0,0.0,0.0,coverage);
+}
+`
+export const orbitShader =
+  orbitVertex +
+  /* wgsl */ `
+@fragment fn fs_main(i: Out) -> @location(0) vec4f {
+  let coverage = 1.0-smoothstep(max(0.0,i.uv.y-0.7),i.uv.y+0.7,abs(i.uv.x));
+  return vec4f(i.color.rgb,i.color.a*coverage);
 }
 `
 export const dotShader =
@@ -120,7 +130,7 @@ export const dotShader =
 export const starsShader =
   camera +
   /* wgsl */ `
-struct Params { viewport: vec4f, motion: vec4f, globe: vec4f }
+struct Params { viewport: vec4f, motion: vec4f, globe: vec4f, rotation: vec4f }
 @group(0) @binding(0) var<uniform> p: Params;
 struct Out {
  @builtin(position) position: vec4f,
@@ -135,20 +145,31 @@ fn hash(n:f32) -> f32 { return fract(sin(n*127.1+311.7)*43758.5453); }
  let azimuth=hash(n)*6.2831853;
  let latitude=hash(n+1.0)*2.0-1.0;
  let radial=sqrt(1.0-latitude*latitude);
- let backfield=instance>=1900u;
- let radius=select(5000.0*pow(900.0,pow(hash(n+2.0),0.65)),2500000.0+2000000.0*hash(n+2.0),backfield);
+ let nearbyDust=instance>=4000u;
+ let backfield=instance>=1900u && !nearbyDust;
+ let radius=select(select(10000.0*pow(900.0,pow(hash(n+2.0),0.65)),5000000.0+4000000.0*hash(n+2.0),backfield),8000.0+12000.0*hash(n+2.0),nearbyDust);
  var world=vec3f(cos(azimuth)*radial,sin(azimuth)*radial,-latitude)*radius;
  let near=1.0-smoothstep(5000.0,24000.0,radius);
- let dust=smoothstep(0.42,0.94,hash(n+4.0));
+ let dust=select(smoothstep(0.42,0.94,hash(n+4.0)),0.7+0.3*hash(n+4.0),nearbyDust);
  let time=p.motion.x*1.7;
  let phase=hash(n+5.0)*6.2831853;
  // Sparse nearby dust drifts independently inside the surrounding volume.
  let flow=time*(0.035+0.018*hash(n+6.0))*(1.0+2.0*near*dust);
  world+=vec3f(sin(flow+phase)-sin(phase),cos(flow*0.73+phase)-cos(phase),sin(flow*0.51+phase)-sin(phase))*650.0*dust*near*near;
- // One full ambient turn per twenty-five minutes, before interactive camera motion.
- let spinAxis=normalize(vec3f(0.16,1.0,0.08));
- let spinAngle=p.motion.x*6.2831853/1500.0;
- world=world*cos(spinAngle)+cross(spinAxis,world)*sin(spinAngle)+spinAxis*dot(spinAxis,world)*(1.0-cos(spinAngle));
+ // Seeded local wander: smooth independent paths instead of synchronized drift.
+ if (nearbyDust) {
+   let phaseY=hash(n+12.0)*6.2831853;
+   let phaseZ=hash(n+13.0)*6.2831853;
+   let wander=time*(0.045+0.12*hash(n+14.0));
+   let range=180.0+420.0*hash(n+15.0);
+   world+=vec3f(
+     sin(wander+phase)-sin(phase),
+     sin(wander*(0.55+hash(n+16.0))+phaseY)-sin(phaseY),
+     sin(wander*(0.35+hash(n+17.0)*0.7)+phaseZ)-sin(phaseZ)
+   )*range;
+ }
+ // Accumulated orientation retains the most recent cursor-directed spin.
+ world+=2.0*cross(p.rotation.xyz,cross(p.rotation.xyz,world)+p.rotation.w*world);
  world=orbitView(world,p.motion.y,p.motion.z);
  let distance=1650.0-world.z;
  // All six vertices take the same branch: a clipped, degenerate triangle
@@ -162,7 +183,7 @@ fn hash(n:f32) -> f32 { return fract(sin(n*127.1+311.7)*43758.5453); }
  let radiusOnView=length(world.xy);
  let angular=atan(radiusOnView/max(100.0,distance));
  let pixel=world.xy/max(0.001,radiusOnView)*angular*focal+vec2f(p.viewport.x*0.5,p.viewport.y*0.43-p.viewport.z);
- let depth=clamp(log(radius/5000.0)/log(900.0),0.0,1.0);
+ let depth=clamp(log(radius/10000.0)/log(900.0),0.0,1.0);
  let pointRadius=clamp((0.55+pow(hash(n+7.0),2.0)*1.3)*mix(1.08,0.8,depth)*select(1.0,0.7,backfield),0.38,1.85);
  let extent=max(1.2,pointRadius*4.0);
  if (pixel.x < -extent || pixel.x > p.viewport.x+extent || pixel.y < -extent || pixel.y > p.viewport.y+extent) { return o; }
