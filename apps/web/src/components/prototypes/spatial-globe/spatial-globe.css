@@ -76,3 +76,30 @@
 [data-spatial-still] .hero-lag svg * {
   animation: none !important;
 }
+
+/* Let the same sky reach the utility links, keeping the globe's existing crop. */
+[data-spatial-chrome] .hero-band {
+  overflow: visible;
+}
+[data-spatial-chrome] .hero-band .hero-lag {
+  overflow: hidden;
+}
+[data-spatial-chrome] nav[aria-label='O3 properties'] {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border-color: transparent;
+}
+[data-spatial-chrome] #site-nav:not([data-ink='dark']) > nav {
+  background: color-mix(
+    in srgb,
+    var(--color-scrim-pill) calc(var(--spatial-nav-solid, 0) * 100%),
+    transparent
+  );
+  border-color: var(--color-on-ink-line);
+  backdrop-filter: blur(calc(16px * var(--spatial-nav-solid, 0))) saturate(1.25);
+}
+
+[data-spatial-chrome] body {
+  background: var(--color-ink);
+}

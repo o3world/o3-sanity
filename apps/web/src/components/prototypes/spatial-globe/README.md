@@ -23,3 +23,5 @@ Rendered in the in-app browser at desktop and 402px mobile widths. Confirmed the
 This preview is for visual judgment. GPU device-loss recovery, physical mobile performance, precise image parity, and production bundle budgets have not been verified. The hidden SVG animation remains mounted while the GPU scene runs, so this prototype is not a renderer-performance benchmark. Port 3611 uses published content; draft authentication was not configured there. Nothing was merged, pushed, or deployed.
 
 Sources: `packages/ui/src/components/orbital-sphere.tsx`, the official globe exports, `docs/research/globe-frame-cadence-and-vgpu.md`, and vgpu's public API documentation. Visual verdict pending.
+
+Follow-up: Spatial stars now extends behind the utility logos. The nav keeps its existing border while its background and blur are transparent at the top, returning progressively on scroll. Ambient dust and circulation run at 1.7 times the initial speed. These changes are scoped to the spatial comparison and restore on teardown.

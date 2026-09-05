@@ -157,7 +157,7 @@ fn turn(q:vec3f, yaw:f32, pitch:f32) -> vec3f {
  var world=vec3f(cos(azimuth)*radial,sin(azimuth)*radial,-latitude)*radius;
  let near=1.0-smoothstep(500.0,3100.0,radius);
  let dust=smoothstep(0.42,0.94,hash(n+4.0));
- let time=p.motion.x;
+ let time=p.motion.x*1.7;
  let phase=hash(n+5.0)*6.2831853;
  // A slow common circulation with local, asynchronous eddies. Drift grows
  // continuously toward nearby dust; distant lights stay almost anchored.

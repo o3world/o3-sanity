@@ -54,6 +54,8 @@ export async function startSpatialGlobe(
     document.removeEventListener('visibilitychange', wake)
     reduced.removeEventListener('change', wake)
     delete hero.dataset.spatialReady
+    delete document.documentElement.dataset.spatialChrome
+    document.documentElement.style.removeProperty('--spatial-nav-solid')
     delete hero.dataset.spatialStill
     canvas.style.opacity = '0'
     gpu.dispose()
@@ -106,7 +108,13 @@ export async function startSpatialGlobe(
       sx = 0
       sy = 0
     }
-    const h = hero.getBoundingClientRect()
+    const heroBounds = hero.getBoundingClientRect()
+    if (mode === 'depth') {
+      const overhang = Math.max(0, heroBounds.top + scrollY)
+      canvas.style.top = `-${overhang}px`
+      canvas.style.height = `calc(100% + ${overhang}px)`
+    }
+    const h = canvas.getBoundingClientRect()
     const g = globe.getBoundingClientRect()
     const viewport = [h.width, h.height, 0, 0]
     const geometry = [g.left - h.left + g.width / 2, g.top - h.top + g.height / 2, g.width / 680, 0]
@@ -153,6 +161,14 @@ export async function startSpatialGlobe(
         }),
       )
       hero.dataset.spatialReady = 'true'
+      if (mode === 'depth') {
+        document.documentElement.dataset.spatialChrome = 'true'
+        const mobile = innerWidth < 1024
+        document.documentElement.style.setProperty(
+          '--spatial-nav-solid',
+          String(Math.min(1, Math.max(0, (scrollY - (mobile ? 30 : 100)) / (mobile ? 130 : 240)))),
+        )
+      }
       canvas.style.opacity = '1'
       canvas.dataset.frame = String(Math.round(elapsed * 1000))
       if (!isStill()) raf = requestAnimationFrame(tick)
