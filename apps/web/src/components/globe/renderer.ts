@@ -3,6 +3,7 @@ import { draw, frame, init, surface } from 'vgpu'
 import type { OrbitalRendererProps } from '@o3/ui'
 import { resolveColor } from './resolve-color'
 import { createGlobeParallax } from './globe-parallax'
+import { startPhoneTiltPrototype } from './phone-tilt-prototype'
 import { dotShader, orbitMaskShader, orbitShader, shootingStarShader, starsShader } from './shaders'
 
 export async function startSpatialGlobe(
@@ -60,6 +61,7 @@ export async function startSpatialGlobe(
       : undefined
     const previewShootingStar = new URLSearchParams(location.search).has('shooting-star-preview')
     let parallax: ReturnType<typeof createGlobeParallax> | undefined
+    let stopTilt: (() => void) | undefined
     let raf = 0
     let dead = false
     let ready = false
@@ -90,6 +92,7 @@ export async function startSpatialGlobe(
       signal.removeEventListener('abort', cleanup)
       cancelAnimationFrame(raf)
       parallax?.dispose()
+      stopTilt?.()
       observer.disconnect()
       resizeObserver.disconnect()
       window.removeEventListener('pointermove', pointer)
@@ -328,6 +331,29 @@ export async function startSpatialGlobe(
       observer.observe(options.stars ? hero : (globe.closest('section') ?? globe))
       resizeObserver.observe(globe)
       resizeObserver.observe(hero)
+      if (new URLSearchParams(location.search).get('tilt') !== 'off') {
+        let lastTilt: { x: number; y: number } | undefined
+        stopTilt = startPhoneTiltPrototype(
+          canvas,
+          () => visible && !document.hidden && !isStill(),
+          (x, y, reset) => {
+            if (reset) lastTilt = undefined
+            if (lastTilt) {
+              const dx = x - lastTilt.x
+              const dy = y - lastTilt.y
+              const distance = Math.hypot(dx, dy)
+              if (distance >= 0.02) {
+                targetSpinX = dy / distance
+                targetSpinY = -dx / distance
+                targetSpinZ = 0
+                lastTilt = { x, y }
+              }
+            } else lastTilt = { x, y }
+            mx = x
+            my = y
+          },
+        )
+      }
       window.addEventListener('pointermove', pointer, { passive: true })
       window.addEventListener('resize', wake, { passive: true })
       window.addEventListener('scroll', wake, { passive: true })
