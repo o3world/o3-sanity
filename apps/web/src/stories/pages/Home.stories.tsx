@@ -35,7 +35,7 @@ export const Desktop: Story = {
 
 /**
  * `1814:1618`. Every composition switch in the page fires between these two
- * stories — the nav collapses from a 900px pill to a full-width bar, the hero
+ * stories — the nav switches from a content-aligned pill to a full-width bar, the hero
  * goes flush left, the partners strip wraps to two plates across instead of
  * clipping one row of six, and the rail panels restack. ADR 0006 is the record
  * of which of those are deliberate.

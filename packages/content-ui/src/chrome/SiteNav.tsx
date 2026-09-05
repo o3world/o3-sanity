@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import Link from 'next/link'
 
 import { SurfaceProvider } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
@@ -31,7 +30,7 @@ interface SiteNavProps {
  *
  * |        | 402 (`1814:1630`)                 | 1440 (`2225:2920`)                |
  * | ------ | --------------------------------- | --------------------------------- |
- * | Shape  | full-width square bar, `8px 20px` | 900 × 80 bar, radius 12, `16px`   |
+ * | Shape  | full-width square bar, `8px 20px` | structural-width bar, `16px`     |
  * | Mark   | 64 (`1814:1631`)                  | 48 (`2225:2915`)                  |
  * | Links  | behind "Open menu"                | five inline, in a 643px row       |
  * | Button | inline, beside the hamburger      | inline, ending the row            |
@@ -70,15 +69,10 @@ interface SiteNavProps {
  * the resting token for `<main>` in the same breath so the heroes follow.
  * Below `lg` there is no strip and the bar still starts at `top-0`.
  *
- * **The cap is 900px, read off the rebuilt `NavBar` (`2225:2920`) on
- * 2026-08-14** (#91). The component itself is 900 × 80, and every canonical
- * frame carrying the new chrome instances it at exactly that width, unstretched
- * — Home `2225:2967`, Insights index `2336:4382`, Sanity `2332:1679`, Solutions
- * `2354:2584`, each 900px inside a 1440 frame with 270px of margin either side.
- * (Sanity's sits 3px right of centre, 273 / 267. That is a placement nudge in
- * one frame, not a second width.) The pill runs narrower than the Home hero's
- * heading and subheading boxes — 978 and 962 (`2089:4313`, `2089:4318`) — so a
- * bar under its headline is the frame's composition, not a defect to fix.
+ * **O3's desktop pill follows the structural content edges** (#444, Josh,
+ * 2026-09-04). This deliberately supersedes the 900px width in `2225:2920`
+ * without changing height, padding, radii or link spacing. `--container-nav`
+ * reads the section cap for O3; the retired brand retains its 900px cap.
  *
  * ── INK FLIP ───────────────────────────────────────────────────────────────
  *
@@ -201,20 +195,17 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
           // this element carries the whole bar — the links, the hamburger's
           // `currentColor` bars and anything else added to the row inherit the
           // value mid-interpolation, and each keeps its own hover timing.
-          className="bg-scrim lg:bg-scrim-pill lg:border-on-ink-line group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-r-nav duration-(--duration-ink) group-data-[ink=dark]:bg-scrim-light flex items-center justify-between px-5 py-2 text-white backdrop-blur-[16px] backdrop-saturate-[1.25] transition-[background-color,border-color,color] ease-out [view-transition-name:site-nav] max-lg:group-data-[ink=dark]:border-b lg:mx-auto lg:w-full lg:max-w-[900px] lg:rounded-l-[40px] lg:border lg:px-4 lg:py-4"
+          className="bg-scrim lg:bg-scrim-pill lg:border-on-ink-line group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-r-nav duration-(--duration-ink) group-data-[ink=dark]:bg-scrim-light lg:max-w-nav flex items-center justify-between px-5 py-2 text-white backdrop-blur-[16px] backdrop-saturate-[1.25] transition-[background-color,border-color,color] ease-out [view-transition-name:site-nav] max-lg:group-data-[ink=dark]:border-b lg:mx-auto lg:w-full lg:rounded-l-[40px] lg:border lg:px-4 lg:py-4"
         >
-          <Link
+          <NavLink
             href="/"
             aria-label={`${settings?.title ?? 'O3'} home`}
             className="focus-visible:ring-brand shrink-0 focus-visible:outline-none focus-visible:ring-2"
           >
-            {/* No text color here on purpose: a mark drawn in `currentColor`
-              inherits the bar's ink and rides the bar's own 350ms transition
-              rather than carrying a second pair of classes. That is what lands
-              O3's on `--color-fg` (#232323) when flipped — the same ink as the
-              links, and the exact value the prototype's nav mark flips to. */}
+            {/* The mark inherits the nav ink off-home and the existing
+              current-page brand red on the homepage (#444). */}
             {brandMark}
-          </Link>
+          </NavLink>
 
           {/* 1440: the 643px row (`2225:2740`), five links and the button at a
             48px gap. `contents` promotes the list items to flex children, so

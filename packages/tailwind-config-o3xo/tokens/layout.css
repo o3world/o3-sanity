@@ -52,4 +52,5 @@
   --spacing-gutter-tight: clamp(16px, calc(7.707vw - 14.98px), 96px);
   --container-section: 78rem;
   --container-section-half: 39rem;
+  --container-nav: 56.25rem;
 }
