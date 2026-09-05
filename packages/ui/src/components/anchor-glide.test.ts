@@ -10,7 +10,28 @@ import { ANCHOR_GLIDE_SCRIPT } from './anchor-glide'
  * still in flight and a smooth root turns it into an animation nothing
  * finishes.
  */
-const run = () => new Function(ANCHOR_GLIDE_SCRIPT)()
+let events: EventTarget
+let frames: Map<number, FrameRequestCallback>
+let nextFrame: number
+const run = () =>
+  new Function(
+    'addEventListener',
+    'requestAnimationFrame',
+    'cancelAnimationFrame',
+    ANCHOR_GLIDE_SCRIPT,
+  )(
+    events.addEventListener.bind(events),
+    (callback: FrameRequestCallback) => {
+      frames.set(++nextFrame, callback)
+      return nextFrame
+    },
+    (id: number) => frames.delete(id),
+  )
+const paint = () => {
+  const pending = [...frames.values()]
+  frames.clear()
+  pending.forEach((callback) => callback(0))
+}
 
 const armed = () => document.documentElement.hasAttribute('data-anchor-glide')
 
@@ -18,6 +39,9 @@ const readyState = (value: DocumentReadyState) =>
   Object.defineProperty(document, 'readyState', { value, configurable: true })
 
 beforeEach(() => {
+  events = new EventTarget()
+  frames = new Map()
+  nextFrame = 0
   document.documentElement.removeAttribute('data-anchor-glide')
   readyState('loading')
 })
@@ -32,7 +56,7 @@ describe('the anchor-glide gate', () => {
   it('arms on load, so the fragment scroll is instant and every jump after it glides', () => {
     run()
 
-    window.dispatchEvent(new Event('load'))
+    events.dispatchEvent(new Event('load'))
 
     expect(armed()).toBe(true)
   })
@@ -42,6 +66,35 @@ describe('the anchor-glide gate', () => {
 
     run()
 
+    expect(armed()).toBe(true)
+  })
+
+  it('keeps native history restoration instant, then restores anchor gliding', () => {
+    readyState('complete')
+    run()
+    events.dispatchEvent(new Event('popstate'))
+    expect(armed()).toBe(false)
+    paint()
+    expect(armed()).toBe(true)
+  })
+
+  it('keeps rapid history traversals inside one restoration frame', () => {
+    readyState('complete')
+    run()
+    events.dispatchEvent(new Event('popstate'))
+    events.dispatchEvent(new Event('popstate'))
+    expect(armed()).toBe(false)
+    expect(frames.size).toBe(1)
+    paint()
+    expect(armed()).toBe(true)
+  })
+
+  it('does not arm anchor gliding on a history event before load', () => {
+    run()
+    events.dispatchEvent(new Event('popstate'))
+    paint()
+    expect(armed()).toBe(false)
+    events.dispatchEvent(new Event('load'))
     expect(armed()).toBe(true)
   })
 })

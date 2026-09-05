@@ -334,10 +334,11 @@ test('the destination nav skin is complete on the first arriving frame', async (
     button: desktop ? 'rgb(10, 10, 11)' : null,
     buttonBackground: desktop ? 'rgb(255, 255, 255)' : null,
   }
-  const atTop = desktop ? 124 : 0
   const pinned = desktop ? 32 : 0
   await page.goto('/work')
   await ordinaryPage(page)
+  const spatial = (await page.locator('main').getAttribute('data-spatial-layout')) === 'true'
+  const atTop = desktop ? (spatial ? 32 : 124) : 0
   await page.mouse.move(1, 500)
   const arrival = await navigate(
     page,
@@ -427,20 +428,28 @@ test('the destination nav skin is complete on the first arriving frame', async (
     body: JSON.stringify({ before: scrollBefore, after: await page.evaluate(() => scrollY) }),
     contentType: 'application/json',
   })
-  // Native history scroll can land after the route's layout effect. Keep
-  // first-frame colors strict, but let the existing scroll watcher settle
-  // the pin. The separate deep-link case checks restoration itself strictly.
+  // The browser restores the saved position without a smooth-scroll sweep.
+  // The skin must already match; the pin's frame-coalesced writer can settle.
+  expect(back.readyScrollY, 'history restores the saved position before ready paint').toBeCloseTo(
+    scrollBefore,
+    0,
+  )
   expect(back.readyNav).toMatchObject(lightSkin)
   const backScroll = await page.evaluate(() => scrollY)
   await expect
     .poll(async () => (await primary(page).boundingBox())!.y)
-    .toBe(desktop ? Math.max(32, 124 - backScroll) : 0)
+    .toBe(desktop ? Math.max(32, atTop - backScroll) : 0)
   const forward = await navigate(page, '/work', () => page.goForward(), info)
+  expect(forward.readyScrollY, 'Forward restores Work at its saved top position').toBe(0)
   expect(forward.readyNav).toMatchObject(darkSkin)
   const forwardScroll = await page.evaluate(() => scrollY)
   await expect
     .poll(async () => (await primary(page).boundingBox())!.y)
-    .toBe(desktop ? Math.max(32, 124 - forwardScroll) : 0)
+    .toBe(desktop ? Math.max(32, atTop - forwardScroll) : 0)
+  await expect(page.locator('html')).toHaveCSS(
+    'scroll-behavior',
+    info.project.use.contextOptions?.reducedMotion === 'reduce' ? 'auto' : 'smooth',
+  )
 })
 
 test('a manual mobile menu exit finishes when reduced motion changes', async ({ page }, info) => {

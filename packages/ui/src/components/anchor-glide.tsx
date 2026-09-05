@@ -11,11 +11,29 @@
  * they were linked to (#156). Instant on arrival, smooth thereafter, so a
  * pasted deep link lands and an in-page jump link still glides.
  *
+ * Native history restores scroll after popstate. Leave smoothing off for that
+ * restoration, before the router handles the event, then re-arm on the next
+ * frame. Otherwise the saved position animates through the arriving page and
+ * the navigation samples a transient ground (#445). This changes no position
+ * or history entry; native restoration still owns both.
+ *
  * An inline script rather than an effect: hydration lands before `load` on an
  * image-heavy page, so an effect would arm the glide inside the window the gate
  * exists to cover.
  */
-const ARM_AFTER_LOAD = `(function(){var a=function(){document.documentElement.setAttribute('data-anchor-glide','')};if(document.readyState==='complete'){a()}else{addEventListener('load',a,{once:true})}})()`
+const ARM_AFTER_LOAD = `(function(){
+  var root=document.documentElement;
+  var restore=0;
+  var arm=function(){root.setAttribute('data-anchor-glide','')};
+  if(document.readyState==='complete'){arm()}else{addEventListener('load',arm,{once:true})}
+  addEventListener('popstate',function(){
+    if(!root.hasAttribute('data-anchor-glide')&&!restore)return;
+    root.removeAttribute('data-anchor-glide');
+    void getComputedStyle(root).scrollBehavior;
+    cancelAnimationFrame(restore);
+    restore=requestAnimationFrame(function(){restore=0;arm()});
+  },true);
+})()`
 
 export function AnchorGlide() {
   return <script dangerouslySetInnerHTML={{ __html: ARM_AFTER_LOAD }} />
