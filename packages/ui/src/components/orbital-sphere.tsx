@@ -582,6 +582,7 @@ export function OrbitalSphere({
           preset={preset}
           motion={motion}
           opacity={palette.opacity}
+          electronOpacity={palette.electronOpacity}
           onReady={setGpuReady}
         />
       )}

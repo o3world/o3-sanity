@@ -10,6 +10,7 @@ export interface OrbitalRendererProps {
   preset: GlobePreset
   motion: 'still' | 'orbit'
   opacity: number
+  electronOpacity: number
   onReady: (ready: boolean) => void
 }
 

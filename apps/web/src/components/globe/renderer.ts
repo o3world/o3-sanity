@@ -9,7 +9,10 @@ export async function startSpatialGlobe(
   hero: HTMLElement,
   globe: HTMLElement,
   signal: AbortSignal,
-  options: Pick<OrbitalRendererProps, 'arcs' | 'motion' | 'preset' | 'opacity' | 'onReady'> & {
+  options: Pick<
+    OrbitalRendererProps,
+    'arcs' | 'motion' | 'preset' | 'opacity' | 'electronOpacity' | 'onReady'
+  > & {
     stars: boolean
   },
 ) {
@@ -192,7 +195,12 @@ export async function startSpatialGlobe(
     const h = canvas.getBoundingClientRect()
     const g = globe.getBoundingClientRect()
     const viewport = [h.width, h.height, 0, 0]
-    const geometry = [g.left - h.left + g.width / 2, g.top - h.top + g.height / 2, g.width / 680, 0]
+    const geometry = [
+      g.left - h.left + g.width / 2,
+      g.top - h.top + g.height / 2,
+      g.width / 680,
+      options.electronOpacity,
+    ]
     const scrollOrbit =
       isStill() || !options.stars ? 0 : Math.min(1, Math.max(0, scrollY / heroBounds.height)) * 0.08
     const motion = [isStill() ? 0 : elapsed, -sx * 0.045, sy * 0.032 + scrollOrbit, 0]

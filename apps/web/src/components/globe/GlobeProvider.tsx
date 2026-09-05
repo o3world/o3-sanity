@@ -7,7 +7,15 @@ import { OrbitalRendererContext } from '@o3/ui'
 import type { OrbitalRendererProps } from '@o3/ui'
 import './globe.css'
 
-function GlobeRenderer({ hostRef, arcs, preset, motion, opacity, onReady }: OrbitalRendererProps) {
+function GlobeRenderer({
+  hostRef,
+  arcs,
+  preset,
+  motion,
+  opacity,
+  electronOpacity,
+  onReady,
+}: OrbitalRendererProps) {
   const [placement, setPlacement] = useState<{ target: HTMLElement; stars: boolean } | null>(null)
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
   useEffect(() => {
@@ -39,6 +47,7 @@ function GlobeRenderer({ hostRef, arcs, preset, motion, opacity, onReady }: Orbi
             preset,
             motion,
             opacity,
+            electronOpacity,
             onReady,
             stars: placement.stars,
           })
@@ -47,7 +56,7 @@ function GlobeRenderer({ hostRef, arcs, preset, motion, opacity, onReady }: Orbi
         if (!controller.signal.aborted) onReady(false)
       })
     return () => controller.abort()
-  }, [canvas, placement, hostRef, arcs, preset, motion, opacity, onReady])
+  }, [canvas, placement, hostRef, arcs, preset, motion, opacity, electronOpacity, onReady])
   return placement
     ? createPortal(
         <canvas

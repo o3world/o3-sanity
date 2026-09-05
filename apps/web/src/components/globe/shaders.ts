@@ -100,8 +100,8 @@ export const dotShader =
   var result: Out;
   result.position = clip(q.xy+c*extent);
   result.uv = c*extent;
-  let opacity = mix(0.22,select(min(1.0,p.v.w+0.35),1.0,p.dot.z>0.5),smoothstep(-55.0,55.0,q.z));
-  result.color = vec4f(p.color.rgb*(0.5+0.5*opacity)*p.color.a,1.0);
+  let opacity = mix(0.22,select(min(1.0,p.v.w+0.35),p.globe.w,p.dot.z>0.5),smoothstep(-55.0,55.0,q.z));
+  result.color = vec4f(p.color.rgb*mix(1.0,0.5+0.5*opacity,p.dot.w)*p.color.a,mix(opacity,1.0,p.dot.w));
   return result;
 }
 @fragment fn fs_main(i: Out) -> @location(0) vec4f {
@@ -121,7 +121,7 @@ export const dotShader =
   let warmth=mix(i.color.rgb,vec3f(1.0,0.063,0.0),p.dot.w);
   let softRim=pow(1.0-normal.z,2.0)*diffuse;
   let material=i.color.rgb*(0.62+0.22*normal.z)+warmth*(0.09*diffuse+0.07*softRim);
-  let alpha=solid;
+  let alpha=solid*i.color.a;
   let color=mix(i.color.rgb,material,solid);
   return vec4f(color,alpha);
 }
