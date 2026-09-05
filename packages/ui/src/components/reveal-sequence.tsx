@@ -85,7 +85,8 @@ export function RevealSequence({ children, ...props }: HTMLAttributes<HTMLDivEle
         for (const item of items) item.dataset.sequencePhase = 'entered'
         observer.disconnect()
       },
-      { rootMargin: '0px 0px -40px 0px', threshold: 0 },
+      // Leave room to see the heading and the start of its supporting paragraph.
+      { rootMargin: `0px 0px -${Math.round(innerHeight * 0.35)}px 0px`, threshold: 0 },
     )
     observer.observe(root)
     addEventListener('scroll', scroll, { passive: true })

@@ -17,7 +17,7 @@ test('the IRONMAN chapter establishes its heading before its lead without moving
     const lead = [...section.querySelectorAll('p')].find(
       (paragraph) => !heading.parentElement!.contains(paragraph),
     )!
-    const samples: { role: string; at: number; duration: number; delay: number }[] = []
+    const samples: { role: string; at: number; duration: number; delay: number; top: number }[] = []
     ;(window as unknown as { chapterEntries: typeof samples }).chapterEntries = samples
     section.addEventListener('animationstart', (event) => {
       const target = event.target as Element
@@ -33,6 +33,7 @@ test('the IRONMAN chapter establishes its heading before its lead without moving
       samples.push({
         role,
         at: performance.now(),
+        top: target.getBoundingClientRect().top,
         duration: Number(timing?.duration),
         delay: Number(timing?.delay),
       })
@@ -43,7 +44,7 @@ test('the IRONMAN chapter establishes its heading before its lead without moving
     const top = await chapter
       .locator('h2')
       .evaluate((heading) => heading.getBoundingClientRect().top)
-    if (top < page.viewportSize()!.height - 180) break
+    if (top < page.viewportSize()!.height * 0.6) break
     await page.evaluate(
       () =>
         new Promise<void>((resolve) => {
@@ -66,9 +67,18 @@ test('the IRONMAN chapter establishes its heading before its lead without moving
       () =>
         (
           window as unknown as {
-            chapterEntries: { role: string; at: number; duration: number; delay: number }[]
+            chapterEntries: {
+              role: string
+              at: number
+              duration: number
+              delay: number
+              top: number
+            }[]
           }
         ).chapterEntries,
+    )
+    expect(entries[0]!.top, 'the heading enters well inside the visible viewport').toBeLessThan(
+      page.viewportSize()!.height * 0.7,
     )
     expect(entries[0]!.duration).toBe(560)
     expect(entries[1]!.delay - entries[0]!.delay).toBe(100)
@@ -82,7 +92,7 @@ test('the IRONMAN chapter establishes its heading before its lead without moving
   if (await details.count()) {
     if (!reduced) await expect(details).toHaveCSS('opacity', '0')
     for (let step = 0; step < 60; step++) {
-      if (await details.evaluate((list) => list.getBoundingClientRect().top < innerHeight - 100))
+      if (await details.evaluate((list) => list.getBoundingClientRect().top < innerHeight * 0.6))
         break
       await page.evaluate(
         () =>
