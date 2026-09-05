@@ -90,7 +90,7 @@ export const dotShader =
   return vec4f(i.color.rgb,i.color.a*max(solid,glow));
 }
 `
-export const starsShader = /* wgsl */ `
+export const distantStarsShader = /* wgsl */ `
 struct Params { viewport: vec4f, motion: vec4f }
 @group(0) @binding(0) var<uniform> p: Params;
 struct Out {
@@ -127,5 +127,70 @@ fn hash(n:f32) -> f32 { return fract(sin(n*127.1+311.7)*43758.5453); }
  let d=length(i.uv);
  let alpha=exp(-d*d*2.4)+exp(-d*d*0.5)*0.13;
  return vec4f(i.color.rgb,i.color.a*alpha);
+}
+`
+
+// Continuous spherical volume: no depth bands or screen-space particle sheets.
+export const starsShader = /* wgsl */ `
+struct Params { viewport: vec4f, motion: vec4f }
+@group(0) @binding(0) var<uniform> p: Params;
+struct Out {
+ @builtin(position) position: vec4f,
+ @location(0) uv: vec2f,
+ @location(1) color: vec4f,
+ @location(2) softness: f32,
+}
+fn hash(n:f32) -> f32 { return fract(sin(n*127.1+311.7)*43758.5453); }
+fn turn(q:vec3f, yaw:f32, pitch:f32) -> vec3f {
+ let x=q.x*cos(yaw)+q.z*sin(yaw);
+ let z=-q.x*sin(yaw)+q.z*cos(yaw);
+ return vec3f(x,q.y*cos(pitch)-z*sin(pitch),q.y*sin(pitch)+z*cos(pitch));
+}
+@vertex fn vs_main(@builtin(vertex_index) v:u32, @builtin(instance_index) instance:u32) -> Out {
+ let n=f32(instance)+1837.0;
+ let corners=array<vec2f,6>(vec2f(-1,-1),vec2f(1,-1),vec2f(-1,1),vec2f(-1,1),vec2f(1,-1),vec2f(1,1));
+ let c=corners[v];
+ let azimuth=hash(n)*6.2831853;
+ let latitude=hash(n+1.0);
+ let radial=sqrt(1.0-latitude*latitude);
+ let radius=500.0+2600.0*pow(hash(n+2.0),0.3333333);
+ var world=vec3f(cos(azimuth)*radial,sin(azimuth)*radial,-latitude)*radius;
+ let near=1.0-smoothstep(500.0,3100.0,radius);
+ let dust=smoothstep(0.42,0.94,hash(n+4.0));
+ let time=p.motion.x;
+ let phase=hash(n+5.0)*6.2831853;
+ // A slow common circulation with local, asynchronous eddies. Drift grows
+ // continuously toward nearby dust; distant lights stay almost anchored.
+ world=turn(world,time*0.0018,time*0.00065);
+ let flow=time*(0.035+0.018*hash(n+6.0));
+ world+=vec3f(sin(flow+phase)-sin(phase),cos(flow*0.73+phase)-cos(phase),sin(flow*0.51+phase)-sin(phase))*(12.0+65.0*dust)*(0.3+near);
+ // Turning the view produces curved travel across the dome. A small camera
+ // translation adds perspective separation without sliding whole layers.
+ world-=vec3f(p.motion.y*45.0,p.motion.z*35.0,0);
+ world=turn(world,-p.motion.y*0.045,-p.motion.z*0.032);
+ let distance=1450.0-world.z;
+ let focal=max(p.viewport.x,p.viewport.y)*0.95;
+ let perspective=focal/max(400.0,distance);
+ let pixel=world.xy*perspective+vec2f(p.viewport.x*0.5,p.viewport.y*0.43);
+ let proximity=clamp(1450.0/max(400.0,distance),0.2,1.3);
+ let pointRadius=(0.45+hash(n+7.0)*0.85+dust*near*3.2)*proximity;
+ let extent=max(1.2,pointRadius*4.0);
+ var o:Out;
+ let point=pixel+c*extent;
+ o.position=vec4f(point.x/p.viewport.x*2.0-1.0,1.0-point.y/p.viewport.y*2.0,0,1);
+ o.uv=c*4.0;
+ o.softness=dust;
+ let edge=1.0-smoothstep(0.74,1.0,pixel.y/p.viewport.y);
+ let quiet=1.0-0.68*exp(-pow((pixel.x/p.viewport.x-0.5)*3.0,2.0))*smoothstep(0.08,0.22,pixel.y/p.viewport.y)*(1.0-smoothstep(0.5,0.72,pixel.y/p.viewport.y));
+ let visibility=smoothstep(450.0,900.0,distance);
+ let brightness=(0.3+hash(n+8.0)*0.65)*mix(1.0,0.36,dust)*edge*quiet*visibility;
+ o.color=vec4f(mix(vec3f(0.68,0.75,0.9),vec3f(1.0,0.88,0.77),hash(n+9.0)),brightness);
+ return o;
+}
+@fragment fn fs_main(i:Out)->@location(0) vec4f {
+ let d=length(i.uv);
+ let light=exp(-d*d*2.4)+exp(-d*d*0.5)*0.13;
+ let dust=exp(-d*d*0.65)*0.64;
+ return vec4f(i.color.rgb,i.color.a*mix(light,dust,i.softness));
 }
 `

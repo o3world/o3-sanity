@@ -1,7 +1,7 @@
 /// <reference types="@webgpu/types" />
 import { draw, frame, init, surface } from 'vgpu'
 import { buildArcs, rgb } from './geometry'
-import { dotShader, orbitShader, starsShader } from './shaders'
+import { distantStarsShader, dotShader, orbitShader, starsShader } from './shaders'
 
 export async function startSpatialGlobe(
   canvas: HTMLCanvasElement,
@@ -25,9 +25,9 @@ export async function startSpatialGlobe(
     arc.dots.map(() => draw(gpu, { shader: dotShader, vertices: 6, blend: 'alpha' })),
   )
   const stars = draw(gpu, {
-    shader: starsShader,
+    shader: mode === 'depth' ? starsShader : distantStarsShader,
     vertices: 6,
-    instances: mode === 'depth' ? 360 : 180,
+    instances: mode === 'depth' ? 1400 : 180,
     blend: 'alpha',
   })
   let raf = 0
@@ -120,7 +120,9 @@ export async function startSpatialGlobe(
       color: [1, 1, 1, 1],
       dot: [0, 0, 0, 0],
     }
-    stars.set({ p: { viewport, motion: [elapsed, sx, sy, mode === 'depth' ? 1 : 0.3] } })
+    stars.set({
+      p: { viewport, motion: [isStill() ? 0 : elapsed, sx, sy, mode === 'depth' ? 1 : 0.3] },
+    })
     arcs.forEach((arc, i) => {
       // Keep the export's slow colored-orbit breathing.
       const phase = Math.max(0, elapsed - arc.i * 1.1) / ((4.2 + arc.i * 0.7) / 0.3)
@@ -142,7 +144,7 @@ export async function startSpatialGlobe(
         f.pass({ target, clear: [0, 0, 0, 0] }, (pass) => {
           if (mode !== 'globe')
             pass.draw(stars, {
-              instances: Math.round((mode === 'depth' ? 360 : 180) * Math.min(1, h.width / 1200)),
+              instances: mode === 'depth' ? 1400 : Math.round(180 * Math.min(1, h.width / 1200)),
             })
           rings.forEach((ring, i) => {
             pass.draw(ring)

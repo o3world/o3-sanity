@@ -14,7 +14,7 @@ vgpu 0.4.0 draws the seven seeded great circles and their electrons from the ori
 
 The prototype copies the original seed generator, including its random-number draw order. It uses 288 samples per circle instead of 72 to explore smoother contours. Electron halos use a shader approximation of the Gaussian glow, and colored-orbit breathing uses a cosine approximation of the CSS easing. This is not pixel-identical parity or a finished production port.
 
-The stars occupy different depths and respond to the same damped pointer signal. Nearer stars move farther than distant stars. They remain still without pointer input, become sparser on mobile, and fade toward the bottom of the hero. Copy and navigation retain their current layout and motion.
+The stars occupy different depths and respond to the same damped pointer signal. Nearer stars move farther than distant stars. In Spatial stars, particles occupy a continuous spherical volume with slow circulation and independent dust eddies. Softness, drift, and perspective separation vary continuously rather than in depth bands. Cursor movement turns the viewpoint and adds a small translation. Distant stars retains the earlier, quieter comparison. Both fields fade toward the bottom of the hero. Copy and navigation retain their current layout and motion.
 
 ## Validation and limits
 
