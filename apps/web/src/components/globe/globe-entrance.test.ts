@@ -202,3 +202,29 @@ it('moves the sky with the nav while the globe is still waiting for its text bea
   Object.assign(hero, { ownerDocument: { getElementById: () => null } })
   expect(readSkyEntranceOffset(hero, 0, 230)).toBe(0)
 })
+
+it('keeps the sky rising without the globe overshoot and downward return', () => {
+  const hero = {
+    ownerDocument: {
+      getElementById: () => ({
+        getAnimations: () => [
+          {
+            animationName: 'hero-wave',
+            startTime: 0,
+            effect: { getTiming: () => ({ duration: 1860 }) },
+          },
+        ],
+      }),
+    },
+  } as unknown as HTMLElement
+  for (const distance of [55.2, 198.74, 460]) {
+    let previous = distance
+    for (let now = 0; now <= 2000; now += 16) {
+      const offset = readSkyEntranceOffset(hero, now, distance)
+      expect(offset).toBeGreaterThanOrEqual(0)
+      expect(offset).toBeLessThanOrEqual(previous)
+      previous = offset
+    }
+    expect(previous).toBe(0)
+  }
+})
