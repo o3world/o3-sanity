@@ -31,8 +31,6 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
    * half is the app that is rendering it.
    */
   brandMark: ReactNode
-  /** Opt an interior hero into the shared first-paint cadence. */
-  sequence?: boolean
 }
 
 /**
@@ -93,7 +91,6 @@ export function HeroSection({
   surface,
   backgroundMedia,
   brandMark,
-  sequence = false,
 }: HeroSectionProps) {
   const lines = headlineLines ?? []
   const showOrbs = stegaClean(decoration) !== 'none'
@@ -165,7 +162,6 @@ export function HeroSection({
 
     return (
       <CollectionHero
-        sequence={sequence}
         eyebrow={eyebrow}
         heading={lines.join(' ')}
         subheading={subheading}

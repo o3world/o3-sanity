@@ -2,7 +2,6 @@ import type { ReactNode } from 'react'
 
 import { cn } from '../lib/utils'
 import { Eyebrow } from './eyebrow'
-import { heroStagger, HERO_ENTRANCE } from './hero-cadence'
 import { SURFACE_CLASS, surfaceAttrs } from './section-shell'
 import { SurfaceProvider } from './surface-context'
 
@@ -88,8 +87,6 @@ export interface CollectionHeroProps {
   /** Slot for the band's decoration — About hangs an orbital off the right. */
   decoration?: ReactNode
   className?: string
-  /** First-paint cadence for an explicitly opted-in route. */
-  sequence?: boolean
 }
 
 /**
@@ -130,7 +127,6 @@ export function CollectionHero({
   background,
   decoration,
   className,
-  sequence = false,
 }: CollectionHeroProps) {
   const centred = align === 'center'
   const interior = variant === 'interior'
@@ -138,15 +134,6 @@ export function CollectionHero({
   // answers `ink` whatever the caller asked for. Only the redesigned set has a
   // surface axis.
   const painted: CollectionHeroSurface = interior ? surface : 'ink'
-  const hasLockup = !centred && !!lockup
-  const hasSubheading = !centred && !!subheading
-  const headingOrder = Number(!!eyebrow) + Number(hasLockup)
-  const stagger = heroStagger(
-    headingOrder + 1 + Number(hasSubheading) + Number(!centred && !!aside),
-  )
-  const entranceStyle = (order: number) =>
-    sequence ? { animationDelay: `${order * stagger}ms` } : undefined
-  const entranceClass = sequence ? HERO_ENTRANCE : undefined
 
   return (
     <SurfaceProvider surface={painted}>
@@ -205,28 +192,13 @@ export function CollectionHero({
               // read on ink at `I2101:861;2101:791` and on the light band at
               // `I2960:6876;2960:6852`. The older band keeps the white kicker
               // its own frame draws (`1634:1183`).
-              <Eyebrow
-                size={interior ? 'lg' : 'base'}
-                tone={interior ? 'brand' : 'inverse'}
-                className={entranceClass}
-                style={entranceStyle(0)}
-              >
+              <Eyebrow size={interior ? 'lg' : 'base'} tone={interior ? 'brand' : 'inverse'}>
                 {eyebrow}
               </Eyebrow>
             ) : null}
-            {hasLockup ? (
-              sequence ? (
-                <div className={entranceClass} style={entranceStyle(Number(!!eyebrow))}>
-                  {lockup}
-                </div>
-              ) : (
-                lockup
-              )
-            ) : null}
+            {!centred && lockup ? lockup : null}
             <h1
-              style={entranceStyle(headingOrder)}
               className={cn(
-                entranceClass,
                 'font-display text-balance',
                 centred && 'text-cta max-w-[650px]',
                 centred && painted === 'ink' && 'text-on-ink',
@@ -265,9 +237,7 @@ export function CollectionHero({
              */}
             {subheading && !centred && (interior || aside) ? (
               <p
-                style={entranceStyle(headingOrder + 1)}
                 className={cn(
-                  entranceClass,
                   'text-lead',
                   interior ? (aside ? undefined : 'lg:w-[395px]') : 'leading-[1.2]',
                   interior && 'text-on-utility',
@@ -278,12 +248,7 @@ export function CollectionHero({
             ) : null}
           </div>
           {!centred && aside ? (
-            <div
-              className={cn('lg:w-[394px] lg:shrink-0', entranceClass)}
-              style={entranceStyle(headingOrder + 1 + Number(hasSubheading))}
-            >
-              {aside}
-            </div>
+            <div className="lg:w-[394px] lg:shrink-0">{aside}</div>
           ) : subheading && !centred && !interior ? (
             <p className="text-lead leading-[1.2] lg:w-[395px]">{subheading}</p>
           ) : null}

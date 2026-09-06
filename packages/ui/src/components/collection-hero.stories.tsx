@@ -197,31 +197,29 @@ export const HeadingOnly: Story = {
   args: { heading: 'Just the headline.' },
 }
 
-/** Work opts in; other interior routes retain their existing entrance ownership. */
-export const WorkCadence: Story = {
-  args: { ...Interior.args, eyebrow: 'Work', sequence: true },
+/** Interior copy is visible immediately, without its own entrance animation. */
+export const WorkStatic: Story = {
+  args: { ...Interior.args, eyebrow: 'Work' },
   play: async ({ canvasElement }) => {
     const { expect } = await import('storybook/test')
     const parts = [...canvasElement.querySelectorAll<HTMLElement>('h1, p')]
     expect(parts).toHaveLength(3)
-    expect(parts.map((part) => getComputedStyle(part).animationName)).toEqual([
-      'fade-up, hero-wave',
-      'fade-up, hero-wave',
-      'fade-up, hero-wave',
-    ])
-    expect(parts.map((part) => getComputedStyle(part).animationDelay)).toEqual([
-      '0s',
-      '0.16s',
-      '0.32s',
-    ])
+    for (const part of parts) {
+      expect(getComputedStyle(part).animationName).toBe('none')
+      expect(getComputedStyle(part).opacity).toBe('1')
+    }
   },
 }
 
-export const WorkCadenceWithoutEyebrow: Story = {
-  args: { ...Interior.args, eyebrow: undefined, sequence: true },
+export const WorkStaticWithoutEyebrow: Story = {
+  args: { ...Interior.args, eyebrow: undefined },
   play: async ({ canvasElement }) => {
     const { expect } = await import('storybook/test')
     const parts = [...canvasElement.querySelectorAll<HTMLElement>('h1, p')]
-    expect(parts.map((part) => getComputedStyle(part).animationDelay)).toEqual(['0s', '0.16s'])
+    expect(parts).toHaveLength(2)
+    for (const part of parts) {
+      expect(getComputedStyle(part).animationName).toBe('none')
+      expect(getComputedStyle(part).opacity).toBe('1')
+    }
   },
 }
