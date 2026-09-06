@@ -9,13 +9,10 @@ const route = buildSingletonRoute(home)
 
 export const generateMetadata = route.generateMetadata
 export default function HomePage() {
-  const page = <route.Page />
-  return process.env.O3_SPATIAL_GLOBE_ENABLED === '1' ? (
+  return (
     <>
-      <HeroStarfield />
-      {page}
+      {process.env.O3_SPATIAL_GLOBE_ENABLED === '1' && <HeroStarfield />}
+      <route.Page />
     </>
-  ) : (
-    page
   )
 }

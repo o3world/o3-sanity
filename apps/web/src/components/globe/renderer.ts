@@ -333,11 +333,6 @@ export async function startSpatialGlobe(
     lease.onError(fail)
     signal.addEventListener('abort', cleanup, { once: true })
     try {
-      await Promise.all(
-        [...masks, ...rings, ...electrons.flat(), stars, shootingStar].map((item) =>
-          item?.compile({ colors: [navigator.gpu.getPreferredCanvasFormat()], sampleCount: 1 }),
-        ),
-      )
       if (signal.aborted || dead) {
         cleanup()
         return
