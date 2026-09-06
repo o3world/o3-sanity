@@ -94,8 +94,9 @@ fn glowPoint(angle: f32, radius: f32) -> vec3f {
 fn glowRadius(angle: f32) -> f32 {
   let ring = vec2f(cos(angle),sin(angle));
   let drift = vec2f(p.motion.x*0.075,-p.motion.x*0.045);
-  let ripple = (heatNoise(ring*8.0+drift)-0.5)*6.0
-    +(heatNoise(ring*19.0-drift*0.7)-0.5)*2.0;
+  let ripple = (heatNoise(ring*3.0+drift*0.6)-0.5)*10.0
+    +(heatNoise(ring*8.0+drift)-0.5)*5.0
+    +(heatNoise(ring*19.0-drift*0.7)-0.5)*1.5;
   return 342.0+ripple*p.motion.w;
 }
 `
@@ -233,8 +234,8 @@ export const heatHazeShader =
 @vertex fn vs_main(@builtin(vertex_index) vertex: u32) -> Out {
   let c = corner(vertex);
   let angle = (f32(vertex/6u)+(c.x+1.0)*0.5)/288.0*6.2831853;
-  let local = vec2f(cos(angle),sin(angle))*(342.0+c.y*24.0);
-  let pixel = p.globe.xy+glowPoint(angle,342.0+c.y*24.0).xy*p.globe.z;
+  let local = vec2f(cos(angle),sin(angle))*(342.0+c.y*48.0);
+  let pixel = p.globe.xy+glowPoint(angle,342.0+c.y*48.0).xy*p.globe.z;
   var result: Out;
   result.position = clip(pixel,0.0);
   result.uv = local;
@@ -246,10 +247,11 @@ export const heatHazeShader =
   let distance = length(i.uv)-glowRadius(angle);
   let drift = vec2f(p.motion.x*0.075,-p.motion.x*0.045);
   let texture = heatNoise(i.uv*0.045+drift);
-  let softness = 2.5+texture*3.5;
+  let softness = 7.5+texture*1.5;
   let haze = exp(-distance*distance/(2.0*softness*softness));
-  let strength = smoothstep(0.2,0.85,texture)*0.18;
-  return vec4f(i.color.rgb,haze*strength*p.motion.w);
+  let strength = mix(0.21,0.34,smoothstep(0.2,0.85,texture));
+  let edge = 1.0-smoothstep(36.0,47.0,abs(length(i.uv)-342.0));
+  return vec4f(i.color.rgb,haze*strength*edge*p.motion.w);
 }
 `
 export const globeCompositeShader = /* wgsl */ `
