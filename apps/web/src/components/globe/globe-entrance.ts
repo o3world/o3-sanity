@@ -1,6 +1,6 @@
 import { heroStagger } from '@o3/ui'
 
-/** The globe follows the hero text clock, including its GPU readiness pause. */
+/** The globe catches up to the hero text clock when the GPU becomes ready. */
 export function readGlobeEntranceTiming(hero: HTMLElement, now: number, stagger = heroStagger) {
   const items = [...hero.querySelectorAll('.hero-lead h1 > span, .hero-lead > div')]
   const animation = items

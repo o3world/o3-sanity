@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import type { MouseEvent } from 'react'
+import { useLayoutEffect, useRef, type MouseEvent } from 'react'
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import { InsightIndexView } from './InsightIndexView'
 import { readFeedPath } from './feedPath'
@@ -22,10 +22,20 @@ export function InsightFeed({
   path: string
   initial: { items: Data['items']; pagination: { page: number; totalPages: number } }
 }) {
+  const feedRef = useRef<HTMLDivElement>(null)
+  const paginationPending = useRef(false)
   const pathname = usePathname()
   const state = readFeedPath(pathname) ?? readFeedPath(path)!
   const result =
     pathname === path || !pathname ? initial : filterInsights(catalog, state.category, state.page)
+
+  useLayoutEffect(() => {
+    if (!paginationPending.current) return
+    paginationPending.current = false
+    const feed = feedRef.current?.querySelector<HTMLElement>('#feed')
+    feed?.querySelector<HTMLElement>('h2')?.focus({ preventScroll: true })
+    feed?.scrollIntoView({ block: 'start', behavior: 'instant' })
+  }, [pathname])
 
   function follow(event: MouseEvent<HTMLDivElement>) {
     if (
@@ -44,14 +54,17 @@ export function InsightFeed({
     if (url.origin !== window.location.origin || !readFeedPath(url.pathname)) return
     event.preventDefault()
     if (url.pathname === pathname) return
+    paginationPending.current = anchor.closest('nav')?.getAttribute('aria-label') === 'Pagination'
     window.history.pushState(null, '', `${url.pathname}#feed`)
-    if (anchor.closest('nav')?.getAttribute('aria-label') === 'Pagination') {
-      document.getElementById('feed')?.scrollIntoView({ block: 'start', behavior: 'instant' })
-    }
   }
 
   return (
-    <div onClickCapture={follow} data-insight-feed data-catalog-count={catalog.length}>
+    <div
+      ref={feedRef}
+      onClickCapture={follow}
+      data-insight-feed
+      data-catalog-count={catalog.length}
+    >
       <InsightIndexView
         items={result.items}
         categories={categories}

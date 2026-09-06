@@ -1,4 +1,3 @@
-import type { heroStagger } from '@o3/ui'
 import type { globeEntranceOffset, readSkyEntranceOffset } from './globe-entrance'
 import type { createStartupSky } from './startup-sky'
 import type { starHash } from './star-seed'
@@ -9,7 +8,6 @@ export function startStartupSky(
   hash: typeof starHash,
   readSkyOffset: typeof readSkyEntranceOffset,
   offsetAt: typeof globeEntranceOffset,
-  stagger: typeof heroStagger,
 ) {
   if (location.pathname !== '/') return
   const reduced = matchMedia('(prefers-reduced-motion: reduce)')
@@ -25,19 +23,17 @@ export function startStartupSky(
   }
   document.documentElement.dataset.spatialChrome = 'true'
   if (!reduced.matches && !still) {
-    document.documentElement.dataset.heroStartup = 'pending'
     document.documentElement.dataset.navEntrance = 'true'
     document.addEventListener('animationend', onNavEnd)
     reduced.addEventListener('change', finishNavEntrance)
   }
   const releaseStartup = () => {
-    delete document.documentElement.dataset.heroStartup
     if (!document.querySelector('.hero-band[data-spatial-ready]')) {
       delete document.documentElement.dataset.spatialChrome
       finishNavEntrance()
     }
   }
-  // Match the renderer's failure deadline so an unavailable GPU cannot trap the copy.
+  // Bound the temporary sky to the renderer's failure deadline.
   const deadline = setTimeout(() => {
     observer.disconnect()
     releaseStartup()
@@ -56,7 +52,6 @@ export function startStartupSky(
       return
     }
     const project = createSky(hash)
-    const navLead = stagger(hero.querySelectorAll('.hero-lead h1 > span, .hero-lead > div').length)
     const initialBounds = hero.getBoundingClientRect()
     const entrance = location.pathname === '/' && initialBounds.top >= -80
     const distance =
@@ -87,7 +82,6 @@ export function startStartupSky(
       if (hero.hasAttribute('data-spatial-ready')) {
         readyAt ??= now
         clearTimeout(deadline)
-        if (now - readyAt >= navLead) releaseStartup()
       }
       // Continue through the GPU's opacity transition, then release the temporary buffer.
       if (readyAt !== undefined && now - readyAt >= (reduced.matches ? 0 : 220)) return stop()

@@ -1,9 +1,3 @@
-/* Only the first document load waits for the GPU; no-JS and later visits stay readable. */
-[data-hero-startup='pending'] .hero-lead h1 > span,
-[data-hero-startup='pending'] .hero-lead > div {
-  animation-play-state: paused;
-}
-
 .spatial-globe-canvas {
   position: absolute;
   inset: 0;
@@ -56,16 +50,11 @@
   animation: none !important;
 }
 
-/* The nav takes the first beat; the hero clock resumes one interval later. */
+/* Navigation starts at first paint, independently of GPU readiness. */
 @media (prefers-reduced-motion: no-preference) {
   [data-nav-entrance] #site-nav {
     animation: var(--animate-hero-wave);
     animation-fill-mode: backwards;
-  }
-  [data-nav-entrance][data-hero-startup='pending']:not(:has(.hero-band[data-spatial-ready]))
-    #site-nav {
-    animation-play-state: paused;
-    visibility: hidden;
   }
 }
 

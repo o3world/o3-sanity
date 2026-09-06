@@ -2,9 +2,7 @@ import { expect, test } from 'playwright/test'
 
 const heroSelector = '.hero-band:has(.hero-lead)'
 
-test('the sky paints immediately while the text waits for GPU readiness', async ({
-  page,
-}, info) => {
+test('essential Home content stays usable while the GPU is stalled', async ({ page }) => {
   await page.addInitScript(() => {
     Object.defineProperty(navigator, 'gpu', {
       value: { requestAdapter: () => new Promise(() => {}) },
@@ -12,29 +10,16 @@ test('the sky paints immediately while the text waits for GPU readiness', async 
   })
   await page.goto('/')
   const hero = page.locator(heroSelector)
-  await expect(hero.getByRole('heading', { level: 1 })).toBeVisible()
-  const startup = hero.locator('[data-orbital-startup]')
-  await expect(startup).toHaveAttribute('data-painted', 'true')
-  await expect(startup).toHaveCSS('opacity', '1')
-  const nav = page.locator('#site-nav > nav')
-  await expect(nav).toHaveCSS('background-color', /(?:rgba\(.+, 0\)|color\(.+ \/ 0\)|transparent)$/)
-  await expect(nav).toHaveCSS('backdrop-filter', 'blur(0px) saturate(1.25)')
-  const before = await startup.evaluate((element) => (element as HTMLCanvasElement).toDataURL())
-  const lines = hero.locator('h1 > span')
-  if (info.project.use.contextOptions?.reducedMotion === 'reduce') {
-    await expect(lines.first()).toHaveCSS('opacity', '1')
-    await expect(page.locator('#site-nav')).toHaveCSS('opacity', '1')
-  } else {
-    await expect(page.locator('#site-nav')).toHaveCSS('opacity', '0')
-    await expect(page.locator('#site-nav')).toHaveCSS('visibility', 'hidden')
-    await expect(lines.first()).toHaveCSS('animation-play-state', 'paused')
-    await expect(lines.first()).toHaveCSS('opacity', '0')
-    await page.waitForTimeout(160)
-    await expect(lines.first()).toHaveCSS('opacity', '0')
-  }
-  expect(await startup.evaluate((element) => (element as HTMLCanvasElement).toDataURL())).toBe(
-    before,
+  await expect(hero.locator('h1 > span').first()).toHaveCSS('opacity', '1')
+  await expect(page.locator('#site-nav')).toHaveCSS('visibility', 'visible')
+  await expect(page.locator('#site-nav')).toHaveCSS('opacity', '1')
+  await expect(hero.locator('.hero-lag > [data-orbital-preset]')).toHaveAttribute(
+    'data-orbital-loading',
+    'true',
   )
+  const cta = hero.getByRole('link', { name: 'View our work' })
+  await cta.click()
+  await expect(page).toHaveURL(/\/work$/)
 })
 
 for (const gpuDelay of [0, 600]) {
@@ -148,18 +133,6 @@ for (const gpuDelay of [0, 600]) {
       'data-painted',
     )
     if (info.project.use.contextOptions?.reducedMotion !== 'reduce') {
-      const nav = page.locator('#site-nav')
-      const cta = page.locator(`${heroSelector} .hero-lead > div`).last()
-      await expect(nav).toHaveCSS('animation-name', 'fade-up, hero-wave')
-      for (const property of ['animation-duration', 'animation-timing-function']) {
-        await expect(nav).toHaveCSS(
-          property,
-          await cta.evaluate(
-            (element, name) => getComputedStyle(element).getPropertyValue(name),
-            property,
-          ),
-        )
-      }
       await page.waitForFunction(() => {
         const marks = (window as unknown as { globeStartupMarks: Record<string, number> })
           .globeStartupMarks
@@ -178,17 +151,8 @@ for (const gpuDelay of [0, 600]) {
     expect(marks.skyVisible! - marks.heroPaint!).toBeLessThan(50)
     if (info.project.use.contextOptions?.reducedMotion !== 'reduce') {
       expect(marks.alignmentError).toBeLessThan(0.1)
-      expect(marks.navStart! - marks.gpuReady!).toBeGreaterThanOrEqual(-34)
-      expect(marks.navStart! - marks.gpuReady!).toBeLessThan(100)
-      expect(marks.textStart! - marks.navStart!).toBeGreaterThanOrEqual(125)
-      expect(marks.textStart! - marks.navStart!).toBeLessThan(210)
-      expect(marks.skyEntrancePaints).toBeGreaterThan(2)
-      expect(marks.globeAtSkyStart).toBeGreaterThan(0)
-      expect(marks.globeAtSkyHandoff).toBe(marks.globeAtSkyStart)
       expect(marks.navMinY).toBeLessThan(-5)
       expect(marks.navMinY).toBeGreaterThan(-7)
-      expect(marks.textFinish! - marks.navFinish!).toBeGreaterThanOrEqual(125)
-      expect(marks.textFinish! - marks.navFinish!).toBeLessThan(210)
     }
     await expect(page.locator(`${heroSelector} [data-orbital-startup]`)).not.toHaveAttribute(
       'data-painted',

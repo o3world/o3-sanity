@@ -142,7 +142,9 @@ export function InsightIndexView({
            * So the level exists and is only unseen, and it says which cut is on
            * screen.
            */}
-          <h2 className="sr-only">{activeTitle ? `${activeTitle} insights` : 'All insights'}</h2>
+          <h2 tabIndex={-1} className="sr-only">
+            {activeTitle ? `${activeTitle} insights` : 'All insights'}
+          </h2>
 
           {categories.length > 0 ? (
             /*

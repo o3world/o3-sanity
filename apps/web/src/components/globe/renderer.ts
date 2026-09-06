@@ -257,8 +257,13 @@ export async function startSpatialGlobe(
       }
       const heroBounds = hero.getBoundingClientRect()
       parallax?.update(heroBounds, document.documentElement.clientHeight, dt, isStill())
+      // A late GPU frame joins the same sky path, rather than scaling it to
+      // the globe's remaining travel after the text has already started.
+      skyEntranceDistance ??=
+        (innerWidth < 1024
+          ? 48
+          : Math.max(96, heroBounds.bottom - globe.getBoundingClientRect().top)) * 1.15
       const cameraOffset = entrance?.update(now, isStill()) ?? 0
-      skyEntranceDistance ??= cameraOffset
       const skyCameraOffset =
         entrance && !isStill() && heroBounds.top >= -80
           ? readSkyEntranceOffset(hero, now, skyEntranceDistance)

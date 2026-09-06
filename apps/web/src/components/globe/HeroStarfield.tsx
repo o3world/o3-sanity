@@ -1,5 +1,4 @@
 import 'server-only'
-import { heroStagger } from '@o3/ui'
 import { starHash } from './star-seed'
 import { createStartupSky } from './startup-sky'
 import { startStartupSky } from './startup-sky-bootstrap'
@@ -21,7 +20,6 @@ const startup = `(${startStartupSky.toString()})(${[
   starHash,
   readSkyEntranceOffset,
   globeEntranceOffset,
-  heroStagger,
 ]
   .map((fn) => fn.toString())
   .join(',')})`
