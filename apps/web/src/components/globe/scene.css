@@ -1,3 +1,9 @@
+/* Only the first document load waits for the GPU; no-JS and later visits stay readable. */
+[data-hero-startup='pending'] .hero-lead h1 > span,
+[data-hero-startup='pending'] .hero-lead > div {
+  animation-play-state: paused;
+}
+
 .spatial-globe-canvas {
   position: absolute;
   inset: 0;
@@ -7,7 +13,7 @@
   opacity: 0;
 }
 
-/* Paint the sky with the server HTML, then hand it over to the first GPU frame. */
+/* The server sky paints immediately; the startup canvas supplies camera motion. */
 [data-spatial-layout] .hero-band:has(.hero-lead)::before {
   content: '';
   position: absolute;
@@ -17,17 +23,32 @@
   background-position: 50% 43%;
   mask-image: linear-gradient(to bottom, black 92%, transparent);
   opacity: 1;
-  transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-[data-spatial-layout] .hero-band:has(.hero-lead)[data-spatial-ready]::before {
+[data-spatial-layout] .hero-band:has([data-orbital-startup][data-painted])::before,
+[data-spatial-layout] .hero-band[data-spatial-ready]::before {
   opacity: 0;
 }
+[data-orbital-startup] {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  mask-image: linear-gradient(to bottom, black 92%, transparent);
+  transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-orbital-startup][data-painted] {
+  opacity: 1;
+  transition: none;
+}
+[data-spatial-ready] [data-orbital-startup] {
+  opacity: 0;
+  transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
 @media (prefers-reduced-motion: reduce) {
-  [data-spatial-layout] .hero-band:has(.hero-lead)::before {
+  [data-spatial-ready] [data-orbital-startup] {
     transition: none;
   }
 }
-[data-spatial-ready] .hero-lag > div > svg:first-child {
+[data-spatial-ready] .hero-lag > div > svg:first-of-type {
   visibility: hidden;
 }
 [data-spatial-still] .hero-lag,
@@ -39,9 +60,6 @@
 [data-spatial-chrome] .hero-band {
   overflow: visible;
   clip-path: inset(calc(-1 * var(--spatial-sky-overhang, 0px)) 0 0);
-}
-[data-spatial-chrome] .hero-band .hero-lag {
-  overflow: hidden;
 }
 [data-spatial-chrome] nav[aria-label='O3 properties'] {
   position: relative;

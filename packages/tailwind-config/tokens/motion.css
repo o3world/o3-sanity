@@ -60,6 +60,46 @@
     0.992,
     1
   );
+
+  /* wave — the globe entrance's early slowdown and smooth release, scaled
+   * to roughly the globe’s 6px crest at a 24px rise. Thirty-three samples over
+   * rise + release, with a 600/1260 release-to-rise ratio. Each item owns
+   * the whole curve, so its return finishes in the same order it entered. */
+  --ease-wave: linear(
+    0,
+    0.01938,
+    0.07048,
+    0.14381,
+    0.23137,
+    0.32644,
+    0.42371,
+    0.52116,
+    0.61834,
+    0.7141,
+    0.80683,
+    0.89468,
+    0.97575,
+    1.04828,
+    1.11077,
+    1.16208,
+    1.20151,
+    1.22883,
+    1.24429,
+    1.24859,
+    1.24283,
+    1.22838,
+    1.20679,
+    1.1797,
+    1.149,
+    1.11682,
+    1.08542,
+    1.05699,
+    1.03343,
+    1.01606,
+    1.00539,
+    1.00076,
+    1
+  );
 }
 
 /*
@@ -78,6 +118,8 @@
   --duration-ink: 350ms;
   /* .7s — the standard data-reveal opacity/transform transition. */
   --duration-reveal: 700ms;
+  /* Home camera: 1260ms rise plus its 600ms release. */
+  --duration-hero-wave: 1860ms;
   /* .3s — the cross-page fade (#403). Shorter than a reveal on purpose: a
    * band arriving is content, and a route change is the reader's own click
    * answered. Anything at reveal length reads as the site hesitating. */
@@ -214,8 +256,8 @@
  * forward fill would keep that value for the life of the page. `backwards`
  * fills the delay and nothing after it, so the moment the line lands the
  * property drops back to the element's own `filter: none` and the layer goes
- * with it. The two share one delay because the shorthand's single
- * `animation-delay` applies to both.
+ * with it. Opacity and focus keep the reveal clock; movement follows the
+ * globe's longer rise and release, finishing in the same stagger order.
  *
  * `fade-up` carries opacity and a flat 24px rise, matching what `Reveal` does
  * on the scroll side.
@@ -223,8 +265,21 @@
 @theme {
   --animate-line-rise:
     line-rise var(--duration-reveal) var(--ease-spring) both,
-    line-focus var(--duration-reveal) var(--ease-spring) backwards;
+    line-focus var(--duration-reveal) var(--ease-spring) backwards,
+    hero-wave var(--duration-hero-wave) var(--ease-wave) both;
   --animate-fade-up: fade-up var(--duration-reveal) var(--ease-out) both;
+  --animate-hero-wave:
+    fade-up var(--duration-reveal) var(--ease-spring) both,
+    hero-wave var(--duration-hero-wave) var(--ease-wave) both;
+
+  @keyframes hero-wave {
+    from {
+      translate: 0 var(--hero-rise-distance, 24px);
+    }
+    to {
+      translate: 0 0;
+    }
+  }
 
   @keyframes line-rise {
     from {

@@ -1,5 +1,5 @@
 /// <reference types="@webgpu/types" />
-import { frame, surface } from 'vgpu'
+import { frame, surface, target as offscreenTarget, type Draw, type FramePass } from 'vgpu'
 import type { OrbitalRendererProps } from '@o3/ui'
 import { resolveColor } from './resolve-color'
 import { createGlobeParallax } from './globe-parallax'
@@ -7,6 +7,18 @@ import { createGlobeEntrance } from './globe-entrance'
 import { startPhoneTilt } from './phone-tilt'
 import { createSkyHandoff } from './sky-handoff'
 import type { GlobeRuntime } from './globe-runtime'
+
+export function drawGlobeGeometry(
+  pass: Pick<FramePass, 'draw'>,
+  geometry: { rings: Draw[]; ringDepths: Draw[]; electrons: Draw[][]; electronDepths: Draw[][] },
+) {
+  const { rings, ringDepths, electrons, electronDepths } = geometry
+  // Translucent rails blend over planets; they must not erase them before paint.
+  electronDepths.forEach((orbit) => orbit.forEach((dot) => pass.draw(dot)))
+  electrons.forEach((orbit) => orbit.forEach((dot) => pass.draw(dot)))
+  ringDepths.forEach((ring) => pass.draw(ring))
+  rings.forEach((ring) => pass.draw(ring))
+}
 
 export async function startSpatialGlobe(
   canvas: HTMLCanvasElement,
@@ -19,6 +31,7 @@ export async function startSpatialGlobe(
     'arcs' | 'motion' | 'preset' | 'opacity' | 'electronOpacity' | 'onReady'
   > & {
     stars: boolean
+    entrance?: boolean
     quietStars?: boolean
   },
 ) {
@@ -37,6 +50,18 @@ export async function startSpatialGlobe(
       lease.release()
     }
     dispose = release
+    const scene = offscreenTarget(gpu, {
+      size: target.size,
+      format: target.format,
+      depth: 'depth24plus',
+    })
+    const releaseScene = () => {
+      scene.color.destroy()
+      scene.depth?.destroy()
+      release()
+    }
+    dispose = releaseScene
+    const composite = lease.draw('composite')
     const arcs = options.arcs.map((arc) => ({
       ...arc,
       col: resolveColor(arc.col, globe),
@@ -56,8 +81,11 @@ export async function startSpatialGlobe(
           ]
         : [0, 0, 0, 0]
     const rings = arcs.map(() => lease.draw('orbit'))
+    const ringDepths = arcs.map(() => lease.draw('orbitDepth'))
     const masks = (options.stars ? arcs : []).map(() => lease.draw('mask'))
     const electrons = arcs.map((arc) => arc.dots.map(() => lease.draw('dot')))
+    const electronDepths = arcs.map((arc) => arc.dots.map(() => lease.draw('dotDepth')))
+    const heatHaze = options.preset === 'hero' ? lease.draw('heatHaze') : undefined
     const stars = options.stars
       ? lease.draw(options.quietStars ? 'quietStars' : 'stars')
       : undefined
@@ -65,6 +93,9 @@ export async function startSpatialGlobe(
     const previewShootingStar = new URLSearchParams(location.search).has('shooting-star-preview')
     let parallax: ReturnType<typeof createGlobeParallax> | undefined
     let entrance: ReturnType<typeof createGlobeEntrance> | undefined
+    const startupSky = heroStars
+      ? globe.querySelector<HTMLCanvasElement>('[data-orbital-startup]')
+      : null
     let stopTilt: (() => void) | undefined
     let raf = 0
     let dead = false
@@ -114,7 +145,7 @@ export async function startSpatialGlobe(
       if (heroStars) document.documentElement.style.removeProperty('--spatial-nav-solid')
       delete hero.dataset.spatialStill
       canvas.style.opacity = '0'
-      release()
+      releaseScene()
     }
     dispose = cleanup
     const fail = (error: unknown) => {
@@ -210,7 +241,7 @@ export async function startSpatialGlobe(
       }
       const heroBounds = hero.getBoundingClientRect()
       parallax?.update(heroBounds, document.documentElement.clientHeight, dt, isStill())
-      entrance?.update(now, isStill())
+      const cameraOffset = entrance?.update(now, isStill()) ?? 0
       const overhang = heroStars ? Math.max(0, heroBounds.top + scrollY) : 0
       if (heroStars) {
         hero.style.setProperty('--spatial-sky-overhang', `${overhang}px`)
@@ -219,26 +250,41 @@ export async function startSpatialGlobe(
       }
       const h = canvas.getBoundingClientRect()
       const g = globe.getBoundingClientRect()
+      // Cancel this frame's bloom translation while the startup sky crossfades.
+      if (startupSky?.hasAttribute('data-painted')) {
+        startupSky.style.left = `${heroBounds.left - g.left}px`
+        startupSky.style.top = `${heroBounds.top - overhang - g.top}px`
+      }
       const viewport = [h.width, h.height, 0, 0]
       const geometry = [
         g.left - h.left + g.width / 2,
-        g.top - h.top + g.height / 2,
+        g.top - cameraOffset - h.top + g.height / 2,
         g.width / 680,
         options.electronOpacity,
       ]
+      // The DOM translation only keeps the SVG bloom with the camera projection.
+      // GPU geometry stays anchored; the same world-space camera moves rails and sky.
+      const camera = [0, -cameraOffset / geometry[2]!, 0, 0]
       const scrollOrbit =
         isStill() || !heroStars ? 0 : Math.min(1, Math.max(0, scrollY / heroBounds.height)) * 0.08
-      const motion = [isStill() ? 0 : elapsed, -sx * 0.045, sy * 0.032 + scrollOrbit, 0]
+      const motion = [
+        isStill() ? 0 : elapsed,
+        -sx * 0.045,
+        sy * 0.032 + scrollOrbit,
+        Number(!isStill()),
+      ]
       const params = {
         viewport,
+        camera,
         globe: geometry,
         motion,
         u: [0, 0, 0, 0],
         v: [0, 0, 0, 0],
         color: [1, 1, 1, 1],
-        dot: [0, 0, 0, 0],
+        dot: [0, 0, 0, Number(options.preset === 'hero')],
         dotGround,
       }
+      heatHaze?.set({ p: params })
       const targetSkyRise =
         Math.min(heroBounds.height, Math.max(0, -heroBounds.top)) * (options.quietStars ? 0 : 0.015)
       skyRise = isStill()
@@ -254,6 +300,7 @@ export async function startSpatialGlobe(
       stars?.set({
         p: {
           viewport: skyViewport,
+          camera,
           motion: skyMotion,
           globe: geometry,
           rotation: isStill() ? [0, 0, 0, 1] : rotation,
@@ -262,6 +309,7 @@ export async function startSpatialGlobe(
       shootingStar?.set({
         p: {
           viewport: skyViewport,
+          camera,
           globe: geometry,
           motion: [...skyMotion.slice(0, 3), Number(previewShootingStar)],
         },
@@ -272,9 +320,11 @@ export async function startSpatialGlobe(
         const pulse = arc.colored && !isStill() ? 0.725 + 0.275 * Math.cos(phase * Math.PI * 2) : 1
         const shared = { ...params, u: [...arc.u, arc.w], v: [...arc.v, arc.op] }
         masks[i]?.set({ p: shared })
-        rings[i]!.set({ p: { ...shared, color: [...rgb(arc.col), arc.op * pulse] } })
-        arc.dots.forEach((dot, j) =>
-          electrons[i]![j]!.set({
+        const ringParams = { p: { ...shared, color: [...rgb(arc.col), arc.op * pulse] } }
+        rings[i]!.set(ringParams)
+        ringDepths[i]!.set(ringParams)
+        arc.dots.forEach((dot, j) => {
+          const dotParams = {
             p: {
               ...shared,
               color: [...rgb(dot.col), pulse],
@@ -285,21 +335,26 @@ export async function startSpatialGlobe(
                 Number(options.preset === 'hero'),
               ],
             },
-          }),
-        )
+          }
+          electrons[i]![j]!.set(dotParams)
+          electronDepths[i]![j]!.set(dotParams)
+        })
       })
       try {
-        const submitted = frame(gpu, (f) =>
-          f.pass({ target, clear: [0, 0, 0, 0] }, (pass) => {
+        const submitted = frame(gpu, (f) => {
+          scene.resize(target.size)
+          f.pass({ target: scene, clear: [0, 0, 0, 0] }, (pass) => {
             if (stars) {
               pass.draw(stars)
               if (shootingStar && !isStill()) pass.draw(shootingStar)
               masks.forEach((mask) => pass.draw(mask))
             }
-            rings.forEach((ring) => pass.draw(ring))
-            electrons.forEach((orbit) => orbit.forEach((dot) => pass.draw(dot)))
-          }),
-        )
+            drawGlobeGeometry(pass, { rings, ringDepths, electrons, electronDepths })
+            if (heatHaze && !isStill()) pass.draw(heatHaze)
+          })
+          composite.set({ scene: scene.color })
+          f.pass({ target, clear: [0, 0, 0, 0] }, (pass) => pass.draw(composite))
+        })
         if (!ready && !firstFramePending) {
           firstFramePending = true
           void submitted.done
@@ -338,7 +393,7 @@ export async function startSpatialGlobe(
         return
       }
       const parallaxLayer = globe.closest<HTMLElement>('.hero-lag, .cta-lag')
-      if (heroStars) entrance = createGlobeEntrance(globe, hero)
+      if (heroStars && options.entrance) entrance = createGlobeEntrance(globe, hero)
       if (parallaxLayer)
         parallax = createGlobeParallax(
           parallaxLayer,

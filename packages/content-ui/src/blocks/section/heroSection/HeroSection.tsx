@@ -5,6 +5,8 @@ import {
   CloseIcon,
   CollectionHero,
   Entrance,
+  heroStagger,
+  HERO_ENTRANCE,
   Eyebrow,
   StaggeredLines,
   OrbitalSphere,
@@ -29,6 +31,8 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
    * half is the app that is rendering it.
    */
   brandMark: ReactNode
+  /** Opt an interior hero into the shared first-paint cadence. */
+  sequence?: boolean
 }
 
 /**
@@ -89,6 +93,7 @@ export function HeroSection({
   surface,
   backgroundMedia,
   brandMark,
+  sequence = false,
 }: HeroSectionProps) {
   const lines = headlineLines ?? []
   const showOrbs = stegaClean(decoration) !== 'none'
@@ -160,6 +165,7 @@ export function HeroSection({
 
     return (
       <CollectionHero
+        sequence={sequence}
         eyebrow={eyebrow}
         heading={lines.join(' ')}
         subheading={subheading}
@@ -246,27 +252,9 @@ export function HeroSection({
     )
   }
 
-  /*
-   * THE OPENER'S RHYTHM — one sequence, three parts, all of it derived from
-   * one step so the copy cannot desynchronise it.
-   *
-   * The headline's lines are a step apart. The rest of the column waits two
-   * steps after the last line has started, which is the gap that makes the
-   * headline read as a unit rather than as the first two of four things; then
-   * the standfirst and the button follow each other closely, on the house
-   * curve rather than the headline's spring, because they arrive rather than
-   * unfold.
-   *
-   * Read off motion.dev's editorial-stagger reference, which has no Figma
-   * anchor and cannot have one: the frames draw the band, not its entrance.
-   *
-   * Every delay below is measured from the band's first paint, not from
-   * hydration: `StaggeredLines` and `Entrance` are CSS animations in the server
-   * HTML for exactly that reason. A sequence this long has to start at paint,
-   * or the whole of it lands after the bundle does and the opener sits empty.
-   */
-  const lineStagger = 220
-  const columnDelay = (lines.length - 1) * lineStagger + lineStagger * 2
+  // CSS starts at first paint; optional content consumes a beat only when present.
+  const lineStagger = heroStagger(lines.length + Number(!!subheading) + Number(!!button))
+  const columnDelay = lines.length * lineStagger
 
   return (
     // The orbital band always paints ink — the sphere and the white copy over
@@ -341,14 +329,14 @@ export function HeroSection({
             <StaggeredLines
               stagger={lineStagger}
               lines={lines.map((line, index) => (
-                // The frame steps the value between lines rather than fading the
-                // block: within a line it is flat, and the step is hard. Both
-                // ends are solid white — the 92% `on-ink` alpha belongs to the
-                // CTA band, and this headline is drawn at full opacity.
+                // Match 50% white over ink with an opaque gray so the moving
+                // stars cannot show through the closing line.
                 <span
                   key={line}
                   className={
-                    index === lines.length - 1 && lines.length > 1 ? 'text-white/50' : 'text-white'
+                    index === lines.length - 1 && lines.length > 1
+                      ? 'text-[color:color-mix(in_srgb,white_50%,var(--color-ink))]'
+                      : 'text-white'
                   }
                 >
                   {line}
@@ -362,7 +350,7 @@ export function HeroSection({
             // (`2975:8418`), where 24/34 holds rather than stepping down. The
             // 50% belongs to the headline's closing line alone — the standfirst
             // carries no alpha at either width.
-            <Entrance delay={columnDelay} className="mt-10">
+            <Entrance delay={columnDelay} className={cn('mt-10', HERO_ENTRANCE)}>
               {/* 24/34 on both frames — flat, so `text-lead`'s 20px floor
                * would undersize it at 402. */}
               <p className="mx-auto max-w-[724px] text-balance text-[24px] leading-[34px] text-white">
@@ -374,7 +362,10 @@ export function HeroSection({
           {button ? (
             // 33 below the standfirst at 1440, 39 at 402 (`1814:1622`'s
             // column gap, which is the same 39 above the standfirst).
-            <Entrance delay={columnDelay + 120} className="mt-10 lg:mt-8">
+            <Entrance
+              delay={columnDelay + (subheading ? 300 : 0)}
+              className={cn('mt-10 lg:mt-8', HERO_ENTRANCE)}
+            >
               <ButtonLink button={button} />
             </Entrance>
           ) : null}

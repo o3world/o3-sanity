@@ -13,8 +13,9 @@ export interface StaggeredLinesProps {
 
 /**
  * The hero headline's editorial stagger: each line fades up 0.4em with a 4px
- * blur melting off it, on `--ease-spring` over `--duration-reveal`, one line
- * every `stagger` ms.
+ * blur melting off it over `--duration-reveal`. Movement uses `--ease-wave`
+ * over `--duration-hero-wave`, one line every `stagger` ms. Each line carries
+ * its own small overshoot and return, finishing in the same order it started.
  *
  * Read off motion.dev's editorial-stagger reference, which has no Figma anchor
  * and cannot have one — the frames draw the band, not its entrance. Nothing
@@ -41,7 +42,7 @@ export function StaggeredLines({ lines, baseDelay = 0, stagger = 220 }: Staggere
         <span
           key={i}
           className={cn(
-            'animate-line-rise block',
+            'animate-line-rise block [--hero-rise-distance:0.4em]',
             // `translate`, not `transform`: Tailwind v4 compiles `translate-y-*`
             // to the independent `translate` property, which is what the
             // keyframe writes (see `../motion.ts`). `filter` is deliberately

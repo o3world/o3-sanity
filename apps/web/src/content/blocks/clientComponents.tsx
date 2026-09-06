@@ -68,7 +68,13 @@ type O3SectionBlockName = BrandSectionBlockName<'o3'>
  * The tile is `2479:2205`'s: O3's mark on its red plate at 71px.
  */
 function HeroSectionWithMark(props: SectionProps<'heroSection'>) {
-  return <HeroSection {...props} brandMark={<BrandLogo color="red" size={71} />} />
+  return (
+    <HeroSection
+      {...props}
+      brandMark={<BrandLogo color="red" size={71} />}
+      sequence={props.loc?.id.replace(/^drafts\./, '') === 'collectionIndex-seed-work'}
+    />
+  )
 }
 
 /**

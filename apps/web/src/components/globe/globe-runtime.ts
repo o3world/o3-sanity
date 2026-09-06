@@ -1,17 +1,47 @@
 import { draw, init, type Gpu, type DrawOptions } from 'vgpu'
-import { dotShader, orbitMaskShader, orbitShader, shootingStarShader, starsShader } from './shaders'
+import {
+  dotShader,
+  globeCompositeShader,
+  heatHazeShader,
+  orbitMaskShader,
+  orbitShader,
+  shootingStarShader,
+  starsShader,
+} from './shaders'
 
 const recipes = {
-  orbit: { shader: orbitShader, vertices: 288 * 6, blend: 'alpha' },
+  orbit: {
+    shader: orbitShader,
+    vertices: 288 * 6,
+    blend: 'alpha',
+    depth: { write: false },
+    entry: { fragment: 'fs_main' },
+  },
+  orbitDepth: {
+    shader: orbitShader,
+    vertices: 288 * 6,
+    writeMask: [],
+    entry: { fragment: 'fs_depth' },
+  },
   mask: {
     shader: orbitMaskShader,
+    depth: false,
     vertices: 288 * 6,
     blend: { color: { src: 'zero', dst: 'one-minus-src-alpha' } },
   },
-  dot: { shader: dotShader, vertices: 6, blend: 'alpha' },
-  stars: { shader: starsShader, vertices: 6, instances: 4180, blend: 'alpha' },
-  quietStars: { shader: starsShader, vertices: 6, instances: 1100, blend: 'alpha' },
-  shootingStar: { shader: shootingStarShader, vertices: 6, blend: 'alpha' },
+  dot: {
+    shader: dotShader,
+    vertices: 6,
+    blend: 'alpha',
+    depth: { write: false },
+    entry: { fragment: 'fs_main' },
+  },
+  dotDepth: { shader: dotShader, vertices: 6, writeMask: [], entry: { fragment: 'fs_depth' } },
+  composite: { shader: globeCompositeShader, vertices: 3, depth: false },
+  heatHaze: { shader: heatHazeShader, vertices: 288 * 6, blend: 'alpha', depth: false },
+  stars: { shader: starsShader, vertices: 6, instances: 4180, blend: 'alpha', depth: false },
+  quietStars: { shader: starsShader, vertices: 6, instances: 1100, blend: 'alpha', depth: false },
+  shootingStar: { shader: shootingStarShader, vertices: 6, blend: 'alpha', depth: false },
 } satisfies Record<string, DrawOptions>
 
 type Kind = keyof typeof recipes
@@ -66,7 +96,9 @@ export function createGlobeRuntime() {
           (Object.keys(recipes) as Kind[]).map(async (kind) => {
             const item = draw(gpu, recipes[kind])
             state.pool.set(kind, [item])
-            await item.compile(signature)
+            await item.compile(
+              kind === 'composite' ? signature : { ...signature, depth: 'depth24plus' },
+            )
           }),
         )
         if (version !== generation) throw new Error('Globe startup cancelled')

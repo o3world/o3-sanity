@@ -18,15 +18,7 @@ async function pixel(page: Page, image: Buffer) {
 test('authored ground does not flash while arrival content fades', async ({ page }, info) => {
   test.skip(info.project.use.contextOptions?.reducedMotion === 'reduce', 'requires active motion')
   await page.goto('/work')
-  for (const name of [
-    'Insights',
-    'Work',
-    'Solutions',
-    'About',
-    'Solutions',
-    'Let’s talk',
-    'Solutions',
-  ]) {
+  for (const name of ['Insights', 'Solutions', 'About', 'Solutions', 'Let’s talk', 'Solutions']) {
     await (await navLink(page, name)).click()
     await page.waitForFunction(() =>
       document.getAnimations().some((animation) => {

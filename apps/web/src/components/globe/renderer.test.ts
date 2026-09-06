@@ -1,16 +1,32 @@
 import { beforeEach, expect, it, vi } from 'vitest'
-import { frame } from 'vgpu'
-import { startSpatialGlobe } from './renderer'
+import { frame, type Draw } from 'vgpu'
+import { drawGlobeGeometry, startSpatialGlobe } from './renderer'
 import type { GlobeRuntime } from './globe-runtime'
 
 const gpu = vi.hoisted(() => ({ dispose: vi.fn() }))
-const target = { dispose: vi.fn() }
+const target = { dispose: vi.fn(), size: [128, 128], format: 'bgra8unorm' }
+const scene = vi.hoisted(() => ({
+  color: { destroy: vi.fn() },
+  depth: { destroy: vi.fn() },
+  resize: vi.fn(),
+}))
 const release = vi.fn()
 const runtime = {
-  acquire: vi.fn(async () => ({ gpu, release, onError: vi.fn() })),
+  acquire: vi.fn(async () => ({
+    gpu,
+    release,
+    onError: vi.fn(),
+    draw: vi.fn(() => ({ set: vi.fn() })),
+  })),
 } as unknown as GlobeRuntime
 const surface = vi.hoisted(() => vi.fn())
-vi.mock('vgpu', () => ({ init: vi.fn(async () => gpu), surface, draw: vi.fn(), frame: vi.fn() }))
+vi.mock('vgpu', () => ({
+  init: vi.fn(async () => gpu),
+  surface,
+  target: vi.fn(() => scene),
+  draw: vi.fn(),
+  frame: vi.fn(),
+}))
 beforeEach(() => {
   vi.clearAllMocks()
   surface.mockReturnValue(target)
@@ -174,6 +190,8 @@ it.each(['hero', 'cta'] as const)(
         expect(onReady).not.toHaveBeenCalledWith(true)
       }
       expect(target.dispose).toHaveBeenCalledOnce()
+      expect(scene.color.destroy).toHaveBeenCalledOnce()
+      expect(scene.depth.destroy).toHaveBeenCalledOnce()
       expect(release).toHaveBeenCalledOnce()
       expect(gpu.dispose).not.toHaveBeenCalled()
     } finally {
@@ -182,3 +200,21 @@ it.each(['hero', 'cta'] as const)(
     }
   },
 )
+
+it('paints solid planets before translucent rails can write depth over them', () => {
+  const planet = { label: 'planet' } as unknown as Draw
+  const planetDepth = { label: 'planetDepth' } as unknown as Draw
+  const rail = { label: 'rail' } as unknown as Draw
+  const railDepth = { label: 'railDepth' } as unknown as Draw
+  const draw = vi.fn()
+  drawGlobeGeometry(
+    { draw },
+    {
+      rings: [rail],
+      ringDepths: [railDepth],
+      electrons: [[planet]],
+      electronDepths: [[planetDepth]],
+    },
+  )
+  expect(draw.mock.calls.map(([item]) => item)).toEqual([planetDepth, planet, railDepth, rail])
+})

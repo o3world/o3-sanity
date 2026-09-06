@@ -48,7 +48,7 @@ test('a stationary pointer can navigate before the page fade finishes', async ({
   const box = (await insights.boundingBox())!
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2)
   await watchNextPointer(page)
-  await primary(page).getByRole('link', { name: 'Work', exact: true }).focus()
+  await primary(page).getByRole('link', { name: 'About', exact: true }).focus()
   await page.keyboard.press('Enter')
   await page.waitForFunction(() =>
     document.getAnimations().some((animation) => {
@@ -77,14 +77,15 @@ test('the representative reader journey separates ready content from settled mot
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   const first = await navigate(
     page,
-    '/work',
-    async () => (await navLink(page, 'Work')).click(),
+    '/about',
+    async () => (await navLink(page, 'About')).click(),
     info,
   )
   if (info.project.use.contextOptions?.reducedMotion !== 'reduce') {
     expect(first.motionSeen, 'normal navigation actually has an arrival cadence').toBe(true)
     expect(first.readyAt!).toBeLessThan(first.settledAt!)
   }
+  await navigate(page, '/work', async () => (await navLink(page, 'Work')).click(), info)
   await navigate(
     page,
     IRONMAN,
@@ -215,11 +216,11 @@ test('rapid and repeated navigation leaves only the final page active', async ({
     ? primary(page).getByRole('button', { name: 'Open menu' })
     : primary(page).getByRole('link', { name: 'Insights', exact: true })
   const nextBox = (await nextControl.boundingBox())!
-  const work = await navLink(page, 'Work')
-  await watchNextPointer(page, '/work')
-  await work.click()
+  const about = await navLink(page, 'About')
+  await watchNextPointer(page, '/about')
+  await about.click()
   if (info.project.use.contextOptions?.reducedMotion !== 'reduce') await arrivalRunning(page)
-  else await expect(page).toHaveURL(/\/work\/?$/)
+  else await expect(page).toHaveURL(/\/about\/?$/)
   if (mobile) {
     // Tap the live header while the arriving main is still fading. Do not
     // wait for the sheet's previous exit animation or use a forced click.
@@ -271,7 +272,7 @@ test('enabling reduced motion cancels an active arrival without leaving dim cont
     'this case changes the preference during normal motion',
   )
   await page.goto('/')
-  await page.locator('main a[href="/work"]:visible').first().click()
+  await (await navLink(page, 'About')).click()
   await arrivalRunning(page)
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await expect(page.locator('main [data-route-foreground]:visible').first()).toHaveCSS(

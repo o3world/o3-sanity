@@ -9,6 +9,14 @@ fn orbitView(q: vec3f, yaw: f32, pitch: f32) -> vec3f {
   let z = -q.x*sin(yaw)+q.z*cos(yaw);
   return vec3f(x,q.y*cos(pitch)-z*sin(pitch),q.y*sin(pitch)+z*cos(pitch));
 }
+// Compress the sky's enormous depth range for the camera move only.
+// At the resting camera position every seeded star keeps its original projection.
+fn skyCamera(world: vec3f, position: vec3f) -> vec3f {
+  let depth = clamp(log(length(world)/8000.0)/log(1125.0),0.0,1.0);
+  let travelDistance = 900.0*pow(32.0,depth);
+  let eyeDistance = length(world-vec3f(0.0,0.0,1650.0));
+  return world-position*(eyeDistance/travelDistance);
+}
 // Blend toward an angular lens so peripheral motion follows a rounded dome.
 // Shared by the sky and rails; the central globe keeps almost identical scale.
 fn domeProject(xy: vec2f, distance: f32, focal: f32) -> vec2f {
@@ -20,9 +28,11 @@ fn domeProject(xy: vec2f, distance: f32, focal: f32) -> vec2f {
 `
 const common =
   camera +
+  starHashWGSL +
   /* wgsl */ `
 struct Params {
   viewport: vec4f,
+  camera: vec4f,
   globe: vec4f,
   motion: vec4f,
   u: vec4f,
@@ -32,28 +42,60 @@ struct Params {
   dotGround: vec4f,
 }
 @group(0) @binding(0) var<uniform> p: Params;
+const glowLightColor = vec3f(1.0,0.063,0.0);
 struct Out {
   @builtin(position) position: vec4f,
   @location(0) uv: vec2f,
   @location(1) color: vec4f,
 }
-fn project(theta: f32) -> vec4f {
+fn orbitPoint(theta: f32) -> vec3f {
   let original = (p.u.xyz*cos(theta) + p.v.xyz*sin(theta))*340.0;
   let axis = normalize(vec3f(0.32,1.0,0.18));
   let angle = p.motion.x * 6.2831853 / (70.0/0.3);
   let q = original*cos(angle) + cross(axis,original)*sin(angle) + axis*dot(axis,original)*(1.0-cos(angle));
   let tilt = -17.0*3.14159265/180.0;
   let posed = vec3f(q.x*cos(tilt)-q.y*sin(tilt), (q.x*sin(tilt)+q.y*cos(tilt))*cos(11.0*3.14159265/180.0), q.z);
-  let view = orbitView(posed,p.motion.y,p.motion.z);
+  return orbitView(posed-p.camera.xyz,p.motion.y,p.motion.z);
+}
+fn project(theta: f32) -> vec4f {
+  let view = orbitPoint(theta);
   let perspective = 1650.0/(1650.0-view.z);
   return vec4f(p.globe.xy + domeProject(view.xy,1650.0-view.z,1650.0*p.globe.z), view.z, perspective);
 }
-fn clip(pixel: vec2f) -> vec4f {
-  return vec4f(pixel.x/p.viewport.x*2.0-1.0, 1.0-pixel.y/p.viewport.y*2.0, 0.0, 1.0);
+fn sceneDepth(z: f32) -> f32 {
+  return (1000.0-z)/2000.0;
+}
+fn clip(pixel: vec2f, z: f32) -> vec4f {
+  return vec4f(pixel.x/p.viewport.x*2.0-1.0, 1.0-pixel.y/p.viewport.y*2.0, sceneDepth(z), 1.0);
 }
 fn corner(index: u32) -> vec2f {
   let corners = array<vec2f,6>(vec2f(-1,-1),vec2f(1,-1),vec2f(-1,1),vec2f(-1,1),vec2f(1,-1),vec2f(1,1));
   return corners[index%6u];
+}
+fn heatCorner(cell: vec2f) -> f32 {
+  let key = (bitcast<u32>(i32(cell.x))*0x7feb352du)
+    ^ (bitcast<u32>(i32(cell.y))*0x846ca68bu);
+  return stableStarHash(f32(key & 0xffffffu));
+}
+fn heatNoise(q: vec2f) -> f32 {
+  let cell = floor(q);
+  let f = fract(q);
+  let blend = f*f*(3.0-2.0*f);
+  // Hash the shared lattice corners identically on both sides of each cell.
+  let values = vec4f(heatCorner(cell),heatCorner(cell+vec2f(1,0)),
+    heatCorner(cell+vec2f(0,1)),heatCorner(cell+vec2f(1,1)));
+  return mix(mix(values.x,values.y,blend.x),mix(values.z,values.w,blend.x),blend.y);
+}
+// The glow stays in the SVG bloom's plane while following the camera descent.
+fn glowPoint(angle: f32, radius: f32) -> vec3f {
+  return vec3f(cos(angle)*radius,sin(angle)*radius*cos(11.0*3.14159265/180.0),0.0)-p.camera.xyz;
+}
+fn glowRadius(angle: f32) -> f32 {
+  let ring = vec2f(cos(angle),sin(angle));
+  let drift = vec2f(p.motion.x*0.075,-p.motion.x*0.045);
+  let ripple = (heatNoise(ring*8.0+drift)-0.5)*6.0
+    +(heatNoise(ring*19.0-drift*0.7)-0.5)*2.0;
+  return 342.0+ripple*p.motion.w;
 }
 `
 const orbitVertex =
@@ -70,7 +112,7 @@ const orbitVertex =
   let width = p.u.w*p.globe.z*0.5;
   let offset = normal*c.y*(width+1.0);
   var result: Out;
-  result.position = clip(point.xy+offset);
+  result.position = clip(point.xy+offset,point.z);
   result.uv = vec2f(c.y*(width+1.0),width);
   result.color = vec4f(p.color.rgb,p.color.a*mix(0.28,1.0,smoothstep(-55.0,55.0,point.z)));
   return result;
@@ -87,9 +129,21 @@ export const orbitMaskShader =
 export const orbitShader =
   orbitVertex +
   /* wgsl */ `
+fn railCoverage(i: Out) -> f32 {
+  return 1.0-smoothstep(max(0.0,i.uv.y-0.7),i.uv.y+0.7,abs(i.uv.x));
+}
+@fragment fn fs_depth(i: Out) -> @location(0) vec4f {
+  if (railCoverage(i) < 0.01 || i.color.a <= 0.0) { discard; }
+  return vec4f(0.0);
+}
 @fragment fn fs_main(i: Out) -> @location(0) vec4f {
-  let coverage = 1.0-smoothstep(max(0.0,i.uv.y-0.7),i.uv.y+0.7,abs(i.uv.x));
-  return vec4f(i.color.rgb,i.color.a*coverage);
+  let coverage = railCoverage(i);
+  if (coverage < 0.01 || i.color.a <= 0.0) { discard; }
+  let nearSide = smoothstep(0.0,55.0,1000.0-i.position.z*2000.0)*p.dot.w;
+  let opacity = mix(i.color.a,1.0,nearSide);
+  // Keep the exported brightness while giving near-side hero rails a solid body.
+  let material = i.color.rgb*i.color.a/max(opacity,0.0001);
+  return vec4f(material,opacity*coverage);
 }
 `
 export const dotShader =
@@ -101,37 +155,114 @@ export const dotShader =
   let radius = max(0.4,p.dot.y*q.w)*p.globe.z;
   let extent = radius + 1.0;
   var result: Out;
-  result.position = clip(q.xy+c*extent);
+  result.position = clip(q.xy+c*extent,q.z);
   result.uv = c*extent;
   let opacity = mix(0.22,select(min(1.0,p.v.w+0.35),p.globe.w,p.dot.z>0.5),smoothstep(-55.0,55.0,q.z));
-  result.color = vec4f(p.color.rgb*mix(1.0,0.5+0.5*opacity,p.dot.w)*p.color.a,mix(opacity,1.0,p.dot.w));
+  result.color = vec4f(p.color.rgb*p.color.a,opacity);
+  if (p.dot.w > 0.5) {
+    result.color = vec4f(p.color.rgb,1.0);
+  }
+  return result;
+}
+struct SphereFragment {
+  @location(0) color: vec4f,
+  @builtin(frag_depth) depth: f32,
+}
+fn sphereNormal(i: Out) -> vec3f {
+  let q = project(p.dot.x);
+  let radius = max(0.4,p.dot.y*q.w)*p.globe.z;
+  let xy = i.uv/max(radius,0.4);
+  return normalize(vec3f(xy,sqrt(max(0.0,1.0-dot(xy,xy)))));
+}
+fn sphereCoverage(i: Out) -> f32 {
+  let q = project(p.dot.x);
+  let radius = max(0.4,p.dot.y*q.w)*p.globe.z;
+  return 1.0-smoothstep(radius-0.6,radius+0.6,length(i.uv));
+}
+fn sphereDepth(i: Out) -> f32 {
+  return sceneDepth(orbitPoint(p.dot.x).z + sphereNormal(i).z*p.dot.y);
+}
+@fragment fn fs_depth(i: Out) -> SphereFragment {
+  if (sphereCoverage(i) < 0.01) { discard; }
+  var result: SphereFragment;
+  result.color = vec4f(0.0);
+  result.depth = sphereDepth(i);
+  return result;
+}
+fn glowIrradiance(center: vec3f, normal: vec3f) -> f32 {
+  let point = center+normal*p.dot.y;
+  let flatten = cos(11.0*3.14159265/180.0);
+  let localCenter = center+p.camera.xyz;
+  let azimuth = atan2(localCenter.y/flatten,localCenter.x);
+  var energy = 0.0;
+  // The soft heat shimmer and this light share their local radius.
+  // Distance softening avoids hot spots at the glowing rim.
+  for (var sample = -2; sample <= 2; sample++) {
+    let angle = azimuth+f32(sample)*0.28;
+    let radius = glowRadius(angle);
+    let source = glowPoint(angle,radius);
+    let delta = source-point;
+    let distanceSquared = dot(delta,delta);
+    let direction = delta/max(sqrt(distanceSquared),0.001);
+    energy += max(0.0,dot(normal,direction))*40000.0/(distanceSquared+40000.0);
+  }
+  return min(1.0,energy/3.0);
+}
+@fragment fn fs_main(i: Out) -> SphereFragment {
+  let solid = sphereCoverage(i);
+  if (solid < 0.01) { discard; }
+  let normal = sphereNormal(i);
+  let center = orbitPoint(p.dot.x);
+  let toLight = -center-normal*p.dot.y;
+  let light = toLight/max(length(toLight),0.001);
+  var material = i.color.rgb*(0.55+0.45*max(0.0,dot(normal,light)));
+  if (p.dot.w > 0.5) {
+    // A quiet neutral fill preserves shape; only the glowing edge adds direction and warmth.
+    material = i.color.rgb*(vec3f(0.18)+glowLightColor*glowIrradiance(center,normal));
+  }
+  var result: SphereFragment;
+  result.depth = sphereDepth(i);
+  if (p.dotGround.a > 0.5) {
+    result.color = vec4f(mix(p.dotGround.rgb,material,i.color.a),solid);
+  } else {
+    result.color = vec4f(material,solid*i.color.a);
+  }
+  return result;
+}
+`
+export const heatHazeShader =
+  common +
+  /* wgsl */ `
+@vertex fn vs_main(@builtin(vertex_index) vertex: u32) -> Out {
+  let c = corner(vertex);
+  let angle = (f32(vertex/6u)+(c.x+1.0)*0.5)/288.0*6.2831853;
+  let local = vec2f(cos(angle),sin(angle))*(342.0+c.y*24.0);
+  let pixel = p.globe.xy+glowPoint(angle,342.0+c.y*24.0).xy*p.globe.z;
+  var result: Out;
+  result.position = clip(pixel,0.0);
+  result.uv = local;
+  result.color = vec4f(glowLightColor,1.0);
   return result;
 }
 @fragment fn fs_main(i: Out) -> @location(0) vec4f {
-  let q = project(p.dot.x);
-  let radius = max(0.4,p.dot.y*q.w)*p.globe.z;
-  let d = length(i.uv);
-  let solid = 1.0-smoothstep(radius-0.6,radius+0.6,d);
-  // Analytic sphere normal gives a rounded surface without changing the
-  // orbit center. Opaque cores occlude the rail.
-  let xy=i.uv/max(radius,0.4);
-  let normal=normalize(vec3f(xy.x,-xy.y,sqrt(max(0.0,1.0-dot(xy,xy)))));
-  // The surrounding globe supplies broad red light from its center, rather
-  // than a separate white key light in the upper corner of every bead.
-  let inward=p.globe.xy-q.xy;
-  let light=normalize(vec3f(inward.x,-inward.y,max(1.0,length(inward)*0.25)));
-  let diffuse=max(0.0,dot(normal,light));
-  let warmth=mix(i.color.rgb,vec3f(1.0,0.063,0.0),p.dot.w);
-  let softRim=pow(1.0-normal.z,2.0)*diffuse;
-  let material=i.color.rgb*(0.62+0.22*normal.z)+warmth*(0.09*diffuse+0.07*softRim);
-  let alpha=solid*i.color.a;
-  let color=mix(i.color.rgb,material,solid);
-  // Keep the light preset's pale depth tones in the material, not its alpha:
-  // a solid sphere must cover the rail passing behind it.
-  if (p.dotGround.a > 0.5) {
-    return vec4f(mix(p.dotGround.rgb,color,i.color.a),solid);
-  }
-  return vec4f(color,alpha);
+  let angle = atan2(i.uv.y,i.uv.x);
+  let distance = length(i.uv)-glowRadius(angle);
+  let drift = vec2f(p.motion.x*0.075,-p.motion.x*0.045);
+  let texture = heatNoise(i.uv*0.045+drift);
+  let softness = 2.5+texture*3.5;
+  let haze = exp(-distance*distance/(2.0*softness*softness));
+  let strength = smoothstep(0.2,0.85,texture)*0.18;
+  return vec4f(i.color.rgb,haze*strength*p.motion.w);
+}
+`
+export const globeCompositeShader = /* wgsl */ `
+@group(0) @binding(0) var scene: texture_2d<f32>;
+@vertex fn vs_main(@builtin(vertex_index) vertex: u32) -> @builtin(position) vec4f {
+  let points = array<vec2f,3>(vec2f(-1,-1),vec2f(3,-1),vec2f(-1,3));
+  return vec4f(points[vertex],0,1);
+}
+@fragment fn fs_main(@builtin(position) point: vec4f) -> @location(0) vec4f {
+  return textureLoad(scene,vec2i(point.xy),0);
 }
 `
 // Continuous spherical volume: no depth bands or screen-space particle sheets.
@@ -139,7 +270,7 @@ export const starsShader =
   camera +
   starHashWGSL +
   /* wgsl */ `
-struct Params { viewport: vec4f, motion: vec4f, globe: vec4f, rotation: vec4f }
+struct Params { viewport: vec4f, camera: vec4f, motion: vec4f, globe: vec4f, rotation: vec4f }
 @group(0) @binding(0) var<uniform> p: Params;
 struct Out {
  @builtin(position) position: vec4f,
@@ -182,7 +313,7 @@ fn hash(n:f32) -> f32 {
  }
  // Accumulated orientation retains the most recent cursor-directed spin.
  world+=2.0*cross(p.rotation.xyz,cross(p.rotation.xyz,world)+p.rotation.w*world);
- world=orbitView(world,p.motion.y,p.motion.z);
+ world=orbitView(skyCamera(world,p.camera.xyz),p.motion.y,p.motion.z);
  let distance=1650.0-world.z;
  // All six vertices take the same branch: a clipped, degenerate triangle
  // never reaches fragment shading. Keep the existing near-plane fade.
@@ -223,7 +354,7 @@ fn hash(n:f32) -> f32 {
 export const shootingStarShader =
   camera +
   /* wgsl */ `
-struct Params { viewport: vec4f, motion: vec4f, globe: vec4f }
+struct Params { viewport: vec4f, camera: vec4f, motion: vec4f, globe: vec4f }
 @group(0) @binding(0) var<uniform> p: Params;
 struct Out {
  @builtin(position) position: vec4f,
@@ -232,7 +363,7 @@ struct Out {
 }
 fn hash(n:f32) -> f32 { return fract(sin(n*127.1+311.7)*43758.5453); }
 fn skyPoint(world:vec3f) -> vec2f {
- let view=orbitView(world,p.motion.y,p.motion.z);
+ let view=orbitView(skyCamera(world,p.camera.xyz),p.motion.y,p.motion.z);
  let r=length(view.xy);
  let angle=atan(r/max(100.0,1650.0-view.z));
  return view.xy/max(r,0.001)*angle*max(p.viewport.x,p.viewport.y)*0.5+vec2f(p.viewport.x*0.5,p.viewport.y*0.43-p.viewport.z);
