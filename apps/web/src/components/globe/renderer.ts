@@ -34,6 +34,18 @@ export async function startSpatialGlobe(
       dots: arc.dots.map((dot) => ({ ...dot, col: resolveColor(dot.col, globe) })),
     }))
     const rgb = (hex: string) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+    const dotGround =
+      options.preset === 'line'
+        ? [
+            ...rgb(
+              resolveColor(
+                getComputedStyle(globe.closest('section') ?? hero).backgroundColor,
+                globe,
+              ),
+            ),
+            1,
+          ]
+        : [0, 0, 0, 0]
     const rings = arcs.map(() =>
       draw(gpu, { shader: orbitShader, vertices: 288 * 6, blend: 'alpha' }),
     )
@@ -226,6 +238,7 @@ export async function startSpatialGlobe(
         v: [0, 0, 0, 0],
         color: [1, 1, 1, 1],
         dot: [0, 0, 0, 0],
+        dotGround,
       }
       const targetSkyRise =
         Math.min(heroBounds.height, Math.max(0, -heroBounds.top)) * (options.quietStars ? 0 : 0.015)

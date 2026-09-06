@@ -27,6 +27,7 @@ struct Params {
   v: vec4f,
   color: vec4f,
   dot: vec4f,
+  dotGround: vec4f,
 }
 @group(0) @binding(0) var<uniform> p: Params;
 struct Out {
@@ -123,6 +124,11 @@ export const dotShader =
   let material=i.color.rgb*(0.62+0.22*normal.z)+warmth*(0.09*diffuse+0.07*softRim);
   let alpha=solid*i.color.a;
   let color=mix(i.color.rgb,material,solid);
+  // Keep the light preset's pale depth tones in the material, not its alpha:
+  // a solid sphere must cover the rail passing behind it.
+  if (p.dotGround.a > 0.5) {
+    return vec4f(mix(p.dotGround.rgb,color,i.color.a),solid);
+  }
   return vec4f(color,alpha);
 }
 `
