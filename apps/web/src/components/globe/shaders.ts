@@ -244,7 +244,7 @@ export const heatHazeShader =
   let texture = heatNoise(i.uv*0.045+drift);
   let softness = (6.8+texture*0.4)*mix(1.0,0.65,smoothstep(0.0,6.0,distance));
   let haze = exp(-distance*distance/(2.0*softness*softness));
-  let strength = mix(0.27,0.34,smoothstep(0.2,0.85,texture));
+  let strength = mix(0.135,0.17,smoothstep(0.2,0.85,texture));
   let edge = 1.0-smoothstep(36.0,47.0,abs(length(i.uv)-342.0));
   return vec4f(i.color.rgb,haze*strength*edge*p.motion.w);
 }
