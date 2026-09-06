@@ -177,7 +177,11 @@ export const orbitShader =
     center = glowPoint(theta,340.0);
     normal = normalize(vec3f(cos(theta),sin(theta)/cos(11.0*3.14159265/180.0),0.0))*cos(phi)+vec3f(0,0,1)*sin(phi);
   }
-  return solidVertex(center+normal*p.u.w*0.5,normal);
+  let point = center+normal*p.u.w*0.5;
+  var result = solidVertex(point,normal);
+  // Match the SVG bloom's projection while retaining the rim's mesh depth.
+  if (p.dot.z > 1.5) { result.position = clip(p.globe.xy+point.xy*p.globe.z,point.z); }
+  return result;
 }
 @fragment fn fs_main(i: SolidOut) -> @location(0) vec4f {
   let normal = normalize(i.normal);
@@ -242,9 +246,10 @@ export const heatHazeShader =
   let distance = length(i.uv)-glowRadius(angle);
   let drift = vec2f(p.motion.x*0.075,-p.motion.x*0.045);
   let texture = heatNoise(i.uv*0.045+drift);
-  let softness = (6.8+texture*0.4)*mix(1.0,0.65,smoothstep(0.0,6.0,distance));
+  let inwardSpread = mix(1.0,2.0,smoothstep(0.0,12.0,-distance));
+  let softness = (6.8+texture*0.4)*inwardSpread*mix(1.0,0.65,smoothstep(0.0,6.0,distance));
   let haze = exp(-distance*distance/(2.0*softness*softness));
-  let strength = mix(0.135,0.17,smoothstep(0.2,0.85,texture));
+  let strength = mix(0.04,0.05,smoothstep(0.2,0.85,texture));
   let edge = 1.0-smoothstep(36.0,47.0,abs(length(i.uv)-342.0));
   return vec4f(i.color.rgb,haze*strength*edge*p.motion.w);
 }

@@ -97,11 +97,7 @@ export async function startSpatialGlobe(
     const rings = arcs.map(() => lease.draw('orbit'))
     const rim = lease.draw('orbit')
     const rimColor = rgb(
-      options.preset === 'line'
-        ? resolveColor('var(--color-ink)', globe)
-        : options.preset === 'hero'
-          ? resolveColor('color-mix(in srgb, var(--color-brand) 90%, white)', globe)
-          : '#e9edf5',
+      options.preset === 'line' ? resolveColor('var(--color-ink)', globe) : '#e9edf5',
     )
     const electrons = arcs.map((arc) => arc.dots.map(() => lease.draw('dot')))
     const heatHaze = options.preset === 'hero' ? lease.draw('heatHaze') : undefined
