@@ -66,7 +66,8 @@ export function readSkyEntranceOffset(
       : typeof animation.currentTime === 'number'
         ? animation.currentTime
         : 0
-  return offsetAt(elapsed, distance, 0, duration - 600)
+  // The sky settles once; the globe alone keeps its overshoot and return.
+  return Math.max(0, offsetAt(elapsed, distance, 0, duration - 600))
 }
 
 /** Rise just after the second headline line, then drift back from a small overshoot. */
