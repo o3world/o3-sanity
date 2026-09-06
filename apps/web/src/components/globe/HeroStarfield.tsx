@@ -28,9 +28,11 @@ const startup = `(${startStartupSky.toString()})(${[
 
 export function HeroStarfield() {
   return (
-    <>
-      <style>{`[data-spatial-layout] .hero-band:has(.hero-lead)::before { background-image: url("data:image/svg+xml,${sky}"); }`}</style>
-      <script dangerouslySetInnerHTML={{ __html: startup }} />
-    </>
+    <style>{`[data-spatial-layout] .hero-band:has(.hero-lead)::before { background-image: url("data:image/svg+xml,${sky}"); }`}</style>
   )
+}
+
+/** Root-layout bootstrap: parsed once per document, never inserted by a route change. */
+export function HeroStartup() {
+  return <script dangerouslySetInnerHTML={{ __html: startup }} />
 }

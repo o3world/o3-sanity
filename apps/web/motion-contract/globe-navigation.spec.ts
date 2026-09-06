@@ -115,3 +115,24 @@ test('the Home camera entrance belongs to a full document load, not internal nav
   await settle()
   expect(await travel(), 'a document opened on Work has no Home entrance').toBe(0)
 })
+
+test('the Home startup script stays in the initial document on an index-to-Home visit', async ({
+  page,
+}) => {
+  const scriptErrors: string[] = []
+  page.on('console', (message) => {
+    if (message.type() === 'error' && message.text().includes('Encountered a script tag')) {
+      scriptErrors.push(message.text())
+    }
+  })
+  await page.goto('/insights')
+  await expect(page.locator('[data-insight-feed]')).toBeVisible()
+  await primary(page)
+    .getByRole('link', { name: / home$/ })
+    .click()
+  await expect(page).toHaveURL(/\/$/)
+  await expect(page.locator('.hero-lead h1 > span:visible').first()).toHaveCSS('opacity', '1')
+  await expect(page.locator('html')).not.toHaveAttribute('data-nav-entrance')
+  await expect(page.locator('html')).not.toHaveAttribute('data-hero-startup')
+  expect(scriptErrors).toEqual([])
+})

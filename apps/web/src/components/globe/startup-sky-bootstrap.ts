@@ -11,6 +11,7 @@ export function startStartupSky(
   offsetAt: typeof globeEntranceOffset,
   stagger: typeof heroStagger,
 ) {
+  if (location.pathname !== '/') return
   const reduced = matchMedia('(prefers-reduced-motion: reduce)')
   const still = new URLSearchParams(location.search).has('spatial-still')
   const finishNavEntrance = () => {
@@ -22,14 +23,12 @@ export function startStartupSky(
     if (event.animationName === 'hero-wave' && (event.target as Element)?.id === 'site-nav')
       finishNavEntrance()
   }
-  if (location.pathname === '/') {
-    document.documentElement.dataset.spatialChrome = 'true'
-    if (!reduced.matches && !still) {
-      document.documentElement.dataset.heroStartup = 'pending'
-      document.documentElement.dataset.navEntrance = 'true'
-      document.addEventListener('animationend', onNavEnd)
-      reduced.addEventListener('change', finishNavEntrance)
-    }
+  document.documentElement.dataset.spatialChrome = 'true'
+  if (!reduced.matches && !still) {
+    document.documentElement.dataset.heroStartup = 'pending'
+    document.documentElement.dataset.navEntrance = 'true'
+    document.addEventListener('animationend', onNavEnd)
+    reduced.addEventListener('change', finishNavEntrance)
   }
   const releaseStartup = () => {
     delete document.documentElement.dataset.heroStartup
