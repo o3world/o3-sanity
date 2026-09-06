@@ -107,9 +107,10 @@ export interface PagerProps {
    */
   readonly href: (page: number) => string
   readonly className?: string
+  readonly prefetch?: boolean
 }
 
-export function Pager({ page, totalPages, href, className }: PagerProps) {
+export function Pager({ page, totalPages, href, className, prefetch }: PagerProps) {
   // A collection that fits on one page has nothing to navigate.
   if (totalPages <= 1) return null
 
@@ -119,7 +120,7 @@ export function Pager({ page, totalPages, href, className }: PagerProps) {
       <ul className="flex flex-wrap items-center justify-center gap-2">
         {page > 1 ? (
           <li>
-            <Link href={href(page - 1)} rel="prev" className={pillClass(false)}>
+            <Link prefetch={prefetch} href={href(page - 1)} rel="prev" className={pillClass(false)}>
               Previous
             </Link>
           </li>
@@ -135,6 +136,7 @@ export function Pager({ page, totalPages, href, className }: PagerProps) {
           ) : (
             <li key={slot}>
               <Link
+                prefetch={prefetch}
                 href={href(slot)}
                 // A bare "4" is no accessible name. The visible label is inside
                 // this one, which is what keeps label-in-name satisfied.
@@ -150,7 +152,7 @@ export function Pager({ page, totalPages, href, className }: PagerProps) {
 
         {page < totalPages ? (
           <li>
-            <Link href={href(page + 1)} rel="next" className={pillClass(false)}>
+            <Link prefetch={prefetch} href={href(page + 1)} rel="next" className={pillClass(false)}>
               Next
             </Link>
           </li>

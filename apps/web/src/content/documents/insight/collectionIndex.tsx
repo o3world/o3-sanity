@@ -14,7 +14,11 @@ import { defineIndexType, type IndexRendererProps } from '@o3/content-runtime/ro
 import { Blocks } from '@/content/blocks/Blocks'
 
 import { InsightIndexSkeleton } from './InsightIndexSkeleton'
-import { InsightIndexView } from './InsightIndexView'
+import { insightCatalog } from './insightCatalog'
+import dynamic from 'next/dynamic'
+import { feedPath, INSIGHTS_PAGE_SIZE } from './feedPath'
+
+const InsightFeed = dynamic(() => import('./InsightFeed').then((module) => module.InsightFeed))
 
 type Props = IndexRendererProps<typeof INSIGHTS_PAGE_QUERY>
 
@@ -44,17 +48,17 @@ function InsightIndexChrome({ document, slot }: { document: unknown; slot: 'abov
   )
 }
 
-function InsightIndexRenderer({ pagination, facets, ...rest }: Props) {
+async function InsightIndexRenderer({ pagination, facets, ...rest }: Props) {
   // Q widens to string at this site (TS#33304); cast back to the typed
   // query result for the view.
   const data = rest as unknown as NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 
   return (
-    <InsightIndexView
-      items={data.items}
+    <InsightFeed
+      path={feedPath(facets.category ?? null, pagination.page)}
+      catalog={await insightCatalog()}
+      initial={{ items: data.items, pagination }}
       categories={data.categories}
-      category={facets.category ?? null}
-      pagination={pagination}
     />
   )
 }
@@ -73,7 +77,7 @@ function InsightIndexRenderer({ pagination, facets, ...rest }: Props) {
 export const insightIndex = defineIndexType({
   itemTypes: ['insight'],
   query: INSIGHTS_PAGE_QUERY,
-  pageSize: 12,
+  pageSize: INSIGHTS_PAGE_SIZE,
   facets: ['category'],
   // The slugs `/insights/category/[category]` prerenders (#370).
   facetValues: { category: INSIGHT_CATEGORY_SLUGS_QUERY },
