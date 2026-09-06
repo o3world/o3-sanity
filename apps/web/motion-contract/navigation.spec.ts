@@ -117,6 +117,31 @@ test('the representative reader journey separates ready content from settled mot
   }
 })
 
+test('the logo returns Home to the top without reloading or adding history', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.locator('html')).not.toHaveAttribute('data-nav-entrance')
+  const logo = primary(page).getByRole('link', { name: / home$/i })
+  const documentStart = await page.evaluate(() => performance.timeOrigin)
+  const historyLength = await page.evaluate(() => history.length)
+
+  for (const activation of ['pointer', 'keyboard']) {
+    await page.evaluate((activation) => {
+      if (activation === 'keyboard') {
+        history.replaceState(history.state, '', '/?source=logo-test#home-section')
+      }
+      scrollTo({ top: 1200, behavior: 'instant' })
+    }, activation)
+    await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(1000)
+    if (activation === 'pointer') await logo.click()
+    else await logo.press('Enter')
+    await expect.poll(() => page.evaluate(() => scrollY)).toBeLessThan(2)
+    await expect(page).toHaveURL(activation === 'pointer' ? /\/$/ : /\/\?source=logo-test$/)
+    expect(await page.evaluate(() => performance.timeOrigin)).toBe(documentStart)
+    expect(await page.evaluate(() => history.length)).toBe(historyLength)
+    await expect(page.locator('html')).not.toHaveAttribute('data-nav-entrance')
+  }
+})
+
 test('back, forward and a deep link retain usable content and keyboard focus', async ({
   page,
 }, info) => {

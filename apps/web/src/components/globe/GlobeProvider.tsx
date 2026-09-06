@@ -43,21 +43,11 @@ export function GlobeRenderer({
     const quietStars = !!cta || interiorStars
     const stars = heroStars || quietStars
     const target = heroStars || interiorStars ? hero! : (cta ?? host)
+    const availablePlacement = { target, stars, quietStars, interiorStars }
     return observeGlobeAvailability(
       host,
       stars ? target : (host.closest('section') ?? host),
-      (available) =>
-        setPlacement((current) => {
-          if (!available) return null
-          if (
-            current?.target === target &&
-            current.stars === stars &&
-            current.quietStars === quietStars &&
-            current.interiorStars === interiorStars
-          )
-            return current
-          return { target, stars, quietStars, interiorStars }
-        }),
+      (available) => setPlacement(available ? availablePlacement : null),
     )
   }, [hostRef, preset])
   useLayoutEffect(() => {
