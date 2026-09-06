@@ -2,22 +2,21 @@
 import { frame, surface, target as offscreenTarget, type Draw, type FramePass } from 'vgpu'
 import type { OrbitalRendererProps } from '@o3/ui'
 import { resolveColor } from './resolve-color'
+import { nestedOrbitBasis, nestedOrbitRadii } from './nested-orbits'
 import { createGlobeParallax } from './globe-parallax'
-import { createGlobeEntrance } from './globe-entrance'
+import { createGlobeEntrance, readSkyEntranceOffset } from './globe-entrance'
 import { startPhoneTilt } from './phone-tilt'
 import { createSkyHandoff } from './sky-handoff'
 import type { GlobeRuntime } from './globe-runtime'
 
 export function drawGlobeGeometry(
   pass: Pick<FramePass, 'draw'>,
-  geometry: { rings: Draw[]; ringDepths: Draw[]; electrons: Draw[][]; electronDepths: Draw[][] },
+  geometry: { rings: Draw[]; electrons: Draw[][]; rim: Draw },
 ) {
-  const { rings, ringDepths, electrons, electronDepths } = geometry
-  // Translucent rails blend over planets; they must not erase them before paint.
-  electronDepths.forEach((orbit) => orbit.forEach((dot) => pass.draw(dot)))
-  electrons.forEach((orbit) => orbit.forEach((dot) => pass.draw(dot)))
-  ringDepths.forEach((ring) => pass.draw(ring))
-  rings.forEach((ring) => pass.draw(ring))
+  // Every solid surface writes its own color and depth in the same pass.
+  geometry.rings.forEach((ring) => pass.draw(ring))
+  geometry.electrons.forEach((orbit) => orbit.forEach((dot) => pass.draw(dot)))
+  pass.draw(geometry.rim)
 }
 
 export async function startSpatialGlobe(
@@ -44,7 +43,10 @@ export async function startSpatialGlobe(
   }
   let dispose = () => lease.release()
   try {
-    const target = surface(gpu, canvas, { dpr: [1, 2], alphaMode: 'premultiplied' })
+    const target = surface(gpu, canvas, {
+      dpr: [1.5, 2],
+      alphaMode: 'premultiplied',
+    })
     const release = () => {
       target.dispose()
       lease.release()
@@ -54,19 +56,31 @@ export async function startSpatialGlobe(
       size: target.size,
       format: target.format,
       depth: 'depth24plus',
-    })
+      msaa: 4,
+    }) as ReturnType<typeof offscreenTarget> & { destroy(): void }
     const releaseScene = () => {
-      scene.color.destroy()
-      scene.depth?.destroy()
+      scene.destroy()
       release()
     }
     dispose = releaseScene
     const composite = lease.draw('composite')
-    const arcs = options.arcs.map((arc) => ({
-      ...arc,
-      col: resolveColor(arc.col, globe),
-      dots: arc.dots.map((dot) => ({ ...dot, col: resolveColor(dot.col, globe) })),
-    }))
+    const radii = nestedOrbitRadii(options.arcs)
+    const arcs = options.arcs.map((arc, i) => {
+      const { u, v } = nestedOrbitBasis(i)
+      return {
+        ...arc,
+        u: u.map((value) => (value * radii[i]!) / 340),
+        v: v.map((value) => (value * radii[i]!) / 340),
+        col: resolveColor(
+          options.preset === 'hero' && i % 2 === 0 ? 'var(--color-brand)' : arc.col,
+          globe,
+        ),
+        dots: arc.dots.map((dot) => ({
+          ...dot,
+          col: resolveColor(dot.col, globe),
+        })),
+      }
+    })
     const rgb = (hex: string) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
     const dotGround =
       options.preset === 'line'
@@ -81,10 +95,15 @@ export async function startSpatialGlobe(
           ]
         : [0, 0, 0, 0]
     const rings = arcs.map(() => lease.draw('orbit'))
-    const ringDepths = arcs.map(() => lease.draw('orbitDepth'))
-    const masks = (options.stars ? arcs : []).map(() => lease.draw('mask'))
+    const rim = lease.draw('orbit')
+    const rimColor = rgb(
+      options.preset === 'line'
+        ? resolveColor('var(--color-ink)', globe)
+        : options.preset === 'hero'
+          ? resolveColor('color-mix(in srgb, var(--color-brand) 90%, white)', globe)
+          : '#e9edf5',
+    )
     const electrons = arcs.map((arc) => arc.dots.map(() => lease.draw('dot')))
-    const electronDepths = arcs.map((arc) => arc.dots.map(() => lease.draw('dotDepth')))
     const heatHaze = options.preset === 'hero' ? lease.draw('heatHaze') : undefined
     const stars = options.stars
       ? lease.draw(options.quietStars ? 'quietStars' : 'stars')
@@ -106,6 +125,7 @@ export async function startSpatialGlobe(
     let previous: number | undefined
     let elapsed = 0
     let skyRise = 0
+    let skyEntranceDistance: number | undefined
     let mx = 0,
       my = 0,
       sx = 0,
@@ -242,6 +262,11 @@ export async function startSpatialGlobe(
       const heroBounds = hero.getBoundingClientRect()
       parallax?.update(heroBounds, document.documentElement.clientHeight, dt, isStill())
       const cameraOffset = entrance?.update(now, isStill()) ?? 0
+      skyEntranceDistance ??= cameraOffset
+      const skyCameraOffset =
+        entrance && !isStill() && heroBounds.top >= -80
+          ? readSkyEntranceOffset(hero, now, skyEntranceDistance)
+          : 0
       const overhang = heroStars ? Math.max(0, heroBounds.top + scrollY) : 0
       if (heroStars) {
         hero.style.setProperty('--spatial-sky-overhang', `${overhang}px`)
@@ -263,8 +288,9 @@ export async function startSpatialGlobe(
         options.electronOpacity,
       ]
       // The DOM translation only keeps the SVG bloom with the camera projection.
-      // GPU geometry stays anchored; the same world-space camera moves rails and sky.
+      // Geometry follows the text; the sky starts its independent descent with the nav.
       const camera = [0, -cameraOffset / geometry[2]!, 0, 0]
+      const skyCamera = [0, -skyCameraOffset / geometry[2]!, 0, 0]
       const scrollOrbit =
         isStill() || !heroStars ? 0 : Math.min(1, Math.max(0, scrollY / heroBounds.height)) * 0.08
       const motion = [
@@ -285,6 +311,14 @@ export async function startSpatialGlobe(
         dotGround,
       }
       heatHaze?.set({ p: params })
+      rim.set({
+        p: {
+          ...params,
+          u: [0, 0, 0, 1.43],
+          color: [...rimColor, options.preset === 'line' ? 0.2415 : 0.575],
+          dot: [0, 0, 2, params.dot[3]],
+        },
+      })
       const targetSkyRise =
         Math.min(heroBounds.height, Math.max(0, -heroBounds.top)) * (options.quietStars ? 0 : 0.015)
       skyRise = isStill()
@@ -300,7 +334,7 @@ export async function startSpatialGlobe(
       stars?.set({
         p: {
           viewport: skyViewport,
-          camera,
+          camera: skyCamera,
           motion: skyMotion,
           globe: geometry,
           rotation: isStill() ? [0, 0, 0, 1] : rotation,
@@ -309,7 +343,7 @@ export async function startSpatialGlobe(
       shootingStar?.set({
         p: {
           viewport: skyViewport,
-          camera,
+          camera: skyCamera,
           globe: geometry,
           motion: [...skyMotion.slice(0, 3), Number(previewShootingStar)],
         },
@@ -318,11 +352,18 @@ export async function startSpatialGlobe(
         // Keep the export's slow colored-orbit breathing.
         const phase = Math.max(0, elapsed - arc.i * 1.1) / ((4.2 + arc.i * 0.7) / 0.3)
         const pulse = arc.colored && !isStill() ? 0.725 + 0.275 * Math.cos(phase * Math.PI * 2) : 1
-        const shared = { ...params, u: [...arc.u, arc.w], v: [...arc.v, arc.op] }
-        masks[i]?.set({ p: shared })
-        const ringParams = { p: { ...shared, color: [...rgb(arc.col), arc.op * pulse] } }
+        const shared = {
+          ...params,
+          u: [...arc.u, arc.w],
+          v: [...arc.v, arc.op],
+        }
+        const ringParams = {
+          p: {
+            ...shared,
+            color: [...rgb(arc.col), arc.op * pulse],
+          },
+        }
         rings[i]!.set(ringParams)
-        ringDepths[i]!.set(ringParams)
         arc.dots.forEach((dot, j) => {
           const dotParams = {
             p: {
@@ -337,7 +378,6 @@ export async function startSpatialGlobe(
             },
           }
           electrons[i]![j]!.set(dotParams)
-          electronDepths[i]![j]!.set(dotParams)
         })
       })
       try {
@@ -347,10 +387,9 @@ export async function startSpatialGlobe(
             if (stars) {
               pass.draw(stars)
               if (shootingStar && !isStill()) pass.draw(shootingStar)
-              masks.forEach((mask) => pass.draw(mask))
             }
-            drawGlobeGeometry(pass, { rings, ringDepths, electrons, electronDepths })
             if (heatHaze && !isStill()) pass.draw(heatHaze)
+            drawGlobeGeometry(pass, { rings, electrons, rim })
           })
           composite.set({ scene: scene.color })
           f.pass({ target, clear: [0, 0, 0, 0] }, (pass) => pass.draw(composite))

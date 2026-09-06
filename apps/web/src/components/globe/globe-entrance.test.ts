@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest'
-import { createGlobeEntrance } from './globe-entrance'
+import { createGlobeEntrance, readSkyEntranceOffset } from './globe-entrance'
 
 beforeEach(() => vi.stubGlobal('innerWidth', 1155))
 afterEach(() => vi.unstubAllGlobals())
@@ -54,7 +54,7 @@ it('starts half a beat after the second headline line and drifts back after the 
   expect(offset()).toBeGreaterThan(0)
   update(600)
   expect(offset()).toBeGreaterThan(0)
-  update(2100)
+  update(2480)
   expect(globe.style.getPropertyValue('transform')).toBe('')
   expect(globe.style.getPropertyValue('translate')).toBe('-50% 0px')
 })
@@ -64,9 +64,9 @@ it('catches up to the stagger when the GPU becomes visible later', () => {
   update(460)
   expect(offset()).toBeLessThan(207)
   expect(offset()).toBeGreaterThan(0)
-  update(1180)
+  update(1500)
   expect(offset()).toBeLessThan(0)
-  update(2100)
+  update(2480)
   expect(offset()).toBe(0)
 })
 
@@ -78,9 +78,9 @@ it('starts at rest when GPU readiness misses the hero sequence', () => {
 
 it('follows the shorter stagger when optional text is absent', () => {
   const { update, offset } = scene(0, 320)
-  update(1180)
+  update(1500)
   expect(offset()).toBeLessThan(0)
-  update(1940)
+  update(2350)
   expect(offset()).toBe(0)
 })
 
@@ -108,7 +108,7 @@ it('keeps the 55.2px mobile rise with the longer release', () => {
   update(580)
   expect(offset()).toBeLessThan(55.2)
   expect(offset()).toBeGreaterThan(0)
-  update(2100)
+  update(2480)
   expect(globe.style.getPropertyValue('transform')).toBe('')
   expect(globe.style.getPropertyValue('translate')).toBe('-50% 0px')
 })
@@ -118,22 +118,22 @@ it.each([1155, 402])('slows early, overshoots gently, and returns to rest at %ip
   const { update, offset } = scene()
   update(0)
   const distance = offset()
-  update(492)
+  update(568)
   const beforePeak = offset()
-  update(618)
+  update(731)
   const afterPeak = offset()
-  update(744)
+  update(895)
   const later = offset()
   expect(afterPeak - later).toBeLessThan(beforePeak - afterPeak)
-  update(1281)
+  update(1650)
   const overshoot = offset()
   expect(overshoot).toBeLessThan(0)
   expect(overshoot).toBeGreaterThanOrEqual(-Math.min(6, distance * 0.03))
-  update(1940)
+  update(2350)
   expect(offset()).toBeLessThan(0)
   expect(offset()).toBeGreaterThan(overshoot)
   expect(Math.abs(offset())).toBeLessThan(distance * 0.002)
-  update(2100)
+  update(2480)
   expect(offset()).toBe(0)
 })
 
@@ -147,15 +147,15 @@ it('keeps the static fallback when there is no text animation clock', () => {
 it('supplies the same displacement to the camera and the glow, then returns zero at rest', () => {
   const { update, offset } = scene()
   expect(update(160)).toBeCloseTo(offset(), 3)
-  expect(update(1281)).toBeCloseTo(offset(), 3)
-  expect(update(2100)).toBe(0)
-  expect(update(2160)).toBe(0)
+  expect(update(1650)).toBeCloseTo(offset(), 3)
+  expect(update(2480)).toBe(0)
+  expect(update(2540)).toBe(0)
 })
 
 it('preserves the camera motion when the CTA gets a longer reading pause', () => {
   const original = scene()
   const spaced = scene(0, 620, 4)
-  for (const elapsed of [0, 240, 260, 600, 1180, 1500, 1940, 2100]) {
+  for (const elapsed of [0, 240, 260, 600, 1500, 1878, 2350, 2480]) {
     expect(spaced.update(elapsed)).toBeCloseTo(original.update(elapsed), 6)
   }
 })
@@ -180,4 +180,25 @@ it('holds the camera at its starting pose while the text clock waits for GPU rea
   update(1500)
   expect(offset()).toBeGreaterThan(0)
   expect(offset()).toBeLessThan(230)
+})
+
+it('moves the sky with the nav while the globe is still waiting for its text beat', () => {
+  const animation = {
+    animationName: 'hero-wave',
+    startTime: null as number | null,
+    currentTime: 0,
+    effect: { getTiming: () => ({ duration: 1860 }) },
+  }
+  const { hero, update } = scene()
+  Object.assign(hero, {
+    ownerDocument: { getElementById: () => ({ getAnimations: () => [animation] }) },
+  })
+  expect(readSkyEntranceOffset(hero, 900, 230)).toBe(230)
+  animation.startTime = 50
+  expect(readSkyEntranceOffset(hero, 150, 230)).toBeLessThan(230)
+  expect(update(100)).toBeCloseTo(230, 6)
+  expect(readSkyEntranceOffset(hero, 1910, 230)).toBe(0)
+  expect(update(1860)).toBeLessThan(0)
+  Object.assign(hero, { ownerDocument: { getElementById: () => null } })
+  expect(readSkyEntranceOffset(hero, 0, 230)).toBe(0)
 })

@@ -3,45 +3,41 @@ import {
   dotShader,
   globeCompositeShader,
   heatHazeShader,
-  orbitMaskShader,
   orbitShader,
   shootingStarShader,
   starsShader,
 } from './shaders'
 
 const recipes = {
-  orbit: {
-    shader: orbitShader,
+  orbit: { shader: orbitShader, vertices: 576 * 12 * 6 },
+  dot: { shader: dotShader, vertices: 32 * 16 * 6 },
+  composite: { shader: globeCompositeShader, vertices: 3, depth: false },
+  heatHaze: {
+    shader: heatHazeShader,
     vertices: 288 * 6,
     blend: 'alpha',
-    depth: { write: false },
-    entry: { fragment: 'fs_main' },
-  },
-  orbitDepth: {
-    shader: orbitShader,
-    vertices: 288 * 6,
-    writeMask: [],
-    entry: { fragment: 'fs_depth' },
-  },
-  mask: {
-    shader: orbitMaskShader,
     depth: false,
-    vertices: 288 * 6,
-    blend: { color: { src: 'zero', dst: 'one-minus-src-alpha' } },
   },
-  dot: {
-    shader: dotShader,
+  stars: {
+    shader: starsShader,
+    vertices: 6,
+    instances: 4180,
+    blend: 'alpha',
+    depth: false,
+  },
+  quietStars: {
+    shader: starsShader,
+    vertices: 6,
+    instances: 1100,
+    blend: 'alpha',
+    depth: false,
+  },
+  shootingStar: {
+    shader: shootingStarShader,
     vertices: 6,
     blend: 'alpha',
-    depth: { write: false },
-    entry: { fragment: 'fs_main' },
+    depth: false,
   },
-  dotDepth: { shader: dotShader, vertices: 6, writeMask: [], entry: { fragment: 'fs_depth' } },
-  composite: { shader: globeCompositeShader, vertices: 3, depth: false },
-  heatHaze: { shader: heatHazeShader, vertices: 288 * 6, blend: 'alpha', depth: false },
-  stars: { shader: starsShader, vertices: 6, instances: 4180, blend: 'alpha', depth: false },
-  quietStars: { shader: starsShader, vertices: 6, instances: 1100, blend: 'alpha', depth: false },
-  shootingStar: { shader: shootingStarShader, vertices: 6, blend: 'alpha', depth: false },
 } satisfies Record<string, DrawOptions>
 
 type Kind = keyof typeof recipes
@@ -77,7 +73,12 @@ export function createGlobeRuntime() {
         gpu.dispose()
         throw new Error('Globe startup cancelled')
       }
-      const state: State = { gpu, pool: new Map(), errors: new Set(), stopErrors: () => {} }
+      const state: State = {
+        gpu,
+        pool: new Map(),
+        errors: new Set(),
+        stopErrors: () => {},
+      }
       current = state
       state.stopErrors = gpu.onError((error) => {
         for (const listener of [...state.errors]) listener(error)
@@ -97,7 +98,9 @@ export function createGlobeRuntime() {
             const item = draw(gpu, recipes[kind])
             state.pool.set(kind, [item])
             await item.compile(
-              kind === 'composite' ? signature : { ...signature, depth: 'depth24plus' },
+              kind === 'composite'
+                ? signature
+                : { ...signature, sampleCount: 4, depth: 'depth24plus' },
             )
           }),
         )

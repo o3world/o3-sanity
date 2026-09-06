@@ -68,3 +68,10 @@
     transition: none;
   }
 }
+
+/* The sharp limb participates in GPU depth; retain only the soft SVG bloom. */
+[data-orbital-gpu][data-orbital-preset='hero'] > svg:last-of-type > circle:nth-of-type(4),
+[data-orbital-gpu][data-orbital-preset='background'] > svg:last-of-type > circle:nth-of-type(4),
+[data-orbital-gpu][data-orbital-preset='line'] > svg:last-of-type > circle:first-of-type {
+  visibility: hidden;
+}

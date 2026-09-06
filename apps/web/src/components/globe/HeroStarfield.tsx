@@ -3,7 +3,7 @@ import { heroStagger } from '@o3/ui'
 import { starHash } from './star-seed'
 import { createStartupSky } from './startup-sky'
 import { startStartupSky } from './startup-sky-bootstrap'
-import { globeEntranceOffset, readGlobeEntranceTiming } from './globe-entrance'
+import { globeEntranceOffset, readSkyEntranceOffset } from './globe-entrance'
 
 const paths = createStartupSky(starHash)(1440, 1440)
   .map(
@@ -19,7 +19,7 @@ const sky = encodeURIComponent(
 const startup = `(${startStartupSky.toString()})(${[
   createStartupSky,
   starHash,
-  readGlobeEntranceTiming,
+  readSkyEntranceOffset,
   globeEntranceOffset,
   heroStagger,
 ]

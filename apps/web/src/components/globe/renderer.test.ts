@@ -3,12 +3,15 @@ import { frame, type Draw } from 'vgpu'
 import { drawGlobeGeometry, startSpatialGlobe } from './renderer'
 import type { GlobeRuntime } from './globe-runtime'
 
+vi.mock('./resolve-color', () => ({ resolveColor: () => '#ff1000' }))
+
 const gpu = vi.hoisted(() => ({ dispose: vi.fn() }))
 const target = { dispose: vi.fn(), size: [128, 128], format: 'bgra8unorm' }
 const scene = vi.hoisted(() => ({
   color: { destroy: vi.fn() },
   depth: { destroy: vi.fn() },
   resize: vi.fn(),
+  destroy: vi.fn(),
 }))
 const release = vi.fn()
 const runtime = {
@@ -97,7 +100,10 @@ it.each(['hero', 'cta'] as const)(
       getPropertyPriority: () => '',
       removeProperty: (name: string) => values.delete(name),
     }
-    const glow = { style, matches: (selector: string) => selector === `.${range}-lag` }
+    const glow = {
+      style,
+      matches: (selector: string) => selector === `.${range}-lag`,
+    }
     let top = 844
     const hero = {
       matches: (selector: string) => selector === '.cta-band',
@@ -115,9 +121,17 @@ it.each(['hero', 'cta'] as const)(
     const canvas = {
       style: {},
       dataset: {},
-      getBoundingClientRect: () => ({ left: 0, top: 0, width: 390, height: 500 }),
+      getBoundingClientRect: () => ({
+        left: 0,
+        top: 0,
+        width: 390,
+        height: 500,
+      }),
     }
-    const listeners = { addEventListener: vi.fn(), removeEventListener: vi.fn() }
+    const listeners = {
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    }
     let tick: FrameRequestCallback = () => {}
     const observer = class {
       observe() {}
@@ -139,8 +153,13 @@ it.each(['hero', 'cta'] as const)(
       return 1
     })
     vi.stubGlobal('cancelAnimationFrame', vi.fn())
-    vi.stubGlobal('navigator', { gpu: { getPreferredCanvasFormat: () => 'bgra8unorm' } })
-    Object.assign(gpu, { onError: vi.fn(), gpu: { lost: new Promise(() => {}) } })
+    vi.stubGlobal('navigator', {
+      gpu: { getPreferredCanvasFormat: () => 'bgra8unorm' },
+    })
+    Object.assign(gpu, {
+      onError: vi.fn(),
+      gpu: { lost: new Promise(() => {}) },
+    })
     const controller = new AbortController()
     let complete!: () => void
     vi.mocked(frame).mockReturnValue({
@@ -190,8 +209,7 @@ it.each(['hero', 'cta'] as const)(
         expect(onReady).not.toHaveBeenCalledWith(true)
       }
       expect(target.dispose).toHaveBeenCalledOnce()
-      expect(scene.color.destroy).toHaveBeenCalledOnce()
-      expect(scene.depth.destroy).toHaveBeenCalledOnce()
+      expect(scene.destroy).toHaveBeenCalledOnce()
       expect(release).toHaveBeenCalledOnce()
       expect(gpu.dispose).not.toHaveBeenCalled()
     } finally {
@@ -201,20 +219,11 @@ it.each(['hero', 'cta'] as const)(
   },
 )
 
-it('paints solid planets before translucent rails can write depth over them', () => {
+it('draws only the visible rings, planets, and rim', () => {
   const planet = { label: 'planet' } as unknown as Draw
-  const planetDepth = { label: 'planetDepth' } as unknown as Draw
   const rail = { label: 'rail' } as unknown as Draw
-  const railDepth = { label: 'railDepth' } as unknown as Draw
+  const rim = { label: 'rim' } as unknown as Draw
   const draw = vi.fn()
-  drawGlobeGeometry(
-    { draw },
-    {
-      rings: [rail],
-      ringDepths: [railDepth],
-      electrons: [[planet]],
-      electronDepths: [[planetDepth]],
-    },
-  )
-  expect(draw.mock.calls.map(([item]) => item)).toEqual([planetDepth, planet, railDepth, rail])
+  drawGlobeGeometry({ draw }, { rings: [rail], electrons: [[planet]], rim })
+  expect(draw.mock.calls.map(([item]) => item)).toEqual([rail, planet, rim])
 })

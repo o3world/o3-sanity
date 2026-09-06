@@ -1,6 +1,6 @@
 import { heroStagger } from '@o3/ui'
 
-/** The first-paint clock is shared by the startup sky and the GPU camera. */
+/** The globe follows the hero text clock, including its GPU readiness pause. */
 export function readGlobeEntranceTiming(hero: HTMLElement, now: number, stagger = heroStagger) {
   const items = [...hero.querySelectorAll('.hero-lead h1 > span, .hero-lead > div')]
   const animation = items
@@ -16,7 +16,11 @@ export function readGlobeEntranceTiming(hero: HTMLElement, now: number, stagger 
   const delay = Math.max(0, items.length - 1) * beat
   const startDelay =
     (hero.querySelectorAll('.hero-lead h1 > span').length > 1 ? beat : 0) + beat / 2
-  const duration = typeof timing?.duration === 'number' ? delay + timing.duration + beat * 2 : 0
+  const riseDuration =
+    typeof timing?.duration === 'number'
+      ? (delay + timing.duration + beat * 2 - startDelay) * 1.3
+      : 0
+  const duration = riseDuration ? startDelay + riseDuration : 0
   const elapsed =
     typeof animation?.startTime === 'number'
       ? now - animation.startTime
@@ -41,6 +45,28 @@ export function globeEntranceOffset(
   )
   const overshoot = Math.min(6, distance * 0.03) * 64 * (release * (1 - release)) ** 3
   return distance * (1 - progress) ** 4 * (1 + 4 * progress) - overshoot
+}
+
+/** The startup canvas and GPU sky follow the nav's earlier entrance clock. */
+export function readSkyEntranceOffset(
+  hero: HTMLElement,
+  now: number,
+  distance: number,
+  offsetAt = globeEntranceOffset,
+) {
+  const animation = hero.ownerDocument
+    .getElementById('site-nav')
+    ?.getAnimations()
+    .find((animation) => (animation as CSSAnimation).animationName === 'hero-wave')
+  const duration = animation?.effect?.getTiming().duration
+  if (!animation || typeof duration !== 'number') return 0
+  const elapsed =
+    typeof animation.startTime === 'number'
+      ? now - animation.startTime
+      : typeof animation.currentTime === 'number'
+        ? animation.currentTime
+        : 0
+  return offsetAt(elapsed, distance, 0, duration - 600)
 }
 
 /** Rise just after the second headline line, then drift back from a small overshoot. */

@@ -23,7 +23,10 @@ test('the sky paints immediately while the text waits for GPU readiness', async 
   const lines = hero.locator('h1 > span')
   if (info.project.use.contextOptions?.reducedMotion === 'reduce') {
     await expect(lines.first()).toHaveCSS('opacity', '1')
+    await expect(page.locator('#site-nav')).toHaveCSS('opacity', '1')
   } else {
+    await expect(page.locator('#site-nav')).toHaveCSS('opacity', '0')
+    await expect(page.locator('#site-nav')).toHaveCSS('visibility', 'hidden')
     await expect(lines.first()).toHaveCSS('animation-play-state', 'paused')
     await expect(lines.first()).toHaveCSS('opacity', '0')
     await page.waitForTimeout(160)
@@ -41,6 +44,26 @@ for (const gpuDelay of [0, 600]) {
     await page.addInitScript((delay) => {
       const marks: Record<string, number> = {}
       Object.defineProperty(window, 'globeStartupMarks', { value: marks })
+      document.addEventListener('animationend', (event) => {
+        if (event.animationName !== 'hero-wave') return
+        const target = event.target as Element
+        if (target.id === 'site-nav') marks.navFinish = performance.now()
+        if (target.matches('.hero-lead h1 > span:first-child')) marks.textFinish = performance.now()
+      })
+      const clear = CanvasRenderingContext2D.prototype.clearRect
+      CanvasRenderingContext2D.prototype.clearRect = function (...args) {
+        if (this.canvas.hasAttribute('data-orbital-startup')) {
+          const hero = this.canvas.closest('.hero-band')
+          const globe = this.canvas.parentElement
+          if (hero?.hasAttribute('data-spatial-ready') && globe) {
+            marks.skyEntrancePaints = (marks.skyEntrancePaints ?? 0) + 1
+            const offset = parseFloat(globe.style.transform.match(/-?[\d.]+/)?.[0] ?? '0')
+            marks.globeAtSkyStart ??= offset
+            marks.globeAtSkyHandoff = offset
+          }
+        }
+        return clear.apply(this, args)
+      }
       const gpu = navigator.gpu
       if (!gpu) return
       const requestAdapter = gpu.requestAdapter.bind(gpu)
@@ -71,6 +94,13 @@ for (const gpuDelay of [0, 600]) {
         const hero = document.querySelector('.hero-band:has(.hero-lead)')
         if (hero) {
           marks.heroPaint ??= performance.now()
+          const nav = document.querySelector('#site-nav')
+          if (nav) {
+            const style = getComputedStyle(nav)
+            if (Number(style.opacity) > 0) marks.navStart ??= performance.now()
+            const y = parseFloat(style.translate.split(' ')[1] ?? '0')
+            marks.navMinY = Math.min(marks.navMinY ?? 0, y)
+          }
           const firstLine = hero.querySelector('h1 > span')
           if (firstLine && Number(getComputedStyle(firstLine).opacity) > 0)
             marks.textStart ??= performance.now()
@@ -93,7 +123,12 @@ for (const gpuDelay of [0, 600]) {
                 Math.abs(a.top - b.top),
                 Math.abs(a.left - b.left),
               )
-            } else if (performance.now() - marks.gpuReady > 300) return
+            } else if (
+              (marks.navFinish && marks.textFinish) ||
+              (matchMedia('(prefers-reduced-motion: reduce)').matches &&
+                performance.now() - marks.gpuReady > 300)
+            )
+              return
           }
         }
         requestAnimationFrame(sample)
@@ -112,6 +147,25 @@ for (const gpuDelay of [0, 600]) {
     await expect(page.locator(`${heroSelector} [data-orbital-startup]`)).not.toHaveAttribute(
       'data-painted',
     )
+    if (info.project.use.contextOptions?.reducedMotion !== 'reduce') {
+      const nav = page.locator('#site-nav')
+      const cta = page.locator(`${heroSelector} .hero-lead > div`).last()
+      await expect(nav).toHaveCSS('animation-name', 'fade-up, hero-wave')
+      for (const property of ['animation-duration', 'animation-timing-function']) {
+        await expect(nav).toHaveCSS(
+          property,
+          await cta.evaluate(
+            (element, name) => getComputedStyle(element).getPropertyValue(name),
+            property,
+          ),
+        )
+      }
+      await page.waitForFunction(() => {
+        const marks = (window as unknown as { globeStartupMarks: Record<string, number> })
+          .globeStartupMarks
+        return marks.navFinish && marks.textFinish
+      })
+    }
     const marks = await page.evaluate(
       () =>
         (
@@ -124,8 +178,17 @@ for (const gpuDelay of [0, 600]) {
     expect(marks.skyVisible! - marks.heroPaint!).toBeLessThan(50)
     if (info.project.use.contextOptions?.reducedMotion !== 'reduce') {
       expect(marks.alignmentError).toBeLessThan(0.1)
-      expect(marks.textStart! - marks.gpuReady!).toBeGreaterThanOrEqual(-34)
-      expect(marks.textStart! - marks.gpuReady!).toBeLessThan(100)
+      expect(marks.navStart! - marks.gpuReady!).toBeGreaterThanOrEqual(-34)
+      expect(marks.navStart! - marks.gpuReady!).toBeLessThan(100)
+      expect(marks.textStart! - marks.navStart!).toBeGreaterThanOrEqual(125)
+      expect(marks.textStart! - marks.navStart!).toBeLessThan(210)
+      expect(marks.skyEntrancePaints).toBeGreaterThan(2)
+      expect(marks.globeAtSkyStart).toBeGreaterThan(0)
+      expect(marks.globeAtSkyHandoff).toBe(marks.globeAtSkyStart)
+      expect(marks.navMinY).toBeLessThan(-5)
+      expect(marks.navMinY).toBeGreaterThan(-7)
+      expect(marks.textFinish! - marks.navFinish!).toBeGreaterThanOrEqual(125)
+      expect(marks.textFinish! - marks.navFinish!).toBeLessThan(210)
     }
     await expect(page.locator(`${heroSelector} [data-orbital-startup]`)).not.toHaveAttribute(
       'data-painted',
@@ -135,6 +198,10 @@ for (const gpuDelay of [0, 600]) {
         .locator(`${heroSelector} [data-orbital-startup]`)
         .evaluate((element) => (element as HTMLCanvasElement).width),
     ).toBe(0)
+    await expect(page.locator('#site-nav')).toHaveCSS('opacity', '1')
+    await expect(page.locator('#site-nav')).toHaveCSS('visibility', 'visible')
+    await expect(page.locator('#site-nav')).toHaveCSS('translate', 'none')
+    await expect(page.locator('html')).not.toHaveAttribute('data-nav-entrance')
     expect(errors).toEqual([])
   })
 }

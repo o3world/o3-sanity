@@ -1,7 +1,11 @@
 import { expect, test } from 'playwright/test'
 import { navLink, primary } from './journey'
 
-type EntranceWindow = Window & { entranceTravel: number; glowOpacities: number[] }
+type EntranceWindow = Window & {
+  entranceTravel: number
+  glowOpacities: number[]
+  navTravel: number
+}
 const globeSelector = '.hero-band:has(.hero-lead) .hero-lag > [data-orbital-preset]'
 
 test('the Home camera entrance belongs to a full document load, not internal navigation', async ({
@@ -11,8 +15,14 @@ test('the Home camera entrance belongs to a full document load, not internal nav
   await page.addInitScript(() => {
     const probe = window as unknown as EntranceWindow
     probe.entranceTravel = 0
+    probe.navTravel = 0
     probe.glowOpacities = []
     const sample = () => {
+      const nav = document.querySelector('#site-nav')
+      if (nav) {
+        const y = parseFloat(getComputedStyle(nav).translate.split(' ')[1] ?? '0')
+        probe.navTravel = Math.max(probe.navTravel, Math.abs(y))
+      }
       const globe = [
         ...document.querySelectorAll<HTMLElement>(
           '.hero-band:has(.hero-lead) .hero-lag > [data-orbital-preset]',
@@ -33,6 +43,7 @@ test('the Home camera entrance belongs to a full document load, not internal nav
     page.evaluate(() => {
       const probe = window as unknown as EntranceWindow
       probe.entranceTravel = 0
+      probe.navTravel = 0
       probe.glowOpacities = []
     })
   const settle = async () => {
@@ -74,6 +85,10 @@ test('the Home camera entrance belongs to a full document load, not internal nav
     await expect(page).toHaveURL(/\/$/)
     await settle()
     expect(await travel(), `${arrival} keeps the camera at rest`).toBe(0)
+    expect(
+      await page.evaluate(() => (window as unknown as EntranceWindow).navTravel),
+      `${arrival} keeps the nav at rest`,
+    ).toBe(0)
     await expect(page.locator('.hero-lead h1 > span:visible').first()).toHaveCSS('opacity', '1')
     await expect(
       page.locator('.hero-lead:visible').getByRole('link', { name: 'View our work' }),

@@ -1,7 +1,6 @@
 import { starHashWGSL } from './star-seed'
 
-// Prototype shaders: project the original 3D orbit coordinates, then draw
-// anti-aliased screen-space ribbons and electron billboards.
+// Solid meshes share one depth buffer; soft emission is drawn behind their surfaces.
 const camera = /* wgsl */ `
 // World-to-view rotation for a camera orbiting the globe at distance 1650.
 fn orbitView(q: vec3f, yaw: f32, pitch: f32) -> vec3f {
@@ -48,14 +47,16 @@ struct Out {
   @location(0) uv: vec2f,
   @location(1) color: vec4f,
 }
-fn orbitPoint(theta: f32) -> vec3f {
-  let original = (p.u.xyz*cos(theta) + p.v.xyz*sin(theta))*340.0;
+fn orbitPose(original: vec3f) -> vec3f {
   let axis = normalize(vec3f(0.32,1.0,0.18));
   let angle = p.motion.x * 6.2831853 / (70.0/0.3);
   let q = original*cos(angle) + cross(axis,original)*sin(angle) + axis*dot(axis,original)*(1.0-cos(angle));
   let tilt = -17.0*3.14159265/180.0;
   let posed = vec3f(q.x*cos(tilt)-q.y*sin(tilt), (q.x*sin(tilt)+q.y*cos(tilt))*cos(11.0*3.14159265/180.0), q.z);
   return orbitView(posed-p.camera.xyz,p.motion.y,p.motion.z);
+}
+fn orbitPoint(theta: f32) -> vec3f {
+  return orbitPose((p.u.xyz*cos(theta)+p.v.xyz*sin(theta))*340.0);
 }
 fn project(theta: f32) -> vec4f {
   let view = orbitPoint(theta);
@@ -98,136 +99,132 @@ fn glowRadius(angle: f32) -> f32 {
   return 342.0+ripple*p.motion.w;
 }
 `
-const orbitVertex =
+const solid =
   common +
   /* wgsl */ `
-@vertex fn vs_main(@builtin(vertex_index) vertex: u32) -> Out {
-  let segment = vertex/6u;
-  let c = corner(vertex);
-  let a = project(f32(segment)/288.0*6.2831853);
-  let b = project(f32(segment+1u)/288.0*6.2831853);
-  let tangent = normalize(b.xy-a.xy);
-  let normal = vec2f(-tangent.y,tangent.x);
-  let point = mix(a,b,(c.x+1.0)*0.5);
-  let width = p.u.w*p.globe.z*0.5;
-  let offset = normal*c.y*(width+1.0);
-  var result: Out;
-  result.position = clip(point.xy+offset,point.z);
-  result.uv = vec2f(c.y*(width+1.0),width);
-  result.color = vec4f(p.color.rgb,p.color.a*mix(0.28,1.0,smoothstep(-55.0,55.0,point.z)));
+struct SolidOut {
+  @builtin(position) position: vec4f,
+  @location(0) @interpolate(perspective, sample) point: vec3f,
+  @location(1) @interpolate(perspective, sample) normal: vec3f,
+}
+fn solidVertex(point: vec3f, normal: vec3f) -> SolidOut {
+  var result: SolidOut;
+  result.position = clip(p.globe.xy+domeProject(point.xy,1650.0-point.z,1650.0*p.globe.z),point.z);
+  result.point = point;
+  result.normal = normal;
   return result;
 }
-`
-export const orbitMaskShader =
-  orbitVertex +
-  /* wgsl */ `
-@fragment fn fs_main(i: Out) -> @location(0) vec4f {
-  let coverage = 1.0-smoothstep(max(0.0,i.uv.y-0.7),i.uv.y+0.7,abs(i.uv.x));
-  return vec4f(0.0,0.0,0.0,coverage);
+fn coreCenter() -> vec3f {
+  return orbitView(-p.camera.xyz,p.motion.y,p.motion.z);
+}
+fn linearColor(color: vec3f) -> vec3f {
+  return select(color/12.92,pow((color+0.055)/1.055,vec3f(2.4)),color>vec3f(0.04045));
+}
+fn displayColor(color: vec3f) -> vec3f {
+  let light = max(color,vec3f(0.0));
+  return select(light*12.92,1.055*pow(light,vec3f(1.0/2.4))-0.055,light>vec3f(0.0031308));
+}
+fn illumination(point: vec3f, normal: vec3f) -> vec3f {
+  if (p.dot.w < 0.5) { return vec3f(0.65+0.35*max(0.0,dot(normal,normalize(coreCenter()-point)))); }
+  let center = coreCenter();
+  let delta = center-point;
+  let distanceSquared = dot(delta,delta);
+  // The luminous core has area, so the terminator receives a little wrapped light.
+  let core = max(0.0,(dot(normal,normalize(delta))+0.18)/1.18)*90000.0/(distanceSquared+30000.0);
+  let localPoint = point-center;
+  let azimuth = atan2(localPoint.y,localPoint.x);
+  var rim = 0.0;
+  for (var sample = -2; sample <= 2; sample++) {
+    let angle = azimuth+f32(sample)*0.28;
+    let source = glowPoint(angle,glowRadius(angle));
+    let toRim = source-point;
+    let d2 = dot(toRim,toRim);
+    rim += max(0.0,dot(normal,toRim/max(sqrt(d2),0.001)))*40000.0/(d2+40000.0);
+  }
+  return vec3f(0.20)+linearColor(glowLightColor)*min(1.4,core+rim/3.0);
+}
+fn wireReflection(point: vec3f, normal: vec3f) -> f32 {
+  let eye = normalize(vec3f(0.0,0.0,1650.0)-point);
+  let local = point-coreCenter();
+  let azimuth = atan2(local.y,local.x);
+  var highlight = 0.0;
+  for (var sample = 0; sample < 4; sample++) {
+    let angle = azimuth+f32(sample-1)*0.24;
+    let source = select(glowPoint(angle,glowRadius(angle)),coreCenter(),sample==3);
+    let delta = source-point;
+    let d2 = dot(delta,delta);
+    let direction = delta/max(sqrt(d2),0.001);
+    let halfVector = direction+eye;
+    let halfway = halfVector/max(length(halfVector),0.001);
+    let reflection = pow(max(0.0,dot(normal,halfway)),32.0);
+    let facing = smoothstep(0.0,0.25,dot(normal,direction));
+    highlight = max(highlight,reflection*facing*40000.0/(d2+40000.0));
+  }
+  let grazing = pow(1.0-max(0.0,dot(normal,eye)),3.0);
+  return highlight*0.65+grazing*0.045;
 }
 `
 export const orbitShader =
-  orbitVertex +
+  solid +
   /* wgsl */ `
-fn railCoverage(i: Out) -> f32 {
-  return 1.0-smoothstep(max(0.0,i.uv.y-0.7),i.uv.y+0.7,abs(i.uv.x));
+@vertex fn vs_main(@builtin(vertex_index) vertex: u32) -> SolidOut {
+  let c = (corner(vertex)+1.0)*0.5;
+  let cell = vertex/6u;
+  let theta = (f32(cell/12u)+c.x)/576.0*6.2831853;
+  let phi = (f32(cell%12u)+c.y)/12.0*6.2831853;
+  var center = orbitPoint(theta);
+  let radial = normalize(orbitPoint(theta)-orbitPose(vec3f(0.0)));
+  let axis = normalize(cross(orbitPoint(theta+0.001)-center,radial));
+  var normal = radial*cos(phi)+axis*sin(phi);
+  if (p.dot.z > 1.5) {
+    // The former SVG limb is now solid geometry at the bloom's depth.
+    center = glowPoint(theta,340.0);
+    normal = normalize(vec3f(cos(theta),sin(theta)/cos(11.0*3.14159265/180.0),0.0))*cos(phi)+vec3f(0,0,1)*sin(phi);
+  }
+  return solidVertex(center+normal*p.u.w*0.5,normal);
 }
-@fragment fn fs_depth(i: Out) -> @location(0) vec4f {
-  if (railCoverage(i) < 0.01 || i.color.a <= 0.0) { discard; }
-  return vec4f(0.0);
-}
-@fragment fn fs_main(i: Out) -> @location(0) vec4f {
-  let coverage = railCoverage(i);
-  if (coverage < 0.01 || i.color.a <= 0.0) { discard; }
-  let nearSide = smoothstep(0.0,55.0,1000.0-i.position.z*2000.0)*p.dot.w;
-  let opacity = mix(i.color.a,1.0,nearSide);
-  // Keep the exported brightness while giving near-side hero rails a solid body.
-  let material = i.color.rgb*i.color.a/max(opacity,0.0001);
-  return vec4f(material,opacity*coverage);
+@fragment fn fs_main(i: SolidOut) -> @location(0) vec4f {
+  let normal = normalize(i.normal);
+  let brightness = p.color.a*mix(0.45,1.0,smoothstep(-100.0,100.0,i.point.z-coreCenter().z));
+  var material = p.color.rgb*brightness*illumination(i.point,normal);
+  if (p.dot.w > 0.5) {
+    // Keep neutral wire neutral; reserve the glow's full color for the red accent material.
+    var light = illumination(i.point,normal);
+    let chroma = max(p.color.r,max(p.color.g,p.color.b))-min(p.color.r,min(p.color.g,p.color.b));
+    if (chroma < 0.12) {
+      let energy = dot(light,vec3f(0.2126,0.7152,0.0722));
+      let warmth = smoothstep(0.6,1.25,light.r)*0.035;
+      light = mix(vec3f(energy),light,warmth);
+    }
+    let albedo = linearColor(p.color.rgb);
+    let reflectionColor = select(albedo,vec3f(0.88,0.94,1.0),chroma<0.12);
+    let body = albedo*p.color.a*light*0.68;
+    let sheen = reflectionColor*wireReflection(i.point,normal)*sqrt(p.color.a);
+    material = displayColor(body+sheen);
+  }
+  if (p.dot.z > 1.5) { material = p.color.rgb*p.color.a; }
+  if (p.dotGround.a > 0.5) { material = mix(p.dotGround.rgb,p.color.rgb,brightness); }
+  return vec4f(material,1.0);
 }
 `
 export const dotShader =
-  common +
+  solid +
   /* wgsl */ `
-@vertex fn vs_main(@builtin(vertex_index) vertex: u32) -> Out {
-  let q = project(p.dot.x);
-  let c = corner(vertex);
-  let radius = max(0.4,p.dot.y*q.w)*p.globe.z;
-  let extent = radius + 1.0;
-  var result: Out;
-  result.position = clip(q.xy+c*extent,q.z);
-  result.uv = c*extent;
-  let opacity = mix(0.22,select(min(1.0,p.v.w+0.35),p.globe.w,p.dot.z>0.5),smoothstep(-55.0,55.0,q.z));
-  result.color = vec4f(p.color.rgb*p.color.a,opacity);
+@vertex fn vs_main(@builtin(vertex_index) vertex: u32) -> SolidOut {
+  let c = (corner(vertex)+1.0)*0.5;
+  let cell = vertex/6u;
+  let longitude = (f32(cell/16u)+c.x)/32.0*6.2831853;
+  let latitude = (f32(cell%16u)+c.y)/16.0*3.14159265;
+  let normal = vec3f(cos(longitude)*sin(latitude),cos(latitude),sin(longitude)*sin(latitude));
+  return solidVertex(orbitPoint(p.dot.x)+normal*p.dot.y,normal);
+}
+@fragment fn fs_main(i: SolidOut) -> @location(0) vec4f {
+  var material = p.color.rgb*illumination(i.point,normalize(i.normal));
   if (p.dot.w > 0.5) {
-    result.color = vec4f(p.color.rgb,1.0);
+    material = displayColor(linearColor(p.color.rgb)*illumination(i.point,normalize(i.normal)));
   }
-  return result;
-}
-struct SphereFragment {
-  @location(0) color: vec4f,
-  @builtin(frag_depth) depth: f32,
-}
-fn sphereNormal(i: Out) -> vec3f {
-  let q = project(p.dot.x);
-  let radius = max(0.4,p.dot.y*q.w)*p.globe.z;
-  let xy = i.uv/max(radius,0.4);
-  return normalize(vec3f(xy,sqrt(max(0.0,1.0-dot(xy,xy)))));
-}
-fn sphereCoverage(i: Out) -> f32 {
-  let q = project(p.dot.x);
-  let radius = max(0.4,p.dot.y*q.w)*p.globe.z;
-  return 1.0-smoothstep(radius-0.6,radius+0.6,length(i.uv));
-}
-fn sphereDepth(i: Out) -> f32 {
-  return sceneDepth(orbitPoint(p.dot.x).z + sphereNormal(i).z*p.dot.y);
-}
-@fragment fn fs_depth(i: Out) -> SphereFragment {
-  if (sphereCoverage(i) < 0.01) { discard; }
-  var result: SphereFragment;
-  result.color = vec4f(0.0);
-  result.depth = sphereDepth(i);
-  return result;
-}
-fn glowIrradiance(center: vec3f, normal: vec3f) -> f32 {
-  let point = center+normal*p.dot.y;
-  let flatten = cos(11.0*3.14159265/180.0);
-  let localCenter = center+p.camera.xyz;
-  let azimuth = atan2(localCenter.y/flatten,localCenter.x);
-  var energy = 0.0;
-  // The soft heat shimmer and this light share their local radius.
-  // Distance softening avoids hot spots at the glowing rim.
-  for (var sample = -2; sample <= 2; sample++) {
-    let angle = azimuth+f32(sample)*0.28;
-    let radius = glowRadius(angle);
-    let source = glowPoint(angle,radius);
-    let delta = source-point;
-    let distanceSquared = dot(delta,delta);
-    let direction = delta/max(sqrt(distanceSquared),0.001);
-    energy += max(0.0,dot(normal,direction))*40000.0/(distanceSquared+40000.0);
-  }
-  return min(1.0,energy/3.0);
-}
-@fragment fn fs_main(i: Out) -> SphereFragment {
-  let solid = sphereCoverage(i);
-  if (solid < 0.01) { discard; }
-  let normal = sphereNormal(i);
-  let center = orbitPoint(p.dot.x);
-  let toLight = -center-normal*p.dot.y;
-  let light = toLight/max(length(toLight),0.001);
-  var material = i.color.rgb*(0.55+0.45*max(0.0,dot(normal,light)));
-  if (p.dot.w > 0.5) {
-    // A quiet neutral fill preserves shape; only the glowing edge adds direction and warmth.
-    material = i.color.rgb*(vec3f(0.18)+glowLightColor*glowIrradiance(center,normal));
-  }
-  var result: SphereFragment;
-  result.depth = sphereDepth(i);
-  if (p.dotGround.a > 0.5) {
-    result.color = vec4f(mix(p.dotGround.rgb,material,i.color.a),solid);
-  } else {
-    result.color = vec4f(material,solid*i.color.a);
-  }
-  return result;
+  if (p.dotGround.a > 0.5) { material = mix(p.dotGround.rgb,material,p.globe.w); }
+  return vec4f(material,1.0);
 }
 `
 export const heatHazeShader =

@@ -56,6 +56,19 @@
   animation: none !important;
 }
 
+/* The nav takes the first beat; the hero clock resumes one interval later. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-nav-entrance] #site-nav {
+    animation: var(--animate-hero-wave);
+    animation-fill-mode: backwards;
+  }
+  [data-nav-entrance][data-hero-startup='pending']:not(:has(.hero-band[data-spatial-ready]))
+    #site-nav {
+    animation-play-state: paused;
+    visibility: hidden;
+  }
+}
+
 /* Let the same sky reach the utility links, keeping the globe's existing crop. */
 [data-spatial-chrome] .hero-band {
   overflow: visible;

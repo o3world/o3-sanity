@@ -1,5 +1,5 @@
 import type { heroStagger } from '@o3/ui'
-import type { globeEntranceOffset, readGlobeEntranceTiming } from './globe-entrance'
+import type { globeEntranceOffset, readSkyEntranceOffset } from './globe-entrance'
 import type { createStartupSky } from './startup-sky'
 import type { starHash } from './star-seed'
 
@@ -7,20 +7,36 @@ import type { starHash } from './star-seed'
 export function startStartupSky(
   createSky: typeof createStartupSky,
   hash: typeof starHash,
-  readTiming: typeof readGlobeEntranceTiming,
+  readSkyOffset: typeof readSkyEntranceOffset,
   offsetAt: typeof globeEntranceOffset,
   stagger: typeof heroStagger,
 ) {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)')
   const still = new URLSearchParams(location.search).has('spatial-still')
+  const finishNavEntrance = () => {
+    delete document.documentElement.dataset.navEntrance
+    document.removeEventListener('animationend', onNavEnd)
+    reduced.removeEventListener('change', finishNavEntrance)
+  }
+  const onNavEnd = (event: AnimationEvent) => {
+    if (event.animationName === 'hero-wave' && (event.target as Element)?.id === 'site-nav')
+      finishNavEntrance()
+  }
   if (location.pathname === '/') {
     document.documentElement.dataset.spatialChrome = 'true'
-    if (!reduced.matches && !still) document.documentElement.dataset.heroStartup = 'pending'
+    if (!reduced.matches && !still) {
+      document.documentElement.dataset.heroStartup = 'pending'
+      document.documentElement.dataset.navEntrance = 'true'
+      document.addEventListener('animationend', onNavEnd)
+      reduced.addEventListener('change', finishNavEntrance)
+    }
   }
   const releaseStartup = () => {
     delete document.documentElement.dataset.heroStartup
-    if (!document.querySelector('.hero-band[data-spatial-ready]'))
+    if (!document.querySelector('.hero-band[data-spatial-ready]')) {
       delete document.documentElement.dataset.spatialChrome
+      finishNavEntrance()
+    }
   }
   // Match the renderer's failure deadline so an unavailable GPU cannot trap the copy.
   const deadline = setTimeout(() => {
@@ -41,6 +57,7 @@ export function startStartupSky(
       return
     }
     const project = createSky(hash)
+    const navLead = stagger(hero.querySelectorAll('.hero-lead h1 > span, .hero-lead > div').length)
     const initialBounds = hero.getBoundingClientRect()
     const entrance = location.pathname === '/' && initialBounds.top >= -80
     const distance =
@@ -71,7 +88,7 @@ export function startStartupSky(
       if (hero.hasAttribute('data-spatial-ready')) {
         readyAt ??= now
         clearTimeout(deadline)
-        releaseStartup()
+        if (now - readyAt >= navLead) releaseStartup()
       }
       // Continue through the GPU's opacity transition, then release the temporary buffer.
       if (readyAt !== undefined && now - readyAt >= (reduced.matches ? 0 : 220)) return stop()
@@ -92,12 +109,8 @@ export function startStartupSky(
       canvas.style.top = `${bounds.top - overhang - g.top}px`
       canvas.style.width = `${width}px`
       canvas.style.height = `${height}px`
-      const timing = readTiming(hero, now, stagger)
-      const elapsed = timing.elapsed ?? now - firstFrame
       const offset =
-        entrance && !reduced.matches && !still && timing.duration
-          ? offsetAt(elapsed, distance, timing.startDelay, timing.duration)
-          : 0
+        entrance && !reduced.matches && !still ? readSkyOffset(hero, now, distance, offsetAt) : 0
       const cameraY = -offset / (g.width / 680)
       const frame = `${w},${h},${cameraY}`
       if (frame !== lastPaint) {
