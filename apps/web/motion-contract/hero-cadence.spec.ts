@@ -4,16 +4,18 @@ import { navLink, primary } from './journey'
 for (const route of [
   {
     path: '/',
+    animated: true,
     parts: '.hero-lead h1 > span:visible, .hero-lead > div:visible',
     delays: [0, 160, 320, 620],
   },
   {
     path: '/work',
+    animated: false,
     parts: '[data-collection-hero] h1:visible, [data-collection-hero] p:visible',
     delays: [0, 160, 320],
   },
 ]) {
-  test(`${route.path} hero owns its cadence on direct and cached arrivals`, async ({
+  test(`${route.path} hero ${route.animated ? 'owns its cadence' : 'stays static'} on direct and cached arrivals`, async ({
     page,
   }, info) => {
     const reduced = info.project.use.contextOptions?.reducedMotion === 'reduce'
@@ -50,7 +52,8 @@ for (const route of [
         }
       })
       expect(proof.stacked, 'the route fade never stacks with the hero cadence').toBe(false)
-      if (reduced) expect(proof.names.every((name) => name === 'none')).toBe(true)
+      if (reduced || !route.animated)
+        expect(proof.names.every((name) => name === 'none')).toBe(true)
       else {
         expect(proof.delays).toEqual(route.delays)
         expect(proof.names.every((name) => name !== 'none')).toBe(true)
@@ -68,7 +71,7 @@ for (const route of [
       else await (await navLink(page, 'Work')).click()
       await expect(page).toHaveURL(route.path === '/' ? /\/$/ : /\/work\/?$/)
     }
-    if (!reduced) {
+    if (!reduced && route.animated) {
       await expect
         .poll(() =>
           page
