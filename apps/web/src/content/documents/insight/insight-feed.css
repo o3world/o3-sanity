@@ -1,0 +1,16 @@
+[data-insight-feed] [data-insight-results] {
+  animation: insight-results-arrive 160ms ease-out;
+}
+@keyframes insight-results-arrive {
+  from {
+    opacity: 0.75;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-insight-feed] [data-insight-results] {
+    animation: none;
+  }
+}

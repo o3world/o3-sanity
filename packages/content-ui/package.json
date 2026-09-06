@@ -41,6 +41,7 @@
   },
   "exports": {
     ".": "./src/index.ts",
+    "./pager": "./src/Pager.tsx",
     "./cards": "./src/cards/index.ts",
     "./chrome": "./src/chrome/index.ts",
     "./chrome/nav-ink": "./src/chrome/NavInk.tsx",

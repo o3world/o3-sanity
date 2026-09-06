@@ -196,3 +196,30 @@ export const CentredIgnoresSubheading: Story = {
 export const HeadingOnly: Story = {
   args: { heading: 'Just the headline.' },
 }
+
+/** Interior copy is visible immediately, without its own entrance animation. */
+export const WorkStatic: Story = {
+  args: { ...Interior.args, eyebrow: 'Work' },
+  play: async ({ canvasElement }) => {
+    const { expect } = await import('storybook/test')
+    const parts = [...canvasElement.querySelectorAll<HTMLElement>('h1, p')]
+    expect(parts).toHaveLength(3)
+    for (const part of parts) {
+      expect(getComputedStyle(part).animationName).toBe('none')
+      expect(getComputedStyle(part).opacity).toBe('1')
+    }
+  },
+}
+
+export const WorkStaticWithoutEyebrow: Story = {
+  args: { ...Interior.args, eyebrow: undefined },
+  play: async ({ canvasElement }) => {
+    const { expect } = await import('storybook/test')
+    const parts = [...canvasElement.querySelectorAll<HTMLElement>('h1, p')]
+    expect(parts).toHaveLength(2)
+    for (const part of parts) {
+      expect(getComputedStyle(part).animationName).toBe('none')
+      expect(getComputedStyle(part).opacity).toBe('1')
+    }
+  },
+}

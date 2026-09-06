@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import Link from 'next/link'
 
 import { SurfaceProvider } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
@@ -9,6 +8,7 @@ import { resolveButtonHref } from '../buttonDestination'
 
 import { MobileNavMenu } from './MobileNavMenu'
 import { NavLink } from './NavLink'
+import { NavHomeLink } from './NavHomeLink'
 import { NAV_INK_TARGET, NavInk } from './NavInk'
 import { NavPin } from './NavPin'
 
@@ -198,14 +198,13 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
           // value mid-interpolation, and each keeps its own hover timing.
           className="bg-scrim lg:bg-scrim-pill lg:border-on-ink-line group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-r-nav duration-(--duration-ink) group-data-[ink=dark]:bg-scrim-light lg:max-w-nav px-gutter flex items-center justify-between py-2 text-white backdrop-blur-[16px] backdrop-saturate-[1.25] transition-[background-color,border-color,color] ease-out [view-transition-name:site-nav] max-lg:group-data-[ink=dark]:border-b lg:mx-auto lg:w-full lg:rounded-l-[40px] lg:border lg:px-4 lg:py-4"
         >
-          <Link
-            href="/"
+          <NavHomeLink
             aria-label={`${settings?.title ?? 'O3'} home`}
             className="focus-visible:ring-brand shrink-0 focus-visible:outline-none focus-visible:ring-2"
           >
             {/* The mark follows the nav ink on every route (#446). */}
             {brandMark}
-          </Link>
+          </NavHomeLink>
 
           {/* 1440: the 643px row (`2225:2740`), five links and the button at a
             48px gap. `contents` promotes the list items to flex children, so

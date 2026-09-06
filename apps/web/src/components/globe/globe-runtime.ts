@@ -1,17 +1,43 @@
 import { draw, init, type Gpu, type DrawOptions } from 'vgpu'
-import { dotShader, orbitMaskShader, orbitShader, shootingStarShader, starsShader } from './shaders'
+import {
+  dotShader,
+  globeCompositeShader,
+  heatHazeShader,
+  orbitShader,
+  shootingStarShader,
+  starsShader,
+} from './shaders'
 
 const recipes = {
-  orbit: { shader: orbitShader, vertices: 288 * 6, blend: 'alpha' },
-  mask: {
-    shader: orbitMaskShader,
+  orbit: { shader: orbitShader, vertices: 576 * 12 * 6 },
+  dot: { shader: dotShader, vertices: 32 * 16 * 6 },
+  composite: { shader: globeCompositeShader, vertices: 3, depth: false },
+  heatHaze: {
+    shader: heatHazeShader,
     vertices: 288 * 6,
-    blend: { color: { src: 'zero', dst: 'one-minus-src-alpha' } },
+    blend: 'alpha',
+    depth: false,
   },
-  dot: { shader: dotShader, vertices: 6, blend: 'alpha' },
-  stars: { shader: starsShader, vertices: 6, instances: 4180, blend: 'alpha' },
-  quietStars: { shader: starsShader, vertices: 6, instances: 1100, blend: 'alpha' },
-  shootingStar: { shader: shootingStarShader, vertices: 6, blend: 'alpha' },
+  stars: {
+    shader: starsShader,
+    vertices: 6,
+    instances: 4180,
+    blend: 'alpha',
+    depth: false,
+  },
+  quietStars: {
+    shader: starsShader,
+    vertices: 6,
+    instances: 1100,
+    blend: 'alpha',
+    depth: false,
+  },
+  shootingStar: {
+    shader: shootingStarShader,
+    vertices: 6,
+    blend: 'alpha',
+    depth: false,
+  },
 } satisfies Record<string, DrawOptions>
 
 type Kind = keyof typeof recipes
@@ -47,7 +73,12 @@ export function createGlobeRuntime() {
         gpu.dispose()
         throw new Error('Globe startup cancelled')
       }
-      const state: State = { gpu, pool: new Map(), errors: new Set(), stopErrors: () => {} }
+      const state: State = {
+        gpu,
+        pool: new Map(),
+        errors: new Set(),
+        stopErrors: () => {},
+      }
       current = state
       state.stopErrors = gpu.onError((error) => {
         for (const listener of [...state.errors]) listener(error)
@@ -66,7 +97,11 @@ export function createGlobeRuntime() {
           (Object.keys(recipes) as Kind[]).map(async (kind) => {
             const item = draw(gpu, recipes[kind])
             state.pool.set(kind, [item])
-            await item.compile(signature)
+            await item.compile(
+              kind === 'composite'
+                ? signature
+                : { ...signature, sampleCount: 4, depth: 'depth24plus' },
+            )
           }),
         )
         if (version !== generation) throw new Error('Globe startup cancelled')

@@ -106,3 +106,29 @@ export const HeadlineOnly: Story = {
     button: null,
   },
 }
+
+/** Headline and copy keep their beats; a following CTA gets a 300ms reading pause. */
+const checkCadence =
+  (expected: number[]): NonNullable<Story['play']> =>
+  async ({ canvasElement }) => {
+    const { expect } = await import('storybook/test')
+    const items = [...canvasElement.querySelectorAll<HTMLElement>('h1 > span, .hero-lead > div')]
+    const delays = items.map((item) => parseFloat(getComputedStyle(item).animationDelay) * 1000)
+    expect(delays).toHaveLength(expected.length)
+    delays.forEach((delay, index) => expect(delay).toBeCloseTo(expected[index]!, 2))
+  }
+
+export const Cadence: Story = { args: fixture, play: checkCadence([0, 160, 320, 620]) }
+
+export const CadenceWithoutCopy: Story = {
+  args: { ...fixture, subheading: undefined },
+  play: checkCadence([0, 160, 320]),
+}
+
+export const LongHeadlineCadence: Story = {
+  args: {
+    ...fixture,
+    headlineLines: ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight'],
+  },
+  play: checkCadence([0, 53.333, 106.667, 160, 213.333, 266.667, 320, 373.333, 426.667, 726.667]),
+}

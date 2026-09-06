@@ -55,6 +55,10 @@
 [data-orbital-renderer] > svg {
   transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
+/* A retained route must reset its old glow before its first restored paint. */
+[data-orbital-loading] > svg {
+  transition: none;
+}
 @media (prefers-reduced-motion: reduce) {
   .spatial-globe-canvas,
   .cta-starfield-canvas,
@@ -63,4 +67,11 @@
   [data-orbital-renderer] > svg {
     transition: none;
   }
+}
+
+/* The sharp limb participates in GPU depth; retain only the soft SVG bloom. */
+[data-orbital-gpu][data-orbital-preset='hero'] > svg:last-of-type > circle:nth-of-type(4),
+[data-orbital-gpu][data-orbital-preset='background'] > svg:last-of-type > circle:nth-of-type(4),
+[data-orbital-gpu][data-orbital-preset='line'] > svg:last-of-type > circle:first-of-type {
+  visibility: hidden;
 }

@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
-import { INSIGHT_QUERY, INSIGHTS_PAGE_QUERY, SITE_SETTINGS_QUERY } from '@o3/sanity/queries'
+import {
+  INSIGHT_QUERY,
+  INSIGHTS_PAGE_QUERY,
+  INSIGHTS_CATALOG_QUERY,
+  SITE_SETTINGS_QUERY,
+} from '@o3/sanity/queries'
 import { buildDetailRoute, buildIndexRoute } from '@o3/content-runtime/routes'
 
 import { insight, insightIndex } from '@/content/documents'
@@ -23,10 +28,15 @@ import { anInsight, anInsightsPage, renderRoute, siteSettings, type FetchCall } 
  */
 const detail = buildDetailRoute(insight)
 const index = buildIndexRoute(insightIndex)
+const indexQueries = [
+  ['page', INSIGHTS_PAGE_QUERY],
+  ['catalog', INSIGHTS_CATALOG_QUERY],
+] as const
 
 function dataset(call: FetchCall): unknown {
   if (call.query === SITE_SETTINGS_QUERY) return siteSettings()
   if (call.query === INSIGHTS_PAGE_QUERY) return anInsightsPage([anInsight()], 1)
+  if (call.query === INSIGHTS_CATALOG_QUERY) return { items: [anInsight()] }
   return anInsight()
 }
 
@@ -46,16 +56,19 @@ describe('an ordinary request', () => {
     }
   })
 
-  it('reads published content with no stega on an index route', async () => {
-    const { calls } = await renderRoute(index, { data: dataset })
+  it.each(indexQueries)(
+    'reads published content with no stega for the index %s',
+    async (_, query) => {
+      const { calls } = await renderRoute(index, { data: dataset })
 
-    const feed = reads(calls, INSIGHTS_PAGE_QUERY)
-    expect(feed.length).toBeGreaterThan(0)
-    for (const call of feed) {
-      expect(call.perspective).toBe('published')
-      expect(call.stega).toBe(false)
-    }
-  })
+      const feed = reads(calls, query)
+      expect(feed.length).toBeGreaterThan(0)
+      for (const call of feed) {
+        expect(call.perspective).toBe('published')
+        expect(call.stega).toBe(false)
+      }
+    },
+  )
 
   it('reads Site Settings published, with no stega', async () => {
     const { calls } = await renderRoute(detail, { data: dataset, params: { slug: 'an-insight' } })
@@ -99,10 +112,10 @@ describe('a draft request', () => {
     for (const call of stegaFree) expect(call.perspective).toBe('drafts')
   })
 
-  it('reads drafts on an index route too', async () => {
+  it.each(indexQueries)('reads drafts for the index %s too', async (_, query) => {
     const { calls } = await renderRoute(index, { data: dataset, draft: true })
 
-    const feed = reads(calls, INSIGHTS_PAGE_QUERY)
+    const feed = reads(calls, query)
     expect(feed.length).toBeGreaterThan(0)
     for (const call of feed) {
       expect(call.perspective).toBe('drafts')
@@ -118,10 +131,10 @@ describe('a draft request', () => {
  * route.
  */
 describe('an index read', () => {
-  it('is tagged by every type its feed lists', async () => {
+  it.each(indexQueries)('tags the index %s by every type its feed lists', async (_, query) => {
     const { calls } = await renderRoute(index, { data: dataset })
 
-    const feed = reads(calls, INSIGHTS_PAGE_QUERY)
+    const feed = reads(calls, query)
     expect(feed.length).toBeGreaterThan(0)
     for (const call of feed) expect(call.tags).toContain('sanity:insight')
   })

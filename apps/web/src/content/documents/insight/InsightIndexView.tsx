@@ -7,12 +7,13 @@ import type { Pagination } from '@o3/content-runtime/routes'
 import { indexHref } from '@o3/content-runtime/routes/index-paths'
 
 import { InsightCard } from '@o3/content-ui/cards'
-import { Pager } from '@o3/content-ui'
+import { Pager } from '@o3/content-ui/pager'
 import { Reveal } from '@o3/ui'
 
 type IndexData = NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 
 interface InsightIndexViewProps {
+  readonly resultsKey?: string
   readonly items: IndexData['items']
   /** Every category with an article to show — the filter bar's options. */
   readonly categories: IndexData['categories']
@@ -84,10 +85,9 @@ function insightsHref({
  * at O3) rather than sample words — so the control filters on `category`, and
  * the chips come from the collection instead of from a hand-kept list here.
  *
- * It is **server-side and in the path** (`/insights/category/design`, #370),
- * which is what
- * makes a filtered index linkable, crawlable and free of client state. The
- * mechanism is `IndexEntry.facets` — see `@o3/content-runtime/routes`.
+ * The initial result is server-rendered at `/insights/category/design` (#370),
+ * keeping filtered indexes linkable and crawlable. Hydrated filter changes
+ * use the downloaded card catalog and keep that same URL scheme.
  *
  * Two divergences from the frame worth stating rather than burying:
  *
@@ -109,6 +109,7 @@ function insightsHref({
  */
 export function InsightIndexView({
   items,
+  resultsKey,
   categories,
   category,
   pagination,
@@ -126,12 +127,7 @@ export function InsightIndexView({
           grid. Unlike the Home and About Blog rows the cards do not bleed past
           the right edge: the grid has nothing to scroll to at either width.
 
-          128 is flat, and the 402 band is deliberately not followed. `2975:8655`
-          pads 24 top and bottom inside a 16px gutter, where every other band on
-          that frame pads 96 or 128 inside the 20px gutter the token defines —
-          it is off-system on both axes at once, which is the signature of a
-          nudged layer rather than a rhythm. band-md is 128 at both widths by
-          design (layout.css), so the band keeps it. */}
+          The feed uses the 128px band spacing above and below its content. */}
       <div
         id="feed"
         className="px-gutter py-band-md bg-bone scroll-mt-20 lg:scroll-mt-[calc(var(--spacing-nav-pinned)+96px)]"
@@ -146,7 +142,9 @@ export function InsightIndexView({
            * So the level exists and is only unseen, and it says which cut is on
            * screen.
            */}
-          <h2 className="sr-only">{activeTitle ? `${activeTitle} insights` : 'All insights'}</h2>
+          <h2 tabIndex={-1} className="sr-only">
+            {activeTitle ? `${activeTitle} insights` : 'All insights'}
+          </h2>
 
           {categories.length > 0 ? (
             /*
@@ -176,7 +174,9 @@ export function InsightIndexView({
               className="flex items-center gap-2.5 overflow-x-auto [scrollbar-width:none] lg:flex-wrap lg:overflow-x-visible [&::-webkit-scrollbar]:hidden"
             >
               <FilterChip asChild selected={!category} className="shrink-0">
-                <Link href={insightsHref()}>All</Link>
+                <Link prefetch={false} href={insightsHref()}>
+                  All
+                </Link>
               </FilterChip>
               {categories.map((option) =>
                 option.slug ? (
@@ -186,7 +186,9 @@ export function InsightIndexView({
                     selected={category === option.slug}
                     className="shrink-0"
                   >
-                    <Link href={insightsHref({ category: option.slug })}>{option.title}</Link>
+                    <Link prefetch={false} href={insightsHref({ category: option.slug })}>
+                      {option.title}
+                    </Link>
                   </FilterChip>
                 ) : null,
               )}
@@ -205,7 +207,11 @@ export function InsightIndexView({
              * frames set it, wrapped at 1440 (`2337:4492`) and stacked at 402
              * (`2975:8663`).
              */
-            <ul className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3">
+            <ul
+              key={resultsKey}
+              data-insight-results
+              className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3"
+            >
               {items.map((item, index) => (
                 <li key={item._id}>
                   {/* The stagger is the card's COLUMN in the widest grid, not
@@ -231,13 +237,16 @@ export function InsightIndexView({
             /* Reachable by hand-typing a category slug the feed has nothing
                for — the chips only offer categories that do. Unsourced: no
                frame draws an empty index. */
-            <p className="text-lead text-fg-muted">No insights under that filter yet.</p>
+            <p data-insight-results className="text-lead text-fg-muted">
+              No insights under that filter yet.
+            </p>
           )}
 
           {/* A page link is followed from the feed's foot, and the next page's
               reading starts at its head rather than at the document top above
               the hero — the `#feed` the href builder carries. */}
           <Pager
+            prefetch={false}
             page={page}
             totalPages={totalPages}
             href={(target) => insightsHref({ category, page: target })}

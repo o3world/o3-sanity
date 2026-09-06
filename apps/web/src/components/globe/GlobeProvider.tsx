@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useLayoutEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { OrbitalRendererContext } from '@o3/ui'
@@ -11,6 +11,7 @@ import type { GlobeRuntime } from './globe-runtime'
 
 type Engine = {
   runtime: GlobeRuntime
+  homeEntranceAvailable: boolean
   start: typeof import('./renderer').startSpatialGlobe
 }
 const GlobeRuntimeContext = createContext<Engine | null>(null)
@@ -42,13 +43,14 @@ export function GlobeRenderer({
     const quietStars = !!cta || interiorStars
     const stars = heroStars || quietStars
     const target = heroStars || interiorStars ? hero! : (cta ?? host)
+    const availablePlacement = { target, stars, quietStars, interiorStars }
     return observeGlobeAvailability(
       host,
       stars ? target : (host.closest('section') ?? host),
-      (available) => setPlacement(available ? { target, stars, quietStars, interiorStars } : null),
+      (available) => setPlacement(available ? availablePlacement : null),
     )
   }, [hostRef, preset])
-  useEffect(() => {
+  useLayoutEffect(() => {
     const host = hostRef.current
     if (!canvas || !placement || !host || !engine) return
     const controller = new AbortController()
@@ -62,9 +64,12 @@ export function GlobeRenderer({
       if (ready !== undefined) clearTimeout(timeout)
       onReady(ready)
     }
+    const entrance = placement.stars && !placement.quietStars && engine.homeEntranceAvailable
+    if (entrance) engine.homeEntranceAvailable = false
     engine
       .start(canvas, placement.target, host, controller.signal, engine.runtime, {
         arcs,
+        entrance,
         preset,
         motion,
         opacity,
@@ -81,24 +86,37 @@ export function GlobeRenderer({
       controller.abort()
     }
   }, [canvas, placement, hostRef, arcs, preset, motion, opacity, electronOpacity, onReady, engine])
-  return placement
-    ? createPortal(
+  return (
+    <>
+      {preset === 'hero' && (
         <canvas
-          ref={setCanvas}
+          data-orbital-startup=""
+          width={0}
+          height={0}
+          suppressHydrationWarning
           aria-hidden="true"
-          className={
-            placement.interiorStars
-              ? 'interior-starfield-canvas'
-              : placement.quietStars
-                ? 'cta-starfield-canvas'
-                : placement.stars
-                  ? 'spatial-globe-canvas'
-                  : 'orbital-globe-canvas'
-          }
-        />,
-        placement.target,
-      )
-    : null
+        />
+      )}
+      {placement
+        ? createPortal(
+            <canvas
+              ref={setCanvas}
+              aria-hidden="true"
+              className={
+                placement.interiorStars
+                  ? 'interior-starfield-canvas'
+                  : placement.quietStars
+                    ? 'cta-starfield-canvas'
+                    : placement.stars
+                      ? 'spatial-globe-canvas'
+                      : 'orbital-globe-canvas'
+              }
+            />,
+            placement.target,
+          )
+        : null}
+    </>
+  )
 }
 
 function EnabledGlobeProvider({ children }: { children: ReactNode }) {
@@ -106,6 +124,7 @@ function EnabledGlobeProvider({ children }: { children: ReactNode }) {
   const [failed, setFailed] = useState(false)
   useEffect(() => {
     let disposed = false
+    const homeEntranceAvailable = location.pathname === '/'
     let runtime: GlobeRuntime | undefined
     const timeout = setTimeout(() => {
       disposed = true
@@ -117,7 +136,7 @@ function EnabledGlobeProvider({ children }: { children: ReactNode }) {
         clearTimeout(timeout)
         runtime = createGlobeRuntime()
         void runtime.warm().catch(() => {})
-        setEngine({ runtime, start: startSpatialGlobe })
+        setEngine({ runtime, start: startSpatialGlobe, homeEntranceAvailable })
       })
       .catch(() => {
         clearTimeout(timeout)

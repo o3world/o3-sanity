@@ -358,6 +358,11 @@ export const INSIGHTS_PAGE_QUERY = defineQuery(`{
   "categories": *[_type == "category" && slug.current != "uncategorized" && count(*[_type == "insight" && references(^._id)]) > 0] | order(title asc){title, "slug": slug.current}
 }`)
 
+/** All card metadata, in pinned-first order, for local Insights filtering. */
+export const INSIGHTS_CATALOG_QUERY = defineQuery(`{
+  "items": (${PINNED_INSIGHTS} + (${UNPINNED_INSIGHTS} | order(publishedAt desc)))[]{${INSIGHT_CARD}}
+}`)
+
 /**
  * The category slugs `/insights` has a filtered path for (#370).
  *

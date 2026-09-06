@@ -189,3 +189,5 @@ export type { OrbitalRendererProps } from './components/orbital-sphere-renderer'
 export { RevealSequence } from './components/reveal-sequence'
 
 export { LayeredMediaReveal } from './components/layered-media-reveal'
+
+export { heroStagger, HERO_ENTRANCE } from './components/hero-cadence'

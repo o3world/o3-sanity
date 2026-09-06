@@ -3,6 +3,7 @@ import type React from 'react'
 import { Figtree } from 'next/font/google'
 
 import { AnchorGlide } from '@o3/ui'
+import { HeroStartup } from '@/components/globe/HeroStarfield'
 import { getBaseUrl } from '@o3/content-runtime/base-url'
 
 import '@/app/globals.css'
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       style={{ backgroundColor: 'var(--page-background, #000)' }}
     >
       <body className="text-fg font-sans antialiased">
+        {process.env.O3_SPATIAL_GLOBE_ENABLED === '1' && <HeroStartup />}
         {children}
         <AnchorGlide />
       </body>
