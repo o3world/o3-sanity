@@ -1,3 +1,5 @@
+export const GLOBE_SETTLE_RATE = -Math.log(0.94) * 30
+
 /** Keeps the SVG bloom and GPU geometry on the same animation frame. */
 export function createGlobeParallax(layer: HTMLElement, range: 'hero' | 'cta') {
   const saved = ['animation', 'translate'].map((name) => ({
@@ -27,7 +29,8 @@ export function createGlobeParallax(layer: HTMLElement, range: 'hero' | 'cta') {
       const target = range === 'hero' ? progress * 12 : (progress * 0.2 - 0.1) * bounds.height
       if (still) position = 0
       else if (position === undefined) position = target
-      else position += (target - position) * (1 - 0.94 ** (Math.min(dt, 1 / 20) * 30))
+      else
+        position += (target - position) * (1 - Math.exp(-GLOBE_SETTLE_RATE * Math.min(dt, 1 / 20)))
       layer.style.setProperty('translate', `0 ${position}${range === 'hero' ? 'vh' : 'px'}`)
       return position
     },

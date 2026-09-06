@@ -50,8 +50,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       data-scroll-behavior="smooth"
       className={figtree.variable}
+      style={{ backgroundColor: 'var(--page-background, #000)' }}
     >
-      <body className="text-fg bg-white font-sans antialiased">
+      <body className="text-fg font-sans antialiased">
         {children}
         <AnchorGlide />
       </body>

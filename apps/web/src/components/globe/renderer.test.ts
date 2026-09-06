@@ -1,12 +1,22 @@
 import { beforeEach, expect, it, vi } from 'vitest'
+import { frame } from 'vgpu'
 import { startSpatialGlobe } from './renderer'
+import type { GlobeRuntime } from './globe-runtime'
 
 const gpu = vi.hoisted(() => ({ dispose: vi.fn() }))
+const target = { dispose: vi.fn() }
+const release = vi.fn()
+const runtime = {
+  acquire: vi.fn(async () => ({ gpu, release, onError: vi.fn() })),
+} as unknown as GlobeRuntime
 const surface = vi.hoisted(() => vi.fn())
 vi.mock('vgpu', () => ({ init: vi.fn(async () => gpu), surface, draw: vi.fn(), frame: vi.fn() }))
-beforeEach(() => vi.clearAllMocks())
+beforeEach(() => {
+  vi.clearAllMocks()
+  surface.mockReturnValue(target)
+})
 
-it('disposes the allocated GPU when surface setup fails before listeners are registered', async () => {
+it('releases its lease without destroying the shared GPU when surface setup fails', async () => {
   const error = new Error('WebGPU canvas context unavailable')
   surface.mockImplementationOnce(() => {
     throw error
@@ -18,6 +28,7 @@ it('disposes the allocated GPU when surface setup fails before listeners are reg
       {} as HTMLElement,
       {} as HTMLElement,
       controller.signal,
+      runtime,
       {
         arcs: [],
         preset: 'hero',
@@ -29,12 +40,14 @@ it('disposes the allocated GPU when surface setup fails before listeners are reg
       },
     ),
   ).rejects.toBe(error)
-  expect(gpu.dispose).toHaveBeenCalledOnce()
+  expect(release).toHaveBeenCalledOnce()
+  expect(gpu.dispose).not.toHaveBeenCalled()
   controller.abort()
-  expect(gpu.dispose).toHaveBeenCalledOnce()
+  expect(release).toHaveBeenCalledOnce()
+  expect(gpu.dispose).not.toHaveBeenCalled()
 })
 
-it('disposes a device returned after the request was aborted without creating a surface', async () => {
+it('releases an aborted lease without creating a surface or destroying the shared GPU', async () => {
   const controller = new AbortController()
   controller.abort()
   await startSpatialGlobe(
@@ -42,6 +55,7 @@ it('disposes a device returned after the request was aborted without creating a 
     {} as HTMLElement,
     {} as HTMLElement,
     controller.signal,
+    runtime,
     {
       arcs: [],
       preset: 'hero',
@@ -52,7 +66,8 @@ it('disposes a device returned after the request was aborted without creating a 
       onReady: vi.fn(),
     },
   )
-  expect(gpu.dispose).toHaveBeenCalledOnce()
+  expect(release).toHaveBeenCalledOnce()
+  expect(gpu.dispose).not.toHaveBeenCalled()
   expect(surface).not.toHaveBeenCalled()
 })
 
@@ -111,12 +126,21 @@ it.each(['hero', 'cta'] as const)(
     vi.stubGlobal('navigator', { gpu: { getPreferredCanvasFormat: () => 'bgra8unorm' } })
     Object.assign(gpu, { onError: vi.fn(), gpu: { lost: new Promise(() => {}) } })
     const controller = new AbortController()
+    let complete!: () => void
+    vi.mocked(frame).mockReturnValue({
+      done: new Promise<void>((resolve) => {
+        complete = resolve
+      }),
+    } as ReturnType<typeof frame>)
+    vi.stubGlobal('getComputedStyle', () => ({ transitionDuration: '0.2s' }))
+    const onReady = vi.fn()
     try {
       await startSpatialGlobe(
         canvas as unknown as HTMLCanvasElement,
         hero as unknown as HTMLElement,
         globe as unknown as HTMLElement,
         controller.signal,
+        runtime,
         {
           arcs: [],
           preset: 'hero',
@@ -124,10 +148,16 @@ it.each(['hero', 'cta'] as const)(
           opacity: 1,
           electronOpacity: 1,
           stars: false,
-          onReady: vi.fn(),
+          onReady,
         },
       )
       tick(0)
+      expect(onReady).not.toHaveBeenCalled()
+      if (range === 'hero') {
+        complete()
+        await Promise.resolve()
+        expect(onReady).toHaveBeenCalledWith(true)
+      }
       expect(measured[0]).toBe(range === 'hero' ? '0 0vh' : '0 -50px')
       expect(values.get('animation')).toBe('none')
       top = -500
@@ -138,6 +168,14 @@ it.each(['hero', 'cta'] as const)(
       controller.abort()
       expect(values.has('animation')).toBe(false)
       expect(values.has('translate')).toBe(false)
+      if (range === 'cta') {
+        complete()
+        await Promise.resolve()
+        expect(onReady).not.toHaveBeenCalledWith(true)
+      }
+      expect(target.dispose).toHaveBeenCalledOnce()
+      expect(release).toHaveBeenCalledOnce()
+      expect(gpu.dispose).not.toHaveBeenCalled()
     } finally {
       controller.abort()
       vi.unstubAllGlobals()

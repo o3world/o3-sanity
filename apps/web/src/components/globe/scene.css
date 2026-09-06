@@ -6,6 +6,27 @@
   pointer-events: none;
   opacity: 0;
 }
+
+/* Paint the sky with the server HTML, then hand it over to the first GPU frame. */
+[data-spatial-layout] .hero-band:has(.hero-lead)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-size: cover;
+  background-position: 50% 43%;
+  mask-image: linear-gradient(to bottom, black 92%, transparent);
+  opacity: 1;
+  transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-spatial-layout] .hero-band:has(.hero-lead)[data-spatial-ready]::before {
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-spatial-layout] .hero-band:has(.hero-lead)::before {
+    transition: none;
+  }
+}
 [data-spatial-ready] .hero-lag > div > svg:first-child {
   visibility: hidden;
 }
@@ -36,10 +57,6 @@
   );
   border-color: var(--color-on-ink-line);
   backdrop-filter: blur(calc(16px * var(--spatial-nav-solid, 0))) saturate(1.25);
-}
-
-[data-spatial-chrome] body {
-  background: var(--color-ink);
 }
 
 /* Keep the property links available in the prototype's footer at every size. */

@@ -19,7 +19,7 @@ export function observeGlobeAvailability(
       nearby = entry?.isIntersecting ?? false
       update()
     },
-    { rootMargin: '100px' },
+    { rootMargin: '800px 0px' },
   )
   const resize = new ResizeObserver(update)
   intersection.observe(region)

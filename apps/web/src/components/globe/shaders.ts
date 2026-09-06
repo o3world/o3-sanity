@@ -1,3 +1,5 @@
+import { starHashWGSL } from './star-seed'
+
 // Prototype shaders: project the original 3D orbit coordinates, then draw
 // anti-aliased screen-space ribbons and electron billboards.
 const camera = /* wgsl */ `
@@ -27,6 +29,7 @@ struct Params {
   v: vec4f,
   color: vec4f,
   dot: vec4f,
+  dotGround: vec4f,
 }
 @group(0) @binding(0) var<uniform> p: Params;
 struct Out {
@@ -123,12 +126,18 @@ export const dotShader =
   let material=i.color.rgb*(0.62+0.22*normal.z)+warmth*(0.09*diffuse+0.07*softRim);
   let alpha=solid*i.color.a;
   let color=mix(i.color.rgb,material,solid);
+  // Keep the light preset's pale depth tones in the material, not its alpha:
+  // a solid sphere must cover the rail passing behind it.
+  if (p.dotGround.a > 0.5) {
+    return vec4f(mix(p.dotGround.rgb,color,i.color.a),solid);
+  }
   return vec4f(color,alpha);
 }
 `
 // Continuous spherical volume: no depth bands or screen-space particle sheets.
 export const starsShader =
   camera +
+  starHashWGSL +
   /* wgsl */ `
 struct Params { viewport: vec4f, motion: vec4f, globe: vec4f, rotation: vec4f }
 @group(0) @binding(0) var<uniform> p: Params;
@@ -137,7 +146,10 @@ struct Out {
  @location(0) uv: vec2f,
  @location(1) color: vec4f,
 }
-fn hash(n:f32) -> f32 { return fract(sin(n*127.1+311.7)*43758.5453); }
+fn hash(n:f32) -> f32 {
+ if (p.viewport.w > 0.5) { return fract(sin(n*127.1+311.7)*43758.5453); }
+ return stableStarHash(n);
+}
 @vertex fn vs_main(@builtin(vertex_index) v:u32, @builtin(instance_index) instance:u32) -> Out {
  let n=f32(instance)+1837.0+select(0.0,1900.0,p.viewport.w>0.5);
  let corners=array<vec2f,6>(vec2f(-1,-1),vec2f(1,-1),vec2f(-1,1),vec2f(-1,1),vec2f(1,-1),vec2f(1,1));
