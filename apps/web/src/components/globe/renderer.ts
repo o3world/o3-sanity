@@ -1,16 +1,19 @@
 /// <reference types="@webgpu/types" />
-import { draw, frame, init, surface } from 'vgpu'
+import { frame, surface } from 'vgpu'
 import type { OrbitalRendererProps } from '@o3/ui'
 import { resolveColor } from './resolve-color'
 import { createGlobeParallax } from './globe-parallax'
+import { createGlobeEntrance } from './globe-entrance'
 import { startPhoneTilt } from './phone-tilt'
-import { dotShader, orbitMaskShader, orbitShader, shootingStarShader, starsShader } from './shaders'
+import { createSkyHandoff } from './sky-handoff'
+import type { GlobeRuntime } from './globe-runtime'
 
 export async function startSpatialGlobe(
   canvas: HTMLCanvasElement,
   hero: HTMLElement,
   globe: HTMLElement,
   signal: AbortSignal,
+  runtime: GlobeRuntime,
   options: Pick<
     OrbitalRendererProps,
     'arcs' | 'motion' | 'preset' | 'opacity' | 'electronOpacity' | 'onReady'
@@ -20,14 +23,20 @@ export async function startSpatialGlobe(
   },
 ) {
   const heroStars = options.stars && !options.quietStars
-  const gpu = await init({ powerPreference: 'low-power' })
+  const lease = await runtime.acquire()
+  const { gpu } = lease
   if (signal.aborted) {
-    gpu.dispose()
+    lease.release()
     return
   }
-  let dispose = () => gpu.dispose()
+  let dispose = () => lease.release()
   try {
     const target = surface(gpu, canvas, { dpr: [1, 2], alphaMode: 'premultiplied' })
+    const release = () => {
+      target.dispose()
+      lease.release()
+    }
+    dispose = release
     const arcs = options.arcs.map((arc) => ({
       ...arc,
       col: resolveColor(arc.col, globe),
@@ -46,37 +55,22 @@ export async function startSpatialGlobe(
             1,
           ]
         : [0, 0, 0, 0]
-    const rings = arcs.map(() =>
-      draw(gpu, { shader: orbitShader, vertices: 288 * 6, blend: 'alpha' }),
-    )
-    // Erase sky pixels beneath every rail before drawing translucent globe colors.
-    const masks = (options.stars ? arcs : []).map(() =>
-      draw(gpu, {
-        shader: orbitMaskShader,
-        vertices: 288 * 6,
-        blend: { color: { src: 'zero', dst: 'one-minus-src-alpha' } },
-      }),
-    )
-    const electrons = arcs.map((arc) =>
-      arc.dots.map(() => draw(gpu, { shader: dotShader, vertices: 6, blend: 'alpha' })),
-    )
+    const rings = arcs.map(() => lease.draw('orbit'))
+    const masks = (options.stars ? arcs : []).map(() => lease.draw('mask'))
+    const electrons = arcs.map((arc) => arc.dots.map(() => lease.draw('dot')))
     const stars = options.stars
-      ? draw(gpu, {
-          shader: starsShader,
-          vertices: 6,
-          instances: options.quietStars ? 1100 : 4180,
-          blend: 'alpha',
-        })
+      ? lease.draw(options.quietStars ? 'quietStars' : 'stars')
       : undefined
-    const shootingStar = heroStars
-      ? draw(gpu, { shader: shootingStarShader, vertices: 6, blend: 'alpha' })
-      : undefined
+    const shootingStar = heroStars ? lease.draw('shootingStar') : undefined
     const previewShootingStar = new URLSearchParams(location.search).has('shooting-star-preview')
     let parallax: ReturnType<typeof createGlobeParallax> | undefined
+    let entrance: ReturnType<typeof createGlobeEntrance> | undefined
     let stopTilt: (() => void) | undefined
     let raf = 0
     let dead = false
     let ready = false
+    let firstFramePending = false
+    const skyHandoff = heroStars ? createSkyHandoff() : undefined
     let visible = true
     let previous: number | undefined
     let elapsed = 0
@@ -104,6 +98,7 @@ export async function startSpatialGlobe(
       signal.removeEventListener('abort', cleanup)
       cancelAnimationFrame(raf)
       parallax?.dispose()
+      entrance?.dispose()
       stopTilt?.()
       observer.disconnect()
       resizeObserver.disconnect()
@@ -119,7 +114,7 @@ export async function startSpatialGlobe(
       if (heroStars) document.documentElement.style.removeProperty('--spatial-nav-solid')
       delete hero.dataset.spatialStill
       canvas.style.opacity = '0'
-      gpu.dispose()
+      release()
     }
     dispose = cleanup
     const fail = (error: unknown) => {
@@ -174,6 +169,9 @@ export async function startSpatialGlobe(
       else delete hero.dataset.spatialStill
       const dt = previous === undefined ? 1 / 30 : (now - previous) / 1000
       previous = now
+      const sky = skyHandoff?.sample(now, dt, isStill())
+      const skyStep = sky?.step ?? dt
+      const skyMix = sky?.mix ?? 1
       if (!isStill()) {
         elapsed += dt
         const ease = 1 - 0.94 ** (dt * 30)
@@ -185,7 +183,7 @@ export async function startSpatialGlobe(
         // Integrate the changing axis rather than recomputing orientation from time.
         const magnitude = Math.hypot(spinX, spinY, spinZ)
         if (magnitude > 0.00001) {
-          const halfAngle = (spinRate * magnitude * dt) / 2
+          const halfAngle = (spinRate * magnitude * skyStep) / 2
           const scale = Math.sin(halfAngle) / magnitude
           const x = spinX * scale,
             y = spinY * scale,
@@ -212,6 +210,7 @@ export async function startSpatialGlobe(
       }
       const heroBounds = hero.getBoundingClientRect()
       parallax?.update(heroBounds, document.documentElement.clientHeight, dt, isStill())
+      entrance?.update(now, isStill())
       const overhang = heroStars ? Math.max(0, heroBounds.top + scrollY) : 0
       if (heroStars) {
         hero.style.setProperty('--spatial-sky-overhang', `${overhang}px`)
@@ -242,12 +241,14 @@ export async function startSpatialGlobe(
       }
       const targetSkyRise =
         Math.min(heroBounds.height, Math.max(0, -heroBounds.top)) * (options.quietStars ? 0 : 0.015)
-      skyRise = isStill() ? 0 : skyRise + (targetSkyRise - skyRise) * (1 - 0.94 ** (dt * 30))
+      skyRise = isStill()
+        ? 0
+        : skyRise + (targetSkyRise * skyMix - skyRise) * (1 - 0.94 ** (skyStep * 30))
       const skyViewport = [h.width, h.height, skyRise, Number(options.quietStars)]
       const skyMotion = [
-        isStill() ? 0 : elapsed,
-        -sx * (options.quietStars ? 0.009 : 0.045),
-        sy * (options.quietStars ? 0.0064 : 0.032),
+        isStill() ? 0 : (sky?.elapsed ?? elapsed),
+        -sx * (options.quietStars ? 0.009 : 0.045) * skyMix,
+        sy * (options.quietStars ? 0.0064 : 0.032) * skyMix,
         0,
       ]
       stars?.set({
@@ -288,7 +289,7 @@ export async function startSpatialGlobe(
         )
       })
       try {
-        frame(gpu, (f) =>
+        const submitted = frame(gpu, (f) =>
           f.pass({ target, clear: [0, 0, 0, 0] }, (pass) => {
             if (stars) {
               pass.draw(stars)
@@ -299,12 +300,22 @@ export async function startSpatialGlobe(
             electrons.forEach((orbit) => orbit.forEach((dot) => pass.draw(dot)))
           }),
         )
-        hero.dataset.spatialReady = 'true'
-        if (!ready) {
-          ready = true
-          options.onReady(true)
+        if (!ready && !firstFramePending) {
+          firstFramePending = true
+          void submitted.done
+            .then(() => {
+              if (dead || signal.aborted) return
+              ready = true
+              hero.dataset.spatialReady = 'true'
+              if (heroStars) document.documentElement.dataset.spatialChrome = 'true'
+              canvas.style.opacity = String(options.opacity)
+              const fadeDuration =
+                parseFloat(getComputedStyle(canvas).transitionDuration) * 1000 || 0
+              skyHandoff?.reveal(performance.now(), fadeDuration)
+              options.onReady(true)
+            })
+            .catch(fail)
         }
-        if (heroStars) document.documentElement.dataset.spatialChrome = 'true'
         const mobile = innerWidth < 1024
         if (heroStars)
           document.documentElement.style.setProperty(
@@ -313,17 +324,13 @@ export async function startSpatialGlobe(
               Math.min(1, Math.max(0, (scrollY - (mobile ? 30 : 100)) / (mobile ? 130 : 240))),
             ),
           )
-        canvas.style.opacity = String(options.opacity)
         canvas.dataset.frame = String(Math.round(elapsed * 1000))
         if (!isStill()) raf = requestAnimationFrame(tick)
       } catch (error) {
         fail(error)
       }
     }
-    gpu.onError(fail)
-    gpu.gpu.lost.then((info) => {
-      if (!dead) fail(new Error(info.message || 'device lost'))
-    })
+    lease.onError(fail)
     signal.addEventListener('abort', cleanup, { once: true })
     try {
       await Promise.all(
@@ -336,6 +343,7 @@ export async function startSpatialGlobe(
         return
       }
       const parallaxLayer = globe.closest<HTMLElement>('.hero-lag, .cta-lag')
+      if (heroStars) entrance = createGlobeEntrance(globe, hero)
       if (parallaxLayer)
         parallax = createGlobeParallax(
           parallaxLayer,

@@ -10,3 +10,35 @@
 @source '../../../../packages/ui/src/**/*.{ts,tsx}';
 @source '../../../../packages/content-ui/src/**/*.{ts,tsx}';
 @source '../../../../packages/editor-chrome/src/**/*.{ts,tsx}';
+
+/* The document ground is present before hydration; only the opening band sets its tone. */
+html {
+  --page-background: #000;
+}
+body {
+  background-color: var(--page-background, #000);
+}
+
+html:has(
+  #site-content > article > :first-child > [data-surface='white'],
+  #site-content > [data-collection-hero][data-surface='white'],
+  #site-content > :first-child > [data-collection-hero][data-surface='white']
+) {
+  --page-background: var(--color-white);
+}
+
+html:has(
+  #site-content > article > :first-child > [data-surface='paper'],
+  #site-content > [data-collection-hero][data-surface='paper'],
+  #site-content > :first-child > [data-collection-hero][data-surface='paper']
+) {
+  --page-background: var(--color-paper);
+}
+
+html:has(
+  #site-content > article > :first-child > [data-surface='bone'],
+  #site-content > [data-collection-hero][data-surface='bone'],
+  #site-content > :first-child > [data-collection-hero][data-surface='bone']
+) {
+  --page-background: var(--color-bone);
+}

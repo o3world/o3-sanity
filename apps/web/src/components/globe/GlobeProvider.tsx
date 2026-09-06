@@ -1,14 +1,21 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { OrbitalRendererContext } from '@o3/ui'
 import type { OrbitalRendererProps } from '@o3/ui'
 import './globe.css'
 import { observeGlobeAvailability } from './observe-globe-availability'
+import type { GlobeRuntime } from './globe-runtime'
 
-function GlobeRenderer({
+type Engine = {
+  runtime: GlobeRuntime
+  start: typeof import('./renderer').startSpatialGlobe
+}
+const GlobeRuntimeContext = createContext<Engine | null>(null)
+
+export function GlobeRenderer({
   hostRef,
   arcs,
   preset,
@@ -17,6 +24,7 @@ function GlobeRenderer({
   electronOpacity,
   onReady,
 }: OrbitalRendererProps) {
+  const engine = useContext(GlobeRuntimeContext)
   const [placement, setPlacement] = useState<{
     target: HTMLElement
     stars: boolean
@@ -42,7 +50,7 @@ function GlobeRenderer({
   }, [hostRef, preset])
   useEffect(() => {
     const host = hostRef.current
-    if (!canvas || !placement || !host) return
+    if (!canvas || !placement || !host || !engine) return
     const controller = new AbortController()
     onReady(undefined)
     const timeout = setTimeout(() => {
@@ -54,19 +62,16 @@ function GlobeRenderer({
       if (ready !== undefined) clearTimeout(timeout)
       onReady(ready)
     }
-    import('./renderer')
-      .then(({ startSpatialGlobe }) => {
-        if (!controller.signal.aborted)
-          return startSpatialGlobe(canvas, placement.target, host, controller.signal, {
-            arcs,
-            preset,
-            motion,
-            opacity,
-            electronOpacity,
-            onReady: reportReady,
-            stars: placement.stars,
-            quietStars: placement.quietStars,
-          })
+    engine
+      .start(canvas, placement.target, host, controller.signal, engine.runtime, {
+        arcs,
+        preset,
+        motion,
+        opacity,
+        electronOpacity,
+        onReady: reportReady,
+        stars: placement.stars,
+        quietStars: placement.quietStars,
       })
       .catch(() => {
         reportReady(false)
@@ -75,7 +80,7 @@ function GlobeRenderer({
       clearTimeout(timeout)
       controller.abort()
     }
-  }, [canvas, placement, hostRef, arcs, preset, motion, opacity, electronOpacity, onReady])
+  }, [canvas, placement, hostRef, arcs, preset, motion, opacity, electronOpacity, onReady, engine])
   return placement
     ? createPortal(
         <canvas
@@ -96,10 +101,43 @@ function GlobeRenderer({
     : null
 }
 
-export function GlobeProvider({ children, enabled }: { children: ReactNode; enabled: boolean }) {
+function EnabledGlobeProvider({ children }: { children: ReactNode }) {
+  const [engine, setEngine] = useState<Engine | null>(null)
+  const [failed, setFailed] = useState(false)
+  useEffect(() => {
+    let disposed = false
+    let runtime: GlobeRuntime | undefined
+    const timeout = setTimeout(() => {
+      disposed = true
+      setFailed(true)
+    }, 10000)
+    void Promise.all([import('./globe-runtime'), import('./renderer')])
+      .then(([{ createGlobeRuntime }, { startSpatialGlobe }]) => {
+        if (disposed) return
+        clearTimeout(timeout)
+        runtime = createGlobeRuntime()
+        void runtime.warm().catch(() => {})
+        setEngine({ runtime, start: startSpatialGlobe })
+      })
+      .catch(() => {
+        clearTimeout(timeout)
+        if (!disposed) setFailed(true)
+      })
+    return () => {
+      clearTimeout(timeout)
+      disposed = true
+      runtime?.dispose()
+    }
+  }, [])
   return (
-    <OrbitalRendererContext.Provider value={enabled ? GlobeRenderer : null}>
-      {children}
-    </OrbitalRendererContext.Provider>
+    <GlobeRuntimeContext.Provider value={engine}>
+      <OrbitalRendererContext.Provider value={failed ? null : GlobeRenderer}>
+        {children}
+      </OrbitalRendererContext.Provider>
+    </GlobeRuntimeContext.Provider>
   )
+}
+
+export function GlobeProvider({ children, enabled }: { children: ReactNode; enabled: boolean }) {
+  return enabled ? <EnabledGlobeProvider>{children}</EnabledGlobeProvider> : children
 }

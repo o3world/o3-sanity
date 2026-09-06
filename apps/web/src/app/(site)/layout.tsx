@@ -63,15 +63,8 @@ async function Shell({ children }: ShellProps) {
       {!spatialEnabled && <UtilityNav settings={settings} />}
       {/* The chrome draws no mark of its own (#228); these are this app's. */}
       <SiteNav settings={navSettings} brandMark={NAV_MARK} />
-      {/* `bg-ink` is the DOCUMENT'S GROUND, not a band. Every band paints over
-          it, so the only time it is seen is beside a skeleton: the index routes
-          stream their feed into a Suspense boundary whose fallback holds the
-          shape of the grid but not the whole viewport's height. Over the body's
-          white the uncovered part was a white flash on every click through to
-          /work or /insights — and a second flicker behind it, since `NavInk`
-          samples that white, flips the bar to its light skin, and flips back
-          when the ink hero paints. Ink is the colour both index heroes arrive
-          in, so what shows around the skeleton matches what fills it. */}
+      {/* Bands paint their own surfaces over the document ground. Matching the
+          opening band also covers space around streamed loading content. */}
       <main
         id="site-content"
         data-spatial-layout={spatialEnabled ? 'true' : undefined}
@@ -83,8 +76,8 @@ async function Shell({ children }: ShellProps) {
         // settings fetch.
         className={
           (navSettings?.utilityNavItems ?? []).length > 0
-            ? 'bg-ink min-h-screen'
-            : 'bg-ink min-h-screen [--spacing-nav-offset:32px]'
+            ? 'bg-(--page-background) min-h-screen'
+            : 'bg-(--page-background) min-h-screen [--spacing-nav-offset:32px]'
         }
       >
         {children}
