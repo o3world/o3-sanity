@@ -14,13 +14,13 @@ const smooth = (value: number) => {
 export function WorkStarfield({ children }: { children: ReactNode }) {
   const runtime = useGlobeRuntime()
   const motion = useSpatialMotion()
-  const rootRef = useRef<HTMLDivElement>(null)
+  const layerRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    const root = rootRef.current
+    const layer = layerRef.current
     const canvas = canvasRef.current
-    if (!root || !canvas || !runtime) return
+    if (!layer || !canvas || !runtime) return
     let disposed = false
     let stop: (() => void) | undefined
     void import('vgpu')
@@ -43,7 +43,7 @@ export function WorkStarfield({ children }: { children: ReactNode }) {
           if (disposed || failed) return
           const dt = last ? Math.min(50, now - last) / 1000 : 1 / 60
           last = now
-          const bounds = root.getBoundingClientRect()
+          const bounds = layer.getBoundingClientRect()
           const viewportHeight = document.documentElement.clientHeight
           const entry = smooth((viewportHeight - bounds.top) / (viewportHeight * 0.85))
           const exit = smooth(bounds.bottom / (viewportHeight * 0.85))
@@ -82,7 +82,7 @@ export function WorkStarfield({ children }: { children: ReactNode }) {
           visible = entry?.isIntersecting ?? false
           refresh()
         })
-        observer.observe(root)
+        observer.observe(layer)
         const resize = new ResizeObserver(refresh)
         resize.observe(canvas)
         const unsubscribe = motion?.subscribe(refresh)
@@ -113,8 +113,8 @@ export function WorkStarfield({ children }: { children: ReactNode }) {
   }, [runtime, motion])
 
   return (
-    <div className="work-starfield" ref={rootRef}>
-      <div className="work-starfield-layer" aria-hidden="true">
+    <div className="work-starfield">
+      <div className="work-starfield-layer" ref={layerRef} aria-hidden="true">
         <canvas ref={canvasRef} />
       </div>
       {children}

@@ -230,24 +230,17 @@ export interface IndexEntry<Q extends string = string> {
    */
   readonly document?: IndexDocument
   /**
-   * The authored bands around the feed, rendered OUTSIDE the Suspense
-   * boundary from the `document` alone — nothing here may depend on
-   * `searchParams`. This is what lets the hero above the feed prerender into
-   * the static shell: chrome the renderer drew arrived with the feed, one
-   * query later, and the guessed-height fallback standing in for it shifted
-   * the whole page when the real hero landed. `document` is `null` where the
-   * entry declares none or the dataset holds none.
+   * Authored bands around the route-owned feed. They depend only on the
+   * document, never search parameters. The index builder includes them in
+   * above/feed/below order in the complete page HTML. `document` is null
+   * when the entry declares none or the dataset holds none.
    */
   readonly chrome?: (props: { document: unknown; slot: 'above' | 'below' }) => ReactNode
   readonly renderer: (props: IndexRendererProps<Q>) => ReactNode
   /**
-   * What the Suspense boundary draws while the feed is in flight. Nothing,
-   * where an entry declares none.
-   *
-   * A NODE THE PRODUCT SUPPLIES, not a component this package draws: a
-   * fallback is a picture of one route's own grid on one brand's surfaces, and
-   * this package is engine — it holds the boundary and knows nothing about
-   * what fills it (`tools/engine-seam/data/roster.json`).
+   * Legacy loading view retained for existing entry compatibility. The index
+   * builder no longer consumes it: pages wait for their feed so the content
+   * is readable without JavaScript.
    */
   readonly fallback?: ReactNode
   /**
