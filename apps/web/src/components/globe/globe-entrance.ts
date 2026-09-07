@@ -4,7 +4,8 @@ export function readGlobeEntranceTiming(hero: HTMLElement, now: number) {
   return {
     elapsed: start === undefined ? undefined : Math.max(0, now - Number(start)),
     startDelay: 160,
-    duration: 160 + 1638,
+    duration: 160 + 2047.5,
+    returnTail: 750,
   }
 }
 
@@ -14,12 +15,13 @@ export function globeEntranceOffset(
   distance: number,
   startDelay: number,
   duration: number,
+  returnTail: number,
 ) {
   const riseDuration = duration - startDelay
   const progress = Math.min(1, Math.max(0, (elapsed - startDelay) / riseDuration))
   const release = Math.max(
     0,
-    Math.min(1, (elapsed - startDelay - riseDuration * 0.25) / (riseDuration * 0.75 + 600)),
+    Math.min(1, (elapsed - startDelay - riseDuration * 0.25) / (riseDuration * 0.75 + returnTail)),
   )
   const overshoot = Math.min(6, distance * 0.03) * 64 * (release * (1 - release)) ** 3
   return distance * (1 - progress) ** 4 * (1 + 4 * progress) - overshoot
@@ -32,9 +34,9 @@ export function readSkyEntranceOffset(
   distance: number,
   timingAt = readGlobeEntranceTiming,
 ) {
-  const { elapsed, duration } = timingAt(hero, now)
+  const { elapsed, duration, returnTail } = timingAt(hero, now)
   if (elapsed === undefined) return 0
-  const progress = Math.min(1, elapsed / (duration + 600))
+  const progress = Math.min(1, elapsed / (duration + returnTail))
   return distance * (1 - progress) ** 4 * (1 + 4 * progress)
 }
 
@@ -53,8 +55,7 @@ export function createGlobeEntrance(globe: HTMLElement, hero: HTMLElement) {
     update(now: number, still: boolean) {
       if (finished) return 0
       const bounds = hero.getBoundingClientRect()
-      const { elapsed, duration, startDelay } = readGlobeEntranceTiming(hero, now)
-      const returnTail = 600
+      const { elapsed, duration, startDelay, returnTail } = readGlobeEntranceTiming(hero, now)
       if (
         still ||
         bounds.top < -80 ||
@@ -68,7 +69,7 @@ export function createGlobeEntrance(globe: HTMLElement, hero: HTMLElement) {
       }
       distance ??=
         (mobile ? 48 : Math.max(96, bounds.bottom - globe.getBoundingClientRect().top)) * 1.15
-      const offset = globeEntranceOffset(elapsed, distance, startDelay, duration)
+      const offset = globeEntranceOffset(elapsed, distance, startDelay, duration, returnTail)
       globe.style.setProperty('transform', `translateY(${offset.toFixed(3)}px)`)
       return offset
     },
