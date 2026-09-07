@@ -12,6 +12,12 @@ const recipes = {
   orbit: { shader: orbitShader },
   dot: { shader: dotShader },
   composite: { shader: globeCompositeShader, vertices: 3, depth: false },
+  cachedComposite: {
+    shader: globeCompositeShader,
+    vertices: 3,
+    depth: false,
+    blend: 'premultiplied',
+  },
   heatHaze: {
     shader: heatHazeShader,
     vertices: 288 * 6,
@@ -117,7 +123,7 @@ export function createGlobeRuntime() {
             const item = draw(gpu, state.recipes[kind])
             state.pool.set(kind, [item])
             await item.compile(
-              kind === 'composite'
+              kind === 'composite' || kind === 'cachedComposite'
                 ? signature
                 : { ...signature, sampleCount: 4, depth: 'depth24plus' },
             )

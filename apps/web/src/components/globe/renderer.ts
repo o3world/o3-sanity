@@ -67,7 +67,7 @@ export async function startSpatialGlobe(
       release()
     }
     dispose = releaseScene
-    const composite = lease.draw('composite')
+    const composite = lease.draw(footerStars ? 'cachedComposite' : 'composite')
     const colors = new Map<string, string>()
     const colorOf = (value: string) => {
       let color = colors.get(value)
@@ -134,6 +134,8 @@ export async function startSpatialGlobe(
     let dead = false
     let ready = false
     let firstFramePending = false
+    let cachedGeometry: number[] | undefined
+    let cachedSkyMode: 'moving' | 'paused' | 'still' | undefined
     const skyHandoff = heroStars ? createSkyHandoff() : undefined
     let visible = true
     let previous: number | undefined
@@ -160,8 +162,10 @@ export async function startSpatialGlobe(
     let lastPointer: { x: number; y: number } | undefined
     const reduced = matchMedia('(prefers-reduced-motion: reduce)')
     let forcedStill = new URLSearchParams(location.search).has('spatial-still')
-    const isStill = () => options.motion === 'still' || forcedStill || reduced.matches
-    const isPaused = () => !isStill() && !!options.spatialMotion?.getSnapshot()
+    const isMobileFooter = () => footerStars && innerWidth < 1024
+    const motionRestricted = () => options.motion === 'still' || forcedStill || reduced.matches
+    const isStill = () => isMobileFooter() || motionRestricted()
+    const isPaused = () => !motionRestricted() && !!options.spatialMotion?.getSnapshot()
     const sceneTime = (now: number) => options.spatialMotion?.now(now) ?? now
     let unsubscribeMotion: (() => void) | undefined
     const phases = arcs.map((arc) => arc.dots.map((dot) => dot.t))
@@ -246,6 +250,9 @@ export async function startSpatialGlobe(
         previous = undefined
         return
       }
+      const separateStars = isMobileFooter()
+      const movingSky = !motionRestricted()
+      const skyMode = movingSky ? (isPaused() ? 'paused' : 'moving') : 'still'
       const now = sceneTime(timestamp)
       if (isStill()) hero.dataset.spatialStill = 'true'
       else delete hero.dataset.spatialStill
@@ -256,7 +263,7 @@ export async function startSpatialGlobe(
       const sky = skyState
       const skyStep = isPaused() ? 0 : (sky?.step ?? dt)
       const skyMix = sky?.mix ?? 1
-      if (!isStill() && !isPaused()) {
+      if (movingSky && !isPaused()) {
         elapsed += dt
         const ease = 1 - 0.94 ** (dt * 30)
         sx += (mx - sx) * ease
@@ -331,6 +338,16 @@ export async function startSpatialGlobe(
         g.width / 680,
         options.electronOpacity,
       ]
+      // Scrolling moves the cached mobile footer with the page; only geometry changes need GPU work.
+      let redrawGlobe = true
+      if (isMobileFooter()) {
+        const nextGeometry = [h.width, h.height, ...geometry, ...target.size]
+        redrawGlobe = !cachedGeometry?.every(
+          (value, i) => Math.abs(value - nextGeometry[i]!) < 0.01,
+        )
+        if (!redrawGlobe && skyMode !== 'moving' && skyMode === cachedSkyMode) return
+        cachedGeometry = nextGeometry
+      } else cachedGeometry = undefined
       // The DOM translation only keeps the SVG bloom with the camera projection.
       // Geometry follows the text; the sky starts its independent descent with the nav.
       const camera = [0, -cameraOffset / geometry[2]!, 0, 0]
@@ -352,15 +369,6 @@ export async function startSpatialGlobe(
         dot: [0, 0, 0, Number(options.preset === 'hero')],
         dotGround,
       }
-      heatHaze?.set({ p: params })
-      rim.set({
-        p: {
-          ...params,
-          u: [0, 0, 0, 1.43],
-          color: [...rimColor, options.preset === 'line' ? 0.2415 : 0.575],
-          dot: [0, 0, 2, params.dot[3]],
-        },
-      })
       const targetSkyRise =
         Math.min(heroBounds.height, Math.max(0, -heroBounds.top)) *
         (footerStars ? 0.0075 : options.quietStars ? 0 : 0.015)
@@ -369,7 +377,7 @@ export async function startSpatialGlobe(
         : skyRise + (targetSkyRise * skyMix - skyRise) * (1 - 0.94 ** (skyStep * 30))
       const skyViewport = [h.width, h.height, skyRise, Number(options.quietStars)]
       const skyMotion = [
-        isStill() ? 0 : (sky?.elapsed ?? elapsed),
+        movingSky ? (sky?.elapsed ?? elapsed) : 0,
         -sx * 0.045 * skyResponse * skyMix,
         sy * 0.032 * skyResponse * skyMix,
         Number(footerStars),
@@ -380,7 +388,7 @@ export async function startSpatialGlobe(
           camera: skyCamera,
           motion: skyMotion,
           globe: geometry,
-          rotation: isStill() ? [0, 0, 0, 1] : rotation,
+          rotation: movingSky ? rotation : [0, 0, 0, 1],
         },
       })
       shootingStar?.set({
@@ -391,51 +399,68 @@ export async function startSpatialGlobe(
           motion: [...skyMotion.slice(0, 3), Number(previewShootingStar)],
         },
       })
-      arcs.forEach((arc, i) => {
-        // Keep the export's slow colored-orbit breathing.
-        const phase = Math.max(0, elapsed - arc.i * 1.1) / ((4.2 + arc.i * 0.7) / 0.3)
-        const pulse = arc.colored && !isStill() ? 0.725 + 0.275 * Math.cos(phase * Math.PI * 2) : 1
-        const shared = {
-          ...params,
-          u: [...arc.u, arc.w],
-          v: [...arc.v, arc.op],
-        }
-        const ringParams = {
+      if (redrawGlobe) {
+        heatHaze?.set({ p: params })
+        rim.set({
           p: {
-            ...shared,
-            color: [...rgb(arc.col), arc.op * pulse],
+            ...params,
+            u: [0, 0, 0, 1.43],
+            color: [...rimColor, options.preset === 'line' ? 0.2415 : 0.575],
+            dot: [0, 0, 2, params.dot[3]],
           },
-        }
-        rings[i]!.set(ringParams)
-        arc.dots.forEach((dot, j) => {
-          const dotParams = {
+        })
+        arcs.forEach((arc, i) => {
+          // Keep the export's slow colored-orbit breathing.
+          const phase = Math.max(0, elapsed - arc.i * 1.1) / ((4.2 + arc.i * 0.7) / 0.3)
+          const pulse =
+            arc.colored && !isStill() ? 0.725 + 0.275 * Math.cos(phase * Math.PI * 2) : 1
+          const shared = {
+            ...params,
+            u: [...arc.u, arc.w],
+            v: [...arc.v, arc.op],
+          }
+          const ringParams = {
             p: {
               ...shared,
-              color: [...rgb(dot.col), pulse],
-              dot: [
-                isStill() ? dot.t : phases[i]![j],
-                dot.r,
-                Number(dot.glow),
-                Number(options.preset === 'hero'),
-              ],
+              color: [...rgb(arc.col), arc.op * pulse],
             },
           }
-          electrons[i]![j]!.set(dotParams)
+          rings[i]!.set(ringParams)
+          arc.dots.forEach((dot, j) => {
+            const dotParams = {
+              p: {
+                ...shared,
+                color: [...rgb(dot.col), pulse],
+                dot: [
+                  isStill() ? dot.t : phases[i]![j],
+                  dot.r,
+                  Number(dot.glow),
+                  Number(options.preset === 'hero'),
+                ],
+              },
+            }
+            electrons[i]![j]!.set(dotParams)
+          })
         })
-      })
+      }
       try {
         const submitted = frame(gpu, (f) => {
-          scene.resize(target.size)
-          f.pass({ target: scene, clear: [0, 0, 0, 0] }, (pass) => {
-            if (stars) {
-              pass.draw(stars)
-              if (shootingStar && !isStill()) pass.draw(shootingStar)
-            }
-            if (heatHaze && !isStill()) pass.draw(heatHaze)
-            drawGlobeGeometry(pass, { rings, electrons, rim })
-          })
+          if (redrawGlobe) {
+            scene.resize(target.size)
+            f.pass({ target: scene, clear: [0, 0, 0, 0] }, (pass) => {
+              if (stars && !separateStars) {
+                pass.draw(stars)
+                if (shootingStar && !isStill()) pass.draw(shootingStar)
+              }
+              if (heatHaze && !isStill()) pass.draw(heatHaze)
+              drawGlobeGeometry(pass, { rings, electrons, rim })
+            })
+          }
           composite.set({ scene: scene.color })
-          f.pass({ target, clear: [0, 0, 0, 0] }, (pass) => pass.draw(composite))
+          f.pass({ target, clear: [0, 0, 0, 0] }, (pass) => {
+            if (separateStars && stars) pass.draw(stars)
+            pass.draw(composite)
+          })
         })
         if (!ready && !firstFramePending) {
           firstFramePending = true
@@ -453,8 +478,9 @@ export async function startSpatialGlobe(
             })
             .catch(fail)
         }
+        cachedSkyMode = skyMode
         canvas.dataset.frame = String(Math.round(elapsed * 1000))
-        if (!isStill() && !isPaused()) raf = requestAnimationFrame(tick)
+        if (movingSky && !isPaused()) raf = requestAnimationFrame(tick)
       } catch (error) {
         fail(error)
       }

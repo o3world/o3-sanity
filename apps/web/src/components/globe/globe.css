@@ -79,3 +79,10 @@
 [data-orbital-gpu][data-orbital-preset='line'] > svg:last-of-type > circle:first-of-type {
   visibility: hidden;
 }
+
+/* Keep the footer bloom and fallback pulse aligned with its still GPU frame. */
+.cta-band[data-spatial-still] .cta-lag,
+.cta-band[data-spatial-still] [data-orbital-preset],
+.cta-band[data-spatial-still] [data-orbital-preset] * {
+  animation: none !important;
+}
