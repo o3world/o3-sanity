@@ -44,6 +44,8 @@ test('a stationary pointer can navigate before the page fade finishes', async ({
     'the uninterrupted desktop fade is the stationary-mouse case',
   )
   await page.goto('/')
+  // Position the stationary mouse after the direct-load nav rise has finished.
+  await expect(page.locator('html')).not.toHaveAttribute('data-nav-entrance')
   const insights = primary(page).getByRole('link', { name: 'Insights', exact: true })
   const box = (await insights.boundingBox())!
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2)

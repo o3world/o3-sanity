@@ -159,9 +159,9 @@ export function InsightIndexView({
              * drew.
              *
              * The scroll clips at the 1248 column rather than bleeding past
-             * the gutter. No `tabIndex` either: unlike the card tracks this one
-             * is made of links, so tabbing through the chips scrolls them into
-             * view by itself.
+             * the gutter. The links provide keyboard access and scroll into view
+             * as they receive focus. Exclude the scroll container itself from the
+             * tab order so Firefox does not add a redundant stop before All.
              *
              * A chip lands on `#feed`, the same anchor the pager follows: the
              * band above it is the same authored hero either way, so what the
@@ -171,6 +171,7 @@ export function InsightIndexView({
              */
             <nav
               aria-label="Filter by category"
+              tabIndex={-1}
               className="flex items-center gap-2.5 overflow-x-auto [scrollbar-width:none] lg:flex-wrap lg:overflow-x-visible [&::-webkit-scrollbar]:hidden"
             >
               <FilterChip asChild selected={!category} className="shrink-0">

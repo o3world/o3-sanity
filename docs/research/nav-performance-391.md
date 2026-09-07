@@ -198,11 +198,41 @@ the original Accessibility/Design/Customer Experience reproduction records no pa
 arrival animations after the fix. All 47 verify tasks, rendering assertions and the
 11 feed-path unit tests pass. Parallel defect and Ponytail reviews found no defects.
 
-The broader selection is not fully green: Firefox mobile's existing keyboard test
-fails at the Tab from the feed heading to All in both motion modes, identically on
-the previous committed build. The existing stationary-pointer test intermittently
-fails in Chromium/WebKit because its pointer-proof field is absent (four of six
-isolated repetitions passed). Its cause remains unresolved and is not attributed
-to this guard: Home to About to Insights never satisfies the feed-to-feed condition.
-Neither existing assertion was changed. Local logs are retained as
-`test_output/nav-performance/filter-*.log`.
+That review exposed two further failures: Firefox mobile added an unexpected Tab
+stop after pagination, and the stationary-pointer test intermittently recorded no
+pointer proof. Both are resolved below. The original failures remain in the local
+`test_output/nav-performance/filter-*.log` evidence.
+
+## Keyboard focus and stationary-pointer checks
+
+Firefox's first Tab after the pagination heading focused the horizontally
+scrollable filter `nav`, and only its second Tab reached All. Explicitly excluding
+the container with `tabIndex={-1}` removes that redundant stop; all child links
+remain in the tab order. The strengthened test traverses the entire filter row.
+That exposed a second issue: native focus could leave the last chip only 18%
+visible. The existing client feed now scrolls focus-visible category links into
+view using nearest alignment. The visibility assertion allows fractional-pixel
+rounding at the scroll boundary (99% visibility; the measured result is above
+99.6%). Its strict All-focus assertion remains unchanged.
+
+The pointer failure came from stale coordinates. Ten instrumented cold loads
+placed the pointer over the Insights link while its nav entrance was still moving:
+the link's top was about 78.8 px when measured and 60.98 px after arrival. The click
+at about 89.8 px therefore hit the parent container. The test now waits for the
+existing nav-entrance completion signal before positioning the stationary mouse.
+It still navigates by keyboard and clicks without mouse movement during the next
+page's active fade, retaining the trusted-event, target and opacity assertions.
+The helper records a null target for a miss and explicitly checks for recorded
+proof, so a future miss reports the actual assertion instead of a JSON parse error.
+
+The final browser matrix passes all 27 applicable checks across Chromium, WebKit
+and Firefox at both viewports and motion preferences. Nine stationary-desktop
+cases are intentionally skipped on mobile or with reduced motion. All 47 verify
+tasks and the build rendering assertions pass. Parallel defect and Ponytail
+reviews found no defects. The nav animation itself is unchanged.
+
+The formerly intermittent pointer test also passes 30 consecutive repetitions:
+ten each in Chromium, WebKit and Firefox. Final logs and the instrumented baseline
+are retained under `test_output/nav-performance/input-*.log`; the diagnostic
+script is `input-diagnose.cjs`. These remain local browser results, not physical-
+device or deployment verification.

@@ -13,6 +13,13 @@ test('keyboard pagination moves focus to the refreshed feed', async ({ page }, i
       .getByRole('navigation', { name: 'Filter by category' })
       .getByRole('link', { name: 'All', exact: true }),
   ).toBeFocused()
+  const chips = page.getByRole('navigation', { name: 'Filter by category' }).getByRole('link')
+  for (let index = 1; index < (await chips.count()); index++) {
+    await page.keyboard.press(info.project.use.browserName === 'webkit' ? 'Alt+Tab' : 'Tab')
+  }
+  await expect(chips.last()).toBeFocused()
+  // Allow subpixel rounding at the scroll boundary across browser engines.
+  await expect(chips.last()).toBeInViewport({ ratio: 0.99 })
 })
 
 test('feed URL changes leave the retained page foregrounds alone', async ({ page }, info) => {
