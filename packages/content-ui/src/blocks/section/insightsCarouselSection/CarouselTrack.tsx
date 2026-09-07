@@ -1,9 +1,10 @@
 'use client'
 
-import type { ReactNode } from 'react'
+import { Fragment, type ReactNode } from 'react'
 
 import {
   cn,
+  RevealSequence,
   Carousel,
   CarouselContent,
   CarouselItem,
@@ -14,6 +15,7 @@ import {
 
 export interface CarouselTrackProps {
   heading?: string | null
+  sequence?: boolean
   /**
    * The band header's `data-sanity`, built by the section (#107). A
    * pre-built string rather than a location: this shell is also used by the
@@ -96,45 +98,50 @@ export function CarouselTrack({
   heading,
   headingAttr,
   headingSize = 'xl',
+  sequence = false,
   cards,
 }: CarouselTrackProps) {
+  const Content = sequence ? RevealSequence : Fragment
   return (
     <Carousel opts={{ align: 'start' }}>
-      {/* One row at 1440 with the buttons pushed to the far edge, stacked at
+      <Content>
+        {/* One row at 1440 with the buttons pushed to the far edge, stacked at
           402 with the frame's 32px gap between subhead and buttons. 48px to
           the row either way. */}
-      <div
-        data-sanity={headingAttr}
-        className="mb-12 flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between"
-      >
-        {heading ? (
-          <h2
-            className={cn(
-              'text-display-xl font-display text-balance',
-              headingSize === 'hero' && 'lg:text-hero',
-            )}
-          >
-            {heading}
-          </h2>
-        ) : (
-          <span />
-        )}
-        <Controls />
-      </div>
+        <div
+          data-reveal-step={sequence ? 'heading' : undefined}
+          data-sanity={headingAttr}
+          className="mb-12 flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between"
+        >
+          {heading ? (
+            <h2
+              className={cn(
+                'text-display-xl font-display text-balance',
+                headingSize === 'hero' && 'lg:text-hero',
+              )}
+            >
+              {heading}
+            </h2>
+          ) : (
+            <span />
+          )}
+          <Controls />
+        </div>
 
-      {/* The wrapper is what widens Embla's viewport: `CarouselContent` clips
+        {/* The wrapper is what widens Embla's viewport: `CarouselContent` clips
           on its own parent's width, so the bleed belongs one level above it
           rather than on the track. */}
-      <div className={BLEED_VIEWPORT_CLASS}>
-        {/* The frame's 32px gap at both widths; each step is one card. */}
-        <CarouselContent className="gap-8">
-          {cards.map((card, index) => (
-            <CarouselItem key={index} className="sm:basis-[394px]">
-              {card}
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </div>
+        <div data-reveal-step={sequence ? 'cards' : undefined} className={BLEED_VIEWPORT_CLASS}>
+          {/* The frame's 32px gap at both widths; each step is one card. */}
+          <CarouselContent className="gap-8">
+            {cards.map((card, index) => (
+              <CarouselItem key={index} className="sm:basis-[394px]">
+                {card}
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </div>
+      </Content>
     </Carousel>
   )
 }

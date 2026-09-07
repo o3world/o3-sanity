@@ -97,7 +97,16 @@ export const BASE_CLIENT_COMPONENTS = {
  * holding one until an app says what it is.
  */
 function LayoutSectionWithBaseRoster(props: SectionProps<'layoutSection'>) {
-  return <LayoutSection {...props} baseComponents={BASE_CLIENT_COMPONENTS} />
+  return (
+    <LayoutSection
+      {...props}
+      baseComponents={BASE_CLIENT_COMPONENTS}
+      sequence={
+        props.loc?.type !== 'caseStudy' &&
+        Boolean(props.heading || props.eyebrow || props.subheading)
+      }
+    />
+  )
 }
 
 /**

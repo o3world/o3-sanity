@@ -23,9 +23,14 @@ export function RevealSequence({
     const preference = matchMedia('(prefers-reduced-motion: reduce)')
     if (!root || preference.matches || document.hidden || !('IntersectionObserver' in window))
       return
-    if (!root.getClientRects().length || root.getBoundingClientRect().top < innerHeight) return
+    if (!root.getClientRects().length) return
+    if (boundaries === 'group' && root.getBoundingClientRect().top < innerHeight) return
     const items = [...root.querySelectorAll<HTMLElement>('[data-reveal-step]')].filter(
-      (item) => item.closest('[data-reveal-sequence]') === root,
+      (item) =>
+        item.closest('[data-reveal-sequence]') === root &&
+        (boundaries !== 'items' ||
+          (item.closest('[data-reveal-boundary]') ?? item).getBoundingClientRect().top >=
+            innerHeight),
     )
     if (!items.length) return
     const boundaryOf = (item: HTMLElement) =>
@@ -47,6 +52,7 @@ export function RevealSequence({
       document.removeEventListener('visibilitychange', visibility)
       preference.removeEventListener('change', motion)
       root!.removeEventListener('focusin', finish)
+      root!.removeEventListener('pointerdown', finish, true)
       root!.removeEventListener('animationend', end)
       for (const item of items) {
         delete item.dataset.sequencePhase
@@ -119,6 +125,7 @@ export function RevealSequence({
     document.addEventListener('visibilitychange', visibility)
     preference.addEventListener('change', motion)
     root.addEventListener('focusin', finish)
+    root.addEventListener('pointerdown', finish, true)
     root.addEventListener('animationend', end)
     return finish
   }, [cadence, boundaries])

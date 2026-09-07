@@ -92,7 +92,7 @@ export const Mobile: Story = {
 /** Insight detail retains the smaller heading through the track's default. */
 export const KeepReading: Story = {
   args: seededSectionArgs('index', 'insightsCarouselSection'),
-  render: () => <CarouselTrack heading="Keep reading." cards={[]} />,
+  render: () => <CarouselTrack sequence heading="Keep reading." cards={[]} />,
   globals: { viewport: { value: 'desktop' } },
   play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { level: 2 })

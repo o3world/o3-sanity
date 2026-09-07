@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 
-import { DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
+import { DisplayHeading, Eyebrow, RevealSequence, SectionShell } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { stegaClean } from '@sanity/client/stega'
 
@@ -21,7 +21,8 @@ import { resolveSurface } from '../../surface'
  * there is no shared renderer behind it to fall back to. Whatever the app does
  * not name still comes from `BASE_BLOCK_COMPONENTS`.
  */
-type LayoutSectionProps = SectionProps<'layoutSection'> & BaseComponentsSlot
+type LayoutSectionProps = SectionProps<'layoutSection'> &
+  BaseComponentsSlot & { sequence?: boolean }
 
 const COLUMN_CLASSES: Record<number, string> = {
   1: 'grid-cols-1',
@@ -86,6 +87,7 @@ export function LayoutSection({
   surface,
   width,
   baseComponents,
+  sequence = false,
 }: LayoutSectionProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const components: Record<string, ComponentType<any>> = {
@@ -107,9 +109,10 @@ export function LayoutSection({
    * full-width header strip to draw one in — the band's header IS the first
    * column's first line.
    */
+  const Content = sequence ? RevealSequence : 'div'
   const header =
     eyebrow || heading || subheading ? (
-      <header className="flex flex-col gap-6">
+      <header data-reveal-step={sequence ? 'heading' : undefined} className="flex flex-col gap-6">
         {eyebrow ? (
           <Eyebrow size="lg" tone="brand">
             {eyebrow}
@@ -142,7 +145,18 @@ export function LayoutSection({
     if (!Component) return null
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { _type, ...props } = item
-    return <Component key={item._key} {...props} slotSizes={slotSizes} />
+    const content = <Component key={item._key} {...props} slotSizes={slotSizes} />
+    return sequence ? (
+      <div
+        key={item._key}
+        data-reveal-step="content"
+        className={bleeding && item === entries.at(-1) ? 'h-full' : undefined}
+      >
+        {content}
+      </div>
+    ) : (
+      content
+    )
   }
   const resolved = resolveSurface(surface, 'layoutSection')
   // The band's measure (`2960:6885`). `stegaClean` for the same reason
@@ -174,7 +188,10 @@ export function LayoutSection({
         surface={resolved}
         className="right-[-28%] top-0 w-[90vw] opacity-25"
       />
-      <div className="flex flex-col gap-12">
+      <Content
+        {...(sequence ? { boundaries: 'items' as const } : {})}
+        className="flex flex-col gap-12"
+      >
         {/*
          * The three-part band header the interior frames use everywhere
          * (`1924:5344`): a brand-red eyebrow, the 48px heading 24px under it
@@ -222,7 +239,7 @@ export function LayoutSection({
             entries.map((item) => renderItem(item, LAYOUT_COLUMN[columnCount]))
           )}
         </div>
-      </div>
+      </Content>
     </SectionShell>
   )
 }
