@@ -6,7 +6,7 @@ import { CaseStudyMediaSection, CaseStudyScreenGridSection } from './caseStudyMo
 // the browser bundle. (Every o3 block is currently client-safe — reference
 // data is expanded at query time, not fetched by renderers — so unlike
 // vtx-web there is no server-only exclusion set yet.)
-import type { ComponentType } from 'react'
+import type { ComponentProps, ComponentType } from 'react'
 
 import type { BaseBlockName, BrandSectionBlockName } from '@o3/sanity/schemas/registry'
 import {
@@ -27,6 +27,8 @@ import { StatGroup } from '@/components/blocks/StatGroup'
 
 import { StatsSection } from './statsSection/StatsSection'
 import { CaseStudyCard } from '@/components/cards/CaseStudyCard'
+import { WorkMembranePrototype } from '@/components/prototypes/WorkMembranePrototype'
+import { WorkStarfieldPrototype } from '@/components/prototypes/WorkStarfieldPrototype'
 
 // The renderers themselves are shared (@o3/content-ui); the binding below is
 // this app's. Re-pointing one line here is what "O3XO adapts a block" costs.
@@ -119,11 +121,29 @@ export const CARD_COMPONENTS = bindingsToRecord(CARD_BINDINGS) satisfies AppFirs
  * heading row and washes are the shared renderer's; only the card is O3's.
  */
 function CaseShowcaseSectionWithCard(props: SectionProps<'caseShowcaseSection'>) {
-  return <CaseShowcaseSection {...props} cardComponents={CARD_COMPONENTS} />
+  const study =
+    process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_WORK_MEMBRANE_STUDY === '1'
+  const section = (
+    <CaseShowcaseSection
+      {...props}
+      cardComponents={
+        study ? { ...CARD_COMPONENTS, caseStudy: OrganicCaseCardStudy } : CARD_COMPONENTS
+      }
+    />
+  )
+  return study ? <WorkStarfieldPrototype>{section}</WorkStarfieldPrototype> : section
 }
 
 function InsightsCarouselSectionWithHeading(props: SectionProps<'insightsCarouselSection'>) {
   return <InsightsCarouselSection {...props} headingSize="hero" />
+}
+
+function OrganicCaseCardStudy(props: ComponentProps<typeof CaseStudyCard>) {
+  return (
+    <WorkMembranePrototype>
+      <CaseStudyCard {...props} />
+    </WorkMembranePrototype>
+  )
 }
 
 /**

@@ -1,0 +1,196 @@
+/* Both variants keep the same server markup; the early query gate chooses its presentation. */
+.work-sky-study,
+.work-organic-card-study {
+  display: contents;
+}
+
+.work-sky-study-layer {
+  display: none;
+}
+
+.work-organic-card-clip {
+  position: absolute;
+  pointer-events: none;
+}
+
+@keyframes work-card-reveal {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  15%,
+  85% {
+    opacity: 1;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html[data-work-study='on']:not([data-spatial-paused], [data-spatial-still]) {
+      div:has(> .work-organic-card-study) {
+        view-timeline: --work-card-reveal block;
+      }
+
+      .work-organic-card-study {
+        animation: work-card-reveal 1s ease-in-out both;
+        animation-timeline: --work-card-reveal;
+      }
+
+      .work-organic-card-study:has(> a:focus-visible) {
+        animation: none;
+      }
+    }
+  }
+}
+
+html[data-work-study='on'] {
+  @media (max-width: 1023px) {
+    .work-sky-study > section > div > div:has(> h2) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .work-sky-study > section > div > div:has(> h2) > a {
+      flex-shrink: 0;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .work-sky-study > section > div > div:has(> h2) {
+      gap: 12px;
+    }
+
+    .work-sky-study > section > div > div > h2 {
+      font-size: 28px;
+    }
+
+    .work-sky-study > section > div > div:has(> h2) > a {
+      gap: 8px;
+      padding-inline: 12px;
+      font-size: 14px;
+    }
+  }
+
+  .work-organic-card-study > a {
+    --gradient-card-scrim: linear-gradient(
+      90deg,
+      rgba(3, 3, 3, 0.8) 0%,
+      rgba(3, 3, 3, 0.78) 16%,
+      rgba(3, 3, 3, 0.72) 32%,
+      rgba(3, 3, 3, 0.62) 48%,
+      rgba(3, 3, 3, 0.48) 64%,
+      rgba(3, 3, 3, 0.3) 80%,
+      rgba(3, 3, 3, 0.12) 100%
+    );
+    --gradient-card-scrim-stacked: linear-gradient(
+      180deg,
+      rgba(3, 3, 3, 0.62) 0%,
+      rgba(3, 3, 3, 0.52) 25%,
+      rgba(3, 3, 3, 0.57) 50%,
+      rgba(3, 3, 3, 0.72) 75%,
+      rgba(3, 3, 3, 0.84) 100%
+    );
+  }
+
+  .work-sky-study {
+    display: block;
+    position: relative;
+    isolation: isolate;
+    background: black;
+  }
+
+  .work-sky-study > section {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+  }
+
+  .work-sky-study-layer {
+    display: block;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .work-sky-study-layer canvas {
+    position: sticky;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 100svh;
+    opacity: 0;
+    mask-image: linear-gradient(transparent, black 16%, black 84%, transparent);
+  }
+}
+
+html:is([data-work-study='on'], [data-work-study='ambient']) {
+  .work-sky-study > section > div > div:has(> div > .work-organic-card-study) {
+    gap: 112px;
+  }
+
+  div:has(> .work-organic-card-study) {
+    position: relative;
+    top: auto;
+    background: transparent;
+    opacity: 1 !important;
+  }
+
+  .work-organic-card-study {
+    --work-card-bleed: min(24px, calc(var(--spacing-gutter) / 2));
+    display: block;
+    position: relative;
+    width: 100%;
+    isolation: isolate;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+
+  .work-organic-card-study > a {
+    border-radius: 0;
+    overflow: visible;
+    padding: 88px 80px;
+    min-height: 650px;
+    user-select: text;
+    -webkit-user-drag: none;
+  }
+
+  .work-organic-card-study > a > .absolute {
+    inset: -8px calc(-1 * var(--work-card-bleed));
+    clip-path: var(--work-card-clip);
+    pointer-events: none;
+  }
+
+  .work-organic-card-study > a > .absolute > .transition-transform {
+    scale: none;
+    transition: none;
+  }
+
+  .work-organic-card-study > a > :not(.absolute) {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .work-organic-card-study img {
+    -webkit-user-drag: none;
+  }
+
+  .work-organic-card-study:has(> a:focus-visible) {
+    outline: 2px solid white;
+    outline-offset: 4px;
+    border-radius: 48px;
+  }
+
+  @media (max-width: 767px) {
+    .work-sky-study > section > div > div:has(> div > .work-organic-card-study) {
+      gap: 80px;
+    }
+
+    .work-organic-card-study > a {
+      padding: 76px 24px;
+      min-height: 600px;
+    }
+  }
+}

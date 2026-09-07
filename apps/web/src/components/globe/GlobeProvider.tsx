@@ -18,6 +18,12 @@ type Engine = {
 const GlobeRuntimeContext = createContext<Engine | null>(null)
 const GlobeFailureContext = createContext(false)
 
+export function useGlobeRuntime() {
+  const failed = useContext(GlobeFailureContext)
+  const engine = useContext(GlobeRuntimeContext)
+  return failed ? undefined : engine?.runtime
+}
+
 export function GlobeRenderer({
   hostRef,
   arcs,
