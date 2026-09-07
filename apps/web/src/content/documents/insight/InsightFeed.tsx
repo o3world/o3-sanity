@@ -62,6 +62,12 @@ export function InsightFeed({
     <div
       ref={feedRef}
       onClickCapture={follow}
+      onFocusCapture={(event) => {
+        const target = event.target
+        if (target.matches('[aria-label="Filter by category"] a:focus-visible')) {
+          target.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' })
+        }
+      }}
       data-insight-feed
       data-catalog-count={catalog.length}
     >

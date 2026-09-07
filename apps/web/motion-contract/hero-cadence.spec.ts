@@ -165,3 +165,17 @@ test('Home entered from an interior document does not start a spatial entrance',
     await expect(part).toHaveCSS('opacity', '1')
   }
 })
+
+test('Home reports a real largest-contentful paint after its entrance', async ({ page }, info) => {
+  test.skip(!info.project.name.startsWith('chromium-'), 'LCP observation is a Chromium API')
+  await page.addInitScript(`
+    window.__heroLcp = 0;
+    new PerformanceObserver(list => {
+      for (const entry of list.getEntries()) {
+        if (entry.element?.closest('.hero-lead')) window.__heroLcp = entry.startTime;
+      }
+    }).observe({ type: 'largest-contentful-paint', buffered: true });
+  `)
+  await page.goto('/')
+  await expect.poll(() => page.evaluate('window.__heroLcp')).toBeGreaterThan(0)
+})

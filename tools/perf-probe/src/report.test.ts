@@ -25,6 +25,21 @@ describe('performance report', () => {
     expect(report).toContain('Stable routes: 4/4')
   })
 
+  it('marks missing LCP unavailable and fails stability while reporting INP', () => {
+    const missing: RouteSamples = {
+      route: '/',
+      samples: [
+        { lcp: null, cls: 0.01, inp: 64, tbt: 30 },
+        { lcp: null, cls: 0.01, inp: 72, tbt: 40 },
+      ],
+    }
+    expect(stable(missing)).toBe(false)
+    const report = formatReport([missing], 'http://127.0.0.1:3000')
+    expect(report).toContain('unavailable / unavailable')
+    expect(report).toContain('64 / 72')
+    expect(report).toContain('Stable routes: 0/1')
+  })
+
   it('rejects samples outside any metric tolerance', () => {
     const unstable: RouteSamples = {
       route: '/',

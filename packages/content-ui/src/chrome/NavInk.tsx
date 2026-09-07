@@ -102,18 +102,31 @@ function declaredGround(element: Element): boolean | null {
  * picture, and a strip of bar is not a strip of picture. The walk continues
  * there, to whatever the element paints behind its own background image.
  */
-function groundOf(element: Element, sample: Box): boolean | null {
+function groundOf(
+  element: Element,
+  sample: Box,
+  grounds: Map<Element, boolean | null>,
+): boolean | null {
+  const cached = grounds.get(element)
+  if (cached !== undefined) return cached
   const declared = declaredGround(element)
-  if (declared !== null) return declared
+  if (declared !== null) {
+    grounds.set(element, declared)
+    return declared
+  }
 
   const style = getComputedStyle(element)
+  let containedPicture = false
   if (pictureUri(style.backgroundImage)) {
-    // `cover` fills the box, so the strip is on the picture wherever it falls.
-    if (style.backgroundSize !== 'contain') return false
-    const [x, y] = style.backgroundPosition.split(' ')
     const natural = intrinsicSize(element)
+    if (style.backgroundSize !== 'contain' || !natural) {
+      grounds.set(element, false)
+      return false
+    }
+    // A letterbox and the picture inside it can answer different columns.
+    containedPicture = true
+    const [x, y] = style.backgroundPosition.split(' ')
     if (
-      !natural ||
       coversSample(sample, element.getBoundingClientRect(), natural, {
         x: x ?? '50%',
         y: y ?? x ?? '50%',
@@ -123,11 +136,14 @@ function groundOf(element: Element, sample: Box): boolean | null {
     }
   }
 
+  let ground: boolean | null = null
   const channels = style.backgroundColor.match(/[\d.]+/g)
-  if (!channels || channels.length < 3) return null
-  const [r, g, b, alpha] = channels.map(Number) as [number, number, number, number | undefined]
-  if ((alpha ?? 1) < OPAQUE_ALPHA) return null
-  return luminance(r, g, b) > LIGHT_LUMINANCE
+  if (channels && channels.length >= 3) {
+    const [r, g, b, alpha] = channels.map(Number) as [number, number, number, number | undefined]
+    if ((alpha ?? 1) >= OPAQUE_ALPHA) ground = luminance(r, g, b) > LIGHT_LUMINANCE
+  }
+  if (!containedPicture) grounds.set(element, ground)
+  return ground
 }
 
 /**
@@ -149,7 +165,7 @@ function intrinsicSize(element: Element): { width: number; height: number } | nu
  * The nav's ink flip.
  *
  * The bar is pinned, so it spends the page crossing bands: white copy over the
- * hero, unreadable two sections later over `bone`. On every scroll frame this
+ * hero, unreadable two sections later over `bone`. During scrolling this
  * asks one question — what is actually underneath the bar right now? — and
  * answers it by toggling `data-ink="dark"` on the header. Nothing else about
  * the bar is touched from JS; the attribute is the whole API, and the
@@ -210,8 +226,9 @@ function intrinsicSize(element: Element): { width: number; height: number } | nu
  * - **A restore from the back/forward cache.** The page comes back with its
  *   effects never re-run, so `pageshow` is the only signal there is.
  *
- * Everything funnels through `schedule`, so however many of them fire at once
- * the bar is still sampled at most once per frame.
+ * Scroll and DOM mutation samples run once per three animation frames and read
+ * the final ground. Resize and history restores bypass that delay;
+ * route commits also settle synchronously through `settleNavInk`.
  *
  * ── A PAGE MID VIEW TRANSITION CANNOT BE HIT-TESTED ────────────────────────
  *
@@ -235,6 +252,8 @@ function intrinsicSize(element: Element): { width: number; height: number } | nu
  * time, to the hit-test that runs once the capture is over.
  */
 function sampleNavInk(header: HTMLElement): boolean | null {
+  // Columns share ground answers only within this sample; reflow and CSS stay live.
+  const grounds = new Map<Element, boolean | null>()
   /**
    * Is the document being captured for a view transition right now?
    *
@@ -292,7 +311,7 @@ function sampleNavInk(header: HTMLElement): boolean | null {
   const painted = (x: number, y: number, strip: Box): boolean => {
     for (const element of document.elementsFromPoint(x, y)) {
       if (header.contains(element)) continue
-      const answer = groundOf(element, strip)
+      const answer = groundOf(element, strip, grounds)
       // A veil, a gradient, an element with no ground of its own: keep
       // walking to what it is over.
       if (answer === null) continue
@@ -342,12 +361,23 @@ export function settleNavInk(header: HTMLElement): void {
 
 export function watchNavInk(header: HTMLElement): () => void {
   let frame = 0
+  let pendingFrames = 0
   const schedule = () => {
+    pendingFrames = 0
+    if (!frame) frame = requestAnimationFrame(sample)
+  }
+  const scheduleBatched = () => {
     if (frame) return
+    pendingFrames = 2
     frame = requestAnimationFrame(sample)
   }
   const sample = () => {
     frame = 0
+    if (pendingFrames > 0) {
+      pendingFrames--
+      frame = requestAnimationFrame(sample)
+      return
+    }
     // An unreadable capture is early, not wrong; retry once it can be read.
     if (sampleNavInk(header) === null) schedule()
   }
@@ -355,21 +385,25 @@ export function watchNavInk(header: HTMLElement): () => void {
   sample()
   schedule()
 
-  window.addEventListener('scroll', schedule, { passive: true })
+  window.addEventListener('scroll', scheduleBatched, { passive: true })
   window.addEventListener('resize', schedule, { passive: true })
   window.addEventListener('pageshow', schedule)
 
   const reflow = new ResizeObserver(schedule)
   reflow.observe(document.documentElement)
+  reflow.observe(header.querySelector('nav') ?? header)
 
   // Attributes are deliberately not watched: `sample` writes one to this very
   // header, and the whole ink flip is styled off it.
-  const swap = new MutationObserver(schedule)
+  const swap = new MutationObserver((records) => {
+    // Chrome cannot replace the ground; changes to the pill's size are observed above.
+    if (records.some((record) => !header.contains(record.target))) scheduleBatched()
+  })
   swap.observe(document.body, { childList: true, subtree: true })
 
   return () => {
     if (frame) cancelAnimationFrame(frame)
-    window.removeEventListener('scroll', schedule)
+    window.removeEventListener('scroll', scheduleBatched)
     window.removeEventListener('resize', schedule)
     window.removeEventListener('pageshow', schedule)
     reflow.disconnect()

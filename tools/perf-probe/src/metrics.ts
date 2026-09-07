@@ -112,14 +112,13 @@ export function loadMetrics(snapshot: LoadSnapshot): Omit<Metrics, 'inp'> | null
   if (snapshot.errors.length > 0) {
     throw new Error(`performance observer failure: ${snapshot.errors.join(', ')}`)
   }
-  if (snapshot.lcp <= 0) throw new Error('LCP produced no browser entry')
   if (snapshot.fcp <= 0) throw new Error('FCP produced no browser entry for the TBT boundary')
 
   const tti = timeToInteractive(snapshot)
   if (tti === null) return null
 
   return {
-    lcp: snapshot.lcp,
+    lcp: snapshot.lcp > 0 ? snapshot.lcp : null,
     cls: cumulativeLayoutShift(snapshot.shifts),
     tbt: totalBlockingTime(snapshot.longTasks, snapshot.fcp, tti),
   }

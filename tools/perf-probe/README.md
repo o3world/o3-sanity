@@ -23,3 +23,8 @@ pnpm perf -- --url https://your-production-alias.example
 The probe creates a fresh browser context for each sample, blocks service workers, and applies one fixed mobile viewport, CPU slowdown, latency, and bandwidth profile before navigation. Each route gets two consecutive cold loads. LCP comes from the browser's paint entry. CLS uses the largest layout-shift session window. TBT sums the blocking portion of long tasks between FCP and the first standard five-second TTI quiet window (no long tasks and no more than two concurrent resource requests). INP is the longest Event Timing duration produced by opening the site's mobile menu after the load metrics are captured.
 
 The report prints the applied profile, both samples, and the tolerance used to check their agreement. An unstable route exits nonzero so a local run cannot be mistaken for a baseline, but the browser probe itself is deliberately absent from Turbo and CI.
+
+When the browser emits no LCP entry, the report prints `unavailable` and still
+collects the menu interaction. Missing LCP fails the overall stability check; it
+is never converted to zero or accepted as a passing load measurement. This lets
+an INP comparison proceed without hiding an independent paint-measurement gap.

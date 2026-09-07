@@ -273,10 +273,10 @@ export async function watchNextPointer(page: Page, ignoreControl?: string) {
     const record = (event: PointerEvent) => {
       const target = (event.target as Element).closest('a,button')
       const control = target?.getAttribute('aria-label') ?? target?.getAttribute('href')
-      if (control === ignoreControl) return
+      if (ignoreControl !== undefined && control === ignoreControl) return
       document.documentElement.dataset.pointerProof = JSON.stringify({
         trusted: event.isTrusted,
-        control,
+        control: control ?? null,
         opacity: Math.min(
           1,
           ...[...document.querySelectorAll('main [data-route-foreground]')]
@@ -291,9 +291,9 @@ export async function watchNextPointer(page: Page, ignoreControl?: string) {
 }
 
 export async function expectPointerDuringArrival(page: Page, control: string, info: TestInfo) {
-  const proof = await page.evaluate(() =>
-    JSON.parse(document.documentElement.dataset.pointerProof!),
-  )
+  const recorded = await page.evaluate(() => document.documentElement.dataset.pointerProof)
+  expect(recorded, 'the pointerdown was recorded, including a missed control').toBeDefined()
+  const proof = JSON.parse(recorded!)
   await info.attach('input-during-arrival', {
     body: JSON.stringify(proof),
     contentType: 'application/json',
