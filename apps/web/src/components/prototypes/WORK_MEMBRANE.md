@@ -4,7 +4,7 @@ Question: can the existing case cards take on the floating, deforming behavior o
 
 The study changes the actual cards: equal-width, aligned surfaces with clean, continuously deforming outlines. Corners and edges share a closed spline, so there are no fixed corner joints. Photos and complete card content come from the existing card component. Text is not distorted. Motion pauses offscreen, when the tab is hidden, and through the site's Reduce motion control or OS preference.
 
-The initial HTML includes each outline; a development-only startup script chooses the query variant before paint. The animated clip applies to the photo and scrim, while the content has its own transform layer. Whole-card translation includes a very light idle drift (2px horizontally, 3px vertically). Link and image dragging are disabled in the study so native text selection works. A card holds its position while the pointer is down or its text remains selected; selecting text does not follow the case-study link.
+The initial HTML includes each outline; an opt-in startup script chooses the query variant before paint. The animated clip applies to the photo and scrim, while the content has its own transform layer. Whole-card translation includes a very light idle drift (2px horizontally, 3px vertically). Link and image dragging are disabled in the study so native text selection works. A card holds its position while the pointer is down or its text remains selected; selecting text does not follow the case-study link.
 
 The active study reuses the globe's GPU runtime and the hero's full 4,180-star scene, including its depth distribution and nearby dust. Its depth-aware Y camera travel follows scroll, and visibility fades at both section boundaries in either direction. The viewport-sized sky stays behind the cards rather than allocating a section-height canvas.
 
@@ -13,8 +13,10 @@ In the hero, the same study URL replaces the flat sky parallax offset with depth
 Run from the repository root:
 
 ```sh
-WATCHPACK_POLLING=true O3_SPATIAL_GLOBE=1 NEXT_PUBLIC_WORK_MEMBRANE_STUDY=1 pnpm --filter @o3/web exec next dev --webpack --port 3612
+pnpm --filter @o3/web preview:work
 ```
+
+This builds the current checkout in production mode and serves it on port 3612. After editing, stop the server and rerun the command to rebuild. The study requires `NEXT_PUBLIC_WORK_MEMBRANE_STUDY=1` at build time; ordinary builds keep it disabled. Use this one preview for motion review. The former port 3613 audit snapshot is retired.
 
 Open `http://localhost:3612/?workMembrane=on`. Scroll adds a different parallax depth per card; nearby mouse velocity pulls the edges and gives the card a small spring response. Touch uses scroll only. Native scrolling is unchanged.
 
@@ -32,4 +34,4 @@ The September 7 local performance baseline and remaining device checks are recor
 - A softer vertical spring follows scroll velocity with a short catch-up. Positional parallax is smaller, while the existing subtle idle drift and cursor response remain.
 - Images do not zoom on hover or keyboard focus. Only the complete card and its outline move.
 
-Use `?workMembrane=ambient` for the accepted breathing-card starting point, or omit the query for the original cards. This is a local development experiment, not an accepted production design. The earlier standalone membrane in the heading has been removed.
+Use `?workMembrane=ambient` for the accepted breathing-card starting point, or omit the query for the original cards. This is an opt-in local experiment, not an accepted production design. The earlier standalone membrane in the heading has been removed.

@@ -8,6 +8,12 @@
   display: none;
 }
 
+/* Diagnostic control: retain layout while removing card paint and animation. */
+html[data-work-cards-hidden] .work-organic-card-study {
+  visibility: hidden;
+  animation: none !important;
+}
+
 .work-organic-card-clip {
   position: absolute;
   pointer-events: none;

@@ -39,7 +39,6 @@ export async function startSpatialGlobe(
   const heroStars = options.stars && !options.quietStars
   const depthScrollSky =
     heroStars &&
-    process.env.NODE_ENV === 'development' &&
     process.env.NEXT_PUBLIC_WORK_MEMBRANE_STUDY === '1' &&
     new URLSearchParams(location.search).get('workMembrane') === 'on'
   const footerStars = options.stars && !!options.quietStars && hero.matches('.cta-band')

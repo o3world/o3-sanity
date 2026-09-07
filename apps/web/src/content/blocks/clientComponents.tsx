@@ -121,8 +121,7 @@ export const CARD_COMPONENTS = bindingsToRecord(CARD_BINDINGS) satisfies AppFirs
  * heading row and washes are the shared renderer's; only the card is O3's.
  */
 function CaseShowcaseSectionWithCard(props: SectionProps<'caseShowcaseSection'>) {
-  const study =
-    process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_WORK_MEMBRANE_STUDY === '1'
+  const study = process.env.NEXT_PUBLIC_WORK_MEMBRANE_STUDY === '1'
   const section = (
     <CaseShowcaseSection
       {...props}

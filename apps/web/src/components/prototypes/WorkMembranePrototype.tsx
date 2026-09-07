@@ -37,6 +37,7 @@ export function WorkMembranePrototype({ children }: { children: ReactNode }) {
   useEffect(() => {
     const root = rootRef.current
     if (!enabled || !root) return
+    if (document.documentElement.hasAttribute('data-work-cards-hidden')) return
     let raf = 0
     let visible = false
     let last = 0
@@ -132,7 +133,7 @@ export function WorkMembranePrototype({ children }: { children: ReactNode }) {
       }
       previousScroll = window.scrollY
       last = now
-      const path = membranePath(elapsed, bendX, bendY, membraneSize)
+      const path = membranePath(elapsed * 1.8, bendX, bendY, membraneSize)
       pathRef.current?.setAttribute('d', path)
       const phase = index * 1.7
       const floatX = Math.sin(elapsed * 0.65 + phase) * 2

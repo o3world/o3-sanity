@@ -55,8 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       style={{ backgroundColor: 'var(--page-background, #000)' }}
     >
       <body className="text-fg font-sans antialiased">
-        {process.env.NODE_ENV === 'development' &&
-          process.env.NEXT_PUBLIC_WORK_MEMBRANE_STUDY === '1' && <WorkStudyStartup />}
+        {process.env.NEXT_PUBLIC_WORK_MEMBRANE_STUDY === '1' && <WorkStudyStartup />}
         {process.env.O3_SPATIAL_GLOBE_ENABLED === '1' && <HeroStartup />}
         {children}
         <AnchorGlide />

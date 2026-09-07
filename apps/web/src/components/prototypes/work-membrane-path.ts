@@ -18,35 +18,38 @@ export function membranePath(time: number, pullX = 0, pullY = 0, size = initialS
   const bottom = height - top
   const cx = width / 2
   const cy = height / 2
-  const radius = Math.min(96, paddingX * 2, width / 4, height / 4)
+  const radius = Math.min(96, paddingX * 1.8, width / 4, height / 4)
+  const [tl, tr, br, bl] = [0.75, 0.9, 0.82, 0.68].map(
+    (speed) => radius * (0.86 + Math.cos(time * speed) * 0.14),
+  ) as [number, number, number, number]
   const outline = [
-    [left, top + radius],
+    [left, top + tl],
     [left, top],
-    [left + radius, top],
+    [left + tl, top],
     [cx, top],
-    [right - radius, top],
+    [right - tr, top],
     [right, top],
-    [right, top + radius],
+    [right, top + tr],
     [right, cy],
-    [right, bottom - radius],
+    [right, bottom - br],
     [right, bottom],
-    [right - radius, bottom],
+    [right - br, bottom],
     [cx, bottom],
-    [left + radius, bottom],
+    [left + bl, bottom],
     [left, bottom],
-    [left, bottom - radius],
+    [left, bottom - bl],
     [left, cy],
   ]
   const points = outline.map(([x = 0, y = 0]) => {
     const nx = (x - cx) / cx
     const ny = (y - cy) / cy
     const swayX =
-      Math.sin(time * 0.7) * ny * 0.45 +
-      Math.cos(time * 0.5) * (ny * ny - 0.4) * 0.45 +
+      Math.sin(time * 0.7) * ny * 0.65 +
+      Math.cos(time * 0.5) * (ny * ny - 0.4) * 0.65 +
       clamp(pullX / 0.013) * ny * 0.25
     const swayY =
-      Math.cos(time * 0.6) * nx * 0.45 +
-      Math.sin(time * 0.55) * (nx * nx - 0.4) * 0.45 +
+      Math.cos(time * 0.6) * nx * 0.65 +
+      Math.sin(time * 0.55) * (nx * nx - 0.4) * 0.65 +
       clamp(pullY / 0.016) * nx * 0.25
     return [
       (x + clamp(swayX) * Math.max(0, left - 1)) / width,

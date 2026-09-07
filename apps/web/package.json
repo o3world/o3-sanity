@@ -7,6 +7,7 @@
     "dev": "../../scripts/dev.sh web",
     "format": "prettier --write .",
     "lint": "eslint src/ motion-contract/",
+    "preview:work": "O3_SPATIAL_GLOBE=1 NEXT_PUBLIC_WORK_MEMBRANE_STUDY=1 sh -c 'next build --webpack && next start --port 3612'",
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },
