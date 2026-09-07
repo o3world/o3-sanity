@@ -63,19 +63,17 @@ this change.
 - All 41 focused nav tests pass, including photograph cover/contain and first paint.
 - Content UI typecheck, changed-file ESLint, production web build and
   `pnpm build:assert` pass.
-- The corrected-build browser run passed 23 of 24 checks across Chromium, WebKit
-  and Firefox, desktop/mobile, normal/reduced motion. Firefox mobile normal motion
-  reported a 23 px history-scroll discrepancy in the first-frame test; its earlier
-  color assertions passed. The exact test then passed three isolated reruns without
-  edits. The failed trace is retained at
-  `test_output/nav-performance/review-firefox-failure/`; its cause is not established.
+- The first corrected-build browser run passed 23 of 24 checks. The Firefox mobile
+  history discrepancy led to the scroll-anchor regression and fix described below.
+  Its original failed trace remains at
+  `test_output/nav-performance/review-firefox-failure/`.
 - The full suite passes: 307 files, 3691 tests (`pnpm test --maxWorkers=2`).
 - Homepage and footer screenshots were captured; the homepage was visually
   inspected with the accepted globe scene enabled.
 - Missing-LCP regressions pass: absent browser data stays `null`, prints as
   `unavailable`, and fails stability while the report retains INP.
 
-## Completing the INP comparison
+## INP comparison before the entrance fix
 
 The original probe aborted on absent homepage LCP before opening the menu. A
 minimal page and Insights produced LCP in both headless-shell and full Chromium;
@@ -106,7 +104,80 @@ precision context here, not proof that every final sample is faster or equal.
 There is no material regression at that precision. Two samples per route cannot
 establish a statistically exact no-regression claim.
 
-Both full reports show stable measurements on the three non-homepage routes and
+Both historical reports show stable measurements on the three non-homepage routes and
 exit 1 because homepage LCP is unavailable. INP is now measured rather than
 blocked by that separate limitation. The logs are saved locally as
 `test_output/nav-performance/review-main-perf.log` and `review-final-perf.log`.
+
+## Resolving the remaining browser failures
+
+### Homepage LCP
+
+The entrance retained its completed animation with `animation-fill-mode: both`.
+On the real page, changing only the fill mode to `backwards` produced a hero-text
+LCP entry at 1172 ms; the unchanged page produced none. Removing the animation
+through a diagnostic script after completion also produced the entry. The CSS-only
+fix releases the completed animation while retaining its initial fill during the
+delay. The accepted 300/400/500/600 ms delays and 600 ms duration stay unchanged.
+
+A new browser regression requires an actual hero LCP entry on Chromium. It failed
+against the previous build before the CSS change. The probe still reports absent
+LCP as unavailable if a future page fails to emit it; no metric is synthesized.
+
+### Firefox scroll restoration
+
+The original history assertion compared against a scroll position recorded while
+an off-screen band was still revealing. Firefox's native scroll anchoring followed
+the translated foreground, moving the viewport before navigation; history then
+restored that changed position correctly. The earlier passing reruns did not
+establish the cause.
+
+A direct reproduction on `/solutions` moved from 4770 px to 4756.58 px during the
+reveal, with no viewport or document-height change. Excluding the moving child
+from scroll anchoring held the position at 4770 px throughout. `Reveal` now applies
+`overflow-anchor: none` only to that child in its enhanced phases. The stationary
+wrapper remains eligible as the native anchor; static and reduced-motion content
+retain their existing behavior.
+
+The new browser regression failed before this fix with a 2.07 px displacement.
+It checks the scroll position after the transition completes and two frames pass.
+The existing history-restoration assertion and its tolerance remain unchanged.
+
+### Final validation
+
+- `pnpm verify`: all 47 tasks passed; `pnpm build:assert` passed for all 20 routes.
+- `pnpm test --maxWorkers=2`: 307 files and 3691 tests passed.
+- The final motion-contract selection passed 64 checks across Chromium, Firefox,
+  and WebKit, desktop/mobile, normal/reduced motion. Eight LCP checks were skipped
+  outside Chromium, where that observation API is unavailable. This includes both
+  new regressions, Home/Work entrance cadence, surface ink, and first-frame/history
+  restoration.
+- The formerly intermittent Firefox mobile normal-motion first-frame/history test
+  then passed ten consecutive repeats.
+- The final homepage was inspected in the local browser with the globe enabled.
+  The selected category chip retains its black 1 px border and the same
+  136.664 × 49.992 px geometry as its unselected state.
+- Parallel defect and Ponytail reviews returned no findings on the final code.
+
+Final logs are retained locally under `test_output/nav-performance/complete-*.log`,
+with the browser matrix in `complete-browser-results.json`. The red browser tests
+and minimized real-page diagnoses are retained alongside them. These are ignored
+local evidence, not committed test fixtures.
+
+### Final throttled probe
+
+After both fixes, `pnpm perf` exits 0 with all four routes stable. No test runner
+was active during this run. The existing profile remains mobile 390 × 844, 4× CPU,
+150 ms latency, 1.6 Mbps download and 750 Kbps upload, with two cold loads per route.
+
+| Route            |    LCP (ms) |   CLS | INP (ms) | TBT (ms) |
+| ---------------- | ----------: | ----: | -------: | -------: |
+| `/`              | 2068 / 2052 | 0 / 0 | 104 / 96 |  18 / 40 |
+| `/insights`      |   940 / 948 | 0 / 0 |  80 / 96 |  28 / 28 |
+| `/work`          |   900 / 872 | 0 / 0 |  88 / 88 |  28 / 27 |
+| `/work/best-egg` |   880 / 860 | 0 / 0 |  72 / 72 |  31 / 27 |
+
+The final INP pairs differ from the main samples above by at most 16 ms, within
+the existing 40 ms absolute tolerance. These remain local measurements, not
+physical-device or deployed-site verification. The full report is
+`test_output/nav-performance/complete-perf.log`.

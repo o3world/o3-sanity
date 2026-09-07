@@ -540,3 +540,26 @@ test('a direct request retains readable complete content without JavaScript', as
     await context.close()
   }
 })
+
+test('a revealing band does not pull the viewport away from its scroll position', async ({
+  page,
+}, info) => {
+  await page.goto('/solutions')
+  const paper = page.locator('main section[data-surface="paper"]:visible').first()
+  const translate = () =>
+    paper.evaluate((section) => getComputedStyle(section.parentElement!).translate)
+  const reduced = info.project.use.contextOptions?.reducedMotion === 'reduce'
+  await expect.poll(translate).toBe(reduced ? 'none' : '0px 24px')
+  const before = await paper.evaluate((section) => {
+    scrollTo({ top: section.getBoundingClientRect().top + scrollY + 150, behavior: 'instant' })
+    return scrollY
+  })
+  await expect.poll(translate).toBe('none')
+  const after = await page.evaluate(
+    () =>
+      new Promise<number>((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve(scrollY)))
+      }),
+  )
+  expect(after, 'the stationary reveal wrapper owns the scroll anchor').toBeCloseTo(before, 0)
+})

@@ -84,7 +84,7 @@
 @media (prefers-reduced-motion: no-preference) {
   [data-spatial-entrance='true'] [data-spatial-layout] .hero-lead h1 > span,
   [data-spatial-entrance='true'] [data-spatial-layout] .hero-lead > div {
-    animation: spatial-hero-enter 600ms var(--ease-out) both;
+    animation: spatial-hero-enter 600ms var(--ease-out) backwards;
     /* The shared renderer supplies inline delays; override only this scene. */
     animation-delay: 300ms !important;
   }

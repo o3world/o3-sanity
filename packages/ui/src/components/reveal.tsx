@@ -66,6 +66,8 @@ export function Reveal({ delay = 0, className, style, children, ...rest }: Revea
     <div ref={ref} data-reveal="" className={className} style={style} {...rest}>
       <div
         className={cn(
+          // Anchor to the stationary wrapper, never its moving foreground.
+          phase !== 'static' && '[overflow-anchor:none]',
           // Arming hides with no transition: it happens off-screen, and a fade
           // there would still be mid-flight if the reader arrived early.
           phase === 'armed' && 'translate-y-6 opacity-0 transition-none',
