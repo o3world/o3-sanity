@@ -8,7 +8,7 @@ import { indexHref } from '@o3/content-runtime/routes/index-paths'
 
 import { InsightCard } from '@o3/content-ui/cards'
 import { Pager } from '@o3/content-ui/pager'
-import { Reveal } from '@o3/ui'
+import { RevealSequence } from '@o3/ui'
 
 type IndexData = NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 
@@ -208,32 +208,19 @@ export function InsightIndexView({
              * frames set it, wrapped at 1440 (`2337:4492`) and stacked at 402
              * (`2975:8663`).
              */
-            <ul
-              key={resultsKey}
-              data-insight-results
-              className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3"
-            >
-              {items.map((item, index) => (
-                <li key={item._id}>
-                  {/* The stagger is the card's COLUMN in the widest grid, not
-                      its place in the feed: twelve cards staggered end to end
-                      would keep the last one waiting most of a second after the
-                      reader reached it. Narrower widths keep the modulo and lose
-                      nothing — a stagger is only ever seen where cards enter
-                      together, and below `lg` they enter one at a time. */}
-                  <Reveal delay={(index % 3) * 80}>
-                    {/* The first card sits in the first screen under the hero,
-                        the largest picture on the route. It is the only image
-                        here that is preloaded. */}
+            <RevealSequence key={resultsKey} boundaries="items">
+              <ul data-insight-results className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3">
+                {items.map((item, index) => (
+                  <li key={item._id} data-reveal-step="card">
                     <InsightCard
                       {...item}
                       priority={index === 0}
                       mediaLayout="structural-three-up"
                     />
-                  </Reveal>
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
+            </RevealSequence>
           ) : (
             /* Reachable by hand-typing a category slug the feed has nothing
                for — the chips only offer categories that do. Unsourced: no

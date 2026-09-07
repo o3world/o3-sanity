@@ -1,7 +1,7 @@
 import type { SanityBlock } from '@o3/sanity/types'
 
 import { renderDispatchedBlocks } from '@o3/content-runtime/blocks'
-import { SectionReveal } from '@o3/content-ui'
+import { InteriorSectionReveal } from './interiorMotion'
 import { CaseStudySectionReveal } from './caseStudyMotion'
 import { BLOCK_REGISTRY, type DispatchedBlockType } from './registry'
 
@@ -45,7 +45,7 @@ export function BlockRenderer({ blocks, documentId, documentType, fieldPath }: B
         documentId,
         documentType,
         fieldPath,
-        BlockWrapper: documentType === 'caseStudy' ? CaseStudySectionReveal : SectionReveal,
+        BlockWrapper: documentType === 'caseStudy' ? CaseStudySectionReveal : InteriorSectionReveal,
       })}
     </>
   )

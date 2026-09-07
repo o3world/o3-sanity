@@ -168,3 +168,8 @@ export const LegacyHeading: Story = {
     await expect(getComputedStyle(heading).fontWeight).toBe('400')
   },
 }
+
+/** A headed interior band uses one cadence for its heading and base-block groups. */
+export const GroupedEntrance: Story = {
+  args: { ...seededSectionArgs('about', 'layoutSection', 1), sequence: true },
+}

@@ -1,4 +1,4 @@
-import { ArticleByline, Eyebrow, Reveal, ReadingProgress, SectionShell } from '@o3/ui'
+import { ArticleByline, Eyebrow, ReadingProgress, SectionShell } from '@o3/ui'
 import type { INSIGHT_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { CarouselTrack, CAROUSEL_BAND_CLASS, SanityImage } from '@o3/content-ui'
@@ -88,11 +88,8 @@ type InsightViewProps = NonNullable<INSIGHT_QUERY_RESULT>
  * projection (`INSIGHT_CARD.readingMinutes`), which is where the decision
  * and its arithmetic are recorded.
  *
- * THE ROUTE'S OWN BANDS WEAR THEIR OWN `Reveal` (#402). A block-composed page
- * gets the scroll entrance from the dispatch seam; a document view draws its
- * bands directly, so it asks for one. The article body is not wrapped —
- * `Reveal` leaves anything taller than the viewport alone — and the wrapper
- * carries the band's ground, because the document's ground is ink.
+ * The article body remains static. The related-content carousel owns its
+ * heading-to-track entrance, leaving the painted band still.
  */
 export function InsightView({
   title,
@@ -213,20 +210,21 @@ export function InsightView({
       </div>
 
       {keepReading.length ? (
-        <Reveal className="bg-bone">
+        <div className="bg-bone">
           <SectionShell surface="bone" top="detail" bottom="detail" className={CAROUSEL_BAND_CLASS}>
             {/* `1751:1949` — the frame's own copy for this band. The mobile
                 frame heads it "The thinking behind the work.", which is the
                 /insights index's line; the desktop detail frame is the
                 canonical read for a detail page. */}
             <CarouselTrack
+              sequence
               heading="Keep reading."
               cards={keepReading.map((item) => (
                 <Card key={item._id} {...item} />
               ))}
             />
           </SectionShell>
-        </Reveal>
+        </div>
       ) : null}
     </article>
   )
