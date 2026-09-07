@@ -85,8 +85,10 @@
 }
 
 .work-starfield {
+  --work-sky-bleed: 100svh;
   display: block;
   position: relative;
+  z-index: 1;
   isolation: isolate;
   background: black;
 }
@@ -100,7 +102,7 @@
 .work-starfield-layer {
   display: block;
   position: absolute;
-  inset: 0;
+  inset: calc(-1 * var(--work-sky-bleed)) 0;
   pointer-events: none;
 }
 
