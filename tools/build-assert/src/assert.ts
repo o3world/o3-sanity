@@ -8,9 +8,13 @@
  * more JavaScript than its budget.
  *
  * Pass a dist directory as the first argument to check some other build.
+ * Add `--baseline-dist <directory>` to enforce growth against its route stats.
  */
+import { parseArgs } from 'node:util'
+
 import { checkJsBudget, describeBudgetProblem, headroom } from './bundle'
-import { readBuildOutput } from './build-output'
+import { readBuildOutput, readRouteBundles } from './build-output'
+import type { RouteBundle } from './bundle'
 import { checkCachedNotFound } from './cachedNotFound'
 import { JS_BUDGET, RENDERING_POLICY } from './policy'
 import { allRoutes, checkRenderingStrategy, describeProblem, perRequestRoutes } from './rendering'
@@ -43,7 +47,10 @@ function report(build: BuildOutput): void {
  * passing run too: a budget entry with room to spare is one nobody needs any
  * more, and that is only visible when the headroom is on screen.
  */
-function reportBudget(build: BuildOutput): void {
+function reportBudget(build: BuildOutput, baseline?: RouteBundle[]): void {
+  const previous = new Map(
+    baseline?.map((bundle) => [bundle.route, bundle.firstLoadUncompressedJsBytes]),
+  )
   console.log('\nFirst-load JavaScript, uncompressed:')
   const byLargest = [...build.routeBundles].sort(
     (a, b) => b.firstLoadUncompressedJsBytes - a.firstLoadUncompressedJsBytes,
@@ -59,13 +66,31 @@ function reportBudget(build: BuildOutput): void {
     console.log(
       `  ${spent.padStart(9)} of ${cap} (${margin}, ${bundle.firstLoadChunkPaths.length} chunks)  ${bundle.route}`,
     )
+    if (!baseline) continue
+    const baseBytes = previous.get(bundle.route)
+    const delta = bundle.firstLoadUncompressedJsBytes - (baseBytes ?? 0)
+    console.log(
+      baseBytes === undefined
+        ? '    New route — absolute ceiling applies.'
+        : `    Base ${baseBytes.toLocaleString('en-US')} → current ${spent}; delta ${delta >= 0 ? '+' : ''}${delta.toLocaleString('en-US')} bytes (growth limit ${JS_BUDGET.maxIncreaseBytes.toLocaleString('en-US')}).`,
+    )
   }
 }
 
 function main(): void {
   let build
+  let baseline: RouteBundle[] | undefined
   try {
-    build = readBuildOutput(process.argv[2])
+    const { values, positionals } = parseArgs({
+      allowPositionals: true,
+      options: { 'baseline-dist': { type: 'string' } },
+    })
+    if (positionals.length > 1) throw new Error('Expected at most one build directory.')
+    build = readBuildOutput(positionals[0])
+    if (values['baseline-dist'] !== undefined) {
+      baseline = readRouteBundles(values['baseline-dist'])
+      console.log(`Comparing JavaScript with baseline build: ${values['baseline-dist']}`)
+    }
   } catch (error) {
     console.error(error instanceof Error ? error.message : error)
     process.exitCode = 1
@@ -73,11 +98,11 @@ function main(): void {
   }
 
   report(build)
-  reportBudget(build)
+  reportBudget(build, baseline)
 
   const problems: Problem[] = checkRenderingStrategy(build, RENDERING_POLICY)
   const notCached: string[] = checkCachedNotFound(build)
-  const overBudget = checkJsBudget(build.routeBundles, JS_BUDGET)
+  const overBudget = checkJsBudget(build.routeBundles, JS_BUDGET, baseline)
 
   if (problems.length === 0 && notCached.length === 0 && overBudget.length === 0) {
     console.log(
@@ -120,8 +145,8 @@ function main(): void {
       annotate(message)
     }
     console.error(
-      '\nThe budget is tools/build-assert/src/policy.ts, and #269 has the audit behind ' +
-        'its number. Fix the route, or change the policy and say why in the review.',
+      '\nThe ceiling and growth limit are tools/build-assert/src/policy.ts. ' +
+        'Fix the route, or change the policy and say why in the review.',
     )
   }
 

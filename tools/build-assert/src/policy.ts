@@ -60,6 +60,8 @@ export const RENDERING_POLICY: RenderingPolicy = {
  */
 export const JS_BUDGET: JsBudget = {
   defaultBytes: 730_000,
+  // #389: catch a 20 KB regression even when it fits under the absolute ceiling.
+  maxIncreaseBytes: 10_000,
   routes: [
     {
       route: '/studio/[[...tool]]',

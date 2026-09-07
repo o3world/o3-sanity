@@ -45,6 +45,42 @@ export function readBuildOutput(distDir: string = WEB_DIST_DIR): BuildOutput {
     cacheComponents: config.cacheComponents === true,
     appPathRoutes: readJson<Record<string, string>>(appPathRoutes),
     prerender: readJson<PrerenderManifest>(prerender),
-    routeBundles: readJson<RouteBundle[]>(routeBundles),
+    routeBundles: readRouteBundles(distDir),
   }
+}
+
+/** Also reads a PR base revision build without requiring its rendering manifests. */
+export function readRouteBundles(distDir: string): RouteBundle[] {
+  const path = join(distDir, 'diagnostics', 'route-bundle-stats.json')
+  const bundles = readJson<unknown>(path)
+  const routes = new Set<string>()
+  if (
+    !Array.isArray(bundles) ||
+    bundles.length === 0 ||
+    !bundles.every((bundle: unknown) => {
+      if (bundle === null || typeof bundle !== 'object') return false
+      const {
+        route,
+        firstLoadUncompressedJsBytes: bytes,
+        firstLoadChunkPaths: chunks,
+      } = bundle as Partial<RouteBundle>
+      if (
+        typeof route !== 'string' ||
+        !route.startsWith('/') ||
+        routes.has(route) ||
+        typeof bytes !== 'number' ||
+        !Number.isSafeInteger(bytes) ||
+        bytes < 0 ||
+        !Array.isArray(chunks) ||
+        !chunks.every((chunk) => typeof chunk === 'string')
+      )
+        return false
+      routes.add(route)
+      return true
+    })
+  )
+    throw new Error(
+      `Invalid route bundle stats in ${path}: expected nonempty, unique routes with byte counts and chunk paths.`,
+    )
+  return bundles as RouteBundle[]
 }

@@ -22,10 +22,74 @@ const bundles: RouteBundle[] = [
 
 const budget: JsBudget = {
   defaultBytes: 730_000,
+  maxIncreaseBytes: 10_000,
   routes: [{ route: '/studio/[[...tool]]', bytes: 8_635_000, reason: 'an editing application' }],
 }
 
 describe('checkJsBudget', () => {
+  it('rejects a 20 KB route increase even below the absolute ceiling', () => {
+    const baseline = [
+      { route: '/', firstLoadUncompressedJsBytes: 696_786, firstLoadChunkPaths: [] },
+    ]
+    const current = [{ ...baseline[0]!, firstLoadUncompressedJsBytes: 716_786 }]
+
+    expect(checkJsBudget(current, { ...budget, routes: [] }, baseline)).toEqual([
+      {
+        kind: 'over-growth',
+        route: '/',
+        baselineBytes: 696_786,
+        bytes: 716_786,
+        increaseBytes: 20_000,
+        maxIncreaseBytes: 10_000,
+      },
+    ])
+  })
+
+  it('permits unchanged, smaller and exactly 10 KB larger routes', () => {
+    const baseline = [
+      { route: '/', firstLoadUncompressedJsBytes: 696_786, firstLoadChunkPaths: [] },
+    ]
+    for (const bytes of [696_786, 650_000, 706_786]) {
+      expect(
+        checkJsBudget(
+          [{ ...baseline[0]!, firstLoadUncompressedJsBytes: bytes }],
+          { ...budget, routes: [] },
+          baseline,
+        ),
+      ).toEqual([])
+    }
+  })
+
+  it('holds new routes to the absolute ceiling and ignores removed routes', () => {
+    const baseline = [
+      { route: '/removed', firstLoadUncompressedJsBytes: 696_786, firstLoadChunkPaths: [] },
+    ]
+    const current = [
+      { route: '/new', firstLoadUncompressedJsBytes: 730_000, firstLoadChunkPaths: [] },
+    ]
+    expect(checkJsBudget(current, { ...budget, routes: [] }, baseline)).toEqual([])
+    expect(
+      checkJsBudget(
+        [{ ...current[0]!, firstLoadUncompressedJsBytes: 730_001 }],
+        { ...budget, routes: [] },
+        baseline,
+      ),
+    ).toEqual([{ kind: 'over-budget', route: '/new', bytes: 730_001, budgetBytes: 730_000 }])
+  })
+
+  it('still enforces the absolute ceiling when growth is small', () => {
+    const baseline = [
+      { route: '/', firstLoadUncompressedJsBytes: 729_000, firstLoadChunkPaths: [] },
+    ]
+    expect(
+      checkJsBudget(
+        [{ ...baseline[0]!, firstLoadUncompressedJsBytes: 731_000 }],
+        { ...budget, routes: [] },
+        baseline,
+      ),
+    ).toEqual([{ kind: 'over-budget', route: '/', bytes: 731_000, budgetBytes: 730_000 }])
+  })
+
   it('passes when every route is inside its budget', () => {
     expect(checkJsBudget(bundles, budget)).toEqual([])
   })
