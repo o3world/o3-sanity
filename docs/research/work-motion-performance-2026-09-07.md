@@ -75,4 +75,14 @@ The user-authorized follow-up keeps the card layout width intact and gives the b
 
 Six geometry cases pass through ambient motion and maximum input bends, including narrow phones and the 1728px maximum card width. TypeScript and focused lint checks pass. Browser checks at 390px, 1159px and 2560px confirmed equal card widths and no horizontal page overflow. Phone text selection was visibly verified; a hovered desktop card reported image scale `none`. At 390px, the sampled first/second layout-box gap was about 67px after scrolling; at the large viewport it was about 91px, before accounting for the background's vertical allowance. The card continued to settle over successive 100ms observations after scrolling stopped, rather than jumping immediately to its final offset.
 
-These are functional and layout checks of the revision, not a repeated production performance comparison. The camera-reset finding and broader optimization recommendations remain open.
+These are functional and layout checks of the revision, not a repeated production performance comparison. At this checkpoint, the camera-reset finding and broader optimization recommendations remained open.
+
+## Camera restoration follow-up
+
+The work camera now initializes from the section position on its first visible paint, then retains the existing easing for subsequent scrolling. A regression check covers the restored position, movement in both directions, and paused motion. The seven camera/geometry checks, focused lint, TypeScript, and optimized preview build pass. A browser round trip through IRONMAN returns to the work section with all three cards and its starfield visible; first-frame GPU coordinates were not instrumented in this follow-up.
+
+## Build assertions follow-up
+
+The preview now uses the standard Turbopack production build. Next 16.3.4 writes `route-bundle-stats.json` only for that bundler; the webpack override was why the assertion could not run. The preview checks rendering strategy, cached 404s, and JavaScript budgets before starting its server.
+
+The first standard build exposed 754,573 bytes of first-load JavaScript per content route, above the unchanged 730,000-byte ceiling. Deferring the work starfield's `vgpu` import until its effect runs restores the engine loading boundary and reduces that total to 697,061 bytes. Rendering, cached-404, and bundle assertions now pass with the study enabled. This measures initial bundle size, not a new runtime performance comparison; the broader physical-device and compositor checks remain open.

@@ -16,7 +16,7 @@ Run from the repository root:
 pnpm --filter @o3/web preview:work
 ```
 
-This builds the current checkout in production mode and serves it on port 3612. After editing, stop the server and rerun the command to rebuild. The study requires `NEXT_PUBLIC_WORK_MEMBRANE_STUDY=1` at build time; ordinary builds keep it disabled. Use this one preview for motion review. The former port 3613 audit snapshot is retired.
+This runs the standard production build and its rendering, cached-404, and JavaScript-budget assertions, then serves the current checkout on port 3612. After editing, stop the server and rerun the command to rebuild. The study requires `NEXT_PUBLIC_WORK_MEMBRANE_STUDY=1` at build time; ordinary builds keep it disabled. Use this one preview for motion review. The former port 3613 audit snapshot is retired.
 
 Open `http://localhost:3612/?workMembrane=on`. Scroll adds a different parallax depth per card; nearby mouse velocity pulls the edges and gives the card a small spring response. Touch uses scroll only. Native scrolling is unchanged.
 

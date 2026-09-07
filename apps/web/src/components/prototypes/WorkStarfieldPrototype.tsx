@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect, useRef, useSyncExternalStore, type ReactNode } from 'react'
-import { frame, surface } from 'vgpu'
 import { useGlobeRuntime } from '../globe/GlobeProvider'
 import { useSpatialMotion } from '../globe/SpatialMotionProvider'
 import { subscribeWorkStudy, readWorkStudy, noWorkStudy } from './WorkMembranePrototype'
+import { workStarCameraY } from './work-starfield-camera'
 
 const smooth = (value: number) => {
   const t = Math.max(0, Math.min(1, value))
@@ -26,9 +26,10 @@ export function WorkStarfieldPrototype({ children }: { children: ReactNode }) {
     if (!enabled || !root || !canvas || !runtime) return
     let disposed = false
     let stop: (() => void) | undefined
-    void runtime
-      .acquire()
-      .then((lease) => {
+    void import('vgpu')
+      .then(async ({ frame, surface }) => {
+        if (disposed) return
+        const lease = await runtime.acquire()
         if (disposed) return lease.release()
         const target = surface(lease.gpu, canvas, { dpr: [1, 2], alphaMode: 'premultiplied' })
         const stars = lease.draw('stars')
@@ -36,7 +37,7 @@ export function WorkStarfieldPrototype({ children }: { children: ReactNode }) {
         let visible = false
         let last = 0
         let time = 0
-        let cameraY = 0
+        let cameraY: number | undefined
         let failed = false
         const reduced = matchMedia('(prefers-reduced-motion: reduce)')
         const paused = () => motion?.getSnapshot() || reduced.matches
@@ -50,12 +51,10 @@ export function WorkStarfieldPrototype({ children }: { children: ReactNode }) {
           const entry = smooth((viewportHeight - bounds.top) / (viewportHeight * 0.85))
           const exit = smooth(bounds.bottom / (viewportHeight * 0.85))
           canvas.style.opacity = String(entry * exit * 0.65)
-          if (!paused()) {
-            time += dt
-            // Positive camera Y makes stars rise as the page scrolls down, retaining scene depth.
-            const destination = (viewportHeight - bounds.top) * 0.8
-            cameraY += (destination - cameraY) * (1 - Math.exp(-dt * 5))
-          }
+          const step = paused() ? 0 : dt
+          time += step
+          // Positive camera Y makes stars rise as the page scrolls down, retaining scene depth.
+          cameraY = workStarCameraY(cameraY, (viewportHeight - bounds.top) * 0.8, step)
           const { width, height } = canvas.getBoundingClientRect()
           stars.set({
             p: {
