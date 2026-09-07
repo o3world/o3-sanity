@@ -164,6 +164,14 @@
 [data-spatial-layout] .hero-band:has(.hero-lead) .hero-lag > div {
   top: 16px;
   bottom: auto;
+  max-width: 1728px;
+}
+
+/* Hold the closing globe at its 1440px desktop size on wider screens. */
+@media (min-width: 1024px) {
+  .cta-band .cta-lag > [data-orbital-preset] {
+    max-width: 1296px;
+  }
 }
 
 /* Static, fine dithering breaks up quantized dark glow bands without blur. */
