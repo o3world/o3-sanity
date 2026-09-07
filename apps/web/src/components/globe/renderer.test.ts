@@ -90,9 +90,14 @@ it('releases an aborted lease without creating a surface or destroying the share
   expect(surface).not.toHaveBeenCalled()
 })
 
-it.each(['hero', 'cta'] as const)(
-  'updates the %s glow before measuring the globe for each GPU frame and releases it on abort',
-  async (range) => {
+it.each([
+  { range: 'hero', stars: false },
+  { range: 'cta', stars: false },
+  { range: 'hero', stars: true },
+  { range: 'cta', stars: true },
+])(
+  'updates the $range glow before measuring geometry (quiet sky: $stars) and releases it on abort',
+  async ({ range, stars }) => {
     const values = new Map<string, string>()
     const style = {
       setProperty: (name: string, value: string) => values.set(name, value),
@@ -106,7 +111,7 @@ it.each(['hero', 'cta'] as const)(
     }
     let top = 844
     const hero = {
-      matches: (selector: string) => selector === '.cta-band',
+      matches: (selector: string) => range === 'cta' && selector === '.cta-band',
       dataset: {},
       getBoundingClientRect: () => ({ top, height: 500 }),
     }
@@ -182,11 +187,29 @@ it.each(['hero', 'cta'] as const)(
           motion: 'orbit',
           opacity: 1,
           electronOpacity: 1,
-          stars: false,
+          stars,
+          quietStars: stars,
           onReady,
         },
       )
       tick(0)
+      if (stars) {
+        const lease: Awaited<ReturnType<GlobeRuntime['acquire']>> = await vi.mocked(runtime.acquire)
+          .mock.results[0]!.value
+        const draw = vi.mocked(lease.draw)
+        const skyIndex = draw.mock.calls.findIndex(([kind]) => kind === 'quietStars')
+        const sky = draw.mock.results[skyIndex]!.value
+        expect(vi.mocked(sky.set).mock.calls[0]![0]).toMatchObject({
+          p: {
+            viewport: [390, 500, 0, 1],
+            motion: [expect.any(Number), -0, 0, Number(range === 'cta')],
+          },
+        })
+        expect(draw.mock.calls.filter(([kind]) => kind === 'quietStars')).toHaveLength(1)
+        expect(draw.mock.calls.some(([kind]) => kind === 'stars' || kind === 'shootingStar')).toBe(
+          false,
+        )
+      }
       expect(onReady).not.toHaveBeenCalled()
       if (range === 'hero') {
         complete()
@@ -226,4 +249,49 @@ it('draws only the visible rings, planets, and rim', () => {
   const draw = vi.fn()
   drawGlobeGeometry({ draw }, { rings: [rail], electrons: [[planet]], rim })
   expect(draw.mock.calls.map(([item]) => item)).toEqual([rail, planet, rim])
+})
+
+it('releases a partially prepared footer when navigation aborts a yielded setup', async () => {
+  let clock = 0
+  const now = vi.spyOn(performance, 'now').mockImplementation(() => (clock += 10))
+  const controller = new AbortController()
+  try {
+    const pending = startSpatialGlobe(
+      {} as HTMLCanvasElement,
+      { matches: () => true } as unknown as HTMLElement,
+      {} as HTMLElement,
+      controller.signal,
+      runtime,
+      {
+        arcs: [
+          {
+            u: [1, 0, 0],
+            v: [0, 1, 0],
+            col: '#ff1000',
+            op: 1,
+            w: 1,
+            dots: [],
+            colored: true,
+            i: 0,
+          },
+        ],
+        preset: 'hero',
+        motion: 'orbit',
+        opacity: 1,
+        electronOpacity: 1,
+        stars: true,
+        quietStars: true,
+        onReady: vi.fn(),
+      },
+    )
+    await Promise.resolve()
+    controller.abort()
+    await expect(pending).rejects.toMatchObject({ name: 'AbortError' })
+    expect(frame).not.toHaveBeenCalled()
+    expect(scene.destroy).toHaveBeenCalledOnce()
+    expect(target.dispose).toHaveBeenCalledOnce()
+    expect(release).toHaveBeenCalledOnce()
+  } finally {
+    now.mockRestore()
+  }
 })

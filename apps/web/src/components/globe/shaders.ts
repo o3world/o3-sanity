@@ -164,10 +164,8 @@ export const orbitShader =
   solid +
   /* wgsl */ `
 @vertex fn vs_main(@builtin(vertex_index) vertex: u32) -> SolidOut {
-  let c = (corner(vertex)+1.0)*0.5;
-  let cell = vertex/6u;
-  let theta = (f32(cell/12u)+c.x)/576.0*6.2831853;
-  let phi = (f32(cell%12u)+c.y)/12.0*6.2831853;
+  let theta = f32(vertex/13u)/576.0*6.2831853;
+  let phi = f32(vertex%13u)/12.0*6.2831853;
   var center = orbitPoint(theta);
   let radial = normalize(orbitPoint(theta)-orbitPose(vec3f(0.0)));
   let axis = normalize(cross(orbitPoint(theta+0.001)-center,radial));
@@ -211,10 +209,8 @@ export const dotShader =
   solid +
   /* wgsl */ `
 @vertex fn vs_main(@builtin(vertex_index) vertex: u32) -> SolidOut {
-  let c = (corner(vertex)+1.0)*0.5;
-  let cell = vertex/6u;
-  let longitude = (f32(cell/16u)+c.x)/32.0*6.2831853;
-  let latitude = (f32(cell%16u)+c.y)/16.0*3.14159265;
+  let longitude = f32(vertex/17u)/32.0*6.2831853;
+  let latitude = f32(vertex%17u)/16.0*3.14159265;
   let normal = vec3f(cos(longitude)*sin(latitude),cos(latitude),sin(longitude)*sin(latitude));
   return solidVertex(orbitPoint(p.dot.x)+normal*p.dot.y,normal);
 }
@@ -277,27 +273,33 @@ struct Out {
  @location(1) color: vec4f,
 }
 fn hash(n:f32) -> f32 {
- if (p.viewport.w > 0.5) { return fract(sin(n*127.1+311.7)*43758.5453); }
+ if (p.viewport.w > 0.5 && p.motion.w < 0.5) { return fract(sin(n*127.1+311.7)*43758.5453); }
  return stableStarHash(n);
 }
 @vertex fn vs_main(@builtin(vertex_index) v:u32, @builtin(instance_index) instance:u32) -> Out {
- let n=f32(instance)+1837.0+select(0.0,1900.0,p.viewport.w>0.5);
+ // The footer samples the hero's entire depth range within its 1,100-star budget.
+ let footer=p.motion.w>0.5;
+ let distantOnly=p.viewport.w>0.5 && !footer;
+ let seed=select(instance,instance*4180u/1100u,footer);
+ let n=f32(seed)+1837.0+select(0.0,1900.0,distantOnly);
  let corners=array<vec2f,6>(vec2f(-1,-1),vec2f(1,-1),vec2f(-1,1),vec2f(-1,1),vec2f(1,-1),vec2f(1,1));
  let c=corners[v];
  let azimuth=hash(n)*6.2831853;
  let latitude=hash(n+1.0)*2.0-1.0;
  let radial=sqrt(1.0-latitude*latitude);
- let nearbyDust=instance>=4000u && p.viewport.w<0.5;
- let backfield=(instance>=1900u || p.viewport.w>0.5) && !nearbyDust;
+ let nearbyDust=seed>=4000u && !distantOnly;
+ let backfield=(seed>=1900u || distantOnly) && !nearbyDust;
  let radius=select(select(10000.0*pow(900.0,pow(hash(n+2.0),0.65)),5000000.0+4000000.0*hash(n+2.0),backfield),8000.0+12000.0*hash(n+2.0),nearbyDust);
  var world=vec3f(cos(azimuth)*radial,sin(azimuth)*radial,-latitude)*radius;
  let near=1.0-smoothstep(5000.0,24000.0,radius);
  let dust=select(smoothstep(0.42,0.94,hash(n+4.0)),0.7+0.3*hash(n+4.0),nearbyDust);
- let time=p.motion.x*1.7;
+ let time=p.motion.x*select(1.7,0.85,footer);
  let phase=hash(n+5.0)*6.2831853;
  // Sparse nearby dust drifts independently inside the surrounding volume.
- let flow=time*(0.035+0.018*hash(n+6.0))*(1.0+2.0*near*dust);
- world+=vec3f(sin(flow+phase)-sin(phase),cos(flow*0.73+phase)-cos(phase),sin(flow*0.51+phase)-sin(phase))*650.0*dust*near*near;
+ if (near>0.0) {
+   let flow=time*(0.035+0.018*hash(n+6.0))*(1.0+2.0*near*dust);
+   world+=vec3f(sin(flow+phase)-sin(phase),cos(flow*0.73+phase)-cos(phase),sin(flow*0.51+phase)-sin(phase))*650.0*dust*near*near;
+ }
  // Seeded local wander: smooth independent paths instead of synchronized drift.
  if (nearbyDust) {
    let phaseY=hash(n+12.0)*6.2831853;

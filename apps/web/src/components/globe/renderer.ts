@@ -37,6 +37,8 @@ export async function startSpatialGlobe(
   },
 ) {
   const heroStars = options.stars && !options.quietStars
+  const footerStars = options.stars && !!options.quietStars && hero.matches('.cta-band')
+  const skyResponse = footerStars ? 0.5 : options.quietStars ? 0.2 : 1
   const lease = await runtime.acquire()
   const { gpu } = lease
   if (signal.aborted) {
@@ -66,6 +68,15 @@ export async function startSpatialGlobe(
     }
     dispose = releaseScene
     const composite = lease.draw('composite')
+    const colors = new Map<string, string>()
+    const colorOf = (value: string) => {
+      let color = colors.get(value)
+      if (!color) {
+        color = resolveColor(value, globe)
+        colors.set(value, color)
+      }
+      return color
+    }
     const radii = nestedOrbitRadii(options.arcs)
     const arcs = options.arcs.map((arc, i) => {
       const { u, v } = nestedOrbitBasis(i)
@@ -73,35 +84,40 @@ export async function startSpatialGlobe(
         ...arc,
         u: u.map((value) => (value * radii[i]!) / 340),
         v: v.map((value) => (value * radii[i]!) / 340),
-        col: resolveColor(
-          options.preset === 'hero' && i % 2 === 0 ? 'var(--color-brand)' : arc.col,
-          globe,
-        ),
+        col: colorOf(options.preset === 'hero' && i % 2 === 0 ? 'var(--color-brand)' : arc.col),
         dots: arc.dots.map((dot) => ({
           ...dot,
-          col: resolveColor(dot.col, globe),
+          col: colorOf(dot.col),
         })),
       }
     })
     const rgb = (hex: string) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
     const dotGround =
       options.preset === 'line'
-        ? [
-            ...rgb(
-              resolveColor(
-                getComputedStyle(globe.closest('section') ?? hero).backgroundColor,
-                globe,
-              ),
-            ),
-            1,
-          ]
+        ? [...rgb(colorOf(getComputedStyle(globe.closest('section') ?? hero).backgroundColor)), 1]
         : [0, 0, 0, 0]
-    const rings = arcs.map(() => lease.draw('orbit'))
+    const rings: Draw[] = []
+    const electrons: Draw[][] = []
+    let setupStarted = performance.now()
+    const yieldSetup = async () => {
+      if (performance.now() - setupStarted < 4) return
+      await new Promise<void>((resolve) => setTimeout(resolve, 0))
+      signal.throwIfAborted()
+      setupStarted = performance.now()
+    }
+    // Footer shader reflection must leave time for scrolling during its viewport warm-up.
+    for (const arc of arcs) {
+      rings.push(lease.draw('orbit'))
+      if (footerStars) await yieldSetup()
+      const dots: Draw[] = []
+      for (let index = 0; index < arc.dots.length; index++) {
+        dots.push(lease.draw('dot'))
+        if (footerStars) await yieldSetup()
+      }
+      electrons.push(dots)
+    }
     const rim = lease.draw('orbit')
-    const rimColor = rgb(
-      options.preset === 'line' ? resolveColor('var(--color-ink)', globe) : '#e9edf5',
-    )
-    const electrons = arcs.map((arc) => arc.dots.map(() => lease.draw('dot')))
+    const rimColor = rgb(options.preset === 'line' ? colorOf('var(--color-ink)') : '#e9edf5')
     const heatHaze = options.preset === 'hero' ? lease.draw('heatHaze') : undefined
     const stars = options.stars
       ? lease.draw(options.quietStars ? 'quietStars' : 'stars')
@@ -133,7 +149,7 @@ export async function startSpatialGlobe(
       my = 0,
       sx = 0,
       sy = 0
-    const spinRate = (Math.PI * 2) / (options.quietStars ? 3600 : 900)
+    const spinRate = (Math.PI * 2) / (footerStars ? 1800 : options.quietStars ? 3600 : 900)
     let spinX = 0.16 / Math.hypot(0.16, 1, 0.08),
       spinY = 1 / Math.hypot(0.16, 1, 0.08),
       spinZ = 0.08 / Math.hypot(0.16, 1, 0.08)
@@ -346,16 +362,17 @@ export async function startSpatialGlobe(
         },
       })
       const targetSkyRise =
-        Math.min(heroBounds.height, Math.max(0, -heroBounds.top)) * (options.quietStars ? 0 : 0.015)
+        Math.min(heroBounds.height, Math.max(0, -heroBounds.top)) *
+        (footerStars ? 0.0075 : options.quietStars ? 0 : 0.015)
       skyRise = isStill()
         ? 0
         : skyRise + (targetSkyRise * skyMix - skyRise) * (1 - 0.94 ** (skyStep * 30))
       const skyViewport = [h.width, h.height, skyRise, Number(options.quietStars)]
       const skyMotion = [
         isStill() ? 0 : (sky?.elapsed ?? elapsed),
-        -sx * (options.quietStars ? 0.009 : 0.045) * skyMix,
-        sy * (options.quietStars ? 0.0064 : 0.032) * skyMix,
-        0,
+        -sx * 0.045 * skyResponse * skyMix,
+        sy * 0.032 * skyResponse * skyMix,
+        Number(footerStars),
       ]
       stars?.set({
         p: {
