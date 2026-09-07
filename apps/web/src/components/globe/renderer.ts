@@ -37,8 +37,8 @@ export async function startSpatialGlobe(
   },
 ) {
   const heroStars = options.stars && !options.quietStars
-  const depthScrollSky = heroStars
   const footerStars = options.stars && !!options.quietStars && hero.matches('.cta-band')
+  const depthScrollSky = heroStars || footerStars
   const skyResponse = footerStars ? 0.5 : options.quietStars ? 0.2 : 1
   const lease = await runtime.acquire()
   const { gpu } = lease
@@ -142,7 +142,7 @@ export async function startSpatialGlobe(
     let previous: number | undefined
     let elapsed = 0
     let skyRise = 0
-    let skyScrollY = 0
+    let skyScrollY: number | undefined
     let skyEntranceDistance: number | undefined
     let skyState: { elapsed: number; step: number; mix: number } | undefined
     let cameraOffset = 0
@@ -378,8 +378,14 @@ export async function startSpatialGlobe(
         ? 0
         : skyRise + (targetSkyRise * skyMix - skyRise) * (1 - 0.94 ** (skyStep * 30))
       if (depthScrollSky) {
-        const travel = Math.min(heroBounds.height, Math.max(0, -heroBounds.top)) * 0.8
-        skyScrollY = isStill()
+        const travel =
+          (footerStars
+            ? Math.max(0, document.documentElement.clientHeight - heroBounds.top)
+            : Math.min(heroBounds.height, Math.max(0, -heroBounds.top))) * 0.8
+        // Footer stars move independently of the cached mobile globe. Start at
+        // the current position so restored pages do not replay earlier travel.
+        skyScrollY ??= footerStars ? travel : 0
+        skyScrollY = motionRestricted()
           ? 0
           : skyScrollY + (travel * skyMix - skyScrollY) * (1 - Math.exp(-skyStep * 5))
         skyCamera[1] = skyCamera[1]! + skyScrollY
