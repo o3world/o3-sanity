@@ -50,6 +50,10 @@ describe('the translated La Colombe case study', () => {
     }
   })
 
+  it('sequences every chapter outside the original IRONMAN example', () => {
+    expect(html.match(/data-reveal-step="heading"/g)).toHaveLength(chapters.length)
+  })
+
   it('renders the chapter’s details rows as a term list', () => {
     // `2274:4009` — the Strategy / Design / Research breakdown under the
     // first chapter's prose. jsdom is not involved: this is server HTML, so a

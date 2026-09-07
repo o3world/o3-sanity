@@ -5,7 +5,7 @@ import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
 import { currentYear } from '@/lib/currentYear'
 import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
-import { NavInkFirstPaint, SiteFooter, SiteNav, UtilityNav } from '@o3/content-ui/chrome'
+import { NavInkFirstPaint, SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
 import { DraftTools } from './DraftTools'
 import { RouteArrival } from './RouteArrival'
@@ -43,47 +43,22 @@ export default async function SiteLayout({ children }: ShellProps) {
 async function Shell({ children }: ShellProps) {
   const [settings, year] = await Promise.all([getSiteSettings(), currentYear()])
 
-  const spatialEnabled = process.env.O3_SPATIAL_GLOBE_ENABLED === '1'
-  const navSettings = spatialEnabled && settings ? { ...settings, utilityNavItems: [] } : settings
+  const navSettings = settings ? { ...settings, utilityNavItems: [] } : settings
 
   return (
-    <GlobeProvider enabled={spatialEnabled}>
-      {/* The brand-property strip sits IN the document above everything else
-          and scrolls away with it (`2250:1453` is an in-flow child of the Home
-          frame); the pill below it is fixed. That difference is why the two are
-          siblings here rather than one component.
-
-          EVERY ROUTE DRAWS IT, and the strip is data rather than a route:
-          `utilityNavItems` decides whether there is one, which is the same
-          question `SiteNav` asks for the pill's resting offset and `<main>`
-          asks for its heroes' clearance. Those three used to disagree — the
-          strip was gated on the route through an `@utility` parallel slot
-          while the other two read the setting, so every interior page hung the
-          pill at 124px and padded its hero to clear a strip that was not
-          there. One source, one answer. */}
-      {!spatialEnabled && <UtilityNav settings={settings} />}
+    <GlobeProvider>
       {/* The chrome draws no mark of its own (#228); these are this app's. */}
       <SiteNav
         settings={navSettings}
         brandMark={NAV_MARK}
-        menuUtilities={spatialEnabled ? <SpatialMotionControl /> : undefined}
+        menuUtilities={<SpatialMotionControl />}
       />
       {/* Bands paint their own surfaces over the document ground. Matching the
           opening band also covers space around streamed loading content. */}
       <main
         id="site-content"
-        data-spatial-layout={spatialEnabled ? 'true' : undefined}
-        // No `utilityNavItems`, no strip — and the nav-offset token every
-        // clearance under the pill derives from (hero padding, sticky tops,
-        // jump-target margins) drops to the strip-less 32px the interior
-        // frames draw (`2336:4382`, `2250:2251`, `2250:2131`, all at y: 32).
-        // `SiteNav` makes the same call for the pill itself; the two read one
-        // settings fetch.
-        className={
-          (navSettings?.utilityNavItems ?? []).length > 0
-            ? 'bg-(--page-background) min-h-screen'
-            : 'bg-(--page-background) min-h-screen [--spacing-nav-offset:32px]'
-        }
+        data-spatial-layout="true"
+        className="bg-(--page-background) min-h-screen [--spacing-nav-offset:32px]"
       >
         {children}
       </main>
@@ -97,8 +72,8 @@ async function Shell({ children }: ShellProps) {
         settings={settings}
         brandMark={FOOTER_MARK}
         year={year}
-        utilityNavItems={spatialEnabled ? settings?.utilityNavItems : undefined}
-        utilities={spatialEnabled ? <SpatialMotionControl /> : undefined}
+        utilityNavItems={settings?.utilityNavItems}
+        utilities={<SpatialMotionControl />}
       />
       {/* Nothing visible renders here for a published visitor, so `null` is an
           honest fallback; the boundary exists so `DraftTools`' request-time

@@ -37,6 +37,7 @@ export async function startSpatialGlobe(
   },
 ) {
   const heroStars = options.stars && !options.quietStars
+  const depthScrollSky = heroStars
   const footerStars = options.stars && !!options.quietStars && hero.matches('.cta-band')
   const skyResponse = footerStars ? 0.5 : options.quietStars ? 0.2 : 1
   const lease = await runtime.acquire()
@@ -141,6 +142,7 @@ export async function startSpatialGlobe(
     let previous: number | undefined
     let elapsed = 0
     let skyRise = 0
+    let skyScrollY = 0
     let skyEntranceDistance: number | undefined
     let skyState: { elapsed: number; step: number; mix: number } | undefined
     let cameraOffset = 0
@@ -311,7 +313,7 @@ export async function startSpatialGlobe(
       if (sampleMotion) {
         cameraOffset = entrance?.update(now, isStill()) ?? 0
         skyCameraOffset =
-          entrance && !isStill() && heroBounds.top >= -80
+          entrance && !isStill() && (depthScrollSky || heroBounds.top >= -80)
             ? readSkyEntranceOffset(hero, now, skyEntranceDistance)
             : 0
         scrollOrbit =
@@ -375,7 +377,19 @@ export async function startSpatialGlobe(
       skyRise = isStill()
         ? 0
         : skyRise + (targetSkyRise * skyMix - skyRise) * (1 - 0.94 ** (skyStep * 30))
-      const skyViewport = [h.width, h.height, skyRise, Number(options.quietStars)]
+      if (depthScrollSky) {
+        const travel = Math.min(heroBounds.height, Math.max(0, -heroBounds.top)) * 0.8
+        skyScrollY = isStill()
+          ? 0
+          : skyScrollY + (travel * skyMix - skyScrollY) * (1 - Math.exp(-skyStep * 5))
+        skyCamera[1] = skyCamera[1]! + skyScrollY
+      }
+      const skyViewport = [
+        h.width,
+        h.height,
+        depthScrollSky ? 0 : skyRise,
+        Number(options.quietStars),
+      ]
       const skyMotion = [
         movingSky ? (sky?.elapsed ?? elapsed) : 0,
         -sx * 0.045 * skyResponse * skyMix,

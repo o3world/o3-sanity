@@ -11,7 +11,7 @@ export const generateMetadata = route.generateMetadata
 export default function HomePage() {
   return (
     <>
-      {process.env.O3_SPATIAL_GLOBE_ENABLED === '1' && <HeroStarfield />}
+      <HeroStarfield />
       <route.Page />
     </>
   )

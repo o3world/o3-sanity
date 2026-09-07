@@ -18,6 +18,12 @@ type Engine = {
 const GlobeRuntimeContext = createContext<Engine | null>(null)
 const GlobeFailureContext = createContext(false)
 
+export function useGlobeRuntime() {
+  const failed = useContext(GlobeFailureContext)
+  const engine = useContext(GlobeRuntimeContext)
+  return failed ? undefined : engine?.runtime
+}
+
 export function GlobeRenderer({
   hostRef,
   arcs,
@@ -140,7 +146,7 @@ export function GlobeRenderer({
   )
 }
 
-function EnabledGlobeProvider({ children }: { children: ReactNode }) {
+export function GlobeProvider({ children }: { children: ReactNode }) {
   const [engine, setEngine] = useState<Engine | null>(null)
   const [failed, setFailed] = useState(false)
   useEffect(() => {
@@ -180,8 +186,4 @@ function EnabledGlobeProvider({ children }: { children: ReactNode }) {
       </GlobeRuntimeContext.Provider>
     </SpatialMotionProvider>
   )
-}
-
-export function GlobeProvider({ children, enabled }: { children: ReactNode; enabled: boolean }) {
-  return enabled ? <EnabledGlobeProvider>{children}</EnabledGlobeProvider> : children
 }
