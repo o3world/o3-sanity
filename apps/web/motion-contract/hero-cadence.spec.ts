@@ -6,7 +6,7 @@ for (const route of [
     path: '/',
     animated: true,
     parts: '.hero-lead h1 > span:visible, .hero-lead > div:visible',
-    delays: [0, 160, 320, 620],
+    delays: [320, 480, 640, 940],
   },
   {
     path: '/work',

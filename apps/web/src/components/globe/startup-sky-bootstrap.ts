@@ -1,4 +1,4 @@
-import type { globeEntranceOffset, readSkyEntranceOffset } from './globe-entrance'
+import type { readGlobeEntranceTiming, readSkyEntranceOffset } from './globe-entrance'
 import type { createStartupSky } from './startup-sky'
 import type { starHash } from './star-seed'
 
@@ -7,7 +7,7 @@ export function startStartupSky(
   createSky: typeof createStartupSky,
   hash: typeof starHash,
   readSkyOffset: typeof readSkyEntranceOffset,
-  offsetAt: typeof globeEntranceOffset,
+  timingAt: typeof readGlobeEntranceTiming,
 ) {
   if (location.pathname !== '/') return
   const reduced = matchMedia('(prefers-reduced-motion: reduce)')
@@ -45,6 +45,7 @@ export function startStartupSky(
     const canvas = globe?.querySelector<HTMLCanvasElement>('[data-orbital-startup]')
     if (!hero || !globe || !canvas) return
     observer.disconnect()
+    hero.dataset.sceneStart = String(performance.now())
     const context = canvas.getContext('2d')
     if (!context) {
       clearTimeout(deadline)
@@ -103,7 +104,7 @@ export function startStartupSky(
       canvas.style.width = `${width}px`
       canvas.style.height = `${height}px`
       const offset =
-        entrance && !reduced.matches && !still ? readSkyOffset(hero, now, distance, offsetAt) : 0
+        entrance && !reduced.matches && !still ? readSkyOffset(hero, now, distance, timingAt) : 0
       const cameraY = -offset / (g.width / 680)
       const frame = `${w},${h},${cameraY}`
       if (frame !== lastPaint) {

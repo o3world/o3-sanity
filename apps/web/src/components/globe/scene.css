@@ -50,11 +50,26 @@
   animation: none !important;
 }
 
+[data-spatial-layout] .hero-lead h1 > span {
+  --hero-rise-distance: 0.3em;
+}
+
+[data-spatial-layout] .hero-lead > div,
+[data-nav-entrance] #site-nav {
+  --hero-rise-distance: 18px;
+}
+
 /* Navigation starts at first paint, independently of GPU readiness. */
 @media (prefers-reduced-motion: no-preference) {
   [data-nav-entrance] #site-nav {
     animation: var(--animate-hero-wave);
     animation-fill-mode: backwards;
+  }
+}
+
+@media (width < 1024px) {
+  [data-nav-entrance] #site-nav {
+    --hero-rise-distance: 0px;
   }
 }
 
