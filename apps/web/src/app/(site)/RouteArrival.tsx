@@ -4,6 +4,7 @@ import { useLayoutEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { NAV_INK_TARGET, settleNavInk } from '@o3/content-ui/chrome/nav-ink'
 import { syncNavPin } from '@o3/content-ui/chrome/nav-pin'
+import type { GlobeSceneElement } from '@/components/globe/globe-entrance'
 
 /** Animate live foregrounds; authored grounds and native navigation stay intact. */
 export function RouteArrival() {
@@ -13,6 +14,14 @@ export function RouteArrival() {
   useLayoutEffect(() => {
     if (previousPathname.current === pathname) return
     previousPathname.current = pathname
+
+    // The spatial entrance belongs to a direct document load, never a retained route.
+    delete document.documentElement.dataset.spatialEntrance
+    document
+      .querySelectorAll<GlobeSceneElement>('[data-spatial-layout] .hero-band:has(.hero-lead)')
+      .forEach((hero) => {
+        delete hero.__o3SceneStart
+      })
 
     const header = document.getElementById(NAV_INK_TARGET)
     if (header) {

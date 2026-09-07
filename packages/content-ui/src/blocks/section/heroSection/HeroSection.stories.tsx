@@ -118,11 +118,11 @@ const checkCadence =
     delays.forEach((delay, index) => expect(delay).toBeCloseTo(expected[index]!, 2))
   }
 
-export const Cadence: Story = { args: fixture, play: checkCadence([0, 160, 320, 620]) }
+export const Cadence: Story = { args: fixture, play: checkCadence([320, 480, 640, 940]) }
 
 export const CadenceWithoutCopy: Story = {
   args: { ...fixture, subheading: undefined },
-  play: checkCadence([0, 160, 320]),
+  play: checkCadence([320, 480, 640]),
 }
 
 export const LongHeadlineCadence: Story = {
@@ -130,5 +130,7 @@ export const LongHeadlineCadence: Story = {
     ...fixture,
     headlineLines: ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight'],
   },
-  play: checkCadence([0, 53.333, 106.667, 160, 213.333, 266.667, 320, 373.333, 426.667, 726.667]),
+  play: checkCadence([
+    106.667, 160, 213.333, 266.667, 320, 373.333, 426.667, 480, 533.333, 833.333,
+  ]),
 }

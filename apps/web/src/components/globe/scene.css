@@ -50,11 +50,69 @@
   animation: none !important;
 }
 
+[data-spatial-layout] .hero-lead h1 > span {
+  --hero-rise-distance: 0.3em;
+}
+
+[data-spatial-layout] .hero-lead > div,
+[data-nav-entrance] #site-nav {
+  --hero-rise-distance: 18px;
+}
+
+/* Keep copy readable for its entire native scroll exit. */
+[data-spatial-layout] .hero-lead {
+  opacity: 1 !important;
+}
+
+/* Client arrivals are immediately readable; only the document bootstrap opts in. */
+[data-spatial-layout] .hero-lead h1 > span,
+[data-spatial-layout] .hero-lead > div {
+  animation: none;
+}
+
+@keyframes spatial-hero-enter {
+  from {
+    opacity: 0;
+    translate: 0 var(--hero-rise-distance);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-spatial-entrance='true'] [data-spatial-layout] .hero-lead h1 > span,
+  [data-spatial-entrance='true'] [data-spatial-layout] .hero-lead > div {
+    animation: spatial-hero-enter 600ms var(--ease-out) both;
+    /* The shared renderer supplies inline delays; override only this scene. */
+    animation-delay: 300ms !important;
+  }
+
+  [data-spatial-entrance='true'] [data-spatial-layout] .hero-lead h1 > span + span {
+    animation-delay: 400ms !important;
+  }
+
+  [data-spatial-entrance='true'] [data-spatial-layout] .hero-lead > div {
+    animation-delay: 500ms !important;
+  }
+
+  [data-spatial-entrance='true'] [data-spatial-layout] .hero-lead > div ~ div {
+    animation-delay: 600ms !important;
+  }
+}
+
 /* Navigation starts at first paint, independently of GPU readiness. */
 @media (prefers-reduced-motion: no-preference) {
   [data-nav-entrance] #site-nav {
     animation: var(--animate-hero-wave);
     animation-fill-mode: backwards;
+  }
+}
+
+@media (width < 1024px) {
+  [data-nav-entrance] #site-nav {
+    --hero-rise-distance: 0px;
   }
 }
 

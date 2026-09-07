@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import type { ReactNode } from 'react'
 
 import {
   MenuIcon,
@@ -23,6 +24,8 @@ type Settings = NonNullable<SITE_SETTINGS_QUERY_RESULT>
 interface MobileNavMenuProps {
   items: readonly NonNullable<Settings['navItems']>[number][]
   button?: Settings['primaryButton'] | null
+  /** Optional app-owned utilities beneath the menu links and button. */
+  utilities?: ReactNode
 }
 
 /**
@@ -37,7 +40,7 @@ interface MobileNavMenuProps {
  *
  * The only interactive part of the chrome, hence the one client component.
  */
-export function MobileNavMenu({ items, button }: MobileNavMenuProps) {
+export function MobileNavMenu({ items, button, utilities }: MobileNavMenuProps) {
   const [state, setState] = useState<'closed' | 'open' | 'navigated'>('closed')
 
   return (
@@ -65,7 +68,7 @@ export function MobileNavMenu({ items, button }: MobileNavMenuProps) {
             className="bg-ink-deep w-full text-white sm:max-w-sm"
           >
             <SheetTitle className="sr-only">Menu</SheetTitle>
-            <nav aria-label="Menu" className="flex flex-col gap-8 px-5 pt-24">
+            <nav aria-label="Menu" className="flex flex-col gap-8 overflow-y-auto px-5 pb-8 pt-24">
               {items.map((item, i) => (
                 <NavLink
                   key={item._key ?? `nav-${i}`}
@@ -80,6 +83,9 @@ export function MobileNavMenu({ items, button }: MobileNavMenuProps) {
                 <div className="mt-4 self-start">
                   <ButtonLink button={button} onNavigate={() => setState('navigated')} />
                 </div>
+              ) : null}
+              {utilities ? (
+                <div className="border-on-ink-line border-t pt-6">{utilities}</div>
               ) : null}
             </nav>
           </SheetContent>

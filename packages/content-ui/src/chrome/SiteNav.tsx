@@ -20,6 +20,8 @@ interface SiteNavProps {
    * than a page wearing the other brand's logo.
    */
   brandMark: ReactNode
+  /** Optional utilities shown only inside the mobile menu. */
+  menuUtilities?: ReactNode
 }
 
 /**
@@ -135,7 +137,7 @@ interface SiteNavProps {
  */
 const NAV_BUTTON_INK = 'group-data-[ink=dark]:bg-ink group-data-[ink=dark]:text-white'
 
-export function SiteNav({ settings, brandMark }: SiteNavProps) {
+export function SiteNav({ settings, brandMark, menuUtilities }: SiteNavProps) {
   const navItems = settings?.navItems ?? []
   const button = settings?.primaryButton ?? null
   // The resting offset exists to clear the Utility Nav strip, and the strip
@@ -237,7 +239,7 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
           {/* #446: Josh moved the mobile button into the menu only,
             superseding its inline placement in `1814:1632`. */}
           <div className="lg:hidden">
-            <MobileNavMenu items={navItems} button={button} />
+            <MobileNavMenu items={navItems} button={button} utilities={menuUtilities} />
           </div>
         </nav>
       </header>

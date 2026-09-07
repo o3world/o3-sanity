@@ -2,7 +2,7 @@ import 'server-only'
 import { starHash } from './star-seed'
 import { createStartupSky } from './startup-sky'
 import { startStartupSky } from './startup-sky-bootstrap'
-import { globeEntranceOffset, readSkyEntranceOffset } from './globe-entrance'
+import { readGlobeEntranceTiming, readSkyEntranceOffset } from './globe-entrance'
 
 const paths = createStartupSky(starHash)(1440, 1440)
   .map(
@@ -19,7 +19,7 @@ const startup = `(${startStartupSky.toString()})(${[
   createStartupSky,
   starHash,
   readSkyEntranceOffset,
-  globeEntranceOffset,
+  readGlobeEntranceTiming,
 ]
   .map((fn) => fn.toString())
   .join(',')})`

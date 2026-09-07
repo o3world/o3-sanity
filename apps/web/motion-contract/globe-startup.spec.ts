@@ -30,10 +30,14 @@ for (const gpuDelay of [0, 600]) {
       const marks: Record<string, number> = {}
       Object.defineProperty(window, 'globeStartupMarks', { value: marks })
       document.addEventListener('animationend', (event) => {
-        if (event.animationName !== 'hero-wave') return
         const target = event.target as Element
-        if (target.id === 'site-nav') marks.navFinish = performance.now()
-        if (target.matches('.hero-lead h1 > span:first-child')) marks.textFinish = performance.now()
+        if (event.animationName === 'hero-wave' && target.id === 'site-nav')
+          marks.navFinish = performance.now()
+        if (
+          event.animationName === 'spatial-hero-enter' &&
+          target.matches('.hero-lead h1 > span:first-child')
+        )
+          marks.textFinish = performance.now()
       })
       const clear = CanvasRenderingContext2D.prototype.clearRect
       CanvasRenderingContext2D.prototype.clearRect = function (...args) {
@@ -151,8 +155,11 @@ for (const gpuDelay of [0, 600]) {
     expect(marks.skyVisible! - marks.heroPaint!).toBeLessThan(50)
     if (info.project.use.contextOptions?.reducedMotion !== 'reduce') {
       expect(marks.alignmentError).toBeLessThan(0.1)
-      expect(marks.navMinY).toBeLessThan(-5)
-      expect(marks.navMinY).toBeGreaterThan(-7)
+      if (page.viewportSize()!.width < 1024) expect(marks.navMinY).toBe(0)
+      else {
+        expect(marks.navMinY).toBeLessThan(-3.75)
+        expect(marks.navMinY).toBeGreaterThan(-5.25)
+      }
     }
     await expect(page.locator(`${heroSelector} [data-orbital-startup]`)).not.toHaveAttribute(
       'data-painted',

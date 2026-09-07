@@ -250,7 +250,7 @@ export function HeroSection({
 
   // CSS starts at first paint; optional content consumes a beat only when present.
   const lineStagger = heroStagger(lines.length + Number(!!subheading) + Number(!!button))
-  const columnDelay = lines.length * lineStagger
+  const columnDelay = (lines.length + 2) * lineStagger
 
   return (
     // The orbital band always paints ink — the sphere and the white copy over
@@ -323,6 +323,7 @@ export function HeroSection({
            */}
           <h1 className="text-hero font-display space-y-4 text-balance lg:space-y-0">
             <StaggeredLines
+              baseDelay={lineStagger * 2}
               stagger={lineStagger}
               lines={lines.map((line, index) => (
                 // Match 50% white over ink with an opaque gray so the moving

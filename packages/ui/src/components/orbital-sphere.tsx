@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { HTMLAttributes } from 'react'
 
-import { useOrbitalRenderer } from './orbital-sphere-renderer'
+import { useOrbitalRenderer, useOrbitalMotion } from './orbital-sphere-renderer'
 
 import { cn } from '../lib/utils'
 
@@ -430,6 +430,7 @@ export function OrbitalSphere({
   ...rest
 }: OrbitalSphereProps) {
   const Renderer = useOrbitalRenderer()
+  const motionClock = useOrbitalMotion()
   const [gpuReady, setGpuReady] = useState<boolean | undefined>(undefined)
   const loading = !!Renderer && gpuReady === undefined
   const svgActive = !Renderer || gpuReady === false
@@ -469,7 +470,6 @@ export function OrbitalSphere({
      * — so it is gated here, before anything is scheduled.
      */
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
-    if (reduce.matches) return
 
     /* Mutable copies: the render-time descriptors stay pure across re-renders. */
     const phases = arcs.map((a) => a.dots.map((d) => d.t))
@@ -479,6 +479,7 @@ export function OrbitalSphere({
     let smoothX = 0
     let smoothY = 0
     const onMove = (e: MouseEvent) => {
+      if (motionClock?.getSnapshot() || reduce.matches) return
       mx = (e.clientX / window.innerWidth - 0.5) * 2
       my = (e.clientY / window.innerHeight - 0.5) * 2
     }
@@ -501,10 +502,16 @@ export function OrbitalSphere({
     document.addEventListener('visibilitychange', onVisibility)
 
     const omega = (2 * Math.PI) / (70 / GEOMETRY.speed)
-    const t0 = performance.now()
+    const sceneTime = (timestamp: number) => motionClock?.now(timestamp) ?? timestamp
+    const t0 = sceneTime(performance.now())
     let raf = 0
 
-    const frame = (now: number) => {
+    const frame = (timestamp: number) => {
+      raf = 0
+      if (motionClock?.getSnapshot() || reduce.matches) {
+        previous = undefined
+        return
+      }
       raf = requestAnimationFrame(frame)
       if (!visible || document.hidden) {
         previous = undefined
@@ -512,6 +519,7 @@ export function OrbitalSphere({
       }
       // Preserve the former 30Hz electron/easing pace, including its first step,
       // while drawing at display cadence. Paused time never becomes catch-up.
+      const now = sceneTime(timestamp)
       const referenceFrames = previous === undefined ? 1 : ((now - previous) * 30) / 1000
       previous = now
 
@@ -545,15 +553,24 @@ export function OrbitalSphere({
         })
       })
     }
+    const onMotionChange = () => {
+      cancelAnimationFrame(raf)
+      previous = undefined
+      raf = requestAnimationFrame(frame)
+    }
+    const unsubscribe = motionClock?.subscribe(onMotionChange)
+    reduce.addEventListener('change', onMotionChange)
     raf = requestAnimationFrame(frame)
 
     return () => {
       cancelAnimationFrame(raf)
+      unsubscribe?.()
+      reduce.removeEventListener('change', onMotionChange)
       window.removeEventListener('mousemove', onMove)
       document.removeEventListener('visibilitychange', onVisibility)
       io.disconnect()
     }
-  }, [arcs, palette, turning, svgActive])
+  }, [arcs, palette, turning, svgActive, motionClock])
 
   /*
    * `useId` is deliberately not used for the filter ids. The blur radii are the

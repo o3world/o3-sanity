@@ -1,4 +1,8 @@
-import type { globeEntranceOffset, readSkyEntranceOffset } from './globe-entrance'
+import type {
+  GlobeSceneElement,
+  readGlobeEntranceTiming,
+  readSkyEntranceOffset,
+} from './globe-entrance'
 import type { createStartupSky } from './startup-sky'
 import type { starHash } from './star-seed'
 
@@ -7,11 +11,12 @@ export function startStartupSky(
   createSky: typeof createStartupSky,
   hash: typeof starHash,
   readSkyOffset: typeof readSkyEntranceOffset,
-  offsetAt: typeof globeEntranceOffset,
+  timingAt: typeof readGlobeEntranceTiming,
 ) {
   if (location.pathname !== '/') return
   const reduced = matchMedia('(prefers-reduced-motion: reduce)')
   const still = new URLSearchParams(location.search).has('spatial-still')
+  document.documentElement.dataset.spatialEntrance = reduced.matches || still ? 'still' : 'true'
   const finishNavEntrance = () => {
     delete document.documentElement.dataset.navEntrance
     document.removeEventListener('animationend', onNavEnd)
@@ -23,6 +28,14 @@ export function startStartupSky(
   }
   document.documentElement.dataset.spatialChrome = 'true'
   if (!reduced.matches && !still) {
+    reduced.addEventListener(
+      'change',
+      () => {
+        if (document.documentElement.dataset.spatialEntrance === 'true')
+          document.documentElement.dataset.spatialEntrance = 'still'
+      },
+      { once: true },
+    )
     document.documentElement.dataset.navEntrance = 'true'
     document.addEventListener('animationend', onNavEnd)
     reduced.addEventListener('change', finishNavEntrance)
@@ -40,11 +53,21 @@ export function startStartupSky(
   }, 10000)
   const observer = new MutationObserver(start)
   function start() {
-    const hero = document.querySelector<HTMLElement>('.hero-band:has(.hero-lead)')
+    if (
+      location.pathname !== '/' ||
+      !document.documentElement.hasAttribute('data-spatial-entrance')
+    ) {
+      observer.disconnect()
+      clearTimeout(deadline)
+      releaseStartup()
+      return
+    }
+    const hero = document.querySelector<GlobeSceneElement>('.hero-band:has(.hero-lead)')
     const globe = hero?.querySelector<HTMLElement>('.hero-lag > [data-orbital-preset]')
     const canvas = globe?.querySelector<HTMLCanvasElement>('[data-orbital-startup]')
     if (!hero || !globe || !canvas) return
     observer.disconnect()
+    hero.__o3SceneStart = performance.now()
     const context = canvas.getContext('2d')
     if (!context) {
       clearTimeout(deadline)
@@ -75,6 +98,11 @@ export function startStartupSky(
       window.removeEventListener('pagehide', stop)
     }
     const paint = (now: number) => {
+      if (
+        location.pathname !== '/' ||
+        !document.documentElement.hasAttribute('data-spatial-entrance')
+      )
+        return stop()
       if (!hero.isConnected || !globe.isConnected || !canvas.isConnected) return stop()
       if (!globe.hasAttribute('data-orbital-loading') && !globe.hasAttribute('data-orbital-gpu'))
         return stop()
@@ -103,7 +131,18 @@ export function startStartupSky(
       canvas.style.width = `${width}px`
       canvas.style.height = `${height}px`
       const offset =
-        entrance && !reduced.matches && !still ? readSkyOffset(hero, now, distance, offsetAt) : 0
+        entrance && !reduced.matches && !still
+          ? readSkyOffset(
+              hero,
+              (
+                document.documentElement as HTMLElement & {
+                  __o3SpatialMotion?: { now(timestamp: number): number }
+                }
+              ).__o3SpatialMotion?.now(now) ?? now,
+              distance,
+              timingAt,
+            )
+          : 0
       const cameraY = -offset / (g.width / 680)
       const frame = `${w},${h},${cameraY}`
       if (frame !== lastPaint) {

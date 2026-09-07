@@ -8,6 +8,7 @@ import { createGlobeEntrance, readSkyEntranceOffset } from './globe-entrance'
 import { startPhoneTilt } from './phone-tilt'
 import { createSkyHandoff } from './sky-handoff'
 import type { GlobeRuntime } from './globe-runtime'
+import type { SpatialMotion } from './spatial-motion'
 
 export function drawGlobeGeometry(
   pass: Pick<FramePass, 'draw'>,
@@ -32,6 +33,7 @@ export async function startSpatialGlobe(
     stars: boolean
     entrance?: boolean
     quietStars?: boolean
+    spatialMotion?: SpatialMotion
   },
 ) {
   const heroStars = options.stars && !options.quietStars
@@ -122,6 +124,11 @@ export async function startSpatialGlobe(
     let elapsed = 0
     let skyRise = 0
     let skyEntranceDistance: number | undefined
+    let skyState: { elapsed: number; step: number; mix: number } | undefined
+    let cameraOffset = 0
+    let skyCameraOffset = 0
+    let scrollOrbit = 0
+    let motionSampled = false
     let mx = 0,
       my = 0,
       sx = 0,
@@ -136,8 +143,11 @@ export async function startSpatialGlobe(
     let rotation = [0, 0, 0, 1]
     let lastPointer: { x: number; y: number } | undefined
     const reduced = matchMedia('(prefers-reduced-motion: reduce)')
-    const forcedStill = new URLSearchParams(location.search).has('spatial-still')
+    let forcedStill = new URLSearchParams(location.search).has('spatial-still')
     const isStill = () => options.motion === 'still' || forcedStill || reduced.matches
+    const isPaused = () => !isStill() && !!options.spatialMotion?.getSnapshot()
+    const sceneTime = (now: number) => options.spatialMotion?.now(now) ?? now
+    let unsubscribeMotion: (() => void) | undefined
     const phases = arcs.map((arc) => arc.dots.map((dot) => dot.t))
     const cleanup = () => {
       if (dead) return
@@ -154,6 +164,7 @@ export async function startSpatialGlobe(
       window.removeEventListener('scroll', wake)
       document.removeEventListener('visibilitychange', wake)
       reduced.removeEventListener('change', wake)
+      unsubscribeMotion?.()
       if (ready) options.onReady(false)
       if (heroStars) hero.style.removeProperty('--spatial-sky-overhang')
       delete hero.dataset.spatialReady
@@ -173,7 +184,7 @@ export async function startSpatialGlobe(
       options.onReady(false)
     }
     const pointer = (event: PointerEvent) => {
-      if (event.pointerType !== 'mouse' || isStill()) return
+      if (event.pointerType !== 'mouse' || isStill() || isPaused()) return
       const bounds = hero.getBoundingClientRect()
       if (event.clientY < Math.max(0, bounds.top) || event.clientY > bounds.bottom) {
         lastPointer = undefined
@@ -194,6 +205,13 @@ export async function startSpatialGlobe(
       my = (event.clientY / innerHeight - 0.5) * 2
     }
     const wake = () => {
+      if (heroStars) {
+        const mobile = innerWidth < 1024
+        document.documentElement.style.setProperty(
+          '--spatial-nav-solid',
+          String(Math.min(1, Math.max(0, (scrollY - (mobile ? 30 : 100)) / (mobile ? 130 : 240)))),
+        )
+      }
       if (!visible || document.hidden) previous = undefined
       if (!dead && !raf && visible && !document.hidden) {
         previous = undefined
@@ -205,21 +223,24 @@ export async function startSpatialGlobe(
       wake()
     })
     const resizeObserver = new ResizeObserver(wake)
-    const tick = (now: number) => {
+    const tick = (timestamp: number) => {
       raf = 0
       if (dead || signal.aborted) return
       if (!visible || document.hidden) {
         previous = undefined
         return
       }
+      const now = sceneTime(timestamp)
       if (isStill()) hero.dataset.spatialStill = 'true'
       else delete hero.dataset.spatialStill
-      const dt = previous === undefined ? 1 / 30 : (now - previous) / 1000
+      const dt = isPaused() ? 0 : previous === undefined ? 1 / 30 : (now - previous) / 1000
       previous = now
-      const sky = skyHandoff?.sample(now, dt, isStill())
-      const skyStep = sky?.step ?? dt
+      const sampleMotion = !isPaused() || !motionSampled
+      if (sampleMotion) skyState = skyHandoff?.sample(now, dt, isStill())
+      const sky = skyState
+      const skyStep = isPaused() ? 0 : (sky?.step ?? dt)
       const skyMix = sky?.mix ?? 1
-      if (!isStill()) {
+      if (!isStill() && !isPaused()) {
         elapsed += dt
         const ease = 1 - 0.94 ** (dt * 30)
         sx += (mx - sx) * ease
@@ -251,23 +272,29 @@ export async function startSpatialGlobe(
             phases[i]![j]! += dot.sp * 0.15 * dt
           }),
         )
-      } else {
+      } else if (isStill()) {
         sx = 0
         sy = 0
       }
       const heroBounds = hero.getBoundingClientRect()
-      parallax?.update(heroBounds, document.documentElement.clientHeight, dt, isStill())
+      if (sampleMotion)
+        parallax?.update(heroBounds, document.documentElement.clientHeight, dt, isStill())
       // A late GPU frame joins the same sky path, rather than scaling it to
       // the globe's remaining travel after the text has already started.
       skyEntranceDistance ??=
         (innerWidth < 1024
           ? 48
           : Math.max(96, heroBounds.bottom - globe.getBoundingClientRect().top)) * 1.15
-      const cameraOffset = entrance?.update(now, isStill()) ?? 0
-      const skyCameraOffset =
-        entrance && !isStill() && heroBounds.top >= -80
-          ? readSkyEntranceOffset(hero, now, skyEntranceDistance)
-          : 0
+      if (sampleMotion) {
+        cameraOffset = entrance?.update(now, isStill()) ?? 0
+        skyCameraOffset =
+          entrance && !isStill() && heroBounds.top >= -80
+            ? readSkyEntranceOffset(hero, now, skyEntranceDistance)
+            : 0
+        scrollOrbit =
+          isStill() || !heroStars ? 0 : Math.min(1, Math.max(0, scrollY / heroBounds.height)) * 0.08
+      }
+      motionSampled = true
       const overhang = heroStars ? Math.max(0, heroBounds.top + scrollY) : 0
       if (heroStars) {
         hero.style.setProperty('--spatial-sky-overhang', `${overhang}px`)
@@ -292,8 +319,6 @@ export async function startSpatialGlobe(
       // Geometry follows the text; the sky starts its independent descent with the nav.
       const camera = [0, -cameraOffset / geometry[2]!, 0, 0]
       const skyCamera = [0, -skyCameraOffset / geometry[2]!, 0, 0]
-      const scrollOrbit =
-        isStill() || !heroStars ? 0 : Math.min(1, Math.max(0, scrollY / heroBounds.height)) * 0.08
       const motion = [
         isStill() ? 0 : elapsed,
         -sx * 0.045,
@@ -406,21 +431,13 @@ export async function startSpatialGlobe(
               canvas.style.opacity = String(options.opacity)
               const fadeDuration =
                 parseFloat(getComputedStyle(canvas).transitionDuration) * 1000 || 0
-              skyHandoff?.reveal(performance.now(), fadeDuration)
+              skyHandoff?.reveal(sceneTime(performance.now()), fadeDuration)
               options.onReady(true)
             })
             .catch(fail)
         }
-        const mobile = innerWidth < 1024
-        if (heroStars)
-          document.documentElement.style.setProperty(
-            '--spatial-nav-solid',
-            String(
-              Math.min(1, Math.max(0, (scrollY - (mobile ? 30 : 100)) / (mobile ? 130 : 240))),
-            ),
-          )
         canvas.dataset.frame = String(Math.round(elapsed * 1000))
-        if (!isStill()) raf = requestAnimationFrame(tick)
+        if (!isStill() && !isPaused()) raf = requestAnimationFrame(tick)
       } catch (error) {
         fail(error)
       }
@@ -446,7 +463,7 @@ export async function startSpatialGlobe(
         let lastTilt: { x: number; y: number } | undefined
         stopTilt = startPhoneTilt(
           canvas,
-          () => visible && !document.hidden && !isStill(),
+          () => visible && !document.hidden && !isStill() && !isPaused(),
           (x, y, reset) => {
             if (reset) lastTilt = undefined
             if (lastTilt) {
@@ -471,6 +488,15 @@ export async function startSpatialGlobe(
       window.addEventListener('scroll', wake, { passive: true })
       document.addEventListener('visibilitychange', wake)
       reduced.addEventListener('change', wake)
+      unsubscribeMotion = options.spatialMotion?.subscribe(() => {
+        forcedStill = new URLSearchParams(location.search).has('spatial-still')
+        // Cancel only the frame callback; retain the surface, draws and every phase.
+        cancelAnimationFrame(raf)
+        raf = 0
+        previous = undefined
+        lastPointer = undefined
+        wake()
+      })
       canvas.dataset.renderer = 'vgpu'
       wake()
     } catch (error) {
