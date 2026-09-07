@@ -12,7 +12,7 @@ export const THROTTLE = {
 export const TTI_QUIET_WINDOW_MS = 5_000
 
 export interface Metrics {
-  lcp: number
+  lcp: number | null
   cls: number
   inp: number
   tbt: number

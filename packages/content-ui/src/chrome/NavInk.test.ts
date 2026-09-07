@@ -91,7 +91,7 @@ function picture({
 }
 
 /** One frame of the browser's, plus the microtask an observer wakes on. */
-const settle = () => new Promise((resolve) => setTimeout(resolve, 32))
+const settle = () => new Promise((resolve) => setTimeout(resolve, 64))
 
 beforeEach(() => {
   document.body.innerHTML = ''
@@ -434,41 +434,46 @@ describe('the bar is read in columns, and takes the majority', () => {
 })
 
 describe('nav sampling during scroll', () => {
-  it('bounds hit testing while scrolling and reads the final surface', () => {
-    let nextId = 0
-    const pending = new Map<number, FrameRequestCallback>()
-    vi.stubGlobal('requestAnimationFrame', (callback: FrameRequestCallback) => {
-      pending.set(++nextId, callback)
-      return nextId
-    })
-    vi.stubGlobal('cancelAnimationFrame', (id: number) => pending.delete(id))
-    const frame = () => {
-      const callbacks = [...pending.values()]
-      pending.clear()
-      callbacks.forEach((callback) => callback(performance.now()))
-    }
-    const ground = band(DARK)
-    stop = watchNavInk(header)
-    frame()
-    const hitTests = vi.spyOn(document, 'elementsFromPoint')
-    for (let index = 0; index < 30; index++) {
-      if (index === 29) ground.style.backgroundColor = LIGHT
-      window.dispatchEvent(new Event('scroll'))
+  it.each(['scroll', 'mutations', 'both'])(
+    'bounds hit testing during %s and reads the final surface',
+    async (trigger) => {
+      let nextId = 0
+      const pending = new Map<number, FrameRequestCallback>()
+      vi.stubGlobal('requestAnimationFrame', (callback: FrameRequestCallback) => {
+        pending.set(++nextId, callback)
+        return nextId
+      })
+      vi.stubGlobal('cancelAnimationFrame', (id: number) => pending.delete(id))
+      const frame = () => {
+        const callbacks = [...pending.values()]
+        pending.clear()
+        callbacks.forEach((callback) => callback(performance.now()))
+      }
+      const ground = band(DARK)
+      stop = watchNavInk(header)
       frame()
-    }
-    frame()
-    frame()
-    expect(header.dataset.ink).toBe('dark')
-    expect(hitTests.mock.calls.length).toBeGreaterThan(0)
-    expect(hitTests.mock.calls.length).toBeLessThanOrEqual(90)
-    ground.style.backgroundColor = DARK
-    window.dispatchEvent(new Event('scroll'))
-    window.dispatchEvent(new Event('pageshow'))
-    frame()
-    expect(header.dataset.ink).toBeUndefined()
-    stop()
-    expect(pending.size).toBe(0)
-  })
+      const hitTests = vi.spyOn(document, 'elementsFromPoint')
+      for (let index = 0; index < 30; index++) {
+        if (index === 29) ground.style.backgroundColor = LIGHT
+        if (trigger !== 'mutations') window.dispatchEvent(new Event('scroll'))
+        if (trigger !== 'scroll') main.append(document.createElement('span'))
+        await Promise.resolve()
+        frame()
+      }
+      frame()
+      frame()
+      expect(header.dataset.ink).toBe('dark')
+      expect(hitTests.mock.calls.length).toBeGreaterThan(0)
+      expect(hitTests.mock.calls.length).toBeLessThanOrEqual(90)
+      ground.style.backgroundColor = DARK
+      window.dispatchEvent(new Event('scroll'))
+      window.dispatchEvent(new Event('pageshow'))
+      frame()
+      expect(header.dataset.ink).toBeUndefined()
+      stop()
+      expect(pending.size).toBe(0)
+    },
+  )
 })
 
 it('shares computed backgrounds across columns without caching across samples', async () => {

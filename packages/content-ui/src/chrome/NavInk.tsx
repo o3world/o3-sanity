@@ -226,8 +226,8 @@ function intrinsicSize(element: Element): { width: number; height: number } | nu
  * - **A restore from the back/forward cache.** The page comes back with its
  *   effects never re-run, so `pageshow` is the only signal there is.
  *
- * Scroll samples run once per three animation frames and always read the final
- * scroll position. Reflow, content swaps and history restores bypass that delay;
+ * Scroll and DOM mutation samples run once per three animation frames and read
+ * the final ground. Resize and history restores bypass that delay;
  * route commits also settle synchronously through `settleNavInk`.
  *
  * ── A PAGE MID VIEW TRANSITION CANNOT BE HIT-TESTED ────────────────────────
@@ -361,20 +361,20 @@ export function settleNavInk(header: HTMLElement): void {
 
 export function watchNavInk(header: HTMLElement): () => void {
   let frame = 0
-  let scrollFrames = 0
+  let pendingFrames = 0
   const schedule = () => {
-    scrollFrames = 0
+    pendingFrames = 0
     if (!frame) frame = requestAnimationFrame(sample)
   }
-  const scheduleScroll = () => {
+  const scheduleBatched = () => {
     if (frame) return
-    scrollFrames = 2
+    pendingFrames = 2
     frame = requestAnimationFrame(sample)
   }
   const sample = () => {
     frame = 0
-    if (scrollFrames > 0) {
-      scrollFrames--
+    if (pendingFrames > 0) {
+      pendingFrames--
       frame = requestAnimationFrame(sample)
       return
     }
@@ -385,7 +385,7 @@ export function watchNavInk(header: HTMLElement): () => void {
   sample()
   schedule()
 
-  window.addEventListener('scroll', scheduleScroll, { passive: true })
+  window.addEventListener('scroll', scheduleBatched, { passive: true })
   window.addEventListener('resize', schedule, { passive: true })
   window.addEventListener('pageshow', schedule)
 
@@ -397,13 +397,13 @@ export function watchNavInk(header: HTMLElement): () => void {
   // header, and the whole ink flip is styled off it.
   const swap = new MutationObserver((records) => {
     // Chrome cannot replace the ground; changes to the pill's size are observed above.
-    if (records.some((record) => !header.contains(record.target))) schedule()
+    if (records.some((record) => !header.contains(record.target))) scheduleBatched()
   })
   swap.observe(document.body, { childList: true, subtree: true })
 
   return () => {
     if (frame) cancelAnimationFrame(frame)
-    window.removeEventListener('scroll', scheduleScroll)
+    window.removeEventListener('scroll', scheduleBatched)
     window.removeEventListener('resize', schedule)
     window.removeEventListener('pageshow', schedule)
     reflow.disconnect()

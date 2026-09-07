@@ -19,16 +19,18 @@ function agrees(first: number, second: number, tolerance: Tolerance): boolean {
 
 export function stable(row: RouteSamples): boolean {
   const [first, second] = row.samples
-  return (Object.keys(TOLERANCES) as (keyof Metrics)[]).every((metric) =>
-    agrees(first[metric], second[metric], TOLERANCES[metric]),
-  )
+  return (Object.keys(TOLERANCES) as (keyof Metrics)[]).every((metric) => {
+    const a = first[metric]
+    const b = second[metric]
+    return a !== null && b !== null && agrees(a, b, TOLERANCES[metric])
+  })
 }
 
 const rounded = (value: number) => String(Math.round(value))
 const cls = (value: number) => value.toFixed(3)
 
-function pair(first: number, second: number, format = rounded): string {
-  return `${format(first)} / ${format(second)}`
+function pair(first: number | null, second: number | null, format = rounded): string {
+  return `${first === null ? 'unavailable' : format(first)} / ${second === null ? 'unavailable' : format(second)}`
 }
 
 export function formatReport(rows: readonly RouteSamples[], baseUrl: string): string {
@@ -87,6 +89,7 @@ export function formatReport(rows: readonly RouteSamples[], baseUrl: string): st
     '',
     `Stability tolerance: ${tolerance('lcp', ' ms')}; ${tolerance('cls', '')}; ` +
       `${tolerance('inp', ' ms')}; ${tolerance('tbt', ' ms')}.`,
+    'Unavailable LCP is missing browser data, not zero; it fails stability.',
     `Stable routes: ${stableCount}/${rows.length}`,
   ].join('\n')
 }

@@ -30,6 +30,10 @@ describe('loadMetrics', () => {
     expect(loadMetrics(snapshot)).toEqual({ lcp: 500, cls: 0, tbt: 50 })
   })
 
+  it('retains missing LCP without discarding the other load metrics', () => {
+    expect(loadMetrics({ ...snapshot, lcp: 0 })).toEqual({ lcp: null, cls: 0, tbt: 50 })
+  })
+
   it('fails rather than treating an unavailable observer as a stable zero', () => {
     expect(() => loadMetrics({ ...snapshot, errors: ['event: unsupported'] })).toThrow(
       'performance observer failure',
