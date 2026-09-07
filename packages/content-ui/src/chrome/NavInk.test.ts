@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { watchNavInk } from './NavInk'
 
@@ -124,7 +124,11 @@ beforeEach(() => {
   document.getAnimations = () => []
 })
 
-afterEach(() => stop?.())
+afterEach(() => {
+  stop?.()
+  vi.restoreAllMocks()
+  vi.unstubAllGlobals()
+})
 
 /** Wipe the page and repaint it, the way a route change or a reflow does. */
 function repaint(paint: () => void) {
@@ -427,4 +431,64 @@ describe('the bar is read in columns, and takes the majority', () => {
 
     expect(header.dataset.ink).toBeUndefined()
   })
+})
+
+describe('nav sampling during scroll', () => {
+  it('bounds hit testing while scrolling and reads the final surface', () => {
+    let nextId = 0
+    const pending = new Map<number, FrameRequestCallback>()
+    vi.stubGlobal('requestAnimationFrame', (callback: FrameRequestCallback) => {
+      pending.set(++nextId, callback)
+      return nextId
+    })
+    vi.stubGlobal('cancelAnimationFrame', (id: number) => pending.delete(id))
+    const frame = () => {
+      const callbacks = [...pending.values()]
+      pending.clear()
+      callbacks.forEach((callback) => callback(performance.now()))
+    }
+    const ground = band(DARK)
+    stop = watchNavInk(header)
+    frame()
+    const hitTests = vi.spyOn(document, 'elementsFromPoint')
+    for (let index = 0; index < 30; index++) {
+      if (index === 29) ground.style.backgroundColor = LIGHT
+      window.dispatchEvent(new Event('scroll'))
+      frame()
+    }
+    frame()
+    frame()
+    expect(header.dataset.ink).toBe('dark')
+    expect(hitTests.mock.calls.length).toBeGreaterThan(0)
+    expect(hitTests.mock.calls.length).toBeLessThanOrEqual(90)
+    ground.style.backgroundColor = DARK
+    window.dispatchEvent(new Event('scroll'))
+    window.dispatchEvent(new Event('pageshow'))
+    frame()
+    expect(header.dataset.ink).toBeUndefined()
+    stop()
+    expect(pending.size).toBe(0)
+  })
+})
+
+it('shares computed backgrounds across columns without caching across samples', async () => {
+  const ground = band(DARK)
+  const styles = vi.spyOn(window, 'getComputedStyle')
+  stop = watchNavInk(header)
+  expect(styles.mock.calls.filter(([element]) => element === ground)).toHaveLength(1)
+  ground.style.backgroundColor = LIGHT
+  window.dispatchEvent(new Event('pageshow'))
+  await settle()
+  expect(header.dataset.ink).toBe('dark')
+})
+
+it('ignores header-only child changes that cannot replace the ground underneath', async () => {
+  band(DARK)
+  stop = watchNavInk(header)
+  await settle()
+  const hitTests = vi.spyOn(document, 'elementsFromPoint')
+  header.append(document.createElement('span'))
+  await settle()
+  expect(hitTests).not.toHaveBeenCalled()
+  expect(header.dataset.ink).toBeUndefined()
 })
