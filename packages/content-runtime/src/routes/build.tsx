@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import type { ComponentType, JSX, ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -34,9 +33,9 @@ import type {
  * They are also where the rendering strategy lives (#266). Every read goes
  * through `readContent` below, which is the routes' one `'use cache'`
  * boundary; everything a route does outside it — awaiting `params`, reading
- * `draftMode()` — is either known while prerendering or, in the index
- * builder's case, deliberately fenced behind Suspense so the rest of the page
- * can still be a static shell.
+ * `draftMode()` — is known while prerendering for enumerated routes. Index
+ * feeds resolve before the page is returned so their HTML remains usable
+ * without JavaScript.
  *
  * The vtx-web original's i18n (locale param, fallbackOrNotFound,
  * buildAlternates), legacy path rewrites, and materialized-path matching are
@@ -110,7 +109,7 @@ export type IndexParams = Record<string, string | string[] | undefined>
  */
 export interface IndexRouteShim {
   readonly generateMetadata: () => Promise<Metadata>
-  readonly Page: (props: { params?: Promise<IndexParams> }) => JSX.Element
+  readonly Page: (props: { params?: Promise<IndexParams> }) => Promise<JSX.Element>
   /** For `<prefix>/page/[page]`. */
   readonly pageParams: () => Promise<Array<{ page: string }>>
   /** For `<prefix>/<facet>/[<facet>]`. */
@@ -428,11 +427,9 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
   }
 
   /**
-   * The feed, behind the Suspense boundary.
-   *
-   * Its input is `params`, so a prerendered page of the collection is a static
-   * shell the CDN serves. A page nobody enumerated renders on demand once and
-   * is cached from then on, and the boundary is what that once streams into.
+   * Resolve the collection page using its path state and cached content.
+   * Enumerated pages remain prerendered; other valid pages use the same
+   * on-demand cache policy. The caller includes the feed in the page HTML.
    */
   const Feed = async ({ params }: { params?: Promise<IndexParams> }) => {
     const state = readIndexState(facetNames, (await params) ?? {})
@@ -445,9 +442,6 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
       fetchPage(state.page, state.facets, read),
       fetchDocument(read),
     ])
-    // Inside the boundary, so the shell has already flushed with a 200: an
-    // index whose dataset is unreadable renders the 404 body without the 404
-    // status a detail route would send. It is the accepted cost of the hole.
     if (!data) notFound()
 
     const total = (data as { total?: unknown } | null)?.total
@@ -471,13 +465,8 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
   }
 
   /**
-   * The authored bands around the feed, rendered outside the boundary. Reads
-   * only prerender-safe things — `draftMode()` through `currentReadMode`, and
-   * the cached document — so on a published request this is part of the
-   * static shell: the hero is real from the first byte instead of a
-   * guessed-height stand-in that shifts the page when the feed lands. The
-   * feed's own document read agrees on every argument, so the two are one
-   * cache entry.
+   * The authored bands around the feed share its cached document read.
+   * Their order is unchanged: above, feed, below.
    */
   const Chrome = async ({ slot }: { slot: 'above' | 'below' }) => {
     if (!entry.chrome) return null
@@ -485,18 +474,18 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
     return <>{entry.chrome({ document, slot })}</>
   }
 
-  const Page: IndexRouteShim['Page'] = ({ params }) => (
-    <>
-      <Chrome slot="above" />
-      {/* The entry's own picture of its feed, or nothing where it declares
-          none — in which case the hole is whatever the layout's `<main>`
-          paints until the feed arrives on the same response. */}
-      <Suspense fallback={entry.fallback ?? null}>
-        <Feed params={params} />
-      </Suspense>
-      <Chrome slot="below" />
-    </>
-  )
+  const Page: IndexRouteShim['Page'] = async ({ params }) => {
+    // Resolve the feed before the shell flushes. A streamed Suspense payload
+    // needs JavaScript to replace its fallback, even in a prerendered HTML file.
+    const feed = await Feed({ params })
+    return (
+      <>
+        <Chrome slot="above" />
+        {feed}
+        <Chrome slot="below" />
+      </>
+    )
+  }
 
   /**
    * The one facet a path can carry a segment pair for.
