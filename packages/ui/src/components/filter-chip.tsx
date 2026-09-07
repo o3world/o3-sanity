@@ -37,12 +37,12 @@ import { cn } from '../lib/utils'
  * ```
  */
 const filterChipVariants = cva(
-  'inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-btn text-button transition-colors duration-(--duration-hover) ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 px-4 py-3',
+  'inline-flex items-center justify-center gap-3 whitespace-nowrap border rounded-btn text-button transition-colors duration-(--duration-hover) ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 px-4 py-3',
   {
     variants: {
       selected: {
         // Theme=Black (2337:4542) — the chip for the category being shown.
-        true: 'bg-ink text-white',
+        true: 'bg-ink text-white border-ink',
         /*
          * Theme=White (2337:4551). Both of the chip's own colours are on the
          * ramp: the label is `fg-body` — the warm dark grey the 2026-08 frames
@@ -50,7 +50,7 @@ const filterChipVariants = cva(
          * uses.
          */
         false:
-          'bg-white text-fg-body border border-fg-muted hover:bg-ink hover:text-white hover:border-ink',
+          'bg-white text-fg-body border-fg-muted hover:bg-ink hover:text-white hover:border-ink',
       },
     },
     defaultVariants: { selected: false },
