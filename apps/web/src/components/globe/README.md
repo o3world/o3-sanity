@@ -2,7 +2,7 @@
 
 `GlobeProvider` supplies the O3 GPU renderer through `OrbitalRendererContext`. Every existing `OrbitalSphere` placement inherits it: homepage and interior heroes, closing CTA bands, and quote decorations. The shared UI component owns the seeded geometry, palette, layout, motion setting, and SVG fallback. The app owns vgpu, the sky, and GPU lifecycle; other apps keep the SVG renderer.
 
-The provider is enabled in development and in preview/staging builds when `O3_SPATIAL_GLOBE=1`. The web deployment workflow supplies that flag; Turbo includes it in the cache key. Next bakes the resulting boolean into the build so request-time rendering uses the same choice as prerendered pages. `VERCEL_ENV=production` always disables the scene. The production promotion workflow is unchanged. The approved appearance is saved at `4530b605` before extraction.
+The provider runs in every environment. Staging and production use the same renderer and motion behavior without a build flag; the deployed revision determines which changes are live. GPU capability and startup failures still retain the SVG fallback.
 
 The enabled site provider starts loading the separate renderer chunk immediately on mount and warms the globe shaders before a canvas is needed. `globe-runtime.ts` owns one GPU device and its pipeline cache for the provider's lifetime, including client-side page navigation. Each placement borrows independent draw objects from a reusable pool; the pool grows only to the concurrent high-water mark. Unmounting a globe returns its draws and disposes its surface and listeners without destroying the shared device. Provider teardown destroys the device; failed startup or device loss clears the cache so a later placement can retry. Device loss restores SVG fallbacks for active globes.
 
@@ -18,7 +18,7 @@ The production build and rendering-strategy assertion passed with the existing p
 
 Staging device checks: benchmark GPU/frame cost on physical mobile hardware and with multiple visible instances, exercise actual device loss and reduced-motion settings, and review quote/background placements with representative content. Instances share a GPU device and recycle draws; offscreen pausing is verified, but physical-device GPU timing and memory are not benchmarked. These limits are not a claim of production readiness.
 
-Build the enabled release locally with `O3_SPATIAL_GLOBE=1 VERCEL_ENV=preview pnpm --filter @o3/web build`, then run `pnpm build:assert`. `scene.css` owns the accepted hero, navigation, and utility-link placement alongside the renderer.
+Build locally with `pnpm --filter @o3/web build`, then run `pnpm build:assert`. `scene.css` owns the accepted hero, navigation, and utility-link placement alongside the renderer.
 
 Shared-startup validation: 25 focused globe tests, web typecheck, and scoped lint passed. Local browser navigation through Work, Solutions, Insights, About, and back to Work, including each closing CTA, retained one live device and five compiled pipelines throughout. React development Strict Mode also created and immediately disposed one cancelled startup device. At 402px, the category-page closing CTA rendered without horizontal overflow or page errors, reduced motion held its frame counter at zero, and disabling WebGPU restored the fully visible SVG. Cold adapter startup remains browser-dependent; this is not a production performance benchmark.
 

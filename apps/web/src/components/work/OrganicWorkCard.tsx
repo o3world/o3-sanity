@@ -1,34 +1,14 @@
 'use client'
 
-import {
-  useEffect,
-  useId,
-  useRef,
-  useSyncExternalStore,
-  type CSSProperties,
-  type ReactNode,
-} from 'react'
+import { useEffect, useId, useRef, type CSSProperties, type ReactNode } from 'react'
 import { useSpatialMotion } from '../globe/SpatialMotionProvider'
-import './work-membrane-prototype.css'
+import './work-cards.css'
 import { membranePath } from './work-membrane-path'
 
-export const subscribeWorkStudy = (listener: () => void) => {
-  const refresh = () => {
-    document.documentElement.dataset.workStudy = readWorkStudy()
-    listener()
-  }
-  refresh()
-  window.addEventListener('popstate', refresh)
-  return () => window.removeEventListener('popstate', refresh)
-}
-export const readWorkStudy = () => new URLSearchParams(location.search).get('workMembrane') ?? 'off'
-export const noWorkStudy = () => 'off'
 const clamp = (value: number, limit: number) => Math.max(-limit, Math.min(limit, value))
 
-/** Local homepage study: can the case cards themselves behave like floating membranes? */
-export function WorkMembranePrototype({ children }: { children: ReactNode }) {
-  const mode = useSyncExternalStore(subscribeWorkStudy, readWorkStudy, noWorkStudy)
-  const enabled = mode === 'on' || mode === 'ambient'
+/** Keep the existing case card content inside a floating, continuously curved surface. */
+export function OrganicWorkCard({ children }: { children: ReactNode }) {
   const id = useId().replaceAll(':', '')
   const rootRef = useRef<HTMLDivElement>(null)
   const pathRef = useRef<SVGPathElement>(null)
@@ -36,13 +16,11 @@ export function WorkMembranePrototype({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const root = rootRef.current
-    if (!enabled || !root) return
-    if (document.documentElement.hasAttribute('data-work-cards-hidden')) return
+    if (!root) return
     let raf = 0
     let visible = false
     let last = 0
     let elapsed = 0
-    const responsive = mode === 'on'
     const layout = root.parentElement!
     const index = Array.from(layout.parentElement!.children).indexOf(layout)
     const depth = 0.03 + (index % 3) * 0.006
@@ -87,7 +65,7 @@ export function WorkMembranePrototype({ children }: { children: ReactNode }) {
       }
     }
     const pointerMove = (event: PointerEvent) => {
-      if (!responsive || !visible || paused() || event.pointerType !== 'mouse') return
+      if (!visible || paused() || event.pointerType !== 'mouse') return
       const now = performance.now()
       const dt = (now - pointerAt) / 1000
       const dx = Math.max(left - event.clientX, 0, event.clientX - left - width)
@@ -110,26 +88,24 @@ export function WorkMembranePrototype({ children }: { children: ReactNode }) {
       const dt = last ? Math.min(now - last, 32) / 1000 : 1 / 60
       if (!paused()) {
         elapsed += dt * 0.35
-        if (responsive) {
-          const scrollVelocity = clamp((window.scrollY - previousScroll) / dt, 1800)
-          const parallax = clamp(
-            (window.scrollY + window.innerHeight / 2 - top - height / 2) * depth,
-            mobile ? 16 : 28,
-          )
-          const targetX = mobile ? 0 : impulseX * 0.008
-          const targetY =
-            parallax + clamp(scrollVelocity * 0.018, mobile ? 22 : 30) + clamp(impulseY * 0.007, 10)
-          // A damped spring retains momentum after input stops; no wheel or scroll interception.
-          velocityX += ((targetX - offsetX) * 75 - velocityX * 17) * dt
-          velocityY += ((targetY - offsetY) * 42 - velocityY * 12.5) * dt
-          offsetX += velocityX * dt
-          offsetY += velocityY * dt
-          const follow = 1 - Math.exp(-dt * 9)
-          bendX += (clamp(impulseX * 0.000007 + velocityX * 0.00012, 0.013) - bendX) * follow
-          bendY += (clamp(scrollVelocity * 0.000007 + impulseY * 0.000006, 0.016) - bendY) * follow
-          impulseX *= Math.exp(-dt * 6)
-          impulseY *= Math.exp(-dt * 6)
-        }
+        const scrollVelocity = clamp((window.scrollY - previousScroll) / dt, 1800)
+        const parallax = clamp(
+          (window.scrollY + window.innerHeight / 2 - top - height / 2) * depth,
+          mobile ? 16 : 28,
+        )
+        const targetX = mobile ? 0 : impulseX * 0.008
+        const targetY =
+          parallax + clamp(scrollVelocity * 0.018, mobile ? 22 : 30) + clamp(impulseY * 0.007, 10)
+        // A damped spring retains momentum after input stops; no wheel or scroll interception.
+        velocityX += ((targetX - offsetX) * 75 - velocityX * 17) * dt
+        velocityY += ((targetY - offsetY) * 42 - velocityY * 12.5) * dt
+        offsetX += velocityX * dt
+        offsetY += velocityY * dt
+        const follow = 1 - Math.exp(-dt * 9)
+        bendX += (clamp(impulseX * 0.000007 + velocityX * 0.00012, 0.013) - bendX) * follow
+        bendY += (clamp(scrollVelocity * 0.000007 + impulseY * 0.000006, 0.016) - bendY) * follow
+        impulseX *= Math.exp(-dt * 6)
+        impulseY *= Math.exp(-dt * 6)
       }
       previousScroll = window.scrollY
       last = now
@@ -202,27 +178,23 @@ export function WorkMembranePrototype({ children }: { children: ReactNode }) {
       document.removeEventListener('visibilitychange', refresh)
       reduced.removeEventListener('change', refresh)
     }
-  }, [enabled, mode, motion])
+  }, [motion])
 
   return (
     <div
       ref={rootRef}
-      className="work-organic-card-study"
+      className="work-organic-card"
       style={{ '--work-card-clip': `url(#work-clip-${id})` } as CSSProperties}
-      onDragStart={enabled ? (event) => event.preventDefault() : undefined}
-      onClickCapture={
-        enabled
-          ? (event) => {
-              const selection = window.getSelection()
-              if (
-                selection &&
-                !selection.isCollapsed &&
-                event.currentTarget.contains(selection.anchorNode)
-              )
-                event.preventDefault()
-            }
-          : undefined
-      }
+      onDragStart={(event) => event.preventDefault()}
+      onClickCapture={(event) => {
+        const selection = window.getSelection()
+        if (
+          selection &&
+          !selection.isCollapsed &&
+          event.currentTarget.contains(selection.anchorNode)
+        )
+          event.preventDefault()
+      }}
     >
       <svg className="work-organic-card-clip" width="0" height="0" aria-hidden="true">
         <defs>

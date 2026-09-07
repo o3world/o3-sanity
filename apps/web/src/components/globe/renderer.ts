@@ -37,10 +37,7 @@ export async function startSpatialGlobe(
   },
 ) {
   const heroStars = options.stars && !options.quietStars
-  const depthScrollSky =
-    heroStars &&
-    process.env.NEXT_PUBLIC_WORK_MEMBRANE_STUDY === '1' &&
-    new URLSearchParams(location.search).get('workMembrane') === 'on'
+  const depthScrollSky = heroStars
   const footerStars = options.stars && !!options.quietStars && hero.matches('.cta-band')
   const skyResponse = footerStars ? 0.5 : options.quietStars ? 0.2 : 1
   const lease = await runtime.acquire()

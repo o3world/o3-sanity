@@ -4,7 +4,6 @@ import { Figtree } from 'next/font/google'
 
 import { AnchorGlide } from '@o3/ui'
 import { HeroStartup } from '@/components/globe/HeroStarfield'
-import { WorkStudyStartup } from '@/components/prototypes/WorkStudyStartup'
 import { getBaseUrl } from '@o3/content-runtime/base-url'
 
 import '@/app/globals.css'
@@ -55,8 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       style={{ backgroundColor: 'var(--page-background, #000)' }}
     >
       <body className="text-fg font-sans antialiased">
-        {process.env.NEXT_PUBLIC_WORK_MEMBRANE_STUDY === '1' && <WorkStudyStartup />}
-        {process.env.O3_SPATIAL_GLOBE_ENABLED === '1' && <HeroStartup />}
+        <HeroStartup />
         {children}
         <AnchorGlide />
       </body>

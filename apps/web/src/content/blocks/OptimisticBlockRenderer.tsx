@@ -7,7 +7,7 @@ import type { SanityBlock } from '@o3/sanity/types'
 import { dataAttr, rootFieldLoc } from '@o3/content-runtime/data-attribute'
 import { renderDispatchedBlocks } from '@o3/content-runtime/blocks'
 import { SectionReveal } from '@o3/content-ui'
-import { CaseStudySectionReveal, hasCaseStudyMotion } from './caseStudyMotion'
+import { CaseStudySectionReveal } from './caseStudyMotion'
 
 import { BLOCK_COMPONENTS } from './clientComponents'
 import { reconcileOptimisticOrder } from './optimisticOrder'
@@ -96,7 +96,7 @@ export function OptimisticBlockRenderer({
         documentId,
         documentType,
         fieldPath,
-        BlockWrapper: hasCaseStudyMotion(documentId) ? CaseStudySectionReveal : SectionReveal,
+        BlockWrapper: documentType === 'caseStudy' ? CaseStudySectionReveal : SectionReveal,
       })}
     </div>
   )

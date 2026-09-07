@@ -27,8 +27,8 @@ import { StatGroup } from '@/components/blocks/StatGroup'
 
 import { StatsSection } from './statsSection/StatsSection'
 import { CaseStudyCard } from '@/components/cards/CaseStudyCard'
-import { WorkMembranePrototype } from '@/components/prototypes/WorkMembranePrototype'
-import { WorkStarfieldPrototype } from '@/components/prototypes/WorkStarfieldPrototype'
+import { OrganicWorkCard } from '@/components/work/OrganicWorkCard'
+import { WorkStarfield } from '@/components/work/WorkStarfield'
 
 // The renderers themselves are shared (@o3/content-ui); the binding below is
 // this app's. Re-pointing one line here is what "O3XO adapts a block" costs.
@@ -121,27 +121,25 @@ export const CARD_COMPONENTS = bindingsToRecord(CARD_BINDINGS) satisfies AppFirs
  * heading row and washes are the shared renderer's; only the card is O3's.
  */
 function CaseShowcaseSectionWithCard(props: SectionProps<'caseShowcaseSection'>) {
-  const study = process.env.NEXT_PUBLIC_WORK_MEMBRANE_STUDY === '1'
-  const section = (
-    <CaseShowcaseSection
-      {...props}
-      cardComponents={
-        study ? { ...CARD_COMPONENTS, caseStudy: OrganicCaseCardStudy } : CARD_COMPONENTS
-      }
-    />
+  return (
+    <WorkStarfield>
+      <CaseShowcaseSection
+        {...props}
+        cardComponents={{ ...CARD_COMPONENTS, caseStudy: OrganicCaseCard }}
+      />
+    </WorkStarfield>
   )
-  return study ? <WorkStarfieldPrototype>{section}</WorkStarfieldPrototype> : section
 }
 
 function InsightsCarouselSectionWithHeading(props: SectionProps<'insightsCarouselSection'>) {
   return <InsightsCarouselSection {...props} headingSize="hero" />
 }
 
-function OrganicCaseCardStudy(props: ComponentProps<typeof CaseStudyCard>) {
+function OrganicCaseCard(props: ComponentProps<typeof CaseStudyCard>) {
   return (
-    <WorkMembranePrototype>
+    <OrganicWorkCard>
       <CaseStudyCard {...props} />
-    </WorkMembranePrototype>
+    </OrganicWorkCard>
   )
 }
 

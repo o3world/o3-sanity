@@ -146,7 +146,7 @@ export function GlobeRenderer({
   )
 }
 
-function EnabledGlobeProvider({ children }: { children: ReactNode }) {
+export function GlobeProvider({ children }: { children: ReactNode }) {
   const [engine, setEngine] = useState<Engine | null>(null)
   const [failed, setFailed] = useState(false)
   useEffect(() => {
@@ -186,8 +186,4 @@ function EnabledGlobeProvider({ children }: { children: ReactNode }) {
       </GlobeRuntimeContext.Provider>
     </SpatialMotionProvider>
   )
-}
-
-export function GlobeProvider({ children, enabled }: { children: ReactNode; enabled: boolean }) {
-  return enabled ? <EnabledGlobeProvider>{children}</EnabledGlobeProvider> : children
 }

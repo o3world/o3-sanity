@@ -1,9 +1,8 @@
 'use client'
 
-import { useEffect, useRef, useSyncExternalStore, type ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 import { useGlobeRuntime } from '../globe/GlobeProvider'
 import { useSpatialMotion } from '../globe/SpatialMotionProvider'
-import { subscribeWorkStudy, readWorkStudy, noWorkStudy } from './WorkMembranePrototype'
 import { workStarCameraY } from './work-starfield-camera'
 
 const smooth = (value: number) => {
@@ -12,9 +11,7 @@ const smooth = (value: number) => {
 }
 
 /** The existing sky's depth-aware entrance travel, scrubbed along Y through the work section. */
-export function WorkStarfieldPrototype({ children }: { children: ReactNode }) {
-  const mode = useSyncExternalStore(subscribeWorkStudy, readWorkStudy, noWorkStudy)
-  const enabled = mode === 'on'
+export function WorkStarfield({ children }: { children: ReactNode }) {
   const runtime = useGlobeRuntime()
   const motion = useSpatialMotion()
   const rootRef = useRef<HTMLDivElement>(null)
@@ -23,7 +20,7 @@ export function WorkStarfieldPrototype({ children }: { children: ReactNode }) {
   useEffect(() => {
     const root = rootRef.current
     const canvas = canvasRef.current
-    if (!enabled || !root || !canvas || !runtime) return
+    if (!root || !canvas || !runtime) return
     let disposed = false
     let stop: (() => void) | undefined
     void import('vgpu')
@@ -113,11 +110,11 @@ export function WorkStarfieldPrototype({ children }: { children: ReactNode }) {
       disposed = true
       stop?.()
     }
-  }, [enabled, runtime, motion])
+  }, [runtime, motion])
 
   return (
-    <div className="work-sky-study" ref={rootRef}>
-      <div className="work-sky-study-layer" aria-hidden="true">
+    <div className="work-starfield" ref={rootRef}>
+      <div className="work-starfield-layer" aria-hidden="true">
         <canvas ref={canvasRef} />
       </div>
       {children}

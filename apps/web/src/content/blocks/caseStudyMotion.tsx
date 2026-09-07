@@ -2,17 +2,12 @@ import type { DispatchedBlockWrapperProps, SectionProps } from '@o3/content-runt
 import { MediaSection, ScreenGridSection, SectionReveal } from '@o3/content-ui'
 import { stegaClean } from '@sanity/client/stega'
 
-/** The accepted IRONMAN tracer is the only document opting into these scenes. */
-export function hasCaseStudyMotion(documentId?: string) {
-  return documentId?.replace(/^drafts\./, '') === 'caseStudy-wp-10028'
-}
-
 export function CaseStudyMediaSection(props: SectionProps<'mediaSection'>) {
-  return <MediaSection {...props} sequence={hasCaseStudyMotion(props.loc?.id)} />
+  return <MediaSection {...props} sequence={props.loc?.type === 'caseStudy'} />
 }
 
 export function CaseStudyScreenGridSection(props: SectionProps<'screenGridSection'>) {
-  return <ScreenGridSection {...props} sequence={hasCaseStudyMotion(props.loc?.id)} />
+  return <ScreenGridSection {...props} sequence={props.loc?.type === 'caseStudy'} />
 }
 
 /** A capture owns its inner motion, so its enclosing band stays painted and still. */

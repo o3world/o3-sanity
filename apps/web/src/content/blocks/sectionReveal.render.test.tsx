@@ -75,3 +75,34 @@ describe('the hero', () => {
     expect(html.match(/data-reveal/g)).toHaveLength(1)
   })
 })
+
+describe('case-study captures', () => {
+  it('lets each screen enter without fading its enclosing band', () => {
+    const html = renderToStaticMarkup(
+      <BlockRenderer
+        documentId="caseStudy-another-client"
+        documentType="caseStudy"
+        fieldPath="story"
+        blocks={
+          [
+            {
+              _key: 'screens',
+              _type: 'screenGridSection',
+              surface: 'white',
+              screens: [
+                {
+                  _key: 'screen',
+                  media: { image: null, alt: 'Homepage' },
+                  tone: 'ink',
+                  span: 'wide',
+                },
+              ],
+            },
+          ] as unknown as SanityBlock[]
+        }
+      />,
+    )
+    expect(html).toContain('data-reveal-step="screen"')
+    expect(html).not.toContain('data-reveal=""')
+  })
+})
