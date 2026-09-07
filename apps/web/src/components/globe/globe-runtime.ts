@@ -1,4 +1,4 @@
-import { draw, init, type Gpu, type DrawOptions } from 'vgpu'
+import { draw, geometry, init, type Gpu, type DrawOptions } from 'vgpu'
 import {
   dotShader,
   globeCompositeShader,
@@ -9,8 +9,8 @@ import {
 } from './shaders'
 
 const recipes = {
-  orbit: { shader: orbitShader, vertices: 576 * 12 * 6 },
-  dot: { shader: dotShader, vertices: 32 * 16 * 6 },
+  orbit: { shader: orbitShader },
+  dot: { shader: dotShader },
   composite: { shader: globeCompositeShader, vertices: 3, depth: false },
   heatHaze: {
     shader: heatHazeShader,
@@ -44,9 +44,25 @@ type Kind = keyof typeof recipes
 type Drawing = ReturnType<typeof draw>
 type State = {
   gpu: Gpu
+  recipes: Record<Kind, DrawOptions>
   pool: Map<Kind, Drawing[]>
   errors: Set<(error: unknown) => void>
   stopErrors: () => void
+}
+
+/** Keep every original triangle, sharing its corner vertices within each solid mesh. */
+function solidGrid(gpu: Gpu, columns: number, rows: number) {
+  const indices = new Uint16Array(columns * rows * 6)
+  let cursor = 0
+  for (let column = 0; column < columns; column++) {
+    for (let row = 0; row < rows; row++) {
+      const a = column * (rows + 1) + row
+      const b = a + rows + 1
+      indices.set([a, b, a + 1, a + 1, b, b + 1], cursor)
+      cursor += 6
+    }
+  }
+  return geometry(gpu, { buffers: [], indices })
 }
 
 /** One device and pipeline cache per mounted site provider; draws recycle between placements. */
@@ -75,6 +91,7 @@ export function createGlobeRuntime() {
       }
       const state: State = {
         gpu,
+        recipes: { ...recipes },
         pool: new Map(),
         errors: new Set(),
         stopErrors: () => {},
@@ -89,13 +106,15 @@ export function createGlobeRuntime() {
         dispose()
       })
       try {
+        state.recipes.orbit = { ...recipes.orbit, geometry: solidGrid(gpu, 576, 12) }
+        state.recipes.dot = { ...recipes.dot, geometry: solidGrid(gpu, 32, 16) }
         const signature = {
           colors: [navigator.gpu.getPreferredCanvasFormat()],
           sampleCount: 1 as const,
         }
         await Promise.all(
           (Object.keys(recipes) as Kind[]).map(async (kind) => {
-            const item = draw(gpu, recipes[kind])
+            const item = draw(gpu, state.recipes[kind])
             state.pool.set(kind, [item])
             await item.compile(
               kind === 'composite'
@@ -131,7 +150,7 @@ export function createGlobeRuntime() {
       return {
         gpu: state.gpu,
         draw(kind: Kind) {
-          const item = state.pool.get(kind)?.pop() ?? draw(state.gpu, recipes[kind])
+          const item = state.pool.get(kind)?.pop() ?? draw(state.gpu, state.recipes[kind])
           borrowed.push([kind, item])
           return item
         },

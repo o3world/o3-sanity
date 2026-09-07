@@ -93,15 +93,11 @@ async function Shell({ children }: ShellProps) {
       {/* After `<main>`, so the arriving page's bands are parsed when it reads
           them, and inline, so it reads them before the first paint. */}
       <NavInkFirstPaint />
-      {spatialEnabled && (
-        <div className="spatial-footer-properties">
-          <UtilityNav settings={settings} />
-        </div>
-      )}
       <SiteFooter
         settings={settings}
         brandMark={FOOTER_MARK}
         year={year}
+        utilityNavItems={spatialEnabled ? settings?.utilityNavItems : undefined}
         utilities={spatialEnabled ? <SpatialMotionControl /> : undefined}
       />
       {/* Nothing visible renders here for a published visitor, so `null` is an

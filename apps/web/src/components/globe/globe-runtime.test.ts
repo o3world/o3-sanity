@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import { createGlobeRuntime } from './globe-runtime'
 
-const mocks = vi.hoisted(() => ({ init: vi.fn(), draw: vi.fn() }))
+const mocks = vi.hoisted(() => ({ init: vi.fn(), draw: vi.fn(), geometry: vi.fn() }))
 vi.mock('vgpu', () => mocks)
 
 function device() {
@@ -15,6 +15,7 @@ function device() {
 beforeEach(() => {
   vi.clearAllMocks()
   mocks.draw.mockImplementation(() => ({ compile: vi.fn(async () => {}) }))
+  mocks.geometry.mockImplementation(() => ({ destroy: vi.fn() }))
   vi.stubGlobal('navigator', { gpu: { getPreferredCanvasFormat: () => 'bgra8unorm' } })
 })
 afterEach(() => vi.unstubAllGlobals())
@@ -43,6 +44,48 @@ it('warms once, shares one device between concurrent globes, and recycles draws 
   third.release()
   runtime.dispose()
   expect(gpu.dispose).toHaveBeenCalledOnce()
+})
+
+it('shares the solid mesh buffers across concurrent placements and repeat visits', async () => {
+  mocks.init.mockResolvedValue(device())
+  const runtime = createGlobeRuntime()
+  const first = await runtime.acquire()
+  first.draw('orbit')
+  first.draw('orbit')
+  const second = await runtime.acquire()
+  second.draw('orbit')
+  second.draw('dot')
+  first.release()
+  const next = await runtime.acquire()
+  next.draw('dot')
+  expect(mocks.geometry).toHaveBeenCalledTimes(2)
+  const meshes = mocks.geometry.mock.results.map(({ value }) => value)
+  const orbitDraws = mocks.draw.mock.calls
+    .map(([, options]) => options)
+    .filter((options) => options.geometry === meshes[0])
+  expect(orbitDraws).toHaveLength(3)
+  expect(mocks.draw.mock.calls.some(([, options]) => options.geometry === meshes[1])).toBe(true)
+  second.release()
+  next.release()
+  runtime.dispose()
+})
+
+it('keeps the quieter sky within one 1100-star draw using the shared star shader', async () => {
+  mocks.init.mockResolvedValue(device())
+  const runtime = createGlobeRuntime()
+  const lease = await runtime.acquire()
+  const hero = lease.draw('stars')
+  const quiet = lease.draw('quietStars')
+  const recipeFor = (item: unknown) =>
+    mocks.draw.mock.calls[mocks.draw.mock.results.findIndex(({ value }) => value === item)]![1]
+  const heroRecipe = recipeFor(hero)
+  expect(recipeFor(quiet)).toMatchObject({
+    shader: heroRecipe.shader,
+    vertices: 6,
+    instances: 1100,
+  })
+  lease.release()
+  runtime.dispose()
 })
 
 it('drops a failed warm-up and retries with a new device', async () => {

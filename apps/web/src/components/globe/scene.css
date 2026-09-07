@@ -137,16 +137,6 @@
   backdrop-filter: blur(calc(16px * var(--spatial-nav-solid, 0))) saturate(1.25);
 }
 
-/* Keep the property links available in the prototype's footer at every size. */
-.spatial-footer-properties nav[aria-label='O3 properties'] {
-  display: flex;
-  flex-wrap: wrap;
-  height: auto;
-  min-height: 69px;
-  padding-block: 24px;
-  border: 0;
-}
-
 /* Reserve a separate globe row after the naturally sized text column. */
 [data-spatial-layout] .hero-band:has(.hero-lead) {
   display: grid;

@@ -100,7 +100,7 @@ export function UtilityNav({ settings }: UtilityNavProps) {
  * the smallest honest translation of "this row responds" onto artwork whose
  * colours are the property's, not ours.
  */
-function UtilityNavLink({ item }: { item: UtilityNavItem }) {
+export function UtilityNavLink({ item }: { item: UtilityNavItem }) {
   const button = item._type === 'brandLogo' ? item.button : item
   const label = button?.label ?? ''
 

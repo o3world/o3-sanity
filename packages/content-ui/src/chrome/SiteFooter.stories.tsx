@@ -44,6 +44,10 @@ type Story = StoryObj<typeof meta>
 
 export const AsAuthored: Story = {}
 
+export const PropertyLogos: Story = {
+  args: { utilityNavItems: SITE_SETTINGS?.utilityNavItems },
+}
+
 /** `2225:2671` — the 402 arrangement, where the 'O' centres on the left edge. */
 export const Mobile: Story = {
   globals: { backgrounds: { value: 'ink' }, viewport: { value: 'mobile' } },

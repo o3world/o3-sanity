@@ -5,6 +5,7 @@ import { SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { resolveButtonHref } from '../buttonDestination'
+import { UtilityNavLink } from './UtilityNav'
 
 interface SiteFooterProps {
   settings: SITE_SETTINGS_QUERY_RESULT
@@ -18,6 +19,8 @@ interface SiteFooterProps {
   year: number
   /** Optional app-owned utilities alongside the legal links. */
   utilities?: ReactNode
+  /** Render matching footer destinations with their authored property logos. */
+  utilityNavItems?: NonNullable<SITE_SETTINGS_QUERY_RESULT>['utilityNavItems']
 }
 
 /**
@@ -32,7 +35,13 @@ interface SiteFooterProps {
  * Every string still comes from Site Settings (#19); the component decides
  * only the arrangement.
  */
-export function SiteFooter({ settings, brandMark, year, utilities }: SiteFooterProps) {
+export function SiteFooter({
+  settings,
+  brandMark,
+  year,
+  utilities,
+  utilityNavItems,
+}: SiteFooterProps) {
   const groups = settings?.footerGroups ?? []
   const socialLinks = settings?.socialLinks ?? []
   const legalLinks = settings?.legalLinks ?? []
@@ -94,7 +103,12 @@ export function SiteFooter({ settings, brandMark, year, utilities }: SiteFooterP
                   <FooterColumn label={leadGroup.label}>
                     {(leadGroup.links ?? []).map((link) => (
                       <li key={link._key}>
-                        <FooterLink href={resolveButtonHref(link)}>{link.label}</FooterLink>
+                        <FooterLink
+                          href={resolveButtonHref(link)}
+                          utilityNavItems={utilityNavItems}
+                        >
+                          {link.label}
+                        </FooterLink>
                       </li>
                     ))}
                   </FooterColumn>
@@ -122,7 +136,12 @@ export function SiteFooter({ settings, brandMark, year, utilities }: SiteFooterP
                   <FooterColumn key={group._key} label={group.label}>
                     {(group.links ?? []).map((link) => (
                       <li key={link._key}>
-                        <FooterLink href={resolveButtonHref(link)}>{link.label}</FooterLink>
+                        <FooterLink
+                          href={resolveButtonHref(link)}
+                          utilityNavItems={utilityNavItems}
+                        >
+                          {link.label}
+                        </FooterLink>
                       </li>
                     ))}
                   </FooterColumn>
@@ -188,12 +207,25 @@ function FooterColumn({ label, children }: { label?: string | null; children: Re
       <p className="text-brand mb-3 text-[14px] font-semibold uppercase tracking-[0.07em]">
         {label}
       </p>
-      <ul className="flex flex-col gap-3">{children}</ul>
+      <ul className="flex flex-col gap-3 has-[img]:gap-6">{children}</ul>
     </div>
   )
 }
 
-function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
+function FooterLink({
+  href,
+  children,
+  utilityNavItems,
+}: {
+  href: string
+  children: React.ReactNode
+  utilityNavItems?: SiteFooterProps['utilityNavItems']
+}) {
+  const logo = utilityNavItems?.find(
+    (item) => item._type === 'brandLogo' && resolveButtonHref(item.button ?? {}) === href,
+  )
+  if (logo) return <UtilityNavLink item={logo} />
+
   return (
     <Link
       href={href}

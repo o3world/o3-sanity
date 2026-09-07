@@ -7,6 +7,54 @@ type EntranceWindow = Window & {
   navTravel: number
 }
 const globeSelector = '.hero-band:has(.hero-lead) .hero-lag > [data-orbital-preset]'
+type SkyWindow = Window & { skyCoverage: number[] }
+
+test('internal Home arrivals keep the sky visible throughout the GPU handoff', async ({ page }) => {
+  await page.addInitScript(() => {
+    const probe = window as unknown as SkyWindow
+    probe.skyCoverage = []
+    const sample = () => {
+      const hero = [...document.querySelectorAll('.hero-band:has(.hero-lead)')].find(
+        (element) => element.getBoundingClientRect().height > 0,
+      )
+      if (location.pathname === '/' && hero) {
+        const gpu = hero.querySelector('.spatial-globe-canvas')
+        const startup = hero.querySelector('[data-orbital-startup][data-painted]')
+        probe.skyCoverage.push(
+          Number(getComputedStyle(hero, '::before').opacity) +
+            (gpu ? Number(getComputedStyle(gpu).opacity) : 0) +
+            (startup ? Number(getComputedStyle(startup).opacity) : 0),
+        )
+      }
+      requestAnimationFrame(sample)
+    }
+    requestAnimationFrame(sample)
+  })
+  await page.goto('/work')
+  for (const arrival of ['first logo', 'back', 'return logo']) {
+    await page.evaluate(() => {
+      const probe = window as unknown as SkyWindow
+      probe.skyCoverage = []
+    })
+    if (arrival === 'back') await page.goBack()
+    else
+      await primary(page)
+        .getByRole('link', { name: / home$/ })
+        .click()
+    await expect(page).toHaveURL(/\/$/)
+    const globe = page.locator(`${globeSelector}:visible`)
+    await expect(globe).not.toHaveAttribute('data-orbital-loading', 'true', { timeout: 15000 })
+    test.skip((await globe.getAttribute('data-orbital-gpu')) !== 'true', 'Requires live WebGPU')
+    await page.waitForTimeout(300)
+    const coverage = await page.evaluate(() => (window as unknown as SkyWindow).skyCoverage)
+    expect(coverage.length, `${arrival} captures visible Home frames`).toBeGreaterThan(0)
+    expect(Math.min(...coverage), `${arrival} never blanks or dims the sky`).toBeGreaterThanOrEqual(
+      0.95,
+    )
+    await page.locator('.hero-band:visible').getByRole('link', { name: 'View our work' }).click()
+    await expect(page).toHaveURL(/\/work\/?$/)
+  }
+})
 
 test('the Home camera entrance belongs to a full document load, not internal navigation', async ({
   page,
