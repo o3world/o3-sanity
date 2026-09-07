@@ -181,3 +181,28 @@ The final INP pairs differ from the main samples above by at most 16 ms, within
 the existing 40 ms absolute tolerance. These remain local measurements, not
 physical-device or deployed-site verification. The full report is
 `test_output/nav-performance/complete-perf.log`.
+
+## Retained Insights filter arrival
+
+A filter click correctly uses native history and the local catalog, but its pathname
+change also triggered `RouteArrival`. Three real filter clicks each animated the
+retained hero foreground from opacity 0.72 to 1 over 300 ms. `RouteArrival` now uses
+the existing `readFeedPath` parser to skip arrivals only between two Insights feed
+URLs, including pagination and history. Article and other document arrivals retain
+their existing path; the results grid keeps its own fade.
+
+The new browser regression failed before the guard and passes across all 12 browser,
+viewport and motion profiles. It checks retained hero identity, absence of page
+arrival calls, results animation, pagination focus, and Back/Forward URLs. Repeating
+the original Accessibility/Design/Customer Experience reproduction records no page
+arrival animations after the fix. All 47 verify tasks, rendering assertions and the
+11 feed-path unit tests pass. Parallel defect and Ponytail reviews found no defects.
+
+The broader selection is not fully green: Firefox mobile's existing keyboard test
+fails at the Tab from the feed heading to All in both motion modes, identically on
+the previous committed build. The existing stationary-pointer test intermittently
+fails in Chromium/WebKit because its pointer-proof field is absent (four of six
+isolated repetitions passed). Its cause remains unresolved and is not attributed
+to this guard: Home to About to Insights never satisfies the feed-to-feed condition.
+Neither existing assertion was changed. Local logs are retained as
+`test_output/nav-performance/filter-*.log`.

@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { NAV_INK_TARGET, settleNavInk } from '@o3/content-ui/chrome/nav-ink'
 import { syncNavPin } from '@o3/content-ui/chrome/nav-pin'
 import type { GlobeSceneElement } from '@/components/globe/globe-entrance'
+import { readFeedPath } from '@/content/documents/insight/feedPath'
 
 /** Animate live foregrounds; authored grounds and native navigation stay intact. */
 export function RouteArrival() {
@@ -12,8 +13,11 @@ export function RouteArrival() {
   const previousPathname = useRef(pathname)
 
   useLayoutEffect(() => {
-    if (previousPathname.current === pathname) return
+    const previous = previousPathname.current
+    if (previous === pathname) return
     previousPathname.current = pathname
+    // Filters and pagination update the retained feed, not the surrounding page.
+    if (readFeedPath(previous) && readFeedPath(pathname)) return
 
     // The spatial entrance belongs to a direct document load, never a retained route.
     delete document.documentElement.dataset.spatialEntrance
