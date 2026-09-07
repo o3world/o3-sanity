@@ -286,6 +286,32 @@ it.each([
         expect(position).toBeGreaterThan(range === 'hero' ? 0 : -50)
         expect(position).toBeLessThan(range === 'hero' ? 2 : -40)
       }
+      if (range === 'cta' && stars) {
+        const lease: Awaited<ReturnType<GlobeRuntime['acquire']>> = await vi.mocked(runtime.acquire)
+          .mock.results[0]!.value
+        const draw = vi.mocked(lease.draw)
+        const sky =
+          draw.mock.results[draw.mock.calls.findIndex(([kind]) => kind === 'quietStars')]!.value
+        const readSky = () =>
+          vi.mocked(sky.set).mock.calls.at(-1)![0] as {
+            p: { camera: number[]; viewport: number[] }
+          }
+        const departedY = readSky().p.camera[1]!
+        if (search.includes('spatial-still')) {
+          expect(departedY).toBeCloseTo(0)
+        } else {
+          expect(departedY).toBeGreaterThan(0)
+          expect(readSky().p.viewport[2]).toBe(0)
+          top = 422
+          tick(3800)
+          const enteringY = readSky().p.camera[1]!
+          expect(enteringY).toBeGreaterThan(0)
+          expect(enteringY).toBeLessThan(departedY)
+          top = 700
+          tick(4800)
+          expect(readSky().p.camera[1]).toBeLessThan(enteringY)
+        }
+      }
       controller.abort()
       expect(hero.dataset).not.toHaveProperty('footerTest')
       expect(values.has('animation')).toBe(false)

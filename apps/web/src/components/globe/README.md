@@ -41,3 +41,5 @@ frames. The temporary footer comparison flags are no longer needed.
 The affected Android Chrome user confirmed no visible frame loss with animated GPU stars and a
 cached footer globe. Local browser instrumentation verified star draws with zero globe geometry
 redraws during scrolling, resize repainting, and zero submissions while paused or reduced-motion.
+
+Closing CTA stars use the same depth-based Y scroll response as the homepage sky. Travel starts as the band enters the viewport, reverses with native scrolling, and initializes at the current position on restored pages. This camera movement remains active on mobile while the globe geometry stays cached; reduced motion and the shared pause control still stop it.
