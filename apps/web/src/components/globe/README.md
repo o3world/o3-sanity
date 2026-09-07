@@ -29,3 +29,15 @@ Merge review: the enabled release passed lint, type checking, and the release bu
 The spatial provider exposes a Reduce motion setting inside the mobile menu and among the footer utilities at every width. Both instances share the current document's choice and remain available when globes are offscreen or absent. The label stays fixed, `aria-pressed` reports the state, and a fixed-width On/Off status prevents movement when toggled. System reduced motion and `?spatial-still` take precedence: the setting stays On and disabled until that preference clears. Shared chrome accepts app-owned utility slots; it contains no motion behavior. There is no floating control. One provider-owned clock pauses the GPU scene, startup sky, and SVG fallback without recreating the renderer or resetting its pose. Native scroll and resize can redraw the frozen scene; resuming excludes the paused duration. The choice survives client navigation for the current document. Hero and navigation geometry, authored copy, star brightness, and the globe entrance are unchanged.
 
 Local hero UX validation: 3,190 unit/render tests, web typecheck, and scoped app/shared UI lint passed. The live browser confirmed pause and keyboard resume, immediate Home return content, full scroll opacity, and identical 375×667 layout geometry. Added browser contracts cover the new cadence and pause behavior, but the production browser matrix and physical-device checks have not been run for this patch.
+
+Below 1024px, closing CTA placements cache the GPU globe and keep the stars animated behind it.
+The SVG glow remains visible. Only changes to canvas size or the globe's position within it
+rerender globe geometry; ordinary star frames reuse that texture. Mobile footer parallax,
+globe rotation, and pulse stop together. Hero and interior globes and desktop footer motion retain
+their existing behavior. Crossing the breakpoint restores desktop animation without remounting.
+Global pause, still mode, and system reduced motion also stop star animation and skip unchanged
+frames. The temporary footer comparison flags are no longer needed.
+
+The affected Android Chrome user confirmed no visible frame loss with animated GPU stars and a
+cached footer globe. Local browser instrumentation verified star draws with zero globe geometry
+redraws during scrolling, resize repainting, and zero submissions while paused or reduced-motion.
