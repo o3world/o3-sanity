@@ -66,14 +66,6 @@ export function SpatialMotionProvider({ children }: { children: ReactNode }) {
   const refreshPreferences = useRef<(() => void) | null>(null)
   const refresh = useCallback(() => refreshPreferences.current?.(), [])
   const context = useMemo(() => ({ motion, blocked }), [motion, blocked])
-  const fallbackMotion = useMemo(
-    () => ({
-      ...motion,
-      getSnapshot: () =>
-        motion.getSnapshot() || new URLSearchParams(location.search).has('spatial-still'),
-    }),
-    [motion],
-  )
 
   useLayoutEffect(() => {
     // Publish only after hydration; the server-owned attributes stay untouched before it.
@@ -95,17 +87,14 @@ export function SpatialMotionProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const reduced = matchMedia('(prefers-reduced-motion: reduce)')
-    let previousBlocked: boolean | undefined
     const update = () => {
       const still = new URLSearchParams(location.search).has('spatial-still')
       const root = document.documentElement
       if (root.hasAttribute('data-spatial-still') !== still)
         root.toggleAttribute('data-spatial-still', still)
       const nextBlocked = reduced.matches || still
-      if (nextBlocked !== previousBlocked) {
-        previousBlocked = nextBlocked
-        setBlocked(nextBlocked)
-      }
+      motion.setBlocked(nextBlocked)
+      setBlocked(nextBlocked)
     }
     refreshPreferences.current = update
     update()
@@ -117,13 +106,11 @@ export function SpatialMotionProvider({ children }: { children: ReactNode }) {
       window.removeEventListener('popstate', update)
       document.documentElement.removeAttribute('data-spatial-still')
     }
-  }, [])
+  }, [motion])
 
   return (
     <SpatialMotionContext.Provider value={context}>
-      <OrbitalMotionContext.Provider value={fallbackMotion}>
-        {children}
-      </OrbitalMotionContext.Provider>
+      <OrbitalMotionContext.Provider value={motion}>{children}</OrbitalMotionContext.Provider>
       <Suspense fallback={null}>
         <MotionQuerySync refresh={refresh} />
       </Suspense>

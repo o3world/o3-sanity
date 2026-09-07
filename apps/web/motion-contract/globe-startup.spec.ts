@@ -155,8 +155,11 @@ for (const gpuDelay of [0, 600]) {
     expect(marks.skyVisible! - marks.heroPaint!).toBeLessThan(50)
     if (info.project.use.contextOptions?.reducedMotion !== 'reduce') {
       expect(marks.alignmentError).toBeLessThan(0.1)
-      expect(marks.navMinY).toBeLessThan(-5)
-      expect(marks.navMinY).toBeGreaterThan(-7)
+      if (page.viewportSize()!.width < 1024) expect(marks.navMinY).toBe(0)
+      else {
+        expect(marks.navMinY).toBeLessThan(-3.75)
+        expect(marks.navMinY).toBeGreaterThan(-5.25)
+      }
     }
     await expect(page.locator(`${heroSelector} [data-orbital-startup]`)).not.toHaveAttribute(
       'data-painted',

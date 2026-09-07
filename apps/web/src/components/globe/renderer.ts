@@ -143,7 +143,7 @@ export async function startSpatialGlobe(
     let rotation = [0, 0, 0, 1]
     let lastPointer: { x: number; y: number } | undefined
     const reduced = matchMedia('(prefers-reduced-motion: reduce)')
-    const forcedStill = new URLSearchParams(location.search).has('spatial-still')
+    let forcedStill = new URLSearchParams(location.search).has('spatial-still')
     const isStill = () => options.motion === 'still' || forcedStill || reduced.matches
     const isPaused = () => !isStill() && !!options.spatialMotion?.getSnapshot()
     const sceneTime = (now: number) => options.spatialMotion?.now(now) ?? now
@@ -489,6 +489,7 @@ export async function startSpatialGlobe(
       document.addEventListener('visibilitychange', wake)
       reduced.addEventListener('change', wake)
       unsubscribeMotion = options.spatialMotion?.subscribe(() => {
+        forcedStill = new URLSearchParams(location.search).has('spatial-still')
         // Cancel only the frame callback; retain the surface, draws and every phase.
         cancelAnimationFrame(raf)
         raf = 0

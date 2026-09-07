@@ -206,3 +206,60 @@ test('explicit still and reduced motion take precedence over the control', async
     expect(await canvas.getAttribute('data-frame')).toBe(frame)
   }
 })
+
+for (const renderer of ['SVG', 'GPU'] as const) {
+  test(`${renderer} motion resumes when forced still mode clears without reloading`, async ({
+    page,
+  }, info) => {
+    test.skip(info.project.use.contextOptions?.reducedMotion === 'reduce')
+    if (renderer === 'SVG')
+      await page.addInitScript(() => Object.defineProperty(navigator, 'gpu', { value: undefined }))
+    await page.goto('/?spatial-still')
+    await expect(page.locator(globe)).not.toHaveAttribute('data-orbital-loading', 'true', {
+      timeout: 15000,
+    })
+    if (renderer === 'GPU')
+      test.skip(
+        (await page.locator(globe).getAttribute('data-orbital-gpu')) !== 'true',
+        'Requires live WebGPU',
+      )
+    const control = page.locator('#footer').getByRole('button', { name: 'Reduce motion' })
+    const geometry = () =>
+      page
+        .locator(globe)
+        .evaluate((element) =>
+          Array.from(
+            element.querySelectorAll('svg:first-of-type path, svg:first-of-type circle'),
+          ).map((node) => [
+            node.getAttribute('d'),
+            node.getAttribute('cx'),
+            node.getAttribute('cy'),
+          ]),
+        )
+    const pose = async () =>
+      renderer === 'SVG'
+        ? JSON.stringify(await geometry())
+        : page.locator(`${hero} .spatial-globe-canvas`).getAttribute('data-frame')
+    const original = await page.locator(globe).elementHandle()
+    await expect(control).toBeDisabled()
+    const frozen = await pose()
+    await page.waitForTimeout(350)
+    expect(await pose()).toEqual(frozen)
+
+    await page.evaluate(() => history.pushState(null, '', '/'))
+    await expect(control).toBeEnabled()
+    await expect(control).toHaveAttribute('aria-pressed', 'false')
+    await expect.poll(pose).not.toEqual(frozen)
+    expect(await original!.evaluate((element) => element.isConnected)).toBe(true)
+
+    await page.goBack()
+    await expect(control).toBeDisabled()
+    await page.waitForTimeout(100)
+    const restored = await pose()
+    await page.waitForTimeout(350)
+    expect(await pose()).toEqual(restored)
+    await page.goForward()
+    await expect(control).toBeEnabled()
+    await expect.poll(pose).not.toEqual(restored)
+  })
+}

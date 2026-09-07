@@ -5,6 +5,41 @@ afterEach(() => {
   vi.restoreAllMocks()
 })
 
+it('wakes consumers when a forced preference clears without counting the pause as motion', () => {
+  const motion = createSpatialMotion()
+  const listener = vi.fn()
+  motion.subscribe(listener)
+
+  motion.setBlocked(true, 100)
+  expect(motion.getSnapshot()).toBe(true)
+  expect(motion.now(1_000)).toBe(100)
+  motion.setBlocked(true, 1_000)
+  expect(listener).toHaveBeenCalledTimes(1)
+
+  motion.setBlocked(false, 2_000)
+  expect(motion.getSnapshot()).toBe(false)
+  expect(motion.now(2_025)).toBe(125)
+  expect(listener).toHaveBeenCalledTimes(2)
+})
+
+it('preserves manual pause while forced preferences come and go', () => {
+  const motion = createSpatialMotion()
+  const listener = vi.fn()
+  motion.subscribe(listener)
+
+  motion.setPaused(true, 100)
+  motion.setBlocked(true, 200)
+  motion.setBlocked(false, 300)
+  expect(motion.getSnapshot()).toBe(true)
+  expect(motion.now(400)).toBe(100)
+  expect(listener).toHaveBeenCalledTimes(1)
+
+  motion.setPaused(false, 500)
+  expect(motion.getSnapshot()).toBe(false)
+  expect(motion.now(525)).toBe(125)
+  expect(listener).toHaveBeenCalledTimes(2)
+})
+
 it('starts unpaused on the performance timeline and keeps a stable snapshot reader', () => {
   const motion = createSpatialMotion()
   const { getSnapshot } = motion

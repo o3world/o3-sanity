@@ -1,20 +1,33 @@
 export function createSpatialMotion() {
   let paused = false
+  let manualPause = false
+  let blocked = false
   let pausedAt = 0
   let pausedDuration = 0
   const listeners = new Set<() => void>()
+
+  const update = (now: number) => {
+    const nextPaused = manualPause || blocked
+    if (nextPaused === paused) return
+
+    if (nextPaused) pausedAt = now
+    else pausedDuration += now - pausedAt
+
+    paused = nextPaused
+    for (const listener of listeners) listener()
+  }
 
   return {
     getSnapshot: () => paused,
 
     setPaused(nextPaused: boolean, now: number = performance.now()): void {
-      if (nextPaused === paused) return
+      manualPause = nextPaused
+      update(now)
+    },
 
-      if (nextPaused) pausedAt = now
-      else pausedDuration += now - pausedAt
-
-      paused = nextPaused
-      for (const listener of listeners) listener()
+    setBlocked(nextBlocked: boolean, now: number = performance.now()): void {
+      blocked = nextBlocked
+      update(now)
     },
 
     subscribe(listener: () => void): () => void {

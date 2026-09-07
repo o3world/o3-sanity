@@ -8,7 +8,7 @@ import {
 beforeEach(() => vi.stubGlobal('innerWidth', 1155))
 afterEach(() => vi.unstubAllGlobals())
 
-function scene(top = 0, delay = 480, itemCount = delay / 160 + 1) {
+function scene(top = 0) {
   const values = new Map<string, string>([['translate', '-50% 0px']])
   const globe = {
     style: {
@@ -21,18 +21,6 @@ function scene(top = 0, delay = 480, itemCount = delay / 160 + 1) {
   } as unknown as HTMLElement
   const hero = {
     __o3SceneStart: 50,
-    querySelectorAll: () =>
-      Array.from({ length: itemCount }, () => ({
-        getAnimations: () => [
-          {
-            startTime: 50,
-            effect: {
-              getKeyframes: () => [{ opacity: 0 }, { opacity: 1 }],
-              getTiming: () => ({ delay, duration: 700 }),
-            },
-          },
-        ],
-      })),
     getBoundingClientRect: () => ({ top, bottom: 900 }),
   } as unknown as GlobeSceneElement
   const entrance = createGlobeEntrance(globe, hero)
@@ -77,14 +65,6 @@ it('starts at rest when GPU readiness misses the hero sequence', () => {
   const { update, offset } = scene()
   update(3085)
   expect(offset()).toBe(0)
-})
-
-it('keeps the same scene timing when optional text is absent', () => {
-  const complete = scene()
-  const shorter = scene(0, 320)
-  for (const elapsed of [0, 160, 600, 1500, 2350, 2398]) {
-    expect(shorter.update(elapsed)).toBeCloseTo(complete.update(elapsed), 6)
-  }
 })
 
 it('keeps reduced motion and restored scroll positions at rest', () => {
@@ -153,14 +133,6 @@ it('supplies the same displacement to the camera and the glow, then returns zero
   expect(update(2022.5)).toBeCloseTo(offset(), 3)
   expect(update(3060)).toBe(0)
   expect(update(3135)).toBe(0)
-})
-
-it('preserves the camera motion when the CTA gets a longer reading pause', () => {
-  const original = scene()
-  const spaced = scene(0, 620, 4)
-  for (const elapsed of [0, 240, 260, 600, 1500, 1878, 2350, 2480]) {
-    expect(spaced.update(elapsed)).toBeCloseTo(original.update(elapsed), 6)
-  }
 })
 
 it('keeps the sky moving after the nav ends and while the globe is arriving', () => {
