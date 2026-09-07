@@ -10,6 +10,7 @@ import { NavInkFirstPaint, SiteFooter, SiteNav, UtilityNav } from '@o3/content-u
 import { DraftTools } from './DraftTools'
 import { RouteArrival } from './RouteArrival'
 import { GlobeProvider } from '@/components/globe/GlobeProvider'
+import { SpatialMotionControl } from '@/components/globe/SpatialMotionProvider'
 import '@/components/globe/scene.css'
 
 interface ShellProps {
@@ -62,7 +63,11 @@ async function Shell({ children }: ShellProps) {
           there. One source, one answer. */}
       {!spatialEnabled && <UtilityNav settings={settings} />}
       {/* The chrome draws no mark of its own (#228); these are this app's. */}
-      <SiteNav settings={navSettings} brandMark={NAV_MARK} />
+      <SiteNav
+        settings={navSettings}
+        brandMark={NAV_MARK}
+        menuUtilities={spatialEnabled ? <SpatialMotionControl /> : undefined}
+      />
       {/* Bands paint their own surfaces over the document ground. Matching the
           opening band also covers space around streamed loading content. */}
       <main
@@ -93,7 +98,12 @@ async function Shell({ children }: ShellProps) {
           <UtilityNav settings={settings} />
         </div>
       )}
-      <SiteFooter settings={settings} brandMark={FOOTER_MARK} year={year} />
+      <SiteFooter
+        settings={settings}
+        brandMark={FOOTER_MARK}
+        year={year}
+        utilities={spatialEnabled ? <SpatialMotionControl /> : undefined}
+      />
       {/* Nothing visible renders here for a published visitor, so `null` is an
           honest fallback; the boundary exists so `DraftTools`' request-time
           read cannot block the shell. */}

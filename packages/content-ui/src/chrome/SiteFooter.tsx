@@ -16,6 +16,8 @@ interface SiteFooterProps {
   brandMark: ReactNode
   /** The copyright year — the footer prints it, the layout resolves it. */
   year: number
+  /** Optional app-owned utilities alongside the legal links. */
+  utilities?: ReactNode
 }
 
 /**
@@ -30,7 +32,7 @@ interface SiteFooterProps {
  * Every string still comes from Site Settings (#19); the component decides
  * only the arrangement.
  */
-export function SiteFooter({ settings, brandMark, year }: SiteFooterProps) {
+export function SiteFooter({ settings, brandMark, year, utilities }: SiteFooterProps) {
   const groups = settings?.footerGroups ?? []
   const socialLinks = settings?.socialLinks ?? []
   const legalLinks = settings?.legalLinks ?? []
@@ -134,8 +136,8 @@ export function SiteFooter({ settings, brandMark, year }: SiteFooterProps) {
             Figma variable here as the Utility Nav's links (`2050:1226`) — the
             warm solid for muted copy on the black chrome, which replaced the
             `fg-subtle` grey this row shipped with (2026-08-13 token pass). */}
-          <div className="text-legal text-on-utility flex flex-col gap-3 lg:flex-row lg:justify-between">
-            <ul className="flex flex-wrap gap-6">
+          <div className="text-legal text-on-utility flex flex-col gap-3 lg:flex-row lg:items-baseline lg:justify-between">
+            <ul className="flex flex-wrap items-baseline gap-6">
               {legalLinks.map((link) => (
                 <li key={link._key}>
                   <Link
@@ -146,6 +148,7 @@ export function SiteFooter({ settings, brandMark, year }: SiteFooterProps) {
                   </Link>
                 </li>
               ))}
+              {utilities ? <li>{utilities}</li> : null}
             </ul>
             <div className="flex gap-6 lg:w-[277px] lg:justify-between">
               <p>

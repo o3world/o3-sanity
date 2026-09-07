@@ -8,6 +8,7 @@ import type { OrbitalRendererProps } from '@o3/ui'
 import './globe.css'
 import { observeGlobeAvailability } from './observe-globe-availability'
 import type { GlobeRuntime } from './globe-runtime'
+import { SpatialMotionProvider, useSpatialMotion } from './SpatialMotionProvider'
 
 type Engine = {
   runtime: GlobeRuntime
@@ -15,6 +16,7 @@ type Engine = {
   start: typeof import('./renderer').startSpatialGlobe
 }
 const GlobeRuntimeContext = createContext<Engine | null>(null)
+const GlobeFailureContext = createContext(false)
 
 export function GlobeRenderer({
   hostRef,
@@ -26,6 +28,8 @@ export function GlobeRenderer({
   onReady,
 }: OrbitalRendererProps) {
   const engine = useContext(GlobeRuntimeContext)
+  const failed = useContext(GlobeFailureContext)
+  const spatialMotion = useSpatialMotion()
   const [placement, setPlacement] = useState<{
     target: HTMLElement
     stars: boolean
@@ -33,6 +37,9 @@ export function GlobeRenderer({
     interiorStars: boolean
   } | null>(null)
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
+  useEffect(() => {
+    if (failed) onReady(false)
+  }, [failed, onReady])
   useEffect(() => {
     const host = hostRef.current
     if (!host) return
@@ -52,7 +59,7 @@ export function GlobeRenderer({
   }, [hostRef, preset])
   useLayoutEffect(() => {
     const host = hostRef.current
-    if (!canvas || !placement || !host || !engine) return
+    if (!canvas || !placement || !host || !engine || failed) return
     const controller = new AbortController()
     onReady(undefined)
     const timeout = setTimeout(() => {
@@ -77,6 +84,7 @@ export function GlobeRenderer({
         onReady: reportReady,
         stars: placement.stars,
         quietStars: placement.quietStars,
+        spatialMotion,
       })
       .catch(() => {
         reportReady(false)
@@ -85,7 +93,20 @@ export function GlobeRenderer({
       clearTimeout(timeout)
       controller.abort()
     }
-  }, [canvas, placement, hostRef, arcs, preset, motion, opacity, electronOpacity, onReady, engine])
+  }, [
+    canvas,
+    placement,
+    hostRef,
+    arcs,
+    preset,
+    motion,
+    opacity,
+    electronOpacity,
+    onReady,
+    engine,
+    failed,
+    spatialMotion,
+  ])
   return (
     <>
       {preset === 'hero' && (
@@ -149,11 +170,15 @@ function EnabledGlobeProvider({ children }: { children: ReactNode }) {
     }
   }, [])
   return (
-    <GlobeRuntimeContext.Provider value={engine}>
-      <OrbitalRendererContext.Provider value={failed ? null : GlobeRenderer}>
-        {children}
-      </OrbitalRendererContext.Provider>
-    </GlobeRuntimeContext.Provider>
+    <SpatialMotionProvider>
+      <GlobeRuntimeContext.Provider value={engine}>
+        <GlobeFailureContext.Provider value={failed}>
+          <OrbitalRendererContext.Provider value={GlobeRenderer}>
+            {children}
+          </OrbitalRendererContext.Provider>
+        </GlobeFailureContext.Provider>
+      </GlobeRuntimeContext.Provider>
+    </SpatialMotionProvider>
   )
 }
 

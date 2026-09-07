@@ -1,8 +1,10 @@
+export type GlobeSceneElement = HTMLElement & { __o3SceneStart?: number }
+
 /** One scene clock, established before hydration and independent of text cadence. */
-export function readGlobeEntranceTiming(hero: HTMLElement, now: number) {
-  const start = hero.dataset.sceneStart
+export function readGlobeEntranceTiming(hero: GlobeSceneElement, now: number) {
+  const start = hero.__o3SceneStart
   return {
-    elapsed: start === undefined ? undefined : Math.max(0, now - Number(start)),
+    elapsed: start === undefined ? undefined : Math.max(0, now - start),
     startDelay: 160,
     duration: 160 + 2047.5,
     returnTail: 750,

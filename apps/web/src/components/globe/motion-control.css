@@ -1,0 +1,25 @@
+.spatial-motion-setting {
+  padding: 0.25rem 0;
+  gap: 0.75rem;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+.spatial-motion-setting > span {
+  flex: 0 0 3ch;
+  text-align: left;
+}
+
+/* Keep the current CSS animation positions, including the SVG fallback's pulse. */
+html[data-spatial-paused] :is(.hero-lag, .cta-lag, [data-orbital-preset]),
+html[data-spatial-paused] [data-orbital-preset] *,
+html[data-spatial-paused] [data-orbital-preset] *::before,
+html[data-spatial-paused] [data-orbital-preset] *::after {
+  animation-play-state: paused !important;
+}
+
+html[data-spatial-still] :is(.hero-lag, .cta-lag, [data-orbital-preset]),
+html[data-spatial-still] [data-orbital-preset] * {
+  animation: none !important;
+}

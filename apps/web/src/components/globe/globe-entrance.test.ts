@@ -1,5 +1,9 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest'
-import { createGlobeEntrance, readSkyEntranceOffset } from './globe-entrance'
+import {
+  createGlobeEntrance,
+  readSkyEntranceOffset,
+  type GlobeSceneElement,
+} from './globe-entrance'
 
 beforeEach(() => vi.stubGlobal('innerWidth', 1155))
 afterEach(() => vi.unstubAllGlobals())
@@ -16,7 +20,7 @@ function scene(top = 0, delay = 480, itemCount = delay / 160 + 1) {
     getBoundingClientRect: () => ({ top: 700 }),
   } as unknown as HTMLElement
   const hero = {
-    dataset: { sceneStart: '50' },
+    __o3SceneStart: 50,
     querySelectorAll: () =>
       Array.from({ length: itemCount }, () => ({
         getAnimations: () => [
@@ -30,7 +34,7 @@ function scene(top = 0, delay = 480, itemCount = delay / 160 + 1) {
         ],
       })),
     getBoundingClientRect: () => ({ top, bottom: 900 }),
-  } as unknown as HTMLElement
+  } as unknown as GlobeSceneElement
   const entrance = createGlobeEntrance(globe, hero)
   const update = (elapsed: number, still = false) => {
     return entrance.update(elapsed + 50, still)
@@ -138,7 +142,7 @@ it.each([1155, 402])('slows early, overshoots gently, and returns to rest at %ip
 
 it('keeps the static fallback when there is no scene clock', () => {
   const { hero, update, offset } = scene()
-  delete hero.dataset.sceneStart
+  delete hero.__o3SceneStart
   update(0)
   expect(offset()).toBe(0)
 })

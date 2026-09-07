@@ -30,10 +30,14 @@ for (const gpuDelay of [0, 600]) {
       const marks: Record<string, number> = {}
       Object.defineProperty(window, 'globeStartupMarks', { value: marks })
       document.addEventListener('animationend', (event) => {
-        if (event.animationName !== 'hero-wave') return
         const target = event.target as Element
-        if (target.id === 'site-nav') marks.navFinish = performance.now()
-        if (target.matches('.hero-lead h1 > span:first-child')) marks.textFinish = performance.now()
+        if (event.animationName === 'hero-wave' && target.id === 'site-nav')
+          marks.navFinish = performance.now()
+        if (
+          event.animationName === 'spatial-hero-enter' &&
+          target.matches('.hero-lead h1 > span:first-child')
+        )
+          marks.textFinish = performance.now()
       })
       const clear = CanvasRenderingContext2D.prototype.clearRect
       CanvasRenderingContext2D.prototype.clearRect = function (...args) {
