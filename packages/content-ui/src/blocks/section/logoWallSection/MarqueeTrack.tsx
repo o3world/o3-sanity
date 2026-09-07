@@ -98,10 +98,11 @@ export function MarqueeTrack({ copies, className, children }: MarqueeTrackProps)
     const style = getComputedStyle(track)
     const period = parseDuration(style.getPropertyValue('--duration-marquee'))
     if (!period) return
+    const settle = parseDuration(style.getPropertyValue('--marquee-settle')) || EASE_TAU
 
     let x = translateX(style.transform)
     let velocity = 0
-    let target = 1
+    let target = track.matches(':hover') ? 0 : 1
     let frame = 0
     let last = 0
 
@@ -115,7 +116,7 @@ export function MarqueeTrack({ copies, className, children }: MarqueeTrackProps)
       const copyWidth = track.getBoundingClientRect().width / copies
       // Full speed in px/ms: one copy per period.
       const full = copyWidth / period
-      velocity += (target * full - velocity) * (1 - Math.exp(-dt / EASE_TAU))
+      velocity += (target * full - velocity) * (1 - Math.exp(-dt / settle))
 
       x -= velocity * dt
       if (x <= -copyWidth) x += copyWidth

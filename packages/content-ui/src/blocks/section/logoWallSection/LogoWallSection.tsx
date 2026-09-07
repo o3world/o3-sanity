@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Eyebrow, SURFACE_CLASS, SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
 import type { SectionProps } from '@o3/content-runtime/blocks'
@@ -147,6 +148,11 @@ export function LogoWallSection({
     <SurfaceProvider surface={resolved}>
       <section
         {...surfaceAttrs(resolved)}
+        style={
+          isBar
+            ? undefined
+            : ({ '--duration-marquee': '64s', '--marquee-settle': '480ms' } as CSSProperties)
+        }
         className={cn(
           SURFACE_CLASS[resolved],
           'px-gutter bg-(image:--gradient-surface-wash-warm) flex flex-col items-center',
@@ -220,7 +226,10 @@ export function LogoWallSection({
            * It is margin, so it moves the track without joining its width —
            * every copy stays exactly one `copies`-th of the box.
            */}
-          <MarqueeTrack copies={copies} className={cn(!isBar && 'ml-px mt-px')}>
+          <MarqueeTrack
+            copies={copies}
+            className={cn(!isBar && 'ml-px mt-px', resolved !== 'ink' && 'mix-blend-multiply')}
+          >
             {track.map(({ client, copy }) => (
               // `plates` — 280 × 280 with 64px of side padding at 1440, so the
               // artwork gets a 152px box (`1864:2395`); the smaller steps
@@ -240,6 +249,7 @@ export function LogoWallSection({
                 aria-hidden={copy > 0 || undefined}
                 className={cn(
                   'flex shrink-0 items-center justify-center',
+                  !isBar && 'group/logo',
                   isBar
                     ? 'h-[100px] w-[168px] px-8 sm:w-[224px] sm:px-12 lg:w-[280px] lg:px-16'
                     : 'border-line -ml-px -mt-px size-[168px] border px-8 sm:size-[224px] sm:px-12 lg:size-[280px] lg:px-16',
@@ -255,7 +265,12 @@ export function LogoWallSection({
                   source={client.logo}
                   alt={client.name ?? ''}
                   width={456}
-                  className="w-full grayscale"
+                  loading="eager"
+                  className={cn(
+                    'max-h-[80px] w-full object-contain grayscale',
+                    !isBar &&
+                      'ease-soft opacity-90 transition-[opacity,filter] duration-500 group-hover/logo:opacity-100 group-hover/logo:contrast-125 motion-reduce:transition-none',
+                  )}
                   // The artwork box is the tile less its padding at each step.
                   // Without this the browser has no slot and downloads all 456
                   // for a 152px box.

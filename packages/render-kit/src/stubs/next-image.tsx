@@ -18,6 +18,7 @@ interface StubImageProps {
   fill?: boolean
   sizes?: string
   priority?: boolean
+  loading?: 'lazy' | 'eager'
   className?: string
   style?: CSSProperties
 }
@@ -29,6 +30,7 @@ export default function Image({
   height,
   sizes,
   priority,
+  loading,
   className,
   style,
 }: StubImageProps) {
@@ -44,7 +46,7 @@ export default function Image({
       // (#268): a lazy image carries `loading="lazy"`, and a priority image
       // carries no `loading` at all — Next expresses its urgency as a hoisted
       // `<link rel="preload">`, which the render layer has no DOM to receive.
-      loading={priority ? undefined : 'lazy'}
+      loading={priority ? undefined : (loading ?? 'lazy')}
       className={className}
       style={style}
     />

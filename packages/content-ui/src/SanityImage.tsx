@@ -81,6 +81,8 @@ export interface SanityImageProps {
    * thing that knows whether the card is above the fold.
    */
   priority?: boolean
+  /** Fetch offscreen artwork before it enters a moving strip, without marking it as the LCP candidate. */
+  loading?: 'lazy' | 'eager'
   /**
    * Styles the outermost element this renders: the `<img>` for an original,
    * the ratio box for every other `ratio`.
@@ -143,6 +145,7 @@ export function SanityImage({
   width = 1600,
   sizes,
   priority,
+  loading,
   className,
 }: SanityImageProps) {
   if (!source) return null
@@ -175,7 +178,7 @@ export function SanityImage({
       <img
         src={src}
         alt={cleanAlt}
-        loading={priority ? 'eager' : 'lazy'}
+        loading={priority ? 'eager' : (loading ?? 'lazy')}
         decoding="async"
         {...(ratio === 'original'
           ? { width: dimensions?.width, height: dimensions?.height, className }
@@ -211,6 +214,7 @@ export function SanityImage({
         height={Math.round(width / aspectRatio)}
         sizes={sizes}
         priority={priority}
+        loading={priority ? undefined : loading}
         className={className}
         style={lqipBackground(image, true)}
       />
@@ -241,6 +245,7 @@ export function SanityImage({
         fill
         sizes={sizes ?? '100vw'}
         priority={priority}
+        loading={priority ? undefined : loading}
         className={cropped ? 'object-cover' : 'object-contain'}
         style={{
           ...lqipBackground(image, cropped, objectPosition),

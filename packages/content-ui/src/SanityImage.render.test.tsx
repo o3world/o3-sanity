@@ -23,6 +23,13 @@ function srcOf(html: string): string {
 }
 
 describe('SanityImage', () => {
+  it('can load moving-strip artwork before it enters the viewport', () => {
+    const html = renderToStaticMarkup(
+      <SanityImage source={anImage()} alt="Client" loading="eager" />,
+    )
+    expect(html).toContain('loading="eager"')
+  })
+
   describe('ratio="original" (the default)', () => {
     it('lays out at the image’s own shape rather than a guessed one', () => {
       const html = renderToStaticMarkup(<SanityImage source={anImage()} alt="" width={1600} />)
