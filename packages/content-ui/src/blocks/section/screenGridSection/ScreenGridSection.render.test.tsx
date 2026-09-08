@@ -65,10 +65,10 @@ describe('the screen grid band', () => {
     expect(html).toContain('gap-8')
   })
 
-  it('paints each plate with the tone it was authored with', () => {
+  it('keeps the wide plate and removes backgrounds from smaller tiles', () => {
     expect(plates[0]).toContain('--gradient-screen-plate')
-    expect(plates[1]).toContain('bg-brand-glow')
-    expect(plates[2]).toContain('bg-bone')
+    expect(plates[1]).not.toContain('bg-brand-glow')
+    expect(plates[2]).not.toContain('bg-bone')
   })
 
   it('spans a wide screen across both columns and leaves a standard one alone', () => {
@@ -93,11 +93,11 @@ describe('the screen grid band', () => {
       'sizes="(min-width: 1440px) calc(100vw - 278px), (min-width: 1024px) calc(89.402vw - 125.396px), calc(90vw - 64px)"',
     )
     expect(illustratedHtml).toContain(
-      'sizes="(min-width: 1440px) calc(50vw - 219px), (min-width: 1024px) calc(44.701vw - 142.698px), calc(90vw - 64px)"',
+      'sizes="(min-width: 1440px) calc(50vw - 91px), (min-width: 1024px) calc(44.701vw - 14.698px), 90vw"',
     )
   })
 
-  it('falls back to the ink plate and a single column for values it does not know', () => {
+  it('falls back to a standard filled tile for values it does not know', () => {
     const odd = renderToStaticMarkup(
       <ScreenGridSection
         {...({
@@ -106,7 +106,7 @@ describe('the screen grid band', () => {
         } as unknown as SectionProps<'screenGridSection'>)}
       />,
     )
-    expect(odd).toContain('--gradient-screen-plate')
+    expect(odd).not.toContain('--gradient-screen-plate')
     expect(odd).not.toContain('lg:col-span-2')
   })
 

@@ -19,7 +19,10 @@ type ScreenGridSectionProps = SectionProps<'screenGridSection'> & { sequence?: b
  * screen   radius 12, shadow 0 0 32 / 0.25, top-aligned and cropped
  * ```
  *
- * **The plate crops the screenshot, and that is the whole effect.** Every tile
+ * Standard tiles fill their boxes without a separate background or inset.
+ * Wide tiles retain the inset presentation described below.
+ *
+ * **The plate crops the screenshot, and that is the whole effect.** Each wide tile
  * on both frames sets an oversized capture inside the plate and lets the
  * plate's rounded box cut it off — `2230:3315`'s lead tile holds an 807 × 2048
  * phone shot in a 716-tall plate. So the image renders at its own proportions,
@@ -87,6 +90,7 @@ export function ScreenGridSection({
     <ul className="mx-auto grid w-full gap-8 lg:grid-cols-2">
       {screens.map((screen) => {
         const span = spanOf(screen.span)
+        const fill = span === 'standard'
         return (
           <li
             key={screen._key}
@@ -94,17 +98,25 @@ export function ScreenGridSection({
             // The tile's own path. This band has no header to attribute —
             // it is screens and nothing else.
             data-sanity={itemAttr(loc, 'screens', screen._key)}
-            className={`aspect-4/3 relative overflow-hidden rounded-[32px] ${TONE_CLASS[toneOf(screen.tone)]} ${SPAN_CLASS[span]}`}
+            className={`aspect-4/3 relative overflow-hidden rounded-[32px] ${fill ? '' : TONE_CLASS[toneOf(screen.tone)]} ${SPAN_CLASS[span]}`}
           >
             <div
               data-reveal-step={sequence ? 'screen' : undefined}
-              className="absolute inset-x-0 top-0 flex justify-center px-8 pt-8 lg:px-16 lg:pt-16"
+              className={
+                fill
+                  ? 'absolute inset-0'
+                  : 'absolute inset-x-0 top-0 flex justify-center px-8 pt-8 lg:px-16 lg:pt-16'
+              }
             >
               <SanityImage
                 source={screen.media?.image}
                 alt={screen.media?.alt}
                 width={1600}
-                className="w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.25)]"
+                className={
+                  fill
+                    ? 'h-full w-full object-cover object-top'
+                    : 'w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.25)]'
+                }
                 /*
                  * The plate is the tile less its padding — 32px a side
                  * below `lg`, 64px above — and this band takes the gutter
@@ -113,17 +125,17 @@ export function ScreenGridSection({
                  *
                  *   wide      the whole column less 64 before `lg`, then
                  *             less 128; 100vw − 2×75 − 128 once pinned
-                 *   standard  half of it, less half the 32px gap:
-                 *             45vw − 144, and 50vw − 219 once pinned
+                 *   standard  the full half-column tile, less half the 32px gap:
+                 *             45vw − 16, and 50vw − 91 once pinned
                  *
-                 * At 1440 that is 1162 and 501 after the #429 gutter
+                 * At 1440 that is 1162 and 629 after the #429 gutter
                  * override. The 90vw stand-in is derived in
                  * `imageSizes.ts`.
                  */
                 sizes={
                   span === 'wide'
                     ? '(min-width: 1440px) calc(100vw - 278px), (min-width: 1024px) calc(89.402vw - 125.396px), calc(90vw - 64px)'
-                    : '(min-width: 1440px) calc(50vw - 219px), (min-width: 1024px) calc(44.701vw - 142.698px), calc(90vw - 64px)'
+                    : '(min-width: 1440px) calc(50vw - 91px), (min-width: 1024px) calc(44.701vw - 14.698px), 90vw'
                 }
               />
             </div>

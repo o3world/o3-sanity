@@ -296,14 +296,13 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(heroClasses).not.toContain('text-left')
   })
 
-  it('gives the hero band each frame’s own vertical rhythm', () => {
+  it('uses the approved hero top spacing and preserves the frame bottom spacing', () => {
     // The foot is the frame's: 247 below at 402 (`1814:1622` in an 874 band),
-    // 310 at 1440 (`2209:2223` ending at y 630 in a 940 band). The head is a
-    // step under it — 160 / 256 — because #397 rules the frames' 173 / 288 too
-    // deep by about a tenth. Both are on the 4px spacing scale.
+    // 310 at 1440 (`2209:2223` ending at y 630 in a 940 band). Mobile retains
+    // 160px above; September 8 feedback sets desktop to 200px.
     const heroClasses = html.match(/class="([^"]*pb-\[247px\][^"]*)"/)?.[1] ?? ''
     expect(heroClasses).toContain('pt-40')
-    expect(heroClasses).toContain('lg:pt-64')
+    expect(heroClasses).toContain('lg:pt-[200px]')
     expect(heroClasses).toContain('lg:pb-[310px]')
   })
 

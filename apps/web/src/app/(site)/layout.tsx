@@ -5,7 +5,7 @@ import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
 import { currentYear } from '@/lib/currentYear'
 import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
-import { NavInkFirstPaint, SiteFooter, SiteNav, UtilityNav } from '@o3/content-ui/chrome'
+import { NavInkFirstPaint, SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
 import { DraftTools } from './DraftTools'
 import { RouteArrival } from './RouteArrival'
@@ -42,18 +42,22 @@ export default async function SiteLayout({ children }: ShellProps) {
 
 async function Shell({ children }: ShellProps) {
   const [settings, year] = await Promise.all([getSiteSettings(), currentYear()])
+  const navSettings = settings ? { ...settings, utilityNavItems: [] } : settings
 
   return (
     <GlobeProvider>
-      <UtilityNav settings={settings} />
       {/* The chrome draws no mark of its own (#228); these are this app's. */}
-      <SiteNav settings={settings} brandMark={NAV_MARK} menuUtilities={<SpatialMotionControl />} />
+      <SiteNav
+        settings={navSettings}
+        brandMark={NAV_MARK}
+        menuUtilities={<SpatialMotionControl />}
+      />
       {/* Bands paint their own surfaces over the document ground. Matching the
           opening band also covers space around streamed loading content. */}
       <main
         id="site-content"
         data-spatial-layout="true"
-        className="bg-(--page-background) min-h-screen"
+        className="bg-(--page-background) min-h-screen [--spacing-nav-offset:32px]"
       >
         {children}
       </main>
@@ -67,6 +71,7 @@ async function Shell({ children }: ShellProps) {
         settings={settings}
         brandMark={FOOTER_MARK}
         year={year}
+        utilityNavItems={settings?.utilityNavItems}
         utilities={<SpatialMotionControl />}
       />
       {/* Nothing visible renders here for a published visitor, so `null` is an

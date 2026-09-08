@@ -35,7 +35,8 @@ export function createStartupSky(hash: (seed: number) => number) {
     const opacity =
       mix(background, 0.98, smooth(0.65, 0.98, hash(n + 7))) *
       smooth(100, 400, distance) *
-      (backfield ? 0.72 : 1)
+      (backfield ? 0.72 : 1) *
+      0.45
     const warmth = hash(n + 9)
     const color = [mix(0.88, 1, warmth), mix(0.92, 0.95, warmth), mix(1, 0.88, warmth)].map(
       (channel) => Math.round(mix(channel, 1, 0.375) * 255),

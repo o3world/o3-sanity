@@ -304,7 +304,8 @@ export function HeroSection({
          *
          * The head is a step shallower than the frames' 288 / 173 — the launch
          * review read the headline about a tenth too low — landing on the 4px
-         * spacing scale at 256 / 160. Both clear the pinned pill, whose foot sits
+         * spacing scale at 256 / 160. Desktop feedback now sets the head to 200px.
+         * Both clear the pinned pill, whose foot sits
          * at 96px once `--spacing-nav-offset` resolves to the strip-less 32.
          * The clearance is checked here, not derived: the band's head is a
          * composition value that happens to be larger than the chrome needs.
@@ -314,7 +315,7 @@ export function HeroSection({
          */}
         <div
           data-route-foreground=""
-          className="hero-lead max-w-content relative z-10 mx-auto flex flex-col items-center pb-[247px] pt-40 text-center lg:pb-[310px] lg:pt-64"
+          className="hero-lead max-w-content relative z-10 mx-auto flex flex-col items-center pb-[247px] pt-40 text-center lg:pb-[310px] lg:pt-[200px]"
         >
           {/*
            * 16 between the two headline blocks at 402 (`2975:8420` over
@@ -343,14 +344,10 @@ export function HeroSection({
           </h1>
 
           {subheading ? (
-            // 724px and solid white (`2089:4315`); the whole 362 column at 402
-            // (`2975:8418`), where 24/34 holds rather than stepping down. The
-            // 50% belongs to the headline's closing line alone — the standfirst
-            // carries no alpha at either width.
+            // Supporting copy uses 16px on mobile and 22px on desktop,
+            // with the font's natural line height at both sizes.
             <Entrance delay={columnDelay} className={cn('mt-10', HERO_ENTRANCE)}>
-              {/* 24/34 on both frames — flat, so `text-lead`'s 20px floor
-               * would undersize it at 402. */}
-              <p className="mx-auto max-w-[724px] text-balance text-[24px] leading-[34px] text-white">
+              <p className="mx-auto max-w-[724px] text-balance text-[16px] leading-[normal] text-white lg:text-[22px]">
                 {subheading}
               </p>
             </Entrance>
@@ -363,7 +360,7 @@ export function HeroSection({
               delay={columnDelay + (subheading ? 300 : 0)}
               className={cn('mt-10 lg:mt-8', HERO_ENTRANCE)}
             >
-              <ButtonLink button={button} />
+              <ButtonLink button={button} className="p-5 text-[16px] font-medium leading-6" />
             </Entrance>
           ) : null}
         </div>

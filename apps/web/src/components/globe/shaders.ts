@@ -338,7 +338,7 @@ fn hash(n:f32) -> f32 {
  let visibility=smoothstep(100.0,400.0,distance);
  let prominence=smoothstep(0.65,0.98,hash(n+7.0));
  let backgroundLight=(0.3+pow(hash(n+8.0),1.8)*0.7)*mix(1.0,0.8,dust)*mix(1.0,0.72,depth);
- let brightness=mix(backgroundLight,0.98,prominence)*edge*visibility*select(1.0,0.72,backfield);
+ let brightness=mix(backgroundLight,0.98,prominence)*edge*visibility*select(1.0,0.72,backfield)*0.45;
  o.color=vec4f(mix(vec3f(0.88,0.92,1.0),vec3f(1.0,0.95,0.88),hash(n+9.0)),brightness);
  return o;
 }
