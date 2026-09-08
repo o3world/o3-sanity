@@ -1,8 +1,3 @@
-.work-organic-card-clip {
-  position: absolute;
-  pointer-events: none;
-}
-
 @media (max-width: 1023px) {
   .work-starfield > section > div > div:has(> h2) {
     flex-direction: row;
@@ -30,27 +25,6 @@
     padding-inline: 12px;
     font-size: 14px;
   }
-}
-
-.work-organic-card > a {
-  --gradient-card-scrim: linear-gradient(
-    90deg,
-    rgba(3, 3, 3, 0.8) 0%,
-    rgba(3, 3, 3, 0.78) 16%,
-    rgba(3, 3, 3, 0.72) 32%,
-    rgba(3, 3, 3, 0.62) 48%,
-    rgba(3, 3, 3, 0.48) 64%,
-    rgba(3, 3, 3, 0.3) 80%,
-    rgba(3, 3, 3, 0.12) 100%
-  );
-  --gradient-card-scrim-stacked: linear-gradient(
-    180deg,
-    rgba(3, 3, 3, 0.62) 0%,
-    rgba(3, 3, 3, 0.52) 25%,
-    rgba(3, 3, 3, 0.57) 50%,
-    rgba(3, 3, 3, 0.72) 75%,
-    rgba(3, 3, 3, 0.84) 100%
-  );
 }
 
 .work-starfield {
@@ -83,78 +57,4 @@
   height: 100svh;
   opacity: 0;
   mask-image: linear-gradient(transparent, black 16%, black 84%, transparent);
-}
-
-.work-starfield > section > div > div:has(> div > .work-organic-card) {
-  gap: 112px;
-}
-
-div:has(> .work-organic-card) {
-  position: relative;
-  top: auto;
-  background: transparent;
-  opacity: 1 !important;
-}
-
-@media (min-width: 768px) {
-  div:has(> .work-organic-card) {
-    width: 90%;
-    margin-inline: auto;
-  }
-}
-
-.work-organic-card {
-  --work-card-bleed: min(24px, calc(var(--spacing-gutter) / 2));
-  display: block;
-  position: relative;
-  width: 100%;
-  isolation: isolate;
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
-}
-
-.work-organic-card > a {
-  border-radius: 0;
-  overflow: visible;
-  padding: 56px;
-  min-height: 550px;
-  user-select: text;
-  -webkit-user-drag: none;
-}
-
-.work-organic-card > a > .absolute {
-  inset: -8px calc(-1 * var(--work-card-bleed));
-  clip-path: var(--work-card-clip);
-  pointer-events: none;
-}
-
-.work-organic-card > a > .absolute > .transition-transform {
-  scale: none;
-  transition: none;
-}
-
-.work-organic-card > a > :not(.absolute) {
-  transform: translateZ(0);
-  will-change: transform;
-}
-
-.work-organic-card img {
-  -webkit-user-drag: none;
-}
-
-.work-organic-card:has(> a:focus-visible) {
-  outline: 2px solid white;
-  outline-offset: 4px;
-  border-radius: 48px;
-}
-
-@media (max-width: 767px) {
-  .work-starfield > section > div > div:has(> div > .work-organic-card) {
-    gap: 80px;
-  }
-
-  .work-organic-card > a {
-    padding: 56px 24px;
-    min-height: 550px;
-  }
 }

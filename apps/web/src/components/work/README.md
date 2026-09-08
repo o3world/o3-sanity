@@ -1,6 +1,10 @@
 # Our work
 
-The existing case showcase section uses `OrganicWorkCard` and `WorkStarfield` by default. Its CMS content and links stay in the existing `CaseStudyCard`; there is no study flag, query switch, or startup script. Old `workMembrane` and `hideWorkCards` query parameters have no effect.
+The homepage now binds the original rectangular `CaseStudyCard` to `CaseCardStack`: desktop cards pin and layer over one another, while mobile cards stay in document flow. `WorkStarfield` retains the existing starfield. The organic-card modules below are preserved but are no longer mounted by the site. The complete prior site state is backed up at `backup/pre-justin-design-reversion-2026-09-08` (`3216cda1`).
+
+## Previous organic-card treatment
+
+The previous case showcase section used `OrganicWorkCard` and `WorkStarfield` together. Its CMS content and links stay in the existing `CaseStudyCard`; there is no study flag, query switch, or startup script. Old `workMembrane` and `hideWorkCards` query parameters have no effect.
 
 Cards share one layout width. Their photo and scrim use a continuous SVG clip with the original smooth outline and two connected control points along each edge, allowing an asymmetric sweep rather than a centered side bulge. The perimeter has persistent displacement and velocity at each control point. Card acceleration drives broad elastic lag; mouse velocity acts along the connected edge and shares force between neighboring control points, tangential sweeps tug the contour, and neighbor tension spreads deformation. Visible, slowly traveling ambient pressure drives broad idle flex through the same damped perimeter as scroll and cursor forces. Each card has its own phase; pausing stops that clock along with interaction. Broad bends use at most 40% of the horizontal padding, capped at 20px; the text remains clear of the silhouette. Text stays in selectable HTML, card dragging is disabled, and selection holds the card still. Native scrolling drives one section-level velocity sample with 60ms smoothing. Each card has its own critically damped vertical spring: IRONMAN has medium travel and response, Vertex is quicker and tighter, and Caron is slower and broader. The profile follows the case-study URL rather than the card's position in the DOM.
 
