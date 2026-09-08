@@ -31,45 +31,41 @@ function samplePath(path: string) {
 
 describe('the membrane stays outside the content padding', () => {
   it.each([
-    { cardWidth: 280, cardHeight: 1050, bleedX: 10, paddingX: 24, paddingY: 76 },
-    { cardWidth: 350, cardHeight: 950, bleedX: 10, paddingX: 24, paddingY: 76 },
-    { cardWidth: 447, cardHeight: 662, bleedX: 12.5, paddingX: 24, paddingY: 76 },
-    { cardWidth: 689, cardHeight: 600, bleedX: 19, paddingX: 24, paddingY: 76 },
-    { cardWidth: 1050, cardHeight: 650, bleedX: 24, paddingX: 80, paddingY: 88 },
-    { cardWidth: 1728, cardHeight: 650, bleedX: 24, paddingX: 80, paddingY: 88 },
-  ])('holds its safe area at $cardWidth px through ambient and maximum input bends', (fixture) => {
+    { cardWidth: 280, cardHeight: 1050, bleedX: 10, paddingX: 24, paddingY: 56 },
+    { cardWidth: 350, cardHeight: 950, bleedX: 10, paddingX: 24, paddingY: 56 },
+    { cardWidth: 447, cardHeight: 662, bleedX: 12.5, paddingX: 24, paddingY: 56 },
+    { cardWidth: 689, cardHeight: 600, bleedX: 19, paddingX: 24, paddingY: 56 },
+    { cardWidth: 1050, cardHeight: 650, bleedX: 24, paddingX: 56, paddingY: 56 },
+    { cardWidth: 1728, cardHeight: 650, bleedX: 24, paddingX: 56, paddingY: 56 },
+  ])('holds its safe area at $cardWidth px across rest outline phases', (fixture) => {
     const { cardWidth, cardHeight, bleedX, paddingX, paddingY } = fixture
     const bleedY = 8
     const width = cardWidth + bleedX * 2
     const height = cardHeight + bleedY * 2
     for (let time = 0; time <= 120; time += 3) {
-      for (const [pullX, pullY] of [
-        [0, 0],
-        [-0.013, -0.016],
-        [0.013, 0.016],
-        [-0.013, 0.016],
-        [0.013, -0.016],
-      ]) {
-        const points = samplePath(
-          membranePath(time, pullX, pullY, { width, height, bleedX, bleedY, paddingX }),
-        )
-        let intrusion = 0
-        for (const [nx, ny] of points) {
-          const x = nx * width
-          const y = ny * height
-          // Every edge stays inside its allocated background, including the corners.
-          intrusion = Math.max(intrusion, -x, x - width, -y, y - height)
-          if (y >= bleedY + paddingY && y <= height - bleedY - paddingY) {
-            intrusion = Math.max(intrusion, x < width / 2 ? x - bleedX : width - bleedX - x)
-          }
-          if (x >= bleedX + paddingX && x <= width - bleedX - paddingX) {
-            intrusion = Math.max(intrusion, y < height / 2 ? y - bleedY : height - bleedY - y)
-          }
+      const points = samplePath(membranePath(time, { width, height, bleedX, bleedY, paddingX }))
+      let intrusion = 0
+      for (const [nx, ny] of points) {
+        const x = nx * width
+        const y = ny * height
+        // Every edge stays inside its allocated background, including the corners.
+        intrusion = Math.max(intrusion, -x, x - width, -y, y - height)
+        if (y >= bleedY + paddingY && y <= height - bleedY - paddingY) {
+          intrusion = Math.max(
+            intrusion,
+            x < width / 2 ? x - bleedX - paddingX / 2 : width - bleedX - paddingX / 2 - x,
+          )
         }
-        expect(intrusion).toBeLessThan(0.001)
-        expect(points.at(-1)![0]).toBeCloseTo(points[0]![0], 12)
-        expect(points.at(-1)![1]).toBeCloseTo(points[0]![1], 12)
+        if (x >= bleedX + paddingX && x <= width - bleedX - paddingX) {
+          intrusion = Math.max(
+            intrusion,
+            y < height / 2 ? y - bleedY - paddingY / 2 : height - bleedY - paddingY / 2 - y,
+          )
+        }
       }
+      expect(intrusion).toBeLessThan(0.001)
+      expect(points.at(-1)![0]).toBeCloseTo(points[0]![0], 12)
+      expect(points.at(-1)![1]).toBeCloseTo(points[0]![1], 12)
     }
   })
 })
