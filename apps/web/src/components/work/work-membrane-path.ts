@@ -10,7 +10,7 @@ const initialSize: MembraneSize = { width: 1776, height: 666, bleedX: 24, bleedY
 const clamp = (value: number) => Math.max(-1, Math.min(1, value))
 
 /** The background owns the motion allowance; the card's content box stays intact. */
-export function membraneOutline(time: number, pullX = 0, pullY = 0, size = initialSize) {
+export function membraneOutline(time: number, size = initialSize) {
   const { width, height, bleedX, bleedY, paddingX } = size
   const left = bleedX / 2
   const top = bleedY / 2
@@ -47,14 +47,8 @@ export function membraneOutline(time: number, pullX = 0, pullY = 0, size = initi
   const points = outline.map(([x = 0, y = 0]) => {
     const nx = (x - cx) / cx
     const ny = (y - cy) / cy
-    const swayX =
-      Math.sin(time * 0.7) * ny * 0.65 +
-      Math.cos(time * 0.5) * (ny * ny - 0.4) * 0.65 +
-      clamp(pullX / 0.013) * ny * 0.25
-    const swayY =
-      Math.cos(time * 0.6) * nx * 0.65 +
-      Math.sin(time * 0.55) * (nx * nx - 0.4) * 0.65 +
-      clamp(pullY / 0.016) * nx * 0.25
+    const swayX = Math.sin(time * 0.7) * ny * 0.65 + Math.cos(time * 0.5) * (ny * ny - 0.4) * 0.65
+    const swayY = Math.cos(time * 0.6) * nx * 0.65 + Math.sin(time * 0.55) * (nx * nx - 0.4) * 0.65
     return [
       (x + clamp(swayX) * Math.max(0, left - 1)) / width,
       (y + clamp(swayY) * Math.max(0, top - 1)) / height,
@@ -63,8 +57,8 @@ export function membraneOutline(time: number, pullX = 0, pullY = 0, size = initi
   return points
 }
 
-export function membranePath(time: number, pullX = 0, pullY = 0, size = initialSize) {
-  return membraneSpline(membraneOutline(time, pullX, pullY, size))
+export function membranePath(time: number, size = initialSize) {
+  return membraneSpline(membraneOutline(time, size))
 }
 
 export function membraneSpline(points: readonly (readonly [number, number])[]) {

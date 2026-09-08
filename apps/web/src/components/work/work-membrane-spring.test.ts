@@ -99,21 +99,35 @@ it('keeps replayed motion consistent at 30, 60 and 120Hz', () => {
 })
 
 it.each(['top', 'bottom'] as const)(
-  'responds to horizontal cursor sweeps along the %s without scrolling',
+  'responds between control points along the %s at desktop widths',
   (edge) => {
-    const m = createMembrane(size)
-    const y = edge === 'top' ? 4 : size.height - 4
-    for (let i = 0; i < 20; i++) {
-      stepMembrane(
-        m,
-        { ...idle, pointer: { x: size.width / 2 - 60, y, velocityX: 1400, velocityY: 0 } },
-        1 / 120,
-      )
+    for (const width of [1100, 1440, 1776]) {
+      for (const fraction of [0.4, 0.5, 0.6]) {
+        const fixture = { ...size, width }
+        const calm = createMembrane(fixture)
+        const touched = createMembrane(fixture)
+        const y = edge === 'top' ? 4 : fixture.height - 4
+        for (let i = 0; i < 20; i++) {
+          stepMembrane(calm, { accelerationX: 0, accelerationY: 0 }, 1 / 120)
+          stepMembrane(
+            touched,
+            {
+              accelerationX: 0,
+              accelerationY: 0,
+              pointer: { x: width * fraction, y, velocityX: 1400, velocityY: 0 },
+            },
+            1 / 120,
+          )
+        }
+        const changes = touched.nodes.map((node, i) =>
+          Math.abs(node.displacement - calm.nodes[i]!.displacement),
+        )
+        const near = changes.filter((_, i) => Math.abs(touched.nodes[i]!.y - y) < 30)
+        const far = changes.filter((_, i) => Math.abs(touched.nodes[i]!.y - y) > fixture.height / 2)
+        expect(Math.max(...near), `${width}px at ${fraction}`).toBeGreaterThan(0.1)
+        expect(Math.max(...far)).toBeLessThan(Math.max(...near) * 0.1)
+      }
     }
-    const nearby = m.nodes.filter(
-      (n) => Math.abs(n.y - y) < 30 && Math.abs(n.x - size.width / 2) < 160,
-    )
-    expect(Math.max(...nearby.map((n) => Math.abs(n.displacement)))).toBeGreaterThan(0.1)
   },
 )
 

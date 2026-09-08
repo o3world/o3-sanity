@@ -19,7 +19,7 @@ export type MembraneInput = {
 }
 
 export function createMembrane(size: MembraneSize, phase = 0): Membrane {
-  const points = membraneOutline(phase, 0, 0, size)
+  const points = membraneOutline(phase, size)
   const nodes = points.map(([x, y], i) => {
     const before = points[(i + points.length - 1) % points.length]!
     const after = points[(i + 1) % points.length]!
@@ -64,11 +64,31 @@ export function stepMembrane(membrane: Membrane, input: MembraneInput, dt: numbe
   const steps = Math.ceil(Math.min(dt, 0.05) * 240)
   const h = Math.min(dt, 0.05) / steps
   const { nodes } = membrane
-  const forces = nodes.map((node) => {
+  const forces = nodes.map((node, i) => {
     let force = -(input.accelerationX * node.nx + input.accelerationY * node.ny) * 0.9
     if (input.pointer) {
-      const distance = Math.hypot(input.pointer.x - node.x, input.pointer.y - node.y)
-      const influence = Math.max(0, 1 - distance / 160) ** 2
+      let influence = 0
+      // Share an edge hit between its endpoints, including the space between sparse controls.
+      for (const neighbor of [
+        nodes[(i + nodes.length - 1) % nodes.length]!,
+        nodes[(i + 1) % nodes.length]!,
+      ]) {
+        const dx = neighbor.x - node.x
+        const dy = neighbor.y - node.y
+        const t = Math.max(
+          0,
+          Math.min(
+            1,
+            ((input.pointer.x - node.x) * dx + (input.pointer.y - node.y) * dy) /
+              (dx * dx + dy * dy || 1),
+          ),
+        )
+        const distance = Math.hypot(
+          input.pointer.x - node.x - t * dx,
+          input.pointer.y - node.y - t * dy,
+        )
+        influence = Math.max(influence, (1 - t) * Math.max(0, 1 - distance / 160) ** 2)
+      }
       const normalSpeed = input.pointer.velocityX * node.nx + input.pointer.velocityY * node.ny
       const tangentSpeed = -input.pointer.velocityX * node.ny + input.pointer.velocityY * node.nx
       const along =

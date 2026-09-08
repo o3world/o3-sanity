@@ -45,7 +45,7 @@ export function OrganicWorkCard({ children }: { children: ReactNode }) {
     let width = 0
     let height = 0
     let mobile = false
-    let membraneSize: Parameters<typeof membranePath>[3]
+    let membraneSize: Parameters<typeof membranePath>[1]
     let pointerX = 0
     let pointerY = 0
     let pointerAt = 0
@@ -175,7 +175,7 @@ export function OrganicWorkCard({ children }: { children: ReactNode }) {
       if (!visible) return
       pathRef.current?.setAttribute(
         'd',
-        membrane ? springMembranePath(membrane) : membranePath(phase, 0, 0, membraneSize),
+        membrane ? springMembranePath(membrane) : membranePath(phase, membraneSize),
       )
       const floatX = Math.sin(elapsed * 0.45 + phase)
       const floatY = Math.sin(elapsed * 0.55 + phase) * 1.5
