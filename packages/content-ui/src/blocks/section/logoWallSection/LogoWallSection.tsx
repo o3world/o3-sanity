@@ -281,7 +281,7 @@ export function LogoWallSection({
           </MarqueeTrack>
         </div>
 
-        {button ? <ButtonLink button={button} size="large" /> : null}
+        {button ? <ButtonLink button={button} size="large" className="relative z-10" /> : null}
       </section>
     </SurfaceProvider>
   )

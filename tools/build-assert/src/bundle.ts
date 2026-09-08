@@ -32,6 +32,8 @@ interface BudgetEntry {
 export interface JsBudget {
   /** What any route may ship without an entry of its own. */
   defaultBytes: number
+  /** Maximum increase over the same route in the PR base revision build. */
+  maxIncreaseBytes: number
   routes: BudgetEntry[]
 }
 
@@ -40,6 +42,14 @@ export type BudgetProblem =
   | { kind: 'over-budget'; route: string; bytes: number; budgetBytes: number }
   /** Has an entry, and the build has no such route. */
   | { kind: 'unknown-budget'; route: string }
+  | {
+      kind: 'over-growth'
+      route: string
+      baselineBytes: number
+      bytes: number
+      increaseBytes: number
+      maxIncreaseBytes: number
+    }
 
 function budgetFor(route: string, budget: JsBudget): number {
   return budget.routes.find((entry) => entry.route === route)?.bytes ?? budget.defaultBytes
@@ -64,6 +74,8 @@ export function describeBudgetProblem(problem: BudgetProblem): string {
   switch (problem.kind) {
     case 'over-budget':
       return `${problem.route} ships ${thousands(problem.bytes)} bytes of first-load JavaScript and its budget is ${thousands(problem.budgetBytes)}. Every visitor downloads, parses and runs the difference.`
+    case 'over-growth':
+      return `${problem.route} grew from ${thousands(problem.baselineBytes)} to ${thousands(problem.bytes)} bytes of first-load JavaScript (+${thousands(problem.increaseBytes)}); the per-PR growth limit is ${thousands(problem.maxIncreaseBytes)} bytes.`
     case 'unknown-budget':
       return `${problem.route} has a JS budget entry and the build has no such route — delete the entry or fix its path.`
   }
@@ -79,18 +91,39 @@ export function describeBudgetProblem(problem: BudgetProblem): string {
  * needed to be — so the run prints every route's headroom whether it passes or
  * not, and an entry with room to spare reads as spent.
  */
-export function checkJsBudget(bundles: RouteBundle[], budget: JsBudget): BudgetProblem[] {
+export function checkJsBudget(
+  bundles: RouteBundle[],
+  budget: JsBudget,
+  baseline?: RouteBundle[],
+): BudgetProblem[] {
   const problems: BudgetProblem[] = []
+  const baselineBytes = new Map(
+    baseline?.map((bundle) => [bundle.route, bundle.firstLoadUncompressedJsBytes]),
+  )
 
   for (const bundle of bundles) {
     const budgetBytes = budgetFor(bundle.route, budget)
-    if (bundle.firstLoadUncompressedJsBytes <= budgetBytes) continue
-    problems.push({
-      kind: 'over-budget',
-      route: bundle.route,
-      bytes: bundle.firstLoadUncompressedJsBytes,
-      budgetBytes,
-    })
+    if (bundle.firstLoadUncompressedJsBytes > budgetBytes) {
+      problems.push({
+        kind: 'over-budget',
+        route: bundle.route,
+        bytes: bundle.firstLoadUncompressedJsBytes,
+        budgetBytes,
+      })
+    }
+    const previous = baselineBytes.get(bundle.route)
+    if (previous === undefined) continue
+    const increaseBytes = bundle.firstLoadUncompressedJsBytes - previous
+    if (increaseBytes > budget.maxIncreaseBytes) {
+      problems.push({
+        kind: 'over-growth',
+        route: bundle.route,
+        baselineBytes: previous,
+        bytes: bundle.firstLoadUncompressedJsBytes,
+        increaseBytes,
+        maxIncreaseBytes: budget.maxIncreaseBytes,
+      })
+    }
   }
 
   const routes = new Set(bundles.map((bundle) => bundle.route))

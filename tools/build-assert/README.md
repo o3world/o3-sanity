@@ -8,7 +8,11 @@ pnpm --filter @o3/web build     # the assertion reads what this leaves in .next
 pnpm build:assert
 ```
 
-CI runs the same two commands as the `build assertions` job, after the build.
+CI runs the `build assertions` job after the build. On pull requests it compares GitHub's merged
+candidate with the exact PR base revision from the event, built with that revision's frozen
+lockfile in a separate worktree using the same Node version and Sanity environment. This measures
+what the PR adds to its target branch, without credit for unrelated reductions on main since the
+branches diverged. The baseline is freshly built, not supplied by the PR.
 
 ## The rendering assertion
 
@@ -69,6 +73,23 @@ budget exists to produce. What goes stale is an ENTRY — a route excused from t
 it needed to be — so the run prints every route's headroom whether it passes or not, and an entry
 with room to spare reads as spent.
 
+The absolute ceiling remains in force. On pull requests, `maxIncreaseBytes` also limits each
+existing route to **10,000 additional uncompressed bytes** compared with its PR base revision build.
+A 20 KB addition therefore fails even when the route still fits below 730,000 bytes. The report
+prints the route, base bytes, current bytes, delta and growth limit on passing runs too. New routes
+have no comparison and must meet their absolute ceiling; removed routes need no growth check.
+
+To run the same comparison locally after building both revisions separately:
+
+```bash
+pnpm build:assert --baseline-dist /path/to/pr-base/apps/web/.next
+```
+
+Missing, empty, malformed or duplicate baseline route measurements fail the command. Omitting
+`--baseline-dist` retains the absolute-budget check for ordinary local builds and pushes to main;
+PR CI always supplies it. Any intentional increase beyond the growth limit needs a reviewed policy
+change in `src/policy.ts`, rather than a bypass flag or an updated baseline file.
+
 The one entry today is the Studio, which is an editing application rather than a page. The audit
 behind the number is on #269.
 
@@ -105,8 +126,8 @@ point you add it.
 ## Tests
 
 `src/rendering.test.ts`, `src/cachedNotFound.test.ts` and `src/bundle.test.ts`, the unit layer,
-against output trimmed from a real build. The reader (`build-output.ts`) is a thin adapter over
-`readFileSync` and is exercised by running the command.
+against output trimmed from a real build. `src/assert.test.ts` runs the CLI against temporary build
+output to cover the growth failure, comparison report and invalid-baseline failures.
 
 These failure modes were proven against a real build rather than assumed:
 

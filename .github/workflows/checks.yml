@@ -67,7 +67,7 @@ jobs:
     name: build assertions
     needs: checks
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     permissions:
       contents: read
     env:
@@ -78,11 +78,47 @@ jobs:
       SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: ./.github/actions/setup
+      - name: Check out the immutable PR base revision
+        id: baseline
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          base=$(git rev-parse --verify "${PR_BASE}^{commit}")
+          echo "JavaScript baseline revision: $base"
+          git -c core.hooksPath=/dev/null worktree add --detach "$RUNNER_TEMP/js-budget-base" "$base"
+          echo "package_json=$(realpath --relative-to="$GITHUB_WORKSPACE" "$RUNNER_TEMP/js-budget-base/package.json")" >> "$GITHUB_OUTPUT"
+      - name: Set up the baseline's pnpm version
+        if: github.event_name == 'pull_request'
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: ${{ steps.baseline.outputs.package_json }}
+          run_install: false
+      - name: Build the baseline with its own locked dependencies
+        if: github.event_name == 'pull_request'
+        working-directory: ${{ runner.temp }}/js-budget-base
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm turbo run build --filter=@o3/web --force
+      - name: Restore the candidate's pnpm version
+        if: github.event_name == 'pull_request'
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - name: Build the site
         run: pnpm turbo run build --filter=@o3/web
       - name: Assert the rendering strategy, cached 404s and the JS budget
-        run: pnpm build:assert
+        env:
+          COMPARE_BASE: ${{ github.event_name == 'pull_request' }}
+        run: |
+          if [ "$COMPARE_BASE" = true ]; then
+            pnpm build:assert --baseline-dist "$RUNNER_TEMP/js-budget-base/apps/web/.next"
+          else
+            pnpm build:assert
+          fi
 
   # The three test layers (ADR 0004). Deliberately its own job rather than a
   # `turbo run` task: tests are a checkpoint, not something every command
