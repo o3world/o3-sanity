@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
-import { expect, within } from 'storybook/test'
+import { expect, waitFor, within } from 'storybook/test'
 
 import { CaseShowcaseSection } from '@o3/content-ui'
 import { seededSectionArgs } from '@o3/content-ui/testing/seed'
@@ -60,6 +60,43 @@ export const AsSeeded: Story = {
     }
     await expect(canvasElement.querySelector('.work-organic-card')).toBeNull()
     await expect(canvasElement.querySelector('canvas')).toBeNull()
+  },
+}
+
+/** Short desktop windows must allow the full card to scroll into view. */
+export const ShortViewport: Story = {
+  ...AsSeeded,
+  globals: { viewport: { value: 'shortDesktop' } },
+  parameters: {
+    viewport: {
+      options: {
+        shortDesktop: { name: 'Short desktop', styles: { width: '1440px', height: '550px' } },
+      },
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const win = canvasElement.ownerDocument.defaultView!
+    const card = canvasElement.querySelector<HTMLAnchorElement>('a[data-surface="ink"]')!
+    const cta = within(card).getByText('View the work')
+    await waitFor(() => expect(getComputedStyle(card.parentElement!).position).toBe('static'))
+    try {
+      cta.scrollIntoView({ block: 'center' })
+      await waitFor(() => {
+        const rect = cta.getBoundingClientRect()
+        expect(rect.top).toBeGreaterThanOrEqual(0)
+        expect(rect.bottom).toBeLessThanOrEqual(win.innerHeight)
+        expect(
+          card.contains(
+            canvasElement.ownerDocument.elementFromPoint(
+              rect.left + rect.width / 2,
+              rect.top + rect.height / 2,
+            ),
+          ),
+        ).toBe(true)
+      })
+    } finally {
+      win.scrollTo(0, 0)
+    }
   },
 }
 
