@@ -51,6 +51,11 @@ export const Desktop: Story = {
     await expect(title.parentElement!.getBoundingClientRect().width).toBe(576)
     await expect(getComputedStyle(title).fontWeight).toBe('400')
     await expect(getComputedStyle(chip!).borderRadius).toBe('0px')
+    await expect(chip!.querySelector('svg')).toHaveAttribute('width', '34.8')
+    const band = canvasElement.querySelector('section')!
+    const content = band.firstElementChild!
+    await expect(getComputedStyle(band).paddingInlineStart).toBe('96px')
+    await expect(content.getBoundingClientRect().width).toBeLessThanOrEqual(1248)
   },
 }
 
@@ -68,6 +73,9 @@ export const Mobile: Story = {
     const title = canvas.getByText(firstCase!.title!)
     await expect(getComputedStyle(title).fontSize).toBe('36px')
     await expect(getComputedStyle(title).fontWeight).toBe('400')
+    const band = canvasElement.querySelector('section')!
+    await expect(getComputedStyle(band).paddingInlineStart).toBe('20px')
+    await expect(getComputedStyle(band).paddingBlockStart).toBe('96px')
     await expect(canvas.getByRole('link')).toHaveAccessibleName(
       ['Next project', firstCase!.client?.name].filter(Boolean).join(' — ') +
         ': ' +

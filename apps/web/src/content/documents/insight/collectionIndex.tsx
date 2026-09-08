@@ -15,10 +15,8 @@ import { Blocks } from '@/content/blocks/Blocks'
 
 import { InsightIndexSkeleton } from './InsightIndexSkeleton'
 import { insightCatalog } from './insightCatalog'
-import dynamic from 'next/dynamic'
+import { InsightFeed } from './InsightFeed'
 import { feedPath, INSIGHTS_PAGE_SIZE } from './feedPath'
-
-const InsightFeed = dynamic(() => import('./InsightFeed').then((module) => module.InsightFeed))
 
 type Props = IndexRendererProps<typeof INSIGHTS_PAGE_QUERY>
 

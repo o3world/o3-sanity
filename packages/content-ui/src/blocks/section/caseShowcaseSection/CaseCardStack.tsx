@@ -19,8 +19,8 @@ export interface CaseCardStackProps {
  * **The stacking itself is CSS and is not here.** Each wrapper is `sticky` at
  * the same offset, so a card pins under the chrome and the next one slides
  * over it; they paint in document order, which is why no card needs a
- * `z-index`. What CSS cannot do is fade the card underneath as it disappears,
- * and that is the whole of this component's job.
+ * `z-index`. This component dims covered cards and switches the stack to
+ * normal flow when its cards cannot fit below the navigation.
  *
  * Opacity is written straight onto the nodes rather than through `setState`:
  * a scroll past three cards is a few hundred frames, and each one would
@@ -78,9 +78,15 @@ export function CaseCardStack({ children }: CaseCardStackProps) {
     }
 
     const measure = () => {
+      for (const card of cards) card.style.removeProperty('position')
       const style = getComputedStyle(cards[0]!)
-      enabled = style.position === 'sticky' && !reduced.matches
       stickyTop = Number.parseFloat(style.top) || 0
+      const sticky = style.position === 'sticky'
+      const fits = cards.every((card) => card.offsetHeight + stickyTop <= window.innerHeight)
+      if (sticky && !fits) {
+        for (const card of cards) card.style.position = 'static'
+      }
+      enabled = sticky && fits && !reduced.matches
       if (!enabled) clear()
     }
 
@@ -93,14 +99,18 @@ export function CaseCardStack({ children }: CaseCardStackProps) {
     }
 
     remeasure()
+    const resizer = new ResizeObserver(remeasure)
+    cards.forEach((card) => resizer.observe(card))
     window.addEventListener('scroll', schedule, { passive: true })
     window.addEventListener('resize', remeasure, { passive: true })
     reduced.addEventListener('change', remeasure)
     return () => {
       if (frame) cancelAnimationFrame(frame)
+      resizer.disconnect()
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', remeasure)
       reduced.removeEventListener('change', remeasure)
+      for (const card of cards) card.style.removeProperty('position')
       clear()
     }
   }, [])

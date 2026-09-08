@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
+import { expect, waitFor, within } from 'storybook/test'
 
 import { CaseShowcaseSection } from '@o3/content-ui'
 import { seededSectionArgs } from '@o3/content-ui/testing/seed'
 
-import { CARD_COMPONENTS } from './clientComponents'
+import { CARD_COMPONENTS, SECTION_CLIENT_COMPONENTS } from './clientComponents'
 
 /**
  * The Home frame's "Case Studies" band (`1683:2656`), drawing O3's card.
@@ -46,6 +47,57 @@ type Story = StoryObj<typeof meta>
 /** Three real case studies, dereferenced from the committed translations. */
 export const AsSeeded: Story = {
   args: seededSectionArgs('index', 'caseShowcaseSection'),
+  render: (args) => <SECTION_CLIENT_COMPONENTS.caseShowcaseSection {...args} />,
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const cards = within(canvasElement)
+      .getAllByRole('link')
+      .filter((link) => link.getAttribute('href')?.startsWith('/work/'))
+    await expect(cards.length).toBeGreaterThan(1)
+    for (const card of cards) {
+      await expect(getComputedStyle(card.parentElement!).position).toBe('sticky')
+      await expect(getComputedStyle(card).clipPath).toBe('none')
+    }
+    await expect(canvasElement.querySelector('.work-organic-card')).toBeNull()
+    await expect(canvasElement.querySelector('canvas')).toBeNull()
+  },
+}
+
+/** Short desktop windows must allow the full card to scroll into view. */
+export const ShortViewport: Story = {
+  ...AsSeeded,
+  globals: { viewport: { value: 'shortDesktop' } },
+  parameters: {
+    viewport: {
+      options: {
+        shortDesktop: { name: 'Short desktop', styles: { width: '1440px', height: '550px' } },
+      },
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const win = canvasElement.ownerDocument.defaultView!
+    const card = canvasElement.querySelector<HTMLAnchorElement>('a[data-surface="ink"]')!
+    const cta = within(card).getByText('View the work')
+    await waitFor(() => expect(getComputedStyle(card.parentElement!).position).toBe('static'))
+    try {
+      cta.scrollIntoView({ block: 'center' })
+      await waitFor(() => {
+        const rect = cta.getBoundingClientRect()
+        expect(rect.top).toBeGreaterThanOrEqual(0)
+        expect(rect.bottom).toBeLessThanOrEqual(win.innerHeight)
+        expect(
+          card.contains(
+            canvasElement.ownerDocument.elementFromPoint(
+              rect.left + rect.width / 2,
+              rect.top + rect.height / 2,
+            ),
+          ),
+        ).toBe(true)
+      })
+    } finally {
+      win.scrollTo(0, 0)
+    }
+  },
 }
 
 /** Gap 24 at 402, 48 at 1440 — the band's one responsive move (ADR 0006). */

@@ -1,38 +1,33 @@
-.work-organic-card-clip {
-  position: absolute;
-  pointer-events: none;
-}
-
 @media (max-width: 1023px) {
-  .work-starfield > section > div > div:has(> h2) {
+  .work-showcase > section > div > div:has(> h2) {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
   }
 
-  .work-starfield > section > div > div:has(> h2) > a {
+  .work-showcase > section > div > div:has(> h2) > a {
     flex-shrink: 0;
   }
 }
 
 @media (max-width: 380px) {
-  .work-starfield > section > div > div:has(> h2) {
+  .work-showcase > section > div > div:has(> h2) {
     gap: 12px;
   }
 
-  .work-starfield > section > div > div > h2 {
+  .work-showcase > section > div > div > h2 {
     font-size: 28px;
   }
 
-  .work-starfield > section > div > div:has(> h2) > a {
+  .work-showcase > section > div > div:has(> h2) > a {
     gap: 8px;
     padding-inline: 12px;
     font-size: 14px;
   }
 }
 
-.work-organic-card > a {
+.work-showcase a[data-surface='ink'] {
   --gradient-card-scrim: linear-gradient(
     90deg,
     rgba(3, 3, 3, 0.8) 0%,
@@ -53,107 +48,42 @@
   );
 }
 
-.work-starfield {
-  --work-sky-bleed: 100svh;
-  display: block;
-  position: relative;
-  z-index: 1;
-  isolation: isolate;
-  background: black;
-}
-
-.work-starfield > section {
-  position: relative;
-  z-index: 1;
-  background: transparent;
-}
-
-.work-starfield-layer {
-  display: block;
-  position: absolute;
-  inset: calc(-1 * var(--work-sky-bleed)) 0;
-  pointer-events: none;
-}
-
-.work-starfield-layer canvas {
-  position: sticky;
-  top: 0;
-  display: block;
-  width: 100%;
-  height: 100svh;
-  opacity: 0;
-  mask-image: linear-gradient(transparent, black 16%, black 84%, transparent);
-}
-
-.work-starfield > section > div > div:has(> div > .work-organic-card) {
+.work-showcase > section > div > div:has(> div > a[data-surface='ink']) {
   gap: 112px;
 }
 
-div:has(> .work-organic-card) {
-  position: relative;
-  top: auto;
-  background: transparent;
-  opacity: 1 !important;
-}
-
 @media (min-width: 768px) {
-  div:has(> .work-organic-card) {
+  .work-showcase div:has(> a[data-surface='ink']) {
     width: 90%;
     margin-inline: auto;
   }
 }
-
-.work-organic-card {
-  --work-card-bleed: min(24px, calc(var(--spacing-gutter) / 2));
-  display: block;
-  position: relative;
-  width: 100%;
-  isolation: isolate;
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
-}
-
-.work-organic-card > a {
-  border-radius: 0;
-  overflow: visible;
+.work-showcase a[data-surface='ink'] {
   padding: 56px;
   min-height: 550px;
   user-select: text;
   -webkit-user-drag: none;
 }
 
-.work-organic-card > a > .absolute {
-  inset: -8px calc(-1 * var(--work-card-bleed));
-  clip-path: var(--work-card-clip);
+.work-showcase a[data-surface='ink'] > .absolute {
   pointer-events: none;
 }
 
-.work-organic-card > a > .absolute > .transition-transform {
+.work-showcase a[data-surface='ink'] > .absolute > .transition-transform {
   scale: none;
   transition: none;
 }
 
-.work-organic-card > a > :not(.absolute) {
-  transform: translateZ(0);
-  will-change: transform;
-}
-
-.work-organic-card img {
+.work-showcase a[data-surface='ink'] img {
   -webkit-user-drag: none;
 }
 
-.work-organic-card:has(> a:focus-visible) {
-  outline: 2px solid white;
-  outline-offset: 4px;
-  border-radius: 48px;
-}
-
 @media (max-width: 767px) {
-  .work-starfield > section > div > div:has(> div > .work-organic-card) {
+  .work-showcase > section > div > div:has(> div > a[data-surface='ink']) {
     gap: 80px;
   }
 
-  .work-organic-card > a {
+  .work-showcase a[data-surface='ink'] {
     padding: 56px 24px;
     min-height: 550px;
   }
