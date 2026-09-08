@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
 import { Reveal } from '@o3/ui'
+import { expect, waitFor } from 'storybook/test'
 
 import { seedImage, seededSectionArgs } from '../../../testing/seedContent'
 
@@ -158,6 +159,26 @@ export const RailMobile: Story = {
 export const RailBleed: Story = {
   args: { ...seededSectionArgs('index', 'railPanelsSection', 0), plate: 'bleed' },
   parameters: { design: figmaDesign('2747:4503') },
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const rail = canvasElement.querySelector('ol')!
+    const win = canvasElement.ownerDocument.defaultView!
+    const top = parseFloat(win.getComputedStyle(rail).top)
+    const start = rail.getBoundingClientRect().top + win.scrollY
+    try {
+      for (const offset of [150, 500]) {
+        win.scrollTo(0, start - top + offset)
+        await waitFor(() =>
+          expect(Math.abs(rail.getBoundingClientRect().top - top)).toBeLessThan(2),
+        )
+      }
+      await expect(canvasElement.ownerDocument.documentElement.scrollWidth).toBeLessThanOrEqual(
+        win.innerWidth,
+      )
+    } finally {
+      win.scrollTo(0, 0)
+    }
+  },
 }
 
 /** The same plate at 402: square, from the copy's left edge to the viewport's right. */
