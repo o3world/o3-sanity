@@ -4,7 +4,7 @@ import { useEffect, useRef, type ReactNode } from 'react'
 import { useGlobeRuntime } from '../globe/GlobeProvider'
 import { useSpatialMotion } from '../globe/SpatialMotionProvider'
 import { workStarCameraY } from './work-starfield-camera'
-import './work-cards.css'
+import { WorkCardFrames, useWorkCardFrames } from './WorkCardFrames'
 
 const smooth = (value: number) => {
   const t = Math.max(0, Math.min(1, value))
@@ -15,6 +15,8 @@ const smooth = (value: number) => {
 export function WorkStarfield({ children }: { children: ReactNode }) {
   const runtime = useGlobeRuntime()
   const motion = useSpatialMotion()
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const cardFrames = useWorkCardFrames(sectionRef)
   const layerRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -114,11 +116,13 @@ export function WorkStarfield({ children }: { children: ReactNode }) {
   }, [runtime, motion])
 
   return (
-    <div className="work-starfield">
-      <div className="work-starfield-layer" ref={layerRef} aria-hidden="true">
-        <canvas ref={canvasRef} />
+    <WorkCardFrames.Provider value={cardFrames}>
+      <div className="work-starfield" ref={sectionRef}>
+        <div className="work-starfield-layer" ref={layerRef} aria-hidden="true">
+          <canvas ref={canvasRef} />
+        </div>
+        {children}
       </div>
-      {children}
-    </div>
+    </WorkCardFrames.Provider>
   )
 }

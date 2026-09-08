@@ -1,6 +1,6 @@
 # Our work
 
-The homepage now binds the original rectangular `CaseStudyCard` to `CaseCardStack`: desktop cards pin and layer over one another, while mobile cards stay in document flow. `WorkStarfield` retains the existing starfield. The organic-card modules below are preserved but are no longer mounted by the site. The complete prior site state is backed up at `backup/pre-justin-design-reversion-2026-09-08` (`3216cda1`).
+The homepage binds the existing rectangular `CaseStudyCard` to `CaseCardStack`: desktop cards pin and layer over one another, while mobile cards stay in document flow. The prior card widths, spacing, padding, image shading, and disabled hover zoom remain in `work-cards.css`. The starfield and organic-card modules below are no longer mounted by the site. The complete prior site state, including their styles, is backed up at `backup/pre-justin-design-reversion-2026-09-08` (`3216cda1`).
 
 ## Previous organic-card treatment
 

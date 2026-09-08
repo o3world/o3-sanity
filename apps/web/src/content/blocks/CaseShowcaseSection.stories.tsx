@@ -59,6 +59,7 @@ export const AsSeeded: Story = {
       await expect(getComputedStyle(card).clipPath).toBe('none')
     }
     await expect(canvasElement.querySelector('.work-organic-card')).toBeNull()
+    await expect(canvasElement.querySelector('canvas')).toBeNull()
   },
 }
 

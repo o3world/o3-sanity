@@ -51,6 +51,24 @@ const ENTRANCE_STAGGER = 100
 const WALK_CLEARANCE = 160
 
 /**
+ * Where the walk begins: this much room under the track's foot — the rule
+ * and every column fully on screen, at rest in the first framing, before
+ * anything moves. The track rather than the whole band, because a band
+ * whose header eats half a short viewport would otherwise start walking
+ * before the reader has seen what walks.
+ */
+const WALK_FOOT_GAP = 48
+
+/**
+ * The least page scroll the walk may be mapped onto. A tall track in a short
+ * viewport squeezes the fully-visible stretch toward nothing, and a walk
+ * compressed into a few pixels of scroll is a flip; below this the window
+ * opens upward from `WALK_CLEARANCE` instead, trading a little head-room
+ * for a walk that still reads as motion.
+ */
+const WALK_MIN_SPAN = 160
+
+/**
  * `layout: track` — Home's "How we work" (`2846:5480`, `2975:8355` at 402),
  * on the shared `Carousel` (Embla) primitive.
  *
@@ -95,15 +113,25 @@ const WALK_CLEARANCE = 160
  *
  * ## The advance
  *
- * On a fine pointer the header and columns pin below the navigation while
- * page scrolling advances through Embla's own snaps. A wrapper reserves the
- * travel, so the browser keeps its native document scroll and releases the
- * band after the final framing. Each framing gets an equal share of the
- * pinned stretch; Embla animates the hand-over and reports the rule's progress.
- *
- * A track taller than the available viewport stays in normal flow, as do
- * touch and reduced-motion views. All columns remain reachable through the
- * carousel's drag and keyboard controls.
+ * On a fine pointer the track walks as it transits the viewport: the walk
+ * maps onto the stretch of page scroll in which the rule and every column
+ * are on screen — from fully entered (`WALK_FOOT_GAP` under the track's
+ * foot) to the nav clearance from the top. The mapping is STEPPED: the
+ * target is one of Embla's own scroll snaps — `scrollSnapList()`, which is
+ * already trimmed to the framings the track can rest in — and each framing
+ * holds an equal share of the window, so every slide gets its dwell instead
+ * of the transit being spent between columns. `scrollTo` is left to tween,
+ * so a hand-over lands as a glide into a rest rather than a flip. The window
+ * is measured over the track rather than the whole band: the header above it
+ * only has to have been seen, not to still be on screen, and holding the
+ * walk for it would start the advance early on any viewport short enough
+ * that band-plus-header never fits at once. Nothing pins and nothing is held
+ * open: the section keeps exactly the height it has, the page never stops
+ * moving, and the bands around this one are undisturbed. On desktop two
+ * columns fit the view, so the walk is one hand-over — [1 2] dwells, then
+ * [2 3] — while a one-column view walks all three framings on equal shares.
+ * The rule above reads Embla's own progress, so it keeps reporting the truth
+ * without knowing who moved the track.
  *
  * **A hand on the track ends the drive**, on Embla's `pointerDown` or on a
  * key, a focus or a wheel with sideways intent — a reader who has taken hold
@@ -149,7 +177,6 @@ const WALK_CLEARANCE = 160
  * one size down.
  */
 export function PanelTrack({ items, label, header }: PanelTrackProps) {
-  const wrapRef = useRef<HTMLDivElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
   const walkRef = useRef<HTMLDivElement>(null)
   const ruleRef = useRef<HTMLSpanElement>(null)
@@ -204,10 +231,9 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
   }, [])
 
   useEffect(() => {
-    const wrap = wrapRef.current
     const stage = stageRef.current
     const walk = walkRef.current
-    if (!api || !wrap || !stage || !walk) return
+    if (!api || !stage || !walk) return
 
     const still = window.matchMedia('(prefers-reduced-motion: reduce)')
     const finger = window.matchMedia('(pointer: coarse)')
@@ -215,56 +241,31 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
 
     let frame = 0
     let live = false
-    let travel = 0
-    let clearance = WALK_CLEARANCE
     // The framing the drive last aimed at, so a page scroll that stays inside
     // one share of the window costs nothing. `-1` is "aim afresh", which is
     // what a re-arm wants: the reader may have left the track anywhere.
     let aimed = -1
 
-    const unpin = () => {
-      travel = 0
-      stage.style.removeProperty('position')
-      stage.style.removeProperty('top')
-      wrap.style.removeProperty('height')
-    }
-
-    const layout = () => {
-      clearance = parseFloat(getComputedStyle(stage).scrollMarginTop) || WALK_CLEARANCE
-      const slides = api.slideNodes()
-      const first = slides[0]
-      const last = slides.at(-1)
-      const framings = api.scrollSnapList().length
-      if (
-        !allowed() ||
-        !first ||
-        !last ||
-        framings <= 1 ||
-        stage.offsetHeight + clearance > window.innerHeight
-      ) {
-        unpin()
-        return
-      }
-      travel = Math.max(
-        last.offsetLeft + last.offsetWidth - first.offsetLeft - walk.clientWidth,
-        framings * 240,
-      )
-      stage.style.position = 'sticky'
-      stage.style.top = `${clearance}px`
-      wrap.style.height = `${stage.offsetHeight + travel}px`
-    }
-
     const paint = () => {
       frame = 0
-      if (!live || !travel) return
+      if (!live) return
       // Embla's snaps are already the framings the track can rest in —
       // trimmed at the end, so the last one is the end of the travel.
       const framings = api.scrollSnapList().length
       if (framings <= 1) return
-      const progress = Math.min(
-        1,
-        Math.max(0, (clearance - wrap.getBoundingClientRect().top) / travel),
+      const rect = walk.getBoundingClientRect()
+      // Where the last framing must be settled: the stage's scroll-margin-top
+      // resolves the nav-clearance token, so the walk ends where a sticky
+      // element would stop — under the pill wherever the pill sits.
+      const clearance = parseFloat(getComputedStyle(stage).scrollMarginTop) || WALK_CLEARANCE
+      // The walk's window: the stretch of transit in which the rule and every
+      // column are on screen. Squeezed under WALK_MIN_SPAN (a tall track in a
+      // short viewport), it opens upward from the clearance instead.
+      const start = Math.max(
+        window.innerHeight - rect.height - WALK_FOOT_GAP,
+        clearance + WALK_MIN_SPAN,
       )
+      const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - clearance)))
       // Equal shares, one per framing: written proportionally the track spends
       // most of the transit between columns, all seam and no slide.
       const framing = Math.min(framings - 1, Math.floor(progress * framings))
@@ -300,15 +301,8 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
     }
 
     const onPreference = () => {
-      layout()
       if (allowed()) take()
       else yieldTrack()
-    }
-
-    const relayout = () => {
-      layout()
-      aimed = -1
-      schedule()
     }
 
     // Out of sight is where the drive gets its second chance: a reader who
@@ -319,16 +313,12 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
       },
       { threshold: 0 },
     )
-    io.observe(wrap)
+    io.observe(stage)
 
-    layout()
     if (allowed()) take()
 
-    const resizer = new ResizeObserver(relayout)
-    resizer.observe(stage)
-
     window.addEventListener('scroll', schedule, { passive: true })
-    window.addEventListener('resize', relayout)
+    window.addEventListener('resize', schedule)
     // The listeners sit on the walk rather than the carousel root: the rule
     // above it is decorative and holds nothing focusable, and the band's
     // header — whose links a reader may well tab through — is outside it.
@@ -339,24 +329,22 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
     // as a DOM pointerdown we would have to tell apart from our own writes.
     api.on('pointerDown', yieldTrack)
     // The travel moves with the measure; a re-init re-aims the walk.
-    api.on('reInit', relayout)
+    api.on('reInit', schedule)
     still.addEventListener('change', onPreference)
     finger.addEventListener('change', onPreference)
 
     return () => {
       if (frame) cancelAnimationFrame(frame)
       io.disconnect()
-      resizer.disconnect()
       window.removeEventListener('scroll', schedule)
-      window.removeEventListener('resize', relayout)
+      window.removeEventListener('resize', schedule)
       walk.removeEventListener('keydown', yieldTrack)
       walk.removeEventListener('focusin', yieldTrack)
       walk.removeEventListener('wheel', yieldToSideways)
       api.off('pointerDown', yieldTrack)
-      api.off('reInit', relayout)
+      api.off('reInit', schedule)
       still.removeEventListener('change', onPreference)
       finger.removeEventListener('change', onPreference)
-      unpin()
     }
   }, [api])
 
@@ -367,11 +355,8 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
     // resolved nav-clearance token as pixels — `getComputedStyle` hands back
     // an unresolved `calc()` for a custom property, and a resolved length for
     // the real property it lands on.
-    <div ref={wrapRef} className="w-full">
-      <div
-        ref={stageRef}
-        className="flex w-full scroll-mt-[calc(var(--spacing-nav-pinned)+96px)] flex-col gap-[18px]"
-      >
+    <div ref={stageRef} className="w-full scroll-mt-[calc(var(--spacing-nav-pinned)+96px)]">
+      <div className="flex w-full flex-col gap-[18px]">
         {header}
 
         <div ref={walkRef} className="flex w-full flex-col">

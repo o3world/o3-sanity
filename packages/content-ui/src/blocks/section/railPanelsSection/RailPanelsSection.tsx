@@ -8,7 +8,6 @@ import { stegaClean } from '@sanity/client/stega'
 
 import { ButtonLink } from '../../../ButtonLink'
 import { SanityImage } from '../../../SanityImage'
-import { DECORATED_BAND_CLASS } from '../../decoration'
 import { sectionBackground } from '../../sectionBackground'
 import { resolveSurface } from '../../surface'
 
@@ -302,9 +301,9 @@ export function RailPanelsSection({
       top="md"
       bottom="md"
       background={background}
-      // A bleeding plate ends on the viewport's edge; the clip is what keeps it
-      // from pushing the page sideways over the scrollbar.
-      className={bleeding ? DECORATED_BAND_CLASS : undefined}
+      // Clip the bleeding artwork without creating a scroll container that
+      // prevents the rail from sticking to the viewport.
+      className={bleeding ? 'relative isolate overflow-clip' : undefined}
     >
       <div className="flex flex-col gap-32">
         {header}

@@ -27,7 +27,7 @@ import { StatGroup } from '@/components/blocks/StatGroup'
 
 import { StatsSection } from './statsSection/StatsSection'
 import { CaseStudyCard } from '@/components/cards/CaseStudyCard'
-import { WorkStarfield } from '@/components/work/WorkStarfield'
+import '@/components/work/work-cards.css'
 
 // The renderers themselves are shared (@o3/content-ui); the binding below is
 // this app's. Re-pointing one line here is what "O3XO adapts a block" costs.
@@ -130,9 +130,9 @@ export const CARD_COMPONENTS = bindingsToRecord(CARD_BINDINGS) satisfies AppFirs
  */
 function CaseShowcaseSectionWithCard(props: SectionProps<'caseShowcaseSection'>) {
   return (
-    <WorkStarfield>
+    <div className="work-showcase">
       <CaseShowcaseSection {...props} cardComponents={CARD_COMPONENTS} />
-    </WorkStarfield>
+    </div>
   )
 }
 

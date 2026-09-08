@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
 import { Reveal } from '@o3/ui'
-import { expect, waitFor, within } from 'storybook/test'
+import { expect, waitFor } from 'storybook/test'
 
 import { seedImage, seededSectionArgs } from '../../../testing/seedContent'
 
@@ -95,9 +95,8 @@ export const TrackEntrance: Story = {
  * The track's advance — scroll the page slowly and the columns walk sideways.
  *
  * The spacer above and below is what makes it visible: the band's transit
- * through the pinned stretch drives the travel, so the story needs room on both
- * sides of it to be scrolled through. The header and columns pin below the
- * navigation until the last framing has had its turn. The rule reads Embla's
+ * across the viewport is the whole travel, so the story needs room on both
+ * sides of it to be scrolled through. The rule under the columns reads Embla's
  * own progress and knows nothing about who moved the track, so it follows the
  * advance for free.
  *
@@ -112,7 +111,6 @@ export const TrackEntrance: Story = {
  */
 export const TrackAdvance: Story = {
   args: seededSectionArgs('index', 'railPanelsSection', 1),
-  globals: { viewport: { value: 'desktop' } },
   parameters: { design: figmaDesign('2846:5480') },
   render: (args) => (
     <>
@@ -127,31 +125,6 @@ export const TrackAdvance: Story = {
       </div>
     </>
   ),
-  play: async ({ canvasElement }) => {
-    const carousel = within(canvasElement).getByRole('region', { name: 'How we work' })
-    const stage = carousel.parentElement!.parentElement!
-    const wrap = stage.parentElement!
-    const view = canvasElement.ownerDocument.defaultView!
-    const column = carousel.querySelector('[aria-roledescription="slide"]')!
-    await waitFor(() => expect(getComputedStyle(stage).position).toBe('sticky'))
-    const clearance = Number.parseFloat(getComputedStyle(stage).top)
-    const start = wrap.getBoundingClientRect().top + view.scrollY - clearance
-    const travel = wrap.offsetHeight - stage.offsetHeight
-    try {
-      view.scrollTo(0, start + travel * 0.1)
-      await waitFor(() =>
-        expect(Math.abs(stage.getBoundingClientRect().top - clearance)).toBeLessThan(1),
-      )
-      const firstX = column.getBoundingClientRect().left
-      view.scrollTo(0, start + travel * 0.9)
-      await waitFor(() => expect(column.getBoundingClientRect().left).toBeLessThan(firstX - 100))
-      await expect(Math.abs(stage.getBoundingClientRect().top - clearance)).toBeLessThan(1)
-      view.scrollTo(0, start + travel + 150)
-      await waitFor(() => expect(stage.getBoundingClientRect().top).toBeLessThan(clearance - 100))
-    } finally {
-      view.scrollTo(0, 0)
-    }
-  },
 }
 
 /** The track at 402 (`2975:8355`) — one column per view, no hairline in sight. */
@@ -186,6 +159,26 @@ export const RailMobile: Story = {
 export const RailBleed: Story = {
   args: { ...seededSectionArgs('index', 'railPanelsSection', 0), plate: 'bleed' },
   parameters: { design: figmaDesign('2747:4503') },
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const rail = canvasElement.querySelector('ol')!
+    const win = canvasElement.ownerDocument.defaultView!
+    const top = parseFloat(win.getComputedStyle(rail).top)
+    const start = rail.getBoundingClientRect().top + win.scrollY
+    try {
+      for (const offset of [150, 500]) {
+        win.scrollTo(0, start - top + offset)
+        await waitFor(() =>
+          expect(Math.abs(rail.getBoundingClientRect().top - top)).toBeLessThan(2),
+        )
+      }
+      await expect(canvasElement.ownerDocument.documentElement.scrollWidth).toBeLessThanOrEqual(
+        win.innerWidth,
+      )
+    } finally {
+      win.scrollTo(0, 0)
+    }
+  },
 }
 
 /** The same plate at 402: square, from the copy's left edge to the viewport's right. */
