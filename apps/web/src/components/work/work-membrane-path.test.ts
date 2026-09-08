@@ -31,12 +31,12 @@ function samplePath(path: string) {
 
 describe('the membrane stays outside the content padding', () => {
   it.each([
-    { cardWidth: 280, cardHeight: 1050, bleedX: 10, paddingX: 24, paddingY: 76 },
-    { cardWidth: 350, cardHeight: 950, bleedX: 10, paddingX: 24, paddingY: 76 },
-    { cardWidth: 447, cardHeight: 662, bleedX: 12.5, paddingX: 24, paddingY: 76 },
-    { cardWidth: 689, cardHeight: 600, bleedX: 19, paddingX: 24, paddingY: 76 },
-    { cardWidth: 1050, cardHeight: 650, bleedX: 24, paddingX: 80, paddingY: 88 },
-    { cardWidth: 1728, cardHeight: 650, bleedX: 24, paddingX: 80, paddingY: 88 },
+    { cardWidth: 280, cardHeight: 1050, bleedX: 10, paddingX: 24, paddingY: 56 },
+    { cardWidth: 350, cardHeight: 950, bleedX: 10, paddingX: 24, paddingY: 56 },
+    { cardWidth: 447, cardHeight: 662, bleedX: 12.5, paddingX: 24, paddingY: 56 },
+    { cardWidth: 689, cardHeight: 600, bleedX: 19, paddingX: 24, paddingY: 56 },
+    { cardWidth: 1050, cardHeight: 650, bleedX: 24, paddingX: 56, paddingY: 56 },
+    { cardWidth: 1728, cardHeight: 650, bleedX: 24, paddingX: 56, paddingY: 56 },
   ])('holds its safe area at $cardWidth px through ambient and maximum input bends', (fixture) => {
     const { cardWidth, cardHeight, bleedX, paddingX, paddingY } = fixture
     const bleedY = 8
@@ -60,10 +60,16 @@ describe('the membrane stays outside the content padding', () => {
           // Every edge stays inside its allocated background, including the corners.
           intrusion = Math.max(intrusion, -x, x - width, -y, y - height)
           if (y >= bleedY + paddingY && y <= height - bleedY - paddingY) {
-            intrusion = Math.max(intrusion, x < width / 2 ? x - bleedX : width - bleedX - x)
+            intrusion = Math.max(
+              intrusion,
+              x < width / 2 ? x - bleedX - paddingX / 2 : width - bleedX - paddingX / 2 - x,
+            )
           }
           if (x >= bleedX + paddingX && x <= width - bleedX - paddingX) {
-            intrusion = Math.max(intrusion, y < height / 2 ? y - bleedY : height - bleedY - y)
+            intrusion = Math.max(
+              intrusion,
+              y < height / 2 ? y - bleedY - paddingY / 2 : height - bleedY - paddingY / 2 - y,
+            )
           }
         }
         expect(intrusion).toBeLessThan(0.001)

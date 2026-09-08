@@ -3,37 +3,6 @@
   pointer-events: none;
 }
 
-@keyframes work-card-reveal {
-  0%,
-  100% {
-    opacity: 0;
-  }
-
-  15%,
-  85% {
-    opacity: 1;
-  }
-}
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    html:not([data-spatial-paused], [data-spatial-still]) {
-      div:has(> .work-organic-card) {
-        view-timeline: --work-card-reveal block;
-      }
-
-      .work-organic-card {
-        animation: work-card-reveal 1s ease-in-out both;
-        animation-timeline: --work-card-reveal;
-      }
-
-      .work-organic-card:has(> a:focus-visible) {
-        animation: none;
-      }
-    }
-  }
-}
-
 @media (max-width: 1023px) {
   .work-starfield > section > div > div:has(> h2) {
     flex-direction: row;
@@ -127,6 +96,13 @@ div:has(> .work-organic-card) {
   opacity: 1 !important;
 }
 
+@media (min-width: 768px) {
+  div:has(> .work-organic-card) {
+    width: 90%;
+    margin-inline: auto;
+  }
+}
+
 .work-organic-card {
   --work-card-bleed: min(24px, calc(var(--spacing-gutter) / 2));
   display: block;
@@ -140,8 +116,8 @@ div:has(> .work-organic-card) {
 .work-organic-card > a {
   border-radius: 0;
   overflow: visible;
-  padding: 88px 80px;
-  min-height: 650px;
+  padding: 56px;
+  min-height: 550px;
   user-select: text;
   -webkit-user-drag: none;
 }
@@ -178,7 +154,7 @@ div:has(> .work-organic-card) {
   }
 
   .work-organic-card > a {
-    padding: 76px 24px;
-    min-height: 600px;
+    padding: 56px 24px;
+    min-height: 550px;
   }
 }

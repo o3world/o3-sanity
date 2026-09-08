@@ -1,9 +1,25 @@
 'use client'
 
-import { useEffect, useId, useRef, type CSSProperties, type ReactNode } from 'react'
+import { useContext, useEffect, useId, useRef, type CSSProperties, type ReactNode } from 'react'
 import { useSpatialMotion } from '../globe/SpatialMotionProvider'
 import './work-cards.css'
 import { membranePath } from './work-membrane-path'
+import {
+  createMembrane,
+  resetMembrane,
+  stepMembrane,
+  springMembranePath,
+  type Membrane,
+} from './work-membrane-spring'
+import { WorkCardFrames, type WorkCardFrame } from './WorkCardFrames'
+import {
+  cardProfile,
+  stepScrollCard,
+  type CardScrollState,
+  cardTravelScale,
+  stepCardSpring,
+  type CardSpring,
+} from './work-card-motion'
 
 const clamp = (value: number, limit: number) => Math.max(-limit, Math.min(limit, value))
 
@@ -13,35 +29,33 @@ export function OrganicWorkCard({ children }: { children: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null)
   const pathRef = useRef<SVGPathElement>(null)
   const motion = useSpatialMotion()
+  const frames = useContext(WorkCardFrames)
 
   useEffect(() => {
     const root = rootRef.current
-    if (!root) return
-    let raf = 0
+    if (!root || !frames) return
     let visible = false
-    let last = 0
     let elapsed = 0
     const layout = root.parentElement!
-    const index = Array.from(layout.parentElement!.children).indexOf(layout)
-    const depth = 0.03 + (index % 3) * 0.006
+    const profile = cardProfile(root.querySelector('a')?.getAttribute('href') ?? '')
+    const { phase, pace } = profile
+    let travelScale = 1
     let top = 0
     let left = 0
     let width = 0
     let height = 0
     let mobile = false
     let membraneSize: Parameters<typeof membranePath>[3]
-    let previousScroll = window.scrollY
     let pointerX = 0
     let pointerY = 0
     let pointerAt = 0
     let impulseX = 0
     let impulseY = 0
     let offsetX = 0
-    let offsetY = 0
+    let springY: CardScrollState = { position: 0, velocity: 0, momentum: 0 }
+    let mouseY: CardSpring = { position: 0, velocity: 0 }
     let velocityX = 0
-    let velocityY = 0
-    let bendX = 0
-    let bendY = 0
+    let membrane: Membrane | undefined
     const reduced = matchMedia('(prefers-reduced-motion: reduce)')
     let pointerHeld = false
     let selecting = false
@@ -53,6 +67,8 @@ export function OrganicWorkCard({ children }: { children: ReactNode }) {
       width = rect.width
       height = root.offsetHeight
       mobile = window.innerWidth < 768
+      const gap = Number.parseFloat(getComputedStyle(layout.parentElement!).rowGap)
+      travelScale = cardTravelScale(profile, mobile, Number.isFinite(gap) ? gap : mobile ? 80 : 112)
       const background = root.querySelector<HTMLElement>('a > .absolute')
       if (background) {
         membraneSize = {
@@ -61,6 +77,16 @@ export function OrganicWorkCard({ children }: { children: ReactNode }) {
           bleedX: (background.offsetWidth - root.offsetWidth) / 2,
           bleedY: (background.offsetHeight - height) / 2,
           paddingX: Number.parseFloat(getComputedStyle(background.parentElement!).paddingLeft),
+        }
+        if (
+          !membrane ||
+          Object.keys(membraneSize).some(
+            (key) =>
+              membrane!.size[key as keyof typeof membraneSize] !==
+              membraneSize![key as keyof typeof membraneSize],
+          )
+        ) {
+          membrane = createMembrane(membraneSize, phase)
         }
       }
     }
@@ -83,53 +109,88 @@ export function OrganicWorkCard({ children }: { children: ReactNode }) {
       pointerX = event.clientX
       pointerY = event.clientY
     }
-    const paint = (now: number) => {
-      raf = 0
-      const dt = last ? Math.min(now - last, 32) / 1000 : 1 / 60
-      if (!paused()) {
-        elapsed += dt * 0.35
-        const scrollVelocity = clamp((window.scrollY - previousScroll) / dt, 1800)
-        const parallax = clamp(
-          (window.scrollY + window.innerHeight / 2 - top - height / 2) * depth,
-          mobile ? 16 : 28,
+    const resetImpulse = () => {
+      springY.velocity = 0
+      springY.momentum = 0
+      mouseY.velocity = 0
+      velocityX = 0
+      impulseX = impulseY = 0
+      pointerAt = 0
+      if (membrane) resetMembrane(membrane)
+    }
+    const paint = ({ dt, scrollVelocity, reset, atRest }: WorkCardFrame) => {
+      if (reset || paused()) resetImpulse()
+      if (atRest) {
+        springY = { position: 0, velocity: 0, momentum: 0 }
+        mouseY = { position: 0, velocity: 0 }
+        offsetX = 0
+        if (membrane) resetMembrane(membrane, true)
+      }
+      if (!paused() && dt > 0) {
+        elapsed += dt * 0.35 * pace
+        const previousVX = velocityX
+        const previousVY = springY.velocity + mouseY.velocity
+        springY = stepScrollCard(springY, profile, scrollVelocity, travelScale, dt)
+        const horizontal = stepCardSpring(
+          { position: offsetX, velocity: velocityX },
+          mobile ? 0 : impulseX * 0.008,
+          0.22,
+          dt,
         )
-        const targetX = mobile ? 0 : impulseX * 0.008
-        const targetY =
-          parallax + clamp(scrollVelocity * 0.018, mobile ? 22 : 30) + clamp(impulseY * 0.007, 10)
-        // A damped spring retains momentum after input stops; no wheel or scroll interception.
-        velocityX += ((targetX - offsetX) * 75 - velocityX * 17) * dt
-        velocityY += ((targetY - offsetY) * 42 - velocityY * 12.5) * dt
-        offsetX += velocityX * dt
-        offsetY += velocityY * dt
-        const follow = 1 - Math.exp(-dt * 9)
-        bendX += (clamp(impulseX * 0.000007 + velocityX * 0.00012, 0.013) - bendX) * follow
-        bendY += (clamp(scrollVelocity * 0.000007 + impulseY * 0.000006, 0.016) - bendY) * follow
+        mouseY = stepCardSpring(mouseY, mobile ? 0 : impulseY * 0.004, 0.22, dt)
+        offsetX = horizontal.position
+        velocityX = horizontal.velocity
+        if (membrane) {
+          stepMembrane(
+            membrane,
+            {
+              accelerationX: reset ? 0 : (velocityX - previousVX) / dt,
+              accelerationY: reset ? 0 : (springY.velocity + mouseY.velocity - previousVY) / dt,
+              pointer: pointerAt
+                ? {
+                    x:
+                      pointerX -
+                      left -
+                      offsetX -
+                      Math.sin(elapsed * 0.45 + phase) +
+                      membrane.size.bleedX,
+                    y:
+                      pointerY -
+                      (top - window.scrollY) -
+                      springY.position -
+                      mouseY.position -
+                      Math.sin(elapsed * 0.55 + phase) * 1.5 +
+                      membrane.size.bleedY,
+                    velocityX: impulseX,
+                    velocityY: impulseY,
+                  }
+                : undefined,
+            },
+            dt,
+          )
+        }
         impulseX *= Math.exp(-dt * 6)
         impulseY *= Math.exp(-dt * 6)
       }
-      previousScroll = window.scrollY
-      last = now
-      const path = membranePath(elapsed * 1.8, bendX, bendY, membraneSize)
-      pathRef.current?.setAttribute('d', path)
-      const phase = index * 1.7
-      const floatX = Math.sin(elapsed * 0.65 + phase) * 2
-      const floatY = Math.sin(elapsed * 0.8 + phase) * 3
-      root.style.transform = `translate3d(${offsetX + floatX}px, ${offsetY + floatY}px, 0)`
-      if (visible && !document.hidden && !paused()) raf = requestAnimationFrame(paint)
+      if (!visible) return
+      pathRef.current?.setAttribute(
+        'd',
+        membrane ? springMembranePath(membrane) : membranePath(phase, 0, 0, membraneSize),
+      )
+      const floatX = Math.sin(elapsed * 0.45 + phase)
+      const floatY = Math.sin(elapsed * 0.55 + phase) * 1.5
+      root.style.transform = `translate3d(${offsetX + floatX}px, ${springY.position + mouseY.position + floatY}px, 0)`
     }
     const refresh = () => {
-      cancelAnimationFrame(raf)
-      last = 0
-      previousScroll = window.scrollY
-      impulseX = impulseY = 0
-      pointerAt = 0
-      if (visible && !document.hidden) raf = requestAnimationFrame(paint)
+      resetImpulse()
+      paint({ dt: 0, scrollVelocity: 0, reset: true, atRest: false })
     }
+    frames.add(paint)
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry?.isIntersecting ?? false
-      refresh()
+      paint({ dt: 0, scrollVelocity: 0, reset: false, atRest: false })
     })
-    observer.observe(root)
+    observer.observe(layout)
     const resize = new ResizeObserver(() => {
       measure()
       refresh()
@@ -138,36 +199,37 @@ export function OrganicWorkCard({ children }: { children: ReactNode }) {
     measure()
     const selectionChanged = () => {
       const selection = window.getSelection()
-      selecting =
+      const nextSelecting =
         !!selection &&
         !selection.isCollapsed &&
         (root.contains(selection.anchorNode) || root.contains(selection.focusNode))
-      refresh()
+      if (nextSelecting !== selecting) {
+        selecting = nextSelecting
+        refresh()
+      }
     }
     const pointerDown = (event: PointerEvent) => {
-      if (event.button !== 0) return
+      if (event.button !== 0 || event.pointerType !== 'mouse') return
       pointerHeld = true
       refresh()
     }
     const pointerUp = () => {
+      const wasHeld = pointerHeld
       pointerHeld = false
       selectionChanged()
+      if (wasHeld) refresh()
     }
     root.addEventListener('pointerdown', pointerDown)
     window.addEventListener('pointerup', pointerUp)
     window.addEventListener('pointercancel', pointerUp)
     window.addEventListener('blur', pointerUp)
     document.addEventListener('selectionchange', selectionChanged)
-    const unsubscribe = motion?.subscribe(refresh)
     window.addEventListener('pointermove', pointerMove, { passive: true })
     window.addEventListener('resize', measure, { passive: true })
-    document.addEventListener('visibilitychange', refresh)
-    reduced.addEventListener('change', refresh)
     return () => {
-      cancelAnimationFrame(raf)
+      frames.delete(paint)
       observer.disconnect()
       resize.disconnect()
-      unsubscribe?.()
       root.removeEventListener('pointerdown', pointerDown)
       window.removeEventListener('pointerup', pointerUp)
       window.removeEventListener('pointercancel', pointerUp)
@@ -175,10 +237,8 @@ export function OrganicWorkCard({ children }: { children: ReactNode }) {
       document.removeEventListener('selectionchange', selectionChanged)
       window.removeEventListener('pointermove', pointerMove)
       window.removeEventListener('resize', measure)
-      document.removeEventListener('visibilitychange', refresh)
-      reduced.removeEventListener('change', refresh)
     }
-  }, [motion])
+  }, [motion, frames])
 
   return (
     <div
