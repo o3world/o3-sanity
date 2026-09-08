@@ -55,6 +55,9 @@ it('keeps bounded geometry across mobile sizes, phases and extreme input', () =>
     for (const phase of [0, 1.7, 3.4]) {
       const fixture = { ...size, width, paddingX: width < 700 ? 24 : 56 }
       const m = createMembrane(fixture, phase)
+      let maxDisplacement = 0
+      let minBoundary = Infinity
+      let minPadding = Infinity
       for (let i = 0; i < 240; i++) {
         stepMembrane(
           m,
@@ -62,26 +65,30 @@ it('keeps bounded geometry across mobile sizes, phases and extreme input', () =>
           1 / 30,
         )
         for (const n of m.nodes) {
-          expect(Math.abs(n.displacement)).toBeLessThanOrEqual(Math.min(20, fixture.paddingX * 0.4))
-          expect(n.x + n.nx * n.displacement).toBeGreaterThanOrEqual(0)
-          expect(n.x + n.nx * n.displacement).toBeLessThanOrEqual(width)
-          expect(n.y + n.ny * n.displacement).toBeGreaterThanOrEqual(0)
-          expect(n.y + n.ny * n.displacement).toBeLessThanOrEqual(fixture.height)
           const x = n.x + n.nx * n.displacement
           const y = n.y + n.ny * n.displacement
+          maxDisplacement = Math.max(maxDisplacement, Math.abs(n.displacement))
+          minBoundary = Math.min(minBoundary, x, width - x, y, fixture.height - y)
           if (y > fixture.bleedY + 56 && y < fixture.height - fixture.bleedY - 56) {
-            expect(x < width / 2 ? x : width - x).toBeLessThan(fixture.bleedX + fixture.paddingX)
+            minPadding = Math.min(
+              minPadding,
+              fixture.bleedX + fixture.paddingX - (x < width / 2 ? x : width - x),
+            )
           }
           if (
             x > fixture.bleedX + fixture.paddingX &&
             x < width - fixture.bleedX - fixture.paddingX
           ) {
-            expect(y < fixture.height / 2 ? y : fixture.height - y).toBeLessThan(
-              fixture.bleedY + 56,
+            minPadding = Math.min(
+              minPadding,
+              fixture.bleedY + 56 - (y < fixture.height / 2 ? y : fixture.height - y),
             )
           }
         }
       }
+      expect(maxDisplacement).toBeLessThanOrEqual(Math.min(20, fixture.paddingX * 0.4))
+      expect(minBoundary).toBeGreaterThanOrEqual(0)
+      expect(minPadding).toBeGreaterThan(0)
     }
   }
 })
