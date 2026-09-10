@@ -81,7 +81,7 @@
       "figmaName": "Solutions",
       "route": "/solutions",
       "variant": "desktop",
-      "note": "Re-tracked 2026-08-16: the 2026-08-13 ruling took `2360:2879` for a /solutions redesign, but that frame is a service landing page under /solutions/ — this frame stays the route's source of record."
+      "note": "Re-tracked 2026-08-16: the 2026-08-13 ruling took `2360:2879` for a /solutions redesign, but that frame is a service landing page under /solutions/ \u2014 this frame stays the route's source of record."
     },
     {
       "nodeId": "2360:2879",
@@ -90,7 +90,7 @@
       "figmaName": "Solutions",
       "route": "/solutions/software-engineering",
       "variant": "desktop",
-      "note": "Named \"Solutions\" in the file but re-ruled by Nick 2026-08-16: a standalone service landing page under /solutions/, not the index — Interior Hero, Service Grid, statement band, Use cases. #93 built the layer at this route; `1925:6138` stays the /solutions frame."
+      "note": "Named \"Solutions\" in the file but re-ruled by Nick 2026-08-16: a standalone service landing page under /solutions/, not the index \u2014 Interior Hero, Service Grid, statement band, Use cases. #93 built the layer at this route; `1925:6138` stays the /solutions frame."
     },
     {
       "nodeId": "2336:4310",
@@ -99,7 +99,7 @@
       "figmaName": "Insights",
       "route": "/insights",
       "variant": "desktop",
-      "note": "The frame #61 commissioned — Interior Hero, filter bar, card grid. Ruled canonical 2026-08-13; #61 clears the provisional marker against it."
+      "note": "The frame #61 commissioned \u2014 Interior Hero, filter bar, card grid. Ruled canonical 2026-08-13; #61 clears the provisional marker against it."
     },
     {
       "nodeId": "2354:2446",
@@ -108,7 +108,7 @@
       "figmaName": "Sanity",
       "route": "/partners/sanity",
       "variant": "desktop",
-      "note": "A platform-partnership landing page, ruled canonical 2026-08-13. #92 settled the route as /partners/sanity — a multi-segment page slug under a new pageType 'partner', with Vercel and Lovable behind it; the Home platforms rail already names all three. No 402 frame, the same gap About and Solutions have."
+      "note": "A platform-partnership landing page, ruled canonical 2026-08-13. #92 settled the route as /partners/sanity \u2014 a multi-segment page slug under a new pageType 'partner', with Vercel and Lovable behind it; the Home platforms rail already names all three. No 402 frame, the same gap About and Solutions have."
     },
     {
       "nodeId": "1644:1889",
@@ -148,7 +148,7 @@
       "name": "Button (2026-08 rebuild)",
       "figmaName": "Button",
       "codeComponent": "packages/ui/src/components/ui/button.tsx#Button",
-      "note": "The redesign's button — Theme = Black | White | Red, radius 5, 12x16 padding, 12px gap — which every redesigned frame instances. `Button` carries its geometry (#150) and `FilterChip` (packages/ui/src/components/filter-chip.tsx) is drawn from it too, so a change here routes to both. The set has no size axis; `Button`'s base | large is authored."
+      "note": "The redesign's button \u2014 Theme = Black | White | Red, radius 5, 12x16 padding, 12px gap \u2014 which every redesigned frame instances. `Button` carries its geometry (#150) and `FilterChip` (packages/ui/src/components/filter-chip.tsx) is drawn from it too, so a change here routes to both. The set has no size axis; `Button`'s base | large is authored."
     },
     {
       "nodeId": "2177:1556",
@@ -156,7 +156,7 @@
       "name": "Icon (2026-08 set)",
       "figmaName": "Icon",
       "codeComponent": "packages/ui/src/components/button-icons.tsx#BUTTON_ICONS",
-      "note": "Twenty-nine glyphs in a 20x20 frame, one variant axis (`Icon`) — Lucide-traced strokes, plus four filled social brand marks (`2177:1603`, `2177:1605`, `2177:1607`, `2177:1609`) that route nowhere. Three of the strokes are the curated set a button's `icon` knob picks from (#151) — arrow-right (2177:1559), external-link (2177:1585), chevron-down (2177:1567) — vendored as inline SVG rather than installed (ADR 0009). A change to one of those three routes to `button-icons.tsx`; a change to the other twenty-six routes nowhere yet."
+      "note": "Twenty-nine glyphs in a 20x20 frame, one variant axis (`Icon`) \u2014 Lucide-traced strokes, plus four filled social brand marks (`2177:1603`, `2177:1605`, `2177:1607`, `2177:1609`) that route nowhere. Three of the strokes are the curated set a button's `icon` knob picks from (#151) \u2014 arrow-right (2177:1559), external-link (2177:1585), chevron-down (2177:1567) \u2014 vendored as inline SVG rather than installed (ADR 0009). A change to one of those three routes to `button-icons.tsx`; a change to the other twenty-six routes nowhere yet."
     },
     {
       "nodeId": "264:50",
@@ -164,7 +164,7 @@
       "name": "Brand / Logo",
       "figmaName": "Brand / Logo",
       "codeComponent": "packages/ui/src/components/brand-logo.tsx#BrandLogo",
-      "note": "`Color` is the one axis. `White` is unbuilt on purpose — no canonical frame instances it, and the 2026-08 Footer's white logo is the plate-less `BrandMark`, not this variant (#87)."
+      "note": "`Color` is the one axis. `White` is unbuilt on purpose \u2014 no canonical frame instances it, and the 2026-08 Footer's white logo is the plate-less `BrandMark`, not this variant (#87)."
     },
     {
       "nodeId": "778:1862",
@@ -180,7 +180,7 @@
       "name": "Icon / Soft",
       "figmaName": "Icon / Soft",
       "codeComponent": null,
-      "note": "Not standalone — a part: the inner chip of `Icon / Surface`."
+      "note": "Not standalone \u2014 a part: the inner chip of `Icon / Surface`."
     },
     {
       "nodeId": "136:14",
@@ -188,7 +188,7 @@
       "name": ".building block Icon_text",
       "figmaName": ".building block Icon_text",
       "codeComponent": null,
-      "note": "No component — ADR 0009. Material Symbols glyphs are inline SVG (`ArrowIcon`, `CloseIcon`), never a string prop."
+      "note": "No component \u2014 ADR 0009. Material Symbols glyphs are inline SVG (`ArrowIcon`, `CloseIcon`), never a string prop."
     },
     {
       "nodeId": "3271:17013",
@@ -196,7 +196,7 @@
       "name": "NavBar",
       "figmaName": "NavBar",
       "codeComponent": "packages/content-ui/src/chrome/SiteNav.tsx#SiteNav",
-      "note": "A two-variant set — `Property 1` = Dark (`2225:2920`, the node canonical frames instance) | Light (`3271:17012`). Both draw the pill at `40px 12px 12px 40px` and differ only in fill: Dark `rgba(3,3,3,0.6)`, Light `rgba(255,255,255,0.8)` — the bar's two skins, which `--color-scrim-pill` and `--color-scrim-light` carry. Source of record for the nav's display labels (Work · Live · Insights · Solutions · About + \"Let's talk\"), for the pill's radius, and for both scrims. Tracked at the SET from 2026-09-03: the manifest had `2225:2920`, which the Light variant's arrival demoted from set to child — the read-a-child-not-the-parent trap `docs/agents/figma.md` names."
+      "note": "A two-variant set \u2014 `Property 1` = Dark (`2225:2920`, the node canonical frames instance) | Light (`3271:17012`). Both draw the pill at `40px 12px 12px 40px` and differ only in fill: Dark `rgba(3,3,3,0.6)`, Light `rgba(255,255,255,0.8)` \u2014 the bar's two skins, which `--color-scrim-pill` and `--color-scrim-light` carry. Source of record for the nav's display labels (Work \u00b7 Live \u00b7 Insights \u00b7 Solutions \u00b7 About + \"Let's talk\"), for the pill's radius, and for both scrims. Tracked at the SET from 2026-09-03: the manifest had `2225:2920`, which the Light variant's arrival demoted from set to child \u2014 the read-a-child-not-the-parent trap `docs/agents/figma.md` names."
     },
     {
       "nodeId": "2250:1445",
@@ -204,7 +204,7 @@
       "name": "Utility Nav",
       "figmaName": "Utility Nav",
       "codeComponent": "packages/content-ui/src/chrome/UtilityNav.tsx#UtilityNav",
-      "note": "New 2026-08 brand-property bar above the NavBar (O3 World · 1682 Conference · O3XO), instanced by canonical frames. Built in #88: in flow at the top of the document (the frame marks it `SCROLLS` where the NavBar is `FIXED`), desktop only, links from `siteSettings.utilityNavItems`."
+      "note": "New 2026-08 brand-property bar above the NavBar (O3 World \u00b7 1682 Conference \u00b7 O3XO), instanced by canonical frames. Built in #88: in flow at the top of the document (the frame marks it `SCROLLS` where the NavBar is `FIXED`), desktop only, links from `siteSettings.utilityNavItems`."
     },
     {
       "nodeId": "1280:1885",
@@ -212,7 +212,7 @@
       "name": "Footer",
       "figmaName": "Footer",
       "codeComponent": "packages/content-ui/src/chrome/SiteFooter.tsx#SiteFooter",
-      "note": "Became canonical 2026-08: the Home frame's footer (`2435:1840`) is now an override-free instance of this component — the old frame footer `1680:2096` is gone, superseding #41's from-the-frame decision. `SiteFooter` was realigned to it in #87 — black band, 64px 96px, the plate-less white mark (`1280:1856`), \"Go birds.\" on hover. One open delta: the legal row is `#AAA69E` against `--color-fg-subtle`; the ring matches (`SiteFooter` draws the filled `#0A0A0B` donut, `1320:117`)."
+      "note": "Became canonical 2026-08: the Home frame's footer (`2435:1840`) is now an override-free instance of this component \u2014 the old frame footer `1680:2096` is gone, superseding #41's from-the-frame decision. `SiteFooter` was realigned to it in #87 \u2014 black band, 64px 96px, the plate-less white mark (`1280:1856`), \"Go birds.\" on hover. One open delta: the legal row is `#AAA69E` against `--color-fg-subtle`; the ring matches (`SiteFooter` draws the filled `#0A0A0B` donut, `1320:117`)."
     },
     {
       "nodeId": "264:573",
@@ -228,7 +228,7 @@
       "name": "Case study cards",
       "figmaName": "Case study cards",
       "codeComponent": null,
-      "note": "The one non-canonical set a canonical frame instances — Solutions' three engagement cards (`1925:6113`–`6115`, #47). Nothing case-study about the content, so `PanelCards` composes it locally and the set stays non-canonical."
+      "note": "The one non-canonical set a canonical frame instances \u2014 Solutions' three engagement cards (`1925:6113`\u2013`6115`, #47). Nothing case-study about the content, so `PanelCards` composes it locally and the set stays non-canonical."
     },
     {
       "nodeId": "242:310",
@@ -268,7 +268,7 @@
       "name": "CTA",
       "figmaName": "CTA",
       "codeComponent": "packages/content-ui/src/blocks/section/ctaSection/CtaSection.tsx#CtaSection",
-      "note": "The closing band: Device = Desktop (`2124:72`) | Mobile (`2177:1353`), 1440/402, black, one decoration — the molecule at 775.9 square, 15%, centred, over a \"Get in touch\" button. The software-engineering (`2354:2640`) and Sanity partner (`2478:2134`) frames instance it override-free; the rest close on a copy of Home's bespoke `1680:2132` instead, whose raster is a video capture of that band's own sphere (#303) rather than anything this set draws. Tracked from 2026-08-16: #163 found the band a generation behind and nothing reported the drift, because the set the band is built to was not watched."
+      "note": "The closing band: Device = Desktop (`2124:72`) | Mobile (`2177:1353`), 1440/402, black, one decoration \u2014 the molecule at 775.9 square, 15%, centred, over a \"Get in touch\" button. The software-engineering (`2354:2640`) and Sanity partner (`2478:2134`) frames instance it override-free; the rest close on a copy of Home's bespoke `1680:2132` instead, whose raster is a video capture of that band's own sphere (#303) rather than anything this set draws. Tracked from 2026-08-16: #163 found the band a generation behind and nothing reported the drift, because the set the band is built to was not watched."
     },
     {
       "nodeId": "2107:1051",
@@ -276,7 +276,7 @@
       "name": "Interior Hero",
       "figmaName": "Interior Hero",
       "codeComponent": "packages/ui/src/components/collection-hero.tsx#CollectionHero",
-      "note": "The ink hero on every interior and collection frame: Device = Desktop (`2101:828`) | Mobile (`2107:1042`), #0A0A0B, eyebrow + h2 + standfirst. `CollectionHero`'s `interior` variant is built to it. Tracked from 2026-08-16 alongside `CTA` and `Blog` — the three page-level sets the component map had never carried."
+      "note": "The ink hero on every interior and collection frame: Device = Desktop (`2101:828`) | Mobile (`2107:1042`), #0A0A0B, eyebrow + h2 + standfirst. `CollectionHero`'s `interior` variant is built to it. Tracked from 2026-08-16 alongside `CTA` and `Blog` \u2014 the three page-level sets the component map had never carried."
     },
     {
       "nodeId": "2205:1146",
@@ -284,7 +284,7 @@
       "name": "Blog",
       "figmaName": "Blog",
       "codeComponent": "packages/content-ui/src/blocks/section/insightsCarouselSection/InsightsCarouselSection.tsx#InsightsCarouselSection",
-      "note": "The insight band on Home and the insight index: Property 1 = Default (`2134:1302`, 1440×866) | Mobile (`2204:1145`, 402×1372), bone, 48px gap. Its axis is the unnamed `Property 1` where the other two page sets use `Device`; the values still read Desktop/Mobile, so it is one axis, not a second vocabulary. `CarouselTrack` already reads the mobile variant. Tracked from 2026-08-16."
+      "note": "The insight band on Home and the insight index: Property 1 = Default (`2134:1302`, 1440\u00d7866) | Mobile (`2204:1145`, 402\u00d71372), bone, 48px gap. Its axis is the unnamed `Property 1` where the other two page sets use `Device`; the values still read Desktop/Mobile, so it is one axis, not a second vocabulary. `CarouselTrack` already reads the mobile variant. Tracked from 2026-08-16."
     },
     {
       "nodeId": "2846:5637",
@@ -292,7 +292,7 @@
       "name": "Services",
       "figmaName": "Services",
       "codeComponent": "packages/content-ui/src/blocks/section/railPanelsSection/PanelTrack.tsx#PanelTrack",
-      "note": "One column of the sideways track — index, 64/76 heading, 24/34 body, a quieter \"Best when…\" line and a text link — instanced three times by Home's \"How we work\" (`2846:5480`, #309) and three times again by About's \"What we optimize for.\" (`2960:7022`, #305). A component, not a set: no variant axis, so a change to it is a change to every column on both bands. The link the component draws is its own default on all six instances and neither band builds it. Tracked from 2026-08-24."
+      "note": "One column of the sideways track \u2014 index, 64/76 heading, 24/34 body, a quieter \"Best when\u2026\" line and a text link \u2014 instanced three times by Home's \"How we work\" (`2846:5480`, #309) and three times again by About's \"What we optimize for.\" (`2960:7022`, #305). A component, not a set: no variant axis, so a change to it is a change to every column on both bands. The link the component draws is its own default on all six instances and neither band builds it. Tracked from 2026-08-24."
     },
     {
       "nodeId": "2089:4169",
@@ -300,7 +300,7 @@
       "name": "Case Study Card",
       "figmaName": "Case Study Card",
       "codeComponent": "apps/web/src/components/cards/CaseStudyCard.tsx#CaseStudyCard",
-      "note": "The case-study card as a set at last: 1246 × 550 filling a 1248 column, radius 32, padding 64 uniform, space-between over a gap floor of 66 — a 180 × 80 logo holder above a 1118 content row that is 559 of text beside 559 of deadspace, holding an eyebrow (18/24 bold, red #C90E00), a 24/34 narrative, a stat row and a white `Button / Solid`. The /work index instances it three times (`2107:1094`–`1096`) and the case-study detail's next-project band once (`2250:1564`); at 402 the stack `2975:8428` overrides the padding to 24 side / 64 top-and-bottom. Its axis — the `Variant` property, Caron | Ironman | Vertex — is which client the demo shows, so it maps to no `cva` key. The gen-1 sets `264:573` / `1393:3025` never became canonical; this one did. Tracked from 2026-08-24 (#302), internals read from the node tree at file version 2391349966960467923 (#314); the renderer draws all of it since #319."
+      "note": "The case-study card as a set at last: 1246 \u00d7 550 filling a 1248 column, radius 32, padding 64 uniform, space-between over a gap floor of 66 \u2014 a 180 \u00d7 80 logo holder above a 1118 content row that is 559 of text beside 559 of deadspace, holding an eyebrow (18/24 bold, red #C90E00), a 24/34 narrative, a stat row and a white `Button / Solid`. The /work index instances it three times (`2107:1094`\u2013`1096`) and the case-study detail's next-project band once (`2250:1564`); at 402 the stack `2975:8428` overrides the padding to 24 side / 64 top-and-bottom. Its axis \u2014 the `Variant` property, Caron | Ironman | Vertex \u2014 is which client the demo shows, so it maps to no `cva` key. The gen-1 sets `264:573` / `1393:3025` never became canonical; this one did. Tracked from 2026-08-24 (#302), internals read from the node tree at file version 2391349966960467923 (#314); the renderer draws all of it since #319."
     },
     {
       "nodeId": "2748:4672",
@@ -308,7 +308,7 @@
       "name": "Quote",
       "figmaName": "Quote",
       "codeComponent": "packages/content-ui/src/blocks/section/quoteSection/QuoteSection.tsx#QuoteSection",
-      "note": "The pull quote as a band-level set — Device = Device3 | Mobile, where `Device3` is the desktop value under a default name. Bone #F1F0EC, 96 of side padding at 1440 (`2748:4829`) and 16 at 402 (`2748:4686`), a centred 1034 column at 192 of vertical padding (128 at 402), 48 between the quote and the attribution (24 at 402); the quote is 64/76 Light at -1px of tracking in #232323 (36/44 at 402), the attribution 18/24 bold uppercase at 0.1em in fg-muted #76746F (16/20 at 402). Home instances it twice — `2748:4767` at 1440 × 1012 and `2748:4804` at 402 × 804 — both hanging the 776px molecule off the bottom-left corner at 10%. The case-study detail's loose `Section - Quote` (`2250:1525`) is the same block drawn a generation earlier and still disagrees with the set on alignment, type step and a gradient fill; that is #323's open question. Tracked from 2026-08-24 (#323)."
+      "note": "The pull quote as a band-level set \u2014 Device = Device3 | Mobile, where `Device3` is the desktop value under a default name. Bone #F1F0EC, 96 of side padding at 1440 (`2748:4829`) and 16 at 402 (`2748:4686`), a centred 1034 column at 192 of vertical padding (128 at 402), 48 between the quote and the attribution (24 at 402); the quote is 64/76 Light at -1px of tracking in #232323 (36/44 at 402), the attribution 18/24 bold uppercase at 0.1em in fg-muted #76746F (16/20 at 402). Home instances it twice \u2014 `2748:4767` at 1440 \u00d7 1012 and `2748:4804` at 402 \u00d7 804 \u2014 both hanging the 776px molecule off the bottom-left corner at 10%. The case-study detail's loose `Section - Quote` (`2250:1525`) is the same block drawn a generation earlier and still disagrees with the set on alignment, type step and a gradient fill; that is #323's open question. Tracked from 2026-08-24 (#323)."
     },
     {
       "nodeId": "2960:7557",
@@ -354,43 +354,379 @@
       "route": "/about",
       "variant": "mobile",
       "note": "Band-for-band companion to the About desktop redesign. Carries scratch tells (a CTA band named ClaudeTest, raw chrome, divergent CTA copy) - flagged to design, tracked anyway per #308. Ruled canonical 2026-08-24 (the 2026-08 design pass; updates are canonical per #308)."
+    },
+    {
+      "nodeId": "1647:1720",
+      "kind": "componentFrame",
+      "name": "Section - Image",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Section - Image"
+    },
+    {
+      "nodeId": "1647:1721",
+      "kind": "componentFrame",
+      "name": "Container",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Container"
+    },
+    {
+      "nodeId": "1680:2132",
+      "kind": "componentFrame",
+      "name": "Frame 2611286",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611286"
+    },
+    {
+      "nodeId": "1683:2656",
+      "kind": "componentFrame",
+      "name": "Section - Case Studies",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Section - Case Studies"
+    },
+    {
+      "nodeId": "1710:1800",
+      "kind": "componentFrame",
+      "name": "Frame 2611290",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611290"
+    },
+    {
+      "nodeId": "1710:2609",
+      "kind": "componentFrame",
+      "name": "Section - Next",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Section - Next"
+    },
+    {
+      "nodeId": "1732:1409",
+      "kind": "componentFrame",
+      "name": "Frame 2611289",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611289"
+    },
+    {
+      "nodeId": "1751:1994",
+      "kind": "componentFrame",
+      "name": "Blog",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Blog"
+    },
+    {
+      "nodeId": "1814:1636",
+      "kind": "componentFrame",
+      "name": "Open menu",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Open menu"
+    },
+    {
+      "nodeId": "1864:2390",
+      "kind": "componentFrame",
+      "name": "Section - Partners",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Section - Partners"
+    },
+    {
+      "nodeId": "1906:1039",
+      "kind": "componentFrame",
+      "name": "Frame 2611307",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611307"
+    },
+    {
+      "nodeId": "1906:342",
+      "kind": "componentFrame",
+      "name": "Case studies",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Case studies"
+    },
+    {
+      "nodeId": "1906:579",
+      "kind": "componentFrame",
+      "name": "Frame 2611290",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611290"
+    },
+    {
+      "nodeId": "1906:900",
+      "kind": "componentFrame",
+      "name": "Frame 2611248",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611248"
+    },
+    {
+      "nodeId": "1906:947",
+      "kind": "componentFrame",
+      "name": "Frame 2611249",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611249"
+    },
+    {
+      "nodeId": "1925:6061",
+      "kind": "componentFrame",
+      "name": "Frame 2611289",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611289"
+    },
+    {
+      "nodeId": "1925:6108",
+      "kind": "componentFrame",
+      "name": "Frame 2611206",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611206"
+    },
+    {
+      "nodeId": "1927:6435",
+      "kind": "componentFrame",
+      "name": "Frame 2611350",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611350"
+    },
+    {
+      "nodeId": "2089:4316",
+      "kind": "componentFrame",
+      "name": "Section - Hero",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Section - Hero"
+    },
+    {
+      "nodeId": "2124:72",
+      "kind": "componentFrame",
+      "name": "Device=Desktop",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Device=Desktop"
+    },
+    {
+      "nodeId": "2134:1352",
+      "kind": "componentFrame",
+      "name": "Blog",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Blog"
+    },
+    {
+      "nodeId": "2177:1353",
+      "kind": "componentFrame",
+      "name": "Device=Mobile",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Device=Mobile"
+    },
+    {
+      "nodeId": "2204:1145",
+      "kind": "componentFrame",
+      "name": "Property 1=Mobile",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Property 1=Mobile"
+    },
+    {
+      "nodeId": "2225:2920",
+      "kind": "componentFrame",
+      "name": "Property 1=Dark",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Property 1=Dark"
+    },
+    {
+      "nodeId": "2230:3315",
+      "kind": "componentFrame",
+      "name": "Section - Images",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Section - Images"
+    },
+    {
+      "nodeId": "2230:7559",
+      "kind": "componentFrame",
+      "name": "Section - Image",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Section - Image"
+    },
+    {
+      "nodeId": "2274:4004",
+      "kind": "componentFrame",
+      "name": "Section",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Section"
+    },
+    {
+      "nodeId": "2332:1708",
+      "kind": "componentFrame",
+      "name": "Section - Sanity Client Partners",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Section - Sanity Client Partners"
+    },
+    {
+      "nodeId": "2334:2122",
+      "kind": "componentFrame",
+      "name": "Frame 2611367",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611367"
+    },
+    {
+      "nodeId": "2336:4477",
+      "kind": "componentFrame",
+      "name": "Interior Hero",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Interior Hero"
+    },
+    {
+      "nodeId": "2341:2250",
+      "kind": "componentFrame",
+      "name": "Frame 2611383",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611383"
+    },
+    {
+      "nodeId": "2354:2530",
+      "kind": "componentFrame",
+      "name": "Frame 2611390",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611390"
+    },
+    {
+      "nodeId": "2357:2690",
+      "kind": "componentFrame",
+      "name": "Frame 2611390",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611390"
+    },
+    {
+      "nodeId": "2358:2788",
+      "kind": "componentFrame",
+      "name": "Frame 2611395",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Frame 2611395"
+    },
+    {
+      "nodeId": "2360:2861",
+      "kind": "componentFrame",
+      "name": "Intro section",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Intro section"
+    },
+    {
+      "nodeId": "2401:3185",
+      "kind": "componentFrame",
+      "name": "Interior Hero",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Interior Hero"
+    },
+    {
+      "nodeId": "2747:4486",
+      "kind": "componentFrame",
+      "name": "Section",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Section"
+    },
+    {
+      "nodeId": "2747:4503",
+      "kind": "componentFrame",
+      "name": "Container",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Container"
+    },
+    {
+      "nodeId": "2748:4767",
+      "kind": "componentFrame",
+      "name": "Quote",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Quote"
+    },
+    {
+      "nodeId": "2748:4804",
+      "kind": "componentFrame",
+      "name": "Quote",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Quote"
+    },
+    {
+      "nodeId": "2749:6863",
+      "kind": "componentFrame",
+      "name": "Section",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Section"
+    },
+    {
+      "nodeId": "2846:5480",
+      "kind": "componentFrame",
+      "name": "Services",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Services"
+    },
+    {
+      "nodeId": "2960:6876",
+      "kind": "componentFrame",
+      "name": "Interior Hero \u2013 White",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Interior Hero \u2013 White"
+    },
+    {
+      "nodeId": "2960:6885",
+      "kind": "componentFrame",
+      "name": "Why O3",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Why O3"
+    },
+    {
+      "nodeId": "2960:7792",
+      "kind": "componentFrame",
+      "name": "section",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "section"
+    },
+    {
+      "nodeId": "2975:10195",
+      "kind": "componentFrame",
+      "name": "section",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "section"
+    },
+    {
+      "nodeId": "2975:8188",
+      "kind": "componentFrame",
+      "name": "Section",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Section"
+    },
+    {
+      "nodeId": "2975:8355",
+      "kind": "componentFrame",
+      "name": "Services",
+      "note": "Verified full Figma node at version 2395446971141267709; tight story reference tracked for the O3 acceptance gate (#379).",
+      "figmaName": "Services"
     }
   ],
   "ignoredNodeIds": [
     {
       "nodeId": "2117:800",
       "name": "Blog Post",
-      "note": "Hero-treatment study (full-bleed image, left gradient) of the IRONMAN×Sanity article — one of five variants of one hero, no footer/CTA. Ruled noise 2026-08-13."
+      "note": "Hero-treatment study (full-bleed image, left gradient) of the IRONMAN\u00d7Sanity article \u2014 one of five variants of one hero, no footer/CTA. Ruled noise 2026-08-13."
     },
     {
       "nodeId": "2118:858",
       "name": "Blog Post",
-      "note": "Hero-treatment study (full-bleed image, bottom gradient) — same family as `2117:800`. Ruled noise 2026-08-13."
+      "note": "Hero-treatment study (full-bleed image, bottom gradient) \u2014 same family as `2117:800`. Ruled noise 2026-08-13."
     },
     {
       "nodeId": "2118:909",
       "name": "Blog Post",
-      "note": "Hero-treatment study (side image, row layout) — same family as `2117:800`. Ruled noise 2026-08-13."
+      "note": "Hero-treatment study (side image, row layout) \u2014 same family as `2117:800`. Ruled noise 2026-08-13."
     },
     {
       "nodeId": "2118:1068",
       "name": "Blog Post",
-      "note": "Hero-treatment study (side image, circle crop) — same family as `2117:800`. Ruled noise 2026-08-13."
+      "note": "Hero-treatment study (side image, circle crop) \u2014 same family as `2117:800`. Ruled noise 2026-08-13."
     },
     {
       "nodeId": "2118:1015",
       "name": "Blog Post",
-      "note": "Hero-treatment study (large circular background image) — same family as `2117:800`. Ruled noise 2026-08-13."
+      "note": "Hero-treatment study (large circular background image) \u2014 same family as `2117:800`. Ruled noise 2026-08-13."
     },
     {
       "nodeId": "2252:3535",
       "name": "Frame 2611219",
-      "note": "Bare hero fragment of the same IRONMAN×Sanity article as the Blog Post studies — unnamed, no chrome. Ruled noise 2026-08-13."
+      "note": "Bare hero fragment of the same IRONMAN\u00d7Sanity article as the Blog Post studies \u2014 unnamed, no chrome. Ruled noise 2026-08-13."
     },
     {
       "nodeId": "1799:1607",
       "name": "Intro section",
-      "note": "A cover study for the section itself — 1440x693, no nav and no footer, two decorative groups. Not a page."
+      "note": "A cover study for the section itself \u2014 1440x693, no nav and no footer, two decorative groups. Not a page."
     },
     {
       "nodeId": "1893:478",

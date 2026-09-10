@@ -72,6 +72,7 @@ export function projectCard(doc: SeedDoc | null, resolve: ResolveRef): SeedDoc |
   const { slug, client, industries, ...rest } = doc
   return {
     ...rest,
+    cardMedia: doc.cardMedia ?? doc.heroMedia ?? null,
     slug: (slug as { current?: string } | undefined)?.current ?? null,
     headlineStat: (doc.stats as unknown[] | undefined)?.[0] ?? null,
     ...(client !== undefined ? { client: resolve(client) } : {}),

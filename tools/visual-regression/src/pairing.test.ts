@@ -62,6 +62,7 @@ export const OnInk: Story = { args: {} }
 
   it('lets a story override the meta pairing, and records which it was', () => {
     const source = `
+import { figmaDesign } from '@o3/story-kit'
 const meta = {
   title: 'Content/Blocks/Section/QuoteSection',
   parameters: { design: figmaDesign('2748:4767') },
@@ -80,6 +81,7 @@ export const Mobile: Story = { parameters: { design: figmaDesign('2748:4804') } 
 
   it('records the design file a second argument names, and defaults to O3s', () => {
     const source = `
+import { figmaDesign } from '@o3/story-kit'
 const meta = { title: 'Content/Pager' }
 export default meta
 
@@ -95,6 +97,7 @@ export const O3Variant: Story = { parameters: { design: figmaDesign('136:14') } 
 
   it('yields nothing for a story file that declares no pairing', () => {
     const source = `
+import { figmaDesign } from '@o3/story-kit'
 const meta = { title: 'Content/HeaderPill' }
 export default meta
 export const Default: Story = {}
@@ -104,6 +107,7 @@ export const Default: Story = {}
 
   it('ignores a figmaDesign call inside a comment', () => {
     const source = `
+import { figmaDesign } from '@o3/story-kit'
 /**
  * There is no Design tab: figmaDesign('9999:1') is pinned to O3's file.
  */
@@ -117,6 +121,7 @@ export const Default: Story = {}
 
   it('leaves the story id null when the file names no title', () => {
     const source = `
+import { figmaDesign } from '@o3/story-kit'
 const meta = { component: Thing, parameters: { design: figmaDesign('1:2') } }
 export default meta
 export const Default: Story = {}
@@ -127,6 +132,7 @@ export const Default: Story = {}
 
   it('reads a node id written in the dash form a Figma URL uses', () => {
     const source = `
+import { figmaDesign } from '@o3/story-kit'
 const meta = { title: 'A/B', parameters: { design: figmaDesign('1680-2134') } }
 export default meta
 export const Default: Story = {}
@@ -279,4 +285,42 @@ describe('formatInventory', () => {
     expect(text).toContain('778:1862')
     expect(text).not.toContain('…')
   })
+})
+
+it('does not turn an unused helper call or a documentation string into a design pairing', () => {
+  const source = `const unused = figmaDesign('1:1'); const meta = { title: 'UI/Card', parameters: {docs: 'figmaDesign("2:2")'} }; export default meta;
+export const Default = {}`
+  expect(extractPairings('Card.stories.tsx', source, ['o3'])).toEqual([])
+})
+
+it('does not inherit a meta design that a story explicitly clears or replaces', () => {
+  const source = `
+import { figmaDesign as design } from '@o3/story-kit'
+export default { title: 'UI/Card', parameters: { design: design('1:1') } }
+export const Inherited = {}
+export const Null = { parameters: { design: null } }
+export const Undefined = { parameters: { design: undefined } }
+export const Different = { parameters: { design: { type: 'link', url: 'example' } } }
+`
+  expect(extractPairings('card.stories.tsx', source, ['o3']).map((row) => row.exportName)).toEqual([
+    'Inherited',
+  ])
+})
+
+it('requires figmaDesign to come from the story-kit contract', () => {
+  for (const declaration of [
+    "import { figmaDesign } from 'unrelated'",
+    'function figmaDesign() {}',
+  ]) {
+    expect(
+      extractPairings(
+        'card.stories.tsx',
+        `${declaration}
+export default { title: 'UI/Card', parameters: { design: figmaDesign('1:1') } }
+export const Default = {}
+`,
+        ['o3'],
+      ),
+    ).toEqual([])
+  }
 })

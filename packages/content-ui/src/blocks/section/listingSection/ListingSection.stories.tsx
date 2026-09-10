@@ -1,3 +1,4 @@
+/* eslint o3/figma-design: "off" -- ADR 0013 retired /services; this unused block has no seeded instance or canonical frame (module contract below). */
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import type { SectionProps } from '@o3/content-runtime/blocks'

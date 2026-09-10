@@ -1,3 +1,4 @@
+/* eslint o3/figma-design: "off" -- Stats bands are authored from case-study content; no canonical Figma frame exists (module contract below). */
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { expect, within } from 'storybook/test'
 

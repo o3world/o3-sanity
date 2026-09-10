@@ -59,6 +59,7 @@ export function compare(options: {
   diffDir: string
   threshold: number
   maxDiffRatio: number
+  flattenAlpha?: boolean
 }): Comparison {
   const { baseline, current } = options
   const shot = current ?? baseline
@@ -95,6 +96,18 @@ export function compare(options: {
 
   const before = PNG.sync.read(fs.readFileSync(baseline.file))
   const after = PNG.sync.read(fs.readFileSync(current.file))
+  if (options.flattenAlpha) {
+    for (const image of [before, after]) {
+      for (let offset = 0; offset < image.data.length; offset += 4) {
+        const alpha = image.data[offset + 3]! / 255
+        for (let channel = 0; channel < 3; channel++)
+          image.data[offset + channel] = Math.round(
+            image.data[offset + channel]! * alpha + 255 * (1 - alpha),
+          )
+        image.data[offset + 3] = 255
+      }
+    }
+  }
   result.baselineSize = { width: before.width, height: before.height }
   result.currentSize = { width: after.width, height: after.height }
   result.resized = before.width !== after.width || before.height !== after.height

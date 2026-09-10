@@ -39,6 +39,7 @@ type Story = StoryObj<typeof meta>
 
 /** The About page's opening prose band. */
 export const AsSeeded: Story = {
+  parameters: { design: figmaDesign('2960:6885') },
   args: seededSectionArgs('about', 'layoutSection', 0),
 }
 

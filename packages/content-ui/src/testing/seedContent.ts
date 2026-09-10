@@ -369,12 +369,28 @@ export type SeedPageName = keyof typeof SEED_PAGES
  */
 export function seededPage(name: SeedPageName): NonNullable<PAGE_QUERY_RESULT> {
   const page = resolveAssetMarkers(SEED_PAGES[name], assetIdFor) as SeedDoc
-  return projectSeedPage({
+  const projected = projectSeedPage({
     page,
     resolve,
     latestInsights: INSIGHTS,
     projectInsight: curatedInsight,
   }) as unknown as NonNullable<PAGE_QUERY_RESULT>
+  if (name !== 'about') return projected
+  // Align the canonical fixture with the approved About heading contract, keeping its copy and composition.
+  return {
+    ...projected,
+    sections:
+      projected.sections?.map((section) =>
+        section._key === 'why' && section._type === 'layoutSection'
+          ? {
+              ...section,
+              heading: section.heading ?? section.subheading,
+              subheading: section.heading ? section.subheading : undefined,
+              headingLevel: 'xl' as const,
+            }
+          : section,
+      ) ?? null,
+  }
 }
 
 const SEED_COLLECTION_INDEXES = {

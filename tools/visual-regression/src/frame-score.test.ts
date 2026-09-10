@@ -305,3 +305,30 @@ describe('formatScoring', () => {
     expect(text).toContain('+40px')
   })
 })
+
+it('compares transparent Figma surfaces on white but still counts space outside the actual band', () => {
+  const frame = new PNG({ width: 20, height: 20 })
+  frame.data.fill(0)
+  const exact = new PNG({ width: 20, height: 20 })
+  exact.data.fill(255)
+  const grown = new PNG({ width: 20, height: 30 })
+  grown.data.fill(255)
+  const frameFile = path.join(diffDir, 'transparent-frame.png')
+  const exactFile = path.join(diffDir, 'white-exact.png')
+  const grownFile = path.join(diffDir, 'white-grown.png')
+  fs.writeFileSync(frameFile, PNG.sync.write(frame))
+  fs.writeFileSync(exactFile, PNG.sync.write(exact))
+  fs.writeFileSync(grownFile, PNG.sync.write(grown))
+  const compare = (file: string) =>
+    scoreFrame({
+      capture: { ...capture('near-match'), file },
+      frame: { ...fixture('near-match'), file: frameFile, width: 20, height: 20 },
+      nodeId: '1:1',
+      brand: 'o3',
+      diffDir,
+      threshold: 0.1,
+    })
+  expect(compare(exactFile).ratio).toBe(0)
+  expect(compare(grownFile).heightDelta).toBe(10)
+  expect(compare(grownFile).ratio).toBeGreaterThan(0.2)
+})

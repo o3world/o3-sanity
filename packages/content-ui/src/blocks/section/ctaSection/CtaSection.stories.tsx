@@ -50,6 +50,7 @@ export const Orbs: Story = {
 
 /** The sphere is `150vw` below `lg` against `90vw` above it. */
 export const Mobile: Story = {
+  parameters: { design: figmaDesign('2177:1353') },
   args: seededSectionArgs('index', 'ctaSection'),
   globals: { backgrounds: { value: 'ink' }, viewport: { value: 'mobile' } },
 }

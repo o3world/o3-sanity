@@ -1,10 +1,56 @@
 # Figma sync
 
-- Ran: 2026-09-03T14:54:38.292Z
-- File version: 2394769568920405467
+- Ran: 2026-09-05T04:40:03.273Z
+- File version: 2395446971141267709
 - Short-circuited: no
 
-## Changed component sets
+## Changed frames
 
-- **NavBar** → `packages/content-ui/src/chrome/SiteNav.tsx#SiteNav` — added `3271:17013`
-- **2225:2920** → no code target — removed `2225:2920`
+- **Section - Image** — added `1647:1720`
+- **Container** — added `1647:1721`
+- **Frame 2611286** — added `1680:2132`
+- **Section - Case Studies** — added `1683:2656`
+- **Frame 2611290** — added `1710:1800`
+- **Section - Next** — added `1710:2609`
+- **Frame 2611289** — added `1732:1409`
+- **Blog** — added `1751:1994`
+- **Open menu** — added `1814:1636`
+- **Section - Partners** — added `1864:2390`
+- **Frame 2611307** — added `1906:1039`
+- **Case studies** — added `1906:342`
+- **Frame 2611290** — added `1906:579`
+- **Frame 2611248** — added `1906:900`
+- **Frame 2611249** — added `1906:947`
+- **Frame 2611289** — added `1925:6061`
+- **Frame 2611206** — added `1925:6108`
+- **Frame 2611350** — added `1927:6435`
+- **Section - Hero** — added `2089:4316`
+- **Device=Desktop** — added `2124:72`
+- **Blog** — added `2134:1352`
+- **Device=Mobile** — added `2177:1353`
+- **Property 1=Mobile** — added `2204:1145`
+- **Property 1=Dark** — added `2225:2920`
+- **Section - Images** — added `2230:3315`
+- **Section - Image** — added `2230:7559`
+- **Section** — added `2274:4004`
+- **Section - Sanity Client Partners** — added `2332:1708`
+- **Frame 2611367** — added `2334:2122`
+- **Interior Hero** — added `2336:4477`
+- **Frame 2611383** — added `2341:2250`
+- **Frame 2611390** — added `2354:2530`
+- **Frame 2611390** — added `2357:2690`
+- **Frame 2611395** — added `2358:2788`
+- **Intro section** — added `2360:2861`
+- **Interior Hero** — added `2401:3185`
+- **Section** — added `2747:4486`
+- **Container** — added `2747:4503`
+- **Quote** — added `2748:4767`
+- **Quote** — added `2748:4804`
+- **Section** — added `2749:6863`
+- **Services** — added `2846:5480`
+- **Interior Hero – White** — added `2960:6876`
+- **Why O3** — added `2960:6885`
+- **section** — added `2960:7792`
+- **section** — added `2975:10195`
+- **Section** — added `2975:8188`
+- **Services** — added `2975:8355`

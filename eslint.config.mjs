@@ -1,3 +1,5 @@
+import figmaDesignRule from './tools/visual-regression/eslint/figma-design.mjs'
+
 import o3Config from '@o3/eslint-config'
 import nextPlugin from '@next/eslint-plugin-next'
 
@@ -144,6 +146,14 @@ function appBoundaries(app) {
 
 export default [
   ...o3Config,
+  {
+    files: [
+      'packages/content-ui/src/blocks/section/**/*.stories.{ts,tsx}',
+      'apps/web/src/content/blocks/**/*.stories.{ts,tsx}',
+    ],
+    plugins: { o3: { rules: { 'figma-design': figmaDesignRule } } },
+    rules: { 'o3/figma-design': 'error' },
+  },
   // Captured prototypes are third-party artifacts frozen as a record (ADR
   // 0010) — their bundled runtime JS is not ours to lint or fix, and editing
   // one to satisfy a rule ends its usefulness as a record. Only the set

@@ -56,7 +56,7 @@ const EXPORT_SCALE = 1
  * — the key is (node, baseline hash), as the spec says — so without this a
  * changed scale would be served out of a cache written under the old one.
  */
-const DRAWN_WITH = `${EXPORT_FORMAT}-x${EXPORT_SCALE}`
+const DRAWN_WITH = `${EXPORT_FORMAT}-x${EXPORT_SCALE}-absolute`
 
 /** How many node ids go in one `/images` call. Figma draws each one. */
 const IMAGE_BATCH_SIZE = 10
@@ -160,7 +160,12 @@ async function renderUrls(
     return await client.getRenderUrls(
       fileKey,
       requests.map((request) => request.nodeId),
-      { format: EXPORT_FORMAT, scale: EXPORT_SCALE },
+      {
+        format: EXPORT_FORMAT,
+        scale: EXPORT_SCALE,
+        absoluteBounds: true,
+        version: requests[0]?.fileVersion,
+      },
     )
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
