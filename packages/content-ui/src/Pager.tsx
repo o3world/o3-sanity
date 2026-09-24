@@ -4,7 +4,8 @@ import { cn } from '@o3/ui'
 
 /**
  * A collection index's numbered pager, from the O3XO UI kit's `Pagination`
- * canvas — the `Numbers` component, `4404:1821` in `G6M2gu5qKFvhGxwj3W365b`.
+ * canvas — the `Numbers` component, `4404:1821` in `G6M2gu5qKFvhGxwj3W365b`,
+ * the only drawing of this control in any design file.
  *
  * ```
  * 1  2  …  6  Next        row, 5px apart, each pill 40 × 37, radius 12
@@ -13,10 +14,10 @@ import { cn } from '@o3/ui'
  *   ellipsis   no plate, the same label colour
  * ```
  *
- * ## The kit draws anatomy, the token packages supply the values
+ * ## The kit draws anatomy, the token package supplies the values
  *
  * The set has **no variant axes** — it is one component, and the canvas is an
- * HTML import of the live o3xo.ai Framer site (its frames are named
+ * HTML import of a Framer site (its frames are named
  * `button.pagination-button` and `span.pagination-ellipsis`, its paddings are
  * fractional). So it is a strong source for the arrangement and a weak one for
  * geometry, and three of its values are read as the design system's rather
@@ -31,13 +32,12 @@ import { cn } from '@o3/ui'
  *   interaction states anywhere, and the hover here is `FilterChip`'s — the
  *   nearest control this repo already ships.
  *
- * Every colour is a role both brands' token packages define, so O3 paints this
- * in its warm black over `#D6D3CC` hairlines and O3XO in its slate over
- * `#E5E7EB` (ADR 0028, `brand-token-seam.test.ts`).
+ * Every colour is a token role, so it paints in the warm black over `#D6D3CC`
+ * hairlines (`brand-token-seam.test.ts`).
  *
  * O3's own Figma draws no pager at all — `docs/figma-components.md` has no
  * pagination row, and the Insights frame `2336:4310` fits nine cards on one
- * canvas. The kit is the only drawing of this control either brand has.
+ * canvas.
  *
  * ## Why it lives here and not in `@o3/ui`
  *

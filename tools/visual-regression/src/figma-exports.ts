@@ -1,5 +1,5 @@
 /**
- * The IO half of the frame-export cache (#337): read each brand's
+ * The IO half of the frame-export cache (#337): read the
  * `figma:sync` baseline, list what `.vr/figma/` already holds, ask the images
  * API to draw whatever the plan says is missing, and write the bytes.
  *
@@ -35,10 +35,9 @@ import { frameKey, type FrameExport } from './frame-score'
 import type { PairingRow } from './pairing'
 import { BRANDS, type Brand } from './storybook'
 
-/** `tools/figma-sync/data/` — that package's committed baselines. */
+/** `tools/figma-sync/data/` — that package's committed baseline. */
 const BASELINE: Record<Brand, string> = {
   o3: 'tools/figma-sync/data/baseline.json',
-  o3xo: 'tools/figma-sync/data/baseline-o3xo.json',
 }
 
 /**

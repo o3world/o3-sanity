@@ -247,10 +247,8 @@ export const GridMobile: Story = {
 }
 
 /**
- * `backgroundMedia` — the band sits on a picture (#239). This is the band the
- * o3xo homepage migrates onto its own photograph (kit `4406:6755`, "AI
- * Expertise"); the seeded picture here is O3's, because the stories layer
- * reads O3's committed tree.
+ * `backgroundMedia` — the band sits on a picture (#239). The seeded picture
+ * comes from the committed tree.
  *
  * The surface is still `ink`: it paints under the picture, it decides the
  * copy's colour, and it is what the tint is made of.

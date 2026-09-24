@@ -2,20 +2,11 @@ import { SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { ButtonLink } from '../../../ButtonLink'
-import { getCard, type CardSlot } from '../../../cards/card-registry'
+import { getCard } from '../../../cards/card-registry'
 
 import { CaseCardStack } from './CaseCardStack'
 
-/**
- * The card slot, REQUIRED here: `caseStudy` is app-first
- * (`APP_FIRST_RENDERERS`), so each app hands the band its own card and there
- * is no shared one behind it (ADR 0028).
- *
- * The same channel `LayoutSection`'s `baseComponents` opens for the base tier:
- * this band is a server component on the published path, so an app's card
- * cannot reach it any other way.
- */
-type CaseShowcaseSectionProps = SectionProps<'caseShowcaseSection'> & CardSlot<'caseStudy'>
+type CaseShowcaseSectionProps = SectionProps<'caseShowcaseSection'>
 
 /**
  * Section block: the case-study showcase, built to the Home frame's
@@ -39,13 +30,8 @@ type CaseShowcaseSectionProps = SectionProps<'caseShowcaseSection'> & CardSlot<'
  * (`CaseCardStack`). Figma draws a still and cannot say this; the sequence
  * comes from the retired design prototype.
  */
-export function CaseShowcaseSection({
-  heading,
-  button,
-  caseStudies,
-  cardComponents,
-}: CaseShowcaseSectionProps) {
-  const Card = getCard('caseStudy', cardComponents)
+export function CaseShowcaseSection({ heading, button, caseStudies }: CaseShowcaseSectionProps) {
+  const Card = getCard('caseStudy')
   const items = caseStudies ?? []
 
   return (
@@ -68,9 +54,8 @@ export function CaseShowcaseSection({
           <CaseCardStack>
             {items.map((caseStudy) => (
               /*
-               * The wrapper is what stacks, not the card: `caseStudy` is
-               * app-first, so the band knows nothing about what it was handed
-               * and cannot pin it directly.
+               * The wrapper is what stacks, not the card: the card is its own
+               * component, so the band cannot pin it directly.
                *
                * `top-40` is the clearance the sticky rail in `PanelBand`
                * already uses — the nav floats at `top-[64px]` and stands about

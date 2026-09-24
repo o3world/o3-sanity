@@ -1,4 +1,3 @@
-import type { ComponentType } from 'react'
 import { DisplayHeading, OrbitalDiagram, SectionShell } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { stegaClean } from '@sanity/client/stega'
@@ -8,19 +7,7 @@ import { DECORATED_BAND_CLASS } from '../../decoration'
 import { MoleculeDecoration } from '../../MoleculeDecoration'
 import { resolveSurface } from '../../surface'
 
-/**
- * The glyphs a feature's `icon` can name, keyed by the value an editor stores.
- *
- * Supplied by the app, the way the hero's brand mark is (#228): the eighteen
- * are the O3XO kit's set and one brand rendering this band has none, so a
- * drawing named here would be a role this package may not speak (ADR 0028).
- */
-type FeatureIcons = Readonly<Record<string, ComponentType<{ className?: string }>>>
-
-type FeatureGridSectionProps = SectionProps<'featureGridSection'> & {
-  /** Omitted by a brand with no icon set, which is what O3 is. */
-  icons?: FeatureIcons
-}
+type FeatureGridSectionProps = SectionProps<'featureGridSection'>
 
 /**
  * Section block: a set of parallel short claims, in the four compositions the
@@ -79,7 +66,6 @@ export function FeatureGridSection({
   features,
   decoration,
   surface,
-  icons,
 }: FeatureGridSectionProps) {
   const items = features ?? []
   const chosen = stegaClean(layout)
@@ -105,35 +91,12 @@ export function FeatureGridSection({
   const markTone = onInk ? 'text-white' : 'text-ink'
 
   /**
-   * WHAT STANDS BESIDE THE COPY — the feature's glyph if it names one this app
-   * can draw, and the dotted mark otherwise.
-   *
-   * **One slot, one occupant.** An icon and a disc are two answers to the same
-   * question ("what is beside this claim?"), so a feature that names a glyph
-   * gets the glyph instead of the mark rather than as well as it.
-   *
-   * **The box comes from the composition, not from the icon.** The kit draws
-   * its glyphs at 24 and has no feature band of its own, so there is no
-   * authored size to copy here; taking the mark's box keeps every layout's
-   * geometry identical whichever occupant fills it, and a vector set scales to
-   * whatever it is given. Ink is the mark's too — the glyph is `currentColor`
-   * all the way down, so a band on `ink` inverts them together.
-   *
-   * A name the app's map has never heard of resolves to the mark, the same
-   * answer `none` gives: an icon nobody drew is the absence of an entry.
+   * WHAT STANDS BESIDE THE COPY — the dotted mark. A stored `icon` draws
+   * nothing: the site has no icon set.
    */
-  const beside = (feature: (typeof items)[number], className: string) => {
-    const name = stegaClean(feature.icon)
-    const Glyph =
-      name && icons && Object.prototype.hasOwnProperty.call(icons, name) ? icons[name] : undefined
-    return Glyph ? (
-      <span aria-hidden="true" className={`${markTone} ${className} block aspect-square`}>
-        <Glyph className="h-full w-full" />
-      </span>
-    ) : (
-      <Mark {...markProps(feature.mark)} onInk={onInk} className={`${markTone} ${className}`} />
-    )
-  }
+  const beside = (feature: (typeof items)[number], className: string) => (
+    <Mark {...markProps(feature.mark)} onInk={onInk} className={`${markTone} ${className}`} />
+  )
 
   const grid = (
     <div className="grid gap-x-8 gap-y-4 md:grid-cols-2">

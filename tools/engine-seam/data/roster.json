@@ -2,29 +2,18 @@
   "$comment": "The engine/product roster (#285). Read by the #284 spec and by the engine-purity seam test (#287). See ../README.md for the rules: verdicts, the closed-roster rule, intent + impurity ledgers, and module granularity.",
   "verdicts": {
     "engine": "Extractable, brand-free by intent. A future unrelated Sanity project could take it. #287 holds these rows pure: no app imports, no product-model imports, brand facts arrive as parameters. Known leaks are listed per row as impurities and burn down; new ones fail.",
-    "product-shared": "These two brands' content model and components, rendered by both sites.",
-    "product-brand": "One brand's alone."
+    "product": "The site's content model, components and app."
   },
   "rows": [
     {
       "path": "apps/web",
-      "verdict": "product-brand",
+      "verdict": "product",
       "why": "The o3world.com site."
     },
     {
-      "path": "apps/o3xo",
-      "verdict": "product-brand",
-      "why": "The o3xo.ai site."
-    },
-    {
       "path": "apps/storybook",
-      "verdict": "product-brand",
-      "why": "The O3-brand Storybook host. The reusable half is packages/story-kit."
-    },
-    {
-      "path": "apps/storybook-o3xo",
-      "verdict": "product-brand",
-      "why": "The O3XO-brand Storybook host."
+      "verdict": "product",
+      "why": "The Storybook host. The reusable half is packages/story-kit."
     },
     {
       "path": "packages/block-spec",
@@ -109,7 +98,7 @@
       "overrides": [
         {
           "path": "src/fixtures.ts",
-          "verdict": "product-shared",
+          "verdict": "product",
           "why": "O3 documents: insight and caseStudy shapes, real names, the siteSettings fixture."
         }
       ],
@@ -128,8 +117,8 @@
     },
     {
       "path": "packages/sanity",
-      "verdict": "product-shared",
-      "why": "The content model: schemas, queries, generated types, knob declarations, brand facts. The machinery inside it is real but fused — see the fused list; extraction is governed by ADR 0028's trigger, not by this roster.",
+      "verdict": "product",
+      "why": "The content model: schemas, queries, generated types, knob declarations, brand facts. The machinery inside it is real but fused — see the fused list; extraction is not governed by this roster.",
       "overrides": [
         {
           "path": "src/knobs/decoration.ts",
@@ -140,11 +129,11 @@
       "fused": [
         {
           "path": "src/brand.ts",
-          "split": "brandConfig()/currentBrand(), the resolvers (resolveDataset/resolveProjectId/readsNeedToken/collectionPrefixes) and the BrandFacts shape are machinery; BRANDS, DEFAULT_BRAND and the FACTS table (project ids, domains, prefixes) are product. One module, no injection seam; BrandFacts is not even exported, so no third party can supply a brand. Import-side-effect-free: nothing resolves a brand or reads process.env until asked, and the knob-entry closure check in the purity suite holds the browser graph out of here."
+          "split": "brandConfig(), the resolvers (resolveDataset/resolveProjectId/readsNeedToken/collectionPrefixes) and the BrandConfig shape are machinery; the FACTS table (project id, domain, prefixes) is product. One module, no injection seam. Import-side-effect-free: nothing reads process.env until asked, and the knob-entry closure check in the purity suite holds the browser graph out of here."
         },
         {
           "path": "src/schemas/blocks/registry.ts",
-          "split": "The roster mechanism (blockArraysFor, sectionBlocksFor, blockArrayMembers, BrandSectionBlockName, the private blockArrays builder) is machinery; CORE_SECTION_BLOCKS, BRAND_SECTION_BLOCKS, BASE_BLOCKS and the authored array addresses are product. The functions close over the constants and the types derive from the values, so neither half exists without the other today."
+          "split": "blockArrayMembers and the BlockArrays types are machinery; SECTION_BLOCKS, BASE_BLOCKS and the authored array addresses in BLOCK_ARRAYS are product. The types derive from the values, so neither half exists without the other today."
         },
         {
           "path": "src/client.ts",
@@ -156,7 +145,7 @@
         },
         {
           "path": "src/schemas/index.ts",
-          "split": "schemaTypesWith is a clean brand-free builder; it shares a module with thirty concrete schema imports, so the assembly function cannot be reached without the content."
+          "split": "The assembly of the schema list is generic; it shares a module with thirty concrete schema imports, so it cannot be reached without the content."
         }
       ]
     },
@@ -172,24 +161,24 @@
       "overrides": [
         {
           "path": "src/figma.ts",
-          "verdict": "product-shared",
-          "why": "Two hardcoded Figma file keys — external asset ids of these brands' design files."
+          "verdict": "product",
+          "why": "A hardcoded Figma file key — the external asset id of the site's design file."
         },
         {
           "path": "src/storyRoots.ts",
-          "verdict": "product-shared",
+          "verdict": "product",
           "why": "Hardcoded repo paths into packages/ui and packages/content-ui."
         },
         {
           "path": "src/storybookPreview.ts",
-          "verdict": "product-shared",
-          "why": "The o3/o3xo brand toolbar, the Brand type from @o3/sanity, and surface backgrounds bound to this palette's variables."
+          "verdict": "product",
+          "why": "Surface backgrounds bound to this palette's variables."
         }
       ],
       "impurities": [
         {
           "where": "src/index.ts (export * from './figma')",
-          "what": "The engine barrel re-exports the product override's two hardcoded Figma file keys.",
+          "what": "The engine barrel re-exports the product override's hardcoded Figma file key.",
           "fix": "Hosts take the figma helpers from their own binding; the re-export goes."
         },
         {
@@ -206,23 +195,13 @@
           "where": "src/defineVariantStories.tsx (text-fg-muted)",
           "what": "The same brand token class in the variant grid's row labels.",
           "fix": "Same shape: neutral inline styles, or the classes arrive as parameters."
-        },
-        {
-          "where": "package.json (@o3/sanity dependency)",
-          "what": "The engine half depends on the product package for the Brand type.",
-          "fix": "The brand list becomes a parameter."
         }
       ]
     },
     {
       "path": "packages/tailwind-config",
-      "verdict": "product-brand",
+      "verdict": "product",
       "why": "The O3 palette and type scale, provenance pinned to the O3 Figma file."
-    },
-    {
-      "path": "packages/tailwind-config-o3xo",
-      "verdict": "product-brand",
-      "why": "The O3XO brand layer over the base theme."
     },
     {
       "path": "packages/typescript-config",
@@ -231,7 +210,7 @@
     },
     {
       "path": "packages/ui",
-      "verdict": "product-shared",
+      "verdict": "product",
       "why": "The primitives, painted in the shared token vocabulary, plus the O3 glyphs and Figma-sourced artwork components.",
       "overrides": [
         {
@@ -281,8 +260,8 @@
     },
     {
       "path": "packages/content-ui",
-      "verdict": "product-shared",
-      "why": "The 16 core section renderers, the base-block renderers, cards, portable text — both brands' shared rendering. The chrome components are the exception: O3's alone since the #243 fork, overridden below (NavInk stays engine).",
+      "verdict": "product",
+      "why": "The section renderers, the base-block renderers, cards, portable text and the site chrome.",
       "overrides": [
         {
           "path": "src/buttonDestination.ts",
@@ -305,56 +284,6 @@
           "why": "Luminance and contain-box arithmetic behind the flip; no DOM, no brand."
         },
         {
-          "path": "src/chrome/index.ts",
-          "verdict": "product-brand",
-          "why": "O3's alone: o3xo mounts app-local chrome (#243); stays while a brand uses it (ADR 0028)."
-        },
-        {
-          "path": "src/chrome/SiteNav.tsx",
-          "verdict": "product-brand",
-          "why": "O3's alone since the #243 chrome fork."
-        },
-        {
-          "path": "src/chrome/SiteFooter.tsx",
-          "verdict": "product-brand",
-          "why": "O3's alone since the #243 chrome fork."
-        },
-        {
-          "path": "src/chrome/UtilityNav.tsx",
-          "verdict": "product-brand",
-          "why": "O3's alone since the #243 chrome fork."
-        },
-        {
-          "path": "src/chrome/MobileNavMenu.tsx",
-          "verdict": "product-brand",
-          "why": "O3's alone since the #243 chrome fork."
-        },
-        {
-          "path": "src/chrome/SiteNav.stories.tsx",
-          "verdict": "product-brand",
-          "why": "O3's alone since the #243 chrome fork."
-        },
-        {
-          "path": "src/chrome/SiteFooter.stories.tsx",
-          "verdict": "product-brand",
-          "why": "O3's alone since the #243 chrome fork."
-        },
-        {
-          "path": "src/chrome/UtilityNav.stories.tsx",
-          "verdict": "product-brand",
-          "why": "O3's alone since the #243 chrome fork."
-        },
-        {
-          "path": "src/chrome/MobileNavMenu.stories.tsx",
-          "verdict": "product-brand",
-          "why": "O3's alone since the #243 chrome fork."
-        },
-        {
-          "path": "src/chrome/chrome.render.test.tsx",
-          "verdict": "product-brand",
-          "why": "O3's alone since the #243 chrome fork."
-        },
-        {
           "path": "src/testing/responsive.ts",
           "verdict": "engine",
           "why": "classTokens/variantsOf class-string assertions, project-agnostic."
@@ -375,15 +304,15 @@
       "fused": [
         {
           "path": "src/blocks/base/baseComponents.tsx",
-          "split": "defineBlockRender/bindingsToRecord usage and the AppFirstBaseName subtraction are machinery; the six concrete base bindings are product. Deliberate per the barrel's note — the base tier is the inline vocabulary a section renderer draws with — and each app supplies its app-first blocks through the LayoutSection slot."
+          "split": "defineBlockRender/bindingsToRecord usage is machinery; the eight concrete base bindings are product. Deliberate per the barrel's note — the base tier is the inline vocabulary a section renderer draws with."
         },
         {
           "path": "src/blocks/section/layoutSection/LayoutSection.tsx",
-          "split": "The one renderer that is a dispatcher: the baseComponents slot is machinery, the BASE_BLOCK_COMPONENTS it merges the app roster over is product."
+          "split": "The one renderer that is a dispatcher: the dispatch over its items is machinery, the BASE_BLOCK_COMPONENTS it dispatches through is product."
         },
         {
           "path": "src/cards/card-registry.ts",
-          "split": "defineCardRender, the CardTypeName union and getCard's override lookup are machinery; the three cards SHARED_CARDS binds are product. An app re-points a card type through the cardComponents slot the three card-drawing sections carry, which is how o3xo binds its own case-study card."
+          "split": "The CardTypeName union and getCard's lookup are machinery; the three cards it binds are product."
         },
         {
           "path": "src/blocks/decoration.ts",
@@ -397,28 +326,28 @@
     },
     {
       "path": "tools/build-assert",
-      "verdict": "product-shared",
+      "verdict": "product",
       "why": "Generic Next-manifest mechanics asserting this product's route policy. cachedNotFound hardcodes CONTENT_ROUTES outside policy.ts, where the rest of the route table lives."
     },
     {
       "path": "tools/engine-seam",
-      "verdict": "product-shared",
+      "verdict": "product",
       "why": "Generic roster-and-import mechanics enforcing this product's engine boundary; the roster itself is the product."
     },
     {
       "path": "tools/figma-sync",
-      "verdict": "product-shared",
+      "verdict": "product",
       "why": "The diff, hash, normalize and probe layers are generic Figma-API work; the brand registry and the two file keys are the product."
     },
     {
       "path": "tools/guidance",
-      "verdict": "product-shared",
+      "verdict": "product",
       "why": "Brand-clean, but coupled to @o3/sanity and the brief document type. The nearest tool to promotable."
     },
     {
       "path": "tools/migration",
-      "verdict": "product-shared",
-      "why": "The WordPress and Framer pipeline for these two sites.",
+      "verdict": "product",
+      "why": "The WordPress migration pipeline for this site.",
       "overrides": [
         {
           "path": "src/core/state.ts",
@@ -446,28 +375,28 @@
       "fused": [
         {
           "path": "src/core/plan.ts",
-          "split": "The planner is machinery; EXTRACT_OF_SOURCE is a literal table of this migration's wp/framer source prefixes. Injectable, not yet injected."
+          "split": "The planner is machinery; EXTRACT_OF_SOURCE is a literal table of this migration's source prefixes. Injectable, not yet injected."
         }
       ]
     },
     {
       "path": "tools/perf-probe",
-      "verdict": "product-brand",
+      "verdict": "product",
       "why": "The local lab probe for o3world.com: fixed O3 routes and its mobile-menu interaction."
     },
     {
       "path": "tools/visual-regression",
-      "verdict": "product-shared",
+      "verdict": "product",
       "why": "compare/capture/freeze/git/affected are brand-free; the brand host registry is the product."
     },
     {
       "path": "tools/authoring-skill",
-      "verdict": "product-brand",
+      "verdict": "product",
       "why": "The O3 voice and authoring pipeline. Not a workspace. scripts/slop-lint.mjs is brand-free."
     },
     {
       "path": "tools/content-backups",
-      "verdict": "product-brand",
+      "verdict": "product",
       "why": "Committed snapshots of published O3 content. Not a workspace; data, not code."
     }
   ]

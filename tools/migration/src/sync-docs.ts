@@ -1,6 +1,6 @@
 /**
  * A targeted migration: exactly the committed documents you name, into the
- * brand's dataset. Runs under `sanity exec --with-user-token`.
+ * dataset. Runs under `sanity exec --with-user-token`.
  *
  *     pnpm --filter @o3/migration sync-docs -- 'client/*' 'page/partners-sanity'
  *     pnpm --filter @o3/migration sync-docs -- 'client/puma' --apply
@@ -42,7 +42,6 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 
 import { getCliClient } from 'sanity/cli'
 
-import { brandArg } from './lib/brandArg'
 import { isImageBuffer } from './lib/media'
 import { ALLOW_FLAG, productionGate } from './lib/prodGate'
 import { ASSET_MAP, REPO_ROOT } from './lib/paths'
@@ -83,9 +82,9 @@ const fields = (argv.find((arg) => arg.startsWith('--fields='))?.slice('--fields
 const forceLocked = argv.includes('--force-locked')
 
 // ── assets ────────────────────────────────────────────────────────────────
-// The same ledger `load` keeps, read and written the same way: Sanity derives
-// an asset id from the file's bytes, so an upload that has happened before
-// costs a lookup and nothing else.
+// `data/assets.json`, the committed upload ledger: Sanity derives an asset id
+// from the file's bytes, so an upload that has happened before costs a lookup
+// and nothing else.
 
 const assetMap: Record<string, { sha256?: string; assetId: string }> = existsSync(ASSET_MAP)
   ? JSON.parse(readFileSync(ASSET_MAP, 'utf8'))
@@ -129,8 +128,8 @@ async function uploadLocalAsset(relativePath: string): Promise<string> {
 
 /**
  * Image markers resolved to real assets. `_localSrc` only: a targeted run is
- * for committed content, and the remote markers belong to the WordPress and
- * Framer trees, whose media the blanket pipeline fetches and caches.
+ * for committed content, and a remote marker names a source-site URL that no
+ * command here fetches.
  */
 async function resolveAssets(node: unknown): Promise<unknown> {
   if (Array.isArray(node)) return Promise.all(node.map(resolveAssets))
@@ -167,7 +166,7 @@ async function main() {
 
   const dataset = client.config().dataset
   console.log(
-    `brand ${brandArg()} · target ${client.config().projectId}/${dataset} · ` +
+    `target ${client.config().projectId}/${dataset} · ` +
       `${matched.length} document${matched.length === 1 ? '' : 's'}` +
       `${apply ? '' : ' · DRY RUN'}\n`,
   )
@@ -216,15 +215,14 @@ async function main() {
     return
   }
 
-  // The gate is on the write, not on the plan. `load`'s is on the whole run
-  // because a load has no harmless form; a dry run here writes nothing, and
+  // The gate is on the write, not on the plan: a dry run writes nothing, and
   // refusing it would mean you could not read the production plan without
   // first arming the command that acts on it.
   const refusal = productionGate(dataset, process.argv)
   if (refusal) {
     console.error(refusal)
     console.error(
-      `\n  …for this command:  pnpm --filter @o3/migration sync-docs -- <patterns> --apply ${ALLOW_FLAG}`,
+      `\nThen say it out loud:  pnpm --filter @o3/migration sync-docs -- <patterns> --apply ${ALLOW_FLAG}`,
     )
     process.exitCode = 1
     return
@@ -234,9 +232,9 @@ async function main() {
     return
   }
 
-  // One transaction, for the reason `load` gives: Sanity validates a strong
-  // reference against the state after the transaction, so a page and the
-  // clients it references may be written in any order.
+  // One transaction: Sanity validates a strong reference against the state
+  // after the transaction, so a page and the clients it references may be
+  // written in any order, and a failed run leaves the dataset untouched.
   const tx = client.transaction()
   for (const { document } of writes) {
     const resolved = (await resolveAssets(document)) as CorpusDoc

@@ -105,9 +105,8 @@ interface Palette {
 }
 
 /**
- * Brand-bearing colours resolve through token roles — both apps render this
- * package, so a literal red here would paint O3's brand on an O3XO page. The
- * neutral greys stay literal: they are not a brand fact and no shared role
+ * Brand-bearing colours resolve through token roles, so the palette has one
+ * home. The neutral greys stay literal: they are not a brand fact and no role
  * carries them.
  */
 const PALETTES: Record<GlobePreset, Palette> = {
@@ -118,9 +117,8 @@ const PALETTES: Record<GlobePreset, Palette> = {
     /*
      * Every red here is the brand role or a `color-mix` off it — the export's
      * own values are O3-red derivatives (`#b03a2e`, `#7e140a`, `#ff5a40`), and
-     * both apps render this package, so a literal would draw O3's brand on an
-     * O3XO hero. `brand-token-seam.test.ts` cannot catch that: it flags roles
-     * only one token package declares, and a raw hex declares nothing.
+     * a literal would take the brand red out of the token package.
+     * `brand-token-seam.test.ts` cannot catch that: a raw hex names no role.
      *
      * The mixes reproduce the export's ramp against `--color-brand`: the dim
      * arc and the mid bloom sit toward black, the hot inner ring toward white.

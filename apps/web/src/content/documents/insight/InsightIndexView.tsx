@@ -97,8 +97,7 @@ function insightsHref({
  *    402, so a sixth category costs the layout nothing at either width.
  * 2. **The frame has no pager**, because nine cards fit its canvas. 273
  *    articles do not, so the pager stays, at the same 12 a page. The drawing
- *    it follows is the O3XO kit's — the one file either brand has that draws
- *    this control — and `Pager` is shared for that reason.
+ *    it follows is the O3XO kit's, the one file that draws this control.
  *
  * The card is untouched: the frame's cards are 395 wide with a 24px gap, a
  * square image under the ink veil, and a 13px meta line over a 24px title —

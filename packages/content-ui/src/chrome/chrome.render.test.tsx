@@ -425,10 +425,9 @@ describe('every chrome destination is a route the build-out lands (#48)', () => 
     ...(settings.utilityNavItems ?? []).map((item) =>
       item._type === 'brandLogo' ? item.button : item,
     ),
-    // `navItems` is a union since O3XO's nav grew dropdowns: a member is a
-    // button or a `navGroup`, and only the button half carries an href. O3
-    // authors no group, so this narrowing drops nothing here — it is what
-    // keeps the sweep honest if it ever does.
+    // `navItems` is a union: a member is a button or a `navGroup`, and only
+    // the button half carries an href. No group is authored, so this narrowing
+    // drops nothing here — it is what keeps the sweep honest if one ever is.
     ...(settings.navItems ?? []).filter((item) => item._type === 'button'),
     settings.primaryButton,
     ...(settings.footerGroups ?? []).flatMap((g) => g.links ?? []),
@@ -453,9 +452,7 @@ describe('every chrome destination is a route the build-out lands (#48)', () => 
 })
 
 /**
- * The mark is the app's (#228). Both brands render this chrome, and O3XO's
- * mark is a different drawing in a colour no shared role names — so the chrome
- * takes one and draws it, rather than choosing between two.
+ * The mark is the app's (#228): the chrome takes one and draws it.
  *
  * A probe in place of a brand's mark is what proves it: whatever the chrome
  * still draws of its own would show up here as the O3 geometry the seam is

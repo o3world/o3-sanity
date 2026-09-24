@@ -40,12 +40,12 @@ describe('defineStorybookConfig', () => {
   })
 
   it("appends the host's own app roots after the shared ones", () => {
-    const config = defineStorybookConfig({ configDir, appStoryRoots: ['apps/o3xo/src'] })
+    const config = defineStorybookConfig({ configDir, appStoryRoots: ['apps/web/src'] })
 
     expect(config.stories).toEqual([
       `../../../packages/ui/src/${SUFFIX}`,
       `../../../packages/content-ui/src/${SUFFIX}`,
-      `../../../apps/o3xo/src/${SUFFIX}`,
+      `../../../apps/web/src/${SUFFIX}`,
     ])
   })
 

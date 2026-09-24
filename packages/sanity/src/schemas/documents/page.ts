@@ -4,12 +4,8 @@ import { briefsField } from '../blocks/fields'
 import { blockArrayMembers, type BlockArrays } from '../blocks/registry'
 
 /**
- * A page, built from one roster's block arrays.
- *
- * A function rather than a constant because `sections` is the array a brand's
- * Studio differs in (ADR 0028, #251): the same declaration builds O3's page and
- * O3XO's, and `schemaTypesFor` is what decides which. Everything else about the
- * document is one model's, and reads the same in both.
+ * A page, built from the registry's block arrays, so `sections`' members
+ * derive from `BLOCK_ARRAYS` rather than being restated.
  */
 export const page = (arrays: BlockArrays) =>
   defineType({

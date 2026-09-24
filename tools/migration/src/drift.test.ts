@@ -11,16 +11,16 @@ import {
 import { productionGate } from './lib/prodGate'
 
 describe('productionGate', () => {
-  it('refuses a load into production without the flag', () => {
-    expect(productionGate('production', ['node', 'load.ts'])).toMatch(/REFUSED/)
+  it('refuses a write into production without the flag', () => {
+    expect(productionGate('production', ['node', 'sync-docs.ts'])).toMatch(/REFUSED/)
   })
 
-  it('lets a load into production through with --allow-production', () => {
-    expect(productionGate('production', ['node', 'load.ts', '--allow-production'])).toBeNull()
+  it('lets a write into production through with --allow-production', () => {
+    expect(productionGate('production', ['node', 'sync-docs.ts', '--allow-production'])).toBeNull()
   })
 
-  it('never gates a load into development', () => {
-    expect(productionGate('development', ['node', 'load.ts'])).toBeNull()
+  it('never gates a write into development', () => {
+    expect(productionGate('development', ['node', 'sync-docs.ts'])).toBeNull()
   })
 })
 

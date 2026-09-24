@@ -16,7 +16,7 @@ const SURFACE_GROUND = {
 } as const
 
 /**
- * The per-block wrapper both brands hand the dispatch seam: every band fades
+ * The per-block wrapper the app hands the dispatch seam: every band fades
  * up 24px as it crosses the viewport edge, once. It stands exactly where the
  * seam's own `<div>` stood, so the band attribution and the jump-link `id`
  * land on the same element they always did.
@@ -30,7 +30,7 @@ const SURFACE_GROUND = {
  * screen never blanks or shifts while the bundle loads.
  *
  * **The wrapper wears the band's own surface.** The document's ground is ink
- * (each app's `<main>`), so a band fading up over it would rise out of black
+ * (the app's `<main>`), so a band fading up over it would rise out of black
  * whatever colour it is. Painted with the band's resolved surface, the ground
  * a hidden band leaves behind is the colour the band arrives in, and the fade
  * only ever brings up the content.

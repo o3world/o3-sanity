@@ -73,10 +73,9 @@
  * case-study showcase (`1683:2659`) all bind h1; the partners wall
  * (`1864:2393`) and the services track (`2846:5485`) bind h2.
  *
- * `hero` and `quote` carry the same numbers on this brand — the `Quote` set
- * binds the hero's variable pair at both ends. `quote` survives as its own
- * name because the type-scale enum names it and because O3XO sizes the role
- * differently (24 → 36 Light); see the tokens.
+ * `hero` and `quote` carry the same numbers — the `Quote` set binds the hero's
+ * variable pair at both ends. `quote` survives as its own name because the
+ * type-scale enum names it; see the tokens.
  */
 
 @theme {
@@ -124,8 +123,8 @@
    * (`2748:4672`) draws it Light on the hero's variable pair — 64/76 at 1440
    * (`2748:4839`), 36/44 at 402 (`2748:4715`) — with -1px of tracking read
    * absolute at both ends, the same shape `hero` and `cta` ship. Numerically
-   * identical to `hero` on this brand; kept as its own name because the
-   * type-scale enum has it and O3XO sizes the role at 24 → 36. */
+   * identical to `hero`; kept as its own name because the type-scale enum has
+   * it. */
   --text-quote: clamp(36px, calc(2.7vw + 25.15px), 64px);
   --text-quote--line-height: clamp(44px, calc(3.083vw + 31.61px), 76px);
   --text-quote--letter-spacing: -1px;

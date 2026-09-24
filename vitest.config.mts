@@ -18,25 +18,15 @@ const appSrc = (app: string) => resolve(root, 'apps', app, 'src')
  *   render   `*.render.test.tsx`  — a document or route rendered from fixture
  *                                   data to HTML, with no network. Answers
  *                                   "does this content actually display?"
- *                                   One project per app: a project resolves
- *                                   one `@/` and carries one brand, so the
- *                                   second app is `render:o3xo` rather than a
- *                                   second glob. The layer itself is
- *                                   `@o3/render-kit`.
+ *                                   The layer itself is `@o3/render-kit`.
  *   stories  `*.stories.tsx`      — every Storybook story, mounted in real
  *                                   Chromium with real CSS, plus an axe scan.
  *                                   No test files to write: writing the story
  *                                   IS the test. Configured next to each
  *                                   Storybook host so its addon resolves from
- *                                   that package. One project per host, and
- *                                   the second one runs only the stories the
- *                                   first cannot: `stories` is the shared
- *                                   packages plus apps/web under O3's tokens,
- *                                   `stories:o3xo` is apps/o3xo's own under
- *                                   O3XO's.
+ *                                   that package.
  *
- * Run one layer with `pnpm test --project unit`, or both render projects with
- * `pnpm test --project 'render*'`.
+ * Run one layer with `pnpm test --project unit`.
  *
  * **The suite pins its own port** (#116). Vitest loads the repo-root `.env`
  * into `process.env`, and provisioning writes a unique `WEB_PORT` into every
@@ -82,7 +72,6 @@ export default defineConfig({
             // pins it at zero hits over approved site copy.
             'tools/authoring-skill/scripts/*.test.ts',
             'apps/web/src/**/*.test.ts',
-            'apps/o3xo/src/**/*.test.ts',
             'packages/*/src/**/*.test.ts',
             // The worktree scripts are shell, and their seams are subcommands.
             // A test here shells out to the script the same way a session does,
@@ -100,34 +89,14 @@ export default defineConfig({
           server: { deps: { inline: ['sanity'] } },
         },
       },
-      /**
-       * O3, plus the shared renderers. `@o3/content-ui`'s own render tests
-       * (#212) run here rather than in a project of their own: the components
-       * take a brand's tokens from CSS the render layer never loads, so one
-       * run of them covers both apps.
-       */
+      /** The app, plus the shared renderers' own render tests (#212). */
       renderProject({
         name: 'render',
         appSrc: appSrc('web'),
-        env: { ...TEST_ENV, NEXT_PUBLIC_BRAND: 'o3' },
+        env: TEST_ENV,
         include: ['apps/web/src/**/*.render.test.tsx', 'packages/*/src/**/*.render.test.tsx'],
       }),
-      /**
-       * O3XO. **The brand is pinned the way the port is**, and for the same
-       * kind of reason: `next.config.ts` is what puts `NEXT_PUBLIC_BRAND` in
-       * the running app, vitest never loads it, and `brandConfig()` answers
-       * `o3` when the variable is unset. Unpinned, every route this app builds
-       * would canonicalise to o3world.com and link case studies at `/work`,
-       * and the assertions would agree with it.
-       */
-      renderProject({
-        name: 'render:o3xo',
-        appSrc: appSrc('o3xo'),
-        env: { ...TEST_ENV, NEXT_PUBLIC_BRAND: 'o3xo' },
-        include: ['apps/o3xo/src/**/*.render.test.tsx'],
-      }),
       './apps/storybook/vitest.config.ts',
-      './apps/storybook-o3xo/vitest.config.ts',
     ],
   },
 })

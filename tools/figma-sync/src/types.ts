@@ -44,7 +44,7 @@ export interface TrackedManifest {
   readonly fileKey: string
   /**
    * The nodes the untracked-node probe lists the direct children of (#79) —
-   * O3's Design Concept section, or the O3XO kit's watched canvases (#242).
+   * O3's Design Concept section.
    */
   readonly sectionNodeIds: readonly string[]
   /**

@@ -101,8 +101,8 @@ export function anchorField() {
  * (#239).
  *
  * **Every band, not the seven that need one.** Which bands sit on a picture is
- * a fact about a design, and the O3XO kit puts a picture under five of its
- * thirteen while O3's frames put one under none. A per-block opt-in would make
+ * a fact about a design, and O3's frames put one under none today. A per-block
+ * opt-in would make
  * that a schema edit each time a design moved; the field costs an unfilled row
  * in the form on a band nobody wants one on.
  *

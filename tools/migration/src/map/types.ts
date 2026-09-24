@@ -11,9 +11,8 @@ import type { ConversionIssue } from '../lib/htmlToPortableText'
  *
  * **The marker names the source the bytes come from.** `_wpSrc` is a WordPress
  * upload URL, `_srcUrl` a URL on any other source site, `_localSrc` a
- * repo-relative file (seed imagery, `load.ts`). That is the same rule the
- * pipeline already followed with two markers; O3XO's Framer source adds the
- * third. `load.ts` holds the one table of which resolver each takes.
+ * repo-relative file (seed imagery). `core/drift.ts` holds the table of which
+ * are remote and which are read off disk.
  */
 export const migratableImage = z
   .object({

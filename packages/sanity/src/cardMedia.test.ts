@@ -15,7 +15,7 @@ import { CASE_STUDIES_QUERY, LATEST_INSIGHTS_QUERY } from './queries'
  * dataset answers.
  *
  * The hero side of the chain is the view's, and is asserted through a
- * rendered page in each app's detail render test.
+ * rendered page in the app's detail render test.
  */
 async function cards(dataset: unknown[]) {
   const result = await evaluate(parse(CASE_STUDIES_QUERY), { dataset })

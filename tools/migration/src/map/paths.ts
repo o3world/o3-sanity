@@ -93,10 +93,9 @@ export function movedPath(from: string): string | null {
  * parity failure the caller reports.
  *
  * The pathname is decoded, because `new URL()` percent-encodes anything outside
- * ASCII and a slug is compared against a stored one that is not encoded. Two of
- * o3xo.ai's insight slugs carry a curly apostrophe, and their canonicals arrive
- * as `…on-pact%E2%80%99s-…` — which reads as a moved path against the slug the
- * document actually holds.
+ * ASCII and a slug is compared against a stored one that is not encoded: a
+ * curly apostrophe arrives as `%E2%80%99`, which would read as a moved path
+ * against the slug the document actually holds.
  */
 export function wpPath(canonicalUrl: string): string | null {
   if (!canonicalUrl) return null
@@ -111,25 +110,19 @@ export function wpPath(canonicalUrl: string): string | null {
 }
 
 /**
- * Compare the path a document will be served at against the one its source
+ * Compare the path a document will be served at against the one WordPress
  * serves today. Returns the issue to report, or `null` when they agree (or when
  * the difference is a recorded exception).
- *
- * `source` names the live site in the message, because the rule now guards two
- * of them: WordPress for o3, o3xo.ai for O3XO. The exception lists are o3's
- * facts and no O3XO path is in them, which is correct — O3XO's URL space is the
- * one ADR 0001 already routes, so nothing there moves.
  */
 export function checkPathParity(
   canonicalRendered: string,
   newPath: string,
-  source = 'WordPress',
 ): ConversionIssue | null {
   const from = wpPath(canonicalRendered)
   if (from === null) {
     return {
       element: 'path parity',
-      detail: `no usable ${source} canonical to compare against (got ${JSON.stringify(canonicalRendered)})`,
+      detail: `no usable WordPress canonical to compare against (got ${JSON.stringify(canonicalRendered)})`,
     }
   }
   if (from === newPath) return null
@@ -139,7 +132,7 @@ export function checkPathParity(
   return {
     element: 'path parity',
     detail:
-      `${source} serves "${from}" but this document maps to "${newPath}". ` +
+      `WordPress serves "${from}" but this document maps to "${newPath}". ` +
       `Either fix the slug or record the change in PATH_EXCEPTIONS / PATH_PREFIX_EXCEPTIONS (map/paths.ts) so it becomes a redirect.`,
   }
 }

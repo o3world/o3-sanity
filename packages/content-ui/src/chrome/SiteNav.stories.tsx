@@ -54,7 +54,7 @@ type Story = StoryObj<typeof meta>
 
 /** The desktop pill shares the hero's inner content measure. */
 export const AlignedWithContent: Story = {
-  globals: { brand: 'o3', viewport: { value: 'desktop' } },
+  globals: { viewport: { value: 'desktop' } },
   render: (args) => (
     <div className="bg-ink px-gutter h-[420px] pt-64">
       <SiteNav {...args} />
@@ -79,7 +79,7 @@ export const AlignedWithContent: Story = {
 
 export const AlignedOnWideScreens: Story = {
   ...AlignedWithContent,
-  globals: { brand: 'o3', viewport: { value: 'wide' } },
+  globals: { viewport: { value: 'wide' } },
   parameters: {
     viewport: {
       options: { wide: { name: 'Wide desktop', styles: { width: '1920px', height: '900px' } } },

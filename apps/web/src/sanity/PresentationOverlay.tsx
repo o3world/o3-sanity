@@ -6,7 +6,7 @@ import { VisualEditing as NextSanityVisualEditing } from 'next-sanity/visual-edi
 import type { HistoryRefresh } from '@sanity/visual-editing'
 import { CanvasNotices, createCanvasComponents } from '@o3/editor-chrome/canvas'
 import { BLOCK_KNOBS, OBJECT_KNOBS } from '@o3/sanity/knobs'
-import { blockArraysFor } from '@o3/sanity/schemas/registry'
+import { BLOCK_ARRAYS } from '@o3/sanity/schemas/registry'
 import { BUTTON_ICONS } from '@o3/ui'
 
 /**
@@ -38,11 +38,10 @@ import { BUTTON_ICONS } from '@o3/ui'
  * knows the knob vocabulary and none of our declarations (ADR 0020), so they
  * are handed in here rather than imported over there. `OBJECT_KNOBS` is what a
  * hovered instance offers (#145) — a mark's options, declared once against the
- * component and read at every placement. `blockArraysFor` is what the insert
+ * component and read at every placement. `BLOCK_ARRAYS` is what the insert
  * menu offers (#112) — which arrays hold blocks and which blocks each holds,
- * taken from the same roster this app's Studio builds its `of:` from, so the
- * menu and the form cannot disagree about what a page accepts. It takes a brand
- * (ADR 0028, #251): the roster the menu offers is the one this app renders.
+ * taken from the same declaration the Studio builds its `of:` from, so the
+ * menu and the form cannot disagree about what a page accepts.
  *
  * `BUTTON_ICONS` is the fourth, and the only one that is a drawing (#151). A
  * knob whose options are icons declares `optionPreview: 'glyph'` and their
@@ -61,7 +60,7 @@ import { BUTTON_ICONS } from '@o3/ui'
 const canvasComponents = createCanvasComponents({
   blockKnobs: BLOCK_KNOBS,
   objectKnobs: OBJECT_KNOBS,
-  blockArrays: blockArraysFor('o3'),
+  blockArrays: BLOCK_ARRAYS,
   glyphs: BUTTON_ICONS,
 })
 

@@ -9,13 +9,7 @@ import { CaseShowcaseSection } from './CaseShowcaseSection'
  * The band is ONE ink band, and that is what a browser cannot be relied on to
  * tell an agent: `data-surface` is invisible, and a wash left behind the cards
  * would read as "nearly black" in a screenshot.
- *
- * The card is a stub. `caseStudy` is app-first, so the shared package has no
- * card to draw; what is under test is the band around it.
  */
-function StubCard({ title }: { title: string }) {
-  return <article>{title}</article>
-}
 
 const html = renderToStaticMarkup(
   <CaseShowcaseSection
@@ -24,7 +18,6 @@ const html = renderToStaticMarkup(
       button: null,
       caseStudies: [{ _id: 'caseStudy-one', title: 'One' }],
     } as unknown as SectionProps<'caseShowcaseSection'>)}
-    cardComponents={{ caseStudy: StubCard }}
   />,
 )
 

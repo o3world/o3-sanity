@@ -298,9 +298,6 @@ export type CollectionIndex = {
     | ({
         _key: string
       } & StatsSection)
-    | ({
-        _key: string
-      } & FaqSection)
   >
   sectionsBelow?: Array<
     | ({
@@ -354,27 +351,9 @@ export type CollectionIndex = {
     | ({
         _key: string
       } & StatsSection)
-    | ({
-        _key: string
-      } & FaqSection)
   >
   seo?: Seo
   migration?: Migration
-}
-
-export type FaqSection = {
-  _type: 'faqSection'
-  heading?: string
-  subheading?: string
-  questions?: Array<{
-    heading?: string
-    body?: string
-    _type: 'question'
-    _key: string
-  }>
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
-  backgroundMedia?: BackgroundMedia
-  anchor?: string
 }
 
 export type StatsSection = {
@@ -942,9 +921,6 @@ export type Page = {
     | ({
         _key: string
       } & StatsSection)
-    | ({
-        _key: string
-      } & FaqSection)
   >
   briefs?: Array<
     {
@@ -1040,9 +1016,6 @@ export type CaseStudy = {
     | ({
         _key: string
       } & StatsSection)
-    | ({
-        _key: string
-      } & FaqSection)
   >
   deliverables?: Array<string>
   briefs?: Array<
@@ -1232,7 +1205,6 @@ export type AllSanitySchemaTypes =
   | Industry
   | Slug
   | CollectionIndex
-  | FaqSection
   | StatsSection
   | ListingSection
   | ScreenGridSection
@@ -2061,37 +2033,6 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'molecule' | 'none' | 'orbs'
-        backgroundMedia: {
-          _type: 'backgroundMedia'
-          image: {
-            asset: {
-              _id: string
-              metadata: {
-                lqip: string | null
-                isOpaque: boolean | null
-              } | null
-            } | null
-            media?: unknown
-            hotspot?: SanityImageHotspot
-            crop?: SanityImageCrop
-            _type: 'image'
-          } | null
-          tint?: 'dim' | 'none'
-        } | null
-        anchor?: string
-      }
-    | {
-        _key: string
-        _type: 'faqSection'
-        heading?: string
-        subheading?: string
-        questions?: Array<{
-          heading?: string
-          body?: string
-          _type: 'question'
-          _key: string
-        }>
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -3323,37 +3264,6 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'molecule' | 'none' | 'orbs'
-        backgroundMedia: {
-          _type: 'backgroundMedia'
-          image: {
-            asset: {
-              _id: string
-              metadata: {
-                lqip: string | null
-                isOpaque: boolean | null
-              } | null
-            } | null
-            media?: unknown
-            hotspot?: SanityImageHotspot
-            crop?: SanityImageCrop
-            _type: 'image'
-          } | null
-          tint?: 'dim' | 'none'
-        } | null
-        anchor?: string
-      }
-    | {
-        _key: string
-        _type: 'faqSection'
-        heading?: string
-        subheading?: string
-        questions?: Array<{
-          heading?: string
-          body?: string
-          _type: 'question'
-          _key: string
-        }>
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -4795,37 +4705,6 @@ export type CASE_STUDY_QUERY_RESULT = {
       }
     | {
         _key: string
-        _type: 'faqSection'
-        heading?: string
-        subheading?: string
-        questions?: Array<{
-          heading?: string
-          body?: string
-          _type: 'question'
-          _key: string
-        }>
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
-        backgroundMedia: {
-          _type: 'backgroundMedia'
-          image: {
-            asset: {
-              _id: string
-              metadata: {
-                lqip: string | null
-                isOpaque: boolean | null
-              } | null
-            } | null
-            media?: unknown
-            hotspot?: SanityImageHotspot
-            crop?: SanityImageCrop
-            _type: 'image'
-          } | null
-          tint?: 'dim' | 'none'
-        } | null
-        anchor?: string
-      }
-    | {
-        _key: string
         _type: 'featureGridSection'
         heading?: string
         layout?: 'grid' | 'orbital' | 'rows' | 'stack'
@@ -6193,37 +6072,6 @@ export type PAGE_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'molecule' | 'none' | 'orbs'
-        backgroundMedia: {
-          _type: 'backgroundMedia'
-          image: {
-            asset: {
-              _id: string
-              metadata: {
-                lqip: string | null
-                isOpaque: boolean | null
-              } | null
-            } | null
-            media?: unknown
-            hotspot?: SanityImageHotspot
-            crop?: SanityImageCrop
-            _type: 'image'
-          } | null
-          tint?: 'dim' | 'none'
-        } | null
-        anchor?: string
-      }
-    | {
-        _key: string
-        _type: 'faqSection'
-        heading?: string
-        subheading?: string
-        questions?: Array<{
-          heading?: string
-          body?: string
-          _type: 'question'
-          _key: string
-        }>
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {

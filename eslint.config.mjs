@@ -155,11 +155,7 @@ export default [
   // Registering it repo-wide clashes with the shared config's react/jsx-a11y
   // plugin registrations.
   {
-    files: [
-      'apps/web/**/*.{ts,tsx}',
-      'apps/o3xo/**/*.{ts,tsx}',
-      'packages/content-ui/**/*.{ts,tsx}',
-    ],
+    files: ['apps/web/**/*.{ts,tsx}', 'packages/content-ui/**/*.{ts,tsx}'],
     plugins: {
       '@next/next': nextPlugin,
     },
@@ -228,12 +224,8 @@ export default [
       ],
     },
   },
-  // Both apps' boundaries, from one declaration. A rule scoped to a path stops
-  // applying the moment a second app appears at a different path, and it stops
-  // silently — the same trap #212 hit when the renderers moved out. Called per
-  // app rather than matched with a glob so each app's `ignores` stay its own.
+  // The app's boundaries, from one declaration.
   ...appBoundaries('apps/web'),
-  ...appBoundaries('apps/o3xo'),
   // The shared renderer package (#212). The block renderers, the site chrome
   // and the cards left apps/web/src/content/, and both boundaries left with
   // them — a rule scoped to a path stops applying the moment the path moves,

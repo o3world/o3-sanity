@@ -1,7 +1,6 @@
 import Link from 'next/link'
 
 import { CARD_LINK_FOCUS, CARD_MEDIA_ZOOM, CARD_TITLE_FADE, cn } from '@o3/ui'
-import { brandConfig } from '@o3/sanity/brand'
 
 import { hrefForDoc } from '@o3/content-runtime/urls'
 import type { SectionProps } from '@o3/content-runtime/blocks'
@@ -9,14 +8,6 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 import { SanityImage } from '../SanityImage'
 import { CARD_THREE_UP, STRUCTURAL_THREE_UP } from '../imageSizes'
 import { formatNumericDate } from '../lib/format-date'
-
-/**
- * Whether the brand this app runs as prints a publication date at all. o3xo's
- * insights carry a synthetic one that orders the collection and says nothing
- * about when anything was published (#218), so its cards draw the reading time
- * alone. Read once at module scope: `NEXT_PUBLIC_BRAND` is fixed for a build.
- */
-const { showsPublishDates } = brandConfig()
 
 /**
  * The insight card shape — the `INSIGHT_CARD` projection. Pinned to
@@ -78,7 +69,7 @@ export function InsightCard({
   const isStructural = mediaLayout === 'structural-three-up'
   const meta = [
     readingMinutes ? `${readingMinutes} min${readingMinutes === 1 ? '' : 's'}` : null,
-    showsPublishDates ? formatNumericDate(publishedAt) : null,
+    formatNumericDate(publishedAt),
   ]
     .filter(Boolean)
     .join(' · ')

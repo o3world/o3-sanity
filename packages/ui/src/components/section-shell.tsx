@@ -35,8 +35,8 @@ export const SURFACE_CLASS: Record<Surface, string> = {
  * IT WORKS NESTED, and only because a light surface declares itself too: the
  * roles inherit, so a light card inside an ink band keeps the band's white
  * alphas until `data-surface="white"` (or `bone`) on the card points them back
- * at the light values. A plate that is neither — O3XO's yellow accent card —
- * declares no surface and names `ink`, the role no band re-points.
+ * at the light values. A plate that is neither declares no surface and names
+ * `ink`, the role no band re-points.
  *
  * Its React half is `SurfaceProvider`, and they are one act: this shell does
  * both, and a band that builds its own `<section>` reaches for this beside
@@ -55,8 +55,8 @@ export type Tint = (typeof TINTS)[number]
  * Surface → the wash laid over the picture, so a band's copy keeps the
  * contrast its surface promised it. The wash is the band's OWN colour: an ink
  * band darkens toward the white it writes in, a white band lightens toward the
- * ink it writes in, and neither names a colour outside the three roles every
- * brand's token package paints (ADR 0028).
+ * ink it writes in, and neither names a colour outside the three surface
+ * roles.
  *
  * `bg-ink/40` is the kit's Banner Tint (`4406:6598`). The light surfaces carry
  * dark copy and need more of their own colour to do it; the kit draws no light

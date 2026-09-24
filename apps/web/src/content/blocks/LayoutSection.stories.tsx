@@ -5,19 +5,11 @@ import { figmaDesign } from '@o3/story-kit'
 import { LayoutSection } from '@o3/content-ui'
 import { seededSectionArgs } from '@o3/content-ui/testing/seed'
 
-import { BASE_CLIENT_COMPONENTS } from './clientComponents'
-
 /**
- * The one true two-tier block (ADR 0001): 1–3 columns of **base-tier** blocks,
- * dispatched through this app's base roster. It is the band an editor reaches
- * for when no bespoke block fits, so what it does with an awkward mix is more
- * interesting than what it does with a tidy one.
- *
- * **The brand is pinned**, and the story is this app's rather than the shared
- * package's, because `statGroup` is app-first (`APP_FIRST_RENDERERS`): the
- * band's `baseComponents` slot only has an answer inside an app. The band
- * itself is still shared, so each host draws it through its own roster, and
- * this story is O3's side of that.
+ * The one true two-tier block (ADR 0001): 1–3 columns of **base-tier** blocks.
+ * It is the band an editor reaches for when no bespoke block fits, so what it
+ * does with an awkward mix is more interesting than what it does with a tidy
+ * one.
  *
  * Its header follows the About frame's interior bands (`1924:5344`): a neutral
  * eyebrow, the 48px heading, and a set-back subheading.
@@ -29,8 +21,6 @@ import { BASE_CLIENT_COMPONENTS } from './clientComponents'
 const meta = {
   title: 'Content/Blocks/Section/LayoutSection',
   component: LayoutSection,
-  globals: { brand: 'o3' },
-  args: { baseComponents: BASE_CLIENT_COMPONENTS },
   parameters: { layout: 'fullscreen' },
 } satisfies Meta<typeof LayoutSection>
 

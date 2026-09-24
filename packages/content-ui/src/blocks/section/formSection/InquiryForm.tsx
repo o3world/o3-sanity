@@ -62,7 +62,7 @@ export interface InquiryFormProps {
 /** What the submit says when the document has not named it. */
 const SUBMIT_LABEL = 'Send message'
 
-/** The app's own route, in both brands: a relative path resolves to its host. */
+/** The app's own route: a relative path resolves to its host. */
 const ENDPOINT = '/api/contact'
 
 /**

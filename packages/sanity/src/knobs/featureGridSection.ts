@@ -24,10 +24,8 @@ import type { FeatureGridSection } from '../types/generated'
  * says the option VALUES name icons; the app hands the map from names to
  * components to the canvas and to its own feature binding.
  *
- * **The eighteen are O3XO's, and O3 draws none of them.** The content model
- * does not fork (ADR 0028), so the field is on the shared member and an O3
- * document that never sets it renders exactly as it did — `none` is the
- * default, and O3's app binds no icons at all.
+ * **The site draws none of the eighteen.** `none` is the default, and the app
+ * binds no icon set, so a stored name renders as the mark.
  */
 export const featureKnobs = defineItemKnobs({
   type: 'feature',
@@ -39,8 +37,7 @@ export const featureKnobs = defineItemKnobs({
       description:
         'The glyph beside this feature’s copy, from the kit’s set. None leaves the mark to stand on its own.',
       // The `Phosphor Icons` set (`4404:5589`, Icons canvas `345:2833` of the
-      // _O3XO: UI kit_ file) holds exactly these eighteen, and offering a
-      // nineteenth would let an editor pick a shape the kit does not draw.
+      // _O3XO: UI kit_ file) holds exactly these eighteen.
       optionPreview: 'glyph',
       options: [
         'none',

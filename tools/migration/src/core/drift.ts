@@ -6,12 +6,11 @@
  * Pure — expected documents, live documents and the committed asset map in,
  * findings out — so the comparison rules are pinned by fixtures.
  *
- * `resolveMarkers` is the pure twin of `resolveAssets` in `load.ts`: the same
- * marker vocabulary, the same figure-drop rule, minus the uploads. It exists
- * because a committed document carries `_wpSrc`/`_srcUrl`/`_localSrc` markers
- * where the dataset carries asset references, and comparing the two without
- * translating one side would flag every image as an edit. Change one twin,
- * change the other.
+ * `resolveMarkers` translates image markers the way a write resolves them,
+ * minus the uploads. It exists because a committed document carries
+ * `_wpSrc`/`_srcUrl`/`_localSrc` markers where the dataset carries asset
+ * references, and comparing the two without translating one side would flag
+ * every image as an edit.
  */
 import { bareId } from './state'
 

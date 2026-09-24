@@ -5,11 +5,8 @@ import { blockArrayMembers, type BlockArrays } from '../blocks/registry'
 import { isReservedCollectionSlug, RESERVED_SLUG_MESSAGE } from './reservedSlugs'
 
 /**
- * A case study, built from one roster's block arrays.
- *
- * A function rather than a constant because `story` interleaves section blocks
- * with its chapters, and which sections a brand's Studio offers is that brand's
- * roster (ADR 0028, #251). `schemaTypesFor` is what decides which.
+ * A case study, built from the registry's block arrays, so `story`'s section
+ * members derive from `BLOCK_ARRAYS` rather than being restated.
  */
 export const caseStudy = (arrays: BlockArrays) =>
   defineType({
@@ -87,8 +84,7 @@ export const caseStudy = (arrays: BlockArrays) =>
        * fields cannot express. One array of `chapter` members and section
        * blocks can, and every band the case study needs is then a block any
        * page can compose too. The section members come from the `arrays`
-       * parameter — `blockArraysFor(brand)` in every real Studio — never
-       * restated.
+       * parameter — `BLOCK_ARRAYS` — never restated.
        */
       defineField({
         name: 'story',

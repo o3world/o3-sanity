@@ -1,5 +1,3 @@
-import type { ComponentType } from 'react'
-
 import { SectionShell } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
 import type { SectionProps } from '@o3/content-runtime/blocks'
@@ -12,7 +10,7 @@ import { sectionBackground } from '../../sectionBackground'
 import { resolveSurface } from '../../surface'
 
 import { PanelBand } from './PanelBand'
-import { PanelCards, type PanelCard } from './PanelCards'
+import { PanelCards } from './PanelCards'
 import { PanelGrid } from './PanelGrid'
 import { PanelPlate } from './PanelPlate'
 import { PanelRows } from './PanelRows'
@@ -67,15 +65,7 @@ const HEADER_SHAPE = {
   },
 } as const
 
-type RailPanelsSectionProps = SectionProps<'railPanelsSection'> & {
-  /**
-   * The row the `cards` layout draws, so an app can hand the band its own
-   * card without forking the band (ADR 0028). O3XO fills it with the kit's
-   * `Yellow Text Card`, whose plate is a token role only its own package
-   * declares (#244); unfilled, the band draws the cards it always has.
-   */
-  panelCards?: ComponentType<{ items: PanelCard[] }>
-}
+type RailPanelsSectionProps = SectionProps<'railPanelsSection'>
 
 /**
  * Section block: rail + panels — an ordered set of parallel things, in five
@@ -149,7 +139,6 @@ export function RailPanelsSection({
   surface,
   backgroundMedia,
   loc,
-  panelCards: Cards = PanelCards,
 }: RailPanelsSectionProps) {
   const items = panels ?? []
   const resolved = resolveSurface(surface, 'railPanelsSection')
@@ -276,7 +265,7 @@ export function RailPanelsSection({
       <SectionShell surface={resolved} top="md" bottom="md" background={background}>
         <div className="flex flex-col gap-10 lg:gap-[65px]">
           {header}
-          <Cards
+          <PanelCards
             items={items.map((panel, index) => ({
               key: panel._key ?? String(index),
               heading: panel.heading ?? panel.railLabel,

@@ -15,8 +15,7 @@ import { collectionPrefixes } from '@o3/sanity/brand'
  *
  * `routes/index-paths` rather than the `routes` barrel: the barrel drags the
  * route builders and their server runtime in with it, which is not something a
- * config file should be loading. This app runs as the default brand, so it
- * names none; o3xo's copy of this file passes its own.
+ * config file should be loading.
  */
 export function indexRedirects(): IndexRedirect[] {
   const { insight, caseStudy } = collectionPrefixes()

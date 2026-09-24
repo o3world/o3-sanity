@@ -11,29 +11,25 @@ import fs from 'node:fs'
 import http from 'node:http'
 import path from 'node:path'
 
-/** The brands with a Storybook host of their own (#240). */
-export const BRANDS = ['o3', 'o3xo'] as const
+/** Vestigial single-member brand list (#490). It still keys pairing rows,
+ *  frame keys, ledger keys, export paths and the `.vr/` cache. */
+export const BRANDS = ['o3'] as const
 export type Brand = (typeof BRANDS)[number]
 
 /**
- * A brand's host, repo-relative. Everything else that is brand-shaped follows
- * from this one string: the directory the build runs in, the prefix Storybook
+ * The host, repo-relative. Everything else that is host-shaped follows from
+ * this one string: the directory the build runs in, the prefix Storybook
  * writes its module ids against, and the two globals that sit above every one
  * of that host's stories.
  */
 const HOST_DIR: Record<Brand, string> = {
   o3: 'apps/storybook',
-  o3xo: 'apps/storybook-o3xo',
 }
 
 export const DEFAULT_BRAND: Brand = 'o3'
 
 export function hostDir(brand: Brand): string {
   return HOST_DIR[brand]
-}
-
-export function isBrand(value: string): value is Brand {
-  return (BRANDS as readonly string[]).includes(value)
 }
 
 /** One entry of Storybook's `index.json`. */

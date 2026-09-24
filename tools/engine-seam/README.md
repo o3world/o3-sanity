@@ -15,15 +15,15 @@ Four scans, each derived from the roster and the repo rather than listed:
 
 - **Imports.** Every engine module's specifiers — static, re-export, dynamic,
   `require` — resolved through the workspaces' exports maps and the roster's
-  overrides. A resolved target labelled `product-shared` or `product-brand`
-  (apps are rows too, so app imports are the same failure) fails unless a
+  overrides. A resolved target labelled `product` (apps are rows too, so app
+  imports are the same failure) fails unless a
   ledger entry names the importing file. Type-only imports count: a type the
   content model generates is a brand fact.
 - **Dependencies.** An engine workspace's `package.json` may not declare a
   product workspace under `dependencies` unless a ledger entry names
   `package.json` and the package. `devDependencies` stay out — they are the
   test harness, not what extraction would take.
-- **Brand tokens.** The colour vocabulary both token packages declare —
+- **Brand tokens.** The colour vocabulary the token package declares —
   custom properties, their utility classes, their hex values — may not appear
   in engine code. `white`/`black` are excluded (they paint the same in any
   host), and only colour and gradient roles are derived, so a value-shaped
@@ -38,17 +38,14 @@ extraction would take, and the suite's own fixtures import product code on
 purpose. A ledger entry permits leaks per file — the module it names, nothing
 finer — which is the same granularity the roster's rows use.
 
-The roster decides the boundary only. Moving code across it is separate work,
-and ADR 0028's trigger still governs it: extract when a second consumer
-imports, not because a row says `engine`.
+The roster decides the boundary only. Moving code across it is separate work:
+extract when a second consumer imports, not because a row says `engine`.
 
 ## Verdicts
 
 - `engine`: extractable and brand-free. A future unrelated Sanity project
   could take it.
-- `product-shared`: these two brands' content model and components, rendered
-  by both sites.
-- `product-brand`: one brand's alone.
+- `product`: the site's content model, components and app.
 
 ## Rules
 
@@ -71,5 +68,4 @@ functions are machinery and the block lists they close over are product. Each
 
 **`overrides` re-label a path inside a workspace.** The workspace row carries
 the default. An override carries the exception, such as
-`tools/migration/src/core/state.ts` as `engine` inside a `product-shared`
-tool.
+`tools/migration/src/core/state.ts` as `engine` inside a `product` tool.

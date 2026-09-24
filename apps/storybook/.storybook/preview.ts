@@ -4,7 +4,6 @@ import '../globals.css'
 import { defineStorybookPreview } from '@o3/story-kit/storybook-preview'
 
 export default defineStorybookPreview({
-  brand: 'o3',
   parameters: {
     // Sidebar ordering follows the layered architecture: the extracted design
     // reference first, then layout primitives, then UI atoms, then content

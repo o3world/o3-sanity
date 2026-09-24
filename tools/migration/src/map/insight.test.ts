@@ -387,17 +387,12 @@ describe('mapInsight', () => {
 })
 
 /**
- * The gate both sources pass, and `verify` re-runs over the whole dataset.
- *
- * `publishedAt` is required of every insight, whatever produced it. o3xo.ai was
- * the one source with nothing to give it — the field used to be exempt for a
- * `framer:` document — and #218 closed that: its dates are synthesised from the
- * sitemap position, so no source is exempt and an insight with no date is a
- * failure again rather than a shape the gate has a hole for.
+ * The gate every insight passes, and `verify` re-runs over the whole dataset.
+ * `publishedAt` is required of every insight, whatever produced it.
  */
 describe('insightDoc', () => {
   const doc = {
-    _id: 'insight-framer-a-migrated-article',
+    _id: 'insight-seed-a-written-article',
     _type: 'insight' as const,
     title: 'A migrated article',
     slug: { _type: 'slug' as const, current: 'a-migrated-article' },
@@ -405,7 +400,7 @@ describe('insightDoc', () => {
     categories: [],
     publishedAt: '2026-08-01T12:00:00Z',
     body: [{ _type: 'block' }],
-    migration: { locked: false, sourceId: 'framer:insight:KkV56cgmc' },
+    migration: { locked: false, sourceId: 'seed:insight:a-written-article' },
   }
 
   it('accepts a document from either source', () => {
@@ -419,7 +414,7 @@ describe('insightDoc', () => {
     ).toBe(true)
   })
 
-  it('requires a date of an o3xo.ai insight too, now that it has one', () => {
+  it('requires a date', () => {
     const dateless: Record<string, unknown> = { ...doc }
     delete dateless.publishedAt
     const parsed = insightDoc.safeParse(dateless)

@@ -17,8 +17,8 @@ describe('decodePathParam', () => {
   })
 
   /**
-   * The two o3xo.ai slugs with a curly apostrophe: the corpus stores the
-   * character, a browser sends the escape, and the lookup has to match (#218).
+   * A slug with a curly apostrophe: the corpus stores the character, a
+   * browser sends the escape, and the lookup has to match (#218).
    */
   it('decodes a percent-encoded segment to the form slugs are stored in', () => {
     expect(decodePathParam('mike-gadsby-on-pact%E2%80%99s-digital-phorum-podcast')).toBe(

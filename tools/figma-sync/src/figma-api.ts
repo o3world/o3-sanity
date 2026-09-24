@@ -64,11 +64,10 @@ export interface FigmaClientOptions {
   readonly fetchImpl?: FetchLike
   /**
    * How many times a 429 is re-asked before it becomes an error, and how long
-   * the first wait is (doubling after that). A brand whose manifest spreads
-   * over sixteen canvases makes sixteen probe calls back to back where O3's
-   * makes one, and Figma answers the tail of that burst with a rate limit
-   * rather than a failure (#242). Zero in tests: a retry there would only
-   * spend the wall clock proving the same throw.
+   * the first wait is (doubling after that). Calls made back to back can
+   * meet a rate limit at the tail of the burst rather than a failure. Zero in
+   * tests: a retry there would only spend the wall clock proving the same
+   * throw.
    */
   readonly retries?: number
   readonly retryDelayMs?: number

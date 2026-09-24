@@ -6,7 +6,7 @@ import { sectionBackground } from './sectionBackground'
 
 /**
  * A band with no picture has to render the markup it rendered before the field
- * existed — which is every band on o3world.com and most of o3xo's.
+ * existed — which is every band on o3world.com.
  *
  * The trap this guards is that a React element is truthy even when it renders
  * nothing, so a renderer that always handed `SectionShell` a component would

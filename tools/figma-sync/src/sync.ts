@@ -1,11 +1,6 @@
 /**
  * `pnpm figma:sync` — what moved in the design file since the last sync
- * (#78, extended by #79, #81 and #242).
- *
- * One brand per run: `pnpm figma:sync` watches O3's file, `pnpm figma:sync
- * --brand o3xo` the O3XO UI kit. A brand is a set of committed files
- * (`brands.ts`) and nothing else — the pipeline below is the same work over
- * whichever set it was asked for.
+ * (#78, extended by #79 and #81).
  *
  *   1. one call to `/files/:key?depth=1` for the file's version
  *   2. version unchanged and the baseline covers every tracked node *and*
@@ -29,7 +24,6 @@
  * where a short-circuited run reports the conflicts the baseline still carries.
  */
 import { basename } from 'node:path'
-import { parseArgs } from 'node:util'
 
 import {
   applyAssetDecisions,
@@ -37,12 +31,11 @@ import {
   carryOpenConflicts,
   planAssetSync,
 } from './assets'
-import { BRANDS, DEFAULT_BRAND, isBrand } from './brands'
 import { diffHashes, isBaselineFresh } from './diff'
 import { createFigmaClientFromEnv } from './figma-api'
 import { hashSubtree } from './hash'
 import {
-  dataPaths,
+  DATA_PATHS,
   readAssetManifest,
   readBaseline,
   readManifest,
@@ -61,17 +54,8 @@ import {
 import type { Baseline, TrackedKind } from './types'
 
 async function main() {
-  const { values } = parseArgs({
-    options: { brand: { type: 'string', default: DEFAULT_BRAND } },
-    allowPositionals: false,
-  })
-  if (!isBrand(values.brand)) {
-    throw new Error(`unknown brand ${values.brand} — expected one of ${BRANDS.join(', ')}`)
-  }
-  const brand = values.brand
-
-  const manifest = readManifest(brand)
-  const assetManifest = readAssetManifest(brand)
+  const manifest = readManifest()
+  const assetManifest = readAssetManifest()
   // One node fetch serves both manifests, which only works if they describe
   // the same file. They are hand-maintained separately, so say it out loud.
   if (assetManifest.fileKey !== manifest.fileKey) {
@@ -80,14 +64,12 @@ async function main() {
         `claims ${assetManifest.fileKey} — one of them is wrong.`,
     )
   }
-  const baseline = readBaseline(brand)
+  const baseline = readBaseline()
   const client = createFigmaClientFromEnv()
   const ranAt = new Date().toISOString()
 
   const meta = await client.getFileMeta(manifest.fileKey)
-  console.log(
-    `${brand} — ${meta.name} — version ${meta.version}, last modified ${meta.lastModified}`,
-  )
+  console.log(`${meta.name} — version ${meta.version}, last modified ${meta.lastModified}`)
 
   const trackedIds = manifest.entries.map((entry) => entry.nodeId)
   const assetIds = assetSourceNodeIds(assetManifest)
@@ -108,8 +90,7 @@ async function main() {
 
   // The probe (#79): one `depth=1` call per watched section, and the only
   // thing here that looks outside the manifest. It surfaces candidates and
-  // promotes nothing. A kit spreads its work over canvases rather than one
-  // section, so the list is a list (#242).
+  // promotes nothing.
   const untrackedFrames = []
   for (const sectionNodeId of manifest.sectionNodeIds) {
     const children = await client.getSectionChildren(manifest.fileKey, sectionNodeId)
@@ -174,7 +155,7 @@ async function main() {
     assets,
     errors,
   })
-  writeReport(report, renderReportMarkdown(report), brand)
+  writeReport(report, renderReportMarkdown(report))
 
   const next: Baseline = {
     fileKey: manifest.fileKey,
@@ -190,7 +171,7 @@ async function main() {
     // are what keep the conflict visible until the manifest entry changes.
     openAssetConflicts: assets.openConflicts,
   }
-  writeBaseline(next, brand)
+  writeBaseline(next)
 
   const changed = [...report.changedFrames, ...report.changedComponentSets]
   if (changed.length === 0) {
@@ -239,10 +220,9 @@ async function main() {
     console.error(`  failed   ${failure.path}  ← ${failure.nodeId ?? '?'}: ${failure.error}`)
   }
   for (const error of errors) console.error(`  error    ${error}`)
-  const written = dataPaths(brand)
   console.log(
     `\nbaseline and report written to tools/figma-sync/data/ — commit them:\n` +
-      `  ${[written.baseline, written.reportJson, written.reportMd]
+      `  ${[DATA_PATHS.baseline, DATA_PATHS.reportJson, DATA_PATHS.reportMd]
         .map((path) => basename(path))
         .join(', ')}`,
   )

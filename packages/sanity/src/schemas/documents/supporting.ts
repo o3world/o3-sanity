@@ -67,8 +67,8 @@ export const industry = defineType({
 })
 
 /**
- * A nav item that opens a panel instead of going somewhere — the dropdown the
- * O3XO kit's `Navigation` (`4404:4146`) draws on three of its five items.
+ * A nav item that opens a panel instead of going somewhere — a dropdown. The
+ * site's nav authors none today.
  *
  * Inline in `navItems` rather than a registered shared object, the way
  * `footerGroup` and `socialLink` below are inline in theirs: it has no
@@ -202,10 +202,8 @@ export const siteSettings = defineType({
      * The nav's own row. A member is either a plain link or a `navGroup` — a
      * label that opens a panel of links instead of going anywhere itself.
      *
-     * The group exists because O3XO's nav has dropdowns and O3's does not
-     * (`Navigation`, `4404:4146` of the _O3XO: UI kit_). It is additive on
-     * purpose: an array that already holds buttons keeps holding them, and a
-     * brand whose nav is five flat links authors no group.
+     * The group is additive on purpose: an array that already holds buttons
+     * keeps holding them, and a nav of flat links authors no group.
      */
     defineField({
       name: 'navItems',

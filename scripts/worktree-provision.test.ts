@@ -96,7 +96,6 @@ describe('worktree provisioning', () => {
     const env = readFileSync(join(worktree, '.env'), 'utf8')
     expect(env).toMatch(/^WEB_PORT=36\d\d$/m)
     expect(env).toMatch(/^STORYBOOK_PORT=66\d\d$/m)
-    expect(env).toMatch(/^XO_WEB_PORT=37\d\d$/m)
   })
 
   it('symlinks the prototype assets rather than copying 22MB per worktree', () => {

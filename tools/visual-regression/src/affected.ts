@@ -11,8 +11,8 @@
  * Storybook config's root): `./globals.css`,
  * `./../../packages/ui/src/components/stat.tsx`. Everything below normalises
  * them to repo-relative paths so they can be compared against `git diff`
- * output — which is why every entry point takes the host directory. The same
- * `./globals.css` is a different file on each of the two hosts (#242).
+ * output — which is why every entry point takes the host directory: the same
+ * `./globals.css` is a different file in each one.
  */
 import path from 'node:path'
 

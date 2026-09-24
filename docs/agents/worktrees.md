@@ -39,7 +39,7 @@ names the base commit the checkout starts on:
 ```
   #167  pnpm wt new branches from a stale local main
   branch  feat/167-pnpm-wt-new-branches-from-a-stale-local
-  base    6b48e83  origin/main  feat(storybook): an O3XO brand theme, and the…
+  base    31945ac  origin/main  perf: reclaim shared JavaScript and enforce PR…
 ```
 
 ## Or from Orca
@@ -80,16 +80,12 @@ does four things:
 1. **Carry the gitignored env across** — `.env.local`, `apps/web/.env.local`,
    `.vercel/project.json`. Without these a worktree can't reach Sanity or
    Vercel, and the failure looks like a code bug rather than a missing file.
-   `apps/o3xo/.env.local` comes too when the main checkout has one; it is
-   optional, because that brand's dataset reads anonymously.
 2. **Symlink `prototype/`** — 22 MB of seed image assets, gitignored, that the
    migration seed test asserts against. Without it that suite fails in every
    worktree for reasons that have nothing to do with the ticket being worked.
 3. **Allocate dev ports**, written to the worktree's own `.env`: `WEB_PORT`
-   from 3600-3609, `XO_WEB_PORT` from 3700-3709, `STORYBOOK_PORT` from
-   6600-6609 and `XO_STORYBOOK_PORT` from 6700-6709, skipping anything a
-   sibling worktree has already claimed or that
-   is currently listening. Two checkouts both booting on 3600 is the first thing
+   from 3600-3609 and `STORYBOOK_PORT` from 6600-6609, skipping anything a
+   sibling worktree has already claimed or that is currently listening. Two checkouts both booting on 3600 is the first thing
    that breaks when a second session starts.
 4. **`pnpm install`.** node_modules is not shared between worktrees.
 
@@ -149,11 +145,10 @@ have to, so a provisioned worktree costs four "keep" lines.
 `--no-install` is not an optimisation. `prepare` runs at the END of an install,
 so a provisioner that installed would re-enter it.
 
-**The web port pools are bounded by Sanity CORS, one pool per brand.** Every
-port a browser hits needs a matching origin, and an origin belongs to one Sanity
-project — so 3600-3609 are registered on o3's and 3700-3709 on o3xo's (ADR 0028).
-Boot an app on the other brand's port and the page loads while every read fails.
-Widening a pool means registering the new ports first, on that brand's project:
+**The web port pool is bounded by Sanity CORS.** Every port a browser hits
+needs a matching origin on the Sanity project, and 3600-3609 are the ports
+registered. Boot the app on any other port and the page loads while every read
+fails. Widening the pool means registering the new ports first:
 
 ```bash
 pnpm sanity cors add http://localhost:<port> --credentials

@@ -67,12 +67,12 @@ Every colour, size and spacing value comes from `@o3/tailwind-config`, which is
 read off the canonical Figma frames. Never pick a value by eye — see that
 package's README for the rule on what earns a token.
 
-Both brands render these components, so a component may only name a role
-**every** brand's token package defines (ADR 0028). `bg-ink` is fine — the role
-is shared and each brand paints it its own colour. `bg-accent` is not: `accent`
-is O3XO's alone, and Tailwind bakes the declared value in as the utility's
-fallback, so it paints O3XO's yellow on an O3 page rather than nothing at all.
+A component may only name a token role `@o3/tailwind-config` declares.
+`--color-ink` is fine. A role pasted from another design system is not:
+shadcn's `--color-background` or a kit's `--color-accent` compiles to an
+undeclared `var()` and renders as a transparent fill rather than an error.
 
-`brand-token-seam.test.ts` derives both sets from the token packages and walks
-`packages/ui/src` and `packages/content-ui/src`. It catches the utility class,
-a `var(--color-accent)` reference, and the raw hex; comments are exempt.
+`brand-token-seam.test.ts` derives the declared roles from the token package
+and walks `packages/ui/src` and `packages/content-ui/src`. It catches a
+`var(--color-accent)` reference, an arbitrary value and a custom-property
+class; comments are exempt.

@@ -1,22 +1,12 @@
 /**
- * The block renderers and the support layer they are built from. An app
- * binds these into its own registry (ADR 0028) — nothing here reads a
- * registry, so a second brand can re-bind one block type without forking
- * the other fifteen.
+ * The block renderers and the support layer they are built from. The app
+ * binds these into its own registry — nothing here reads a registry.
  */
 
 // ── Base tier ──────────────────────────────────────────────────────────────
 // The base tier is the inline vocabulary a section renderer draws with, so the
-// bindings ship with the renderers rather than per app. What each app adds is
-// the app-first blocks (`APP_FIRST_RENDERERS`), which the shared table
-// subtracts and `BaseComponentsSlot` makes it supply.
+// bindings ship with the renderers rather than with the app.
 export { BASE_BLOCK_BINDINGS, BASE_BLOCK_COMPONENTS } from './blocks/base/baseComponents'
-export type {
-  AppFirstBaseComponents,
-  AppFirstBaseName,
-  BaseComponents,
-  BaseComponentsSlot,
-} from './blocks/base/baseComponents'
 export { Button } from './blocks/base/button/Button'
 export { ButtonGroup } from './blocks/base/buttonGroup/ButtonGroup'
 export { Embed } from './blocks/base/embed/Embed'
@@ -43,16 +33,12 @@ export { MediaSection } from './blocks/section/mediaSection/MediaSection'
 export { PersonGridSection } from './blocks/section/personGridSection/PersonGridSection'
 export { QuoteSection } from './blocks/section/quoteSection/QuoteSection'
 export { RailPanelsSection } from './blocks/section/railPanelsSection/RailPanelsSection'
-// The shape the `cards` layout hands each card. Exported so an app can fill
-// the band's cards slot with its own row (ADR 0028) — the band maps its panels
-// once and either brand's cards read the same items.
-export type { PanelCard } from './blocks/section/railPanelsSection/PanelCards'
 export { RoleListSection } from './blocks/section/roleListSection/RoleListSection'
 export { ScreenGridSection } from './blocks/section/screenGridSection/ScreenGridSection'
 
 // ── Route furniture ────────────────────────────────────────────────────────
-// Not a block — a collection index has no document to hold one. Every brand's
-// index renders the same pager, so it lives here rather than in either app.
+// Not a block — a collection index has no document to hold one. Every
+// collection index renders the same pager.
 export { Pager, type PagerProps } from './Pager'
 
 // ── Renderer support ───────────────────────────────────────────────────────

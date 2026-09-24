@@ -17,7 +17,6 @@
     "@o3/content-ui": "workspace:*",
     "@o3/story-kit": "workspace:*",
     "@o3/tailwind-config": "workspace:*",
-    "@o3/tailwind-config-o3xo": "workspace:*",
     "@o3/ui": "workspace:*"
   },
   "devDependencies": {

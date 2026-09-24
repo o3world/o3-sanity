@@ -2,24 +2,13 @@ import { SectionShell } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
-import { getCard, type CardSlot } from '../../../cards/card-registry'
+import { getCard } from '../../../cards/card-registry'
 import { resolveSurface } from '../../surface'
 
 import { CAROUSEL_BAND_CLASS } from './carouselBand'
 import { CarouselTrack, type CarouselTrackProps } from './CarouselTrack'
 
-/**
- * The card slot: how an app re-points this band's card without forking the
- * band (ADR 0028). Optional while `insight` has a shared card, and required
- * the moment `APP_FIRST_RENDERERS` demotes it — there would be nothing left to
- * fall back to.
- *
- * The same channel `LayoutSection`'s `baseComponents` opens for the base tier:
- * this band is a server component on the published path, so an app's card
- * cannot reach it any other way.
- */
 type InsightsCarouselSectionProps = SectionProps<'insightsCarouselSection'> &
-  CardSlot<'insight'> &
   Pick<CarouselTrackProps, 'headingSize'>
 
 /**
@@ -47,11 +36,10 @@ export function InsightsCarouselSection({
   latest,
   surface,
   loc,
-  cardComponents,
   headingSize,
 }: InsightsCarouselSectionProps) {
   const items = curated?.length ? curated : (latest ?? [])
-  const Card = getCard('insight', cardComponents)
+  const Card = getCard('insight')
 
   return (
     <SectionShell

@@ -37,11 +37,11 @@ Two kinds live here:
 - **Mappers and helpers.** `tools/migration/src/map/*.test.ts`, `packages/content-runtime/src/**`. Migration
   mappers are pure `WpThing → Mapped<Doc>` functions, so a new ACF module type means one arm in the
   mapper and one case in its test.
-- **Wiring a compiler cannot see.** `apps/o3xo/src/brandBinding.test.ts` reads the app's own files
-  and asserts the four things that would otherwise fail silently in a browser: the brand reaching
-  the bundles, the token layer's import order, `data-brand` on `<html>`, and a route directory per
-  collection prefix. Same shape as `packages/ui/src/components/ui/shadcn-seam.test.ts` — a
-  filesystem lint, in the layer that needs no React.
+- **Wiring a compiler cannot see.** `packages/content-ui/src/renderer-seam.test.ts` reads the
+  source tree and asserts that every renderer is drawn exactly once, in `packages/content-ui` or in
+  `apps/web` — a duplicate or a missing one would otherwise fail silently in a browser. Same shape
+  as `packages/ui/src/components/ui/shadcn-seam.test.ts`: a filesystem lint, in the layer that
+  needs no React.
 - **Corpus invariants.** `tools/migration/src/converted.test.ts` runs over everything actually
   committed under `data/converted/` — every document validates against its zod gate, every author
   and category reference resolves, no body block type the schema doesn't allow, no WP thumbnail
@@ -86,8 +86,7 @@ the same guardrail the block registry uses. Pass only the field your assertion i
 **`aMigratedInsight(slug)` loads a real converted document** and shapes it into what the query
 returns. That is the migration → render bridge: a mapper change producing something the renderer
 can't display fails here rather than in Studio. `migratedInsightSlugs()` sweeps all of them. It is
-`apps/web`'s, like every fixture that reads a tree off disk; `apps/o3xo`'s `aSeededPage()` reads
-that app's bootstrap documents instead.
+`apps/web`'s, like every fixture that reads a tree off disk.
 
 **The 402 half of ADR 0006 is assertable** via the responsive helpers, exported from `@/test` in the
 app and from `@o3/content-ui/testing` in the package that now holds the renderers:
@@ -95,21 +94,13 @@ app and from `@o3/content-ui/testing` in the package that now holds the renderer
 is a phone getting a scroll region where the frame draws a stack — and `variantsOf(html, 'gap-12')`
 pins a utility to the widths that emitted it when the two frames disagree on a value.
 
-**The layer is `@o3/render-kit`, and each app instantiates it** (#227). A vitest project resolves
-one `@/` alias and carries one environment, so the two brand apps are two projects — `render` and
-`render:o3xo` — built by one `renderProject()` call each in `vitest.config.mts`. Run both with
-`pnpm test --project 'render*'`.
+**The layer is `@o3/render-kit`, and the app instantiates it** (#227). A vitest project resolves
+one `@/` alias and carries one environment; `vitest.config.mts` builds the `render` project with
+one `renderProject()` call. Run it with `pnpm test --project render`.
 
 The `render` project also collects `packages/*/src/**`: the renderers moved to `@o3/content-ui`
 (#212) and their render tests moved with them, while an app keeps the route- and view-level ones.
-Those components take a brand's tokens from CSS this layer never loads, so one run of them covers
-both apps. A moved test reaches its helpers by package subpath; only app tests get the `@/` alias.
-
-**The brand is pinned per project, beside the port** — `NEXT_PUBLIC_BRAND: 'o3xo'` on the second
-one. `next.config.ts` is what supplies it to the running app and vitest never loads that file, so
-an unpinned project gets `brandConfig()`'s fallback of `o3`: every URL the second app builds would
-canonicalise to o3world.com and link case studies at `/work`, and the assertions would agree with
-it. Seven of `apps/o3xo`'s render tests fail the moment the pin is removed, which is what it is for.
+Those components take their tokens from CSS this layer never loads. A moved test reaches its helpers by package subpath; only app tests get the `@/` alias.
 
 Four modules are stubbed (see `@o3/render-kit`'s `project.ts` for why each):
 `@o3/content-runtime/live` is the network seam, `next/image` renders a plain `<img>`, `next/headers`
@@ -124,11 +115,9 @@ Every story is mounted in headless Chromium with real CSS and scanned by axe. **
 is writing the test** — there is no second file, which is why the wireframe build-out gets its
 safety net for free.
 
-One project per Storybook host, because a host carries one brand's tokens. `stories` is the O3
-host: the shared roots `packages/story-kit`'s `SHARED_STORY_ROOTS` names — `packages/ui/src` and
-`packages/content-ui/src` — plus `apps/web/src` and the captured prototypes, under O3's paint.
-`stories:o3xo` is the O3XO host, cut back to `apps/o3xo/src`: the shared packages are already
-covered, and what is left is the components whose token roles only O3XO's package declares.
+The `stories` project is the Storybook host in `apps/storybook`: the shared roots
+`packages/story-kit`'s `SHARED_STORY_ROOTS` names — `packages/ui/src` and `packages/content-ui/src`
+— plus `apps/web/src` and the captured prototypes.
 
 `HeroSection.stories.tsx` is the pattern for section blocks: a story per state the prototype shows.
 

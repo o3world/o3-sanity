@@ -2,7 +2,6 @@
 
 ```bash
 pnpm vr                       # the stories your change touches, vs the merge base with main
-pnpm vr --brand o3xo          # the o3xo Storybook host, not o3's
 pnpm vr --base NickO3/toolbar # vs another ref
 pnpm vr --story hero          # these stories, whatever the diff says
 pnpm vr --all                 # every story
@@ -21,22 +20,14 @@ Nothing leaves the machine and nothing is committed. Everything lives in `.vr/`,
 
 ## Which host
 
-`--brand` names one of the two Storybook hosts (#240): `o3` is `apps/storybook`, `o3xo` is
-`apps/storybook-o3xo`. It defaults to `o3`, so an unqualified `pnpm vr` is what it always was.
-
-The brand is not a decoration on the run — it decides which build the module graph is read from, and
-therefore which files select which stories. Storybook writes module ids relative to the host that
-built them, so `./globals.css` is `apps/storybook/globals.css` on one host and
-`apps/storybook-o3xo/globals.css` on the other; a change to one host's `preview.ts` or `globals.css`
-selects every story on **that** host and nothing on the other. The shared packages sit under both, so
-editing `packages/ui/src/components/stat.tsx` selects the `Stat` stories on either — under O3's
-tokens or O3XO's, depending which brand you asked for.
-
-A change to `packages/story-kit` reaches everything on both hosts, because each host's `preview.ts`
-is a shell over it and the climb runs through that import.
+The run builds `apps/storybook`, and the module graph it reads comes from that build. Storybook
+writes module ids relative to the host that built them, so `./globals.css` is
+`apps/storybook/globals.css`; a change to the host's `preview.ts` or `globals.css` selects every
+story. A change to `packages/story-kit` does too, because the host's `preview.ts` is a shell over it
+and the climb runs through that import.
 
 A baseline commit older than the host has no such directory to build. That is reported rather than
-crashed: the baseline index is empty and every story on that host reads as `added`.
+crashed: the baseline index is empty and every story reads as `added`.
 
 ## What it compares
 
@@ -151,7 +142,6 @@ export cache** up to date, then captures each paired story and **scores** it aga
 
 ```
 pnpm vr --figma --list                 the inventory, read-only: no token, no network
-pnpm vr --figma --list --brand o3xo    one host and its manifest
 pnpm vr --figma                        …fetch what the cache is missing, then score every pairing
 pnpm vr --figma --story pages-home     score these stories against their frames
 ```
@@ -174,8 +164,7 @@ whole model — source text and manifests in, inventory out — and `figma-inven
 part that touches disk.
 
 A story inherits its meta's `design` unless it sets its own, the way Storybook's parameters already
-resolve. `figmaDesign`'s second argument picks the design file, so an O3XO pairing joins against
-`tracked-nodes-o3xo.json` even when the story sits in a package both hosts serve.
+resolve.
 
 ### Frame exports
 
@@ -278,9 +267,8 @@ pairing, holding the score it was accepted at, the tolerance around that score, 
 
 It is committed, sorted-key JSON — the philosophy `tools/migration/data/assets.json` and the sync
 baselines already use. Acceptance is a decision reviewed in a diff, never a prompt and never a run
-that quietly moves the bar. The key is `<host>/<story>/<design brand>/<node>/<viewport>`: both
-Storybook hosts serve the shared packages and give a shared story the same id, so the host is part
-of the pairing's identity and not a detail of the run.
+that quietly moves the bar. The key is `<host>/<story>/<design brand>/<node>/<viewport>`. Host and
+design brand are always `o3`.
 
 `unpairable` is the second map, keyed `<design brand>/<node>`. A node listed there — a pasted
 capture with cursor pixels, a `ClaudeTest` frame, #308-ruling-9 material generally — is never
@@ -361,9 +349,7 @@ an earlier run timed out on, and — under `--figma` — empties the frame expor
     report-figma/index.html  the scored report
 ```
 
-Everything that renders is under the brand, so running one host does not overwrite the other's
-report or serve it the other's build. `base/` is brand-independent by nature: the baseline checkout
-is one commit whichever host renders it.
+`<brand>` is always `o3`.
 
 Delete the whole directory to start clean; the next run rebuilds it. `git worktree prune` afterwards
 if you removed it while `.vr/base` existed.
@@ -376,5 +362,5 @@ starts cold on every ticket and dies with the worktree: that was 18,581 image re
 `cdn.sanity.io` in the week to 2026-08-26, 77% of the project's image bandwidth, all of it
 screenshots. Sharing one directory across every worktree is safe because a Sanity asset URL is
 content-addressed — the hash in the path names the bytes, the transform is in the query string, and
-the cache hashes the whole URL. It is also what keeps the second brand's first run, and a fresh
-worktree's, from re-fetching 256 images.
+the cache hashes the whole URL. It is also what keeps a fresh worktree's first run from re-fetching
+256 images.

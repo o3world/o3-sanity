@@ -7,7 +7,7 @@
  * its rules. This module only makes the roster enforceable.
  */
 
-export type Verdict = 'engine' | 'product-shared' | 'product-brand'
+export type Verdict = 'engine' | 'product'
 
 type Override = { path: string; verdict: Verdict; why: string }
 type Impurity = { where: string; what: string; fix: string }

@@ -7,7 +7,7 @@ import { hrefForDoc } from '@o3/content-runtime/urls'
 import { SanityImage } from '@o3/content-ui'
 import { CONTENT_COLUMN } from '@o3/content-ui/image-sizes'
 
-import { CaseStudyCard } from '@/components/cards/CaseStudyCard'
+import { CaseStudyCard } from '@o3/content-ui/cards'
 
 type NextCase = NonNullable<NonNullable<CASE_STUDY_QUERY_RESULT>['next']>
 

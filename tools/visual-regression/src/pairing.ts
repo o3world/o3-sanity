@@ -6,7 +6,7 @@
  * `parameters: { design: figmaDesign('1710:2609') }`, and that parameter is
  * the only place code names its frame (spec #326 → Unit). Everything here
  * reads that declaration and joins it to
- * `tools/figma-sync/data/tracked-nodes*.json`, so the later tickets in the
+ * `tools/figma-sync/data/tracked-nodes.json`, so the later tickets in the
  * chain — the frame exports, the `--figma` comparison — take their subject
  * from one model rather than each re-deriving it.
  *
@@ -33,10 +33,9 @@ export interface TrackedEntry {
 }
 
 /**
- * One brand's design file: the manifest that watches it, and the
- * `@o3/story-kit` export a story names to select it. `figmaDesign`'s second
- * argument is an identifier, not a literal, so the join runs on that
- * identifier — no file key is spelled out twice.
+ * A design file: the manifest that watches it, and the `@o3/story-kit` export
+ * that names its key. The join runs on that identifier rather than on the key
+ * itself, so no file key is spelled out twice.
  */
 export interface BrandDesignFile {
   readonly brand: Brand
@@ -60,7 +59,7 @@ export interface DeclaredPairing {
   /** Repo-relative path of the story file. */
   readonly file: string
   readonly declaredOn: DeclaredOn
-  /** The Storybook hosts that glob this file — a shared story is on both. */
+  /** The Storybook hosts that glob this file. */
   readonly hosts: readonly Brand[]
 }
 
@@ -98,13 +97,14 @@ export interface Inventory {
   readonly coverage: readonly BrandCoverage[]
 }
 
-/** `figmaDesign`'s default second argument. */
+/** The `@o3/story-kit` export whose key `figmaDesign` links to. */
 const DEFAULT_FILE_KEY_REF = 'FIGMA_FILE_KEY'
 
 /**
- * `figmaDesign('1710:2609')` or `figmaDesign('4404:1821', O3XO_FIGMA_FILE_KEY)`.
- * The node id is a string literal in every call, which is what makes the
- * declaration readable without evaluating the module.
+ * `figmaDesign('1710:2609')`. The node id is a string literal in every call,
+ * which is what makes the declaration readable without evaluating the module.
+ * A trailing identifier argument is recorded as the file it names, so a call
+ * pointing anywhere but the tracked file surfaces as untracked.
  */
 const CALL = /figmaDesign\(\s*['"]([^'"]+)['"]\s*(?:,\s*([A-Za-z_$][\w$]*)\s*)?\)/g
 
@@ -193,23 +193,18 @@ export function extractPairings(
  *
  * Coverage is reported, never gated (spec #326) — an uncovered set is a row,
  * not a failure, and the list is never capped.
- *
- * `files` is every design file the join may need; `report` is the subset the
- * run is about. The two differ under `--brand`: a shared story can name either
- * brand's file whichever host serves it, so the join has to see both even when
- * only one brand's pairings are being listed.
  */
 export function buildInventory(
   pairings: readonly DeclaredPairing[],
   files: readonly BrandDesignFile[],
-  report: readonly Brand[] = files.map((file) => file.brand),
 ): Inventory {
   const byRef = new Map(files.map((file) => [file.fileKeyRef, file]))
   const entriesByRef = new Map(
     files.map((file) => [file.fileKeyRef, new Map(file.entries.map((e) => [e.nodeId, e]))]),
   )
-  const reported = new Set<Brand>(report)
 
+  // A pairing that names no known file is kept: a mistyped identifier is
+  // exactly the thing an inventory should surface.
   const rows: PairingRow[] = pairings
     .map((pairing) => {
       const file = byRef.get(pairing.fileKeyRef) ?? null
@@ -222,10 +217,6 @@ export function buildInventory(
         route: entry?.route ?? null,
       }
     })
-    // A pairing against a design file this run does not report is out of
-    // scope, not missing. One that names no known file is kept: a mistyped
-    // identifier is exactly the thing an inventory should surface.
-    .filter((row) => row.designBrand === null || reported.has(row.designBrand))
     .sort(
       (a, b) =>
         (a.storyId ?? a.file).localeCompare(b.storyId ?? b.file) ||
@@ -243,7 +234,6 @@ export function buildInventory(
   const uncovered: UncoveredEntry[] = []
   const coverage: BrandCoverage[] = []
   for (const file of files) {
-    if (!reported.has(file.brand)) continue
     const paired = pairedNodes.get(file.brand) ?? new Set<string>()
     const sets = file.entries.filter((entry) => entry.kind === 'componentSet')
     for (const entry of sets) {

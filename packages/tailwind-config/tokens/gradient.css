@@ -138,8 +138,8 @@
    * `OrbitalSphere` for the geometry that reads those two numbers.
    *
    * A token under (c): used once, so the recurrence rule alone would leave it a
-   * call-site literal, but it carries the brand red and a custom property is
-   * the only thing a second brand can re-point.
+   * call-site literal, but it carries the brand red, which belongs in the
+   * token package.
    */
   --gradient-sphere-bloom: radial-gradient(
     closest-side circle at 50% 50%,

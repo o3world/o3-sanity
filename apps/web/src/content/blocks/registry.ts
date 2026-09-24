@@ -1,9 +1,10 @@
 import type { ComponentType } from 'react'
 
 import { bindingsToRecord, type LayoutItem, type PageSection } from '@o3/content-runtime/blocks'
-import type { BrandSectionBlockName } from '@o3/sanity/schemas/registry'
 
-import { BASE_CLIENT_COMPONENTS, CLIENT_SECTION_BINDINGS } from './clientComponents'
+import { BASE_BLOCK_COMPONENTS } from '@o3/content-ui'
+
+import { CLIENT_SECTION_BINDINGS } from './clientComponents'
 
 /**
  * Union of every block the renderer can dispatch — base + section, sourced
@@ -15,14 +16,7 @@ import { BASE_CLIENT_COMPONENTS, CLIENT_SECTION_BINDINGS } from './clientCompone
  * The renderer is context-agnostic; placement constraints (which tier goes
  * where) are enforced at the schema layer.
  */
-/**
- * The generated section union NARROWED TO THIS BRAND'S ROSTER (ADR 0028).
- * Typegen is one file over the whole content model, so `PageSection` holds
- * every brand's blocks; the roster is what says which of them this app has to
- * render, and the `satisfies` clause below is where the answer is checked.
- */
-export type DispatchedBlock =
-  Extract<PageSection, { _type: BrandSectionBlockName<'o3'> }> | LayoutItem
+export type DispatchedBlock = PageSection | LayoutItem
 export type DispatchedBlockType = DispatchedBlock['_type']
 
 type BlockComponentSlot<K extends DispatchedBlockType> = ComponentType<
@@ -30,11 +24,10 @@ type BlockComponentSlot<K extends DispatchedBlockType> = ComponentType<
 >
 
 const BLOCK_MAP = {
-  // Base blocks — this app's roster: the shared table plus the app-first
-  // renderers it binds itself. Widening BaseBlockName forces a typecheck error
-  // there if one is missing; this satisfies clause then checks each
+  // Base blocks — the shared table. Widening BaseBlockName forces a typecheck
+  // error there if one is missing; this satisfies clause then checks each
   // component's props against the generated block shape.
-  ...BASE_CLIENT_COMPONENTS,
+  ...BASE_BLOCK_COMPONENTS,
   // Section blocks — shared with ClientBlockRenderer's BLOCK_COMPONENTS
   // (clientComponents.ts). Server-only overrides would spread after this
   // (later keys win); none exist today.

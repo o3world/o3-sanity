@@ -7,9 +7,8 @@ import { serverEnv } from '@o3/env/server'
  * The contact form's submission path: the browser posts here, HubSpot takes it
  * from there.
  *
- * Everything but the brand lives in `@o3/content-ui/inquiry` — parsing,
- * validation, the spam checks, the payload and the answer — so this app and
- * o3xo enforce the same rules. What is this route's own is the page's name.
+ * Everything but the page's name lives in `@o3/content-ui/inquiry` — parsing,
+ * validation, the spam checks, the payload and the answer.
  */
 
 /** How this page identifies itself in HubSpot's submission list. */

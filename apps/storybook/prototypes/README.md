@@ -79,8 +79,7 @@ thing about one two years from now.
 This host's `.storybook/main.ts` names this directory, and the story-kit config
 builder mounts every directory inside it that contains an `index.html` at
 `/prototypes/<dir>` and globs it for stories. There is no registry to update —
-the directory _is_ the registry. **Only the O3 host mounts it**: the captured
-artifacts are O3's history, so the O3XO host does not name this directory.
+the directory _is_ the registry.
 
 ## Adding one
 

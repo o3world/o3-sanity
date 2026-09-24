@@ -3,7 +3,6 @@ import { dirname, join, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { ASSET_DIR } from './asset-manifest'
-import { brandFiles, DEFAULT_BRAND, type Brand } from './brands'
 
 import type { AssetManifest, Baseline, Report, TrackedManifest } from './types'
 
@@ -15,17 +14,19 @@ export const REPO_ROOT = join(ROOT, '..', '..')
 /** Where `pnpm env:pull` puts the dev environment, FIGMA_API_KEY included. */
 export const WEB_ENV_LOCAL = join(REPO_ROOT, 'apps', 'web', '.env.local')
 
-/** The four (or three) committed files a brand's run reads and writes. */
-export function dataPaths(brand: Brand = DEFAULT_BRAND) {
-  const files = brandFiles(brand)
-  return {
-    trackedNodes: join(DATA, files.trackedNodes),
-    assetManifest: files.assetManifest ? join(DATA, files.assetManifest) : null,
-    baseline: join(DATA, files.baseline),
-    reportJson: join(DATA, files.reportJson),
-    reportMd: join(DATA, files.reportMd),
-  }
-}
+/**
+ * The committed files a run reads and writes: the two hand-maintained
+ * manifests (what to watch, where every seed asset came from), the baseline
+ * that makes the next run cheap, and the report of the last run with
+ * something to say.
+ */
+export const DATA_PATHS = {
+  trackedNodes: join(DATA, 'tracked-nodes.json'),
+  assetManifest: join(DATA, 'asset-manifest.json'),
+  baseline: join(DATA, 'baseline.json'),
+  reportJson: join(DATA, 'report.json'),
+  reportMd: join(DATA, 'report.md'),
+} as const
 
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(path, 'utf8')) as T
@@ -36,19 +37,12 @@ function writeJson(path: string, value: unknown): void {
   writeFileSync(path, JSON.stringify(value, null, 2) + '\n')
 }
 
-export function readManifest(brand: Brand = DEFAULT_BRAND): TrackedManifest {
-  return readJson<TrackedManifest>(dataPaths(brand).trackedNodes)
+export function readManifest(): TrackedManifest {
+  return readJson<TrackedManifest>(DATA_PATHS.trackedNodes)
 }
 
-/**
- * A brand with no asset manifest gets an empty one keyed to its own file, so
- * the asset stage plans nothing, calls nothing and writes nothing — the same
- * path an O3 run takes when no source node moved.
- */
-export function readAssetManifest(brand: Brand = DEFAULT_BRAND): AssetManifest {
-  const path = dataPaths(brand).assetManifest
-  if (!path) return { fileKey: readManifest(brand).fileKey, assets: [] }
-  return readJson<AssetManifest>(path)
+export function readAssetManifest(): AssetManifest {
+  return readJson<AssetManifest>(DATA_PATHS.assetManifest)
 }
 
 /**
@@ -81,18 +75,17 @@ export function writeSeedAsset(path: string, bytes: Uint8Array): void {
 }
 
 /** `null` on the first run — no baseline is not an error. */
-export function readBaseline(brand: Brand = DEFAULT_BRAND): Baseline | null {
-  const path = dataPaths(brand).baseline
+export function readBaseline(): Baseline | null {
+  const path = DATA_PATHS.baseline
   return existsSync(path) ? readJson<Baseline>(path) : null
 }
 
-export function writeBaseline(baseline: Baseline, brand: Brand = DEFAULT_BRAND): void {
-  writeJson(dataPaths(brand).baseline, baseline)
+export function writeBaseline(baseline: Baseline): void {
+  writeJson(DATA_PATHS.baseline, baseline)
 }
 
-export function writeReport(report: Report, markdown: string, brand: Brand = DEFAULT_BRAND): void {
-  const paths = dataPaths(brand)
+export function writeReport(report: Report, markdown: string): void {
   // `writeJson` has already made `data/` — both files live in it.
-  writeJson(paths.reportJson, report)
-  writeFileSync(paths.reportMd, markdown)
+  writeJson(DATA_PATHS.reportJson, report)
+  writeFileSync(DATA_PATHS.reportMd, markdown)
 }

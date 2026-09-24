@@ -21,9 +21,10 @@ The block renderers, the site chrome and the cards are `@o3/content-ui`; the
 route builders and the dispatch loop are `@o3/content-runtime`. This app keeps
 the halves that are its own: `src/content/blocks/` (its registry binding and
 the three dispatchers that read it), `src/content/documents/` (route entries
-and document views), and `src/app/` (the routes). Adding a block to this app is
-a line in `clientComponents.ts`, not a file here — see
-[ADR 0028](../../docs/adr/0028-o3xo-is-a-second-app-in-the-monorepo.md).
+and document views), and `src/app/` (the routes). Adding a shared block to this app is
+a line in `clientComponents.tsx`, not a file here. A renderer lives in this app
+only when it needs something only the app has — see "Where a component lives"
+in [`AGENTS.md`](../../AGENTS.md).
 
 ## Gotchas
 

@@ -5,16 +5,10 @@ import { expect, waitFor, within } from 'storybook/test'
 import { CaseShowcaseSection } from '@o3/content-ui'
 import { seededSectionArgs } from '@o3/content-ui/testing/seed'
 
-import { CARD_COMPONENTS, SECTION_CLIENT_COMPONENTS } from './clientComponents'
+import { SECTION_CLIENT_COMPONENTS } from './clientComponents'
 
 /**
- * The Home frame's "Case Studies" band (`1683:2656`), drawing O3's card.
- *
- * **The brand is pinned**, and the story is this app's rather than the shared
- * package's, for the same reason: `caseStudy` is app-first
- * (`APP_FIRST_RENDERERS`), so the band's cards slot only has an answer inside
- * an app. O3XO's own composition is covered by its card's story and the
- * showcase render test in `apps/o3xo`.
+ * The Home frame's "Case Studies" band (`1683:2656`).
  *
  * The band is one flat `neutral/black` band padded `64px 96px`, and that is
  * the thing to look at first: the cards are photographs behind their own
@@ -33,8 +27,6 @@ import { CARD_COMPONENTS, SECTION_CLIENT_COMPONENTS } from './clientComponents'
 const meta = {
   title: 'Content/Blocks/Section/CaseShowcaseSection',
   component: CaseShowcaseSection,
-  globals: { brand: 'o3' },
-  args: { cardComponents: CARD_COMPONENTS },
   parameters: {
     layout: 'fullscreen',
     design: figmaDesign('1683:2656'),

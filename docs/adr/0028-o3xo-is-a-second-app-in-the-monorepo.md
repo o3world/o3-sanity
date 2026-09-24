@@ -1,5 +1,7 @@
 # 0028. O3XO is a second app in the monorepo
 
+Status: superseded 2026-09-24 by #490; the o3xo app is deleted.
+
 - **Status:** Accepted; first-step sequencing amended 2026-08-19 (see Addendum); the experiment superseded by kit parity later the same day (see second Addendum); the one-model-one-home clause superseded by ADR 0029 (2026-08-21)
 - **Date:** 2026-08-19
 - **Deciders:** NickO3 + Claude

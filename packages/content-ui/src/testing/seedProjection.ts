@@ -3,7 +3,7 @@
  *
  * A committed seed under `tools/migration/data/` is the **un-projected** form:
  * `slug` is an object, references are `{_ref}`, and images carry a `_wpSrc` /
- * `_localSrc` marker where `load` will put an asset reference. A renderer
+ * `_localSrc` marker where the migration pipeline puts an asset reference. A renderer
  * receives the projected form. Anything that wants to render committed JSON
  * without a dataset therefore has to apply the same projections GROQ does —
  * and two layers want to:
@@ -34,10 +34,10 @@ export type AssetIdFor = (source: string) => string
 export type ResolveRef = (ref: unknown) => SeedDoc | null
 
 /**
- * Every marker a committed document can carry, in `load.ts`'s own order:
- * `_wpSrc` is a WordPress upload URL, `_srcUrl` a URL on any other source site
- * (o3xo.ai's Framer assets), `_localSrc` a repo-relative file committed beside
- * its seed. Where the bytes come from is `load`'s problem; here they are three
+ * Every marker a committed document can carry, in the migration pipeline's order:
+ * `_wpSrc` is a WordPress upload URL, `_srcUrl` a URL on any other source site,
+ * `_localSrc` a repo-relative file committed beside
+ * its seed. Where the bytes come from is the migration pipeline's problem; here they are three
  * spellings of "an asset reference goes here".
  */
 const MARKERS = ['_wpSrc', '_srcUrl', '_localSrc'] as const

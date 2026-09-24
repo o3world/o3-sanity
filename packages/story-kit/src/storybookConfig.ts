@@ -13,7 +13,7 @@ export interface StorybookHostOptions {
   configDir: string
   /**
    * Repo-relative story roots this host globs on top of the shared packages —
-   * the app whose brand the host paints in.
+   * the app it serves.
    */
   appStoryRoots?: readonly string[]
   /**
@@ -27,10 +27,9 @@ export interface StorybookHostOptions {
  * The `.storybook/main.ts` of every Storybook host in this repo.
  *
  * A host is a thin shell: it names its story roots, its prototypes if it has
- * any, and nothing else (ADR 0028). Everything a Storybook host here needs to
- * survive — the React pinning below, the prototype mounts, the `'use client'`
- * warning floor — is the same in both, so it lives here rather than being
- * copied into a second config that then drifts.
+ * any, and nothing else. Everything a Storybook host here needs to survive —
+ * the React pinning below, the prototype mounts, the `'use client'` warning
+ * floor — lives here, so the host config stays a thin shell.
  */
 export function defineStorybookConfig({
   configDir,

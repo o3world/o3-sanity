@@ -1,20 +1,14 @@
-import { createElement } from 'react'
-
-import type { Brand } from '@o3/sanity/brand'
 import type { Preview } from '@storybook/nextjs-vite'
 import type { ViewportParameters } from 'storybook/viewport'
 
 export interface StorybookPreviewOptions {
-  /** The brand this host paints in until a story or the toolbar says otherwise. */
-  brand: Brand
   /**
    * Merged over the parameters below. **The sidebar order has to arrive this
    * way**: Storybook reads `parameters.options.storySort` by parsing the host's
    * `preview.ts` with babel and walking the first argument of the exported
    * call, so an order this builder supplies — or one the host imports from a
    * constant — is invisible to it and the index comes out in file order. Spell
-   * the array inline in the host, which is also where it belongs: the two
-   * hosts have different sidebars.
+   * the array inline in the host, which is also where it belongs.
    */
   parameters?: Preview['parameters']
 }
@@ -22,46 +16,12 @@ export interface StorybookPreviewOptions {
 /**
  * The `.storybook/preview.ts` of every Storybook host in this repo.
  *
- * The host supplies three things and nothing else: its own `globals.css`
+ * The host supplies two things and nothing else: its own `globals.css`
  * (which it imports for the side effect, so the sources Tailwind scans stay
- * the host's business), the brand it defaults to, and its sidebar order.
- *
- * **The Brand toolbar is on every host, and it is a test.** A shared-package
- * story flipped to the other brand must repaint and nothing more; anything
- * that survives the flip is paint leaking out of a token role (ADR 0028). A
- * story that pins `globals: { brand }` — every app-local story, which belongs
- * to exactly one brand — disables the control for itself, which is how the
- * toolbar stays a live question only where the answer is open.
+ * the host's business) and its sidebar order.
  */
-export function defineStorybookPreview({
-  brand,
-  parameters = {},
-}: StorybookPreviewOptions): Preview {
+export function defineStorybookPreview({ parameters = {} }: StorybookPreviewOptions = {}): Preview {
   return {
-    // Brand rides on <html data-brand>, where @o3/tailwind-config-o3xo
-    // re-points the theme's custom properties — the documentElement rather
-    // than a wrapper div, so portalled content (Sheet, dialogs) is themed
-    // too. Idempotent per render.
-    decorators: [
-      (Story, context) => {
-        document.documentElement.dataset.brand = String(context.globals.brand ?? brand)
-        return createElement(Story)
-      },
-    ],
-    globalTypes: {
-      brand: {
-        description: 'Brand token set',
-        toolbar: {
-          title: 'Brand',
-          icon: 'paintbrush',
-          items: [
-            { value: 'o3', title: 'O3' },
-            { value: 'o3xo', title: 'O3XO' },
-          ],
-          dynamicTitle: true,
-        },
-      },
-    },
     parameters: {
       /**
        * Every story is axe-scanned when the `stories` layer runs (ADR 0004), and
@@ -95,8 +55,8 @@ export function defineStorybookPreview({
       } satisfies ViewportParameters['viewport'],
       // The three-surface system as a toolbar: stories set
       // `globals: { backgrounds: { value: 'ink' } }` to pin a surface.
-      // Values are var() so the surface follows whichever brand token set the
-      // Brand toolbar has active, instead of duplicating one brand's hexes.
+      // Values are var() so the surface follows the token set instead of
+      // duplicating its hexes.
       backgrounds: {
         options: {
           white: { name: 'White', value: 'var(--color-white)' },
@@ -110,7 +70,6 @@ export function defineStorybookPreview({
     },
     initialGlobals: {
       backgrounds: { value: 'white' },
-      brand,
     },
   }
 }

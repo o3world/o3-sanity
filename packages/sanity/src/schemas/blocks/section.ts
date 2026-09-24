@@ -7,7 +7,6 @@ import { blockArrayMembers, BLOCK_ARRAYS } from './registry'
 import { PAGE_TYPES } from '../../constants'
 import { caseShowcaseSectionKnobs } from '../../knobs/caseShowcaseSection'
 import { ctaSectionKnobs } from '../../knobs/ctaSection'
-import { faqSectionKnobs } from '../../knobs/faqSection'
 import { featureGridSectionKnobs, featureKnobs } from '../../knobs/featureGridSection'
 import { formSectionKnobs } from '../../knobs/formSection'
 import { heroSectionKnobs } from '../../knobs/heroSection'
@@ -265,7 +264,7 @@ export const quoteSection = defineSectionBlock({
       name: 'eyebrow',
       type: 'string',
       description:
-        'The label over the quote — "Trusted by leading organizations". O3XO draws it as the kit’s pill (`4414:8100`); O3’s band draws no label above a quote and leaves this empty.',
+        'The label over the quote — "Trusted by leading organizations". The band draws no label above a quote, so this is left empty.',
     }),
     defineField({ name: 'quote', type: 'text', rows: 4, validation: (rule) => rule.required() }),
     defineField({
@@ -704,9 +703,6 @@ export const layoutSection = defineSectionBlock({
       // spent three files finding out about. `mark` arrives through it, which
       // is why the column's picker says "Mark" rather than "Orb": a member
       // title here would be the one hand-kept fact in a derived list.
-      //
-      // The model's own arrays, and not a brand's: the base tier is one list
-      // for both brands, so every roster answers this key identically.
       of: blockArrayMembers('layoutSection.items', BLOCK_ARRAYS).map((member) =>
         defineArrayMember(member),
       ),
@@ -830,16 +826,6 @@ export const listingSection = defineSectionBlock({
 })
 
 /**
- * O3XO's alone (ADR 0028): the kit draws an FAQ accordion (`4406:7288`) and
- * O3's design file has no band like it. `surface` is declared in
- * `src/knobs/faqSection.ts`; everything here is editorial.
- *
- * A row is `heading` + `body`, the pair `panel` and `feature` already use for
- * "the item's own title, and the prose under it" — a question is a heading that
- * happens to end in a question mark, and inventing `question` / `answer` fields
- * would put two more synonyms in the lexicon for concepts it already names.
- */
-/**
  * Figures as a band — `1883:3565`'s stat vocabulary, the large value over its
  * label, in the two shapes the `layout` knob names.
  *
@@ -869,50 +855,4 @@ export const statsSection = defineSectionBlock({
     }),
   ],
   preview: { select: { title: 'stats.0.value', subtitle: 'stats.0.label' } },
-})
-
-export const faqSection = defineSectionBlock({
-  name: 'faqSection',
-  description:
-    'The objections a reader is holding, answered in their own words — one heading, a standfirst, and a column of questions that open. Reach for it late on a page that has already made its case, where the remaining obstacle is doubt rather than ignorance. Every row starts closed, so nothing here can be the first time a reader meets an idea.',
-  title: 'FAQ',
-  knobs: faqSectionKnobs,
-  fields: [
-    defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
-    defineField({
-      name: 'subheading',
-      type: 'text',
-      rows: 2,
-      description: 'The standfirst under the heading — what this set of questions is about.',
-    }),
-    defineField({
-      name: 'questions',
-      type: 'array',
-      validation: (rule) => rule.required().min(1),
-      of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'question',
-          fields: [
-            defineField({
-              name: 'heading',
-              type: 'string',
-              description: 'The question, as a reader would ask it.',
-              validation: (rule) => rule.required(),
-            }),
-            defineField({
-              name: 'body',
-              type: 'text',
-              rows: 4,
-              description:
-                'The answer. One paragraph — a row that opens onto an essay is one nobody reads.',
-              validation: (rule) => rule.required(),
-            }),
-          ],
-          preview: { select: { title: 'heading', subtitle: 'body' } },
-        }),
-      ],
-    }),
-  ],
-  preview: { select: { title: 'heading' } },
 })

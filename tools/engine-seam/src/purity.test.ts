@@ -58,7 +58,7 @@ describe('the closed roster', () => {
       rows: [
         {
           path: 'packages/a',
-          verdict: 'product-shared',
+          verdict: 'product',
           why: '',
           overrides: [{ path: 'src/gone.ts', verdict: 'engine', why: '' }],
         },
@@ -79,13 +79,13 @@ describe('a file’s verdict', () => {
       { path: 'packages/machine', verdict: 'engine', why: '' },
       {
         path: 'packages/model',
-        verdict: 'product-shared',
+        verdict: 'product',
         why: '',
         overrides: [{ path: 'src/pure.ts', verdict: 'engine', why: '' }],
       },
       {
         path: 'tools/pipeline',
-        verdict: 'product-shared',
+        verdict: 'product',
         why: '',
         overrides: [{ path: 'src/core', verdict: 'engine', why: '' }],
       },
@@ -94,7 +94,7 @@ describe('a file’s verdict', () => {
 
   it('is the workspace row’s by default', () => {
     expect(verdictOf(declared, 'packages/machine/src/anything.ts')).toBe('engine')
-    expect(verdictOf(declared, 'packages/model/src/schema.ts')).toBe('product-shared')
+    expect(verdictOf(declared, 'packages/model/src/schema.ts')).toBe('product')
   })
 
   it('is the override’s for a path the override names, file or directory', () => {
@@ -103,8 +103,8 @@ describe('a file’s verdict', () => {
   })
 
   it('does not let one path prefix another’s name', () => {
-    expect(verdictOf(declared, 'packages/model/src/pure.test.ts')).toBe('product-shared')
-    expect(verdictOf(declared, 'tools/pipeline/src/core-adjacent.ts')).toBe('product-shared')
+    expect(verdictOf(declared, 'packages/model/src/pure.test.ts')).toBe('product')
+    expect(verdictOf(declared, 'tools/pipeline/src/core-adjacent.ts')).toBe('product')
   })
 
   it('is null outside every row', () => {
@@ -211,13 +211,13 @@ describe('engine purity over the import graph', () => {
         path: 'packages/machine',
         verdict: 'engine',
         why: '',
-        overrides: [{ path: 'src/fixtures.ts', verdict: 'product-shared', why: '' }],
+        overrides: [{ path: 'src/fixtures.ts', verdict: 'product', why: '' }],
         impurities: [
           { where: 'src/leaky.ts (KNOWN)', what: 'A known leak.', fix: 'Parameterize.' },
         ],
       },
-      { path: 'packages/model', verdict: 'product-shared', why: '' },
-      { path: 'apps/site', verdict: 'product-brand', why: '' },
+      { path: 'packages/model', verdict: 'product', why: '' },
+      { path: 'apps/site', verdict: 'product', why: '' },
     ],
   }
   const packages: WorkspacePackage[] = [
@@ -248,19 +248,19 @@ describe('engine purity over the import graph', () => {
         file: 'packages/machine/src/app-reach.ts',
         specifier: '../../../apps/site/src/route',
         target: 'apps/site/src/route.ts',
-        targetVerdict: 'product-brand',
+        targetVerdict: 'product',
       },
       {
         file: 'packages/machine/src/barrel.ts',
         specifier: './fixtures',
         target: 'packages/machine/src/fixtures.ts',
-        targetVerdict: 'product-shared',
+        targetVerdict: 'product',
       },
       {
         file: 'packages/machine/src/leaky.ts',
         specifier: '@o3/model',
         target: 'packages/model/src/index.ts',
-        targetVerdict: 'product-shared',
+        targetVerdict: 'product',
       },
     ])
   })
@@ -423,11 +423,7 @@ describe('engine purity against the repo', () => {
   const imports = partitionPermitted(declared, importViolations(declared, sources, packages))
   const dependencies = partitionPermitted(declared, dependencyViolations(declared, packages))
 
-  const vocabulary = colorVocabulary(
-    ['tailwind-config', 'tailwind-config-o3xo'].flatMap((pkg) =>
-      sourceCss(join(REPO, 'packages', pkg)),
-    ),
-  )
+  const vocabulary = colorVocabulary(sourceCss(join(REPO, 'packages', 'tailwind-config')))
   const tokens = partitionPermitted(
     declared,
     [...sources]
@@ -501,9 +497,9 @@ describe('engine purity against the repo', () => {
 describe('the browser knob entry against the repo', () => {
   /**
    * `@o3/sanity/knobs` is consumed in the site bundle — PresentationOverlay
-   * and optimisticOrder in both apps read `BLOCK_KNOBS` in the browser — so
-   * every module the entry reaches ships to the client (#288). The brand
-   * FACTS table (both brands' project ids, domains, prefixes) may not be in
+   * and optimisticOrder read `BLOCK_KNOBS` in the browser — so every module
+   * the entry reaches ships to the client (#288). The brand FACTS table
+   * (project id, domain, prefixes) may not be in
    * that set, and neither may a `process.env` read: importing the knob
    * vocabulary stays side-effect-free, and brand facts are resolved only
    * where something asks for them.
@@ -541,7 +537,7 @@ describe('engine purity over declared dependencies', () => {
         ],
       },
       { path: 'packages/other-machine', verdict: 'engine', why: '' },
-      { path: 'packages/model', verdict: 'product-shared', why: '' },
+      { path: 'packages/model', verdict: 'product', why: '' },
     ],
   }
   const packages = (deps: Record<string, string[]>): WorkspacePackage[] =>
@@ -559,7 +555,7 @@ describe('engine purity over declared dependencies', () => {
         file: 'packages/other-machine/package.json',
         specifier: '@o3/model',
         target: 'packages/model',
-        targetVerdict: 'product-shared',
+        targetVerdict: 'product',
       },
     ])
   })
@@ -578,7 +574,7 @@ describe('engine purity over declared dependencies', () => {
 
   it('does not permit a second product dependency through the same entry', () => {
     const extended: Roster = {
-      rows: [...declared.rows, { path: 'packages/model-two', verdict: 'product-shared', why: '' }],
+      rows: [...declared.rows, { path: 'packages/model-two', verdict: 'product', why: '' }],
     }
     const found = dependencyViolations(extended, [
       ...packages({ '@o3/machine': ['@o3/model', '@o3/model-two'] }),
@@ -593,14 +589,14 @@ describe('brand facts in engine code', () => {
   const vocabulary = () =>
     colorVocabulary([
       '@theme { --color-ink: #0a0a0b; --color-bone: #f5f1ea; --color-white: #ffffff; --color-black: #000000; }',
-      ":root[data-brand='o3xo'] { --color-accent: #ffbe00; --gradient-xo-plate: linear-gradient(180deg, #ffbe00 0%, #000000 100%); }",
+      ':root { --color-accent: #ffbe00; --gradient-plate: linear-gradient(180deg, #ffbe00 0%, #000000 100%); }',
     ])
 
   it.each([
     ['a colour utility class', '<div className="bg-ink px-2" />'],
     ['a variant-prefixed utility', '<div className="hover:text-bone" />'],
     ['the custom property by name', "const s = { color: 'var(--color-accent)' }"],
-    ['a gradient property class', '<div className="bg-(image:--gradient-xo-plate)" />'],
+    ['a gradient property class', '<div className="bg-(image:--gradient-plate)" />'],
     ['a declared hex pasted in place of the token', '<circle fill="#F5F1EA" />'],
   ])('is an offence written as %s', (_written, source) => {
     expect(tokenOffences(source, vocabulary())).toHaveLength(1)

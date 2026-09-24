@@ -70,7 +70,7 @@ export function CaseStudyHero({
        * Two arbitrary gradients rather than one `--gradient-*` token: the two
        * frames differ only in that stop, and a gradient custom property cannot
        * take a stop from the call site. The COLOUR still comes from the token,
-       * so the wash is each brand's own darkest ink.
+       * so the wash is the palette's own darkest ink.
        */}
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,var(--color-ink-deep)_34%,transparent_100%)] lg:bg-[linear-gradient(0deg,var(--color-ink-deep)_15%,transparent_100%)]" />
 

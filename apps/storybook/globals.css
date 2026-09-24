@@ -1,10 +1,5 @@
 @import 'tailwindcss';
 @import '@o3/tailwind-config/theme.css';
-/* The second brand's paint: re-points the theme's custom properties under
- * [data-brand='o3xo'], which the Brand toolbar (preview.ts) sets on <html>.
- * Storybook is the one host that loads both packages — it is a two-brand
- * host, and the toolbar is the standing paint-leak test (ADR 0028). */
-@import '@o3/tailwind-config-o3xo/theme.css';
 
 /* preview.ts imports Fontsource directly so Vite bundles its relative font
  * assets before Tailwind processes this stylesheet. The website uses

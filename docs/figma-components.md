@@ -12,10 +12,6 @@ machine-readable half of this document (#79). `pnpm figma:sync` hashes each set 
 one changed and what code it routes to. **Edit both halves together**: a row added here without a
 manifest entry is a set nothing is watching.
 
-o3xo answers to a different file. Its half of the map is
-[`docs/figma-components-o3xo.md`](./figma-components-o3xo.md), watched by
-`pnpm figma:sync --brand o3xo` (#242).
-
 ## The rule
 
 **One Figma variant axis → one `cva` variants key** (ADR 0008). Figma's value
@@ -65,7 +61,7 @@ Verified by direct reads of the canonical frames, or recorded in
 | `CTA`                             | `2177:1354` | Device = Desktop \| Mobile                         | `CtaSection` (`blocks/section/ctaSection`)                           | ✅ #163 — the band-level sets, below                                                                            |
 | `Interior Hero`                   | `2107:1051` | Device = Desktop \| Mobile; Surface = Ink \| White | `CollectionHero variant="interior"` (`ui/collection-hero.tsx`)       | ✅ #311 — surface axis, optional rail, picture slot; below                                                      |
 | `Blog`                            | `2205:1146` | Property 1 = Default \| Mobile                     | `InsightsCarouselSection` (`blocks/section/insightsCarouselSection`) | ✅ #163                                                                                                         |
-| `Case Study Card`                 | `2089:4169` | Variant = Caron \| Ironman \| Vertex               | `CaseStudyCard` (`apps/web/src/components/cards`)                    | ✅ #302, tree confirmed #314 — the axis is **content, not design**: no `cva` key, below                         |
+| `Case Study Card`                 | `2089:4169` | Variant = Caron \| Ironman \| Vertex               | `CaseStudyCard` (`content-ui/cards`)                                 | ✅ #302, tree confirmed #314 — the axis is **content, not design**: no `cva` key, below                         |
 | `Services` (component, not a set) | `2846:5637` | —                                                  | `PanelTrack` (`blocks/section/railPanelsSection`)                    | ✅ #305 — one column of the sideways track; two bands instance it, below                                        |
 | `Quote`                           | `2748:4672` | Device = Device3 \| Mobile                         | `QuoteSection` (`blocks/section/quoteSection`)                       | ✅ #323 — a fourth band-level set; `Device3` is the desktop value under a default name, below                   |
 
@@ -368,7 +364,7 @@ Every component in the package, against the Figma library.
 | `MenuIcon`       | **Has counterpart** — `1814:1636` (drawn, not a set) | Added #41. Two bars, per the frame                                                                                                                                           |
 | `CloseIcon`      | **Has counterpart** — `close` glyph                  | Added #41 (ADR 0009)                                                                                                                                                         |
 | `Sheet`          | **Code-only** — shadcn                               | Added #41 for the 402 nav; the panel has no frame (ADR 0006)                                                                                                                 |
-| `Card`           | **Code-only**                                        | shadcn's box. The case-study card is its own set (`2089:4169`) and each brand draws its own renderer for it                                                                  |
+| `Card`           | **Code-only**                                        | shadcn's box. The case-study card is its own set (`2089:4169`), drawn by `CaseStudyCard` in `packages/content-ui`                                                            |
 | `SectionShell`   | **Code-only**                                        | The three-surface organism; ADR 0008 — shadcn cannot model it                                                                                                                |
 | `ArrowIcon`      | **Has counterpart** — `.building block Icon_text`    | Glyph becomes a component, not a string prop (ADR 0009)                                                                                                                      |
 | `ArrowLink`      | **Retired** in #55                                   | No Figma equivalent; the frames use `Button / Ghost` for this job, and #42 built every text CTA that way — so it ended with no call site and was deleted                     |

@@ -57,12 +57,11 @@ pnpm dataset:sync       # that backup, then import into development with --repla
 pnpm dataset:drift      # which pipeline-owned documents an editor changed (exit 1 on drift)
 ```
 
-- **`load` refuses `production`.** Without `--allow-production` it prints a
-  refusal and exits — a load deletes and recreates every unlocked
-  pipeline-owned document and clears any draft shadowing one, which now means
-  destroying editors' work. Run `dataset:drift` and `dataset:backup` before
-  passing the flag, and expect the drifted documents to be locked, not
-  overwritten.
+- **`load` refuses, in every dataset.** It prints a refusal and exits
+  non-zero, with no flag. A load deletes and recreates every unlocked
+  pipeline-owned document and clears any draft shadowing one, which means
+  destroying editors' work. A dataset change is a targeted migration instead
+  (AGENTS.md → "Changing a dataset").
 - **`dataset:sync` never deletes.** `--replace` overwrites a document that
   exists in both datasets with production's copy and leaves
   development-only documents (briefs, experiments) alone. It creates and drops
@@ -73,15 +72,14 @@ pnpm dataset:drift      # which pipeline-owned documents an editor changed (exit
 --replace` from `tools/migration`.
 - **A drifted document gets locked, not reloaded.**
   `pnpm --filter @o3/migration drift -- --lock` stamps `migration.locked` on
-  every drifted document, and `load` skips a locked document in any mode
-  (ADR 0003). To hand one back to the pipeline: port the edit into
+  every drifted document, and the pipeline never replaces a locked document
+  from outside it (ADR 0003). To hand one back to the pipeline: port the edit into
   `tools/migration/data/`, then unset the lock.
 
 ## Rebuilding a dataset from scratch
 
-**You cannot, for o3, and that is deliberate** (2026-09-03). `load` refuses the
-brand outright, in every dataset, with no flag —
-`tools/migration/src/lib/loadRetired.ts` carries the reasoning. There is no
+**You cannot, and that is deliberate.** `load` refuses in every dataset, with
+no flag — `tools/migration/src/load.ts` carries the reasoning. There is no
 scratch dataset left to rebuild into: `development` mirrors `production` via
 `pnpm dataset:sync`, and both hold content no committed JSON knows about.
 
@@ -95,10 +93,6 @@ pnpm dataset:sync                        # production → development
 pnpm --filter @o3/migration verify       # read-only: is the dataset what data/ says it is?
 ```
 
-o3xo is unaffected — its only dataset holds nothing but the pipeline's output,
-so a rebuild there is still `pnpm --filter @o3/migration load -- --brand o3xo
---allow-production`.
-
 `pnpm dataset` with no argument prints which dataset each entry point is
 pointed at. It rewrites four gitignored `.env.local` files at once — web app,
 typegen, migration, guidance — because the loader resolves its dataset
@@ -106,7 +100,7 @@ independently of the web app, and the two silently disagreeing is what once
 sent every load to production.
 
 The extract and convert halves still run — they write files, not documents —
-but for o3 the chain now ends at the corpus rather than at the dataset:
+but the chain ends at the corpus rather than at the dataset:
 
 ```bash
 pnpm --filter @o3/migration extract      # WordPress → data/extract/
@@ -125,10 +119,9 @@ pnpm wt new <n>               # claim a ticket, branch it, worktree it, install
 
 pnpm dataset:backup           # export production to a local tarball
 pnpm dataset:sync             # production → development (backup first, no deletes)
-pnpm dataset:drift            # what an editor changed that the next load would revert
+pnpm dataset:drift            # which pipeline-owned documents an editor changed
 
-pnpm dev:web                  # the o3 site
-pnpm dev:o3xo                 # the o3xo site (its own port pool, its own project)
+pnpm dev:web                  # the site
 pnpm storybook                # the component library
 pnpm down                     # stop what dev started
 
@@ -140,70 +133,31 @@ pnpm typegen                  # schema.json + generated types, after a schema ed
 pnpm brief:sync               # brief markdown → brief documents
 pnpm brief:check              # fails if a file-backed brief drifted
 pnpm brief:export             # a dataset-born brief becomes a file in the repo
-pnpm schema:deploy            # deploy this brand's roster so get_schema sees it
+pnpm schema:deploy            # deploy the schema so get_schema sees it
 pnpm schema:check             # fails if the deployed schema drifted (a CI gate — see below)
 pnpm figma:sync               # what changed in the design file since last sync
 pnpm skill:lint               # validate the o3sanity plugin's five skill files
 pnpm env:pull                 # restore apps/web/.env.local from Vercel
 ```
 
-## Deployments: two apps, two Vercel projects, one repo
+## Deployments: two Vercel projects, one repo
 
-Both brands deploy from this repository, each from its own Vercel project on the
-`o3-world` team, so an O3XO deploy never costs an O3 build (#216, spec #209).
+The site and Storybook deploy from this repository, each from its own Vercel
+project on the `o3-world` team.
 
-| Project               | Root directory | Branch that is production | What triggers a build                            | What gates it                                                          |
-| --------------------- | -------------- | ------------------------- | ------------------------------------------------ | ---------------------------------------------------------------------- |
-| `o3-sanity-web`       | `apps/web`     | `main`                    | `deploy.yml` / `promote.yml` — no Git connection | the `affected` job: `turbo run build --filter=@o3/web... --affected`   |
-| `xo-sanity-web`       | `apps/o3xo`    | `integration/o3xo`        | Vercel's GitHub integration, on every push       | Ignored Build Step: `pnpm dlx turbo-ignore @o3/o3xo --fallback=HEAD^1` |
-| `o3-sanity-storybook` | repo root      | `main`                    | `deploy-storybook.yml`                           | —                                                                      |
+| Project               | Root directory | Branch that is production | What triggers a build                            | What gates it                                                        |
+| --------------------- | -------------- | ------------------------- | ------------------------------------------------ | -------------------------------------------------------------------- |
+| `o3-sanity-web`       | `apps/web`     | `main`                    | `deploy.yml` / `promote.yml` — no Git connection | the `affected` job: `turbo run build --filter=@o3/web... --affected` |
+| `o3-sanity-storybook` | repo root      | `main`                    | `deploy-storybook.yml`                           | —                                                                    |
 
 The repo-root `vercel.json` turns Git deployments off. It is the configuration
 file for whatever is rooted at the repo root — the Storybook project — and not
-for either app project, because Vercel reads a project's `vercel.json` from its
+for `o3-sanity-web`, because Vercel reads a project's `vercel.json` from its
 root directory.
 
-The two gates are the same question asked by the same engine — is this app's
-dependency graph in the diff — so the matrix holds in both directions:
-
-| The change                     | `xo-sanity-web` | `o3-sanity-web` |
-| ------------------------------ | --------------- | --------------- |
-| `apps/o3xo` only               | builds          | skipped         |
-| `apps/web` only                | skipped         | builds          |
-| a shared package (`@o3/ui`, …) | builds          | builds          |
-
-`xo-sanity-web` holds **no environment variables**, deliberately. O3XO's brand
-facts are committed (`@o3/sanity/brand`: project `tunpgire`, dataset
-`production`), and that dataset answers an unauthenticated read, so published
-content renders with nothing configured. A `SANITY_API_READ_TOKEN` buys draft
-preview and Presentation, and a `SANITY_REVALIDATE_SECRET` buys the Sanity
-webhook — neither exists yet, and the revalidate route answers 401 without the
-secret rather than trusting an unsigned POST.
-
-Its deployment origins are CORS-allowed on `tunpgire` with credentials —
-`https://xo-sanity-web.vercel.app`, `https://xo-sanity-web-*.vercel.app` for the
-team and branch aliases, and `https://*o3-world.vercel.app` for per-deployment
-URLs. Without them the embedded Studio and every draft read fail on the
-deployment while working perfectly in dev. Add an origin from `apps/o3xo/`,
-where the CLI config points at O3XO's project:
-
-```bash
-pnpm sanity cors add https://<host> --credentials
-```
-
-Two things to know before touching either project:
-
-- **A push to `main` cannot build `xo-sanity-web`.** `apps/o3xo` does not exist
-  on `main` — this map integrates on `integration/o3xo` — so a build from `main`
-  fails at "the specified Root Directory does not exist" before the Ignored
-  Build Step runs. Vercel's own affected-projects skipping is on for the project
-  and may skip the push before it gets that far; if failed `main` deployments
-  show up in the dashboard, turn the project's Git deployments off until
-  `apps/o3xo` lands on `main`.
-- **`turbo-ignore` prints a deprecation notice** pointing at Vercel's built-in
-  project skipping. It still works, and it is what the two gates share; moving
-  `xo-sanity-web` to the built-in mechanism would leave the CI-driven `o3` gate
-  as the odd one out, so both stay on turbo until someone decides otherwise.
+The `xo-sanity-web` Vercel project and O3XO's Sanity project (`tunpgire`) still
+exist outside the repo, pending manual removal (#490). Nothing here deploys to
+either.
 
 ## The revalidate webhook carries its own list of types
 
@@ -239,16 +193,13 @@ Production keeps itself honest. Every push to main deploys the schema and then
 runs `pnpm schema:check` against `production`, and the deploy job fails if the
 two disagree — a `schema:deploy` can exit 0 without landing, or land against
 the wrong workspace. `promote.yml` asserts the same thing for the SHA it
-promotes, because that SHA is hand-picked and may be older than main. Pushes
-to `integration/o3xo` do the same for O3XO's project (`deploy-xo-web.yml`),
-ahead of kicking the site build.
+promotes, because that SHA is hand-picked and may be older than main.
 
-What a deploy publishes is **this brand's roster**, not the whole model
-(#252): `NEXT_PUBLIC_BRAND` picks the project and the blocks its schema
-declares, so a schema-driven writer — `get_schema`, the typeset skill — is
-never offered a band the brand's app cannot render. The check fails on any
-schema document in the dataset that the deploy did not write, so a whole-model
-deploy from an old checkout cannot sit beside the brand's quietly. A
+What a deploy publishes is the Studio's one workspace, `default`, so a
+schema-driven writer — `get_schema`, the typeset skill — is offered exactly
+the blocks the app renders. The check fails on any schema document in the
+dataset that the deploy did not write, so a deploy from an old checkout cannot
+sit beside the current one quietly. A
 scheduled run at 05:00 UTC (`nightly-schema-drift.yml`) catches what neither
 sees: a hand-run deploy pointed at the wrong dataset, a Studio-side edit, a
 push whose deploy job was cancelled. It files one tracking issue against map

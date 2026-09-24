@@ -149,8 +149,8 @@ export function isInternalType(type: string): boolean {
 
 /**
  * Pipeline ownership is the deterministic id contract (CONTEXT.md →
- * Rebuild): `<type>-wp-<id>` for a WordPress document, `<type>-framer-<key>`
- * for one migrated from o3xo.ai, `<type>-seed-<slug>` for a greenfield one.
+ * Rebuild): `<type>-wp-<id>` for a WordPress document, `<type>-seed-<slug>`
+ * for a greenfield one.
  * Everything else in the dataset — Studio-created documents, uuid drafts,
  * `siteSettings` — is outside the pipeline's authority and is never retired
  * by `load`.
@@ -167,7 +167,7 @@ export function isInternalType(type: string): boolean {
 export function isPipelineOwned(id: string): boolean {
   const bare = bareId(id)
   if (INTERNAL_TYPES.some((type) => bare.startsWith(`${type}-`))) return false
-  return /^[a-zA-Z]+-(wp|framer|seed)-./.test(bare)
+  return /^[a-zA-Z]+-(wp|seed)-./.test(bare)
 }
 
 /**

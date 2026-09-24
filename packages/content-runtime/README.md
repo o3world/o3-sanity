@@ -5,9 +5,6 @@ block dispatch loop, and the fetch, cache-tag, SEO and URL layers they sit on.
 It holds no block renderers and no site chrome — those are `@o3/content-ui`,
 which an app binds itself.
 
-This is the part ADR 0028 commits to sharing. A second brand app is a second
-consumer of these modules, not a second copy of them.
-
 ## Exports
 
 | Subpath                | What it is                                                                                                                                                                           |
@@ -69,8 +66,7 @@ paste and in markup a crawler reads (#229).
 
 So a body fetch says nothing about stega and inherits the gate. Only a
 metadata fetch says `stega: false`, because `<title>` and OG tags are strings
-no browser renders. A brand app that adds a route builder gets the rule by
-saying nothing;
+no browser renders. A new route builder gets the rule by saying nothing;
 `apps/web/src/content/documents/stegaGating.render.test.tsx` fails the build if
 one starts talking.
 

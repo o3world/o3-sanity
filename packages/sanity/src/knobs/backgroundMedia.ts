@@ -24,7 +24,7 @@ export const backgroundMediaKnobs = defineObjectKnobs({
         'Dim lays the band’s own surface colour over the picture so the copy stays legible. None shows the picture as it is — reach for it when the picture is already dark enough to read over.',
       // The kit's "Banner Tint" (`4406:6598`) is the dim state: black at 39%
       // over the hero's video. Its photographic bands (`4406:6755`,
-      // `4406:6954`) draw no tint at all, because O3XO's imagery is a
+      // `4406:6954`) draw no tint at all, because the kit's imagery is a
       // near-black starfield. Two states, drawn — so two options.
       options: ['dim', 'none'],
       // The safe answer for a picture nobody has looked at yet: a band whose

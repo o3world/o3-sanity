@@ -7,7 +7,7 @@ const here = dirname(fileURLToPath(import.meta.url))
 const stub = (file: string) => resolve(here, 'stubs', file)
 
 export interface RenderProjectOptions {
-  /** Vitest project name — `render` for apps/web, `render:o3xo` for the second app. */
+  /** Vitest project name — `render` for apps/web. */
   readonly name: string
   /** The app's `src/` directory, absolute. `@/` resolves here, and nowhere else. */
   readonly appSrc: string
@@ -16,8 +16,8 @@ export interface RenderProjectOptions {
   /**
    * The environment the layer asserts against. The caller writes it out rather
    * than inheriting a default, because every value in it is a pin a test can
-   * read back — the port a canonical URL is built from, the brand
-   * `brandConfig()` answers with. See the call sites in `vitest.config.mts`.
+   * read back — the port a canonical URL is built from. See the call site in
+   * `vitest.config.mts`.
    */
   readonly env: Readonly<Record<string, string>>
 }
@@ -26,10 +26,9 @@ export interface RenderProjectOptions {
  * One app's instance of the `render` layer (ADR 0004): its route entries
  * rendered to HTML from fixture documents, with no network and no Next build.
  *
- * A project can resolve one `@/` and carry one environment, so a second brand
- * app is a second project rather than a second glob on the first. Everything
- * that is the same in both — the four module stubs, the JSX override, the leak
- * guard — is here; everything that differs is an argument.
+ * A project can resolve one `@/` and carry one environment. The four module
+ * stubs, the JSX override and the leak guard are here; what is the app's is an
+ * argument.
  */
 export function renderProject(options: RenderProjectOptions): TestProjectInlineConfiguration {
   return {

@@ -13,25 +13,9 @@
         "src/test/index.ts"
       ]
     },
-    "apps/o3xo": {
-      "entry": [
-        "src/app/**/{page,layout,route,not-found,error,loading}.tsx",
-        "src/app/**/route.ts",
-        "next.config.ts",
-        "sanity.cli.ts",
-        "seed/load.ts",
-        "src/**/*.stories.tsx",
-        "src/**/*.test.ts",
-        "src/**/*.render.test.tsx",
-        "src/test/index.ts"
-      ]
-    },
     "apps/storybook": {
       "entry": [".storybook/{main,preview}.ts", "prototypes/**/*.stories.tsx"],
       "ignore": ["prototypes/*/**"]
-    },
-    "apps/storybook-o3xo": {
-      "entry": [".storybook/{main,preview}.ts"]
     },
     "packages/*": {
       "entry": ["src/index.ts", "src/**/*.stories.tsx", "sanity.cli.ts"]

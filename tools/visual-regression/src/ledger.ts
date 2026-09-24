@@ -14,11 +14,9 @@
  * fixed field order and a trailing newline, so re-accepting an unchanged pair
  * produces no diff at all.
  *
- * **The key carries the host.** Two Storybook hosts serve the shared packages
- * and give a shared story the same id (#336), so `pages-home--desktop` on o3
- * and on o3xo are two pairings against two design files. The key is
- * `<host>/<story>/<design brand>/<node>/<viewport>` — every axis that can make
- * two comparisons differ, and nothing else.
+ * **The key** is `<host>/<story>/<design brand>/<node>/<viewport>`. Host and
+ * design brand are always `o3` (see `BRANDS` in `storybook.ts`); they stay in
+ * the key so the committed ledger's keys stay stable.
  *
  * **Exactly four things are red**, and the acceptance criteria say so:
  *

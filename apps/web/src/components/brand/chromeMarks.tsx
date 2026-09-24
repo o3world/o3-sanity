@@ -3,9 +3,9 @@ import { BrandMark } from '@o3/ui'
 /**
  * The marks this app hands the shared chrome (#228).
  *
- * `SiteNav` and `SiteFooter` draw no mark of their own — both brands render
- * them — so the app passes one in, and the size travels with it because how big
- * a mark runs is a property of its own proportions.
+ * `SiteNav` and `SiteFooter` draw no mark of their own, so the app passes one
+ * in, and the size travels with it because how big a mark runs is a property of
+ * its own proportions.
  *
  * Both are `BrandMark`: the ring and the superscript free-standing, in
  * `currentColor`. That is what lets the nav's ink flip carry the mark and the

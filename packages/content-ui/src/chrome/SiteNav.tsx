@@ -16,8 +16,8 @@ interface SiteNavProps {
   settings: SITE_SETTINGS_QUERY_RESULT
   /**
    * The brand's mark, drawn by the app that mounts this bar (#228). Required
-   * with no fallback: a brand that supplies none is a compile error rather
-   * than a page wearing the other brand's logo.
+   * with no fallback: an app that supplies none is a compile error rather
+   * than a bar with no mark.
    */
   brandMark: ReactNode
   /** Optional utilities shown only inside the mobile menu. */
@@ -106,12 +106,10 @@ interface SiteNavProps {
  * `--color-scrim-light`, white at 60%. Over a flat band it reads as a white
  * pill; over anything with content in it, the 40px blur shows through.
  *
- * **The mark is the app's, and the bar sets no colour on it.** Both brands
- * render this bar and their marks are different drawings — O3XO's carries a
- * yellow no shared token role names — so the app passes one in and the bar
- * draws it (#228). A mark that inherits colour rides the bar's ink flip for
- * free; one that carries its own paint keeps it through the flip. Which of
- * those a brand wants is the brand's answer, made where its mark lives.
+ * **The mark is the app's, and the bar sets no colour on it.** The app passes
+ * one in and the bar draws it (#228). A mark that inherits colour rides the
+ * bar's ink flip for free; one that carries its own paint keeps it through the
+ * flip.
  *
  * **The button is `Theme=White`** — the pill instances `2205:1298`, a white
  * fill with an ink label `#0A0A0B`. The bar declares itself an `ink` surface

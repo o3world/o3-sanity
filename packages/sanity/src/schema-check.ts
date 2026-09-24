@@ -23,13 +23,7 @@ import { join } from 'node:path'
 import { diffSchemas, type Drift } from './schema-diff'
 import { deployedTypes, repoSchemaFile, repoTarget, straySchemaDocs } from './schema-manifest'
 
-/**
- * The workspace under check is the one `schema:deploy` publishes — the
- * brand-filtered roster of whichever brand the env names. `sanity.config.ts`
- * also declares `model`, the whole-model workspace typegen extracts; comparing
- * that against a deployed brand schema would report the other brand's blocks
- * as drift.
- */
+/** The workspace under check is the one `schema:deploy` publishes. */
 const WORKSPACE = 'default'
 
 /**
@@ -49,7 +43,7 @@ function sanity(args: string[]): string {
 function describe(drift: Drift): string {
   if (drift.kind === 'field-missing') return `${drift.path} is not in the deployed schema`
   if (drift.kind === 'deployed-extra') {
-    return `${drift.path} is deployed but not in this brand's roster — a stale or whole-model deploy wrote it`
+    return `${drift.path} is deployed but not in the repo — a stale deploy wrote it`
   }
   return [
     `${drift.path} describes itself differently`,
@@ -76,7 +70,7 @@ function main(): void {
     )
 
     // A schema document from another workspace declares its own roster to
-    // every schema-driven writer, however well this brand's matches. Queried
+    // every schema-driven writer, however well this one matches. Queried
     // against the one dataset under check — `schemas list` walks every
     // workspace in the config, so it cannot place a document in a dataset.
     const strays = straySchemaDocs(

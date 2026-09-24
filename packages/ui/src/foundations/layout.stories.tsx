@@ -227,7 +227,7 @@ export const Layout: Story = {
 /** Product-owned O3 geometry at the canonical 402px mobile viewport. */
 export const GeometryAt402: Story = {
   parameters: { viewport: geometryViewport },
-  globals: { brand: 'o3', viewport: { value: 'layout402' } },
+  globals: { viewport: { value: 'layout402' } },
   render: () => <GeometrySpecimen />,
   play: async ({ canvasElement }) => {
     await expectGeometry(canvasElement, {
@@ -244,7 +244,7 @@ export const GeometryAt402: Story = {
 /** The 1440px design viewport opens to 75px gutters and a 1290px stage. */
 export const GeometryAt1440: Story = {
   parameters: { viewport: geometryViewport },
-  globals: { brand: 'o3', viewport: { value: 'layout1440' } },
+  globals: { viewport: { value: 'layout1440' } },
   render: () => <GeometrySpecimen />,
   play: async ({ canvasElement }) => {
     await expectGeometry(canvasElement, {
@@ -261,7 +261,7 @@ export const GeometryAt1440: Story = {
 /** The structural stage keeps growing after 1440, then caps at 1728px. */
 export const GeometryAt1920: Story = {
   parameters: { viewport: geometryViewport },
-  globals: { brand: 'o3', viewport: { value: 'layout1920' } },
+  globals: { viewport: { value: 'layout1920' } },
   render: () => <GeometrySpecimen />,
   play: async ({ canvasElement }) => {
     await expectGeometry(canvasElement, {

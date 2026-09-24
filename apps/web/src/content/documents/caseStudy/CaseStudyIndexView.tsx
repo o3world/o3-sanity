@@ -7,7 +7,7 @@ import { indexHref } from '@o3/content-runtime/routes/index-paths'
 
 import { Pager } from '@o3/content-ui'
 
-import { CaseStudyCard } from '@/components/cards/CaseStudyCard'
+import { CaseStudyCard } from '@o3/content-ui/cards'
 
 interface CaseStudyIndexViewProps {
   readonly items: NonNullable<CASE_STUDIES_PAGE_QUERY_RESULT>['items']

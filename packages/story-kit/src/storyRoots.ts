@@ -1,9 +1,7 @@
 /**
  * The repo dirs every Storybook host globs for stories.
  *
- * These are the shared component packages — they name only token roles both
- * brands paint, so the same story renders in either host and the Brand
- * toolbar over it is the standing paint-leak test (ADR 0028).
+ * These are the shared component packages.
  *
  * A host's own app roots are not here: they belong to that host, and it
  * passes them to `defineStorybookConfig` as `appStoryRoots`.

@@ -53,8 +53,8 @@ import { writeReport } from './report'
 import {
   BRANDS,
   buildStorybook,
+  DEFAULT_BRAND,
   hostDir,
-  isBrand,
   readIndex,
   readStats,
   serve,
@@ -77,7 +77,6 @@ const HELP = `
 pnpm vr — visual regression for the stories your change touches
 
   pnpm vr                          compare against the merge base with main
-  pnpm vr --brand o3xo             the o3xo Storybook host, not o3's
   pnpm vr --base NickO3/toolbar    compare against another ref
   pnpm vr --all                    every story, not just the affected ones
   pnpm vr --story hero             these stories, whatever the diff says (repeatable)
@@ -88,7 +87,6 @@ pnpm vr — visual regression for the stories your change touches
   pnpm vr --figma --accept         record this run's scores in the drift ledger
 
 Options
-  --brand <o3|o3xo>     which Storybook host to build and capture (default: o3)
   --figma               compare against Figma rather than the merge base (#326)
   --accept              write this run's scores into the ledger (#339); with --story, only those
   --strict              also fail on a pairing nobody has accepted — what CI runs
@@ -157,7 +155,6 @@ async function withServer<T>(dir: string, run: (url: string) => Promise<T>): Pro
  */
 async function scoreAgainstFigma(options: {
   brand: Brand
-  brands: readonly Brand[]
   pairings: readonly PairingRow[]
   exportsDir: string
   exports: Map<string, FrameExport>
@@ -180,10 +177,6 @@ async function scoreAgainstFigma(options: {
   const root = repoRoot()
   const host = hostDir(brand)
   const cache = path.join(root, '.vr', brand)
-
-  if (options.brands.length > 1) {
-    log(`\n  scoring the ${host} stories — \`--brand o3xo\` scores that host's`)
-  }
 
   log(`  building ${host} for the working tree`)
   const build = path.join(cache, 'build', 'current')
@@ -372,9 +365,6 @@ async function scoreAgainstFigma(options: {
 async function main(): Promise<void> {
   const { values } = parseArgs({
     options: {
-      // No default: `--figma` reads every host unless a brand is named, and
-      // the pixel run below falls back to o3 the way it always has.
-      brand: { type: 'string' },
       figma: { type: 'boolean', default: false },
       accept: { type: 'boolean', default: false },
       strict: { type: 'boolean', default: false },
@@ -402,9 +392,7 @@ async function main(): Promise<void> {
     return
   }
 
-  if (values.brand !== undefined && !isBrand(values.brand)) {
-    throw new Error(`unknown brand ${values.brand} — expected one of ${BRANDS.join(', ')}`)
-  }
+  const brand = DEFAULT_BRAND
 
   // Applied to the current index and to the baseline's deleted stories alike,
   // so `--story hero` cannot come back with someone else's removed carousel.
@@ -421,9 +409,8 @@ async function main(): Promise<void> {
   // feeds (#337) need neither a build nor a browser, so they answer before
   // anything below spends twelve seconds on Storybook.
   if (values.figma) {
-    const brands = values.brand ? [values.brand] : BRANDS
-    const inventory = readInventory(brands)
-    log(`\nfigma pairings — ${brands.join(', ')}\n`)
+    const inventory = readInventory()
+    log(`\nfigma pairings — ${brand}\n`)
     log(formatInventory(inventory))
     // `--list` is read-only: it says what the run is about and touches
     // nothing, so it stays answerable with no token and no network.
@@ -431,7 +418,7 @@ async function main(): Promise<void> {
 
     const dir = exportDir(repoRoot())
     if (values.refresh) fs.rmSync(dir, { recursive: true, force: true })
-    const plan = planFrameExports(inventory.pairings, brands, dir)
+    const plan = planFrameExports(inventory.pairings, BRANDS, dir)
     log(
       `\n  ${plan.fetch.length} to fetch · ${plan.fresh.length} cached · ` +
         `${plan.unknown.length} unplaceable`,
@@ -441,14 +428,13 @@ async function main(): Promise<void> {
     log(`\n  ${path.relative(repoRoot(), dir)}`)
 
     await scoreAgainstFigma({
-      brand: values.brand ?? 'o3',
-      brands,
+      brand,
       pairings: inventory.pairings,
       exportsDir: dir,
       reasons: exportReasons(plan, outcome),
-      exports: readFrameExports(dir, plan, outcome, values.brand ?? 'o3'),
+      exports: readFrameExports(dir, plan, outcome, brand),
       missing: outcome.missing,
-      baselines: readBaselines(brands),
+      baselines: readBaselines(BRANDS),
       wanted,
       scoped: needles.length > 0,
       settleMs: Number(values.settle),
@@ -462,13 +448,11 @@ async function main(): Promise<void> {
     return
   }
 
-  const brand = values.brand ?? 'o3'
   const host = hostDir(brand)
 
   const root = repoRoot()
-  // Per brand, because a run of one host must not read the other's build,
-  // screenshots or report. `assets/` and `base/` stay above it: remote bytes
-  // and the baseline checkout are the same whichever host renders them.
+  // The host's build, screenshots and report. `assets/` and `base/` sit
+  // beside it: remote bytes and the baseline checkout belong to no one host.
   const cache = path.join(root, '.vr', brand)
   const viewports = values.viewports ? parseViewports(values.viewports) : DEFAULT_VIEWPORTS
   const base = resolveBase(root, values.base)

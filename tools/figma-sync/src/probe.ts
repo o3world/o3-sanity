@@ -21,8 +21,8 @@
  * Descending would report every hero in the file as new; taking every type
  * would report the loose components a site file's section holds (the canonical
  * `NavBar` sits right there). Which types are news depends on what the file
- * is, so the manifest says: a site file watches `FRAME`s, and the O3XO kit
- * watches library nodes because its frames are spec sheets (#242).
+ * is, so the manifest says: a site file watches `FRAME`s, and a UI kit would
+ * watch library nodes because its frames are spec sheets.
  */
 import type { TrackedManifest, UntrackedFrame } from './types'
 

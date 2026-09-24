@@ -22,7 +22,6 @@ import { join } from 'node:path'
 
 import { getCliClient } from 'sanity/cli'
 
-import { brandArg } from './lib/brandArg'
 import { driftBetween, type AnyDoc, type AssetMap } from './core/drift'
 import { plan } from './core/plan'
 import { readCorpus } from './core/read'
@@ -34,9 +33,7 @@ const client = getCliClient({ apiVersion: '2026-07-01' })
 
 async function main() {
   const all = readCorpus<AnyDoc>().map((entry) => entry.document)
-  console.log(
-    `brand ${brandArg()} · target ${client.config().projectId}/${client.config().dataset}\n`,
-  )
+  console.log(`target ${client.config().projectId}/${client.config().dataset}\n`)
   if (all.length === 0) {
     console.log('nothing committed, nothing to drift')
     return

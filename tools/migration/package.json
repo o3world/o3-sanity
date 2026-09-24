@@ -9,7 +9,7 @@
     "brand-assets": "tsx src/brand-assets.ts",
     "convert": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" tsx src/convert.ts",
     "redirects": "tsx src/redirects.ts",
-    "load": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/load.ts --with-user-token --",
+    "load": "tsx src/load.ts",
     "sync-docs": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/sync-docs.ts --with-user-token --",
     "stats-to-band": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/statsToBand.ts --with-user-token --",
     "insight-card-media": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/insightCardMedia.ts --with-user-token --",

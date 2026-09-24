@@ -14,12 +14,6 @@ import { stegaClean } from '@sanity/client/stega'
  * stacked   the 822 article measure, one per row, a hairline above each
  * ```
  *
- * **App-local, and O3's alone** (ADR 0028): `statsSection` is on this brand's
- * half of the section roster. O3XO plates each figure on `accent` (`Key Metric
- * Card`, `4404:3916`) and draws no row of them, so a renderer in
- * `@o3/content-ui` would be one nothing else imports — the same call
- * `APP_FIRST_RENDERERS` already records about `statGroup`.
- *
  * **The Case Study frame draws no stats region**, so the two layouts answer to
  * the vocabulary rather than to a frame. `stacked` is the shape the case-study
  * detail carried as a fixed band before the block existed: on the article

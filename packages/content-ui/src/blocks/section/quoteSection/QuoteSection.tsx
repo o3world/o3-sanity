@@ -1,5 +1,3 @@
-import type { ReactNode } from 'react'
-
 import { OrbitalSphere, SURFACE_CLASS, SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 
@@ -7,16 +5,7 @@ import { DECORATED_BAND_CLASS, resolveDecoration } from '../../decoration'
 import { MoleculeDecoration } from '../../MoleculeDecoration'
 import { resolveSurface } from '../../surface'
 
-type QuoteSectionProps = SectionProps<'quoteSection'> & {
-  /**
-   * The band's `eyebrow`, drawn by the app that binds this renderer: O3XO
-   * fills it with the kit's header pill (`4414:8100`), and O3's binding leaves
-   * it empty, because no O3 frame puts a label over a quote. A slot rather
-   * than the stored string, since what the two brands disagree about is the
-   * chrome around those words, not the words.
-   */
-  eyebrowSlot?: ReactNode
-}
+type QuoteSectionProps = SectionProps<'quoteSection'>
 
 /**
  * Section block: the pull quote, built to the `Quote` set (`2748:4672`), which
@@ -52,13 +41,7 @@ type QuoteSectionProps = SectionProps<'quoteSection'> & {
  * hangs the full 776px off the corner and lets the gutter clip it, where the
  * spheres would fill the band instead of sitting behind it.
  */
-export function QuoteSection({
-  quote,
-  attribution,
-  decoration,
-  surface,
-  eyebrowSlot,
-}: QuoteSectionProps) {
+export function QuoteSection({ quote, attribution, decoration, surface }: QuoteSectionProps) {
   if (!quote) return null
   const resolved = resolveSurface(surface, 'quoteSection')
   // The spheres and the molecule are alternatives: the band draws one or neither.
@@ -97,13 +80,6 @@ export function QuoteSection({
               className="-z-10 hidden lg:left-[734px] lg:top-[643px] lg:block lg:w-[1304px]"
             />
           </>
-        ) : null}
-
-        {/* Above the quote, on the same column — 32px clear of it, the gap the
-            kit's Quote Block sets (`4404:4920`). An unfilled slot adds no
-            markup, so a band with no label is the band it always was. */}
-        {eyebrowSlot ? (
-          <div className="max-w-content relative mx-auto mb-8">{eyebrowSlot}</div>
         ) : null}
 
         <blockquote className="max-w-content relative mx-auto flex flex-col gap-6 text-center lg:gap-12">

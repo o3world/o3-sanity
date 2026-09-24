@@ -60,11 +60,7 @@ export interface CollectionHeroProps {
    * clearance, a 608 copy column, a Light headline over an 18px kicker, an
    * optional rail, and a surface axis.
    *
-   * Two values rather than a rewrite because O3XO answers to its own kit and
-   * its collection indexes are still canonical at `band`; flipping the default
-   * would repaint them against a file that says otherwise. Every O3 caller
-   * draws `interior`. Expect these to collapse into one when the o3xo kit
-   * grows its own opener — the component-realignment work on #55.
+   * Every caller draws `interior`; `band` is the default and has no caller.
    */
   variant?: 'band' | 'interior'
   /**

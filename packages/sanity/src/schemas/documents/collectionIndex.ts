@@ -16,9 +16,8 @@ import { blockArrayMembers, type BlockArrays } from '../blocks/registry'
  * `pinnedItems` orders the head, and the route's query pages over the joined
  * sequence. That is an ordering, not a second listing — the feed is still one.
  *
- * A function rather than a constant for the same reason `page` is: the two
- * arrays take whichever roster the caller builds with (ADR 0028), so one
- * declaration serves both brands' Studios and the whole-model typegen.
+ * A function of the registry's block arrays, like `page`, so the two arrays'
+ * members derive from `BLOCK_ARRAYS` rather than being restated.
  *
  * NOT ROUTABLE, and deliberately without a slug: the route owns the URL, and
  * this document is addressed by its `collection`. Adding it to `ROUTABLE_TYPES`

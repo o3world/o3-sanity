@@ -20,11 +20,9 @@ import type {
  * Pass only the fields your assertion is about; the rest come from a valid
  * default, so a test reads as "this one thing differs".
  *
- * Everything here is invented and brand-neutral: the queries are shared, so
- * a fixture is about the shape a route receives rather than about either
- * site's content. Documents read off disk are the app's own business —
- * `apps/web/src/test/fixtures.ts` reads the migration corpus, `apps/o3xo`'s
- * reads its bootstrap seeds.
+ * Everything here is invented: a fixture is about the shape a route receives
+ * rather than about the site's content. Documents read off disk are the app's
+ * own business — `apps/web/src/test/fixtures.ts` reads the migration corpus.
  */
 
 export type Insight = NonNullable<INSIGHT_QUERY_RESULT>

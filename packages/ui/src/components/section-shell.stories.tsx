@@ -145,14 +145,13 @@ function colourOf(canvasElement: HTMLElement, band: string, role: string): strin
  *
  * Custom properties inherit, so without that block the card's `text-fg-muted`
  * resolves to the band's white-at-65% and the copy is light-on-dark on a light
- * plate — around 1.7:1, and legible in neither brand. Nothing else catches it:
+ * plate — around 1.7:1, and illegible. Nothing else catches it:
  * axe's `color-contrast` rule is off for the whole suite
  * (storybookPreview.ts), so a story is the only thing watching.
  *
  * The play function compares the card against the same roles on a BARE
  * specimen outside any `[data-surface]` — the `:root` values — rather than
- * against a hex, so it asserts the contract in either brand's paint and nobody
- * has to keep two palettes in a test. Bare rather than a white band on
+ * against a hex, so nobody has to keep a palette in a test. Bare rather than a white band on
  * purpose: a band carries `data-surface='white'` and would read the same
  * re-point block as the card, so band-vs-card stays green even when both have
  * drifted from `:root`. The white band is still drawn and still checked — its
@@ -189,17 +188,6 @@ export const LightCardOnInk: Story = {
       ).toBe(colourOf(canvasElement, 'root', role))
     }
   },
-}
-
-/**
- * The same contract in O3XO's paint. The brand is pinned — rare in a shared
- * package, where the Brand toolbar is meant to stay a live question — because
- * each token package scopes its own light block, so the two are two facts and
- * this host loads both packages (apps/storybook/globals.css).
- */
-export const LightCardOnInkO3xo: Story = {
-  ...LightCardOnInk,
-  globals: { brand: 'o3xo' },
 }
 
 /**
@@ -250,9 +238,8 @@ export const OnPhotograph: Story = {
 }
 
 /**
- * `tint: 'none'` — the picture as it is. What the O3XO kit draws on its
- * photographic bands (`4406:6755`, `4406:6954`), whose imagery is already a
- * near-black starfield.
+ * `tint: 'none'` — the picture as it is, for imagery that is already dark
+ * enough to read over.
  */
 export const OnPhotographUntinted: Story = {
   args: { surface: 'ink' },

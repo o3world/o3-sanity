@@ -1,5 +1,7 @@
 # 0029. A brand-only block lives app-first, schema included
 
+Status: superseded 2026-09-24 by #490; the o3xo app is deleted.
+
 - **Status:** Accepted
 - **Date:** 2026-08-21
 - **Deciders:** NickO3 + Claude

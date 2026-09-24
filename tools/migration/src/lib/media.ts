@@ -1,9 +1,9 @@
 /**
  * Deciding whether an upload is an image or a plain file.
  *
- * This lives here rather than in `load.ts` because `load.ts` builds a Sanity
- * CLI client at module scope and can only run under `sanity exec` — importing
- * it from a test is not possible. The rule below is worth a test, so it moves.
+ * Its own module because the commands that upload (`sync-docs.ts`) build a
+ * Sanity CLI client at module scope and only run under `sanity exec`, so a test
+ * cannot import them. The rule below is worth a test.
  */
 
 /** Extensions we treat as images when the bytes are inconclusive. */

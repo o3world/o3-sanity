@@ -11,11 +11,10 @@ import { anInsight, type Insight } from '@o3/render-kit'
  * documents off disk.
  *
  * The invented, brand-neutral builders (`anInsight`, `siteSettings`,
- * `withSettings`, …) are `@o3/render-kit`'s, because both apps serve the same
- * queries and a fixture typed against a query result is a fact about the
- * schema rather than about a site. What is app-specific is the corpus: these
- * read `tools/migration/data/`, which is O3's migrated WordPress archive and
- * this app's content. `apps/o3xo/src/test/fixtures.ts` reads its own.
+ * `withSettings`, …) are `@o3/render-kit`'s, because a fixture typed against a
+ * query result is a fact about the schema rather than about a site. What is
+ * app-specific is the corpus: these read `tools/migration/data/`, which is
+ * O3's migrated WordPress archive and this app's content.
  */
 
 /**

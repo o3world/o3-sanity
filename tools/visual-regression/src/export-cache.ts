@@ -115,8 +115,7 @@ function storyLabel(row: PairingRow): string {
  *
  * One export per node, however many stories cite it: two stories of the same
  * component draw the same frame, and fetching it twice would spend an API call
- * to write the same bytes. `baselines` carries only the brands this run
- * reports, so `--brand` narrows the plan by narrowing its input.
+ * to write the same bytes.
  */
 export function planExports(
   pairings: readonly PairingRow[],

@@ -4,25 +4,13 @@ import { DisplayHeading, Eyebrow, RevealSequence, SectionShell } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { stegaClean } from '@sanity/client/stega'
 
-import { BASE_BLOCK_COMPONENTS, type BaseComponentsSlot } from '../../base/baseComponents'
+import { BASE_BLOCK_COMPONENTS } from '../../base/baseComponents'
 import { LAYOUT_BLEED_COLUMN, LAYOUT_COLUMN } from '../../../imageSizes'
 import { DECORATED_BAND_CLASS, resolveDecoration } from '../../decoration'
 import { MoleculeDecoration } from '../../MoleculeDecoration'
 import { resolveSurface } from '../../surface'
 
-/**
- * The band takes the app's base roster through `baseComponents`
- * (`BaseComponentsSlot`), so an app can swap one base block's renderer without
- * forking the band (ADR 0028). This is the only place a base block is rendered
- * outside an app's own registry, so it is the only way an app's base binding
- * reaches a layout column.
- *
- * The slot is required while any base block is app-first: `statGroup` is, so
- * there is no shared renderer behind it to fall back to. Whatever the app does
- * not name still comes from `BASE_BLOCK_COMPONENTS`.
- */
-type LayoutSectionProps = SectionProps<'layoutSection'> &
-  BaseComponentsSlot & { sequence?: boolean }
+type LayoutSectionProps = SectionProps<'layoutSection'> & { sequence?: boolean }
 
 const COLUMN_CLASSES: Record<number, string> = {
   1: 'grid-cols-1',
@@ -86,14 +74,10 @@ export function LayoutSection({
   items,
   surface,
   width,
-  baseComponents,
   sequence = false,
 }: LayoutSectionProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const components: Record<string, ComponentType<any>> = {
-    ...BASE_BLOCK_COMPONENTS,
-    ...baseComponents,
-  }
+  const components: Record<string, ComponentType<any>> = BASE_BLOCK_COMPONENTS
   const bleeding = stegaClean(bleed) === 'end'
   const selectedHeadingLevel = stegaClean(headingLevel)
   const explicitHeadingLevel = selectedHeadingLevel === 'xl' || selectedHeadingLevel === 'lg'

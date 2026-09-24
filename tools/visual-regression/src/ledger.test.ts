@@ -105,13 +105,6 @@ function plan(input: {
 }
 
 describe('ledgerKey', () => {
-  it('names the host as well as the story, because two hosts share a story id', () => {
-    const shared = { storyId: 'ui-stat--default', designBrand: 'o3' as const, nodeId: '9:9' }
-    expect(ledgerKey({ host: 'o3', viewport: VIEWPORT, ...shared })).not.toBe(
-      ledgerKey({ host: 'o3xo', viewport: VIEWPORT, ...shared }),
-    )
-  })
-
   it('names the design file as well as the node, and the viewport as well as the pair', () => {
     expect(
       ledgerKey({ host: 'o3', storyId: HOME, designBrand: 'o3', nodeId: NODE, viewport: VIEWPORT }),
@@ -271,11 +264,11 @@ describe('serializeLedger', () => {
   it('sorts every key and ends with a newline, so a diff reads and a merge lands', () => {
     const text = serializeLedger({
       pairs: { 'o3/z--z/o3/9:9/frame-402': entry(), 'o3/a--a/o3/1:1/frame-1440': entry() },
-      unpairable: { 'o3xo/5:5': { reason: 'debris' }, 'o3/4:4': { reason: 'debris' } },
+      unpairable: { 'o3/5:5': { reason: 'debris' }, 'o3/4:4': { reason: 'debris' } },
     })
     expect(text.endsWith('\n')).toBe(true)
     expect(text.indexOf('a--a')).toBeLessThan(text.indexOf('z--z'))
-    expect(text.indexOf('"o3/4:4"')).toBeLessThan(text.indexOf('"o3xo/5:5"'))
+    expect(text.indexOf('"o3/4:4"')).toBeLessThan(text.indexOf('"o3/5:5"'))
   })
 
   it('is byte-stable under insertion order and round-trips through parseLedger', () => {

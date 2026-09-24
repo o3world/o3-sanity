@@ -144,29 +144,25 @@ const storyMember = z.union([chapter, mediaSection, screenGridSection, unmodelle
  * The shared `migration` fragment, read as strictly as both tracks need it.
  * An agent writes these documents, so the gate refuses a lock — that flag is
  * an editor's to set, and one arriving pre-set would exempt the document from
- * the next load — and refuses a source that is neither a WordPress work item
- * nor an o3xo.ai case study.
+ * the next load — and refuses a source that is not a WordPress work item.
  */
 const caseStudyMigration = migrationObject
   .extend({
-    /* The coverage-gap marker (ADR 0007). Never set by the translate track,
-     * whose whole review mechanism is `_meta.flags`; set by the Framer mapper,
-     * where the gap is the same on all six documents and belongs on each one. */
+    /* The coverage-gap marker (ADR 0007). The translate track never sets it:
+     * its review mechanism is `_meta.flags`. */
     provisional: z.boolean().optional(),
     provisionalNote: z.string().min(1).optional(),
   })
   .refine((migration) => migration.locked === false, {
     message: 'a case study must arrive unlocked',
   })
-  .refine(
-    (migration) => /^(wp:work:\d+|framer:caseStudy:[A-Za-z0-9_-]+)$/.test(migration.sourceId),
-    { message: 'sourceId must name a WordPress work item or an o3xo.ai case study' },
-  )
+  .refine((migration) => /^wp:work:\d+$/.test(migration.sourceId), {
+    message: 'sourceId must name a WordPress work item',
+  })
 
 export const caseStudyDoc = z.object({
-  /* `-wp-<postId>` for a WordPress `work` post, `-framer-<slug>` for one of
-   * o3xo.ai's case studies (`map/framerCaseStudy.ts`). */
-  _id: z.string().regex(/^caseStudy-(wp-\d+|framer-[a-z0-9-]+)$/),
+  /* `-wp-<postId>`, for the WordPress `work` post it translates. */
+  _id: z.string().regex(/^caseStudy-wp-\d+$/),
   _type: z.literal('caseStudy'),
   title: z.string().min(1),
   slug: z.object({ _type: z.literal('slug'), current: z.string().min(1) }),
