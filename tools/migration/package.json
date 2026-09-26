@@ -18,7 +18,8 @@
     "verify": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/verify.ts --with-user-token --",
     "typecheck": "tsc --noEmit",
     "about-hero-alignment": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/aboutHeroAlignment.ts --with-user-token --",
-    "about-heading": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/aboutHeading.ts --with-user-token --"
+    "about-heading": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/aboutHeading.ts --with-user-token --",
+    "home-quote-size": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/homeQuoteSize.ts --with-user-token --"
   },
   "dependencies": {
     "@o3/block-spec": "workspace:*",

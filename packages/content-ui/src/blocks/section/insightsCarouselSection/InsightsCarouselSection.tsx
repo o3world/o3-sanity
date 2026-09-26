@@ -6,10 +6,9 @@ import { getCard } from '../../../cards/card-registry'
 import { resolveSurface } from '../../surface'
 
 import { CAROUSEL_BAND_CLASS } from './carouselBand'
-import { CarouselTrack, type CarouselTrackProps } from './CarouselTrack'
+import { CarouselTrack } from './CarouselTrack'
 
-type InsightsCarouselSectionProps = SectionProps<'insightsCarouselSection'> &
-  Pick<CarouselTrackProps, 'headingSize'>
+type InsightsCarouselSectionProps = SectionProps<'insightsCarouselSection'>
 
 /**
  * Section block: curated-or-latest insights, built to the Home frame's
@@ -32,11 +31,12 @@ type InsightsCarouselSectionProps = SectionProps<'insightsCarouselSection'> &
  */
 export function InsightsCarouselSection({
   heading,
+  eyebrow,
+  body,
   curated,
   latest,
   surface,
   loc,
-  headingSize,
 }: InsightsCarouselSectionProps) {
   const items = curated?.length ? curated : (latest ?? [])
   const Card = getCard('insight')
@@ -46,11 +46,12 @@ export function InsightsCarouselSection({
       surface={resolveSurface(surface, 'insightsCarouselSection')}
       top="md"
       bottom="md"
-      className={CAROUSEL_BAND_CLASS}
+      className={`${CAROUSEL_BAND_CLASS} max-lg:py-16`}
     >
       <CarouselTrack
         heading={heading}
-        headingSize={headingSize}
+        eyebrow={eyebrow}
+        body={body}
         headingAttr={fieldAttr(loc, 'heading')}
         cards={items.map((item) => (
           <Card key={item._id} {...item} />

@@ -160,3 +160,24 @@ export const EditorPreview: Story = {
     for (const band of [plain!, encoded!]) await expect(band.scrollWidth).toBe(band.clientWidth)
   },
 }
+
+/** Home's instance keeps the Small desktop measure with a roomier mobile quote. */
+export const Medium: Story = {
+  ...Small,
+  args: { ...Small.args, size: 'medium' },
+}
+
+export const MediumMobile: Story = {
+  ...SmallMobile,
+  args: { ...Small.args, size: 'medium' },
+  parameters: { design: figmaDesign('2748:4804') },
+  play: async ({ canvasElement }) => {
+    const quote = canvasElement.querySelector('blockquote p')!
+    const band = quote.closest('section')!
+    await expect(getComputedStyle(quote).fontSize).toBe('30px')
+    await expect(getComputedStyle(quote).lineHeight).toBe('36px')
+    await expect(getComputedStyle(band).paddingTop).toBe('128px')
+    await expect(getComputedStyle(band).paddingBottom).toBe('128px')
+    await expect(quote.getBoundingClientRect().width).toBeLessThanOrEqual(band.clientWidth)
+  },
+}

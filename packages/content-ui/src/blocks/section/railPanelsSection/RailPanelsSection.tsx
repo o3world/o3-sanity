@@ -1,4 +1,4 @@
-import { SectionShell } from '@o3/ui'
+import { Eyebrow, SectionShell } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { fieldAttr, itemAttr } from '@o3/content-runtime/data-attribute'
@@ -15,43 +15,24 @@ import { PanelPlate } from './PanelPlate'
 import { PanelRows } from './PanelRows'
 import { PanelTrack } from './PanelTrack'
 import { PLATE_BLEED_CLASS, PLATE_BLEED_SIZES } from './plateBleed'
-import { STATEMENT_STEP } from './statementStep'
 
-/**
- * The four measures the band's header comes in. Every layout draws the same
- * heading and standfirst; what differs is the step and the column each gets,
- * and both are read off the frame the layout answers to.
- *
- * - `spread` — the rail band: the full column, heading over 571 and standfirst
- *   over 385, pushed apart and centred against each other (`2747:4487`). The
- *   one header on the 48 → 64 statement step rather than `display-xl`.
- * - `measured` — the rows and grid bands: a 928px header, heading over 500 and
- *   standfirst over 385 (`1762:2149`).
- * - `wide` — the Solutions cards band: the full column, 571 and 607, baselines
- *   aligned at the foot (`1925:6108`).
- * - `split` — the track: the full column, the heading hugging its words and
- *   the standfirst holding the far edge in 340 (`2846:5480`).
- */
+/** Current stacked lockups: Home 3720:62626, Solutions 4018:37996,
+ * Engineering 4039:49385. The track retains its separate composition. */
 const HEADER_SHAPE = {
   spread: {
-    // 24 between the two at 402 (`2975:8189`), 64 apart across the row at 1440.
-    wrapper: 'gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-16',
-    heading: `${STATEMENT_STEP} lg:w-[571px]`,
-    // 24/34 on both frames — flat, so `text-lead`'s 20px floor would undersize
-    // it at 402.
-    intro: 'text-[24px] leading-[34px] lg:w-[385px]',
+    wrapper: 'max-w-[821px] gap-2',
+    heading: 'text-hero',
+    intro: 'text-lead text-fg-body',
   },
   measured: {
-    wrapper: 'gap-6 lg:w-[928px] lg:flex-row lg:items-center lg:gap-8',
-    heading: 'text-display-xl lg:w-[500px]',
-    intro: 'text-lead leading-[1.2] lg:w-[385px]',
+    wrapper: 'max-w-[1035px] gap-2',
+    heading: 'text-hero',
+    intro: 'text-lead text-fg-body',
   },
   wide: {
-    wrapper: 'gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-8',
-    heading: 'text-display-xl font-normal lg:w-[571px]',
-    // 30px against the 24px step on the Solutions band — 1.25 rather than
-    // 1.2, and the only value the three headers disagree on.
-    intro: 'text-lead leading-[1.2] lg:w-[607px] lg:leading-[1.25]',
+    wrapper: 'max-w-[821px] gap-2',
+    heading: 'text-hero',
+    intro: 'text-lead text-fg-body',
   },
   split: {
     // 18 between the heading and the standfirst at 402 (`2975:8355`), where
@@ -129,6 +110,7 @@ type RailPanelsSectionProps = SectionProps<'railPanelsSection'>
  * done by an ink third of the rule above them. See `PanelTrack`.
  */
 export function RailPanelsSection({
+  eyebrow,
   heading,
   intro,
   layout,
@@ -174,6 +156,11 @@ export function RailPanelsSection({
       data-sanity={fieldAttr(loc, 'heading')}
       className={cn('flex w-full flex-col', HEADER_SHAPE[shape].wrapper)}
     >
+      {eyebrow ? (
+        <Eyebrow size="lg" className="pb-4">
+          {eyebrow}
+        </Eyebrow>
+      ) : null}
       {heading ? (
         <h2 className={cn('font-display text-balance', HEADER_SHAPE[shape].heading)}>{heading}</h2>
       ) : null}

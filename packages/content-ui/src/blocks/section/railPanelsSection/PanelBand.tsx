@@ -84,9 +84,9 @@ export function PanelBand({ railItems, panelIds, mode, children }: PanelBandProp
           // 928 is the panel row's own sum (500 + 33 + 395); past it the
           // leftover is the rail gap's to keep.
           'flex min-w-0 flex-1 flex-col lg:max-w-[928px]',
-          // 128 between panels at both widths (`2747:4501`, `2975:8203`).
+          // Home label panels: 64 at 402, 128 at 1440 (2975:8203 / 3720:60527).
           // The number rail keeps the 24 its own 402 rows sit at.
-          mode === 'number' ? 'gap-6 lg:gap-32' : 'gap-32',
+          mode === 'number' ? 'gap-6 lg:gap-32' : 'gap-16 lg:gap-32',
         )}
       >
         {children}

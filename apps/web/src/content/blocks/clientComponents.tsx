@@ -79,10 +79,6 @@ function CaseShowcaseSectionInStack(props: SectionProps<'caseShowcaseSection'>) 
   )
 }
 
-function InsightsCarouselSectionWithHeading(props: SectionProps<'insightsCarouselSection'>) {
-  return <InsightsCarouselSection {...props} headingSize="hero" />
-}
-
 /**
  * Render bindings for every client-safe SECTION block — the single authoring
  * point `SECTION_CLIENT_COMPONENTS` derives from.
@@ -100,7 +96,7 @@ export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('caseShowcaseSection', { component: CaseShowcaseSectionInStack }),
   defineBlockRender('railPanelsSection', { component: RailPanelsSection }),
   defineBlockRender('quoteSection', { component: QuoteSection }),
-  defineBlockRender('insightsCarouselSection', { component: InsightsCarouselSectionWithHeading }),
+  defineBlockRender('insightsCarouselSection', { component: InsightsCarouselSection }),
   defineBlockRender('ctaSection', { component: CtaSection }),
   defineBlockRender('featureGridSection', { component: FeatureGridSection }),
   defineBlockRender('personGridSection', { component: PersonGridSection }),

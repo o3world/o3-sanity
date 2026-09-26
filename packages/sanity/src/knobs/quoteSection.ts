@@ -24,8 +24,8 @@ export const quoteSectionKnobs = defineBlockKnobs({
       name: 'size',
       title: 'Size',
       description:
-        'Default is the large pull quote. Small is the compact quote used on the current homepage.',
-      options: ['default', 'small'],
+        'Default is the large pull quote. Medium pairs a compact desktop quote with roomy mobile spacing. Small is compact at every width.',
+      options: ['default', 'medium', 'small'],
       initialValue: 'default',
       bar: true,
     }),

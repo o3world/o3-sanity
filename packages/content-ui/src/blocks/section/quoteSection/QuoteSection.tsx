@@ -12,7 +12,7 @@ type QuoteSectionProps = SectionProps<'quoteSection'>
 
 const quoteVariants = cva('text-fg text-balance font-sans', {
   variants: {
-    size: { default: 'text-quote', small: 'text-quote-sm' },
+    size: { default: 'text-quote', medium: 'text-quote-md', small: 'text-quote-sm' },
   },
   defaultVariants: { size: 'default' },
 })
@@ -33,7 +33,11 @@ export function QuoteSection({ quote, attribution, decoration, surface, size }: 
           SURFACE_CLASS[resolved],
           DECORATED_BAND_CLASS,
           'px-4 lg:px-24',
-          cleanSize === 'small' ? 'py-16 lg:py-32' : 'py-band-lg',
+          cleanSize === 'small'
+            ? 'py-16 lg:py-32'
+            : cleanSize === 'medium'
+              ? 'py-32'
+              : 'py-band-lg',
         )}
       >
         <MoleculeDecoration
@@ -68,7 +72,7 @@ export function QuoteSection({ quote, attribution, decoration, surface, size }: 
         <blockquote
           className={cn(
             'relative mx-auto flex w-full flex-col gap-12 text-center',
-            cleanSize === 'small' ? 'max-w-article' : 'max-w-content',
+            cleanSize === 'default' ? 'max-w-content' : 'max-w-article',
           )}
         >
           <p className={quoteVariants({ size: cleanSize })}>&ldquo;{quote}&rdquo;</p>

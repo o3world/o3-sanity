@@ -121,7 +121,7 @@ export function CaseCardStack({ children }: CaseCardStackProps) {
      * this band precisely because it is *not* a composition divergence — both
      * frames stack the cards, and only the gap moves.
      */
-    <div ref={ref} className="flex flex-col gap-6 lg:gap-12">
+    <div ref={ref} className="flex flex-col gap-12">
       {children}
     </div>
   )

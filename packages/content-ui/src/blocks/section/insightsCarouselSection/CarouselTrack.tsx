@@ -4,6 +4,7 @@ import { Fragment, type ReactNode } from 'react'
 
 import {
   cn,
+  Eyebrow,
   RevealSequence,
   Carousel,
   CarouselContent,
@@ -15,6 +16,8 @@ import {
 
 export interface CarouselTrackProps {
   heading?: string | null
+  eyebrow?: string | null
+  body?: string | null
   sequence?: boolean
   /**
    * The band header's `data-sanity`, built by the section (#107). A
@@ -23,8 +26,6 @@ export interface CarouselTrackProps {
    * block and therefore has no location at all.
    */
   headingAttr?: string
-  /** The hero step applies on desktop; both bands use display-xl on mobile. */
-  headingSize?: 'xl' | 'hero'
   /** Pre-rendered cards. Server components stay on the server; only the
       scrolling shell is client-side. */
   cards: readonly ReactNode[]
@@ -61,11 +62,11 @@ const BLEED_VIEWPORT_CLASS =
  * component because the visibility reads Embla's state, which only exists
  * inside the `<Carousel>` boundary.
  */
-function Controls() {
+function Controls({ className }: { className?: string }) {
   const { canScrollPrev, canScrollNext } = useCarousel()
   if (!canScrollPrev && !canScrollNext) return null
   return (
-    <div className="flex shrink-0 gap-5">
+    <div className={cn('flex shrink-0 gap-5', className)}>
       <CarouselPrevious />
       <CarouselNext />
     </div>
@@ -96,8 +97,9 @@ function Controls() {
  */
 export function CarouselTrack({
   heading,
+  eyebrow,
+  body,
   headingAttr,
-  headingSize = 'xl',
   sequence = false,
   cards,
 }: CarouselTrackProps) {
@@ -105,27 +107,26 @@ export function CarouselTrack({
   return (
     <Carousel opts={{ align: 'start' }}>
       <Content>
-        {/* One row at 1440 with the buttons pushed to the far edge, stacked at
-          402 with the frame's 32px gap between subhead and buttons. 48px to
-          the row either way. */}
+        {/* Desktop controls sit beside the heading; mobile controls follow the cards. */}
         <div
           data-reveal-step={sequence ? 'heading' : undefined}
           data-sanity={headingAttr}
           className="mb-12 flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between"
         >
-          {heading ? (
-            <h2
-              className={cn(
-                'text-display-xl font-display text-balance',
-                headingSize === 'hero' && 'lg:text-hero',
-              )}
-            >
-              {heading}
-            </h2>
-          ) : (
-            <span />
-          )}
-          <Controls />
+          <div className="flex w-full max-w-[638px] flex-col gap-2">
+            {eyebrow ? (
+              <Eyebrow size="lg" className="pb-4">
+                {eyebrow}
+              </Eyebrow>
+            ) : null}
+            {heading ? (
+              <h2 className="text-display-xl font-display text-balance">{heading}</h2>
+            ) : (
+              <span />
+            )}
+            {body ? <p className="text-lead text-fg-body">{body}</p> : null}
+          </div>
+          <Controls className="hidden lg:flex" />
         </div>
 
         {/* The wrapper is what widens Embla's viewport: `CarouselContent` clips
@@ -141,6 +142,7 @@ export function CarouselTrack({
             ))}
           </CarouselContent>
         </div>
+        <Controls className="mt-12 justify-between lg:hidden" />
       </Content>
     </Carousel>
   )

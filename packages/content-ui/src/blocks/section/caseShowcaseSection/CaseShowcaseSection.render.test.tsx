@@ -5,12 +5,6 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { CaseShowcaseSection } from './CaseShowcaseSection'
 
-/**
- * The band is ONE ink band, and that is what a browser cannot be relied on to
- * tell an agent: `data-surface` is invisible, and a wash left behind the cards
- * would read as "nearly black" in a screenshot.
- */
-
 const html = renderToStaticMarkup(
   <CaseShowcaseSection
     {...({
@@ -22,24 +16,24 @@ const html = renderToStaticMarkup(
 )
 
 describe('the case showcase band', () => {
-  it('paints one ink band, and declares the surface it paints', () => {
-    expect(html).toContain('bg-black')
-    expect(html).toContain('data-surface="ink"')
-    expect(html).toContain('text-white')
+  it('paints the light showcase around opaque case cards', () => {
+    expect(html).toContain('bg-bone-soft')
+    expect(html).toContain('data-surface="bone"')
   })
 
   it('carries no light wash behind either half', () => {
     expect(html).not.toContain('--gradient-surface-wash')
   })
 
-  it('is one band and not two: 64px top and bottom, 64 between its rows', () => {
+  it('uses 64px mobile and 128px desktop padding', () => {
     expect(html).toContain('py-16')
+    expect(html).toContain('lg:py-32')
     expect(html).toContain('gap-16')
     expect(html).not.toContain('band-sm')
   })
 
-  it('keeps the card stack at gap 24 / 48 (ADR 0006)', () => {
-    expect(html).toContain('gap-6 lg:gap-12')
+  it('keeps the card stack at the current 48px gap', () => {
+    expect(html).toContain('gap-12')
   })
 
   it('pins each card under the chrome from the desktop breakpoint up, on an opaque wrapper', () => {

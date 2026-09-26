@@ -95,10 +95,9 @@ export function PanelPlate({
             <h3 className="text-display-xl font-display text-balance">{heading}</h3>
           ) : null}
 
-          {/* 24/34 flat — the step both frames set the panel's prose at, and
-              the same one the band's standfirst reads. */}
-          {body ? <p className="text-fg-body text-[24px] leading-[34px]">{body}</p> : null}
-          {note ? <p className="text-fg-muted text-[24px] leading-[34px]">{note}</p> : null}
+          {/* Home panels: 20/26 at 402, 24/34 at 1440. */}
+          {body ? <p className="text-lead text-fg-body">{body}</p> : null}
+          {note ? <p className="text-lead text-fg-muted">{note}</p> : null}
         </div>
 
         {button ? (

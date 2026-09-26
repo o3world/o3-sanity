@@ -24,13 +24,12 @@ import { InsightsCarouselSection } from './InsightsCarouselSection'
 const meta = {
   title: 'Content/Blocks/Section/InsightsCarouselSection',
   component: InsightsCarouselSection,
-  args: { headingSize: 'hero' },
   parameters: {
     layout: 'fullscreen',
     viewport: {
       options: { mobile: { name: 'Figma mobile', styles: { width: '402px', height: '874px' } } },
     },
-    design: figmaDesign('2134:1352'),
+    design: figmaDesign('3720:60615'),
   },
 } satisfies Meta<typeof InsightsCarouselSection>
 
@@ -43,8 +42,8 @@ export const LatestFeed: Story = {
   globals: { backgrounds: { value: 'bone' }, viewport: { value: 'desktop' } },
   play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { level: 2 })
-    await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(64, 1)
-    await expect(parseFloat(getComputedStyle(heading).lineHeight)).toBeCloseTo(76, 1)
+    await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(48, 1)
+    await expect(parseFloat(getComputedStyle(heading).lineHeight)).toBeCloseTo(58, 1)
     await expect(getComputedStyle(heading).fontWeight).toBe('400')
   },
 }
@@ -86,6 +85,18 @@ export const Mobile: Story = {
     await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(38, 1)
     await expect(getComputedStyle(heading).fontWeight).toBe('400')
     await expect(heading.scrollWidth).toBeLessThanOrEqual(heading.clientWidth)
+    const buttons = Array.from(canvasElement.querySelectorAll('button')).filter(
+      (button) => button.getBoundingClientRect().height > 0,
+    )
+    const card = canvasElement.querySelector('[aria-roledescription="slide"]')!
+    await expect(buttons.length).toBe(2)
+    await expect(buttons[0]!.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      card.getBoundingClientRect().bottom,
+    )
+    await expect(buttons[1]!.getBoundingClientRect().right).toBeCloseTo(
+      card.getBoundingClientRect().right,
+      0,
+    )
   },
 }
 

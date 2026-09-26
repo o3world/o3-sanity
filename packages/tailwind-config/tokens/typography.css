@@ -25,6 +25,12 @@
   --text-quote--letter-spacing: 0;
   --text-quote--font-weight: 300;
 
+  /* Home instance: 30/36 at 402, 36/44 at 1440. */
+  --text-quote-md: clamp(30px, calc(0.578035vw + 27.676301px), 36px);
+  --text-quote-md--line-height: clamp(36px, calc(0.770713vw + 32.901734px), 44px);
+  --text-quote-md--letter-spacing: 0;
+  --text-quote-md--font-weight: 300;
+
   /* Quote Small: 3265:2244 desktop and 3265:2256 mobile. */
   --text-quote-sm: clamp(28px, calc(0.770713vw + 24.901734px), 36px);
   --text-quote-sm--line-height: clamp(34px, calc(0.963391vw + 30.127168px), 44px);

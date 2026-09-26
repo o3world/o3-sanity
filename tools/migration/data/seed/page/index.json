@@ -186,7 +186,8 @@
       "surface": "bone",
       "quote": "We were very happy with the outcome and so was top management. I believe we positioned our company as the leader and shaper we want to be seen as. Thank you for all your help, on a tight deadline and always with a smile.",
       "attribution": "Business Leader, Global Health Brand",
-      "decoration": "molecule"
+      "decoration": "molecule",
+      "size": "medium"
     },
     {
       "_type": "railPanelsSection",

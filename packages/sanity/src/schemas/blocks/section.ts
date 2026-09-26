@@ -1,7 +1,7 @@
 import { defineArrayMember, defineField } from 'sanity'
 import { defineArrayItem } from './defineArrayItem'
 import { defineSectionBlock } from './defineBlocks'
-import { detailsField } from './fields'
+import { detailsField, eyebrowField, bodyField } from './fields'
 import { hiddenUnless } from './knobFields'
 import { blockArrayMembers, BLOCK_ARRAYS } from './registry'
 import { PAGE_TYPES } from '../../constants'
@@ -132,11 +132,13 @@ export const logoWallSection = defineSectionBlock({
 export const caseShowcaseSection = defineSectionBlock({
   name: 'caseShowcaseSection',
   description:
-    'Proof by work — sticky-stacking cards for referenced case studies, each projecting that document’s narrative headline and headline stat. Reach for it when a claim needs evidence that actually shipped. There is nothing to write here: the band renders only what the referenced case studies already say.',
+    'Proof by work — sticky-stacking cards for referenced case studies, each projecting that document’s narrative headline and headline stat. Reach for it when a claim needs evidence that actually shipped. The optional heading and supporting text introduce the referenced work.',
   title: 'Case study showcase',
   knobs: caseShowcaseSectionKnobs,
   fields: [
+    eyebrowField(),
     defineField({ name: 'heading', type: 'string', initialValue: 'Our Work' }),
+    bodyField(),
     defineField({ name: 'button', type: 'button' }),
     defineField({
       name: 'caseStudies',
@@ -162,6 +164,7 @@ export const railPanelsSection = defineSectionBlock({
   title: 'Rail + panels',
   knobs: railPanelsSectionKnobs,
   fields: [
+    eyebrowField(),
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'intro', type: 'text', rows: 3 }),
     'layout',
@@ -290,7 +293,9 @@ export const insightsCarouselSection = defineSectionBlock({
   title: 'Insights carousel',
   knobs: insightsCarouselSectionKnobs,
   fields: [
+    eyebrowField(),
     defineField({ name: 'heading', type: 'string', initialValue: 'The thinking behind the work.' }),
+    bodyField(),
     defineField({
       name: 'insights',
       type: 'array',

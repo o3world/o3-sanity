@@ -275,3 +275,20 @@ export const OnPhotographUntinted: Story = {
     },
   },
 }
+
+/** Current Home label rail: a stacked header and 20/26 mobile panel copy. */
+export const HomeMobile: Story = {
+  ...RailByLabel,
+  globals: { viewport: { value: 'mobile' } },
+  parameters: { design: figmaDesign('2975:8188') },
+  play: async ({ canvasElement }) => {
+    const heading = canvasElement.querySelector('h2')!
+    await expect(getComputedStyle(heading).fontSize).toBe('40px')
+    await expect(getComputedStyle(heading).lineHeight).toBe('44px')
+    const panel = canvasElement.querySelector('article')!
+    const body = panel.querySelector('p')!
+    await expect(getComputedStyle(body).fontSize).toBe('20px')
+    await expect(getComputedStyle(body).lineHeight).toBe('26px')
+    await expect(getComputedStyle(panel.parentElement!).gap).toBe('64px')
+  },
+}
