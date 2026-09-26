@@ -4,6 +4,18 @@ import { useLayoutEffect, useRef } from 'react'
 
 const HEIGHT = '--cta-combined-height'
 
+/** Document layout coordinates, independent of an ancestor's entrance transform. */
+function layoutTop(element: HTMLElement): number {
+  let top = 0
+  let current: HTMLElement | null = element
+  while (current) {
+    top += current.offsetTop
+    current = current.offsetParent as HTMLElement | null
+    if (current) top += current.clientTop
+  }
+  return top
+}
+
 /** Keep the adjacent CTA and footer on one gradient field as either box reflows. */
 export function CtaFooterPaint() {
   const marker = useRef<HTMLSpanElement>(null)
@@ -22,13 +34,17 @@ export function CtaFooterPaint() {
       painted = undefined
     }
     const measure = () => {
-      const band = cta.getBoundingClientRect()
-      const foot = footer.getBoundingClientRect()
-      if (Math.abs(band.bottom - foot.top) > 1 || !band.height || !foot.height) {
+      const bandHeight = cta.offsetHeight
+      const footHeight = footer.offsetHeight
+      if (
+        Math.abs(layoutTop(cta) + bandHeight - layoutTop(footer)) > 1 ||
+        !bandHeight ||
+        !footHeight
+      ) {
         clear()
         return
       }
-      const height = `${band.height + foot.height}px`
+      const height = `${bandHeight + footHeight}px`
       if (height === painted) return
       painted = height
       cta.style.setProperty(HEIGHT, height)

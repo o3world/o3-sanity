@@ -78,7 +78,9 @@ export const ReflowingFooter: Story = {
   args: seededSectionArgs('about', 'ctaSection'),
   render: (args) => (
     <>
-      <CtaSection {...args} />
+      <div data-testid="entrance" style={{ transform: 'translateY(24px)', opacity: 0 }}>
+        <CtaSection {...args} />
+      </div>
       <footer id="footer" className="site-footer" style={{ height: 137 }}>
         Footer content
       </footer>
@@ -89,11 +91,15 @@ export const ReflowingFooter: Story = {
     const footer = canvasElement.querySelector('footer')!
     const check = async () =>
       waitFor(() => {
-        const total = `${cta.getBoundingClientRect().height + footer.getBoundingClientRect().height}px`
+        const total = `${cta.offsetHeight + footer.offsetHeight}px`
         expect(cta.style.getPropertyValue('--cta-combined-height')).toBe(total)
         expect(footer.style.getPropertyValue('--cta-combined-height')).toBe(total)
         expect(getComputedStyle(cta).backgroundSize).toBe(getComputedStyle(footer).backgroundSize)
       })
+    await check()
+    const entrance = canvasElement.querySelector<HTMLElement>('[data-testid="entrance"]')!
+    entrance.style.transform = 'none'
+    entrance.style.opacity = '1'
     await check()
     footer.style.height = '311px'
     await check()
