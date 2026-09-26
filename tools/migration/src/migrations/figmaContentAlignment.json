@@ -1168,10 +1168,16 @@
       "slug": "vertex",
       "patches": [
         {
-          "path": "narrativeHeadline",
-          "before": "Vertex takes the complexity out of tax for some of the world’s largest retailers. Its partner network, its products and its marketing were all growing at once.",
+          "path": "title",
+          "before": "Making global tax feel a whole lot simpler.",
           "after": "A partnership that keeps adding up",
           "source": "C66 3565:23182"
+        },
+        {
+          "path": "narrativeHeadline",
+          "before": "A partnership that keeps adding up",
+          "after": "Vertex takes the complexity out of tax for some of the world’s largest retailers. Its partner network, its products and its marketing were all growing at once.",
+          "source": "Restore original teaser: CaseStudyView binds title to heading and narrativeHeadline to subheading."
         }
       ]
     },
@@ -1181,10 +1187,16 @@
       "slug": "caron",
       "patches": [
         {
-          "path": "narrativeHeadline",
-          "before": "We helped Caron create a more empathetic digital experience, helping people find answers and feel confident taking the vital next step toward care.",
+          "path": "title",
+          "before": "Marking the first step feel possible",
           "after": "Making the first step feel possible",
           "source": "C67 3249:20111"
+        },
+        {
+          "path": "narrativeHeadline",
+          "before": "Making the first step feel possible",
+          "after": "We helped Caron create a more empathetic digital experience, helping people find answers and feel confident taking the vital next step toward care.",
+          "source": "Restore original teaser: CaseStudyView binds title to heading and narrativeHeadline to subheading."
         }
       ]
     }
