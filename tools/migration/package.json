@@ -23,7 +23,8 @@
     "home-showcase-button": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/homeShowcaseButton.ts --with-user-token --",
     "contact-composition": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/contactComposition.ts --with-user-token --",
     "solutions-engagement-alignment": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/solutionsEngagementAlignment.ts --with-user-token --",
-    "raster-alignment": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/rasterAlignment.ts --with-user-token --"
+    "raster-alignment": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/rasterAlignment.ts --with-user-token --",
+    "about-composition": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/aboutComposition.ts --with-user-token --"
   },
   "dependencies": {
     "@o3/block-spec": "workspace:*",
