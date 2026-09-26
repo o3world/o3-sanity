@@ -36,8 +36,10 @@ describe('the case showcase band', () => {
     expect(html).toContain('gap-12')
   })
 
-  it('pins each card under the chrome from the desktop breakpoint up, on an opaque wrapper', () => {
-    expect(html).toContain('bg-black lg:sticky lg:top-[calc(var(--spacing-nav-pinned)+96px)]')
+  it('pins each card on a rounded opaque wrapper without clipping its shadow', () => {
+    expect(html).toContain(
+      'rounded-case-card bg-black lg:sticky lg:top-[calc(var(--spacing-nav-pinned)+96px)]',
+    )
   })
 
   it('leaves the cards in normal flow below it — nothing pins at 402', () => {

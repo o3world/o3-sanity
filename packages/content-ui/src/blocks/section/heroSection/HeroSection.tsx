@@ -2,7 +2,6 @@ import type { ReactNode } from 'react'
 import { stegaClean } from '@sanity/client/stega'
 
 import {
-  CloseIcon,
   CollectionHero,
   Entrance,
   heroStagger,
@@ -22,6 +21,7 @@ import { LogoKnockout } from '../../../LogoKnockout'
 import { SanityImage } from '../../../SanityImage'
 import { sectionBackground } from '../../sectionBackground'
 import { resolveSurface } from '../../surface'
+import { MoleculeDecoration } from '../../MoleculeDecoration'
 
 type HeroSectionProps = SectionProps<'heroSection'> & {
   /**
@@ -46,45 +46,33 @@ export function HeroSection({
   decoration,
   surface,
   backgroundMedia,
-  brandMark,
 }: HeroSectionProps) {
   const lines = headlineLines ?? []
   const showOrbs = stegaClean(decoration) !== 'none'
 
-  // The interior-page hero: a shallow strip, not the full orbital band. It is
-  // `CollectionHero` — the same component the /work and /insights routes
-  // render, which is what stops a page-authored hero and a route-owned hero
-  // drifting apart — drawn as the `Interior Hero` set (`2107:1051`), which
-  // #308 ruled canonical for every route that opens on this band.
   if (stegaClean(variant) === 'band') {
     const centred = stegaClean(alignment) === 'center'
     const detailGroups = details ?? []
     // The knob's own roster, all three. Anything else a client could write past
     // the form falls back to the colour the set is instanced on.
     const resolvedBand = resolveSurface(surface, 'heroSection')
-    const band = resolvedBand === 'white' || resolvedBand === 'paper' ? resolvedBand : 'ink'
-    /*
-     * The partner lockup (`2479:2205`): the brand's own mark, a 12px ×, and
-     * the partner's mark. Only the partner half is content; the × is the
-     * lockup's own chrome and the first half comes from the app.
-     *
-     * The knockout is the ink band's treatment — the same "Mask group" the
-     * case-study cards give a client logo, a white silhouette so a full-colour
-     * mark does not read as a foreign object on the dark. A light band has no
-     * dark to knock out of, and a white silhouette on it is invisible, so the
-     * partner's own artwork stands there instead.
-     */
+    const band =
+      resolvedBand === 'white' || resolvedBand === 'paper' || resolvedBand === 'bone'
+        ? resolvedBand
+        : 'ink'
+    // Current partner hero (3895:17003): the partner mark alone, with16px below it.
     const lockup = logo ? (
-      <div className="flex items-center gap-6">
-        {brandMark}
-        <CloseIcon
-          className={cn('size-3', band === 'ink' ? 'text-white' : 'text-fg')}
-          aria-hidden="true"
-        />
+      <div className="max-w-full pb-4">
         {band === 'ink' ? (
-          <LogoKnockout source={logo} alt="" width={257} className="h-[70px]" />
+          <LogoKnockout source={logo} alt="" width={257} className="h-[70px] max-w-full" />
         ) : (
-          <SanityImage source={logo} alt="" width={257} sizes="257px" className="h-[70px] w-auto" />
+          <SanityImage
+            source={logo}
+            alt=""
+            width={257}
+            sizes="257px"
+            className="h-[70px] max-w-full object-contain object-left"
+          />
         )}
       </div>
     ) : null
@@ -103,7 +91,7 @@ export function HeroSection({
                 {detail.label}
               </Eyebrow>
             ) : null}
-            <ul className="text-lead flex list-disc flex-col gap-1 pl-5">
+            <ul className="text-lead flex flex-col">
               {(detail.items ?? []).map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -124,69 +112,31 @@ export function HeroSection({
         background={sectionBackground(backgroundMedia, band)}
         align={centred ? 'center' : 'start'}
         decoration={
-          showOrbs ? (
-            /*
-             * ONE SEATING FOR EVERY SURFACE. The interior hero hangs its
-             * sphere in the same place whichever colour the band is painted;
-             * only the drawing changes with the surface, not the geometry.
-             *
-             * The geometry is the ink set's. The art rides in the set's own
-             * frame — a flattened capture (`I2101:861;2846:4466` on Work, the
-             * same node on Insights and on Software Engineering
-             * `I2354:2583;2846:4466`), so its 1577 box is the capture's bounds
-             * and not the sphere's. The sphere inside it is what this is
-             * seated to: tracing the lit limb across the three exports gives
-             * **d ≈ 918, top edge 184px below the band's top** at BOTH widths,
-             * moving only sideways — left edge 639 on the 1440 frames and 205
-             * on the 402 one (`I2107:1086;2960:6869`, the same capture slid
-             * 434 left). So the size is a literal, `lg` anchors to the right
-             * edge it overhangs by 117, and it is drawn at both widths.
-             *
-             * On the light surfaces it is the hairline drawing rather than the
-             * lit rim, because the glow belongs to the dark bands (see
-             * `OrbitalSphere`).
-             */
-            /*
-             * THE BLOOM IS FADED OUT WHERE THE NAV SITS.
-             *
-             * The sphere is placed correctly — its crest lands at 184, level
-             * with the eyebrow, which is what the frame draws. What collides
-             * with the chrome is the glow: the export's outer ring reaches
-             * about 164 user units past the sphere, ~220px at this band's
-             * scale, so it washes up behind the nav pill and greys the button
-             * inside it.
-             *
-             * Neither obvious fix works alone, and the arithmetic is why.
-             * Moving the globe clear would need +182px on a 581px band, which
-             * recomposes the whole thing. Shrinking the glow to fit the 38px
-             * between the nav's foot and the sphere's crest would mean cutting
-             * it from 164 units to 28 — deleting it, not reducing it.
-             *
-             * So only the colliding part goes. The mask is transparent above
-             * the nav's foot and fully open again by the time the sphere's
-             * crest arrives. That window is 38px wide, so the very top of the
-             * limb is fractionally dimmed; everything below it, and the whole
-             * of the bloom to the sides and underneath, is the export
-             * untouched.
-             */
-            <div className="pointer-events-none absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,transparent_0,transparent_146px,#000_190px)]">
-              <OrbitalSphere
-                /* It turns here as it does in the Home opener — the captures
-                 these are seated to stand in for the animation, so a still
-                 sphere is the stand-in rather than the thing. `motion-reduce`
-                 stops it. */
-                motion="orbit"
-                /* The red globe on ink, the same one the Home opener draws — an
-                 interior hero is not a quieter version of the opener, it is the
-                 same field on a shorter band. The line drawing still belongs to
-                 the light surfaces, where a bloom has nothing to sit on. */
-                preset={band === 'ink' ? 'hero' : 'line'}
-                /* A literal size at both widths — that is the reading above,
-                 not an oversight: the frames slide the same capture sideways
-                 rather than rescaling it. */
-                className="left-[205px] top-[184px] w-[918px] lg:left-auto lg:right-[-117px]"
+          showOrbs && !logo ? (
+            centred && band !== 'ink' ? (
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                data-hero-decoration="ring"
+                viewBox="0 0 608 608"
+                className="pointer-events-none absolute left-1/2 top-[109px] -z-10 size-[440px] -translate-x-1/2 fill-white opacity-50 lg:top-[132px] lg:size-[608px]"
+              >
+                <path d="M0 303.983C0 471.598 136.395 608 304 608C471.606 608 608 471.633 608 303.983C608 136.332 471.641 0 304 0C136.359 0 0 136.367 0 303.983ZM485.614 303.983C485.614 404.116 404.163 485.642 304 485.642C203.837 485.642 122.386 404.151 122.386 303.983C122.386 203.814 203.872 122.358 304 122.358C404.128 122.358 485.614 203.814 485.614 303.983Z" />
+              </svg>
+            ) : (
+              <MoleculeDecoration
+                decoration="molecule"
+                block="heroSection"
+                surface={band}
+                visibleFrom="base"
+                className={cn(
+                  'left-[167px] top-[-390px] size-[980px] opacity-10 lg:left-auto',
+                  centred
+                    ? 'lg:right-[-397px] lg:top-[-426px]'
+                    : 'lg:right-[-287px] lg:top-[-384px]',
+                )}
               />
-            </div>
+            )
           ) : null
         }
       />

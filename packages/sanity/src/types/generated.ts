@@ -728,7 +728,7 @@ export type HeroSection = {
   button?: Button
   decoration?: 'orbs' | 'none'
   alignment?: 'start' | 'center'
-  surface?: 'ink' | 'white' | 'paper'
+  surface?: 'ink' | 'white' | 'paper' | 'bone'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -2264,7 +2264,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         } | null
         decoration?: 'none' | 'orbs'
         alignment?: 'center' | 'start'
-        surface?: 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -3527,7 +3527,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         } | null
         decoration?: 'none' | 'orbs'
         alignment?: 'center' | 'start'
-        surface?: 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -4979,7 +4979,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         } | null
         decoration?: 'none' | 'orbs'
         alignment?: 'center' | 'start'
-        surface?: 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -6399,7 +6399,7 @@ export type PAGE_QUERY_RESULT = {
         } | null
         decoration?: 'none' | 'orbs'
         alignment?: 'center' | 'start'
-        surface?: 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {

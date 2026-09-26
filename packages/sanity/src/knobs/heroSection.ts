@@ -33,7 +33,7 @@ export const heroSectionKnobs = defineBlockKnobs({
       name: 'alignment',
       title: 'Alignment',
       description:
-        'Band composition only. Left puts the copy against the gutter and leaves the right of the band to the globe or a rail; Centred stacks the eyebrow, headline and supporting copy on the centre line.',
+        'Band composition only. Left puts the copy against the gutter and leaves the right of the band to a faint molecule or a rail; Centred stacks the eyebrow, headline and supporting copy on the centre line.',
       options: [
         { value: 'start', title: 'Left' },
         { value: 'center', title: 'Centred' },
@@ -49,25 +49,10 @@ export const heroSectionKnobs = defineBlockKnobs({
     // and the factory that generated a field directly is gone.
     //
     decorationKnob(['orbs', 'none']),
-    /*
-     * Ink or a light band, and only on the band composition (#311).
-     *
-     * The orbital opener paints ink whatever a document stores, and it has to:
-     * the sphere and the white copy over it are one composition drawn on that
-     * colour. So the control is gated rather than offered and ignored — a knob
-     * that turns and repaints nothing is the failure ADR 0020's guard exists
-     * to remove.
-     *
-     * The `Interior Hero` set is instanced on ink everywhere but About, which
-     * draws "Interior Hero – White" (`2960:6876`, and `2975:9022` at 402) —
-     * a set whose fill is **#F5F4F1** despite the name, which is `paper`.
-     * White stays on the roster for a band that wants the plain one.
-     *
-     * `emptyMatches` is not set: `variant` defaults to `orbital`, so an unset
-     * value is the composition this gate is closed for.
-     */
+    // Current About (3754:78486) uses bone; the orbital Home opener keeps
+    // its own ink surface and does not expose this band-only choice.
     surfaceKnob({
-      options: ['ink', 'white', 'paper'],
+      options: ['ink', 'white', 'paper', 'bone'],
       initialValue: 'ink',
       showWhen: { at: 'variant', mode: 'oneOf', values: ['band'] },
     }),

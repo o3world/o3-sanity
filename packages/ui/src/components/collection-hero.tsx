@@ -46,8 +46,13 @@ export function CollectionHero({
         data-collection-hero="interior"
         {...surfaceAttrs(surface)}
         className={cn(
-          'relative isolate overflow-hidden px-4 pb-16 lg:px-24 lg:pt-[240px]',
-          centred ? 'pt-48' : 'pt-[208px]',
+          'relative isolate flex flex-col overflow-hidden px-4 pb-16 lg:px-24',
+          centred
+            ? surface === 'ink'
+              ? 'pt-48 lg:min-h-[660px] lg:pb-[119px] lg:pt-[231px]'
+              : 'min-h-[658px] pt-48 lg:min-h-[864px] lg:pb-[239px] lg:pt-[239px]'
+            : 'pt-[208px] lg:min-h-[660px] lg:justify-end lg:pt-[240px]',
+          !centred && lockup && 'lg:min-h-[640px]',
           SURFACE_CLASS[surface],
           className,
         )}
@@ -67,7 +72,6 @@ export function CollectionHero({
             className={cn(
               'flex flex-col gap-2',
               centred ? 'w-full max-w-[982px] items-center' : 'lg:w-[608px]',
-              !centred && lockup && 'gap-6',
             )}
           >
             {eyebrow ? (
@@ -92,7 +96,11 @@ export function CollectionHero({
             </h1>
             {subheading ? (
               <p
-                className={cn('text-lead', surface === 'ink' ? 'text-on-utility' : 'text-fg-body')}
+                className={cn(
+                  'text-lead',
+                  surface === 'ink' ? 'text-on-utility' : 'text-fg-body',
+                  centred && surface !== 'ink' && 'max-w-[728px]',
+                )}
               >
                 {subheading}
               </p>
