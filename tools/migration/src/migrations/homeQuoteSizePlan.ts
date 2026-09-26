@@ -16,6 +16,7 @@ export function planHomeQuoteSize(row: HomeQuoteRow) {
   )
     throw new Error('Expected the published Home page or its draft')
   const quotes = row.sections?.filter((section) => section._type === 'quoteSection') ?? []
+  if (!quotes.length) return null
   const quote = quotes[0]
   if (quotes.length !== 1 || quote?._key !== 'quote')
     throw new Error('Expected exactly one Home quote keyed quote')

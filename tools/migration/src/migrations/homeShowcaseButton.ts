@@ -1,6 +1,6 @@
-/** Report by default. Apply only after the medium quote renderer is deployed. */
+/** Report by default. Apply only after the brand button renderer is deployed. */
 import { getCliClient } from 'sanity/cli'
-import { planHomeQuoteSize, type HomeQuoteRow } from './homeQuoteSizePlan'
+import { planHomeShowcaseButton, type HomeShowcaseRow } from './homeShowcaseButtonPlan'
 
 const client = getCliClient({ apiVersion: '2026-07-01' })
 
@@ -13,8 +13,8 @@ async function main() {
   }
   if (client.config().projectId !== 'naorcr6k')
     throw new Error('This migration is only for the O3 project')
-  const rows = await client.fetch<HomeQuoteRow[]>(
-    '*[_id in ["page-seed-index", "drafts.page-seed-index"]]{_id,_rev,_type,slug,migration,sections[]{_key,_type,size}}',
+  const rows = await client.fetch<HomeShowcaseRow[]>(
+    '*[_id in ["page-seed-index", "drafts.page-seed-index"]]{_id,_rev,_type,slug,migration,sections[]{_key,_type,button{contrast}}}',
     {},
     { perspective: 'raw' },
   )
@@ -22,10 +22,10 @@ async function main() {
     throw new Error('Expected exactly one published Home page')
   if (new Set(rows.map((row) => row._id)).size !== rows.length)
     throw new Error('Duplicate Home document identities')
-  const plans = rows.map(planHomeQuoteSize).filter((plan) => plan !== null)
+  const plans = rows.map(planHomeShowcaseButton).filter((plan) => plan !== null)
   console.log(`${client.config().projectId}/${dataset}`)
   if (!plans.length) {
-    console.log('No change: every existing Home quote already uses medium size')
+    console.log('No change: Home showcase button needs no change')
     return
   }
   console.log(JSON.stringify(plans, null, 2))
@@ -38,7 +38,9 @@ async function main() {
     transaction.patch(plan.id, (patch) => patch.ifRevisionId(plan.revision).set(plan.set))
   }
   await transaction.commit()
-  console.log(`Updated only quote size in ${plans.length} Home version(s); no draft published.`)
+  console.log(
+    `Updated only showcase button contrast in ${plans.length} Home version(s); no draft published.`,
+  )
 }
 
 main().catch((error) => {

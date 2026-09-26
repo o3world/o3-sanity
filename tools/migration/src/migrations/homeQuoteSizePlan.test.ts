@@ -26,6 +26,10 @@ describe('Home quote size migration', () => {
       ).toBeNull()
     }
   })
+  it('leaves Home versions without a quote unchanged', () => {
+    expect(planHomeQuoteSize({ ...row, sections: [] })).toBeNull()
+    expect(planHomeQuoteSize({ ...row, sections: undefined })).toBeNull()
+  })
   it('refuses locks, unexpected identities, ambiguous quotes and unknown sizes', () => {
     for (const invalid of [
       { ...row, migration: { locked: true } },
