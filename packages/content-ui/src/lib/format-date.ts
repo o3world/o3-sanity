@@ -6,7 +6,7 @@ export function formatMonthYear(iso: string | null | undefined): string | null {
   return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 }
 
-/** "July 16, 2026" — current insight-card metadata (3739:71754). */
+/** "July 16, 2026" — current insight card and article metadata. */
 export function formatLongDate(iso: string | null | undefined): string | null {
   if (!iso) return null
   const date = new Date(iso)

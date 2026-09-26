@@ -1,17 +1,22 @@
+import { expect, within } from 'storybook/test'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { CaseStudyHero } from './case-study-hero'
 
-/**
- * The case-study opener, `1710:2301` at 1440 and `1906:923` at 402. At 1440 the
- * copy sits on a hard-edged black band running the width of the row
- * (`2846:4538`); at 402 there is none and the scrim carries the legibility on
- * its own. The kicker is brand red at both widths.
- */
 const meta = {
   title: 'Case Study/CaseStudyHero',
   component: CaseStudyHero,
   parameters: { layout: 'fullscreen' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    if (window.innerWidth >= 1440) {
+      await expect(getComputedStyle(canvas.getByRole('heading', { level: 1 })).fontSize).toBe(
+        '48px',
+      )
+    }
+    const eyebrow = canvasElement.querySelector('p')
+    if (eyebrow) await expect(getComputedStyle(eyebrow).color).toBe('rgb(255, 255, 255)')
+  },
 } satisfies Meta<typeof CaseStudyHero>
 
 export default meta

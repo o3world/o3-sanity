@@ -33,6 +33,13 @@ const meta = {
     body: [
       {
         _type: 'block',
+        _key: 'body-heading',
+        style: 'h2',
+        markDefs: [],
+        children: [{ _type: 'span', _key: 'text', text: 'An article body heading', marks: [] }],
+      },
+      {
+        _type: 'block',
         _key: 'paragraph',
         style: 'normal',
         markDefs: [],
@@ -64,6 +71,14 @@ const meta = {
     await expect(
       excerpt.getBoundingClientRect().top - heading.getBoundingClientRect().bottom,
     ).toBeCloseTo(8, 1)
+    await expect(
+      getComputedStyle(canvas.getByText('An article body heading')).fontFamily,
+    ).toContain('Figtree')
+    await expect(canvas.queryByText('All Insights')).toBeNull()
+    await expect(canvas.getByRole('link', { name: 'Start the conversation' })).toHaveAttribute(
+      'href',
+      '/contact',
+    )
     const prose = canvas.getByText(paragraph)
     await expect(getComputedStyle(prose).fontSize).toBe('20px')
     await expect(getComputedStyle(prose).lineHeight).toBe('32px')

@@ -8,46 +8,9 @@ import { resolveSurface } from '../../surface'
 
 type ScreenGridSectionProps = SectionProps<'screenGridSection'> & { sequence?: boolean }
 
-/**
- * Section block: tiled product screenshots on gradient plates — the case-study
- * frame's screen bands (`2230:3315`, `2230:7559`), #97.
- *
- * ```
- * band     32px 96px                        (px-gutter, py-8)
- * grid     2 columns, gap 32                (single column below lg)
- * plate    radius 32, overflow hidden
- * screen   radius 12, shadow 0 0 32 / 0.25, top-aligned and cropped
- * ```
- *
- * Standard tiles fill their boxes without a separate background or inset.
- * Wide tiles retain the inset presentation described below.
- *
- * **The plate crops the screenshot, and that is the whole effect.** Each wide tile
- * on both frames sets an oversized capture inside the plate and lets the
- * plate's rounded box cut it off — `2230:3315`'s lead tile holds an 807 × 2048
- * phone shot in a 716-tall plate. So the image renders at its own proportions,
- * hung 64px from the plate's top edge, and whatever runs past the floor is
- * clipped rather than scaled to fit.
- *
- * **Heights follow `span`, not a field.** `2230:7559` draws 716 for the wide
- * lead tile and 342 for the small ones — a ratio of about 1.74 and 1.78, near
- * enough one shape at two column counts, so both are expressed as aspect
- * ratios instead of the frame's fixed pixels (ADR 0006: frames are endpoints).
- * `2230:3315` draws its two standard tiles at 716 as well; that reads as that
- * band's composition rather than a second rule, and a per-tile height field
- * would be authoring layout rather than content.
- *
- * Below `lg` the grid collapses to one column and every plate takes the same
- * 4/3 box — a 1.78 plate on a 362px column is 203px tall, which is not a
- * screenshot, it is a strip.
- *
- * The band builds its own `<section>` rather than using `SectionShell`: 32px
- * is not one of the shell's band steps and should not become one. It is the
- * frame saying these bands butt against each other, not a rhythm choice.
- *
- * Static — no `use client`. Everything here is layout.
+/** Current case-study grids keep each standard asset's complete composition.
+ * Tall and short exports carry their own ratio; wide captures retain a cropped plate.
  */
-
 /** Plate fills. Written out in full because the class scanner cannot see an interpolated one. */
 const TONE_CLASS = {
   /* `2230:3315`'s lead plate. */
@@ -60,8 +23,8 @@ const TONE_CLASS = {
 } as const
 
 const SPAN_CLASS = {
-  standard: 'lg:aspect-[608/342]',
-  wide: 'lg:col-span-2 lg:aspect-[1248/716]',
+  standard: 'self-start',
+  wide: 'aspect-4/3 lg:col-span-2 lg:aspect-[1248/700]',
 } as const
 
 type Tone = keyof typeof TONE_CLASS
@@ -98,13 +61,13 @@ export function ScreenGridSection({
             // The tile's own path. This band has no header to attribute —
             // it is screens and nothing else.
             data-sanity={itemAttr(loc, 'screens', screen._key)}
-            className={`aspect-4/3 relative overflow-hidden rounded-[32px] ${fill ? '' : TONE_CLASS[toneOf(screen.tone)]} ${SPAN_CLASS[span]}`}
+            className={`relative overflow-hidden rounded-[32px] ${fill ? '' : TONE_CLASS[toneOf(screen.tone)]} ${SPAN_CLASS[span]}`}
           >
             <div
               data-reveal-step={sequence ? 'screen' : undefined}
               className={
                 fill
-                  ? 'absolute inset-0'
+                  ? 'relative'
                   : 'absolute inset-x-0 top-0 flex justify-center px-8 pt-8 lg:px-16 lg:pt-16'
               }
             >
@@ -114,7 +77,7 @@ export function ScreenGridSection({
                 width={1600}
                 className={
                   fill
-                    ? 'h-full w-full object-cover object-top'
+                    ? 'h-auto w-full'
                     : 'w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.25)]'
                 }
                 /*

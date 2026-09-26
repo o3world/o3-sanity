@@ -1,13 +1,11 @@
 import { ArticleByline, Eyebrow, ReadingProgress, SectionShell } from '@o3/ui'
 import type { INSIGHT_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { CarouselTrack, CAROUSEL_BAND_CLASS, SanityImage } from '@o3/content-ui'
+import { CarouselTrack, CAROUSEL_BAND_CLASS, CtaSection, SanityImage } from '@o3/content-ui'
 import { FULL_BLEED } from '@o3/content-ui/image-sizes'
 import { PortableTextBody } from '@o3/content-ui/portable-text'
 import { getCard } from '@o3/content-ui/cards'
-import { formatMonthYear } from '@o3/content-ui/format-date'
-
-import { BackToInsights } from './BackToInsights'
+import { formatLongDate } from '@o3/content-ui/format-date'
 
 type InsightViewProps = NonNullable<INSIGHT_QUERY_RESULT>
 
@@ -30,8 +28,7 @@ export function InsightView({
     .filter(Boolean)
     .join(' · ')
 
-  // "Jun 2026 · 6 min read" — `1710:2951`.
-  const meta = [formatMonthYear(publishedAt), readingMinutes ? `${readingMinutes} min read` : null]
+  const meta = [formatLongDate(publishedAt), readingMinutes ? `${readingMinutes} min read` : null]
     .filter(Boolean)
     .join(' · ')
 
@@ -56,7 +53,7 @@ export function InsightView({
           before #90, drawn when the document has no picture at all to fill
           it. With an image it is only what shows while the photograph
           loads. */}
-      <header className="bg-ink-warm px-gutter relative isolate overflow-hidden pb-16 pt-[164px] text-white lg:pt-[calc(var(--spacing-nav-offset)+100px)]">
+      <header className="bg-ink-warm px-gutter relative isolate flex min-h-[540px] flex-col justify-end overflow-hidden pb-12 pt-36 text-white lg:min-h-[720px] lg:pb-16 lg:pt-44">
         {heroImage ? (
           <>
             <div className="absolute inset-0 -z-20">
@@ -72,23 +69,15 @@ export function InsightView({
                 priority
               />
             </div>
-            {/* The `#030303` scrim both frames lay over the photograph, left
-                to right. At 1440 (`2252:3554`) it is opaque to 16.8% and
-                clear by the right edge, which keeps the 588px copy column
-                legible and leaves the picture open beside it. At 402
-                (`2262:3859`) the copy is full-width, so the stop never falls
-                below 50% — the same trade `CaseStudyHero` makes at that
-                width. */}
-            <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(3,3,3,1)_0%,rgba(3,3,3,0.5)_100%)] lg:bg-[linear-gradient(90deg,rgba(3,3,3,1)_16.83%,rgba(3,3,3,0)_100%)]" />
+            {/* Current Blog Hero scrim: 3739:73191 / 3754:73244. */}
+            <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(3,3,3,1)_28.846%,rgba(3,3,3,0.5)_100%)] lg:bg-[linear-gradient(90deg,rgba(3,3,3,1)_55%,rgba(3,3,3,0)_100%)]" />
           </>
         ) : null}
 
         <div
           data-route-foreground=""
-          className="max-w-section relative mx-auto flex flex-col gap-8"
+          className="max-w-section relative mx-auto flex w-full flex-col gap-8"
         >
-          <BackToInsights />
-
           <div className="flex w-full flex-col gap-2 lg:w-[608px]">
             {category ? (
               <Eyebrow size="lg" className="text-on-utility mb-4">
@@ -128,13 +117,10 @@ export function InsightView({
       {keepReading.length ? (
         <div className="bg-bone">
           <SectionShell surface="bone" top="detail" bottom="detail" className={CAROUSEL_BAND_CLASS}>
-            {/* `1751:1949` — the frame's own copy for this band. The mobile
-                frame heads it "The thinking behind the work.", which is the
-                /insights index's line; the desktop detail frame is the
-                canonical read for a detail page. */}
             <CarouselTrack
               sequence
-              heading="Keep reading."
+              eyebrow="Related Insights"
+              heading="More ideas worth looking into."
               cards={keepReading.map((item) => (
                 <Card key={item._id} {...item} />
               ))}
@@ -142,6 +128,18 @@ export function InsightView({
           </SectionShell>
         </div>
       ) : null}
+      <CtaSection
+        heading="Let’s put some of this thinking to work."
+        body="If something here sparked an idea, surfaced a challenge, or got you thinking differently, we’d love to talk about what could be next."
+        decoration="orbs"
+        button={{
+          _type: 'button',
+          label: 'Start the conversation',
+          href: '/contact',
+          contrast: 'light',
+          target: null,
+        }}
+      />
     </article>
   )
 }
