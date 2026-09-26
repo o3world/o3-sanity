@@ -1,3 +1,4 @@
+import { ARTICLE_COLUMN, CONTENT_COLUMN, LAYOUT_COLUMN } from '@o3/content-ui/image-sizes'
 import { describe, expect, it } from 'vitest'
 
 import { PAGE_QUERY } from '@o3/sanity/queries'
@@ -77,17 +78,9 @@ describe('the seeded About page', () => {
    */
   it('sizes a card’s picture to its layout column, not to the whole content column', () => {
     const slots = declaredSizes(html)
-    expect(
-      slots.filter(
-        (slot) =>
-          slot ===
-          '(min-width: 1878px) 550px, (min-width: 1440px) calc(33.333vw - 76.667px), (min-width: 768px) 28vw, 90vw',
-      ),
-    ).toHaveLength(3)
-    expect(slots).not.toContain(
-      '(min-width: 1878px) 1728px, (min-width: 1440px) calc(100vw - 150px), 90vw',
-    )
-    expect(slots).not.toContain('(min-width: 917px) 822px, 90vw')
+    expect(slots.filter((slot) => slot === LAYOUT_COLUMN[3])).toHaveLength(3)
+    expect(slots).not.toContain(CONTENT_COLUMN)
+    expect(slots).not.toContain(ARTICLE_COLUMN)
   })
 
   /**
@@ -262,7 +255,9 @@ describe('the seeded Solutions page', () => {
    */
   it('is a stack at 402, with no frame to copy', () => {
     expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
-    expect(variantsOf(html, 'grid-cols-3')).toEqual(['lg:grid-cols-3'])
+    expect(variantsOf(html, 'grid-cols-[minmax(0,395fr)_minmax(0,821fr)]')).toEqual([
+      'lg:grid-cols-[minmax(0,395fr)_minmax(0,821fr)]',
+    ])
     expect(html).toContain('data-testid="orbital-diagram"')
     expect(html).toContain('lg:block')
   })
@@ -348,11 +343,13 @@ describe('the seeded Software Engineering service page', () => {
    * The frame (`2360:2879`) is 1440-only, so every mobile composition on
    * this page is a renderer decision under ADR 0006, and these are the
    * invariants that keep it honest: nothing scrolls sideways, and the
-   * three-across service grid is `lg:`.
+   * service columns begin at `lg:`.
    */
   it('is a stack at 402, with no frame to copy', () => {
     expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
-    expect(variantsOf(html, 'grid-cols-3')).toEqual(['lg:grid-cols-3'])
+    expect(variantsOf(html, 'grid-cols-[minmax(0,395fr)_minmax(0,821fr)]')).toEqual([
+      'lg:grid-cols-[minmax(0,395fr)_minmax(0,821fr)]',
+    ])
   })
 })
 

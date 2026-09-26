@@ -7,7 +7,7 @@ export type SolutionsEngagementRow = {
   sections?: { _key?: string; _type: string; layout?: string | null }[]
 }
 
-export function planSolutionsEngagementAlignment(row: SolutionsEngagementRow) {
+export function planSolutionsEngagementAlignment(row: SolutionsEngagementRow, allowLocked = false) {
   if (
     !['page-seed-solutions', 'drafts.page-seed-solutions'].includes(row._id) ||
     row._type !== 'page' ||
@@ -19,7 +19,7 @@ export function planSolutionsEngagementAlignment(row: SolutionsEngagementRow) {
   if (sections.length !== 1 || section?._type !== 'railPanelsSection')
     throw new Error('Expected exactly one engagement panel section')
   if (section.layout === 'cards') return null
-  if (row.migration?.locked) throw new Error('Solutions is migration-locked')
+  if (row.migration?.locked && !allowLocked) throw new Error('Solutions is migration-locked')
   if (section.layout !== 'track') throw new Error(`Unexpected engagement layout ${section.layout}`)
   return {
     id: row._id,

@@ -1,3 +1,4 @@
+import { STRUCTURAL_THREE_UP } from '@o3/content-ui/image-sizes'
 import { describe, expect, it } from 'vitest'
 
 import { COLLECTION_INDEX_QUERY, INSIGHTS_PAGE_QUERY } from '@o3/sanity/queries'
@@ -139,11 +140,7 @@ describe('insights collection index route', () => {
     expect(preloaded).toHaveLength(1)
     expect(preloaded[0]).toContain('alt="Picture 0"')
     // …and every card declares the three-up slot rather than the viewport.
-    expect(declaredSizes(html)).toEqual(
-      Array(3).fill(
-        '(min-width: 1878px) 555px, (min-width: 1440px) calc(33.333vw - 71.333px), (min-width: 1024px) calc(29.801vw - 20.465px), (min-width: 640px) 395px, 90vw',
-      ),
-    )
+    expect(declaredSizes(html)).toEqual(Array(3).fill(STRUCTURAL_THREE_UP))
   })
 
   it('links each card at its own detail URL', async () => {

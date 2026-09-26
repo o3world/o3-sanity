@@ -49,7 +49,7 @@ export function PanelRows({ items, onInk = false, lastDetailIsOutcome = true }: 
                 <Mark {...markProps(panel.mark)} onInk={onInk} className="w-[37px]" />
               ) : null}
               {panel.heading ? (
-                <h3 className="font-display text-[40px] leading-[44px] lg:text-[48px] lg:leading-[58px]">
+                <h3 className="font-display break-words text-[40px] leading-[44px] lg:text-[48px] lg:leading-[58px]">
                   {panel.heading}
                 </h3>
               ) : null}

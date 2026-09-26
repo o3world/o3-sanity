@@ -25,7 +25,9 @@ async function main() {
     throw new Error('Expected exactly one published Solutions page')
   if (new Set(rows.map((row) => row._id)).size !== rows.length)
     throw new Error('Duplicate Solutions document identities')
-  const plans = rows.map(planSolutionsEngagementAlignment).filter((plan) => plan !== null)
+  const plans = rows
+    .map((row) => planSolutionsEngagementAlignment(row, args.includes('--allow-locked')))
+    .filter((plan) => plan !== null)
   console.log(`${client.config().projectId}/${dataset}`)
   if (!plans.length) {
     console.log('No change: Solutions engagements already use columns in every version')

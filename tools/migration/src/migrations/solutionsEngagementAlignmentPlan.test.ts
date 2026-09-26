@@ -37,3 +37,11 @@ it('refuses unexpected identities, layouts, duplicate sections and locked conten
   ).toThrow()
   expect(() => planSolutionsEngagementAlignment({ ...row, migration: { locked: true } })).toThrow()
 })
+
+it('allows the approved single-field override without removing the lock', () => {
+  const locked = { ...row, migration: { locked: true } }
+  expect(planSolutionsEngagementAlignment(locked, true)?.set).toEqual({
+    'sections[_key=="engagements"].layout': 'cards',
+  })
+  expect(locked.migration.locked).toBe(true)
+})
