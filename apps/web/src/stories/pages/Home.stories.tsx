@@ -55,9 +55,10 @@ export const Desktop: Story = {
     await expectAlignedNavMark(canvasElement, 80, 24.6)
     // Figma's autosized Newsreader line is 1076px (3720:60482). A weight-only
     // font fixes optical size at 16 and incorrectly narrows it to 1030px.
+    // Allow 6px for browser/platform text metrics (Linux CI differs by 4px).
     await document.fonts.ready
     const heroLine = canvasElement.querySelector('.hero-lead h1 > span > span')!
-    await expect(Math.abs(heroLine.getBoundingClientRect().width - 1076)).toBeLessThan(2)
+    await expect(Math.abs(heroLine.getBoundingClientRect().width - 1076)).toBeLessThan(6)
     const cardCopy = canvasElement.querySelectorAll(
       '.rounded-case-card h3, .rounded-case-card .text-display-xl',
     )
