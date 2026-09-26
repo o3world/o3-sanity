@@ -39,6 +39,7 @@ export const Desktop: Story = {
     const sections = canvasElement.querySelectorAll('section')
     const photo = sections[0]!.querySelector('figure > div')!.getBoundingClientRect()
     const heading = sections[1]!.querySelector('h2')!.getBoundingClientRect()
+    await expect(sections[0]!.getBoundingClientRect().height).toBeCloseTo(photo.height - 64, 0)
     await expect(getComputedStyle(sections[1]!).paddingTop).toBe('192px')
     await expect(heading.top - photo.bottom).toBeCloseTo(128, 0)
   },
@@ -50,6 +51,7 @@ export const Mobile: Story = {
     const sections = canvasElement.querySelectorAll('section')
     const photo = sections[0]!.querySelector('figure > div')!.getBoundingClientRect()
     const heading = sections[1]!.querySelector('h2')!.getBoundingClientRect()
+    await expect(sections[0]!.getBoundingClientRect().height).toBeCloseTo(photo.height - 64, 0)
     await expect(getComputedStyle(sections[1]!).paddingTop).toBe('128px')
     await expect(heading.top - photo.bottom).toBeCloseTo(64, 0)
   },

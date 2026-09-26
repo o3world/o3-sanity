@@ -37,7 +37,10 @@ export function MediaSection({
     const feature = composition === 'feature'
     return (
       <SurfaceProvider surface={resolved}>
-        <section {...surfaceAttrs(resolved)} className={`${bandClass} px-gutter relative`}>
+        <section
+          {...surfaceAttrs(resolved)}
+          className={`${bandClass} px-gutter relative flow-root`}
+        >
           {picture}
           <figure className={`max-w-section relative mx-auto ${feature ? 'z-10 -mb-16' : ''}`}>
             <div
