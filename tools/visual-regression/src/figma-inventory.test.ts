@@ -33,8 +33,8 @@ describe('readDeclaredPairings', () => {
   it('reads the meta pairing NextCaseBand declares once for both its stories', () => {
     const band = pairings.filter((p) => p.title === 'Content/Documents/CaseStudy/NextCaseBand')
     expect(band.map((p) => [p.storyId, p.nodeId, p.declaredOn])).toEqual([
-      ['content-documents-casestudy-nextcaseband--desktop', '1710:2609', 'meta'],
-      ['content-documents-casestudy-nextcaseband--mobile', '1906:1039', 'story'],
+      ['content-documents-casestudy-nextcaseband--desktop', '3267:9463', 'meta'],
+      ['content-documents-casestudy-nextcaseband--mobile', '3267:9463', 'meta'],
     ])
   })
 
@@ -57,7 +57,7 @@ describe('readInventory', () => {
       inventory.pairings.find(
         (row) => row.storyId === 'content-documents-casestudy-nextcaseband--desktop',
       ),
-    ).toMatchObject({ designBrand: 'o3', nodeId: '1710:2609' })
+    ).toMatchObject({ designBrand: 'o3', nodeId: '3267:9463' })
   })
 
   it('flags the page-frame pairings the page mockups declare', () => {

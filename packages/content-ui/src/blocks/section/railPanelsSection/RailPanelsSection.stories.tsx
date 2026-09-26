@@ -305,3 +305,12 @@ export const HomeMobile: Story = {
     await expect(getComputedStyle(panel.parentElement!).gap).toBe('64px')
   },
 }
+
+export const LabelsOnInk: Story = {
+  ...RailByLabel,
+  args: { ...RailByLabel.args, surface: 'ink' },
+  play: async ({ canvasElement }) => {
+    const active = canvasElement.querySelector('a[aria-current="true"]')!
+    await expect(getComputedStyle(active).color).toBe('rgb(255, 255, 255)')
+  },
+}

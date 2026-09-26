@@ -140,7 +140,7 @@ export const Feature: Story = {
       image: {
         _type: 'image',
         asset: {
-          _id: 'image-dc7f93c6b2e336d44316689f85578229a01223dd-1248x550-png',
+          _id: 'image-1ac527f77f4c0726250fbf7340cf31cb4d3854af-3840x2160-png',
           metadata: null,
         },
       },

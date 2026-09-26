@@ -43,7 +43,7 @@ export function MediaSection({
             <div
               className={
                 feature
-                  ? 'relative isolate overflow-hidden rounded-2xl px-4 pb-16 pt-32 shadow-[0_32px_64px_rgba(0,0,0,0.2)] lg:rounded-[32px] lg:px-12 lg:pb-[99px] lg:pt-[163px]'
+                  ? 'relative isolate overflow-hidden rounded-2xl px-4 pb-16 pt-32 shadow-[0_32px_64px_rgba(0,0,0,0.2)] [--feature-gradient-end:61.34%] lg:rounded-[32px] lg:px-12 lg:pb-[99px] lg:pt-[163px] lg:[--feature-gradient-end:100%]'
                   : 'relative isolate aspect-[1248/550] -translate-y-8 overflow-hidden rounded-2xl shadow-[0_32px_64px_rgba(0,0,0,0.2)] lg:-translate-y-16 lg:rounded-[32px]'
               }
             >
@@ -57,6 +57,14 @@ export function MediaSection({
               />
               {feature ? (
                 <>
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(10,10,11,0.2),rgba(0,0,0,0.8)_var(--feature-gradient-end))]"
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,#eb1000,#ad0c00_var(--feature-gradient-end))] mix-blend-screen"
+                  />
                   {badge ? (
                     <SanityImage
                       source={badge}
@@ -68,7 +76,13 @@ export function MediaSection({
                   ) : null}
                   <div className="relative mx-auto flex max-w-[884px] flex-col items-center gap-8 text-center text-white">
                     {heading ? (
-                      <h2 className="w-full">
+                      <h2
+                        className={
+                          logo
+                            ? 'relative h-[55px] w-full max-w-[338px] lg:h-[154px] lg:max-w-[884px]'
+                            : 'w-full'
+                        }
+                      >
                         {logo ? (
                           <>
                             <span className="sr-only">{heading}</span>
@@ -77,7 +91,7 @@ export function MediaSection({
                               alt=""
                               width={884}
                               sizes="(min-width: 1024px) 884px, calc(100vw - 64px)"
-                              className="mx-auto h-[55px] w-full object-contain lg:h-[154px]"
+                              className="absolute left-[4.335%] top-[-2.915px] h-auto w-[90.092%] lg:left-[-0.035%] lg:top-[-8.36px] lg:w-[98.691%]"
                             />
                           </>
                         ) : (
