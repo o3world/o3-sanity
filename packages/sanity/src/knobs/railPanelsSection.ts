@@ -19,28 +19,14 @@ export const railPanelsSectionKnobs = defineBlockKnobs({
       name: 'layout',
       title: 'Layout',
       description:
-        'How the panels are arranged: a numbered/labelled rail beside tall panels, a row of ink cards, hairlined numbered rows, side-by-side columns of details, or a track of numbered columns that scrolls sideways.',
-      // The Solutions frame (1925:6108) carries the same three engagements
-      // Home's band does — same heading, same standfirst — in a different
-      // arrangement: no rail, no media square, three 394×526 ink cards each
-      // holding a halftone disc. Identical
-      // content, different shape, so it is a layout axis rather than a second
-      // block — the test featureGridSection's `grid | orbital` and
-      // inFlightSection's `cards | rows` already passed (#47, #56, #50).
-      // `rows` is the partner page's "Three Core Services" (`2749:6863`):
-      // the same ordered set of offers again, as full-width hairlined rows
-      // with the numeral inline in an ink circle instead of in a sticky rail.
-      // Third arrangement, same content, so it joins the axis rather than
-      // starting a fourth block.
-      // `grid` is the redesigned Solutions frame's service grid (`2358:2788`,
-      // #93): the panels side by side as columns, each one's details stacked
-      // under its heading — no rail, no numerals, no media square.
-      // `track` is Home's redesigned ways-to-work band (`2846:5480`, #309):
-      // the same three engagements again, as columns on a rule that scrolls
-      // sideways. It replaces the rail-with-numbers composition rather than
-      // varying it — there is no rail to count anything off — which is why it
-      // is a fifth arrangement and not a second `rail` value.
-      options: ['rail', 'cards', 'rows', 'grid', 'track'],
+        'Arrange panels beside a rail, as engagement columns, as service rows with an outcome, as service rows with details only, or on a scrolling track.',
+      options: [
+        { value: 'rail', title: 'Rail' },
+        { value: 'cards', title: 'Engagement columns' },
+        { value: 'rows', title: 'Service rows with outcomes' },
+        { value: 'grid', title: 'Service rows with details' },
+        { value: 'track', title: 'Scrolling track' },
+      ],
       initialValue: 'rail',
     }),
     knob({

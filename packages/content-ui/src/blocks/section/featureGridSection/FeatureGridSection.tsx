@@ -121,39 +121,23 @@ export function FeatureGridSection({
     </div>
   )
 
-  /*
-   * `2354:2532` sets three 288px columns 32px apart on a 1248 content column,
-   * which is a fixed row rather than a grid — but `2334:2115` is a declared
-   * `repeat(3, minmax(0,1fr))` holding five cells, so the grid is what both
-   * bands are. 24px gap is the second frame's; the first's 32 is the same
-   * rhythm at a narrower measure.
-   *
-   * The mark's box is the one thing that differs between them (37 against 59),
-   * and it follows the body: a feature with a paragraph under it gets the
-   * smaller disc, because that is what the denser band draws.
-   */
+  // Current partner columns: 2354:2532, with the existing animated marks.
   const stack = (
-    <div className="grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
       {items.map((feature) => (
         <div key={feature._key} className="flex flex-col gap-6">
           {beside(feature, feature.body ? 'w-[37px]' : 'w-[59px]')}
-          {/*
-           * `Body/Large` — 28/38 regular, no tracking. `text-display-md` is
-           * the 28px step; its −0.0286em is the case-study h3's and does not
-           * belong on a line this short, so it is overridden rather than a
-           * fifth level being invented for one band.
-           */}
           {feature.heading ? (
             <DisplayHeading
               as={featureTag}
               level="md"
-              className="text-balance leading-[1.357] tracking-normal"
+              className="text-balance font-sans text-[28px] leading-[38px] tracking-normal"
             >
               {feature.heading}
             </DisplayHeading>
           ) : null}
           {feature.body ? (
-            <p className={`text-body leading-[1.2] ${onInk ? 'text-white/65' : 'text-fg-muted'}`}>
+            <p className={`text-[20px] leading-7 ${onInk ? 'text-white/65' : 'text-fg-muted'}`}>
               {feature.body}
             </p>
           ) : null}

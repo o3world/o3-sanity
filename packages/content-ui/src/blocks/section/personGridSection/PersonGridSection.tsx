@@ -49,12 +49,12 @@ export function PersonGridSection({
 
   return (
     <SectionShell surface={resolveSurface(surface, 'personGridSection')} top="md" bottom="md">
-      <div className="flex flex-col gap-10 lg:gap-12">
+      <div className="flex flex-col gap-16">
         {eyebrow || heading ? (
           <header data-sanity={fieldAttr(loc, 'heading')} className="flex flex-col gap-2">
             {/* Brand red — "LEADERSHIP TEAM" is #EB1000 on About (`1927:6436`). */}
             {eyebrow ? (
-              <Eyebrow size="lg" tone="brand">
+              <Eyebrow size="lg" tone="brand" className="pb-4">
                 {eyebrow}
               </Eyebrow>
             ) : null}
@@ -62,7 +62,7 @@ export function PersonGridSection({
           </header>
         ) : null}
 
-        <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
           {members.map((person) => (
             <li
               // The slot's key, not the person's: two slots may reference one
