@@ -126,10 +126,10 @@ export function InsightIndexView({
           grid. Unlike the Home and About Blog rows the cards do not bleed past
           the right edge: the grid has nothing to scroll to at either width.
 
-          The feed uses the 128px band spacing above and below its content. */}
+          The current mobile feed (2975:8655) uses 24px above and below its content. */}
       <div
         id="feed"
-        className="px-gutter py-band-md bg-bone scroll-mt-20 lg:scroll-mt-[calc(var(--spacing-nav-pinned)+96px)]"
+        className="px-gutter lg:py-band-md bg-bone scroll-mt-20 py-6 lg:scroll-mt-[calc(var(--spacing-nav-pinned)+96px)]"
       >
         <div className="max-w-section mx-auto flex flex-col gap-12">
           {/*

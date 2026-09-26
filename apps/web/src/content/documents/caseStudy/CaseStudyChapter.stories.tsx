@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { CaseChapter } from '@o3/ui'
+import { expect } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 import { PortableTextBody } from '@o3/content-ui/portable-text'
 import ironman from '../../../../../../tools/migration/data/translated/caseStudy/case-studies-ironman-digital-experience-drupal-acquia.json'
@@ -10,13 +11,27 @@ const body = chapter.body ?? []
 const meta = {
   title: 'Case Study/IRONMAN chapter entry',
   component: CaseChapter,
-  parameters: { layout: 'fullscreen', design: figmaDesign('2274:4004') },
+  parameters: { layout: 'fullscreen', design: figmaDesign('3267:9701') },
+  play: async ({ canvasElement }) => {
+    const paragraph = canvasElement.querySelector('[data-reveal-step="lead"]')!
+    const desktop = window.innerWidth >= 1440
+    if (desktop || window.innerWidth <= 402) {
+      await expect(parseFloat(getComputedStyle(paragraph).fontSize)).toBeCloseTo(
+        desktop ? 24 : 20,
+        1,
+      )
+      await expect(parseFloat(getComputedStyle(paragraph).lineHeight)).toBeCloseTo(
+        desktop ? 34 : 26,
+        1,
+      )
+    }
+  },
   args: {
     number: '01',
     kicker: chapter.kicker,
     title: chapter.title,
     sequence: true,
-    children: <PortableTextBody value={body} revealLead className="max-w-none" />,
+    children: <PortableTextBody value={body} variant="chapter" revealLead className="max-w-none" />,
     details: chapter.details,
   },
   decorators: [
@@ -40,5 +55,4 @@ export const Narrative: Story = {}
 export const Still: Story = { args: { sequence: false } }
 export const Mobile: Story = {
   globals: { viewport: { value: 'mobile' } },
-  parameters: { design: figmaDesign('1906:878') },
 }

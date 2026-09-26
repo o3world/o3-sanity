@@ -327,11 +327,12 @@ describe('insights index composition', () => {
     expect(tokens).not.toContain('bg-ink-warm')
   })
 
-  it('lays the cards on a bone band at the frame’s 128px rhythm', () => {
+  it('lays the cards on a bone band with the mobile and desktop feed rhythm', () => {
     // `2337:4485`: fill #F1F0EC, padding 128px 96px.
     const tokens = classTokens(page.html)
     expect(tokens).toContain('bg-bone')
-    expect(tokens).toContain('py-band-md')
+    expect(tokens).toContain('py-6')
+    expect(tokens).toContain('lg:py-band-md')
   })
 
   it('fills the 1248 column with three of the frame’s own cards', () => {

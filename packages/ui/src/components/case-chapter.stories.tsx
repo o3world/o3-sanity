@@ -7,18 +7,25 @@ import { CaseChapter } from './case-chapter'
 const meta = {
   title: 'Case Study/CaseChapter',
   component: CaseChapter,
-  parameters: { layout: 'fullscreen', design: figmaDesign('2274:4004') },
+  parameters: { layout: 'fullscreen', design: figmaDesign('3267:9701') },
   globals: { viewport: { value: 'desktop' } },
-  play: async ({ canvasElement, globals }) => {
-    // These measurements belong to the O3 canonical frames.
-    if (globals.brand !== 'o3') return
+  play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { level: 2 })
     const chapter = heading.closest('section')!
     const desktop = window.innerWidth >= 1024
     await expect(getComputedStyle(chapter).paddingTop).toBe(desktop ? '128px' : '96px')
     await expect(getComputedStyle(chapter).paddingBottom).toBe(desktop ? '128px' : '96px')
-    await expect(getComputedStyle(heading).fontWeight).toBe(desktop ? '300' : '400')
+    await expect(getComputedStyle(heading).fontWeight).toBe('400')
+    const paragraph = chapter.querySelector('p.my-8')!
+    const body = paragraph.parentElement!
+    if (desktop) {
+      await expect(
+        body.getBoundingClientRect().top - heading.getBoundingClientRect().bottom,
+      ).toBeCloseTo(8, 1)
+    }
     if (window.innerWidth >= 1440) {
+      await expect(parseFloat(getComputedStyle(paragraph).fontSize)).toBeCloseTo(24, 1)
+      await expect(parseFloat(getComputedStyle(paragraph).lineHeight)).toBeCloseTo(34, 1)
       await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(48, 1)
       await expect(parseFloat(getComputedStyle(heading).lineHeight)).toBeCloseTo(58, 1)
     } else if (window.innerWidth <= 402) {
@@ -33,13 +40,13 @@ type Story = StoryObj<typeof meta>
 
 const body = (
   <>
-    <p className="my-5 leading-relaxed">
+    <p className="my-8">
       La Colombe has set the precedent for America’s artisanal coffee revolution for both in-cafe
       and at-home experiences with its proprietary, globally sourced blends. Its in-store experience
       and wholesale products make for an overall outstanding brand experience that needs to be
       translated into the digital space.
     </p>
-    <p className="my-5 leading-relaxed">
+    <p className="my-8">
       Just as every sip of coffee has a certain familiarity to it, so should every visit to the site
       — which meant rebuilding the storefront around the way people actually shop for coffee.
     </p>
@@ -110,7 +117,8 @@ export const NumberOnly: Story = {
 export const Mobile: Story = {
   args: WithDetails.args,
   parameters: {
-    design: figmaDesign('1906:947'),
+    // No current mobile case-study frame; verify the responsive fallback.
+
     viewport: {
       options: {
         caseMobile: { name: 'Case Study mobile', styles: { width: '402px', height: '874px' } },

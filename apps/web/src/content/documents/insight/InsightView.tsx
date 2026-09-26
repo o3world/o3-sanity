@@ -11,86 +11,7 @@ import { BackToInsights } from './BackToInsights'
 
 type InsightViewProps = NonNullable<INSIGHT_QUERY_RESULT>
 
-/**
- * The insight detail layer — Figma **Insights** `1710:2823` (1440) and
- * **Insights - Mobile** `1906:1046` (402), #45. The frame's "Insights" is this
- * project's **Insight** (CONTEXT.md); the other frame of that name is
- * About.
- *
- * ```
- * band          desktop      mobile       renders as
- * ────────────────────────────────────────────────────────────────────────
- * hero          2252:3554    2262:3859    <header>, photograph + scrim, 164/gutter/64
- *   back-link   —            —            <BackToInsights> (precursor 1379:2186)
- *   eyebrow     2252:3558    2262:3862    <Eyebrow size="lg" tone="brand"> — the category
- *   h1          2252:3559    2262:3863    text-detail-hero (48/58 and 40/48, Light)
- *   deck        2252:3560    2262:3864    text-lead, the document's excerpt
- *   byline      2252:3561    2262:3865    <ArticleByline>
- * body          1710:2836    1906:1053    white band, 822px measure, <PortableTextBody>
- * keep reading  2252:3675    2262:3905    bone band, the Home Blog row's carousel
- *
- * Both bands below the hero run band-detail — 128 at 1440, 64 at 402.
- * ```
- *
- * ## The hero is photographic (#90)
- *
- * Both hero frames fill the band with an `IMAGE` paint under a `#030303`
- * linear gradient, left to right: opaque to 16.8% then clear at 1440
- * (`2252:3554`), opaque to 50% across the whole width at 402 (`2262:3859`) —
- * a narrow band has no clear side to keep legible, the same trade
- * `CaseStudyHero` makes. The photograph is the document's lead figure, or the
- * picture it shows on cards where no lead figure was chosen.
- *
- * The band it replaces was a flat `bg-ink-warm` strip with the `OrbitalSphere`
- * hung off it (`1715:1549`, a node that no longer resolves). **No
- * sphere-equivalent exists anywhere in the new hero subtree**, so it is gone
- * from this view; the component still serves Home, the CTA band and the quote
- * band.
- *
- * `bg-ink-warm` stays on the `<header>` as the **no-image fallback**. The
- * field is optional in the schema and an editor can clear it, and a scrim
- * over nothing is a black band rather than a design — so with no image
- * neither the photograph nor the scrim is drawn, and the band renders exactly
- * as it did before this change. It is also what sits under the photograph
- * while it loads.
- *
- * "Keep reading" renders through the same `SectionShell` the Home Blog band
- * uses, so heading, controls and the head of the row all sit in the standard
- * 1248px column and the track bleeds past the right edge of the screen exactly
- * as it does there — one carousel, one rendering. `CarouselTrack` holds the
- * arithmetic, and `CAROUSEL_BAND_CLASS` is the clip that bleed needs.
- *
- * Nav, footer and the closing CTA band are not this component's: the first two
- * come from `(site)/layout.tsx`, and the CTA band the desktop frame ends on is
- * `ctaSection` copy that the mobile frame drops — see the ticket notes.
- *
- * ## Three things the frames do not settle
- *
- * **The featured image keeps its own band as well as the hero.** Neither
- * frame draws a figure at the top of the article, but #45 requires the image
- * displayed and the 2026-08-13 sync re-confirmed the body band against both
- * frames, so it stays at the section measure. The hero shows the same asset
- * cropped to the band and the figure shows it whole, which is what the frames
- * ask for read literally — if the repetition is wrong, dropping the figure is
- * a one-block delete.
- *
- * **The hero's top padding is the pill's clearance, not the frame's 256.**
- * `2252:3554` puts the eyebrow 256px below the band top (64 frame padding +
- * 192 on `2252:3556`) and `2262:3859` puts it at 128 — but neither frame
- * draws the back-link, which the code hangs above the eyebrow with a 32px
- * gap, so the two cannot be compared directly. `pt-[164px]` is the floating
- * nav pill's clearance and is shared verbatim with `CaseStudyHero`,
- * `CollectionHero` and the Home hero; moving it here alone would break that
- * agreement to chase a number the composition does not license. Left as it
- * is, deliberately (#90).
- *
- * **Reading time is computed, never stored.** The value comes from the GROQ
- * projection (`INSIGHT_CARD.readingMinutes`), which is where the decision
- * and its arithmetic are recorded.
- *
- * The article body remains static. The related-content carousel owns its
- * heading-to-track entrance, leaving the painted band still.
- */
+/** Insight detail: current Blog Hero 3739:73191 / 3754:73244 and Body/Open prose. */
 export function InsightView({
   title,
   excerpt,
@@ -168,20 +89,15 @@ export function InsightView({
         >
           <BackToInsights />
 
-          <div className="flex flex-col gap-4">
-            {/* `2252:3558` — the kicker steps to `eyebrow-lg` and is filled
-                #EB1000 (`2457:1856`), the same brand red the two hero sets
-                draw. */}
+          <div className="flex w-full flex-col gap-2 lg:w-[608px]">
             {category ? (
-              <Eyebrow size="lg" tone="brand">
+              <Eyebrow size="lg" className="text-on-utility mb-4">
                 {category}
               </Eyebrow>
             ) : null}
-            {/* `2252:3559` / `2262:3863` — 48/58 and 40/48, both Light. */}
-            <h1 className="text-detail-hero font-display text-balance lg:w-[588px]">{title}</h1>
+            <h1 className="text-interior-hero font-display text-balance">{title}</h1>
+            {excerpt ? <p className="text-lead text-on-utility">{excerpt}</p> : null}
           </div>
-
-          {excerpt ? <p className="text-lead lg:w-[588px]">{excerpt}</p> : null}
 
           <ArticleByline
             name={author?.name}
@@ -205,7 +121,7 @@ export function InsightView({
         <div data-route-foreground="" className="max-w-article mx-auto">
           {/* The band above already sets the 822px article measure (1710:2836);
               max-w-none keeps the body from being narrowed a second time. */}
-          <PortableTextBody value={body} className="max-w-none" />
+          <PortableTextBody value={body} variant="article" className="max-w-none" />
         </div>
       </div>
 
