@@ -1,13 +1,11 @@
 import Link from 'next/link'
 import { ArrowIcon, Button, MoleculeMark } from '@o3/ui'
-import { CtaSection } from '@o3/content-ui'
-
-import SiteLayout from './(site)/layout'
+import { NotFoundCta } from './NotFoundCta'
 
 /** Current 404 frames 3754:73927 and 3754:73809. */
 export default function NotFound() {
   return (
-    <SiteLayout>
+    <>
       <section className="bg-ink-warm px-gutter flex min-h-[670px] flex-col items-center pb-16 pt-40 text-center text-white lg:min-h-[959px] lg:pb-32 lg:pt-[254px]">
         <div
           aria-hidden="true"
@@ -31,7 +29,7 @@ export default function NotFound() {
           </Link>
         </Button>
       </section>
-      <CtaSection
+      <NotFoundCta
         heading="You may be feeling lost right now, but don’t panic."
         body="We love a new challenge. If you’re ready to tackle what’s next, we’re ready to help."
         decoration="orbs"
@@ -43,6 +41,6 @@ export default function NotFound() {
           target: null,
         }}
       />
-    </SiteLayout>
+    </>
   )
 }
