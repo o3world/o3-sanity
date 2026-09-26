@@ -255,9 +255,7 @@ describe('the seeded Solutions page', () => {
    */
   it('is a stack at 402, with no frame to copy', () => {
     expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
-    expect(variantsOf(html, 'grid-cols-[minmax(0,395fr)_minmax(0,821fr)]')).toEqual([
-      'lg:grid-cols-[minmax(0,395fr)_minmax(0,821fr)]',
-    ])
+    expect(variantsOf(html, 'grid-cols-3')).toEqual(['lg:grid-cols-3'])
     expect(html).toContain('data-testid="orbital-diagram"')
     expect(html).toContain('lg:block')
   })
