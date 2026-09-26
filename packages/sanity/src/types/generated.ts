@@ -380,6 +380,7 @@ export type ListingSection = {
 
 export type ScreenGridSection = {
   _type: 'screenGridSection'
+  layout?: 'grid' | 'feature'
   screens?: Array<{
     media?: Figure
     tone?: 'ink' | 'brand' | 'bone'
@@ -3128,6 +3129,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
     | {
         _key: string
         _type: 'screenGridSection'
+        layout?: 'feature' | 'grid'
         screens: Array<{
           media: {
             _type: 'figure'
@@ -4393,6 +4395,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
     | {
         _key: string
         _type: 'screenGridSection'
+        layout?: 'feature' | 'grid'
         screens: Array<{
           media: {
             _type: 'figure'
@@ -5847,6 +5850,7 @@ export type CASE_STUDY_QUERY_RESULT = {
     | {
         _key: string
         _type: 'screenGridSection'
+        layout?: 'feature' | 'grid'
         screens: Array<{
           media: {
             _type: 'figure'
@@ -7269,6 +7273,7 @@ export type PAGE_QUERY_RESULT = {
     | {
         _key: string
         _type: 'screenGridSection'
+        layout?: 'feature' | 'grid'
         screens: Array<{
           media: {
             _type: 'figure'

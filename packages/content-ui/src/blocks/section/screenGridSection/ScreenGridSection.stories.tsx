@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 
 import type { SectionProps } from '@o3/content-runtime/blocks'
@@ -174,5 +175,78 @@ export const ComposedWide: Story = {
         },
       },
     ],
+  },
+}
+
+const featureScreens: Screen[] = [
+  ['feature', 'image-668bf0e9e446a4fa4e2e30bec61914c901da9cb2-2784x2100-png'],
+  ['upper', 'image-6b3f9d9f7f9f99324fd0ee7e37dc44b92a46338c-864x1002-png'],
+  ['lower', 'image-a2a859554866d5a0c6d8f48f3d83a9c009ac189e-864x1002-png'],
+  ['following', 'image-02e5f3c8aabf4b08ccd5d7754b86aea0ee34a7ed-1824x1002-png'],
+].map(([key, id], index) => ({
+  _key: key!,
+  _type: 'screen',
+  span: index === 0 ? 'wide' : 'standard',
+  framing: 'image',
+  media: {
+    _type: 'figure',
+    alt: key!,
+    image: { _type: 'image', asset: { _id: id!, metadata: null } },
+  },
+}))
+
+/** 3503:10901 — 928 × 700 beside two 288 × 334 cards, with 32px gaps. */
+export const Feature: Story = {
+  args: { surface: 'white', layout: 'feature', screens: featureScreens },
+  parameters: { design: figmaDesign('3503:10901') },
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const [lead, upper, lower, following] = Array.from(canvasElement.querySelectorAll('li')).map(
+      (tile) => tile.getBoundingClientRect(),
+    )
+    await expect(Math.abs(lead!.width - 928)).toBeLessThan(1)
+    await expect(Math.abs(lead!.height - 700)).toBeLessThan(1)
+    await expect(Math.abs(upper!.width - 288)).toBeLessThan(1)
+    await expect(Math.abs(upper!.height - 334)).toBeLessThan(1)
+    await expect(Math.abs(upper!.left - lead!.right - 32)).toBeLessThan(1)
+    await expect(Math.abs(lower!.top - upper!.bottom - 32)).toBeLessThan(1)
+    await expect(lower!.left).toBe(upper!.left)
+    await expect(Math.abs(following!.width - 608)).toBeLessThan(1)
+    await expect(Math.abs(following!.top - lead!.bottom - 32)).toBeLessThan(1)
+  },
+}
+
+export const FeatureMobile: Story = {
+  args: Feature.args,
+  parameters: {
+    viewport: {
+      options: { mobile: { name: 'Mobile 402', styles: { width: '402px', height: '874px' } } },
+    },
+  },
+  globals: { viewport: { value: 'mobile' } },
+  play: async ({ canvasElement }) => {
+    const tiles = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
+      tile.getBoundingClientRect(),
+    )
+    for (const [index, tile] of tiles.entries()) {
+      await expect(Math.abs(tile.width - 370)).toBeLessThan(1)
+      if (index > 0)
+        await expect(Math.abs(tile.top - tiles[index - 1]!.bottom - 32)).toBeLessThan(1)
+    }
+  },
+}
+
+/** Missing layout retains the existing full-width lead and equal-width pair. */
+export const DefaultGeometry: Story = {
+  args: { surface: 'white', screens: featureScreens },
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const [lead, left, right] = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
+      tile.getBoundingClientRect(),
+    )
+    await expect(Math.abs(lead!.width - 1248)).toBeLessThan(1)
+    await expect(Math.abs(left!.width - 608)).toBeLessThan(1)
+    await expect(right!.top).toBe(left!.top)
+    await expect(Math.abs(right!.left - left!.right - 32)).toBeLessThan(1)
   },
 }

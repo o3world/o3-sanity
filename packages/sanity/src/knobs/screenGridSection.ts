@@ -55,8 +55,7 @@ export const screenKnobs = defineItemKnobs({
 })
 
 /**
- * The screen grid's design options — a band whose own roster is one knob, and
- * whose interesting ones belong to its tiles.
+ * The screen grid's band and tile design options.
  *
  * Read this file to know what the band offers. The Sanity fields, and the
  * canvas toolbar's controls, are generated from it, so neither can offer a
@@ -72,7 +71,17 @@ export const screenGridSectionKnobs = defineBlockKnobs({
   type: 'screenGridSection',
   title: 'Screen grid',
   tier: 'section',
-  knobs: [surfaceKnob({ initialValue: 'white' })],
+  knobs: [
+    surfaceKnob({ initialValue: 'white' }),
+    knob({
+      name: 'layout',
+      title: 'Layout',
+      description:
+        'Grid pairs tiles. Feature puts the first image beside two stacked tiles on desktop.',
+      options: ['grid', 'feature'],
+      initialValue: 'grid',
+    }),
+  ],
   items: { screens: screenKnobs },
   /**
    * One screen, because `screens` declares `min(1)` and the band renders

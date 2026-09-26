@@ -32,9 +32,7 @@ describe('the screen grid’s knobs', () => {
   })
 
   it('keeps the band’s own roster to the band', () => {
-    // Everything an editor turns on this block except the surface belongs to a
-    // tile, so the block declares one knob and no path with `[]` in it.
-    expect(screenGridSectionKnobs.knobs.map((k) => k.name)).toEqual(['surface'])
+    expect(screenGridSectionKnobs.knobs.map((k) => k.name)).toEqual(['surface', 'layout'])
     expect(screenGridSectionKnobs.knobs.some((k) => k.name.includes('['))).toBe(false)
   })
 

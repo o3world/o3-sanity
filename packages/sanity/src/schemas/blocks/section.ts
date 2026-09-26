@@ -772,10 +772,12 @@ export const screenGridSection = defineSectionBlock({
   title: 'Screen grid',
   knobs: screenGridSectionKnobs,
   fields: [
+    'layout',
     defineField({
       name: 'screens',
       type: 'array',
-      description: 'Tiles fill the two-column grid in order; a wide screen takes both columns.',
+      description:
+        'Tiles retain their order. Feature pairs the first image with two stacked tiles, then returns to the grid.',
       validation: (rule) => rule.required().min(1),
       of: [
         defineArrayItem({
