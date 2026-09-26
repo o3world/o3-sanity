@@ -1,3 +1,4 @@
+import finishManifest from './figmaAlignmentFinish.json'
 import { describe, expect, it } from 'vitest'
 import manifest from './figmaContentAlignment.json'
 import {
@@ -57,5 +58,31 @@ describe('reviewed Figma content migration', () => {
         expect(JSON.stringify(field.after)).not.toMatch(
           /Lorem ipsum|Note to self:|I’ll write a headline/,
         )
+  })
+})
+
+describe('finishing alignment', () => {
+  it('removes only the reviewed extra About content and reruns without changes', () => {
+    const spec = finishManifest.documents.find((document) => document.id === 'page-seed-about')!
+    const row: ContentRow = {
+      _id: spec.id,
+      _type: spec.type,
+      _rev: 'reviewed',
+      slug: { current: 'about' },
+      sections: [spec.patches[0]!.before, { _key: 'beyond', items: [spec.patches[1]!.before] }],
+    }
+    expect(planFigmaContentAlignment(row, true, finishManifest)?.unset).toEqual(
+      spec.patches.map((patch) => patch.path),
+    )
+    expect(
+      planFigmaContentAlignment(
+        { ...row, sections: [{ _key: 'beyond', items: [] }] },
+        true,
+        finishManifest,
+      ),
+    ).toBeNull()
+    expect(() => planFigmaContentAlignment({ ...row, sections: [] }, true, finishManifest)).toThrow(
+      'Expected one keyed item',
+    )
   })
 })

@@ -19,8 +19,7 @@ const REASONS = ['New business inquiry', 'Ventures request', 'Tech consultation'
 /** Everything a person filled in correctly, so a test can spoil one field. */
 function filled() {
   return {
-    firstName: 'Ada',
-    lastName: 'Lovelace',
+    name: 'Ada Lovelace',
     email: 'ada@example.com',
     reason: 'Ventures request',
     message: 'We need a front door for the portal.',
@@ -33,24 +32,15 @@ describe('validateInquiry', () => {
     expect(validateInquiry(filled())).toEqual({ ok: true, errors: {} })
   })
 
-  it.each(['firstName', 'lastName', 'email', 'reason', 'message'] as const)(
-    'names %s when it is blank',
-    (field) => {
-      const result = validateInquiry({ ...filled(), [field]: '   ' })
-      expect(result.ok).toBe(false)
-      expect(result.errors[field]).toBeTruthy()
-    },
-  )
+  it.each(['name', 'email', 'reason', 'message'] as const)('names %s when it is blank', (field) => {
+    const result = validateInquiry({ ...filled(), [field]: '   ' })
+    expect(result.ok).toBe(false)
+    expect(result.errors[field]).toBeTruthy()
+  })
 
   it('reports every blank field at once', () => {
     const result = validateInquiry({ reasons: REASONS })
-    expect(Object.keys(result.errors).sort()).toEqual([
-      'email',
-      'firstName',
-      'lastName',
-      'message',
-      'reason',
-    ])
+    expect(Object.keys(result.errors).sort()).toEqual(['email', 'message', 'name', 'reason'])
   })
 
   it('rejects an address with no @ and no dot after it', () => {
@@ -128,9 +118,9 @@ describe('isSpam', () => {
   const timed = { ...filled(), elapsedMs: 10_000 }
 
   it.each([
-    ['a link in the first name', { firstName: 'Ada http://x.example' }],
-    ['a link in the last name', { lastName: 'HTTPS://X.EXAMPLE' }],
-    ['a bare www host in a name', { lastName: 'www.x.example' }],
+    ['a link in the first name', { name: 'Ada http://x.example' }],
+    ['a link in the last name', { name: 'HTTPS://X.EXAMPLE' }],
+    ['a bare www host in a name', { name: 'www.x.example' }],
   ])('drops %s', (_label, spoiled) => {
     expect(isSpam({ ...timed, ...spoiled })).toBe(true)
   })
@@ -186,8 +176,8 @@ describe('parseInquiryInput', () => {
   it('reads a filled body, trimming every value', () => {
     expect(
       parseInquiryInput({
-        firstName: '  Ada ',
-        lastName: 'Lovelace',
+        name: '  Ada Lovelace ',
+        referral: ' Our friends ',
         email: 'ada@example.com',
         reason: ' Ventures request ',
         message: 'Hello.',
@@ -197,11 +187,11 @@ describe('parseInquiryInput', () => {
         consent: 1,
       }),
     ).toEqual({
-      firstName: 'Ada',
-      lastName: 'Lovelace',
+      name: 'Ada Lovelace',
       email: 'ada@example.com',
       reason: 'Ventures request',
       message: 'Hello.',
+      referral: 'Our friends',
       reasons: ['Ventures request', 'Tech consultation'],
       honeypot: '',
       elapsedMs: 9_000,
@@ -210,8 +200,8 @@ describe('parseInquiryInput', () => {
   })
 
   it('reads a non-string field as blank rather than carrying it through', () => {
-    const parsed = parseInquiryInput({ firstName: 42, message: { length: 1 } })
-    expect(parsed?.firstName).toBe('')
+    const parsed = parseInquiryInput({ name: 42, message: { length: 1 } })
+    expect(parsed?.name).toBe('')
     expect(parsed?.message).toBe('')
   })
 
@@ -226,7 +216,7 @@ describe('parseInquiryInput', () => {
   })
 
   it('leaves the opt-in absent when the body carries no such key', () => {
-    expect(parseInquiryInput({ firstName: 'Ada' })).not.toHaveProperty('consent')
+    expect(parseInquiryInput({ name: 'Ada' })).not.toHaveProperty('consent')
   })
 })
 
@@ -244,6 +234,36 @@ describe('toHubSpotSubmission', () => {
       { objectTypeId: '0-1', name: 'reason', value: 'Ventures request' },
       { objectTypeId: '0-1', name: 'message', value: 'We need a front door for the portal.' },
     ])
+  })
+
+  it('accepts a single name and retains all parts of a longer name', () => {
+    expect(validateInquiry({ ...filled(), name: 'Prince' }).ok).toBe(true)
+    expect(
+      toHubSpotSubmission({ ...filled(), name: 'Prince' }, context).fields.slice(0, 2),
+    ).toEqual([
+      { objectTypeId: '0-1', name: 'firstname', value: 'Prince' },
+      { objectTypeId: '0-1', name: 'lastname', value: '' },
+    ])
+    expect(
+      toHubSpotSubmission({ ...filled(), name: 'Ada Byron Lovelace' }, context).fields[1]?.value,
+    ).toBe('Byron Lovelace')
+  })
+
+  it('keeps an optional referral in the existing message property', () => {
+    expect(validateInquiry({ ...filled(), referral: '' }).ok).toBe(true)
+    const payload = toHubSpotSubmission({ ...filled(), referral: ' A colleague ' }, context)
+    expect(payload.fields.find((field) => field.name === 'message')?.value).toBe(
+      'We need a front door for the portal.\n\nHow you heard about us: A colleague',
+    )
+    expect(payload.fields.some((field) => field.name === 'referral')).toBe(false)
+    expect(parseInquiryInput({ referral: 42 })?.referral).toBe('')
+    expect(
+      isSpam({
+        ...filled(),
+        elapsedMs: 9000,
+        referral: 'https://one.example https://two.example https://three.example',
+      }),
+    ).toBe(true)
   })
 
   it('puts the page in context, never in the fields', () => {
@@ -518,8 +538,7 @@ describe('handleInquiryRequest', () => {
    */
   describe('a form-encoded post', () => {
     const fields = {
-      firstName: 'Ada',
-      lastName: 'Lovelace',
+      name: 'Ada Lovelace',
       email: 'ada@example.com',
       reason: 'Ventures request',
       message: 'We need a front door for the portal.',

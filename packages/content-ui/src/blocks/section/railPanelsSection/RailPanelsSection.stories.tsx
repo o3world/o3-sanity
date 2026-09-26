@@ -338,3 +338,15 @@ export const LabelsOnInk: Story = {
     await expect(getComputedStyle(active).color).toBe('rgb(255, 255, 255)')
   },
 }
+
+/** Engineering's wider header, with the same service-row layout as Partner. */
+export const WideRowsHeader: Story = {
+  args: { ...Rows.args, heading: 'From new builds to what comes next.', headerWidth: 'wide' },
+  globals: { viewport: { value: 'desktop' } },
+  parameters: { design: figmaDesign('4039:49385') },
+  play: async ({ canvasElement }) => {
+    await expect(
+      canvasElement.querySelector('h2')!.parentElement!.getBoundingClientRect().width,
+    ).toBe(1035)
+  },
+}

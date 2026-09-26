@@ -663,6 +663,7 @@ export type RailPanelsSection = {
     _key: string
   }>
   decoration?: 'none' | 'molecule'
+  headerWidth?: 'standard' | 'wide'
   plate?: 'square' | 'bleed'
   surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
@@ -3048,6 +3049,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _key: string
         }> | null
         decoration?: 'molecule' | 'none'
+        headerWidth?: 'standard' | 'wide'
         plate?: 'bleed' | 'square'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
@@ -4314,6 +4316,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _key: string
         }> | null
         decoration?: 'molecule' | 'none'
+        headerWidth?: 'standard' | 'wide'
         plate?: 'bleed' | 'square'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
@@ -5769,6 +5772,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _key: string
         }> | null
         decoration?: 'molecule' | 'none'
+        headerWidth?: 'standard' | 'wide'
         plate?: 'bleed' | 'square'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
@@ -7192,6 +7196,7 @@ export type PAGE_QUERY_RESULT = {
           _key: string
         }> | null
         decoration?: 'molecule' | 'none'
+        headerWidth?: 'standard' | 'wide'
         plate?: 'bleed' | 'square'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {

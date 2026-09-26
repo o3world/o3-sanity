@@ -31,8 +31,8 @@ import {
 } from './inquiry'
 
 const EMPTY_VALUES: Record<InquiryField, string> = {
-  firstName: '',
-  lastName: '',
+  name: '',
+  referral: '',
   email: '',
   reason: '',
   message: '',
@@ -203,42 +203,28 @@ export function InquiryForm({
       ref={form}
     >
       <div className="grid gap-6 lg:grid-cols-2">
-        <FormField name="firstName" label="First name" required error={errors.firstName}>
+        <FormField name="name" label="Your name" required error={errors.name}>
           {(control) => (
             <input
               {...control}
               type="text"
-              autoComplete="given-name"
+              autoComplete="name"
+              placeholder="Enter your name"
               className={FIELD_CONTROL_CLASS}
-              value={values.firstName}
-              onChange={handleChange('firstName')}
-              onBlur={handleBlur('firstName')}
+              value={values.name}
+              onChange={handleChange('name')}
+              onBlur={handleBlur('name')}
             />
           )}
         </FormField>
 
-        <FormField name="lastName" label="Last name" required error={errors.lastName}>
-          {(control) => (
-            <input
-              {...control}
-              type="text"
-              autoComplete="family-name"
-              className={FIELD_CONTROL_CLASS}
-              value={values.lastName}
-              onChange={handleChange('lastName')}
-              onBlur={handleBlur('lastName')}
-            />
-          )}
-        </FormField>
-      </div>
-
-      <div className="grid gap-6 lg:grid-cols-2">
         <FormField name="email" label="Email" required error={errors.email}>
           {(control) => (
             <input
               {...control}
               type="email"
               autoComplete="email"
+              placeholder="Enter your email address"
               className={FIELD_CONTROL_CLASS}
               value={values.email}
               onChange={handleChange('email')}
@@ -246,7 +232,9 @@ export function InquiryForm({
             />
           )}
         </FormField>
+      </div>
 
+      <div className="grid gap-6 lg:grid-cols-2">
         <FormField name="reason" label="Reason" required error={errors.reason}>
           {(control) => (
             // A native select, not a Radix one. ADR 0008 puts a component in
@@ -259,7 +247,7 @@ export function InquiryForm({
               onChange={handleChange('reason')}
               onBlur={handleBlur('reason')}
             >
-              <option value="">Please select…</option>
+              <option value="">Select one</option>
               {reasons.map((reason) => (
                 // `value` is stega-cleaned, the visible child is not — and the
                 // split is the point. In draft mode every string from Sanity
@@ -277,12 +265,30 @@ export function InquiryForm({
             </select>
           )}
         </FormField>
+        <FormField
+          name="referral"
+          label="How’d you hear about us? (optional)"
+          className="[&>label]:font-normal"
+        >
+          {(control) => (
+            <input
+              {...control}
+              type="text"
+              placeholder="Through the grapevine"
+              className={FIELD_CONTROL_CLASS}
+              value={values.referral}
+              onChange={handleChange('referral')}
+              onBlur={handleBlur('referral')}
+            />
+          )}
+        </FormField>
       </div>
 
       <FormField name="message" label="Message" required error={errors.message}>
         {(control) => (
           <textarea
             {...control}
+            placeholder="What’s on your mind?"
             className={cn(FIELD_CONTROL_CLASS, 'h-[146px] resize-y')}
             value={values.message}
             onChange={handleChange('message')}

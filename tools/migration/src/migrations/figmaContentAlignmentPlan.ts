@@ -13,7 +13,8 @@ export type ContentRow = {
 /** Only the simple field/key paths committed in this migration are supported. */
 export function contentValue(row: unknown, path: string): unknown {
   let value = row
-  for (const part of path.split('.')) {
+  const parts = path.split('.')
+  for (const [index, part] of parts.entries()) {
     const match = /^(\w+)(?:\[_key=="([^"]+)"\])?$/.exec(part)
     if (!match) throw new Error(`Unsupported content path: ${path}`)
     value =
@@ -21,6 +22,7 @@ export function contentValue(row: unknown, path: string): unknown {
     if (match[2]) {
       if (!Array.isArray(value)) throw new Error(`Missing array at ${path}`)
       const matches = value.filter((item) => item?._key === match[2])
+      if (matches.length === 0 && index === parts.length - 1) return null
       if (matches.length !== 1) throw new Error(`Expected one keyed item at ${path}`)
       value = matches[0]
     }
@@ -28,9 +30,20 @@ export function contentValue(row: unknown, path: string): unknown {
   return value ?? null
 }
 
-export function planFigmaContentAlignment(row: ContentRow, allowLocked = false) {
+export function planFigmaContentAlignment(
+  row: ContentRow,
+  allowLocked = false,
+  source: {
+    documents: {
+      id: string
+      type: string
+      slug: string | null
+      patches: { path: string; before: unknown; after: unknown }[]
+    }[]
+  } = manifest,
+) {
   const id = row._id.replace(/^drafts\./, '')
-  const spec = manifest.documents.find((document) => document.id === id)
+  const spec = source.documents.find((document) => document.id === id)
   if (!spec || row._type !== spec.type || (row.slug?.current ?? null) !== spec.slug)
     throw new Error(`Unexpected content document: ${row._id}`)
   const set: Record<string, unknown> = {}

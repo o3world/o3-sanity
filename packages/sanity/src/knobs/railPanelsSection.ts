@@ -35,6 +35,15 @@ export const railPanelsSectionKnobs = defineBlockKnobs({
       initialValue: 'rail',
     }),
     knob({
+      name: 'headerWidth',
+      title: 'Header width',
+      description:
+        'Service rows: standard 821px header or the wide 1035px Engineering lockup (4039:49385).',
+      options: ['standard', 'wide'],
+      initialValue: 'standard',
+      showWhen: { at: 'layout', mode: 'oneOf', values: ['rows'] },
+    }),
+    knob({
       name: 'rail',
       title: 'Rail',
       description:

@@ -51,7 +51,7 @@ export function FormSection({
         ) : null}
         {heading ? (
           <DisplayHeading as={hero ? 'h1' : 'h2'} level="hero" className="whitespace-pre-line">
-            {heading}
+            {heading.replace(/\u2028/g, '\n')}
           </DisplayHeading>
         ) : null}
         {note ? <p className="text-lead text-fg-body">{note}</p> : null}

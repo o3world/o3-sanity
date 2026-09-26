@@ -52,6 +52,7 @@ export function RailPanelsSection({
   heading,
   intro,
   layout,
+  headerWidth,
   rail,
   plate,
   panels,
@@ -84,7 +85,16 @@ export function RailPanelsSection({
     `rail-panel-${sectionKey ? `${sectionKey}-` : ''}${key ?? index}`
 
   const isRail = !isCards && !isRows && !isGrid && !isTrack
-  const shape = isCards || isRows ? 'wide' : isTrack ? 'split' : isRail ? 'spread' : 'measured'
+  const shape =
+    isRows && stegaClean(headerWidth) === 'wide'
+      ? 'measured'
+      : isCards || isRows
+        ? 'wide'
+        : isTrack
+          ? 'split'
+          : isRail
+            ? 'spread'
+            : 'measured'
 
   const header = (
     <div

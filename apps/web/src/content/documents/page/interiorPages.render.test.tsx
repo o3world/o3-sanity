@@ -481,8 +481,8 @@ describe('the seeded Contact page', () => {
    */
   describe('the inquiry form', () => {
     it.each([
-      ['first name', 'field-firstName'],
-      ['last name', 'field-lastName'],
+      ['your name', 'field-name'],
+      ['how’d you hear about us?', 'field-referral'],
       ['email', 'field-email'],
       ['reason', 'field-reason'],
       ['message', 'field-message'],
@@ -492,17 +492,17 @@ describe('the seeded Contact page', () => {
     })
 
     it('gives every field a label pointing at its own control', () => {
-      for (const field of ['firstName', 'lastName', 'email', 'reason', 'message', 'consent']) {
+      for (const field of ['name', 'referral', 'email', 'reason', 'message', 'consent']) {
         expect(html, `no label for ${field}`).toContain(`for="field-${field}"`)
       }
     })
 
-    // All five are `gfield_contains_required` on the live form. The asterisk
+    // The four required Figma fields retain both required indicators. The asterisk
     // is the sighted half and `aria-required` the other; a marker drawn
     // without its pair is decoration.
-    it('marks all five required fields, in both halves', () => {
-      expect(html.match(/aria-required="true"/g) ?? []).toHaveLength(5)
-      expect(html.match(/\(required\)/g) ?? []).toHaveLength(5)
+    it('marks all four required fields, in both halves', () => {
+      expect(html.match(/aria-required="true"/g) ?? []).toHaveLength(4)
+      expect(html.match(/\(required\)/g) ?? []).toHaveLength(4)
     })
 
     // The options are the editor's (`reasons`), not the renderer's — which is

@@ -26,16 +26,16 @@ export const AsSeeded: Story = {
     const canvas = within(canvasElement)
     await expect(canvasElement.querySelector('canvas')).toBeNull()
     const heading = canvas.getByRole('heading', { level: 1 })
-    const firstName = canvas.getByLabelText(/First name/)
-    const lastName = canvas.getByLabelText(/Last name/)
-    const form = firstName.closest('form')!
+    const name = canvas.getByLabelText(/Your name/)
+    const email = canvas.getByLabelText(/Email/)
+    const form = name.closest('form')!
     const section = heading.closest('section')!
     await expect(getComputedStyle(section).paddingTop).toBe('256px')
     await expect(getComputedStyle(section).paddingLeft).toBe('96px')
     await expect(form.parentElement!.getBoundingClientRect().width).toBe(608)
     await expect(getComputedStyle(form.parentElement!).paddingLeft).toBe('32px')
-    await expect(firstName.getBoundingClientRect().y).toBe(lastName.getBoundingClientRect().y)
-    await expect(firstName.getBoundingClientRect().height).toBe(44)
+    await expect(name.getBoundingClientRect().y).toBe(email.getBoundingClientRect().y)
+    await expect(name.getBoundingClientRect().height).toBe(44)
     await expect(
       form.parentElement!.getBoundingClientRect().left - heading.getBoundingClientRect().right,
     ).toBe(32)
@@ -50,23 +50,23 @@ export const Mobile: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     await expect(canvasElement.querySelector('canvas')).toBeNull()
-    const firstName = canvas.getByLabelText(/First name/)
-    const lastName = canvas.getByLabelText(/Last name/)
-    const form = firstName.closest('form')!
-    const section = firstName.closest('section')!
+    const name = canvas.getByLabelText(/Your name/)
+    const email = canvas.getByLabelText(/Email/)
+    const form = name.closest('form')!
+    const section = name.closest('section')!
     await expect(getComputedStyle(section).paddingTop).toBe('128px')
     await expect(getComputedStyle(section).paddingLeft).toBe('16px')
     await expect(form.parentElement!.getBoundingClientRect().width).toBe(window.innerWidth - 32)
-    await expect(firstName.getBoundingClientRect().width).toBe(window.innerWidth - 96)
-    await expect(lastName.getBoundingClientRect().top).toBeGreaterThan(
-      firstName.getBoundingClientRect().bottom,
+    await expect(name.getBoundingClientRect().width).toBe(window.innerWidth - 96)
+    await expect(email.getBoundingClientRect().top).toBeGreaterThan(
+      name.getBoundingClientRect().bottom,
     )
     await expect(document.documentElement.scrollWidth).toBe(window.innerWidth)
   },
 }
 
 /**
- * Blur an empty field to see the validation. Every field is required, and the
+ * Blur an empty field to see the validation. The name, email, reason, and message are required, and the
  * email check is deliberately loose — it catches the typo it can prove (no
  * `@`, no dot after it) and leaves the rest to the reply bouncing.
  */

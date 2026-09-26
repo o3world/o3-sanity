@@ -2,11 +2,9 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { getCliClient } from 'sanity/cli'
-import {
-  contentDocumentIds,
-  planFigmaContentAlignment,
-  type ContentRow,
-} from './figmaContentAlignmentPlan'
+import contentManifest from './figmaContentAlignment.json'
+import finishManifest from './figmaAlignmentFinish.json'
+import { planFigmaContentAlignment, type ContentRow } from './figmaContentAlignmentPlan'
 
 const client = getCliClient({ apiVersion: '2026-07-01' })
 async function main() {
@@ -21,12 +19,16 @@ async function main() {
     throw new Error(
       'This reviewed content migration requires naorcr6k and explicit --dataset production',
     )
+  const manifest = args.includes('--finish') ? finishManifest : contentManifest
+  const contentDocumentIds = manifest.documents.map((document) => document.id)
+  const plan = (row: ContentRow, allowLocked: boolean) =>
+    planFigmaContentAlignment(row, allowLocked, manifest)
   const ids = contentDocumentIds.flatMap((id) => [id, `drafts.${id}`])
   const rows = await client.fetch<ContentRow[]>('*[_id in $ids]', { ids }, { perspective: 'raw' })
   if (contentDocumentIds.some((id) => rows.filter((row) => row._id === id).length !== 1))
     throw new Error('Missing or duplicate published document')
   const plans = rows
-    .map((row) => planFigmaContentAlignment(row, args.includes('--allow-locked')))
+    .map((row) => plan(row, args.includes('--allow-locked')))
     .filter((plan) => plan !== null)
   console.log(JSON.stringify({ project: client.config().projectId, dataset, plans }, null, 2))
   if (!plans.length) {
@@ -60,7 +62,7 @@ async function main() {
     flag: 'wx',
     mode: 0o600,
   })
-  if (after.length !== rows.length || after.some((row) => planFigmaContentAlignment(row, true)))
+  if (after.length !== rows.length || after.some((row) => plan(row, true)))
     throw new Error('Readback did not match the reviewed patch; inspect backup before retrying')
   console.log(
     `Verified ${plans.length} document versions; locks and publication state preserved. Backup: ${backup}`,
