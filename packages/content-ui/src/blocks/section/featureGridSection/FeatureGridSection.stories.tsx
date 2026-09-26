@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 
 import { seededSectionArgs } from '../../../testing/seedContent'
@@ -154,4 +155,30 @@ export const StackMobile: Story = {
   args: seededSectionArgs('partners-sanity', 'featureGridSection'),
   globals: { viewport: { value: 'mobile' } },
   parameters: { backgrounds: { value: 'ink' } },
+}
+
+/** Current outcomes preserve animated marks inside the raised cards. */
+export const Cards: Story = {
+  args: {
+    ...seededSectionArgs('partners-sanity', 'featureGridSection', 2),
+    layout: 'cards',
+    features: seededSectionArgs('partners-sanity', 'featureGridSection', 2).features?.map(
+      (feature) => ({ ...feature, mark: { _type: 'mark', kind: 'orb' } }),
+    ),
+  },
+  parameters: { design: figmaDesign('4116:50601') },
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const heading = canvasElement.querySelector('h3')!
+    const card = heading.parentElement!
+    await expect(getComputedStyle(card).backgroundColor).toBe('rgb(255, 255, 255)')
+    await expect(card.getBoundingClientRect().height).toBeGreaterThanOrEqual(296)
+    await expect(getComputedStyle(heading).fontSize).toBe('24px')
+    await expect(card.querySelector('[data-orbital-preset], canvas, svg')).not.toBeNull()
+  },
+}
+
+export const CardsMobile: Story = {
+  ...Cards,
+  globals: { viewport: { value: 'mobile' } },
 }

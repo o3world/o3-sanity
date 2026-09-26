@@ -1,4 +1,4 @@
-import { DisplayHeading, OrbitalDiagram, SectionShell } from '@o3/ui'
+import { DisplayHeading, Eyebrow, OrbitalDiagram, SectionShell } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { stegaClean } from '@sanity/client/stega'
 
@@ -61,7 +61,9 @@ type FeatureGridSectionProps = SectionProps<'featureGridSection'>
  * (ADR 0006).
  */
 export function FeatureGridSection({
+  eyebrow,
   heading,
+  subheading,
   layout,
   features,
   decoration,
@@ -70,6 +72,7 @@ export function FeatureGridSection({
   const items = features ?? []
   const chosen = stegaClean(layout)
   const orbital = chosen === 'orbital'
+  const cards = chosen === 'cards'
   const resolved = resolveSurface(surface, 'featureGridSection')
   const onInk = resolved === 'ink'
 
@@ -88,14 +91,18 @@ export function FeatureGridSection({
   const featureTag = heading ? 'h3' : 'h2'
 
   /** The disc's ink. On ink, white is the only honest inversion. */
-  const markTone = onInk ? 'text-white' : 'text-ink'
+  const markTone = onInk && !cards ? 'text-white' : 'text-ink'
 
   /**
    * WHAT STANDS BESIDE THE COPY — the dotted mark. A stored `icon` draws
    * nothing: the site has no icon set.
    */
   const beside = (feature: (typeof items)[number], className: string) => (
-    <Mark {...markProps(feature.mark)} onInk={onInk} className={`${markTone} ${className}`} />
+    <Mark
+      {...markProps(feature.mark)}
+      onInk={onInk && !cards}
+      className={`${markTone} ${className}`}
+    />
   )
 
   const grid = (
@@ -123,21 +130,46 @@ export function FeatureGridSection({
 
   // Current partner columns: 2354:2532, with the existing animated marks.
   const stack = (
-    <div className="grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+    <div
+      className={
+        cards
+          ? 'grid gap-8 md:grid-cols-2 lg:grid-cols-3'
+          : 'grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3'
+      }
+    >
       {items.map((feature) => (
-        <div key={feature._key} className="flex flex-col gap-6">
-          {beside(feature, feature.body ? 'w-[37px]' : 'w-[59px]')}
+        <div
+          key={feature._key}
+          className={
+            cards
+              ? 'text-ink flex min-h-[296px] flex-col gap-4 rounded-2xl bg-white px-8 py-4 shadow-[0_24px_32px_0_rgb(0_0_0/0.2)]'
+              : 'flex flex-col gap-6'
+          }
+        >
+          {cards ? (
+            <div className="flex h-[180px] items-center justify-center">
+              {beside(feature, 'w-[138px]')}
+            </div>
+          ) : (
+            beside(feature, feature.body ? 'w-[37px]' : 'w-[59px]')
+          )}
           {feature.heading ? (
             <DisplayHeading
               as={featureTag}
               level="md"
-              className="text-balance font-sans text-[28px] leading-[38px] tracking-normal"
+              className={
+                cards
+                  ? 'font-sans text-[24px] leading-[34px] tracking-normal'
+                  : 'text-balance font-sans text-[28px] leading-[38px] tracking-normal'
+              }
             >
               {feature.heading}
             </DisplayHeading>
           ) : null}
           {feature.body ? (
-            <p className={`text-[20px] leading-7 ${onInk ? 'text-white/65' : 'text-fg-muted'}`}>
+            <p
+              className={`text-[20px] leading-7 ${onInk && !cards ? 'text-white/65' : cards ? 'text-ink/65' : 'text-fg-muted'}`}
+            >
               {feature.body}
             </p>
           ) : null}
@@ -146,29 +178,30 @@ export function FeatureGridSection({
     </div>
   )
 
-  /*
-   * `2341:2231` — 48px above and below, a 139px gutter between the two
-   * columns, and a hairline under every row including the last. The rule is
-   * `border-b` on each row rather than `divide-y`, because the frame draws one
-   * under the final row too.
-   */
+  // Current use-case lists (4043:49741 / 4039:49503), with the authored GPU marks.
   const rows = (
-    <ul className="flex flex-col">
+    <ul className="divide-line flex flex-col divide-y">
       {items.map((feature) => (
         <li
           key={feature._key}
-          className="border-fg-muted flex flex-col gap-6 border-b py-8 lg:flex-row lg:items-center lg:gap-[139px] lg:py-12"
+          className="flex flex-col gap-6 py-8 first:pt-0 last:pb-0 lg:flex-row lg:items-start lg:gap-[139px] lg:py-12"
         >
-          <div className="flex items-center gap-8 lg:w-[609px] lg:shrink-0">
+          <div className="flex min-w-0 items-start gap-8 lg:w-[609px] lg:shrink-0">
             {beside(feature, 'w-[75px]')}
             {feature.heading ? (
-              <DisplayHeading as={featureTag} level="lg" className="tracking-[-0.0222em]">
+              <DisplayHeading
+                as={featureTag}
+                level="lg"
+                className="font-sans text-[28px] leading-[38px] tracking-normal"
+              >
                 {feature.heading}
               </DisplayHeading>
             ) : null}
           </div>
           {feature.body ? (
-            <p className={`text-lead lg:w-[500px] ${onInk ? 'text-white/65' : 'text-fg-muted'}`}>
+            <p
+              className={`text-[20px] leading-7 lg:w-[500px] ${onInk && !cards ? 'text-white/65' : cards ? 'text-ink/65' : 'text-fg-muted'}`}
+            >
               {feature.body}
             </p>
           ) : null}
@@ -177,7 +210,7 @@ export function FeatureGridSection({
     </ul>
   )
 
-  const composition = chosen === 'stack' ? stack : chosen === 'rows' ? rows : grid
+  const composition = chosen === 'stack' || cards ? stack : chosen === 'rows' ? rows : grid
 
   return (
     <SectionShell
@@ -199,8 +232,26 @@ export function FeatureGridSection({
         className="right-[-24%] top-1/4 w-[85vw] opacity-25"
       />
 
-      <div className="flex flex-col gap-10 lg:gap-16">
-        {heading ? <DisplayHeading>{heading}</DisplayHeading> : null}
+      <div
+        className={
+          chosen === 'rows'
+            ? 'flex flex-col gap-16 lg:gap-32'
+            : cards
+              ? 'flex flex-col gap-12'
+              : 'flex flex-col gap-16'
+        }
+      >
+        {eyebrow || heading || subheading ? (
+          <header className="flex max-w-[822px] flex-col gap-2">
+            {eyebrow ? (
+              <Eyebrow size="lg" tone="brand" className="pb-4">
+                {eyebrow}
+              </Eyebrow>
+            ) : null}
+            {heading ? <DisplayHeading level="hero">{heading}</DisplayHeading> : null}
+            {subheading ? <p className="text-lead text-fg-body">{subheading}</p> : null}
+          </header>
+        ) : null}
 
         {orbital ? (
           <>

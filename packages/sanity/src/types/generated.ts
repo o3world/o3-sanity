@@ -451,6 +451,7 @@ export type LayoutSection = {
         _key: string
       } & Mark)
   >
+  variant?: 'standard' | 'prose' | 'overview' | 'brand'
   headingLevel?: 'auto' | 'xl' | 'lg'
   bleed?: 'none' | 'end'
   width?: 'section' | 'article'
@@ -542,8 +543,10 @@ export type PersonGridSection = {
 
 export type FeatureGridSection = {
   _type: 'featureGridSection'
+  eyebrow?: string
   heading?: string
-  layout?: 'grid' | 'stack' | 'rows' | 'orbital'
+  subheading?: string
+  layout?: 'grid' | 'stack' | 'cards' | 'rows' | 'orbital'
   features?: Array<{
     heading?: string
     body?: string
@@ -2081,8 +2084,10 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
     | {
         _key: string
         _type: 'featureGridSection'
+        eyebrow?: string
         heading?: string
-        layout?: 'grid' | 'orbital' | 'rows' | 'stack'
+        subheading?: string
+        layout?: 'cards' | 'grid' | 'orbital' | 'rows' | 'stack'
         features?: Array<{
           heading?: string
           body?: string
@@ -2706,6 +2711,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
               >
             }
         > | null
+        variant?: 'brand' | 'overview' | 'prose' | 'standard'
         headingLevel?: 'auto' | 'lg' | 'xl'
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
@@ -3336,8 +3342,10 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
     | {
         _key: string
         _type: 'featureGridSection'
+        eyebrow?: string
         heading?: string
-        layout?: 'grid' | 'orbital' | 'rows' | 'stack'
+        subheading?: string
+        layout?: 'cards' | 'grid' | 'orbital' | 'rows' | 'stack'
         features?: Array<{
           heading?: string
           body?: string
@@ -3961,6 +3969,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
               >
             }
         > | null
+        variant?: 'brand' | 'overview' | 'prose' | 'standard'
         headingLevel?: 'auto' | 'lg' | 'xl'
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
@@ -4780,8 +4789,10 @@ export type CASE_STUDY_QUERY_RESULT = {
     | {
         _key: string
         _type: 'featureGridSection'
+        eyebrow?: string
         heading?: string
-        layout?: 'grid' | 'orbital' | 'rows' | 'stack'
+        subheading?: string
+        layout?: 'cards' | 'grid' | 'orbital' | 'rows' | 'stack'
         features?: Array<{
           heading?: string
           body?: string
@@ -5405,6 +5416,7 @@ export type CASE_STUDY_QUERY_RESULT = {
               >
             }
         > | null
+        variant?: 'brand' | 'overview' | 'prose' | 'standard'
         headingLevel?: 'auto' | 'lg' | 'xl'
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
@@ -6192,8 +6204,10 @@ export type PAGE_QUERY_RESULT = {
     | {
         _key: string
         _type: 'featureGridSection'
+        eyebrow?: string
         heading?: string
-        layout?: 'grid' | 'orbital' | 'rows' | 'stack'
+        subheading?: string
+        layout?: 'cards' | 'grid' | 'orbital' | 'rows' | 'stack'
         features?: Array<{
           heading?: string
           body?: string
@@ -6817,6 +6831,7 @@ export type PAGE_QUERY_RESULT = {
               >
             }
         > | null
+        variant?: 'brand' | 'overview' | 'prose' | 'standard'
         headingLevel?: 'auto' | 'lg' | 'xl'
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'

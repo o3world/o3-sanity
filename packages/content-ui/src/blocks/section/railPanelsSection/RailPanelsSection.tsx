@@ -84,7 +84,7 @@ export function RailPanelsSection({
     `rail-panel-${sectionKey ? `${sectionKey}-` : ''}${key ?? index}`
 
   const isRail = !isCards && !isRows && !isGrid && !isTrack
-  const shape = isCards ? 'wide' : isTrack ? 'split' : isRail ? 'spread' : 'measured'
+  const shape = isCards || isRows ? 'wide' : isTrack ? 'split' : isRail ? 'spread' : 'measured'
 
   const header = (
     <div
@@ -142,7 +142,7 @@ export function RailPanelsSection({
   if (isRows || isGrid) {
     return (
       <SectionShell surface={resolved} top="md" bottom="md" background={background}>
-        <div className={cn('flex flex-col', isGrid ? 'gap-16 lg:gap-32' : 'gap-16')}>
+        <div className="flex flex-col gap-16 lg:gap-32">
           {header}
           <PanelRows
             onInk={resolved === 'ink'}

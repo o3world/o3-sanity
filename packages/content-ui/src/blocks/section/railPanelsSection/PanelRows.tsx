@@ -28,7 +28,7 @@ export interface PanelRowsProps {
 /** Current service lines (4068:50469): title, body/chips, rule, outcome. */
 export function PanelRows({ items, onInk = false, lastDetailIsOutcome = true }: PanelRowsProps) {
   return (
-    <ol className="flex flex-col gap-16">
+    <ol className="divide-line flex flex-col divide-y">
       {items.map((panel) => {
         const details = panel.details ?? []
         const outcome = lastDetailIsOutcome && details.length > 1 ? details.at(-1) : undefined
@@ -38,7 +38,7 @@ export function PanelRows({ items, onInk = false, lastDetailIsOutcome = true }: 
             key={panel.key}
             data-sanity={panel.dataSanity}
             className={cn(
-              'grid gap-8',
+              'grid gap-8 py-16 first:pt-0 last:pb-0',
               outcome
                 ? 'lg:grid-cols-[minmax(0,395fr)_minmax(0,394fr)_minmax(0,75fr)_minmax(0,288fr)]'
                 : 'lg:grid-cols-[minmax(0,395fr)_minmax(0,821fr)]',

@@ -163,3 +163,60 @@ export const LegacyHeading: Story = {
 export const GroupedEntrance: Story = {
   args: { ...seededSectionArgs('about', 'layoutSection', 1), sequence: true },
 }
+
+/** Current prose foundation, with the existing authored text. */
+export const CurrentProse: Story = {
+  args: {
+    ...seededSectionArgs('about', 'layoutSection', 0),
+    variant: 'prose',
+    width: 'article',
+    columns: 1,
+    bleed: 'none',
+    heading: 'The thinking and the making belong together.',
+  },
+  parameters: { design: figmaDesign('3764:78635') },
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', {
+      name: 'The thinking and the making belong together.',
+    })
+    await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(64, 0)
+    await expect(heading.getBoundingClientRect().width).toBeLessThanOrEqual(822)
+  },
+}
+
+export const CurrentOverview: Story = {
+  args: {
+    ...seededSectionArgs('solutions-software-engineering', 'layoutSection', 0),
+    variant: 'overview',
+    bleed: 'end',
+  },
+  parameters: { design: figmaDesign('2360:2861') },
+}
+
+export const CurrentBrandFamily: Story = {
+  args: {
+    ...seededSectionArgs('about', 'layoutSection', 1),
+    variant: 'brand',
+    columns: 2,
+    bleed: 'none',
+  },
+  parameters: { design: figmaDesign('3720:60564') },
+  play: async ({ canvasElement }) => {
+    const image = canvasElement.querySelector('article img')
+    await expect(image).not.toBeNull()
+    await expect(image!.getBoundingClientRect().height).toBe(396)
+    await expect(within(canvasElement).getByText(/Our annual conference/)).toBeVisible()
+  },
+}
+
+export const CurrentBrandFamilyMobile: Story = {
+  ...CurrentBrandFamily,
+  globals: { viewport: { value: 'mobile' } },
+  play: async ({ canvasElement }) => {
+    const image = canvasElement.querySelector('article img')!
+    const box = image.getBoundingClientRect()
+    await expect(box.height).toBeCloseTo(box.width, 0)
+    await expect(box.width).toBeGreaterThan(0)
+  },
+}

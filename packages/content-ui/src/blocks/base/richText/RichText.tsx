@@ -10,9 +10,10 @@ type RichTextProps = BaseProps<'richText'> & {
    * renderer uses on a detail page (#268).
    */
   slotSizes?: string
+  bodyClassName?: string
 }
 
 /** Base block: a Portable Text passage inside a layoutSection column. */
-export function RichText({ body, slotSizes }: RichTextProps) {
-  return <PortableTextBody value={body} figureSizes={slotSizes} />
+export function RichText({ body, slotSizes, bodyClassName }: RichTextProps) {
+  return <PortableTextBody value={body} figureSizes={slotSizes} className={bodyClassName} />
 }

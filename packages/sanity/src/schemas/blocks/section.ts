@@ -355,7 +355,9 @@ export const featureGridSection = defineSectionBlock({
   title: 'Feature grid',
   knobs: featureGridSectionKnobs,
   fields: [
+    defineField({ name: 'eyebrow', type: 'string' }),
     defineField({ name: 'heading', type: 'string' }),
+    defineField({ name: 'subheading', type: 'text', rows: 3 }),
     'layout',
     defineField({
       name: 'features',
