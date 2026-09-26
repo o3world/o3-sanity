@@ -395,8 +395,24 @@ export type ScreenGridSection = {
 export type MediaSection = {
   _type: 'mediaSection'
   media?: Figure
-  variant?: 'plain' | 'capture'
-  width?: 'contained' | 'full-bleed'
+  heading?: string
+  subheading?: string
+  logo?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  badge?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  variant?: 'plain' | 'capture' | 'overlap' | 'feature'
+  width?: 'contained' | 'section' | 'full-bleed'
   surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
@@ -2839,8 +2855,24 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           alt?: string
           caption?: string
         } | null
-        variant?: 'capture' | 'plain'
-        width?: 'contained' | 'full-bleed'
+        heading?: string
+        subheading?: string
+        logo?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        badge?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        variant?: 'capture' | 'feature' | 'overlap' | 'plain'
+        width?: 'contained' | 'full-bleed' | 'section'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -4078,8 +4110,24 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           alt?: string
           caption?: string
         } | null
-        variant?: 'capture' | 'plain'
-        width?: 'contained' | 'full-bleed'
+        heading?: string
+        subheading?: string
+        logo?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        badge?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        variant?: 'capture' | 'feature' | 'overlap' | 'plain'
+        width?: 'contained' | 'full-bleed' | 'section'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -5506,8 +5554,24 @@ export type CASE_STUDY_QUERY_RESULT = {
           alt?: string
           caption?: string
         } | null
-        variant?: 'capture' | 'plain'
-        width?: 'contained' | 'full-bleed'
+        heading?: string
+        subheading?: string
+        logo?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        badge?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        variant?: 'capture' | 'feature' | 'overlap' | 'plain'
+        width?: 'contained' | 'full-bleed' | 'section'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -6902,8 +6966,24 @@ export type PAGE_QUERY_RESULT = {
           alt?: string
           caption?: string
         } | null
-        variant?: 'capture' | 'plain'
-        width?: 'contained' | 'full-bleed'
+        heading?: string
+        subheading?: string
+        logo?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        badge?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        variant?: 'capture' | 'feature' | 'overlap' | 'plain'
+        width?: 'contained' | 'full-bleed' | 'section'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'

@@ -162,6 +162,7 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `excerpt`         | Short summary shown on cards and listings                                                           | `summary`, `intro`, `teaser`                              |
 | `label`           | Short UI string on a leaf object                                                                    | `name`, `text`                                            |
 | `note`            | Quieter secondary line (the "Best when…" line)                                                      | `caption` (reserved: `figure.caption`)                    |
+| `badge`           | A small supporting graphic above a media feature heading                                            | A content label or heading text                           |
 | `media`           | A `figure` on a block                                                                               | `image` — that's the raw asset field inside `figure`      |
 | `heroMedia`       | A document's lead `figure` — the detail page's hero and nothing else                                | `featuredImage`, `banner`                                 |
 | `cardMedia`       | The `figure` a document shows on cards and in feeds                                                 | `featuredImage`, `thumbnail`, `cardImage`, `featureMedia` |

@@ -723,7 +723,7 @@ export const layoutSection = defineSectionBlock({
 /**
  * `variant`, `width` and `surface` are declared in `src/knobs/mediaSection.ts`
  * (ADR 0020), including the gate that withholds `width` from a capture.
- * `media` is the only editorial field the band has.
+ * Feature adds optional heading, supporting copy and graphics over the figure.
  */
 export const mediaSection = defineSectionBlock({
   name: 'mediaSection',
@@ -733,6 +733,22 @@ export const mediaSection = defineSectionBlock({
   knobs: mediaSectionKnobs,
   fields: [
     defineField({ name: 'media', type: 'figure', validation: (rule) => rule.required() }),
+    defineField({
+      name: 'heading',
+      type: 'string',
+      description: 'Accessible heading, also used when no wordmark is supplied.',
+    }),
+    defineField({ name: 'subheading', type: 'text', rows: 3 }),
+    defineField({
+      name: 'logo',
+      type: 'image',
+      description: 'Wordmark displayed in place of the heading.',
+    }),
+    defineField({
+      name: 'badge',
+      type: 'image',
+      description: 'Small graphic above the feature heading.',
+    }),
     'variant',
     'width',
   ],
