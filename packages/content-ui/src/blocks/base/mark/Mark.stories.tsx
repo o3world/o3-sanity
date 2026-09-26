@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import { expect, waitFor } from 'storybook/test'
+import { expect } from 'storybook/test'
 import { seedImageReference } from '../../../testing/seedContent'
 
 import { Mark } from './Mark'
@@ -84,7 +84,7 @@ export const Artwork: Story = {
   play: async ({ canvasElement }) => {
     const image = canvasElement.querySelector('img')!
     await expect(image).not.toBeNull()
-    await waitFor(() => expect(image.naturalWidth).toBeGreaterThan(0))
+    await expect(image.src).toContain('06209950ecc2975e61ed4d6d0868779ee4cb2e6d')
     await expect(image.getBoundingClientRect().width).toBe(66)
     await expect(canvasElement.querySelector('canvas')).toBeNull()
   },
