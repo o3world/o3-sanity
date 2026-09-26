@@ -72,9 +72,6 @@ Apply
 Let’s get started on your next big thing.
 Get in touch
 Contact
-Contact
-Let’s make exceptional
-experiences together
 New business inquiry
 1682 inquiries
 Ventures request
@@ -92,6 +89,9 @@ Philadelphia, PA 19125
 Reach us
 (215) 592-4739
 hello@o3world.com
+Let’s make exceptional
+experiences together
+Contact
 O3 World
 You see the problem in front of you.
 We’re working on the one behind it.

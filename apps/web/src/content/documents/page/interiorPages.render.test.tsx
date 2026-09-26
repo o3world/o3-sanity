@@ -445,10 +445,10 @@ describe('the seeded Contact page', () => {
     expect(bandPaths(html)).toHaveLength(sections.length)
   })
 
-  // `2960:7557` draws two bands, and the second one holds everything the
-  // portrait, the quote and the address used to have bands of their own for.
-  it('resolves to its two bands', () => {
-    expect(sections.map((s) => s._type)).toEqual(['heroSection', 'formSection'])
+  // `2960:7792` pairs the introduction and form in one hero.
+  it('resolves to one form hero with the supporting content retained', () => {
+    expect(sections.map((s) => s._type)).toEqual(['formSection'])
+    expect(sections[0]).toMatchObject({ variant: 'hero' })
   })
 
   it.each([
@@ -564,17 +564,12 @@ describe('the seeded Contact page', () => {
       expect(html).toContain('Send message')
     })
 
-    /**
-     * `2975:10198` keeps the two names SIDE BY SIDE at 402 — a horizontal row
-     * of two 131-wide fields inside a 282 card — so the pair is unprefixed and
-     * a `sm:` variant on it would be the bug. Only the mobile frame proves
-     * this, which is why it is asserted rather than left to the renderer.
-     */
-    it('keeps the two names paired at 402, with nothing escaping sideways', () => {
+    // `3754:78225` stacks the fields on mobile; desktop pairs them.
+    it('stacks fields on mobile, with nothing escaping sideways', () => {
       expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
       const variants = variantsOf(html, 'grid-cols-2')
-      expect(variants).toContain('grid-cols-2')
-      expect(variants).not.toContain('sm:grid-cols-2')
+      expect(variants).toContain('lg:grid-cols-2')
+      expect(variants).not.toContain('grid-cols-2')
     })
   })
 })
