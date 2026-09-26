@@ -82,7 +82,7 @@ export function PanelRail({ items, active, mode }: PanelRailProps) {
                 // 24/28.8 Medium at −0.8px, the same label on both frames.
                 'duration-(--duration-hover) focus-visible:ring-brand flex items-center gap-2 text-[24px] font-medium leading-[1.2] tracking-[-0.0333em] transition-colors ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-4',
                 'border-b-2 lg:border-b-0 lg:pb-0',
-                isActive ? 'border-brand pb-3' : 'border-transparent',
+                isActive ? 'border-brand text-ink pb-3' : 'text-fg-body border-transparent',
               )}
             >
               {/* The column's marker, and the one part of the row the 402

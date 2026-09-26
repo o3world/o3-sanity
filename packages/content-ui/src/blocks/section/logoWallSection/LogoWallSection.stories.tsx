@@ -19,7 +19,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const AsSeeded: Story = {
-  args: seededSectionArgs('index', 'logoWallSection'),
+  args: { ...seededSectionArgs('index', 'logoWallSection'), surface: 'ink' },
   globals: { backgrounds: { value: 'bone' }, viewport: { value: 'desktop' } },
   play: async ({ canvasElement }) => {
     await assertStrip(canvasElement)
@@ -29,7 +29,7 @@ export const AsSeeded: Story = {
 }
 
 export const Mobile: Story = {
-  args: seededSectionArgs('index', 'logoWallSection'),
+  args: { ...seededSectionArgs('index', 'logoWallSection'), surface: 'ink' },
   globals: { backgrounds: { value: 'bone' }, viewport: { value: 'mobile' } },
   parameters: { design: figmaDesign('3726:62792') },
   play: async ({ canvasElement }) => {
@@ -71,13 +71,20 @@ export const MissingLogo: Story = {
 }
 
 export const Bar: Story = {
-  args: seededSectionArgs('partners-sanity', 'logoWallSection'),
-  parameters: { design: figmaDesign('2332:1708') },
-  globals: { backgrounds: { value: 'bone' } },
+  args: { ...seededSectionArgs('partners-sanity', 'logoWallSection'), surface: 'ink' },
+  parameters: { design: figmaDesign('3895:17711') },
+  play: async ({ canvasElement }) => {
+    await assertStrip(canvasElement)
+    const section = canvasElement.querySelector('section')!
+    await expect(getComputedStyle(section).backgroundImage).toContain('partner-texture')
+    const heading = within(canvasElement).getByRole('heading', { level: 2 })
+    await expect(getComputedStyle(heading).fontSize).toBe('48px')
+  },
+  globals: { backgrounds: { value: 'bone' }, viewport: { value: 'desktop' } },
 }
 
 export const BarMobile: Story = {
-  args: seededSectionArgs('partners-sanity', 'logoWallSection'),
+  args: { ...seededSectionArgs('partners-sanity', 'logoWallSection'), surface: 'ink' },
   globals: { viewport: { value: 'mobile' }, backgrounds: { value: 'bone' } },
 }
 
@@ -98,15 +105,15 @@ async function assertStrip(canvasElement: HTMLElement) {
   await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
 }
 
-/** Saved surface metadata cannot invert copy on the Home composition's light wash. */
+/** The authored ink surface is honored by both current logo-wall layouts. */
 export const SavedInkSurface: Story = {
   ...AsSeeded,
   args: { ...AsSeeded.args, surface: 'ink' },
   play: async ({ canvasElement }) => {
     const section = canvasElement.querySelector('section')!
     const body = section.querySelector('p.text-lead')!
-    await expect(section).toHaveAttribute('data-surface', 'bone')
-    await expect(getComputedStyle(body).color).toBe('rgb(85, 82, 78)')
+    await expect(section).toHaveAttribute('data-surface', 'ink')
+    await expect(getComputedStyle(body).color).toBe('rgb(170, 166, 158)')
   },
 }
 
@@ -117,7 +124,18 @@ export const BarOnInk: Story = {
     const section = canvasElement.querySelector('section')!
     const heading = within(canvasElement).getByRole('heading', { level: 2 })
     await expect(section).toHaveAttribute('data-surface', 'ink')
-    await expect(getComputedStyle(section).backgroundImage).toBe('none')
-    await expect(getComputedStyle(heading).color).toBe('rgba(255, 255, 255, 0.92)')
+    await expect(getComputedStyle(section).backgroundImage).toContain('partner-texture')
+    await expect(getComputedStyle(heading).color).toBe('rgb(255, 255, 255)')
+  },
+}
+
+export const AuthoredLightSurface: Story = {
+  ...AsSeeded,
+  args: { ...AsSeeded.args, surface: 'white' },
+  play: async ({ canvasElement }) => {
+    const section = canvasElement.querySelector('section')!
+    await expect(section).toHaveAttribute('data-surface', 'white')
+    await expect(getComputedStyle(section).backgroundColor).toBe('rgb(255, 255, 255)')
+    await expect(getComputedStyle(section.querySelector('h2')!).color).toBe('rgb(10, 10, 11)')
   },
 }

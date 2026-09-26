@@ -170,6 +170,11 @@ export const RailBleed: Story = {
   globals: { viewport: { value: 'desktop' } },
   play: async ({ canvasElement }) => {
     const rail = canvasElement.querySelector('ol')!
+    const plate = canvasElement.querySelector('article > div:last-child')!
+    await expect(getComputedStyle(plate).borderRadius).toBe('32px')
+    await expect(getComputedStyle(plate).boxShadow).not.toBe('none')
+    const link = canvasElement.querySelector('article a')!
+    await expect(getComputedStyle(link).color).toBe('rgb(235, 16, 0)')
     const win = canvasElement.ownerDocument.defaultView!
     const top = parseFloat(win.getComputedStyle(rail).top)
     const start = rail.getBoundingClientRect().top + win.scrollY

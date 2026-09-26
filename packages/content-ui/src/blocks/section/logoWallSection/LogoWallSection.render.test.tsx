@@ -19,7 +19,7 @@ const html = renderToStaticMarkup(
       heading: "Trusted by organizations shaping what's next.",
       body: 'From Fortune 500 enterprises to high-growth organizations.',
       clients: CLIENTS,
-      surface: 'bone',
+      surface: 'ink',
     } as unknown as SectionProps<'logoWallSection'>)}
   />,
 )
@@ -44,7 +44,7 @@ describe('the partners band', () => {
     // `--gradient-statement`. The token survives on the pull quote; reaching
     // for it here is the specific mistake this guards.
     expect(html).not.toContain('text-gradient')
-    expect(html).toContain('text-ink')
+    expect(html).toContain('text-white')
   })
 
   it('sizes the heading at the h2 step and the body at the lead pair', () => {
@@ -109,7 +109,8 @@ describe('the partners band', () => {
     expect(html).toMatch(/--marquee-shift:\s*-[\d.]+%/)
   })
 
-  it('paints the warm wash rather than a flat bone', () => {
-    expect(html).toContain('--gradient-surface-wash-warm')
+  it('honors the authored dark surface', () => {
+    expect(html).toContain('data-surface="ink"')
+    expect(html).not.toContain('--gradient-surface-wash-warm')
   })
 })

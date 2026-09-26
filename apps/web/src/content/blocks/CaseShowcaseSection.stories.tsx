@@ -37,6 +37,8 @@ export const AsSeeded: Story = {
     for (const card of cards) {
       await expect(getComputedStyle(card.parentElement!).position).toBe('sticky')
       await expect(getComputedStyle(card).clipPath).toBe('none')
+      await expect(getComputedStyle(card).boxShadow).not.toBe('none')
+      await expect(getComputedStyle(card.querySelector('h3')!).maxWidth).toBe('472px')
     }
     await expect(canvasElement.querySelector('.work-organic-card')).toBeNull()
     await expect(canvasElement.querySelector('canvas')).toBeNull()
@@ -91,6 +93,15 @@ export const ShortViewport: Story = {
 export const Mobile: Story = {
   args: seededSectionArgs('index', 'caseShowcaseSection'),
   globals: { viewport: { value: 'mobile' } },
+  play: async ({ canvasElement }) => {
+    const card = canvasElement.querySelector('a[data-surface="ink"]')!
+    await expect(getComputedStyle(card).paddingLeft).toBe('32px')
+    const stat = card.querySelector('p > span')!
+    await expect(getComputedStyle(stat).fontSize).toBe('32px')
+    await expect(parseFloat(getComputedStyle(stat).lineHeight)).toBeCloseTo(38.4, 1)
+    await expect(getComputedStyle(stat.parentElement!).gap).toBe('16px')
+    await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
+  },
 }
 
 /**

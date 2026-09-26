@@ -2,12 +2,7 @@ import { defineBlockKnobs, knob } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
 import type { LogoWallSection } from '../types/generated'
 
-/**
- * The logo wall's design options.
- *
- * `bone` because the block asked for it before knobs existed — the warm wash
- * the marks sit on is what both frames draw.
- */
+/** Current Home and partner logo bands share the dark ruled composition. */
 export const logoWallSectionKnobs = defineBlockKnobs({
   type: 'logoWallSection',
   title: 'Logo wall',
@@ -17,15 +12,14 @@ export const logoWallSectionKnobs = defineBlockKnobs({
       name: 'layout',
       title: 'Layout',
       description:
-        'Plates is the Home partners band: an intro and separator above an unboxed logo strip on a warm light surface. Bar is the compact partner-page strip and supports an authored surface.',
+        'An intro and separator above an unboxed logo strip. Plates uses the solid Home surface; Bar adds the partner-page texture on ink.',
       // Keep the stored layout values; current Home is 3720:60483 / 3726:62792.
       options: ['plates', 'bar'],
       initialValue: 'plates',
       bar: true,
     }),
     surfaceKnob({
-      initialValue: 'bone',
-      showWhen: { at: 'layout', mode: 'oneOf', values: ['bar'] },
+      initialValue: 'ink',
     }),
   ],
   /**

@@ -8,6 +8,7 @@ import { ButtonLink } from '../../../ButtonLink'
 import { SanityImage } from '../../../SanityImage'
 import { resolveSurface } from '../../surface'
 import { MarqueeTrack } from './MarqueeTrack'
+import './logo-wall.css'
 
 type LogoWallSectionProps = SectionProps<'logoWallSection'>
 
@@ -23,7 +24,7 @@ function marqueeCopies(count: number) {
 
 /**
  * Home partners (3720:60483 / 3726:62792): a ruled intro above an unboxed
- * 43px logo strip. The partner-page bar retains its compact composition.
+ * 43px logo strip. Partner (3895:17711) shares the composition with a tiled ground.
  * MarqueeTrack owns the existing crawl, pointer settling and reduced motion.
  */
 export function LogoWallSection({
@@ -36,8 +37,8 @@ export function LogoWallSection({
   surface,
 }: LogoWallSectionProps) {
   const isBar = stegaClean(layout) === 'bar'
-  // The Home composition paints an opaque light wash, including for older saved bands.
-  const resolved = isBar ? resolveSurface(surface, 'logoWallSection') : 'bone'
+  const resolved = resolveSurface(surface, 'logoWallSection')
+  const onInk = resolved === 'ink'
   const marks = clients ?? []
   const copies = marqueeCopies(marks.length)
   const track = Array.from({ length: copies }, (_, copy) =>
@@ -55,62 +56,52 @@ export function LogoWallSection({
         }
         className={cn(
           SURFACE_CLASS[resolved],
-          'flex flex-col items-center',
-          resolved !== 'ink' && 'bg-(image:--gradient-surface-wash-warm)',
-          isBar ? 'px-gutter pb-band-sm pt-band-sm gap-6' : 'gap-16 px-4 pb-16 pt-32 lg:px-16',
+          'flex flex-col items-center gap-16 px-4 pb-16 pt-32 lg:px-16',
+          onInk && 'bg-[#171615]',
+          onInk && isBar && 'logo-wall-texture',
         )}
       >
-        <div className={cn('flex w-full flex-col items-center', !isBar && 'border-line border-b')}>
-          <div
-            className={cn(
-              'flex w-full flex-col items-center text-center',
-              isBar ? 'gap-8' : 'max-w-[900px] gap-6 pb-20',
-            )}
-          >
+        <div
+          className={cn(
+            'flex w-full flex-col items-center border-b',
+            onInk ? 'border-on-utility-line' : 'border-line',
+          )}
+        >
+          <div className="flex w-full max-w-[900px] flex-col items-center gap-6 pb-20 text-center">
             {eyebrow ? (
-              <Eyebrow size="lg" className={isBar ? undefined : 'pb-4'}>
+              <Eyebrow size="lg" className={cn('pb-4', onInk && 'text-on-utility')}>
                 {eyebrow}
               </Eyebrow>
             ) : null}
             {heading ? (
               <h2
                 className={cn(
-                  'font-display text-balance',
-                  resolved === 'ink' ? 'text-fg' : 'text-ink',
-                  isBar ? 'text-display-lg max-w-[1026px]' : 'text-display-xl',
+                  'font-display text-display-xl text-balance',
+                  onInk ? 'text-white' : 'text-ink',
                 )}
               >
                 {heading}
               </h2>
             ) : null}
             {body ? (
-              <p className={cn('text-lead text-fg-body text-pretty', isBar && 'max-w-[724px]')}>
+              <p
+                className={cn('text-lead text-pretty', onInk ? 'text-on-utility' : 'text-fg-body')}
+              >
                 {body}
               </p>
             ) : null}
           </div>
         </div>
 
-        <div
-          className={cn(
-            'flex justify-center self-stretch overflow-hidden',
-            isBar ? '-mx-gutter' : '-mx-4 lg:-mx-16',
-          )}
-        >
-          <MarqueeTrack copies={copies} className={cn(resolved !== 'ink' && 'mix-blend-multiply')}>
+        <div className="-mx-4 flex justify-center self-stretch overflow-hidden lg:-mx-16">
+          <MarqueeTrack copies={copies} className={cn(!onInk && 'mix-blend-multiply')}>
             {track.map(({ client, copy }) => (
               <li
                 key={`${copy}-${client._id}`}
                 // Every copy after the first is the same six marks again. A
                 // reader hears the partners once.
                 aria-hidden={copy > 0 || undefined}
-                className={cn(
-                  'flex shrink-0 items-center justify-center',
-                  !isBar && 'group/logo',
-                  isBar
-                    ? 'h-[100px] w-[168px] px-8 sm:w-[224px] sm:px-12 lg:w-[280px] lg:px-16'
-                    : 'h-[43px] w-[239px] pr-16',
-                )}
+                className="group/logo flex h-[43px] w-[239px] shrink-0 items-center justify-center pr-16"
               >
                 <SanityImage
                   source={client.logo}
@@ -118,14 +109,12 @@ export function LogoWallSection({
                   width={456}
                   loading="eager"
                   className={cn(
-                    'w-full object-contain grayscale',
-                    isBar ? 'max-h-[80px]' : 'max-h-[43px]',
-                    !isBar &&
-                      'ease-soft opacity-90 transition-[opacity,filter] duration-500 group-hover/logo:opacity-100 group-hover/logo:contrast-125 motion-reduce:transition-none',
+                    'ease-soft max-h-[43px] w-full object-contain grayscale transition-[opacity,filter] duration-500 motion-reduce:transition-none',
+                    onInk
+                      ? 'opacity-40 brightness-0 invert group-hover/logo:opacity-60'
+                      : 'opacity-90 group-hover/logo:opacity-100 group-hover/logo:contrast-125',
                   )}
-                  sizes={
-                    isBar ? '(min-width: 1024px) 152px, (min-width: 640px) 128px, 104px' : '175px'
-                  }
+                  sizes="175px"
                 />
               </li>
             ))}

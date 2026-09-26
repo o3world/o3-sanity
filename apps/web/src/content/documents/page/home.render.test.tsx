@@ -300,7 +300,7 @@ describe('the homepage at 402 (ADR 0006)', () => {
     const heroHeadline = html.match(/<h1 class="([^"]*)"/)?.[1] ?? ''
     const partnersHeading =
       html.match(
-        /<section[^>]*class="[^"]*surface-wash-warm[^"]*"[^>]*>.*?<h2 class="([^"]*)"/s,
+        /<section[^>]*style="[^"]*--duration-marquee[^"]*"[^>]*>.*?<h2 class="([^"]*)"/s,
       )?.[1] ?? ''
     const pullQuote = html.match(/<blockquote[^>]*>.*?<p class="([^"]*)"/s)?.[1] ?? ''
 

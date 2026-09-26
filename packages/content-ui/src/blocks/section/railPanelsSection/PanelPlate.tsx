@@ -105,19 +105,22 @@ export function PanelPlate({
             button={button}
             // `Link` (`2747:4647`), not `Button`: no padding, and 4px to the
             // arrow rather than the button set's 12.
-            className="gap-1 p-0"
+            className="text-brand gap-1 p-0"
           />
         ) : null}
       </div>
 
       {media?.image && plate === 'bleed' ? (
-        <div className={PLATE_BLEED_CLASS}>
+        <div
+          className={`${PLATE_BLEED_CLASS} rounded-[32px] shadow-[-32px_32px_64px_rgba(0,0,0,0.2)]`}
+        >
           <SanityImage
             source={media.image}
             alt={media.alt ?? ''}
             ratio="fill"
             width={1600}
             sizes={PLATE_BLEED_SIZES}
+            className="rounded-[inherit]"
           />
         </div>
       ) : media?.image ? (

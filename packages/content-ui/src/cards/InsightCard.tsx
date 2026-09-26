@@ -7,7 +7,7 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { SanityImage } from '../SanityImage'
 import { CARD_THREE_UP, STRUCTURAL_THREE_UP } from '../imageSizes'
-import { formatNumericDate } from '../lib/format-date'
+import { formatLongDate } from '../lib/format-date'
 
 export type InsightCardData = NonNullable<SectionProps<'insightsCarouselSection'>['latest']>[number]
 
@@ -38,8 +38,8 @@ export function InsightCard({
 }) {
   const isStructural = mediaLayout === 'structural-three-up'
   const meta = [
+    formatLongDate(publishedAt),
     readingMinutes ? `${readingMinutes} min${readingMinutes === 1 ? '' : 's'}` : null,
-    formatNumericDate(publishedAt),
   ]
     .filter(Boolean)
     .join(' · ')
@@ -59,7 +59,7 @@ export function InsightCard({
     >
       <div
         className={cn(
-          'rounded-card bg-bone relative isolate aspect-square w-full overflow-hidden sm:max-w-[395px]',
+          'bg-bone relative isolate aspect-square w-full overflow-hidden rounded-2xl shadow-[0_32px_64px_rgba(0,0,0,0.2)] sm:max-w-[395px]',
           isStructural && 'lg:max-w-none',
         )}
       >
@@ -72,10 +72,6 @@ export function InsightCard({
           priority={priority}
           className={cn('h-full w-full', CARD_MEDIA_ZOOM)}
         />
-        {/* The veil weights the bottom of the tile, where the frame's pattern
-            lozenge sits. It stays even with no image, so an unillustrated
-            insight still reads as a card rather than a blank square. */}
-        <div className="bg-(image:--gradient-card-veil) absolute inset-0" />
       </div>
 
       <div className="flex flex-col gap-2">

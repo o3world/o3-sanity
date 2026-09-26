@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { expect, within } from 'storybook/test'
+import { expect, within, waitFor } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 
 import { seededSectionArgs } from '../../../testing/seedContent'
@@ -45,6 +45,17 @@ export const LatestFeed: Story = {
     await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(48, 1)
     await expect(parseFloat(getComputedStyle(heading).lineHeight)).toBeCloseTo(58, 1)
     await expect(getComputedStyle(heading).fontWeight).toBe('400')
+    await waitFor(() =>
+      expect(canvasElement.querySelector('[aria-roledescription="slide"] a')).not.toBeNull(),
+    )
+    const card = canvasElement.querySelector('[aria-roledescription="slide"] a')!
+    const media = card.firstElementChild!
+    await expect(getComputedStyle(media).borderRadius).toBe('16px')
+    await expect(getComputedStyle(media).boxShadow).not.toBe('none')
+    await expect(media.children).toHaveLength(1)
+    await expect(card.querySelector('.text-meta')!).toHaveTextContent(
+      /^[A-Za-z]+ \d{1,2}, \d{4} · \d+ mins?$/,
+    )
   },
 }
 
