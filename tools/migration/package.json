@@ -20,7 +20,9 @@
     "about-hero-alignment": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/aboutHeroAlignment.ts --with-user-token --",
     "about-heading": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/aboutHeading.ts --with-user-token --",
     "home-quote-size": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/homeQuoteSize.ts --with-user-token --",
-    "home-showcase-button": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/homeShowcaseButton.ts --with-user-token --"
+    "home-showcase-button": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/homeShowcaseButton.ts --with-user-token --",
+    "contact-composition": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/contactComposition.ts --with-user-token --",
+    "solutions-engagement-alignment": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/solutionsEngagementAlignment.ts --with-user-token --"
   },
   "dependencies": {
     "@o3/block-spec": "workspace:*",

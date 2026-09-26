@@ -190,7 +190,7 @@ export function InquiryForm({
 
   return (
     <form
-      className="flex flex-col gap-5"
+      className="flex flex-col gap-6"
       // The submit the browser resolves on its own, before this component's
       // JavaScript arrives. Without them it GETs the page it is on and writes
       // every field into the address bar, the message included. The route
@@ -202,10 +202,7 @@ export function InquiryForm({
       onSubmit={handleSubmit}
       ref={form}
     >
-      {/* The two names share a row at BOTH frame widths — `2975:10198` is a
-          horizontal row of two 131-wide fields inside a 282 card at 402, so
-          this never stacks. */}
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid gap-6 lg:grid-cols-2">
         <FormField name="firstName" label="First name" required error={errors.firstName}>
           {(control) => (
             <input
@@ -235,62 +232,58 @@ export function InquiryForm({
         </FormField>
       </div>
 
-      <FormField name="email" label="Email" required error={errors.email}>
-        {(control) => (
-          <input
-            {...control}
-            type="email"
-            autoComplete="email"
-            className={FIELD_CONTROL_CLASS}
-            value={values.email}
-            onChange={handleChange('email')}
-            onBlur={handleBlur('email')}
-          />
-        )}
-      </FormField>
+      <div className="grid gap-6 lg:grid-cols-2">
+        <FormField name="email" label="Email" required error={errors.email}>
+          {(control) => (
+            <input
+              {...control}
+              type="email"
+              autoComplete="email"
+              className={FIELD_CONTROL_CLASS}
+              value={values.email}
+              onChange={handleChange('email')}
+              onBlur={handleBlur('email')}
+            />
+          )}
+        </FormField>
 
-      <FormField name="reason" label="Reason" required error={errors.reason}>
-        {(control) => (
-          // A native select, not a Radix one. ADR 0008 puts a component in
-          // `ui/` only when shadcn supplies real behaviour, and here the
-          // platform already does it better: a phone draws its own picker.
-          <select
-            {...control}
-            // 32px of right padding for the native chevron (`2960:7811`),
-            // against the 20 every other control keeps.
-            // 48 tall against the input's 46, and 32 of right pad for the
-            // chevron (`2960:7811`).
-            className={cn(FIELD_CONTROL_CLASS, 'h-12 pr-8')}
-            value={values.reason}
-            onChange={handleChange('reason')}
-            onBlur={handleBlur('reason')}
-          >
-            <option value="">Please select…</option>
-            {reasons.map((reason) => (
-              // `value` is stega-cleaned, the visible child is not — and the
-              // split is the point. In draft mode every string from Sanity
-              // carries invisible stega characters so Presentation can map a
-              // rendered word back to the field that wrote it; keeping them on
-              // the child preserves click-to-edit. Keeping them on the VALUE
-              // would mean the reason a submission carries silently differs
-              // from the one an editor typed, on drafts only, invisibly — and
-              // the route checks the reason against the list it was sent,
-              // exactly, on trimmed values.
-              <option key={optionValue(reason)} value={optionValue(reason)}>
-                {reason}
-              </option>
-            ))}
-          </select>
-        )}
-      </FormField>
+        <FormField name="reason" label="Reason" required error={errors.reason}>
+          {(control) => (
+            // A native select, not a Radix one. ADR 0008 puts a component in
+            // `ui/` only when shadcn supplies real behaviour, and here the
+            // platform already does it better: a phone draws its own picker.
+            <select
+              {...control}
+              className={cn(FIELD_CONTROL_CLASS, 'pr-8')}
+              value={values.reason}
+              onChange={handleChange('reason')}
+              onBlur={handleBlur('reason')}
+            >
+              <option value="">Please select…</option>
+              {reasons.map((reason) => (
+                // `value` is stega-cleaned, the visible child is not — and the
+                // split is the point. In draft mode every string from Sanity
+                // carries invisible stega characters so Presentation can map a
+                // rendered word back to the field that wrote it; keeping them on
+                // the child preserves click-to-edit. Keeping them on the VALUE
+                // would mean the reason a submission carries silently differs
+                // from the one an editor typed, on drafts only, invisibly — and
+                // the route checks the reason against the list it was sent,
+                // exactly, on trimmed values.
+                <option key={optionValue(reason)} value={optionValue(reason)}>
+                  {reason}
+                </option>
+              ))}
+            </select>
+          )}
+        </FormField>
+      </div>
 
       <FormField name="message" label="Message" required error={errors.message}>
         {(control) => (
           <textarea
             {...control}
-            // 136px, not a row count — `textarea#c-msg` (`2960:7817`) is the
-            // same height at both frame widths.
-            className={cn(FIELD_CONTROL_CLASS, 'h-[136px] resize-y')}
+            className={cn(FIELD_CONTROL_CLASS, 'h-[146px] resize-y')}
             value={values.message}
             onChange={handleChange('message')}
             onBlur={handleBlur('message')}
@@ -314,8 +307,7 @@ export function InquiryForm({
       />
 
       {consentLabel ? (
-        // `2960:7818`: a 16px box with a 2.5 radius, 13px from its label.
-        <div className="flex items-start gap-[13px]">
+        <div className="flex items-start gap-2">
           <input
             id="field-consent"
             name="consent"
@@ -324,13 +316,13 @@ export function InquiryForm({
             onChange={(event) => setConsent(event.target.checked)}
             className="accent-brand border-fg-muted mt-0.5 size-4 shrink-0 rounded-[2.5px] border"
           />
-          <label htmlFor="field-consent" className="text-fg-body text-[14px]/[16.8px]">
+          <label htmlFor="field-consent" className="text-fg-body text-[14px]/5">
             {consentLabel}
           </label>
         </div>
       ) : null}
 
-      <div className="border-current/25 flex flex-col border-t pt-6">
+      <div className="flex flex-col">
         {/*
           Always in the DOM, empty until there is something to say — the same
           rule `FormField`'s message follows. A live region that appears only
@@ -345,7 +337,7 @@ export function InquiryForm({
         <div>
           <ButtonLink
             button={submit}
-            size="large"
+            size="base"
             control={{
               type: 'submit',
               // Busy, not gone: the button keeps its words and its place in

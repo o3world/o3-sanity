@@ -13,7 +13,7 @@ import { optionKey } from './optionValue'
 export type BandSurface = 'white' | 'paper' | 'bone' | 'ink'
 
 /** What the presentational button actually draws. `auto` is never one of these. */
-export type ButtonFill = 'dark' | 'light' | 'ghost'
+export type ButtonFill = 'dark' | 'light' | 'ghost' | 'brand'
 
 /**
  * The readable fill on each surface — the whole of Auto, as a table.
@@ -29,14 +29,8 @@ const READABLE_ON: Record<BandSurface, ButtonFill> = {
   ink: 'light',
 }
 
-/**
- * The pre-rename enum, mapped rather than dropped. `load` replaces every
- * pipeline-owned document, but a dataset that has not been rebuilt since #42
- * still carries the old strings — and a locked document keeps them forever.
- * `brand` becomes `dark` because the canonical frames have no red button
- * (docs/figma-components.md); `inverse` was already the white fill.
- */
-const LEGACY_FILLS: Record<string, ButtonFill> = { brand: 'dark', inverse: 'light' }
+/** The retired inverse fill still means light. Brand is an explicit current choice. */
+const LEGACY_FILLS: Record<string, ButtonFill> = { inverse: 'light' }
 
 /**
  * What a button DRAWS for a stored contrast — the sibling of
@@ -70,7 +64,7 @@ const LEGACY_FILLS: Record<string, ButtonFill> = { brand: 'dark', inverse: 'ligh
 export function resolveContrast(stored: unknown, surface: BandSurface | undefined): ButtonFill {
   const key = optionKey(stored)
 
-  if (key === 'dark' || key === 'light' || key === 'ghost') return key
+  if (key === 'dark' || key === 'light' || key === 'ghost' || key === 'brand') return key
 
   // `hasOwnProperty`, not a bare index: a stored `"constructor"` would
   // otherwise resolve off `Object.prototype` and be returned as a fill, which

@@ -200,7 +200,7 @@ export type Button = {
   target?: InsightReference | CaseStudyReference | PageReference
   href?: string
   anchor?: string
-  contrast?: 'auto' | 'dark' | 'light' | 'ghost'
+  contrast?: 'auto' | 'dark' | 'light' | 'brand' | 'ghost'
   icon?: 'arrow' | 'external' | 'down' | 'none'
 }
 
@@ -445,6 +445,8 @@ export type LayoutSection = {
 
 export type FormSection = {
   _type: 'formSection'
+  variant?: 'band' | 'hero'
+  decoration?: 'none' | 'orbs'
   eyebrow?: string
   heading?: string
   note?: string
@@ -578,7 +580,9 @@ export type CategoryReference = {
 
 export type InsightsCarouselSection = {
   _type: 'insightsCarouselSection'
+  eyebrow?: string
   heading?: string
+  body?: string
   insights?: Array<
     {
       _key: string
@@ -607,7 +611,7 @@ export type QuoteSection = {
   quote?: string
   attribution?: string
   decoration?: 'orbs' | 'molecule' | 'none'
-  size?: 'default' | 'small'
+  size?: 'default' | 'medium' | 'small'
   surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
@@ -615,6 +619,7 @@ export type QuoteSection = {
 
 export type RailPanelsSection = {
   _type: 'railPanelsSection'
+  eyebrow?: string
   heading?: string
   intro?: string
   layout?: 'rail' | 'cards' | 'rows' | 'grid' | 'track'
@@ -645,7 +650,9 @@ export type RailPanelsSection = {
 
 export type CaseShowcaseSection = {
   _type: 'caseShowcaseSection'
+  eyebrow?: string
   heading?: string
+  body?: string
   button?: Button
   caseStudies?: Array<
     {
@@ -1284,7 +1291,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         logo?: {
@@ -1320,7 +1327,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
           | null
         href?: string
         anchor?: string
-        contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+        contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
         icon?: 'arrow' | 'down' | 'external' | 'none'
       }
   > | null
@@ -1348,7 +1355,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
           | null
         href?: string
         anchor?: string
-        contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+        contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
         icon?: 'arrow' | 'down' | 'external' | 'none'
       }
     | {
@@ -1376,7 +1383,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
               | null
             href?: string
             anchor?: string
-            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           eyebrow?: string
@@ -1406,7 +1413,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         _type: 'navGroup'
@@ -1435,7 +1442,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
       | null
     href?: string
     anchor?: string
-    contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+    contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
     icon?: 'arrow' | 'down' | 'external' | 'none'
   } | null
   footerTagline: string | null
@@ -1464,7 +1471,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
         | null
       href?: string
       anchor?: string
-      contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+      contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
       icon?: 'arrow' | 'down' | 'external' | 'none'
     }> | null
     _type: 'footerGroup'
@@ -1500,7 +1507,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
       | null
     href?: string
     anchor?: string
-    contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+    contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
     icon?: 'arrow' | 'down' | 'external' | 'none'
   }> | null
   legalName: string | null
@@ -1914,7 +1921,9 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
     | {
         _key: string
         _type: 'caseShowcaseSection'
+        eyebrow?: string
         heading?: string
+        body?: string
         button: {
           _type: 'button'
           label?: string
@@ -1937,7 +1946,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         caseStudies: Array<{
@@ -2030,7 +2039,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'molecule' | 'none' | 'orbs'
@@ -2109,6 +2118,8 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
     | {
         _key: string
         _type: 'formSection'
+        variant?: 'band' | 'hero'
+        decoration?: 'none' | 'orbs'
         eyebrow?: string
         heading?: string
         note?: string
@@ -2136,7 +2147,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         media: {
@@ -2227,7 +2238,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
@@ -2302,7 +2313,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
               | null
             href?: string
             anchor?: string
-            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           _type: 'entry'
@@ -2331,7 +2342,9 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
     | {
         _key: string
         _type: 'insightsCarouselSection'
+        eyebrow?: string
         heading?: string
+        body?: string
         insights?: Array<
           {
             _key: string
@@ -2486,7 +2499,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
                 | null
               href?: string
               anchor?: string
-              contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+              contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
               icon?: 'arrow' | 'down' | 'external' | 'none'
             }
           | {
@@ -2515,7 +2528,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
                   | null
                 href?: string
                 anchor?: string
-                contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+                contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
                 icon?: 'arrow' | 'down' | 'external' | 'none'
               }> | null
               alignment?: 'center' | 'end' | 'start'
@@ -2608,7 +2621,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
                   | null
                 href?: string
                 anchor?: string
-                contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+                contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
                 icon?: 'arrow' | 'down' | 'external' | 'none'
               } | null
             }
@@ -2782,7 +2795,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         surface?: 'bone' | 'ink' | 'paper' | 'white'
@@ -2900,7 +2913,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
-        size?: 'default' | 'small'
+        size?: 'default' | 'medium' | 'small'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -2924,6 +2937,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
     | {
         _key: string
         _type: 'railPanelsSection'
+        eyebrow?: string
         heading?: string
         intro?: string
         layout?: 'cards' | 'grid' | 'rail' | 'rows' | 'track'
@@ -2956,7 +2970,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
               | null
             href?: string
             anchor?: string
-            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           media: {
@@ -3038,7 +3052,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
               | null
             href?: string
             anchor?: string
-            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           mark?: Mark
@@ -3146,7 +3160,9 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
     | {
         _key: string
         _type: 'caseShowcaseSection'
+        eyebrow?: string
         heading?: string
+        body?: string
         button: {
           _type: 'button'
           label?: string
@@ -3169,7 +3185,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         caseStudies: Array<{
@@ -3262,7 +3278,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'molecule' | 'none' | 'orbs'
@@ -3341,6 +3357,8 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
     | {
         _key: string
         _type: 'formSection'
+        variant?: 'band' | 'hero'
+        decoration?: 'none' | 'orbs'
         eyebrow?: string
         heading?: string
         note?: string
@@ -3368,7 +3386,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         media: {
@@ -3459,7 +3477,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
@@ -3534,7 +3552,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
               | null
             href?: string
             anchor?: string
-            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           _type: 'entry'
@@ -3563,7 +3581,9 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
     | {
         _key: string
         _type: 'insightsCarouselSection'
+        eyebrow?: string
         heading?: string
+        body?: string
         insights?: Array<
           {
             _key: string
@@ -3718,7 +3738,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
                 | null
               href?: string
               anchor?: string
-              contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+              contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
               icon?: 'arrow' | 'down' | 'external' | 'none'
             }
           | {
@@ -3747,7 +3767,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
                   | null
                 href?: string
                 anchor?: string
-                contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+                contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
                 icon?: 'arrow' | 'down' | 'external' | 'none'
               }> | null
               alignment?: 'center' | 'end' | 'start'
@@ -3840,7 +3860,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
                   | null
                 href?: string
                 anchor?: string
-                contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+                contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
                 icon?: 'arrow' | 'down' | 'external' | 'none'
               } | null
             }
@@ -4014,7 +4034,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         surface?: 'bone' | 'ink' | 'paper' | 'white'
@@ -4132,7 +4152,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
-        size?: 'default' | 'small'
+        size?: 'default' | 'medium' | 'small'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -4156,6 +4176,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
     | {
         _key: string
         _type: 'railPanelsSection'
+        eyebrow?: string
         heading?: string
         intro?: string
         layout?: 'cards' | 'grid' | 'rail' | 'rows' | 'track'
@@ -4188,7 +4209,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
               | null
             href?: string
             anchor?: string
-            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           media: {
@@ -4270,7 +4291,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
               | null
             href?: string
             anchor?: string
-            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           mark?: Mark
@@ -4503,7 +4524,9 @@ export type CASE_STUDY_QUERY_RESULT = {
     | {
         _key: string
         _type: 'caseShowcaseSection'
+        eyebrow?: string
         heading?: string
+        body?: string
         button: {
           _type: 'button'
           label?: string
@@ -4526,7 +4549,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         caseStudies: Array<{
@@ -4683,7 +4706,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'molecule' | 'none' | 'orbs'
@@ -4762,6 +4785,8 @@ export type CASE_STUDY_QUERY_RESULT = {
     | {
         _key: string
         _type: 'formSection'
+        variant?: 'band' | 'hero'
+        decoration?: 'none' | 'orbs'
         eyebrow?: string
         heading?: string
         note?: string
@@ -4789,7 +4814,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         media: {
@@ -4880,7 +4905,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
@@ -4955,7 +4980,7 @@ export type CASE_STUDY_QUERY_RESULT = {
               | null
             href?: string
             anchor?: string
-            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           _type: 'entry'
@@ -4984,7 +5009,9 @@ export type CASE_STUDY_QUERY_RESULT = {
     | {
         _key: string
         _type: 'insightsCarouselSection'
+        eyebrow?: string
         heading?: string
+        body?: string
         insights?: Array<
           {
             _key: string
@@ -5139,7 +5166,7 @@ export type CASE_STUDY_QUERY_RESULT = {
                 | null
               href?: string
               anchor?: string
-              contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+              contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
               icon?: 'arrow' | 'down' | 'external' | 'none'
             }
           | {
@@ -5168,7 +5195,7 @@ export type CASE_STUDY_QUERY_RESULT = {
                   | null
                 href?: string
                 anchor?: string
-                contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+                contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
                 icon?: 'arrow' | 'down' | 'external' | 'none'
               }> | null
               alignment?: 'center' | 'end' | 'start'
@@ -5261,7 +5288,7 @@ export type CASE_STUDY_QUERY_RESULT = {
                   | null
                 href?: string
                 anchor?: string
-                contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+                contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
                 icon?: 'arrow' | 'down' | 'external' | 'none'
               } | null
             }
@@ -5435,7 +5462,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         surface?: 'bone' | 'ink' | 'paper' | 'white'
@@ -5553,7 +5580,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
-        size?: 'default' | 'small'
+        size?: 'default' | 'medium' | 'small'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -5577,6 +5604,7 @@ export type CASE_STUDY_QUERY_RESULT = {
     | {
         _key: string
         _type: 'railPanelsSection'
+        eyebrow?: string
         heading?: string
         intro?: string
         layout?: 'cards' | 'grid' | 'rail' | 'rows' | 'track'
@@ -5609,7 +5637,7 @@ export type CASE_STUDY_QUERY_RESULT = {
               | null
             href?: string
             anchor?: string
-            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           media: {
@@ -5691,7 +5719,7 @@ export type CASE_STUDY_QUERY_RESULT = {
               | null
             href?: string
             anchor?: string
-            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           mark?: Mark
@@ -5956,7 +5984,9 @@ export type PAGE_QUERY_RESULT = {
     | {
         _key: string
         _type: 'caseShowcaseSection'
+        eyebrow?: string
         heading?: string
+        body?: string
         button: {
           _type: 'button'
           label?: string
@@ -5979,7 +6009,7 @@ export type PAGE_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         caseStudies: Array<{
@@ -6072,7 +6102,7 @@ export type PAGE_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'molecule' | 'none' | 'orbs'
@@ -6151,6 +6181,8 @@ export type PAGE_QUERY_RESULT = {
     | {
         _key: string
         _type: 'formSection'
+        variant?: 'band' | 'hero'
+        decoration?: 'none' | 'orbs'
         eyebrow?: string
         heading?: string
         note?: string
@@ -6178,7 +6210,7 @@ export type PAGE_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         media: {
@@ -6269,7 +6301,7 @@ export type PAGE_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
@@ -6344,7 +6376,7 @@ export type PAGE_QUERY_RESULT = {
               | null
             href?: string
             anchor?: string
-            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           _type: 'entry'
@@ -6373,7 +6405,9 @@ export type PAGE_QUERY_RESULT = {
     | {
         _key: string
         _type: 'insightsCarouselSection'
+        eyebrow?: string
         heading?: string
+        body?: string
         insights?: Array<
           {
             _key: string
@@ -6528,7 +6562,7 @@ export type PAGE_QUERY_RESULT = {
                 | null
               href?: string
               anchor?: string
-              contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+              contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
               icon?: 'arrow' | 'down' | 'external' | 'none'
             }
           | {
@@ -6557,7 +6591,7 @@ export type PAGE_QUERY_RESULT = {
                   | null
                 href?: string
                 anchor?: string
-                contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+                contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
                 icon?: 'arrow' | 'down' | 'external' | 'none'
               }> | null
               alignment?: 'center' | 'end' | 'start'
@@ -6650,7 +6684,7 @@ export type PAGE_QUERY_RESULT = {
                   | null
                 href?: string
                 anchor?: string
-                contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+                contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
                 icon?: 'arrow' | 'down' | 'external' | 'none'
               } | null
             }
@@ -6824,7 +6858,7 @@ export type PAGE_QUERY_RESULT = {
             | null
           href?: string
           anchor?: string
-          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         surface?: 'bone' | 'ink' | 'paper' | 'white'
@@ -6942,7 +6976,7 @@ export type PAGE_QUERY_RESULT = {
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
-        size?: 'default' | 'small'
+        size?: 'default' | 'medium' | 'small'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -6966,6 +7000,7 @@ export type PAGE_QUERY_RESULT = {
     | {
         _key: string
         _type: 'railPanelsSection'
+        eyebrow?: string
         heading?: string
         intro?: string
         layout?: 'cards' | 'grid' | 'rail' | 'rows' | 'track'
@@ -6998,7 +7033,7 @@ export type PAGE_QUERY_RESULT = {
               | null
             href?: string
             anchor?: string
-            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           media: {
@@ -7080,7 +7115,7 @@ export type PAGE_QUERY_RESULT = {
               | null
             href?: string
             anchor?: string
-            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           mark?: Mark

@@ -601,19 +601,19 @@ export const inFlightSection = defineSectionBlock({
 export const formSection = defineSectionBlock({
   name: 'formSection',
   description:
-    'The inquiry band: a form card beside a rail carrying a portrait, a short quote and the ways to reach the studio. Reach for it on a page whose purpose is to start a conversation. The reasons list is the only part of the form’s shape an editor owns; a submission goes to HubSpot through the app’s contact route.',
+    'An invitation to start a conversation, with an introduction beside a form and optional contact details below. Reach for it at the top of a contact page or within a longer page. The reasons list is authored; the input fields remain the contract with the submission handler.',
   title: 'Form',
   knobs: formSectionKnobs,
   fields: [
+    'variant',
+    'decoration',
     defineField({ name: 'eyebrow', type: 'string' }),
-    // Optional: `2960:7792` opens the card at the first name field, so the
-    // whole header is absent on the band the frame draws.
     defineField({ name: 'heading', type: 'string' }),
     defineField({
       name: 'note',
       type: 'text',
       rows: 2,
-      description: 'The quieter line under the heading, above the first field.',
+      description: 'The supporting line under the introduction’s heading.',
     }),
     defineField({
       name: 'reasons',

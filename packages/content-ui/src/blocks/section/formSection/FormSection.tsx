@@ -1,9 +1,13 @@
-import { DisplayHeading, Eyebrow, SectionShell, surfaceAttrs } from '@o3/ui'
+import { DisplayHeading, Eyebrow, OrbitalSphere, SectionShell, surfaceAttrs } from '@o3/ui'
+import { stegaClean } from '@sanity/client/stega'
+import { cn } from '@o3/ui/lib/utils'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
 import { SanityImage } from '../../../SanityImage'
 import { resolveSurface } from '../../surface'
+import { resolveDecoration } from '../../decoration'
+import './form-section.css'
 
 import { InquiryForm, type FormStatus } from './InquiryForm'
 
@@ -16,32 +20,7 @@ type FormSectionProps = SectionProps<'formSection'> & {
   initialStatus?: FormStatus
 }
 
-/**
- * Section block: the inquiry form band — `/contact`'s conversion path (#58),
- * drawn from `2960:7792` (1440) and `2975:10195` (402).
- *
- * ```
- * band            140/140 at 1440, 48/48 at 402
- *   card 673      white, radius 16, 44 padding, field gap 20
- *   rail 481      portrait → quote → attribution, then the address
- * ```
- *
- * The two columns sit side by side above `lg` and stack at 402, which is how
- * the frame answers the objection to a split layout: the form is never narrow
- * on a phone, it is the full width with the rail under it.
- *
- * The band's vertical padding is a call-site literal because 140px is not a
- * step on the band scale (tokens/layout.css) — solved across the two frame
- * widths the way those tokens are.
- *
- * `eyebrow`, `heading` and `note` are optional and the frame sets none of
- * them; the header they compose is drawn above the split when a document does.
- *
- * The submit is an ordinary `button` instance, so it offers everything any
- * other button does. **The fields are not** — see the schema's doc comment and
- * ADR 0014. Where a submission goes is `InquiryForm`'s: the app's
- * `/api/contact` route, and HubSpot behind it.
- */
+/** Contact composition: 2960:7792 desktop and 3754:78225 mobile. */
 export function FormSection({
   eyebrow,
   heading,
@@ -54,34 +33,51 @@ export function FormSection({
   attribution,
   details,
   surface,
+  variant,
+  decoration,
   loc,
   initialStatus,
 }: FormSectionProps) {
   const resolved = resolveSurface(surface, 'formSection')
   const rail = Boolean(media || quote || attribution || details?.length)
+  const hero = stegaClean(variant) === 'hero'
+  const header =
+    eyebrow || heading || note ? (
+      <header data-sanity={fieldAttr(loc, 'heading')} className="flex min-w-0 flex-col gap-2">
+        {eyebrow ? (
+          <Eyebrow size="lg" tone="brand" className="pb-4">
+            {eyebrow}
+          </Eyebrow>
+        ) : null}
+        {heading ? (
+          <DisplayHeading as={hero ? 'h1' : 'h2'} level="hero" className="whitespace-pre-line">
+            {heading}
+          </DisplayHeading>
+        ) : null}
+        {note ? <p className="text-lead text-fg-body">{note}</p> : null}
+      </header>
+    ) : null
 
   return (
     <SectionShell
       surface={resolved}
       top="none"
       bottom="none"
-      // 140/48 vertical and a 16px mobile gutter (`2960:7792` / `2975:10195`);
-      // the band draws its own gutter for the same reason the interior hero
-      // does.
-      className="px-gutter-tight py-[clamp(48px,calc(8.863vw+12.37px),140px)]"
+      className={cn(
+        'relative isolate overflow-hidden max-lg:px-4 lg:px-24',
+        hero ? 'form-section-texture pb-16 pt-32 lg:pb-32 lg:pt-64' : 'py-16 lg:py-32',
+      )}
     >
-      <div className="flex flex-col gap-10 lg:gap-16">
-        {eyebrow || heading || note ? (
-          <header data-sanity={fieldAttr(loc, 'heading')} className="flex flex-col gap-4">
-            {eyebrow ? <Eyebrow size="lg">{eyebrow}</Eyebrow> : null}
-            {heading ? <DisplayHeading>{heading}</DisplayHeading> : null}
-            {note ? <p className="text-lead text-current/70">{note}</p> : null}
-          </header>
-        ) : null}
-
-        {/* 673 + 481 either side of an 86px gutter (`2960:7793`), which is also
-            the gap the two columns keep once they stack (`2975:10196`). */}
-        <div className="grid gap-[86px] lg:grid-cols-[673fr_481fr]">
+      {resolveDecoration(decoration, 'formSection') === 'orbs' ? (
+        <OrbitalSphere
+          preset={resolved === 'ink' ? 'hero' : 'line'}
+          motion="orbit"
+          className="pointer-events-none absolute right-[-449px] top-[367px] -z-10 w-[900px] lg:right-[-329px] lg:top-[-223px] lg:w-[1100px]"
+        />
+      ) : null}
+      <div className="flex flex-col gap-16 lg:gap-32">
+        <div className={cn('grid items-center gap-16 lg:gap-8', header && 'lg:grid-cols-2')}>
+          {header}
           {/*
             The card declares `white` because it paints white: the text roles
             inherit, so a card on an ink band keeps the band's on-ink alphas
@@ -89,7 +85,7 @@ export function FormSection({
           */}
           <div
             {...surfaceAttrs('white')}
-            className="text-fg flex flex-col gap-5 rounded-2xl bg-white p-11"
+            className="text-fg min-w-0 rounded-2xl bg-white p-8 shadow-[0_32px_64px_0_rgb(0_0_0/0.2)]"
           >
             {/* The submit's fill is not passed down: the submit is an ordinary
                 button instance, so it resolves from the surface it stands on
@@ -101,64 +97,64 @@ export function FormSection({
               initialStatus={initialStatus}
             />
           </div>
-
-          {rail ? (
-            <div className="flex flex-col gap-10">
-              {media || quote || attribution ? (
-                <div className="flex flex-col gap-[18px]">
-                  {media?.image ? (
-                    <SanityImage
-                      source={media.image}
-                      alt={media.alt ?? ''}
-                      ratio="1/1"
-                      width={240}
-                      sizes="120px"
-                      className="size-30 rounded-full"
-                    />
-                  ) : null}
-                  {quote ? (
-                    <blockquote data-sanity={fieldAttr(loc, 'quote')} className="text-lead text-fg">
-                      {`“${quote}”`}
-                    </blockquote>
-                  ) : null}
-                  {attribution ? (
-                    <p
-                      data-sanity={fieldAttr(loc, 'attribution')}
-                      className="text-body text-fg-muted whitespace-pre-line"
-                    >
-                      {attribution}
-                    </p>
-                  ) : null}
-                </div>
-              ) : null}
-
-              {details?.length ? (
-                // One flat 14px rhythm under a 32px hairline: `2960:7834` is a
-                // single stack of kicker, lines, kicker, lines at gap 14.
-                <div
-                  data-sanity={fieldAttr(loc, 'details')}
-                  className="border-line flex flex-col gap-[14px] border-t pt-8"
-                >
-                  {details.map((detail) => (
-                    <div key={detail._key} className="flex flex-col gap-[14px]">
-                      <p className="text-brand text-[11px]/[13.2px] font-bold uppercase tracking-[0.14em]">
-                        {detail.label}
-                      </p>
-                      {(detail.items ?? []).map((item, index) => (
-                        <p
-                          key={`${detail._key}-${index}`}
-                          className="text-fg-body whitespace-pre-line text-[15px]/[27px]"
-                        >
-                          <ContactLine value={item} />
-                        </p>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-          ) : null}
         </div>
+
+        {rail ? (
+          <div className="border-line grid gap-16 border-t pt-16 lg:grid-cols-2">
+            {media || quote || attribution ? (
+              <div className="flex flex-col gap-[18px]">
+                {media?.image ? (
+                  <SanityImage
+                    source={media.image}
+                    alt={media.alt ?? ''}
+                    ratio="1/1"
+                    width={240}
+                    sizes="120px"
+                    className="size-30 rounded-full"
+                  />
+                ) : null}
+                {quote ? (
+                  <blockquote data-sanity={fieldAttr(loc, 'quote')} className="text-lead text-fg">
+                    {`“${quote}”`}
+                  </blockquote>
+                ) : null}
+                {attribution ? (
+                  <p
+                    data-sanity={fieldAttr(loc, 'attribution')}
+                    className="text-body text-fg-muted whitespace-pre-line"
+                  >
+                    {attribution}
+                  </p>
+                ) : null}
+              </div>
+            ) : null}
+
+            {details?.length ? (
+              // One flat 14px rhythm under a 32px hairline: `2960:7834` is a
+              // single stack of kicker, lines, kicker, lines at gap 14.
+              <div
+                data-sanity={fieldAttr(loc, 'details')}
+                className="border-line flex flex-col gap-[14px] border-t pt-8"
+              >
+                {details.map((detail) => (
+                  <div key={detail._key} className="flex flex-col gap-[14px]">
+                    <p className="text-brand text-[11px]/[13.2px] font-bold uppercase tracking-[0.14em]">
+                      {detail.label}
+                    </p>
+                    {(detail.items ?? []).map((item, index) => (
+                      <p
+                        key={`${detail._key}-${index}`}
+                        className="text-fg-body whitespace-pre-line text-[15px]/[27px]"
+                      >
+                        <ContactLine value={item} />
+                      </p>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </SectionShell>
   )

@@ -41,10 +41,8 @@ export interface FormFieldProps {
 /**
  * The shared control skin: a white box with a hairline round it, radius 6.
  *
- * Read off `input#c-first` (`2960:7799`) and its siblings — 1px stroke, white
- * fill, 20px of horizontal padding, a 15/17 label inside. `border-line` is the
- * design's hairline role; the frame's own #D8D8D6 is two steps cooler than it
- * and this band has no bound variable to promote.
+ * Figma 2960:7799: 44px control, 15px horizontal padding and 16/20 text.
+ * The field label is 14/20 above it; the mobile frame keeps those dimensions.
  *
  * Exported because the three controls a form draws (`input`, `textarea`,
  * `select`) are native elements, not components — there is nothing to wrap
@@ -56,7 +54,7 @@ export interface FormFieldProps {
  * invert against.
  */
 export const FIELD_CONTROL_CLASS =
-  'w-full rounded-[6px] border border-line bg-white px-5 py-[13.5px] text-[15px]/[17px] text-fg transition-colors duration-(--duration-hover) ease-out placeholder:text-fg-muted hover:border-fg-muted focus:border-fg focus:outline-none focus-visible:outline-none aria-[invalid=true]:border-brand'
+  'w-full rounded-[6px] border border-line bg-white px-[15px] py-[11px] text-[16px]/5 text-fg transition-colors duration-(--duration-hover) ease-out placeholder:text-fg-muted hover:border-fg-muted focus:border-fg focus:outline-none focus-visible:outline-none aria-[invalid=true]:border-brand'
 
 /**
  * One labelled control: label, optional note, the control itself, and the
@@ -89,9 +87,8 @@ export function FormField({
 
   return (
     <div className={cn('flex flex-col gap-2', className)}>
-      {/* `label.c-label` (`2960:7797`): Figtree 600 13/15.6, 8px above the
-          control — which is this wrapper's own `gap-2`. */}
-      <label htmlFor={id} className="text-fg text-[13px]/[15.6px] font-semibold">
+      {/* Figma 2960:7798: Figtree 600 14/20, 8px above the control. */}
+      <label htmlFor={id} className="text-fg text-[14px]/5 font-semibold">
         {label}
         {required ? (
           <>
@@ -116,15 +113,8 @@ export function FormField({
         'aria-describedby': describedBy,
       })}
 
-      {/*
-        Always in the DOM, empty until there is something to say. A message
-        node that appears only when invalid is a live region that was not
-        live when the browser started watching it, so the first error of a
-        session goes unannounced. Its height is reserved for the same reason
-        in reverse — a field that grows when it fails pushes the rest of the
-        form down under the pointer that was about to fix it.
-      */}
-      <p id={errorId} role="alert" className="text-legal text-brand min-h-4">
+      {/* Keep the alert mounted; an empty alert consumes no space. */}
+      <p id={errorId} role="alert" className="text-legal text-brand empty:-mt-2">
         {error}
       </p>
     </div>

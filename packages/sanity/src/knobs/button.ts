@@ -36,7 +36,7 @@ export const buttonKnobs = defineObjectKnobs({
       name: 'contrast',
       title: 'Contrast',
       description:
-        'How the button stands out from what is behind it. Auto reads the band underneath and picks the readable fill; the rest override it. There is no red button in the canonical frames — brand red arrives as a gradient.',
+        'How the button stands out from what is behind it. Auto reads the band underneath and picks the readable fill; the rest override it. Brand draws the red fill used by the Contact form.',
       /*
        * **Contrast, not variant** (ADR 0026). `variant` is already this repo's
        * word for the axis that changes what a block *is* — `heroSection`,
@@ -53,7 +53,7 @@ export const buttonKnobs = defineObjectKnobs({
        * `Theme=White`, plus `Button / Ghost` (`264:260`). See
        * docs/figma-components.md → "Button is divergent".
        */
-      options: ['auto', 'dark', 'light', 'ghost'],
+      options: ['auto', 'dark', 'light', 'brand', 'ghost'],
       initialValue: 'auto',
     }),
     knob({
