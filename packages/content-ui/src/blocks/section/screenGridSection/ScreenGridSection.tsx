@@ -53,7 +53,7 @@ export function ScreenGridSection({
     <ul className="mx-auto grid w-full gap-8 lg:grid-cols-2">
       {screens.map((screen) => {
         const span = spanOf(screen.span)
-        const fill = span === 'standard'
+        const fill = span === 'standard' || stegaClean(screen.framing) === 'image'
         return (
           <li
             key={screen._key}
@@ -61,7 +61,7 @@ export function ScreenGridSection({
             // The tile's own path. This band has no header to attribute —
             // it is screens and nothing else.
             data-sanity={itemAttr(loc, 'screens', screen._key)}
-            className={`relative overflow-hidden rounded-[32px] ${fill ? '' : TONE_CLASS[toneOf(screen.tone)]} ${SPAN_CLASS[span]}`}
+            className={`relative overflow-hidden rounded-[32px] ${fill ? '' : TONE_CLASS[toneOf(screen.tone)]} ${fill ? `self-start ${span === 'wide' ? 'lg:col-span-2' : ''}` : SPAN_CLASS[span]}`}
           >
             <div
               data-reveal-step={sequence ? 'screen' : undefined}
@@ -96,9 +96,11 @@ export function ScreenGridSection({
                  * `imageSizes.ts`.
                  */
                 sizes={
-                  span === 'wide'
-                    ? '(min-width: 1440px) calc(100vw - 278px), (min-width: 1024px) calc(89.402vw - 125.396px), calc(90vw - 64px)'
-                    : '(min-width: 1440px) calc(50vw - 91px), (min-width: 1024px) calc(44.701vw - 14.698px), 90vw'
+                  span === 'wide' && fill
+                    ? '(min-width: 1024px) calc(100vw - 192px), calc(100vw - 32px)'
+                    : span === 'wide'
+                      ? '(min-width: 1440px) calc(100vw - 278px), (min-width: 1024px) calc(89.402vw - 125.396px), calc(90vw - 64px)'
+                      : '(min-width: 1440px) calc(50vw - 91px), (min-width: 1024px) calc(44.701vw - 14.698px), 90vw'
                 }
               />
             </div>

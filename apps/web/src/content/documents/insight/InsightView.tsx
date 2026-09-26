@@ -120,6 +120,7 @@ export function InsightView({
             <CarouselTrack
               sequence
               eyebrow="Related Insights"
+              eyebrowClassName="text-brand-deep"
               heading="More ideas worth looking into."
               cards={keepReading.map((item) => (
                 <Card key={item._id} {...item} />
@@ -129,9 +130,10 @@ export function InsightView({
         </div>
       ) : null}
       <CtaSection
-        heading="Let’s put some of this thinking to work."
-        body="If something here sparked an idea, surfaced a challenge, or got you thinking differently, we’d love to talk about what could be next."
-        decoration="orbs"
+        heading={'Let’s put some of\nthis thinking to work.'}
+        body={
+          'If something here sparked an idea, surfaced a challenge, or got\nyou thinking differently, we’d love to talk about where it could lead.'
+        }
         button={{
           _type: 'button',
           label: 'Start the conversation',

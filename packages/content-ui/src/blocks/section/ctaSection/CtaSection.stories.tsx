@@ -23,7 +23,7 @@ export const AsSeeded: Story = {
   args: seededSectionArgs('about', 'ctaSection'),
 }
 
-export const Orbs: Story = {
+export const Gradient: Story = {
   args: seededSectionArgs('index', 'ctaSection'),
   parameters: { design: figmaDesign('3720:62172') },
   globals: { backgrounds: { value: 'ink' }, viewport: { value: 'desktop' } },
@@ -61,15 +61,6 @@ export const Mobile: Story = {
 
 export const HeadingOnly: Story = {
   args: { ...seededSectionArgs('about', 'ctaSection'), body: undefined, button: null },
-}
-
-export const NoDecoration: Story = {
-  args: { ...seededSectionArgs('about', 'ctaSection'), decoration: 'none' },
-}
-
-export const MoleculeMobile: Story = {
-  args: seededSectionArgs('about', 'ctaSection'),
-  globals: { backgrounds: { value: 'ink' }, viewport: { value: 'mobile' } },
 }
 
 export const OnPhotograph: Story = {

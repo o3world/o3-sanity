@@ -11,7 +11,7 @@ const MARK = 'viewBox="0 0 699 699"'
 
 function render(props: {
   decoration?: string | null
-  block?: 'quoteSection' | 'ctaSection'
+  block?: 'quoteSection'
   surface?: Surface
   className?: string
   visibleFrom?: 'lg' | 'base'
@@ -35,7 +35,6 @@ describe('the molecule decoration', () => {
    */
   it('reads an unset knob as the block’s own default', () => {
     expect(render({ decoration: null, block: 'quoteSection' })).toBe('')
-    expect(render({ decoration: null, block: 'ctaSection' })).toContain(MARK)
   })
 
   it('takes the band’s own ink', () => {

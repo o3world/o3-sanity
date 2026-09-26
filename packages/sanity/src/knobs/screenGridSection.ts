@@ -44,6 +44,13 @@ export const screenKnobs = defineItemKnobs({
       options: ['standard', 'wide'],
       initialValue: 'standard',
     }),
+    knob({
+      name: 'framing',
+      title: 'Wide framing',
+      description: 'Image preserves a complete composition. Plate frames a raw wide screenshot.',
+      options: ['plate', 'image'],
+      initialValue: 'plate',
+    }),
   ],
 })
 

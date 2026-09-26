@@ -6,7 +6,11 @@ import { NotFoundCta } from './NotFoundCta'
 export default function NotFound() {
   return (
     <>
-      <section className="bg-ink-warm px-gutter flex min-h-[670px] flex-col items-center pb-16 pt-40 text-center text-white lg:min-h-[959px] lg:pb-32 lg:pt-[254px]">
+      <section className="bg-ink-warm px-gutter relative isolate flex min-h-[670px] flex-col items-center overflow-hidden pb-16 pt-40 text-center text-white lg:min-h-[959px] lg:pb-32 lg:pt-[254px]">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-[calc(50%-1.5px)] top-[-25px] -z-10 h-[1450px] w-[1621px] -translate-x-1/2 bg-[url(/images/not-found-stars.svg)]"
+        />
         <div
           aria-hidden="true"
           className="flex h-[116px] items-center justify-center text-[164px] font-light leading-none lg:h-[270px] lg:text-[380px]"
@@ -30,12 +34,14 @@ export default function NotFound() {
         </Button>
       </section>
       <NotFoundCta
-        heading="You may be feeling lost right now, but don’t panic."
-        body="We love a new challenge. If you’re ready to tackle what’s next, we’re ready to help."
-        decoration="orbs"
+        heading={'You may be feeling lost\nright now, but don’t panic.'}
+        mobileHeading={'You may be feeling\nlost right now,\nbut don’t panic.'}
+        body={
+          'Helping folks find their way through complex digital\nchallenges is our day job. Consider this the warm-up.'
+        }
         button={{
           _type: 'button',
-          label: 'Let’s talk',
+          label: 'Talk to our team',
           href: '/contact',
           contrast: 'light',
           target: null,

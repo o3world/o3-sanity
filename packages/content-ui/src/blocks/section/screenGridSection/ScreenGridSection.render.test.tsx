@@ -143,6 +143,22 @@ describe('the screen grid band', () => {
     expect(markup).toContain(`height="${Math.round((1600 * height) / width)}"`)
   })
 
+  it('renders a composed wide image without a second plate or crop', () => {
+    const markup = renderToStaticMarkup(
+      <ScreenGridSection
+        {...({
+          screens: [{ ...SCREENS[0], framing: 'image' }],
+          surface: 'white',
+        } as unknown as SectionProps<'screenGridSection'>)}
+      />,
+    )
+    expect(markup).toContain('lg:col-span-2')
+    expect(markup).not.toContain('--gradient-screen-plate')
+    expect(markup).not.toContain('aspect-')
+    expect(markup).not.toContain('shadow-')
+    expect(markup).not.toContain('lg:px-16')
+  })
+
   it('renders nothing when there are no screens', () => {
     expect(
       renderToStaticMarkup(

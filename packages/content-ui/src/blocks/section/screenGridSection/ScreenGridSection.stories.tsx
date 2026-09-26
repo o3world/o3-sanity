@@ -150,3 +150,29 @@ export const Sequence: Story = {
     ),
   ],
 }
+
+/** Current Best Egg wide tile includes its own plate in the exported image. */
+export const ComposedWide: Story = {
+  args: {
+    surface: 'white',
+    screens: [
+      {
+        _key: 'composed',
+        _type: 'screen',
+        span: 'wide',
+        framing: 'image',
+        media: {
+          _type: 'figure',
+          alt: 'Best Egg product composition',
+          image: {
+            _type: 'image',
+            asset: {
+              _id: 'image-715dec532b4d49324981a33a92e0a7a751cda830-3744x2100-png',
+              metadata: null,
+            },
+          },
+        },
+      },
+    ],
+  },
+}

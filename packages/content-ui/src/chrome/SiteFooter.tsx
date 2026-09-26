@@ -52,7 +52,7 @@ export function SiteFooter({
       <footer
         id="footer"
         {...surfaceAttrs('ink')}
-        className="relative overflow-hidden bg-black px-4 pb-16 pt-32 text-white lg:px-24"
+        className="site-footer relative overflow-hidden bg-black px-4 pb-16 pt-32 text-white lg:px-24"
       >
         {/* Exact Home watermark vectors; the same centered lockup is clipped at mobile. */}
         <svg

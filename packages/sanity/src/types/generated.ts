@@ -384,6 +384,7 @@ export type ScreenGridSection = {
     media?: Figure
     tone?: 'ink' | 'brand' | 'bone'
     span?: 'standard' | 'wide'
+    framing?: 'plate' | 'image'
     _type: 'screen'
     _key: string
   }>
@@ -585,7 +586,6 @@ export type CtaSection = {
   heading?: string
   body?: string
   button?: Button
-  decoration?: 'molecule' | 'orbs' | 'none'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -2061,7 +2061,6 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
-        decoration?: 'molecule' | 'none' | 'orbs'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -3146,6 +3145,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           } | null
           tone?: 'bone' | 'brand' | 'ink'
           span?: 'standard' | 'wide'
+          framing?: 'image' | 'plate'
           _type: 'screen'
           _key: string
         }> | null
@@ -3324,7 +3324,6 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
-        decoration?: 'molecule' | 'none' | 'orbs'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -4409,6 +4408,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           } | null
           tone?: 'bone' | 'brand' | 'ink'
           span?: 'standard' | 'wide'
+          framing?: 'image' | 'plate'
           _type: 'screen'
           _key: string
         }> | null
@@ -4776,7 +4776,6 @@ export type CASE_STUDY_QUERY_RESULT = {
           contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
-        decoration?: 'molecule' | 'none' | 'orbs'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -5861,6 +5860,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           } | null
           tone?: 'bone' | 'brand' | 'ink'
           span?: 'standard' | 'wide'
+          framing?: 'image' | 'plate'
           _type: 'screen'
           _key: string
         }> | null
@@ -6196,7 +6196,6 @@ export type PAGE_QUERY_RESULT = {
           contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
-        decoration?: 'molecule' | 'none' | 'orbs'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -7281,6 +7280,7 @@ export type PAGE_QUERY_RESULT = {
           } | null
           tone?: 'bone' | 'brand' | 'ink'
           span?: 'standard' | 'wide'
+          framing?: 'image' | 'plate'
           _type: 'screen'
           _key: string
         }> | null

@@ -41,7 +41,7 @@ describe('the screen grid’s knobs', () => {
   it('delivers both screen options on the item surface', () => {
     const { bySurface } = visibleKnobs({ spec: screenKnobs, read: readFrom(second) })
 
-    expect(bySurface.item.map((r) => r.knob.name)).toEqual(['tone', 'span'])
+    expect(bySurface.item.map((r) => r.knob.name)).toEqual(['tone', 'span', 'framing'])
     expect(bySurface.block).toEqual([])
     expect(bySurface.band).toEqual([])
   })
@@ -53,12 +53,14 @@ describe('the screen grid’s knobs', () => {
     expect(chosen.all.map((r) => [r.knob.name, r.current.value, r.current.isDefault])).toEqual([
       ['tone', 'brand', false],
       ['span', 'wide', false],
+      ['framing', 'plate', true],
     ])
     // The same knobs, one tile over: unset falls back to the declared default,
     // marked as inherited so the menu draws no check on a value nobody picked.
     expect(untouched.all.map((r) => [r.knob.name, r.current.value, r.current.isDefault])).toEqual([
       ['tone', 'ink', true],
       ['span', 'standard', true],
+      ['framing', 'plate', true],
     ])
   })
 
@@ -66,7 +68,9 @@ describe('the screen grid’s knobs', () => {
     // A screen holds a `figure` whose asset the projection dereferences and the
     // echo document does not, so copying `screens` whole would blank every
     // image in the grid on the click (ADR 0021).
-    expect(patchableItemRoots(screenGridSectionKnobs)).toEqual({ screens: ['span', 'tone'] })
+    expect(patchableItemRoots(screenGridSectionKnobs)).toEqual({
+      screens: ['framing', 'span', 'tone'],
+    })
     expect(patchableKnobRoots([screenGridSectionKnobs])).not.toContain('screens')
   })
 })

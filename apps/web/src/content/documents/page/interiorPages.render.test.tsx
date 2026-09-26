@@ -318,19 +318,13 @@ describe('the seeded Software Engineering service page', () => {
     expect(band?.panels?.some((panel) => panel.button ?? panel.media)).toBe(false)
   })
 
-  /**
-   * The proof-point band (`2357:2690`) and the CTA (`2354:2640`) both hang
-   * the molecule — the first through `layoutSection`'s decoration knob, the
-   * second through `ctaSection`'s. Exactly two glyphs: the Overview band's
-   * molecule is almost entirely cropped off-canvas in the frame and is
-   * deliberately not drawn.
-   */
-  it('hangs the molecule behind the proof point and the CTA', () => {
+  /** The proof point retains its molecule; the current CTA uses its gradient. */
+  it('hangs the molecule behind the proof point', () => {
     const decorations = sections
       .filter((s) => s._type === 'layoutSection')
       .map((s) => (s as { decoration?: string }).decoration)
     expect(decorations).toEqual(['none', 'molecule'])
-    expect(html.match(/viewBox="0 0 699 699"/g) ?? []).toHaveLength(2)
+    expect(html.match(/viewBox="0 0 699 699"/g) ?? []).toHaveLength(1)
   })
 
   it('gives the page a single h1', () => {
@@ -618,44 +612,17 @@ describe('the seeded 1682 conference page', () => {
   })
 })
 
-/**
- * WHICH GENERATION EACH CLOSER DRAWS (#163).
- *
- * Software Engineering instances the `CTA` component (`2124:72`) override-free
- * inside `2360:2879`, and that component hangs the molecule and no bleed
- * strip. 1682 has no frame at all, so it takes the same generation.
- *
- * About (`2975:8826`), Solutions (`2975:8839`) and Live (`2975:8763`) close on
- * a copy of Home's bespoke band. #303 read the raster: it is Home's own `orbs`
- * band (cursor pixels included), not a photograph, so their seeds pin `orbs`
- * (#317) — not `backgroundMedia`, which `ctaSection` supports but no seed
- * uses. Live's button is the frame's "View our work" (#308 q9).
- *
- * Home is tested where it lives: its seed pins `orbs`, and its closer fades
- * into the footer.
- */
+/** The current Combined CTA + Footer replaces obsolete stored decorations. */
 describe('the closing CTA band', () => {
   it.each([
-    ['About', about.html, 'about'],
-    ['Solutions', solutions.html, 'solutions'],
-    ['Live', live.html, 'live'],
-  ])('closes %s on the sphere band Home originated', (_label, html, slug) => {
-    const sections = (aSeededPage(slug).sections ?? []) as { _type: string; decoration?: string }[]
-    expect(sections.find((s) => s._type === 'ctaSection')?.decoration).toBe('orbs')
-    // The sphere's fade into the footer, and no molecule.
-    expect(html).toContain('--gradient-ink-fade')
+    ['About', about.html],
+    ['Solutions', solutions.html],
+    ['Live', live.html],
+    ['Software Engineering', softwareEngineering.html],
+    ['1682', conference.html],
+  ])('closes %s on the current gradient band', (_label, html) => {
+    expect(html).toContain('cta-band')
+    expect(html).not.toContain('cta-lag')
     expect(html).not.toContain('w-[54%]')
-  })
-
-  it.each([
-    ['Software Engineering', softwareEngineering.html, 'solutions-software-engineering'],
-    ['1682', conference.html, '1682-conference-ai-innovation'],
-  ])('closes %s on the molecule the component hangs', (_label, html, slug) => {
-    const sections = (aSeededPage(slug).sections ?? []) as { _type: string; decoration?: string }[]
-    expect(sections.find((s) => s._type === 'ctaSection')?.decoration).toBe('molecule')
-    // CtaSection's own molecule and bleed strip — neither shared with any
-    // other band on these pages.
-    expect(html).toContain('w-[54%]')
-    expect(html).not.toContain('--gradient-ink-fade')
   })
 })

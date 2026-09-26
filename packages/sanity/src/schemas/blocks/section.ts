@@ -313,10 +313,7 @@ export const insightsCarouselSection = defineSectionBlock({
   preview: { select: { title: 'heading' } },
 })
 
-/**
- * `decoration` and `surface` are declared in `src/knobs/ctaSection.ts`
- * (ADR 0020).
- */
+/** Current CTA content over the Combined CTA + Footer gradient (3720:62476). */
 export const ctaSection = defineSectionBlock({
   name: 'ctaSection',
   description:
@@ -327,7 +324,6 @@ export const ctaSection = defineSectionBlock({
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'body', type: 'text', rows: 2 }),
     defineField({ name: 'button', type: 'button' }),
-    'decoration',
   ],
   preview: { select: { title: 'heading' } },
 })
@@ -766,24 +762,13 @@ export const mediaSection = defineSectionBlock({
  * any content type can compose, so this is available to `page.sections` on the
  * day it lands.
  *
- * Two design options per screen and no more. The frame's plates differ in
- * exactly two ways — the colour behind the screenshot (`tone`) and whether the
- * tile takes one column or both (`span`) — and everything else about a tile
- * (32px radius, the 12px-radius screenshot inside it, the crop) is composition
- * the renderer owns. Plate HEIGHT is deliberately not a field: `2230:7559`
- * draws 716 for a wide tile and 342 for a small one, so height follows `span`
- * (ADR 0006 — renderers decide).
- *
- * Both of those belong to the SCREEN rather than to the band, so they are
- * declared against the member and their fields come from `defineArrayItem` —
- * the first item-surface knobs in the repo (#118, ADR 0021). The block's own
- * roster is `surface` and nothing else, which is why its declaration looks
- * thin: the knobs an editor reaches for on this band are on the tiles.
+ * Each screen owns its span, plate tone, and whether the image already
+ * contains the complete composition (current Best Egg and Caron frames).
  */
 export const screenGridSection = defineSectionBlock({
   name: 'screenGridSection',
   description:
-    'Product screenshots on gradient plates, tiled two to a row. Reach for it to show an interface actually existing, usually in more than one state. Each screen picks its plate tone and whether it spans one column or both; plate height follows the span and is not something to set.',
+    'Product screenshots or composed images, tiled two to a row. Wide images can keep their complete composition or place a raw screenshot on a colored plate. Each screen picks its span and framing.',
   title: 'Screen grid',
   knobs: screenGridSectionKnobs,
   fields: [
@@ -799,6 +784,7 @@ export const screenGridSection = defineSectionBlock({
             defineField({ name: 'media', type: 'figure', validation: (rule) => rule.required() }),
             'tone',
             'span',
+            'framing',
           ],
           preview: { select: { title: 'media.alt', subtitle: 'tone', media: 'media.image' } },
         }),

@@ -17,6 +17,7 @@ import {
 export interface CarouselTrackProps {
   heading?: string | null
   eyebrow?: string | null
+  eyebrowClassName?: string
   body?: string | null
   sequence?: boolean
   /**
@@ -98,6 +99,7 @@ function Controls({ className }: { className?: string }) {
 export function CarouselTrack({
   heading,
   eyebrow,
+  eyebrowClassName,
   body,
   headingAttr,
   sequence = false,
@@ -115,7 +117,7 @@ export function CarouselTrack({
         >
           <div className="flex w-full max-w-[638px] flex-col gap-2">
             {eyebrow ? (
-              <Eyebrow size="lg" className="pb-4">
+              <Eyebrow size="lg" className={cn('pb-4', eyebrowClassName)}>
                 {eyebrow}
               </Eyebrow>
             ) : null}
