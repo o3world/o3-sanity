@@ -120,8 +120,7 @@
         "label": "View our work",
         "href": "/work",
         "contrast": "light"
-      },
-      "decoration": "orbs"
+      }
     }
   ],
   "migration": {

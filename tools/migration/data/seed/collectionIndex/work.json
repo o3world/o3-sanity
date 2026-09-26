@@ -49,8 +49,7 @@
         "_type": "button",
         "label": "Get in touch",
         "href": "/contact"
-      },
-      "decoration": "orbs"
+      }
     }
   ],
   "seo": {

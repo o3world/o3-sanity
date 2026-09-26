@@ -319,12 +319,12 @@ describe('the seeded Software Engineering service page', () => {
   })
 
   /** The proof point retains its molecule; the current CTA uses its gradient. */
-  it('hangs the molecule behind the proof point', () => {
+  it('hangs the current molecule in the hero and proof point', () => {
     const decorations = sections
       .filter((s) => s._type === 'layoutSection')
       .map((s) => (s as { decoration?: string }).decoration)
     expect(decorations).toEqual(['none', 'molecule'])
-    expect(html.match(/viewBox="0 0 562 562"/g) ?? []).toHaveLength(1)
+    expect(html.match(/viewBox="0 0 562 562"/g) ?? []).toHaveLength(2)
   })
 
   it('gives the page a single h1', () => {

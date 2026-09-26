@@ -62,7 +62,7 @@ export function CollectionHero({
         <div
           data-route-foreground=""
           className={cn(
-            'max-w-section relative mx-auto flex flex-col gap-8',
+            'max-w-section relative mx-auto flex w-full flex-col gap-8',
             centred
               ? 'items-center text-center'
               : 'items-start justify-between lg:flex-row lg:items-end',

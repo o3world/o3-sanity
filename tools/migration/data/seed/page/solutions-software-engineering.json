@@ -291,7 +291,6 @@
     {
       "_type": "ctaSection",
       "_key": "cta",
-      "decoration": "molecule",
       "heading": "Engineering that scales with your business.",
       "body": "Let's build something.",
       "button": {

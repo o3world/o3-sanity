@@ -234,7 +234,6 @@
     {
       "_type": "ctaSection",
       "_key": "cta",
-      "decoration": "molecule",
       "heading": "How long does a page take to go live?",
       "body": "Walk us through how a page gets from a brief to your homepage today. We'll show you where the weeks are going.",
       "button": {

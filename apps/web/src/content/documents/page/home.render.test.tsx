@@ -136,9 +136,8 @@ describe('the seeded homepage', () => {
     expect(sections.find((section) => section._type === 'quoteSection')?.decoration).toBe(
       'molecule',
     )
-    // The mark's own viewBox. Home's closer draws `orbs`, so the glyph
-    // appearing at all is this band's.
-    expect(html).toContain('viewBox="0 0 699 699"')
+    // The quote carries the molecule; the closer uses its gradient.
+    expect(html).toContain('viewBox="0 0 562 562"')
   })
 
   it('renders the client logos the partners strip references', () => {
@@ -326,8 +325,9 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(html).toContain('class="flex flex-col gap-12"')
   })
 
-  it('retains the closer’s responsive orbital fade', () => {
-    expect(html).toContain('h-16 lg:h-[172px]')
+  it('uses the current gradient-only closer', () => {
+    expect(html).toContain('cta-band')
+    expect(html).not.toContain('cta-lag')
   })
 
   it('numbers each how-we-work column once, at both widths', () => {
@@ -335,33 +335,5 @@ describe('the homepage at 402 (ADR 0006)', () => {
     // a second copy — the shape the rail composition needed and this one does
     // not. Two would mean a hidden desktop numeral had come back.
     expect((html.match(/>\.01</g) ?? []).length).toBe(1)
-  })
-})
-
-/**
- * THE CLOSER THE OTHERS WERE PASTED FROM (#163).
- *
- * Home's frame (`1680:2134`) draws the bespoke band `1680:2132` — the sphere
- * layer `1799:1470` plus the `1928:6596` ink fade that dissolves its lower
- * limb into the footer. It is why `orbs` is on the knob, and its seed pins the
- * value rather than reading the default.
- *
- * Five other frames now carry a copy of that band, raster and all; #303 read
- * the raster as this band pasted (not a photo), and #317 pinned `orbs` in
- * those pages' seeds accordingly.
- *
- * If Home's frame is ever redrawn to instance the `CTA` component, this is the
- * test that should fail.
- */
-describe('the homepage closer', () => {
-  it('still draws the sphere band, with the fade into the footer', () => {
-    const sections = (aSeededPage('index').sections ?? []) as {
-      _type: string
-      decoration?: string
-    }[]
-    expect(sections.find((s) => s._type === 'ctaSection')?.decoration).toBe('orbs')
-    expect(html).toContain('--gradient-ink-fade')
-    // CtaSection's molecule, which this band must not also be drawing.
-    expect(html).not.toContain('w-[54%]')
   })
 })

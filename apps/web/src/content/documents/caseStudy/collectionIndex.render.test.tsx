@@ -60,18 +60,12 @@ describe('the /work index', () => {
     expect(html).toContain('Not the deliverable.')
   })
 
-  /**
-   * The closer both frames draw (`2975:8738`, `2975:8751`) — the seed's
-   * `ctaSection` since #348, which is what "/work has no document to seed one
-   * on" stopped being true. Its raster is a capture of the sphere over a
-   * native fade strip, so it is `orbs` rather than a photograph, and the
-   * button leaves the page it closes.
-   */
+  /** The authored closing CTA shares the current gradient composition. */
   it('closes on the shared CTA band', () => {
     expect(html).toContain('Let’s get started on your next big thing.')
     expect(html).toContain('We partner with businesses like yours')
     expect(html).toContain('href="/contact"')
-    expect(html).toContain('--gradient-ink-fade')
+    expect(html).toContain('cta-band')
   })
 
   it('renders a card per case study, linked to its detail route', () => {

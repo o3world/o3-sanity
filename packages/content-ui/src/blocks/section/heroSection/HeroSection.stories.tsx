@@ -166,6 +166,9 @@ export const InteriorMolecule: Story = {
     await expect(getComputedStyle(molecule).opacity).toBe('0.1')
     await expect(getComputedStyle(molecule).top).toBe('-384px')
     await expect(getComputedStyle(molecule).right).toBe('-287px')
+    const hero = canvasElement.querySelector('section')!
+    const heading = canvasElement.querySelector('h1')!
+    await expect(heading.getBoundingClientRect().left - hero.getBoundingClientRect().left).toBe(96)
   },
 }
 

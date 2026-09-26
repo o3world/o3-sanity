@@ -330,8 +330,7 @@
         "label": "Get in touch",
         "href": "/contact",
         "contrast": "light"
-      },
-      "decoration": "orbs"
+      }
     }
   ],
   "migration": {

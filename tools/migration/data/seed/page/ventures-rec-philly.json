@@ -71,8 +71,7 @@
         "label": "See the ventures program",
         "href": "/ventures",
         "contrast": "light"
-      },
-      "decoration": "molecule"
+      }
     }
   ],
   "migration": {

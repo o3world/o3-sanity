@@ -258,7 +258,6 @@
     {
       "_type": "ctaSection",
       "_key": "cta",
-      "decoration": "molecule",
       "heading": "Ready to make your technology work harder?",
       "body": "We turn the right technology into scalable systems built around where you're headed next.",
       "button": {
