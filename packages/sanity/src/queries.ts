@@ -10,8 +10,8 @@ import { defineQuery } from 'groq'
  * **Applied to photographic fields only, and that is the scoping mechanism.**
  * A logo is knocked out or sits transparent over a surface, and an LQIP is
  * rendered onto a flat ground — behind one it reads as a coloured plate. So
- * `client.logo`, the partner-hero `logo`, the rail-panel `logo` and the service
- * card's `icon` stay unexpanded and get no background at all. `isOpaque` is the
+ * `client.logo` only expands alpha metadata; the partner-hero `logo`, the
+ * rail-panel `logo` and the service card's `icon` stay unexpanded. None get an LQIP. `isOpaque` is the
  * second guard, for a photographic field holding artwork with alpha anyway.
  *
  * `_id` rather than a full asset spread: it is the one field the URL builder
@@ -122,7 +122,7 @@ const SECTION_FIELDS = /* groq */ `
     button{..., ${BUTTON_TARGET}}
   },
   _type == "logoWallSection" => {
-    "clients": clients[]->{_id, name, logo},
+    "clients": clients[]->{_id, name, logo{..., asset->{_id, metadata{hasAlpha}}}},
     button{..., ${BUTTON_TARGET}}
   },
   _type == "caseShowcaseSection" => {

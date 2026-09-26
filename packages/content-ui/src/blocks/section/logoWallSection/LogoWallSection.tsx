@@ -94,7 +94,10 @@ export function LogoWallSection({
         </div>
 
         <div className="-mx-4 flex justify-center self-stretch overflow-hidden lg:-mx-16">
-          <MarqueeTrack copies={copies} className={cn(!onInk && 'mix-blend-multiply')}>
+          <MarqueeTrack
+            copies={copies}
+            className={onInk ? 'mix-blend-screen' : 'mix-blend-multiply'}
+          >
             {track.map(({ client, copy }) => (
               <li
                 key={`${copy}-${client._id}`}
@@ -111,7 +114,10 @@ export function LogoWallSection({
                   className={cn(
                     'ease-soft max-h-[43px] w-full object-contain grayscale transition-[opacity,filter] duration-500 motion-reduce:transition-none',
                     onInk
-                      ? 'opacity-40 brightness-0 invert group-hover/logo:opacity-60'
+                      ? cn(
+                          'opacity-40 invert group-hover/logo:opacity-60',
+                          client.logo?.asset?.metadata?.hasAlpha !== false && 'brightness-0',
+                        )
                       : 'opacity-90 group-hover/logo:opacity-100 group-hover/logo:contrast-125',
                   )}
                   sizes="175px"

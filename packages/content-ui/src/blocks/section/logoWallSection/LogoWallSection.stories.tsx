@@ -139,3 +139,45 @@ export const AuthoredLightSurface: Story = {
     await expect(getComputedStyle(section.querySelector('h2')!).color).toBe('rgb(10, 10, 11)')
   },
 }
+
+/** Uploaded white-matte logos share the strip with transparent and older references. */
+export const OpaqueAndAlphaMarks: Story = {
+  ...AsSeeded,
+  args: {
+    ...AsSeeded.args,
+    clients: (
+      [
+        ['American Family', 'b42b1199a726124f20ffefeb144fc906ebab46ef-921x570-webp', false],
+        ['Essity', 'b0b44ade94dd026f1dcc435e8b93dbd674ac8993-921x570-webp', false],
+        ['Cencora', '55d9985b53b1e04ca118fa2b8854d20a329f32d7-921x570-webp', false],
+        ['Ironman', '79d44c241bc1bab4c6dd9dcde12ae2f4917986da-1200x297-png', true],
+        ['Vertex', 'c4e6317ffd073039904d3e1c833aec3a504c8a11-1200x221-png', undefined],
+      ] as const
+    ).map(([name, asset, hasAlpha]) => ({
+      _id: String(name),
+      name: String(name),
+      logo: {
+        _type: 'image' as const,
+        asset: {
+          _type: 'reference' as const,
+          _ref: `image-${asset}`,
+          _id: `image-${asset}`,
+          metadata: { hasAlpha: hasAlpha ?? null },
+        },
+      },
+    })),
+  },
+  play: async ({ canvasElement }) => {
+    const track = canvasElement.querySelector('ul')!
+    await expect(getComputedStyle(track).mixBlendMode).toBe('screen')
+    const marks = Array.from(track.querySelectorAll('li:not([aria-hidden]) img'))
+    await expect(marks).toHaveLength(5)
+    for (const mark of marks.slice(0, 3)) {
+      await expect(getComputedStyle(mark).filter).toContain('invert(1)')
+      await expect(getComputedStyle(mark).filter).not.toContain('brightness(0)')
+    }
+    for (const mark of marks.slice(3)) {
+      await expect(getComputedStyle(mark).filter).toContain('brightness(0)')
+    }
+  },
+}
