@@ -4,27 +4,21 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../lib/utils'
 import { StaggeredLines } from './staggered-lines'
 
-const displayHeadingVariants = cva(
-  // Each text-display-* / text-hero token bundles size, 1.05–1.3 line-height,
-  // negative tracking AND the 300 display weight (tokens/typography.css), so
-  // the level class alone reproduces the prototype heading.
-  'font-display',
-  {
-    variants: {
-      level: {
-        // hero — the homepage h1 ("You see the problem in front of you.").
-        hero: 'text-hero',
-        // xl — section headlines ("Our Work", "How we work").
-        xl: 'text-display-xl',
-        // lg — the engagement-model h3s ("Embedded Team Member").
-        lg: 'text-display-lg',
-        // md — the work-case narrative h3s.
-        md: 'text-display-md',
-      },
+const displayHeadingVariants = cva('font-display', {
+  variants: {
+    level: {
+      // hero — the largest shared section heading.
+      hero: 'text-hero',
+      // xl — section headlines ("Our Work", "How we work").
+      xl: 'text-display-xl',
+      // lg — the engagement-model h3s ("Embedded Team Member").
+      lg: 'text-display-lg',
+      // md — the work-case narrative h3s.
+      md: 'text-display-md',
     },
-    defaultVariants: { level: 'xl' },
   },
-)
+  defaultVariants: { level: 'xl' },
+})
 
 type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'div'
 
@@ -43,7 +37,7 @@ export interface DisplayHeadingProps
 }
 
 /**
- * The Figtree-light display heading in the prototype's four fluid steps.
+ * Newsreader headings in the shared fluid type scale.
  * Color follows the surface (inherits currentColor from SectionShell).
  */
 export function DisplayHeading({

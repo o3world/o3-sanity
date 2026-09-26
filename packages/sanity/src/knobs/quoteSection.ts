@@ -1,4 +1,4 @@
-import { defineBlockKnobs } from '@o3/block-spec'
+import { defineBlockKnobs, knob } from '@o3/block-spec'
 import { decorationKnob } from './decoration'
 import { surfaceKnob } from './surface'
 import type { QuoteSection } from '../types/generated'
@@ -19,7 +19,19 @@ export const quoteSectionKnobs = defineBlockKnobs({
   type: 'quoteSection',
   title: 'Quote',
   tier: 'section',
-  knobs: [decorationKnob(['orbs', 'molecule', 'none']), surfaceKnob({ initialValue: 'bone' })],
+  knobs: [
+    knob({
+      name: 'size',
+      title: 'Size',
+      description:
+        'Default is the large pull quote. Small is the compact quote used on the current homepage.',
+      options: ['default', 'small'],
+      initialValue: 'default',
+      bar: true,
+    }),
+    decorationKnob(['orbs', 'molecule', 'none']),
+    surfaceKnob({ initialValue: 'bone' }),
+  ],
   placeholder: {
     _type: 'quoteSection',
     quote: 'Add the quote this band carries.',

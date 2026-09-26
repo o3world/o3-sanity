@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 
 import { defineVariantStories } from '@o3/story-kit'
 
@@ -15,7 +16,8 @@ const kit = defineVariantStories({
   component: Button,
   title: 'UI/Button',
   knobs: {
-    variant: ['dark', 'light', 'ghost'],
+    variant: ['dark', 'light', 'brand', 'subtle', 'ghost'],
+    appearance: ['primary', 'secondary'],
     size: ['base', 'large'],
   },
   defaultArgs: { children: 'View our work', icon: <ArrowIcon /> },
@@ -32,12 +34,26 @@ export const Matrix = kit.Matrix as Story
 /** `Theme=Black` (2134:1786) on a light band, at the repo's `large` step. */
 export const Dark: Story = {
   args: { size: 'large', children: 'See all partners', icon: <ArrowIcon /> },
+  play: async ({ canvasElement }) => {
+    const button = within(canvasElement).getByRole('button')
+    await expect(getComputedStyle(button).backgroundColor).toBe('rgb(10, 10, 11)')
+    await userEvent.tab()
+    await expect(button).toHaveFocus()
+    await waitFor(() => expect(getComputedStyle(button).boxShadow).toContain('rgb(214, 211, 204)'))
+  },
 }
 
 /** `Theme=White` (2205:1298) on ink — the CTA band's button (2336:4351). */
 export const Light: Story = {
   args: { variant: 'light', children: 'View our work', icon: <ArrowIcon /> },
   globals: { backgrounds: { value: 'ink' } },
+  play: async ({ canvasElement }) => {
+    const button = within(canvasElement).getByRole('button')
+    await expect(getComputedStyle(button).backgroundColor).toBe('rgb(255, 255, 255)')
+    await userEvent.tab()
+    await expect(button).toHaveFocus()
+    await waitFor(() => expect(getComputedStyle(button).boxShadow).toContain('rgb(170, 166, 158)'))
+  },
 }
 
 /**
@@ -85,53 +101,32 @@ export const Disabled: Story = {
   args: { children: 'Disabled', disabled: true },
 }
 
-/**
- * The states the `Button` set draws, on both themes it draws them for.
- *
- * Hover, focus and press are PAINTED here rather than triggered: a screenshot
- * cannot hold a pseudo-class, so each cell names the same token its variant in
- * `SET_STATES` names, and this story is where the two are held together by eye.
- * `disabled` needs no such help and is the attribute.
- *
- * The `light` column is a real ink band, so it is also where a state token that
- * inverts on dark shows itself: that is what `btn-disabled-fg` exists for.
- */
+/** Real pseudo-classes keep this gallery aligned with the component's state rules. */
 export const States: Story = {
-  render: () => {
-    const painted = [
-      ['Default', ''],
-      ['Hover', 'bg-brand text-white'],
-      ['Focus', 'bg-btn-focus text-white'],
-      ['Press', 'bg-btn-press text-ink'],
-    ] as const
-
-    return (
-      <div className="bg-line grid gap-px md:grid-cols-2">
-        {(['dark', 'light'] as const).map((variant) => (
-          <div
-            key={variant}
-            data-surface={variant === 'light' ? 'ink' : 'white'}
-            className={`flex flex-col items-start gap-6 p-10 ${variant === 'light' ? 'bg-ink' : 'bg-white'}`}
-          >
-            {painted.map(([state, paint]) => (
-              <div key={state} className="flex flex-col items-start gap-2">
-                <span className="eyebrow text-fg-muted">
-                  {variant} · {state}
-                </span>
-                <Button variant={variant} className={paint} icon={<ArrowIcon />}>
-                  View our work
-                </Button>
-              </div>
-            ))}
-            <div className="flex flex-col items-start gap-2">
-              <span className="eyebrow text-fg-muted">{variant} · Disabled</span>
-              <Button variant={variant} disabled icon={<ArrowIcon />}>
-                View our work
-              </Button>
-            </div>
-          </div>
-        ))}
-      </div>
-    )
-  },
+  render: () => (
+    <div className="grid gap-8 md:grid-cols-2">
+      {(['dark', 'light', 'brand', 'subtle'] as const).map((variant) => (
+        <div
+          key={variant}
+          className={
+            variant === 'light'
+              ? 'bg-ink flex flex-col items-start gap-6 p-8'
+              : 'bg-bone flex flex-col items-start gap-6 p-8'
+          }
+        >
+          <Button variant={variant} icon={<ArrowIcon />}>
+            View our work
+          </Button>
+          {variant !== 'subtle' && (
+            <Button variant={variant} appearance="secondary" icon={<ArrowIcon />}>
+              View our work
+            </Button>
+          )}
+          <Button variant={variant} disabled icon={<ArrowIcon />}>
+            Disabled
+          </Button>
+        </div>
+      ))}
+    </div>
+  ),
 }

@@ -4,8 +4,8 @@ Figma is the source of record for this site (map #33) — it outranks `prototype
 Everything visible in a **canonical** frame is pre-approved to build (#25 working agreement 3, as
 amended by #33). This page is how you read the file without wasting a session on its traps.
 
-- **File**: `RvraLJaZ0zWm8UaD5AJf43` — "O3DX: Visual exploration"
-- **Frame → route map**: [`docs/figma-frames.md`](https://github.com/o3world/o3-sanity/blob/research/figma-frame-inventory/docs/figma-frames.md) — on branch `research/figma-frame-inventory`, per the repo's research convention. Read it before touching a page layer.
+- **File**: `RvraLJaZ0zWm8UaD5AJf43` — "🅾️ 2026 O3DX Website"
+- **Frame → route map**: [current verified inventory](../figma-frames.md). The older research-branch inventory is historical. Read it before touching a page layer.
 - **Component → code map**: [`docs/figma-components.md`](../figma-components.md) — every component set, its variant axes, and what it maps to (or deliberately doesn't)
 - **Tracked-frame manifest**: [`tools/figma-sync/data/tracked-nodes.json`](../../tools/figma-sync/data/tracked-nodes.json) — the canonical page frames as machine-readable data, node ids verified against the file
 - **Asset provenance**: [`tools/figma-sync/data/asset-manifest.json`](../../tools/figma-sync/data/asset-manifest.json) — every committed seed asset and the node it was exported from, or an explicit "no source found" (#80). Read it before re-exporting anything: ten of the thirty are `locked`, including all seven hand-authored animated SVGs, and the format is documented in [`tools/figma-sync/README.md`](../../tools/figma-sync/README.md)
@@ -30,10 +30,9 @@ directly — no MCP, no rate limit. **A sync is a commit**: `data/baseline.json`
 It watches two things and asks about a third (#79):
 
 - **Canonical page frames** — the manifest's `pageFrame` entries.
-- **Component sets** — all 24 nodes of the component→code map below, so a rework of `Button /
-Solid` reads as "that set changed → `button.tsx#Button`" instead of as unexplained diffs on
+- **Component sets** — the active component→code map, so a rework of `Button` reads as "that set changed → `button.tsx#Button`" instead of as unexplained diffs on
   every frame that instances it. It reports the set **alongside** those frames, not instead.
-- **New work** — each real run lists the Design Concept section's direct children and names any
+- **New work** — each real run lists the current canvases' direct children and names any
   frame the manifest has never heard of. That is a question, not a finding: decide it is canonical
   and add it to `tracked-nodes.json`, or decide it is noise and add it to `ignoredNodeIds` with a
   reason. The probe never promotes anything itself — the two-generations rule below is exactly why.
@@ -128,31 +127,17 @@ ambiguity in it:
 | Built from  | Flat imported nodes                                        | Real components + the `Gradient/Red/1` variable |
 | Tell        | Footer reads "© 2026 O3 Studio. All placeholder content."  | —                                               |
 
-Canonical page layers live in the **Design Concept** section (`1632:1510`). The sections named
-"Home alt", "What we're working on", "About Us" and **"Solutions" (`1924:4768`)** are generation-1
-captures — do not build from them. The Solutions one is worth naming because #47's ticket cited it
-as the 402 half of a breakpoint pair; it is a `SECTION` holding two frames called "1920w light" and
-"390w light", with `div.sc-host` / `nav` layer names. Confirm the width before you read a node.
+Current page layers live directly on the **Designs** canvas (`1126:1100`) and
+**Case Studies** canvas (`1238:557`). The former Design Concept section and several
+August frames have been removed. Use [the current frame inventory](../figma-frames.md)
+and active manifest; do not infer a route from an old node name or imported capture.
 
-**Authoritative breakpoints are 1440 / 402.** There was never a competing 1920/390 set.
+Authoritative design widths remain **1440 / 402**. Missing mobile companions are
+recorded in the inventory. `1710:2300` now contains only a pointer to Case Studies.
 
-### Not every page layer has both
-
-The manifest's mobile roster (`tracked-nodes.json`, `variant: mobile`) is the current list — Home,
-Work, Case Study, Insight detail, Live, plus the 2026-08 pass's ruled-canonical companions:
-Contact `2975:10037`, the /insights index `2975:8499`, /partners/sanity `2975:9343`, About
-`2975:8865`. **Solutions (`1925:6138`) and Software Engineering (`2360:2879`) still have no 402
-frame.** That is a coverage gap, not a missing read: ADR 0006 already makes responsive a renderer
-concern, so the mobile composition on those pages is a code decision, and it should say so at the
-call site.
-
-### Two frames named "Insights"
-
-Neither is the `/insights` index (whose canonical frames are `2336:4310` at 1440 and
-`2975:8499` at 402, per the manifest):
-
-- `1710:2823` → **Insight detail**, `/insights/{slug}` (#45)
-- `1924:5344` → **About**, `/about` (#46)
+The user's September 25 direction keeps companion-brand logos in the footer and
+preserves existing vGPU functionality. It overrides the Brand Navigation hover
+variant and the earlier meeting instruction to expose those brands on hover.
 
 ## Vocabulary
 

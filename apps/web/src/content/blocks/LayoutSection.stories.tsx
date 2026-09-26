@@ -117,7 +117,7 @@ export const AboutHeadingWithPhoto: Story = {
   play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { name: aboutHeading.heading })
     await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(48, 0)
-    await expect(getComputedStyle(heading).fontWeight).toBe('300')
+    await expect(getComputedStyle(heading).fontWeight).toBe('400')
   },
 }
 
@@ -127,8 +127,8 @@ export const AboutHeadingMobile: Story = {
   parameters: { design: figmaDesign('2975:9043') },
   play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { name: aboutHeading.heading })
-    await expect(getComputedStyle(heading).fontSize).toBe('40px')
-    await expect(getComputedStyle(heading).fontWeight).toBe('300')
+    await expect(getComputedStyle(heading).fontSize).toBe('38px')
+    await expect(getComputedStyle(heading).fontWeight).toBe('400')
     await expect(heading.scrollWidth).toBeLessThanOrEqual(heading.clientWidth)
   },
 }
@@ -145,7 +145,7 @@ export const OverviewAutomaticMobile: Story = {
   play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { name: 'Overview' })
     await expect(getComputedStyle(heading).fontSize).toBe('18px')
-    await expect(getComputedStyle(heading).fontWeight).toBe('300')
+    await expect(getComputedStyle(heading).fontWeight).toBe('400')
   },
 }
 
@@ -154,7 +154,7 @@ export const LegacyHeading: Story = {
   globals: { viewport: { value: 'mobile' } },
   play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { name: aboutHeading.heading })
-    await expect(getComputedStyle(heading).fontSize).toBe('40px')
+    await expect(getComputedStyle(heading).fontSize).toBe('38px')
     await expect(getComputedStyle(heading).fontWeight).toBe('400')
   },
 }

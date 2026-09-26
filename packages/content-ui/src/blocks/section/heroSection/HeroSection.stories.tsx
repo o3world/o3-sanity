@@ -134,3 +134,18 @@ export const LongHeadlineCadence: Story = {
     106.667, 160, 213.333, 266.667, 320, 373.333, 426.667, 480, 533.333, 833.333,
   ]),
 }
+
+/** Centering the current About lockup preserves its authored copy and orbital decoration. */
+export const CentredWithGlobe: Story = {
+  args: {
+    ...fixture,
+    variant: 'band',
+    alignment: 'center',
+    surface: 'paper',
+  },
+  play: async ({ canvasElement }) => {
+    const { expect, within } = await import('storybook/test')
+    await expect(within(canvasElement).getByText(fixture.subheading!)).toBeVisible()
+    await expect(canvasElement.querySelector('[data-orbital-preset="line"]')).not.toBeNull()
+  },
+}

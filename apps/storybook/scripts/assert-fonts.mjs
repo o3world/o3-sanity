@@ -7,7 +7,10 @@ import postcss from 'postcss'
 try {
   const output = path.resolve(process.argv[2] ?? 'storybook-static')
   const assets = path.join(output, 'assets')
-  let fontFaces = 0
+  const fontFaces = new Map([
+    ['Figtree Variable', 0],
+    ['Newsreader Variable', 0],
+  ])
 
   for (const name of readdirSync(assets, { recursive: true })) {
     if (!name.endsWith('.css')) continue
@@ -23,13 +26,14 @@ try {
       face.walkDecls('src', (decl) => {
         source = decl.value
       })
-      if (family?.replace(/['"]/g, '') !== 'Figtree Variable') return
+      const font = family?.replace(/['"]/g, '')
+      if (!fontFaces.has(font)) return
 
-      fontFaces++
+      fontFaces.set(font, fontFaces.get(font) + 1)
       const urls = [...(source ?? '').matchAll(/url\(\s*['"]?([^'")\s]+)['"]?\s*\)/g)]
-      assert.ok(urls.length, 'Figtree declares no font asset')
+      assert.ok(urls.length, font + ' declares no font asset')
       for (const [, url] of urls) {
-        assert.ok(!/^(?:[a-z]+:|\/\/)/i.test(url), 'Figtree must use a bundled local font')
+        assert.ok(!/^(?:[a-z]+:|\/\/)/i.test(url), font + ' must use a bundled local font')
         const pathname = decodeURIComponent(url.split(/[?#]/)[0])
         const file = pathname.startsWith('/')
           ? path.join(output, pathname)
@@ -49,8 +53,10 @@ try {
     })
   }
 
-  assert.ok(fontFaces > 0, 'Built Storybook has no Figtree font faces')
-  console.log('Verified ' + fontFaces + ' bundled Figtree font faces')
+  for (const [family, count] of fontFaces) {
+    assert.ok(count > 0, 'Built Storybook has no ' + family + ' font faces')
+    console.log('Verified ' + count + ' bundled ' + family + ' font faces')
+  }
 } catch (error) {
   console.error(error instanceof Error ? error.message : String(error))
   process.exitCode = 1

@@ -3,7 +3,7 @@
 Change detection against the design source of record (#78, #79, #81). One command, one file:
 
 ```sh
-pnpm figma:sync                # O3DX: Visual exploration — o3world.com's design
+pnpm figma:sync                # 2026 O3DX Website — o3world.com's design
 ```
 
 It answers three questions — **which canonical page frames changed since the last sync, which
@@ -64,29 +64,28 @@ GitHub is written down in that skill. The report schema below is the seam betwee
 
 ## `data/tracked-nodes.json` — what we watch
 
-Hand-maintained: the page frames are promoted from the frame inventory on
-`research/figma-frame-inventory`, the component sets from
+Hand-maintained: the page frames follow the [current verified inventory](../../docs/figma-frames.md), the component sets from
 [`docs/figma-components.md`](../../docs/figma-components.md) — this file is that document's
 machine-readable half.
 
 | Field              | Meaning                                                                       |
 | ------------------ | ----------------------------------------------------------------------------- |
-| `fileKey`          | `RvraLJaZ0zWm8UaD5AJf43` — _O3DX: Visual exploration_                         |
-| `sectionNodeIds`   | `["1632:1510"]`, the Design Concept section — what the probe reads            |
+| `fileKey`          | `RvraLJaZ0zWm8UaD5AJf43` — _2026 O3DX Website_                                |
+| `sectionNodeIds`   | `["1126:1100", "1238:557"]`, the current page canvases — what the probe reads |
 | `probeNodeTypes`   | Optional; what counts as news in this file. Defaults to `["FRAME"]`           |
 | `entries[]`        | `{ nodeId, kind, name, figmaName?, route?, variant?, codeComponent?, note? }` |
 | `ignoredNodeIds[]` | `{ nodeId, name?, note }` — section residents the probe must stay quiet about |
 
 - `nodeId` is a **verified** node id in `1680:2134` form. A share URL's `node-id` is usually a
   child, not the frame, and it uses `-` — both mistakes are caught by `manifest.test.ts`.
-- `name` is the page layer in this project's language (CONTEXT.md), not the Figma layer name: two
-  different frames are called "Insights" in that file and neither is the Insights index.
+- `name` is the page layer in this project's language (CONTEXT.md), not the Figma layer name: the
+  inventory distinguishes the Insights index from insight detail frames.
   `figmaName` records what Figma calls it. For a component set the two are the same string — the
   Figma set name _is_ what this project calls it.
 - `kind: "pageFrame"` carries a `route` and a `variant`; `kind: "componentSet"` carries neither
   (a set is not a breakpoint) and carries a `codeComponent` instead.
-- `variant` is `desktop` (1440) or `mobile` (402). About and Solutions have no mobile frame; that is
-  a real gap in the file, not a missing entry.
+- `variant` is `desktop` (1440) or `mobile` (402). Current mobile coverage gaps are recorded in
+  the frame inventory; do not restore removed frame IDs from older reports.
 
 ### Component sets (#79)
 
@@ -102,7 +101,7 @@ every page frame that instances it.
 - The non-canonical sets are tracked too, `null` and all. They cost one hash each and they are the
   only way a set quietly becoming canonical — someone reworking `Button / Outline` before a frame
   uses it — shows up at all.
-- Two entries are bare `COMPONENT`s, not sets (`NavBar` `1710:2271`, `Footer` `1280:1885`). They
+- Bare `COMPONENT`s such as Standard Content Lockup (`3720:62493`) also
   ride in the same lane: `kind: "componentSet"` means "a library node, not a page".
 
 ## `data/asset-manifest.json` — where every seed asset came from

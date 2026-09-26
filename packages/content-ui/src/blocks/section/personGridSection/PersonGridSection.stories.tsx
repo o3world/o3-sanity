@@ -1,6 +1,7 @@
 import type { ComponentProps } from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
+import { expect } from 'storybook/test'
 
 import { seededSectionArgs } from '../../../testing/seedContent'
 
@@ -24,7 +25,7 @@ const meta = {
   component: PersonGridSection,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('1927:6435'),
+    design: figmaDesign('3771:80239'),
   },
 } satisfies Meta<typeof PersonGridSection>
 
@@ -39,11 +40,27 @@ type People = NonNullable<ComponentProps<typeof PersonGridSection>['people']>
 /** The six people the About seed references. */
 export const AsSeeded: Story = {
   args: seededSectionArgs('about', 'personGridSection'),
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement, args }) => {
+    const name = canvasElement.querySelector('li p')!
+    await expect(name).toHaveTextContent(args.people![0]!.name!)
+    await expect(getComputedStyle(name).fontFamily).toContain('Figtree')
+    await expect(parseFloat(getComputedStyle(name).fontSize)).toBeCloseTo(24, 1)
+    await expect(parseFloat(getComputedStyle(name).lineHeight)).toBeCloseTo(34, 1)
+    await expect(name.nextElementSibling!.textContent).toBe(args.people![0]!.title!)
+  },
 }
 
 export const Mobile: Story = {
   args: seededSectionArgs('about', 'personGridSection'),
   globals: { viewport: { value: 'mobile' } },
+  parameters: { design: figmaDesign('3883:16545') },
+  play: async ({ canvasElement }) => {
+    const name = canvasElement.querySelector('li p')!
+    await expect(getComputedStyle(name).fontFamily).toContain('Figtree')
+    await expect(parseFloat(getComputedStyle(name).fontSize)).toBeCloseTo(20, 1)
+    await expect(parseFloat(getComputedStyle(name).lineHeight)).toBeCloseTo(26, 1)
+  },
 }
 
 /** Four — the second row runs short, and must stay left-aligned to the grid. */

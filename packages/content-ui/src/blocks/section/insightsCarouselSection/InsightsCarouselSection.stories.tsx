@@ -45,7 +45,7 @@ export const LatestFeed: Story = {
     const heading = within(canvasElement).getByRole('heading', { level: 2 })
     await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(64, 1)
     await expect(parseFloat(getComputedStyle(heading).lineHeight)).toBeCloseTo(76, 1)
-    await expect(getComputedStyle(heading).fontWeight).toBe('300')
+    await expect(getComputedStyle(heading).fontWeight).toBe('400')
   },
 }
 
@@ -83,8 +83,8 @@ export const Mobile: Story = {
   globals: { backgrounds: { value: 'bone' }, viewport: { value: 'mobile' } },
   play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { level: 2 })
-    await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(40, 1)
-    await expect(getComputedStyle(heading).fontWeight).toBe('300')
+    await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(38, 1)
+    await expect(getComputedStyle(heading).fontWeight).toBe('400')
     await expect(heading.scrollWidth).toBeLessThanOrEqual(heading.clientWidth)
   },
 }
@@ -97,6 +97,6 @@ export const KeepReading: Story = {
   play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { level: 2 })
     await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(48, 1)
-    await expect(getComputedStyle(heading).fontWeight).toBe('300')
+    await expect(getComputedStyle(heading).fontWeight).toBe('400')
   },
 }

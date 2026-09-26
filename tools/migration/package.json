@@ -17,6 +17,7 @@
     "drift": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/drift.ts --with-user-token --",
     "verify": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/verify.ts --with-user-token --",
     "typecheck": "tsc --noEmit",
+    "about-hero-alignment": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/aboutHeroAlignment.ts --with-user-token --",
     "about-heading": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/aboutHeading.ts --with-user-token --"
   },
   "dependencies": {

@@ -62,11 +62,9 @@ describe('the quote band’s molecule decoration', () => {
     expect(html).toContain('Business Leader, Global Health Brand')
   })
 
-  it('centres the column the way the set does, and opens the gap at 1440', () => {
-    // `2748:4839` / `2748:4840` are both centred; the column gap is 24 at 402
-    // (`2748:4689`) and 48 at 1440 (`2748:4838`).
+  it('centres the column with the current shared attribution gap', () => {
     expect(html).toContain('text-center')
-    expect(html).toMatch(/gap-6[^"]*lg:gap-12/)
+    expect(html).toContain('gap-12')
   })
 
   it('sets the attribution as the eyebrow the set draws', () => {

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, within } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 import { BrandMark } from '@o3/ui'
 
@@ -6,28 +7,13 @@ import { SITE_SETTINGS, STORY_YEAR } from '../testing/seedContent'
 
 import { SiteFooter } from './SiteFooter'
 
-/**
- * The footer, built to the `Footer` component (`1280:1885`, mobile
- * `2225:2671`) — black, `64px 96px`, with the `ink` 'O' bleeding off its left
- * edge.
- *
- * Rendered from the real committed Site Settings document. Every string comes
- * from data (#19); the component decides only the year and the arrangement —
- * so the stories that matter are the ones where a group is missing, because
- * that is the only thing the component gets to have an opinion about.
- *
- * Figma draws three peer columns — Company, Socials, Everything else. Socials
- * is a separate schema field rather than a `footerGroup` (its links are
- * external and need `rel="noreferrer"`), so it is spliced into the frame's
- * position rather than appended after the authored groups. `OneGroup` is where
- * that splice is visible.
- */
+/** Current footer with authored links and app-owned companion-brand marks. */
 const meta = {
   title: 'Chrome/SiteFooter',
   component: SiteFooter,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('1280:1885'),
+    design: figmaDesign('3720:62172'),
   },
   // The mark comes from the app (#228) — O3's here, tight-bounded and taking
   // the footer's white through `currentColor` (`1280:1856`).
@@ -42,15 +28,70 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const AsAuthored: Story = {}
+export const AsAuthored: Story = {
+  globals: { backgrounds: { value: 'ink' }, viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const footer = canvasElement.querySelector('footer')!
+    await expect(getComputedStyle(footer).paddingTop).toBe('128px')
+    await expect(getComputedStyle(footer).paddingBottom).toBe('64px')
+    const nav = within(canvasElement).getByRole('navigation', { name: 'Footer' })
+    const copy = nav.parentElement!
+    await expect(copy.getBoundingClientRect().width).toBe(628)
+    await expect(copy.getBoundingClientRect().left - footer.getBoundingClientRect().left).toBe(716)
+    await expect(getComputedStyle(copy).gap).toBe('32px')
+    await expect(getComputedStyle(nav).gap).toBe('32px')
+    await expect(getComputedStyle(copy.parentElement!).paddingBottom).toBe('43px')
+    const watermarks = footer.querySelectorAll(':scope > svg')
+    await expect(watermarks.length).toBe(2)
+    await expect(
+      watermarks[0]!.getBoundingClientRect().left - footer.getBoundingClientRect().left,
+    ).toBe(-149)
+    await expect(
+      watermarks[1]!.getBoundingClientRect().left - footer.getBoundingClientRect().left,
+    ).toBe(931)
+  },
+}
 
 export const PropertyLogos: Story = {
   args: { utilityNavItems: SITE_SETTINGS?.utilityNavItems },
 }
 
-/** `2225:2671` — the 402 arrangement, where the 'O' centres on the left edge. */
+/** Current mobile footer (3726:68508). */
 export const Mobile: Story = {
+  args: { utilityNavItems: SITE_SETTINGS?.utilityNavItems },
   globals: { backgrounds: { value: 'ink' }, viewport: { value: 'mobile' } },
+  parameters: {
+    design: figmaDesign('3726:68508'),
+    viewport: {
+      options: { mobile: { name: 'Mobile', styles: { width: '402px', height: '874px' } } },
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const nav = within(canvasElement).getByRole('navigation', { name: 'Footer' })
+    const copy = nav.parentElement!
+    const upper = copy.parentElement!
+    const container = upper.parentElement!
+    await expect(getComputedStyle(upper).gap).toBe('24px')
+    await expect(getComputedStyle(copy).gap).toBe('64px')
+    await expect(getComputedStyle(container).gap).toBe('64px')
+    await expect(getComputedStyle(nav).paddingBottom).toBe('32px')
+    const footer = nav.closest('footer')!
+    const watermarks = footer.querySelectorAll(':scope > svg')
+    await expect(
+      watermarks[0]!.getBoundingClientRect().left - footer.getBoundingClientRect().left,
+    ).toBe(-668)
+    await expect(
+      watermarks[1]!.getBoundingClientRect().left - footer.getBoundingClientRect().left,
+    ).toBe(412)
+    const company = nav.children[0]!.getBoundingClientRect()
+    const socials = nav.children[1]!.getBoundingClientRect()
+    const brands = nav.children[2]!.getBoundingClientRect()
+    await expect(company.width).toBe(169)
+    await expect(socials.top).toBe(company.top)
+    await expect(socials.left - company.right).toBe(32)
+    await expect(brands.top - Math.max(company.bottom, socials.bottom)).toBe(64)
+    await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
+  },
 }
 
 /** One authored group: Socials still has to land in the frame's middle column. */

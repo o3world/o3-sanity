@@ -255,7 +255,7 @@ describe('the homepage at 402 (ADR 0006)', () => {
     // Matched on the row's own class attribute, because the platforms tab row
     // (`PanelRail`) also wraps below `lg` and would answer for this one in a
     // document-wide probe.
-    const row = html.match(/<ul[^>]*class="([^"]*ml-px[^"]*)"/)?.[1] ?? ''
+    const row = html.match(/<ul[^>]*class="([^"]*animate-marquee[^"]*)"/)?.[1] ?? ''
     expect(row, 'the partner strip was not rendered').not.toBe('')
     expect(row).toContain('flex-nowrap')
     expect(row).not.toContain('flex-wrap')
@@ -265,15 +265,6 @@ describe('the homepage at 402 (ADR 0006)', () => {
     // exact: `w-max` at any width would fail it, prefixed or not.
     expect(row).toContain('shrink-0')
     expect(html).not.toContain('w-max')
-  })
-
-  it('sizes the partner plates from the 1440 row, stepping down with the wrap', () => {
-    // 280 square with 64px of side padding at 1440 (`1864:2395`); the smaller
-    // steps below `lg` follow the wrap, not a frame.
-    const plate = html.match(/<li class="([^"]*lg:size-\[280px\][^"]*)"/)?.[1] ?? ''
-    expect(plate, 'no partner plate was rendered').not.toBe('')
-    expect(plate).toContain('size-[168px]')
-    expect(plate).toContain('border-line')
   })
 
   it('desaturates the partner marks', () => {
@@ -288,7 +279,7 @@ describe('the homepage at 402 (ADR 0006)', () => {
     // it is `textAlignHorizontal: CENTER`; `2089:4316` centres its column too.
     // Matched on the hero's own class attribute — `items-center` alone is on
     // half the cards on the page and would pass without the hero.
-    const heroClasses = html.match(/class="([^"]*pb-\[247px\][^"]*)"/)?.[1] ?? ''
+    const heroClasses = html.match(/class="([^"]*pb-\[237px\][^"]*)"/)?.[1] ?? ''
     expect(heroClasses, 'the hero band was not found at all').not.toBe('')
     expect(heroClasses).toContain('items-center')
     expect(heroClasses).toContain('text-center')
@@ -296,56 +287,38 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(heroClasses).not.toContain('text-left')
   })
 
-  it('uses the approved hero top spacing and preserves the frame bottom spacing', () => {
-    // The foot is the frame's: 247 below at 402 (`1814:1622` in an 874 band),
-    // 310 at 1440 (`2209:2223` ending at y 630 in a 940 band). Mobile retains
-    // 160px above; September 8 feedback sets desktop to 200px.
-    const heroClasses = html.match(/class="([^"]*pb-\[247px\][^"]*)"/)?.[1] ?? ''
-    expect(heroClasses).toContain('pt-40')
-    expect(heroClasses).toContain('lg:pt-[200px]')
-    expect(heroClasses).toContain('lg:pb-[310px]')
+  it('uses the current Figma hero spacing at both endpoints', () => {
+    // September frames: 3720:60473 at 1440 and 1814:1618 at 402.
+    const heroClasses = html.match(/class="([^"]*pb-\[237px\][^"]*)"/)?.[1] ?? ''
+    expect(heroClasses).toContain('pt-[173px]')
+    expect(heroClasses).toContain('lg:pt-[254px]')
+    expect(heroClasses).toContain('lg:pb-[259px]')
   })
 
   it('sizes the three statements from the step its own frame reads', () => {
-    /*
-     * ADR 0006's amendment (2026-08-02). The 30px floor was read off
-     * `1814:1684` — the PULL QUOTE — and applied to `--text-hero`, which three
-     * bands shared. Two of them read 36 at 402: the hero headline
-     * `1814:1624` (36/40) and the partners statement `1814:1894` (36/1.25);
-     * both were 64 at 1440, so the quote needed a second clamp.
-     *
-     * TWO SHARE IT NOW, NOT THREE. The 2026-08 restructure (#89) took the
-     * partners band off the 64px step entirely: `1864:2393` is `Heading/h2`,
-     * 48/58, which is `display-xl` — so the band that used to pull this clamp
-     * around no longer touches it.
-     *
-     * Asserted on each band's own class attribute, because `text-hero`
-     * appearing anywhere in the document would pass while the quote still
-     * dragged the floor down.
-     */
+    // Current Home separates its hero, section heading and Figtree quote roles.
     const heroHeadline = html.match(/<h1 class="([^"]*)"/)?.[1] ?? ''
-    const partnersHeading = html.match(/class="([^"]*max-w-\[1026px\][^"]*)"/)?.[1] ?? ''
+    const partnersHeading =
+      html.match(
+        /<section[^>]*class="[^"]*surface-wash-warm[^"]*"[^>]*>.*?<h2 class="([^"]*)"/s,
+      )?.[1] ?? ''
     const pullQuote = html.match(/<blockquote[^>]*>.*?<p class="([^"]*)"/s)?.[1] ?? ''
 
     expect(heroHeadline, 'the hero h1 was not found at all').not.toBe('')
     expect(partnersHeading, 'the partners heading was not found at all').not.toBe('')
     expect(pullQuote, 'the pull quote was not found at all').not.toBe('')
 
-    // 36 at 402 → 64 at 1440.
-    expect(heroHeadline).toContain('text-hero')
+    // Newsreader Light: 42/50 at 402, 72/86 at 1440.
+    expect(heroHeadline).toContain('text-hero-xl')
 
-    // 48/58 Light at 1440 — the workhorse section-headline step — stepped down
-    // to the 36/44 `2975:8086` reads at 402, which the token's 40px floor is a
-    // width short of.
+    // Newsreader Regular: 38/42 at 402, 48/58 at 1440.
     expect(partnersHeading).toContain('text-display-xl')
-    expect(partnersHeading).toContain('font-light')
-    expect(partnersHeading).toContain('max-lg:text-[36px]')
-    expect(partnersHeading).toContain('max-lg:leading-[44px]')
+    expect(partnersHeading).not.toContain('font-light')
     expect(partnersHeading).not.toContain('text-hero')
 
-    // 36 at 402 → 64 at 1440 (`2748:4839` / `2748:4715`). It carries the
-    // hero's numbers on this brand but keeps its own name — see the token.
+    // Quotes retain Figtree while headings use Newsreader.
     expect(pullQuote).toContain('text-quote')
+    expect(pullQuote).toContain('font-sans')
     expect(pullQuote).not.toContain('text-hero')
   })
 
@@ -360,27 +333,7 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(variantsOf(html, 'gap-12')).toContain('lg:gap-12')
   })
 
-  it('holds the partners band to `2975:8083`’s own rhythm', () => {
-    // 128 above and below at both widths, and 24 between the band's three
-    // parts at 402 against the 1440 frame's 128. The text block's own 32 is
-    // flat — `2975:8084` and `1864:2391` gap the same.
-    const partners = html.match(/<section[^>]*class="([^"]*surface-wash-warm[^"]*)"/)?.[1] ?? ''
-    expect(partners, 'the partners band was not found at all').not.toBe('')
-    expect(partners).toContain('py-band-md')
-    expect(partners).toContain('gap-6')
-    expect(partners).toContain('lg:gap-band-md')
-    expect(partners).not.toContain('pt-band-sm')
-  })
-
-  it('steps the closer’s standfirst down at 402', () => {
-    // 18/22 at −0.8 tracking (`1814:1778`) against the 24px the 1440 band
-    // draws — `text-lead`'s 20px floor is a step too big for it. The ink fade
-    // that dissolves the sphere into the footer steps with it: 64 at 402
-    // (`1928:6595`), 172 at 1440 (`1928:6596`).
-    const closer = html.match(/<p class="([^"]*text-on-ink-subtle[^"]*)"/)?.[1] ?? ''
-    expect(closer, 'the closer standfirst was not found at all').not.toBe('')
-    expect(closer).toContain('max-lg:text-[18px]')
-    expect(closer).toContain('max-lg:leading-[22px]')
+  it('retains the closer’s responsive orbital fade', () => {
     expect(html).toContain('h-16 lg:h-[172px]')
   })
 

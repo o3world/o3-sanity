@@ -3,7 +3,6 @@
 import { useLayoutEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { NAV_INK_TARGET, settleNavInk } from '@o3/content-ui/chrome/nav-ink'
-import { syncNavPin } from '@o3/content-ui/chrome/nav-pin'
 import type { GlobeSceneElement } from '@/components/globe/globe-entrance'
 import { readFeedPath } from '@/content/documents/insight/feedPath'
 
@@ -29,7 +28,6 @@ export function RouteArrival() {
 
     const header = document.getElementById(NAV_INK_TARGET)
     if (header) {
-      syncNavPin(header)
       settleNavInk(header)
     }
 

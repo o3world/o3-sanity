@@ -2,10 +2,12 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { expect, within } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 
+import '@/components/globe/scene.css'
+
 import { PageMockup } from '../PageMockup'
 
 /**
- * `/` — the canonical Home frame (`1680:2134`, mobile `1814:1618`).
+ * `/` — the canonical Home frame (`3720:60473`, mobile `1814:1618`).
  *
  * Eight bands off `data/seed/page/index.json`, in the seed's order: the
  * orbital hero, the partners strip, the case showcase, the pull quote, the two
@@ -22,7 +24,7 @@ const meta = {
   component: PageMockup,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('1680:2134'),
+    design: figmaDesign('3720:60473'),
   },
 } satisfies Meta<typeof PageMockup>
 
@@ -49,7 +51,23 @@ async function expectAlignedNavMark(canvasElement: HTMLElement, targetSize: numb
 export const Desktop: Story = {
   args: { page: 'index' },
   globals: { viewport: { value: 'desktop' } },
-  play: async ({ canvasElement }) => expectAlignedNavMark(canvasElement, 48, 8.6),
+  play: async ({ canvasElement }) => {
+    await expectAlignedNavMark(canvasElement, 80, 24.6)
+    // Figma's autosized Newsreader line is 1076px (3720:60482). A weight-only
+    // font fixes optical size at 16 and incorrectly narrows it to 1030px.
+    await document.fonts.ready
+    const heroLine = canvasElement.querySelector('.hero-lead h1 > span > span')!
+    await expect(Math.abs(heroLine.getBoundingClientRect().width - 1076)).toBeLessThan(2)
+    const cardCopy = canvasElement.querySelectorAll(
+      '.rounded-case-card h3, .rounded-case-card .text-display-xl',
+    )
+    await expect(cardCopy.length).toBeGreaterThan(0)
+    for (const node of cardCopy) {
+      await expect(getComputedStyle(node).fontFamily).toContain('Figtree')
+    }
+    const footerStatement = canvasElement.querySelector('footer .text-display-xl')!
+    await expect(getComputedStyle(footerStatement).fontFamily).toContain('Newsreader')
+  },
 }
 
 /**
@@ -63,5 +81,29 @@ export const Mobile: Story = {
   args: { page: 'index' },
   globals: { viewport: { value: 'mobile' } },
   parameters: { design: figmaDesign('1814:1618') },
-  play: async ({ canvasElement }) => expectAlignedNavMark(canvasElement, 64),
+  play: async ({ canvasElement }) => expectAlignedNavMark(canvasElement, 48, 8.6),
+}
+
+/** The app's capped sphere must remain inside the hero crop on large monitors. */
+export const WideGlobe: Story = {
+  args: { page: 'index' },
+  globals: { viewport: { value: 'ultrawide' } },
+  parameters: {
+    viewport: {
+      options: {
+        ultrawide: { name: 'Wide desktop', styles: { width: '2560px', height: '1100px' } },
+      },
+    },
+  },
+  render: (args) => (
+    <div data-spatial-layout>
+      <PageMockup {...args} />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const hero = canvasElement.querySelector('.hero-band')!.getBoundingClientRect()
+    const globe = canvasElement.querySelector('.hero-lag > div')!.getBoundingClientRect()
+    await expect(globe.width).toBeLessThanOrEqual(1728)
+    await expect(hero.bottom - globe.top).toBeCloseTo(288, 0)
+  },
 }

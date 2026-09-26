@@ -607,6 +607,7 @@ export type QuoteSection = {
   quote?: string
   attribution?: string
   decoration?: 'orbs' | 'molecule' | 'none'
+  size?: 'default' | 'small'
   surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
@@ -2899,6 +2900,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
+        size?: 'default' | 'small'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -4130,6 +4132,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
+        size?: 'default' | 'small'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -5550,6 +5553,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
+        size?: 'default' | 'small'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -6938,6 +6942,7 @@ export type PAGE_QUERY_RESULT = {
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
+        size?: 'default' | 'small'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'

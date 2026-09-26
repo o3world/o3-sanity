@@ -1,31 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
+import { expect, within } from 'storybook/test'
 
 import { CollectionHero } from './collection-hero'
 import { Eyebrow } from './eyebrow'
 import { OrbitalSphere } from './orbital-sphere'
 import { SectionBackground } from './section-shell'
 
-/**
- * The interior-page opener, in the compositions the canonical frames draw it
- * in. The first stories are the original band — `ink-warm`, 164px of clearance
- * for the floating pill — differing only in `align` and what hangs behind it.
- * The `Interior*` ones are the 2026-08 `Interior Hero` set that replaces it on
- * the redesigned frames: rail-absent and rail-present, the two surfaces, and
- * the two things that can sit behind it. Put `Interior` beside `Work` and every
- * difference between the generations is visible at once, which is the point of
- * keeping both.
- *
- * Stories pin the ink background, because this band paints its own dark and a
- * white canvas behind it hides where the band actually ends. `InteriorWhite`
- * pins white for the same reason in reverse.
- */
 const meta = {
   title: 'UI/CollectionHero',
   component: CollectionHero,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('1634:1181'),
+    design: figmaDesign('2107:1051'),
   },
   globals: { backgrounds: { value: 'ink' } },
 } satisfies Meta<typeof CollectionHero>
@@ -33,63 +20,31 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/**
- * `/work` (`1634:1181`) — the shape the component was built to: eyebrow and a
- * 48px headline left in a 588px measure, standfirst pinned right in 395px.
- */
-export const Work: Story = {
-  args: {
-    eyebrow: 'Work',
-    heading: 'The problems behind the problems.',
-    subheading:
-      'Every engagement here started as something else. What follows is what we found once we looked past the brief.',
-  },
-}
-
-/**
- * `/about` (`1924:5344`) — the same left-aligned shape with the sphere hung
- * off the right edge, where the standfirst would otherwise sit. The decoration
- * is a slot rather than a prop, which is why the hero itself knows nothing
- * about spheres.
- */
-export const AboutWithSphere: Story = {
-  args: {
-    eyebrow: 'About',
-    heading: 'Senior people, on your problem, from the first conversation.',
-    decoration: (
-      <OrbitalSphere className="-z-10 hidden lg:bottom-[-30%] lg:right-[-14%] lg:block lg:w-[720px]" />
-    ),
-  },
-}
-
-/**
- * `/insights` (`2336:4477`) — the 2026-08 `Interior Hero` component
- * (`2107:1051`), which the redesigned frames instance, in its base shape: no
- * rail, so the standfirst stacks under the headline. Against `Work` above,
- * every difference the set carries is visible at once — `ink` rather than
- * `ink-warm`, 192px of clearance rather than 164, a brand-red 18px kicker, and
- * a 64/76 Light headline where the older band draws the 48px section step.
- */
 export const Interior: Story = {
   args: {
-    variant: 'interior',
     eyebrow: 'Insights',
     heading: 'Learn about what drives our experiences.',
     subheading:
       'Looking for some firsthand knowledge from our world? Check out our in-depth thoughts about the industry today, our culture at O3, the future of AI and digital experiences, and other relevant topics.',
   },
-  parameters: { design: figmaDesign('2336:4477') },
+  globals: { viewport: { value: 'desktop' } },
+  parameters: { design: figmaDesign('2107:1051') },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', { level: 1 })
+    const section = heading.closest('section')!
+    await expect(getComputedStyle(section).paddingTop).toBe('240px')
+    await expect(getComputedStyle(section).paddingLeft).toBe('96px')
+    await expect(getComputedStyle(section).paddingBottom).toBe('64px')
+    await expect(getComputedStyle(heading).fontFamily).toContain('Newsreader')
+    await expect(getComputedStyle(heading).fontWeight).toBe('400')
+    await expect(heading.nextElementSibling!.getBoundingClientRect().width).toBe(608)
+    await expect(getComputedStyle(heading.previousElementSibling!).color).toBe('rgb(255, 255, 255)')
+    await expect(getComputedStyle(heading.nextElementSibling!).color).toBe('rgb(170, 166, 158)')
+  },
 }
 
-/**
- * `/partners/sanity` (`2401:3185`) — the same set with its right rail filled.
- * The standfirst does not move to make room for it, which is the whole
- * difference from the older band; what does move is the headline, which steps
- * to 48/58 Light because the rail has taken the width the 64 needs.
- */
 export const InteriorWithRail: Story = {
   args: {
-    variant: 'interior',
     eyebrow: 'Technology partners',
     heading: 'Sanity Development Partner',
     subheading:
@@ -110,33 +65,24 @@ export const InteriorWithRail: Story = {
   parameters: { design: figmaDesign('2401:3185') },
 }
 
-/**
- * `/about` (`2960:6876`) — "Interior Hero – White", the one instance of the
- * set drawn on a light band. The headline goes to ink; the kicker stays brand
- * red and the standfirst stays #AAA69E, the same two fills the ink instances
- * carry. Nothing else about the composition moves.
- */
 export const InteriorWhite: Story = {
   args: {
-    variant: 'interior',
     surface: 'white',
     eyebrow: 'About O3',
     heading: 'The model is the story.',
     subheading: 'Senior people, on your problem, from the first conversation.',
   },
-  parameters: { design: figmaDesign('2960:6876') },
+  parameters: { design: figmaDesign('3754:78274') },
   globals: { backgrounds: { value: 'white' } },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', { level: 1 })
+    await expect(getComputedStyle(heading.previousElementSibling!).color).toBe('rgb(201, 14, 0)')
+    await expect(getComputedStyle(heading.nextElementSibling!).color).toBe('rgb(85, 82, 78)')
+  },
 }
 
-/**
- * The globe behind the set's own instances (`2846:4465`) is the ORBITAL
- * SPHERE, drawn rather than exported: the node is a screen capture of it with
- * a mouse cursor in the pixels. So it arrives through `decoration`, like every
- * other drawn ornament, and scales and turns.
- */
 export const InteriorWithGlobe: Story = {
   args: {
-    variant: 'interior',
     eyebrow: 'Work',
     heading: 'The problems behind the problems.',
     decoration: (
@@ -145,16 +91,8 @@ export const InteriorWithGlobe: Story = {
   },
 }
 
-/**
- * The band over a picture. `background` takes a `SectionBackground`, which lays
- * the media full-bleed and then the band's own colour over it, so the copy
- * keeps the contrast its surface promised. It sits under `decoration`, so a
- * sphere and a picture compose rather than replace each other. The stand-in
- * here is a flat plate; on a page it is the editor's upload.
- */
 export const InteriorOverPicture: Story = {
   args: {
-    variant: 'interior',
     eyebrow: 'Solutions',
     heading: 'Strategy, design, engineering and AI under one roof.',
     background: (
@@ -165,11 +103,6 @@ export const InteriorOverPicture: Story = {
   },
 }
 
-/**
- * `/solutions` (`1925:6141`) — centred, which takes the headline to **60px**
- * in a 650px measure. The size follows the alignment because that is what the
- * two frames do; there is no centred 48px hero anywhere in the file.
- */
 export const Centred: Story = {
   args: {
     eyebrow: 'Solutions',
@@ -178,26 +111,48 @@ export const Centred: Story = {
   },
 }
 
-/**
- * A subheading with `align="center"` renders nothing — the centred frame has
- * no standfirst, and the component drops it rather than inventing a placement
- * for it. This story exists so that stays deliberate.
- */
-export const CentredIgnoresSubheading: Story = {
+export const CentredWithSubheading: Story = {
   args: {
-    eyebrow: 'Solutions',
-    heading: 'Centred heroes carry no standfirst.',
-    subheading: 'This text is deliberately not rendered.',
+    eyebrow: 'About O3',
+    heading:
+      'A digital product consultancy that has spent over 20 years prioritizing quality over scale',
+    subheading: 'Senior people, on your problem, from the first conversation.',
     align: 'center',
+    surface: 'paper',
+  },
+  globals: { viewport: { value: 'desktop' } },
+  parameters: { design: figmaDesign('3754:78488') },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', { level: 1 })
+    await expect(getComputedStyle(heading).textAlign).toBe('center')
+    await expect(heading.parentElement!.getBoundingClientRect().width).toBe(982)
+    await expect(
+      within(canvasElement).getByText(
+        'Senior people, on your problem, from the first conversation.',
+      ),
+    ).toBeVisible()
   },
 }
 
-/** Headline alone — no eyebrow, no standfirst. The band must not collapse. */
+export const CentredMobile: Story = {
+  ...CentredWithSubheading,
+  globals: { viewport: { value: 'mobile' } },
+  parameters: { design: figmaDesign('3883:16496') },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', { level: 1 })
+    await expect(getComputedStyle(heading).textAlign).toBe('center')
+    await expect(heading.parentElement!.getBoundingClientRect().width).toBe(
+      document.documentElement.clientWidth - 32,
+    )
+    await expect(getComputedStyle(heading.closest('section')!).paddingTop).toBe('192px')
+    await expect(getComputedStyle(heading.closest('section')!).paddingBottom).toBe('64px')
+  },
+}
+
 export const HeadingOnly: Story = {
   args: { heading: 'Just the headline.' },
 }
 
-/** Interior copy is visible immediately, without its own entrance animation. */
 export const WorkStatic: Story = {
   args: { ...Interior.args, eyebrow: 'Work' },
   play: async ({ canvasElement }) => {
@@ -221,5 +176,19 @@ export const WorkStaticWithoutEyebrow: Story = {
       expect(getComputedStyle(part).animationName).toBe('none')
       expect(getComputedStyle(part).opacity).toBe('1')
     }
+  },
+}
+
+export const InteriorMobile: Story = {
+  ...Interior,
+  globals: { viewport: { value: 'mobile' } },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', { level: 1 })
+    await expect(getComputedStyle(heading.closest('section')!).paddingTop).toBe('208px')
+    await expect(getComputedStyle(heading.closest('section')!).paddingBottom).toBe('64px')
+    await expect(getComputedStyle(heading.closest('section')!).paddingLeft).toBe('16px')
+    await expect(getComputedStyle(heading).fontSize).toBe('40px')
+    await expect(getComputedStyle(heading).lineHeight).toBe('44px')
+    await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
   },
 }

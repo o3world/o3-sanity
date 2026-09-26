@@ -9,46 +9,8 @@ import { ButtonLink } from '../../../ButtonLink'
 type CtaSectionProps = SectionProps<'ctaSection'>
 
 /**
- * Section block: the closing CTA band.
- *
- * ```
- * 1440 × 790, the decoration behind it — `1680:2132`
- *   copy      600px column centred, gap 18
- *     heading 64px (--text-cta, the 2026-08 shared CTA component's step) at
- *     92% white, centred
- *     body    24px at 60% white in a 524px measure
- *   button    20 under the copy, Button Theme=White
- *
- * 402 × 616 — `1814:1775`, filed in the frame under "ClaudeTest"
- *   128 top and bottom, the copy column the full 362, gap 53 to the button
- *     heading 36/44 — `--text-cta`'s own floor
- *     body    18/22 at −0.8 tracking, a step under `--text-lead`'s floor
- * ```
- *
- * **Only the decoration is the `CTA` component's.** The component (`2124:72`,
- * set `2177:1354`) measures its own band differently: 1248 across to the 96px
- * gutter rather than a 600 column, the body fixed at 580, the copy gapped 24
- * and the button 48, all inside 192 of vertical padding. Taking those numbers
- * repaints every closer's typography, and the design is walking the other way
- * — most page frames now draw a copy of `1680:2132` rather than instance the
- * component, a census `ctaSectionKnobs` keeps — so this band stays measured
- * from the band above.
- *
- * **`orbs` is the pre-redesign band (`1680:2132`), and it is a pair.** The
- * sphere and the 172px `--gradient-ink-fade` strip along the foot
- * (`1928:6596`) are one composition: the strip dissolves the sphere's lower
- * limb into the `#030303` footer, so the two dark areas read as one field
- * rather than two bands that happen to touch. The component draws neither, so
- * neither the molecule nor `none` carries a strip — there is no limb to hide
- * and no colour step to soften.
- *
- * Home is the one page whose seed pins it (#163).
- *
- * **A picture is the third composition, and it is `backgroundMedia`** (#303) —
- * the field every section already carries, laid full-bleed the way the hero
- * and the rail band lay theirs. It is not a fourth decoration: a band either
- * sits on an image or hangs a glyph in front of its own ink, and both cannot
- * be the background at once, so a picture silences whatever the knob says.
+ * Closing CTA foreground from the current Home instances (3720:62172 / 3726:68508).
+ * Authored backgrounds and the existing orbital/molecule motion remain independent.
  */
 export function CtaSection({
   heading,
@@ -74,7 +36,7 @@ export function CtaSection({
         {...surfaceAttrs('ink')}
         /* `cta-band` declares the parallax clock the sphere's layer reads;
            it does nothing on its own. See tokens/motion.css. */
-        className={`cta-band bg-ink-deep px-gutter text-white ${DECORATED_BAND_CLASS}`}
+        className={`cta-band bg-ink-deep px-4 text-white lg:px-24 ${DECORATED_BAND_CLASS}`}
       >
         {picture}
         {/*
@@ -170,25 +132,14 @@ export function CtaSection({
           className="left-1/2 top-0 w-[54%] min-w-[420px] -translate-x-1/2 -translate-y-[8.24%] opacity-15"
         />
 
-        {/*
-         * Two nested columns, because the frame gaps them differently: 18
-         * inside the copy block (`1680:2087`) and 20 between that block and
-         * the button (`1680:2090`). One flat column would gap the button like
-         * a third line of copy. At 402 the copy block keeps its 18 and the
-         * button falls 53 clear of it (`1814:1775`).
-         */}
-        <div className="py-band-lg relative z-10 mx-auto flex max-w-[600px] flex-col items-center gap-[53px] text-center lg:gap-5">
+        <div className="relative z-10 mx-auto flex max-w-[600px] flex-col items-center gap-12 pb-16 pt-32 text-center lg:pb-48">
           {heading || body ? (
-            <div className="flex flex-col items-center gap-[18px]">
+            <div className="flex flex-col items-center gap-8">
               {heading ? (
                 <h2 className="text-cta font-display text-on-ink text-balance">{heading}</h2>
               ) : null}
               {body ? (
-                // 18/22 at −0.8 tracking at 402 (`1814:1778`) — a step under
-                // `text-lead`'s 20px floor, so the band names it.
-                <p className="text-lead text-on-ink-subtle max-w-[524px] text-balance max-lg:text-[18px] max-lg:leading-[22px] max-lg:tracking-[-0.8px]">
-                  {body}
-                </p>
+                <p className="text-lead text-on-ink-subtle max-w-[524px] text-balance">{body}</p>
               ) : null}
             </div>
           ) : null}

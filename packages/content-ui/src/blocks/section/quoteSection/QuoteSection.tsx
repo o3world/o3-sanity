@@ -1,3 +1,6 @@
+import { stegaClean } from '@sanity/client/stega'
+import { cn } from '@o3/ui/lib/utils'
+import { cva } from 'class-variance-authority'
 import { OrbitalSphere, SURFACE_CLASS, SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 
@@ -7,43 +10,18 @@ import { resolveSurface } from '../../surface'
 
 type QuoteSectionProps = SectionProps<'quoteSection'>
 
-/**
- * Section block: the pull quote, built to the `Quote` set (`2748:4672`), which
- * Home instances at both widths — `2748:4767` at 1440 × 1012, `2748:4804` at
- * 402 × 804.
- *
- * `192px 96px` at 1440 and `128px 16px` at 402, and inside it a **1034px**
- * column (`--container-content`, node `2748:4838`) with 48px between the two
- * parts, 24px at 402 (`2748:4689`):
- *
- * - **Quote** — `--text-quote`: 64/76 Light at -1px of tracking, 36/44 at 402.
- * - **Attribution** — an eyebrow: 18/24 bold uppercase on 0.1em of
- *   tracking in `--color-fg-muted` (#76746F, variable `2083:1073`), 16/20 at
- *   402. `eyebrow-lg`, the same step "OUR PARTNERS" rides.
- *
- * Both are **centred**, on a centred column (`2748:4839`, `2748:4840`).
- *
- * The quotation marks belong to the frame's string, so they are added here
- * rather than stored: an editor should not have to remember to type the
- * glyphs, and a typed `"` would render as a straight quote.
- *
- * The quote is solid `text-fg` — the set fills it #232323, Figma's
- * `text/default` (`2748:4839`). The case-study detail's loose band
- * (`2250:1527`) still draws `--gradient-statement`; that band is a generation
- * behind this set and the set wins (Nick, 2026-08-25). The gradient token
- * survives on the partners intro.
- *
- * **`decoration: 'molecule'`** swaps the two spheres for the molecule mark —
- * 776px at 10%, hung off the band's bottom-left corner and clipped by its
- * `overflow-hidden`. The offsets are read off the two Home instances.
- *
- * It is the one decoration on this band that survives 402: the mobile frame
- * hangs the full 776px off the corner and lets the gutter clip it, where the
- * spheres would fill the band instead of sitting behind it.
- */
-export function QuoteSection({ quote, attribution, decoration, surface }: QuoteSectionProps) {
+const quoteVariants = cva('text-fg text-balance font-sans', {
+  variants: {
+    size: { default: 'text-quote', small: 'text-quote-sm' },
+  },
+  defaultVariants: { size: 'default' },
+})
+
+/** Quote set 2748:4672; Home uses Small (3720:60563). Motion stays decoration-owned. */
+export function QuoteSection({ quote, attribution, decoration, surface, size }: QuoteSectionProps) {
   if (!quote) return null
   const resolved = resolveSurface(surface, 'quoteSection')
+  const cleanSize = stegaClean(size) ?? 'default'
   // The spheres and the molecule are alternatives: the band draws one or neither.
   const showOrbs = resolveDecoration(decoration, 'quoteSection') === 'orbs'
 
@@ -51,7 +29,12 @@ export function QuoteSection({ quote, attribution, decoration, surface }: QuoteS
     <SurfaceProvider surface={resolved}>
       <section
         {...surfaceAttrs(resolved)}
-        className={`${SURFACE_CLASS[resolved]} px-gutter py-band-lg ${DECORATED_BAND_CLASS}`}
+        className={cn(
+          SURFACE_CLASS[resolved],
+          DECORATED_BAND_CLASS,
+          'px-4 lg:px-24',
+          cleanSize === 'small' ? 'py-16 lg:py-32' : 'py-band-lg',
+        )}
       >
         <MoleculeDecoration
           decoration={decoration}
@@ -82,8 +65,13 @@ export function QuoteSection({ quote, attribution, decoration, surface }: QuoteS
           </>
         ) : null}
 
-        <blockquote className="max-w-content relative mx-auto flex flex-col gap-6 text-center lg:gap-12">
-          <p className="text-quote font-display text-fg text-balance">&ldquo;{quote}&rdquo;</p>
+        <blockquote
+          className={cn(
+            'relative mx-auto flex w-full flex-col gap-12 text-center',
+            cleanSize === 'small' ? 'max-w-article' : 'max-w-content',
+          )}
+        >
+          <p className={quoteVariants({ size: cleanSize })}>&ldquo;{quote}&rdquo;</p>
           {attribution ? <footer className="eyebrow-lg text-fg-muted">{attribution}</footer> : null}
         </blockquote>
       </section>

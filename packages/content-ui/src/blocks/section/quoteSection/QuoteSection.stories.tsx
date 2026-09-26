@@ -1,51 +1,39 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { stegaEncodeSourceMap } from '@sanity/client/stega'
+import { expect } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 
 import { seededSectionArgs } from '../../../testing/seedContent'
 
 import { QuoteSection } from './QuoteSection'
 
-/**
- * The pull quote, built to the `Quote` set (`2748:4672`) — a centred 1034px
- * column on bone, instanced whole by Home at both widths.
- *
- * The quote is filled with `--gradient-statement`, so it starts at ink and
- * finishes at 40% — **the fade is length-dependent**, which is the whole
- * reason this block has a short story and a long one. On two lines it barely
- * registers; on eight it is the effect.
- *
- * The attribution is the section-level eyebrow: 18/24 bold uppercase in
- * `--color-fg-muted` (`2748:4840`).
- *
- * The quotation marks are added by the renderer, not stored, so no story
- * should type them.
- */
+/** Current Quote set (2748:4672), including Home's Small composition. */
 const meta = {
   title: 'Content/Blocks/Section/QuoteSection',
   component: QuoteSection,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('2748:4767'),
+    design: figmaDesign('2748:4672'),
   },
 } satisfies Meta<typeof QuoteSection>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** The homepage quote — eight lines at 1440, where the fade does its work. */
+/** Authored quote and attribution. */
 export const AsSeeded: Story = {
   args: seededSectionArgs('index', 'quoteSection'),
   globals: { backgrounds: { value: 'bone' } },
 }
 
-/** 36/44 at 402 (`2748:4715`), on a 24px column gap instead of 48. */
+/** Default quote at mobile, with the shared 48px attribution gap. */
 export const Mobile: Story = {
   args: seededSectionArgs('index', 'quoteSection'),
   globals: { backgrounds: { value: 'bone' }, viewport: { value: 'mobile' } },
   parameters: { design: figmaDesign('2748:4804') },
 }
 
-/** A two-line quote: the gradient has almost nothing to travel across. */
+/** Short authored copy keeps the same composition. */
 export const Short: Story = {
   args: {
     ...seededSectionArgs('index', 'quoteSection'),
@@ -69,21 +57,106 @@ export const Unattributed: Story = {
 export const Molecule: Story = {
   args: { ...seededSectionArgs('index', 'quoteSection'), decoration: 'molecule' },
   globals: { backgrounds: { value: 'bone' } },
-  parameters: { design: figmaDesign('2748:4767') },
+  parameters: { design: figmaDesign('2748:4672') },
 }
 
-/** `decoration: 'none'` drops the sphere; the column and the fade stay. */
+/** No decoration; the quote composition is unchanged. */
 export const NoDecoration: Story = {
   args: { ...seededSectionArgs('index', 'quoteSection'), decoration: 'none' },
   globals: { backgrounds: { value: 'bone' } },
 }
 
-/**
- * On ink. The gradient fill is authored for a light band, so this is the story
- * that says whether an editor picking `ink` here gets something usable — worth
- * knowing, since the schema lets them.
- */
+/** Text roles follow the authored ink surface. */
 export const OnInk: Story = {
   args: { ...seededSectionArgs('index', 'quoteSection'), surface: 'ink' },
   globals: { backgrounds: { value: 'ink' } },
+}
+
+/** Current homepage instance I3720:60563;3265:2244. */
+export const Small: Story = {
+  args: { ...seededSectionArgs('index', 'quoteSection'), size: 'small' },
+  globals: { backgrounds: { value: 'bone' }, viewport: { value: 'desktop' } },
+  parameters: { design: figmaDesign('3720:60563') },
+  play: async ({ canvasElement }) => {
+    const quote = canvasElement.querySelector('blockquote p')!
+    await expect(getComputedStyle(quote).fontFamily).toContain('Figtree')
+    await expect(getComputedStyle(quote).fontSize).toBe('36px')
+    await expect(getComputedStyle(quote).lineHeight).toBe('44px')
+    const band = quote.closest('section')!
+    await expect(getComputedStyle(band).paddingTop).toBe('128px')
+    await expect(getComputedStyle(band).paddingBottom).toBe('128px')
+    await expect(quote.parentElement!.getBoundingClientRect().width).toBe(822)
+    await expect(getComputedStyle(quote.parentElement!).gap).toBe('48px')
+  },
+}
+
+export const SmallMobile: Story = {
+  ...Small,
+  globals: { backgrounds: { value: 'bone' }, viewport: { value: 'mobile' } },
+  parameters: { design: figmaDesign('3265:2256') },
+  play: async ({ canvasElement }) => {
+    const quote = canvasElement.querySelector('blockquote p')!
+    await expect(getComputedStyle(quote).fontSize).toBe('28px')
+    await expect(getComputedStyle(quote).lineHeight).toBe('34px')
+    const band = quote.closest('section')!
+    await expect(getComputedStyle(band).paddingTop).toBe('64px')
+    await expect(getComputedStyle(band).paddingBottom).toBe('64px')
+    await expect(getComputedStyle(quote.parentElement!).gap).toBe('48px')
+    await expect(quote.getBoundingClientRect().width).toBeLessThanOrEqual(band.clientWidth)
+    await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
+  },
+}
+
+const encodedSmall = stegaEncodeSourceMap(
+  { size: 'small' as const },
+  {
+    documents: [{ _id: 'quote-preview-fixture', _type: 'page' }],
+    paths: ["$['sections'][0]['size']"],
+    mappings: {
+      "$['size']": {
+        type: 'value',
+        source: { type: 'documentValue', document: 0, path: 0 },
+      },
+    },
+  },
+  { enabled: true, studioUrl: '/studio' },
+).size
+
+/** Presentation metadata must not change the selected size or text wrapping. */
+export const EditorPreview: Story = {
+  ...Small,
+  render: (args) => (
+    <>
+      <QuoteSection {...args} size="small" decoration="none" />
+      <QuoteSection {...args} size={encodedSmall} decoration="none" />
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    await document.fonts.ready
+    await expect(encodedSmall).not.toBe('small')
+    const [plain, encoded] = Array.from(canvasElement.querySelectorAll('section'))
+    const plainQuote = plain!.querySelector('blockquote')!
+    const encodedQuote = encoded!.querySelector('blockquote')!
+    const text = getComputedStyle(encodedQuote.querySelector('p')!)
+    await expect(text.fontFamily).toContain('Figtree')
+    await expect(text.fontSize).toBe('36px')
+    await expect(text.lineHeight).toBe('44px')
+    await expect(text.fontWeight).toBe('300')
+    for (const property of ['paddingTop', 'paddingBottom'] as const) {
+      await expect(getComputedStyle(encoded!)[property]).toBe(getComputedStyle(plain!)[property])
+    }
+    await expect(getComputedStyle(encodedQuote).gap).toBe(getComputedStyle(plainQuote).gap)
+    await expect(encodedQuote.getBoundingClientRect().width).toBe(
+      plainQuote.getBoundingClientRect().width,
+    )
+    await expect(encodedQuote.getBoundingClientRect().height).toBeCloseTo(
+      plainQuote.getBoundingClientRect().height,
+      0,
+    )
+    await expect(encoded!.getBoundingClientRect().height).toBeCloseTo(
+      plain!.getBoundingClientRect().height,
+      0,
+    )
+    for (const band of [plain!, encoded!]) await expect(band.scrollWidth).toBe(band.clientWidth)
+  },
 }

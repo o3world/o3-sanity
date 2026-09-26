@@ -188,14 +188,12 @@ export function CaseStudyCard(
               {eyebrow}
             </Eyebrow>
           ) : null}
-          <h3 className="text-display-sm font-display text-balance">
-            {narrativeHeadline ?? title}
-          </h3>
+          <h3 className="text-display-sm text-balance font-sans">{narrativeHeadline ?? title}</h3>
         </div>
 
         {headlineStat?.value ? (
           <p className="flex items-center gap-6 [text-shadow:0_1px_12px_rgba(3,3,3,0.5)]">
-            <span className="text-display-xl font-display font-normal tracking-[-0.0208em]">
+            <span className="text-display-xl font-sans font-normal tracking-[-0.0208em]">
               {headlineStat.value}
             </span>
             {headlineStat.label ? (

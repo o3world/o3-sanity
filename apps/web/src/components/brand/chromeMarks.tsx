@@ -16,20 +16,8 @@ import { BrandMark } from '@o3/ui'
  * layout, so a mark changed in one has to be the mark in the other.
  */
 
-/**
- * The drawn mark stays 38.84px at both widths (`1814:1631`, `2225:2915`).
- * #446 trims empty SVG space on mobile only, retaining its 64px touch target.
- * Desktop keeps the original 64px tile cropped by 8px on each side, preserving
- * the artwork inset and the 48px footprint inside the pill.
- */
-export const NAV_MARK = (
-  <>
-    <span className="flex size-16 items-center lg:hidden">
-      <BrandMark trim size={38.84} />
-    </span>
-    <BrandMark size={64} className="hidden lg:-m-2 lg:block" />
-  </>
-)
+/** 48px footprint with the same mark on both navigation variants. */
+export const NAV_MARK = <BrandMark size={64} className="-m-2" />
 
 /** The footer's vector, tight-bounded: 128 at 402, 148 at 1440 (`1280:1856`, `2225:2613`). */
 export const FOOTER_MARK = <BrandMark trim size={128} className="lg:size-[148px]" />
