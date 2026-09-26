@@ -24,6 +24,7 @@ export const AsSeeded: Story = {
   parameters: { design: figmaDesign('2960:7792') },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
+    await expect(canvasElement.querySelector('canvas')).toBeNull()
     const heading = canvas.getByRole('heading', { level: 1 })
     const firstName = canvas.getByLabelText(/First name/)
     const lastName = canvas.getByLabelText(/Last name/)
@@ -48,6 +49,7 @@ export const Mobile: Story = {
   parameters: { design: figmaDesign('3754:78225') },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
+    await expect(canvasElement.querySelector('canvas')).toBeNull()
     const firstName = canvas.getByLabelText(/First name/)
     const lastName = canvas.getByLabelText(/Last name/)
     const form = firstName.closest('form')!

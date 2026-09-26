@@ -10,55 +10,10 @@ import { resolveSurface } from '../../surface'
 type FeatureGridSectionProps = SectionProps<'featureGridSection'>
 
 /**
- * Section block: a set of parallel short claims, in the four compositions the
- * canonical frames draw them in — #56, surfaced by #46 and #47, extended by
- * #92.
- *
- * Every layout renders the same three fields — a `mark`, a `heading`, an
- * optional `body`. What changes is how they are set against each other.
- *
- * **`grid` — About `1925:5915`.** Mark and copy paired, two across.
- *
- * ```
- * 128px 0, gap 65
- *   header  padding-left 96      48px heading, flush left
- *   body    padding 0 96         two rows, space-between
- *     cell  48px 32px, gap 32    disc 138 | name 36px / body 24px in 560
- * ```
- *
- * **`stack` — "Why Sanity + O3" `2354:2530`, "What it enables." `2334:2122`.**
- * Mark above the copy, three across. The two bands are the same composition at
- * two densities: the first sets a 37px disc over a 28px lead and a 20px
- * paragraph in 288px columns; the second sets a 59px disc over a 28px line and
- * no body at all, wrapping five features onto two rows. That is why `body` is
- * optional on the member — a whole canonical band omits it.
- *
- * **`rows` — "Use cases." `2341:2250`.** One hairlined full-width row per
- * feature: a 75px disc and the heading left in 609, the body right in 500,
- * 48px of padding above and below, a 1px `#76746F` rule under each.
- *
- * **`orbital` — Solutions `1928:6524`.** Exactly four features on a
- * 1120×1172 dotted tetrahedron. See `OrbitalDiagram` for why that is a new
- * drawing rather than `OrbitalSphere` plus labels.
- *
- * **One block, one `layout` field, not four blocks.** The bands carry
- * identical content and differ only in arrangement, which is the same test
- * `railPanelsSection`'s `rail` field passed. Four block types would have made
- * "add a feature" a question about which page you were on — and it is what
- * renamed this block: as `disciplineGridSection` it told an editor adding
- * "Multi-channel publishing from one source" that they were authoring a
- * discipline.
- *
- * **The mark is per feature** (`Mark`): the animated orb by default, the
- * frame's halftone disc when a feature asks for it, so a band can mix them.
- * A feature may name an **icon** instead, and the app supplies the drawing —
- * see `beside`. The `orbital` composition is the exception to both: the diagram
- * draws its own nodes into one canvas and has no slot to swap.
- *
- * The orbital composition is `lg` and up. 1120px of absolutely-positioned copy
- * has no honest 402 form and no 402 frame to copy, so below `lg` it falls back
- * to the grid — which is the same content in a shape that does work there
- * (ADR 0006).
+ * Parallel claims in the current Partner and Engineering compositions:
+ * 66px glyph columns (2354:2532), illustration cards (4116:50601), and plain
+ * two-column use-case rows (4043:49741 / 4039:49503). The existing grid and
+ * orbital layouts remain available to authored sections using those values.
  */
 export function FeatureGridSection({
   eyebrow,
@@ -128,7 +83,7 @@ export function FeatureGridSection({
     </div>
   )
 
-  // Current partner columns: 2354:2532, with the existing animated marks.
+  // Current partner columns and illustration cards.
   const stack = (
     <div
       className={
@@ -148,10 +103,13 @@ export function FeatureGridSection({
         >
           {cards ? (
             <div className="flex h-[180px] items-center justify-center">
-              {beside(feature, 'w-[138px]')}
+              {beside(
+                feature,
+                stegaClean(feature.mark?.kind) === 'image' ? 'h-full w-full' : 'w-[138px]',
+              )}
             </div>
           ) : (
-            beside(feature, feature.body ? 'w-[37px]' : 'w-[59px]')
+            beside(feature, 'h-[66px] w-[66px]')
           )}
           {feature.heading ? (
             <DisplayHeading
@@ -178,7 +136,7 @@ export function FeatureGridSection({
     </div>
   )
 
-  // Current use-case lists (4043:49741 / 4039:49503), with the authored GPU marks.
+  // Current use-case lists have no graphic slot.
   const rows = (
     <ul className="divide-line flex flex-col divide-y">
       {items.map((feature) => (
@@ -186,13 +144,12 @@ export function FeatureGridSection({
           key={feature._key}
           className="flex flex-col gap-6 py-8 first:pt-0 last:pb-0 lg:flex-row lg:items-start lg:gap-[139px] lg:py-12"
         >
-          <div className="flex min-w-0 items-start gap-8 lg:w-[609px] lg:shrink-0">
-            {beside(feature, 'w-[75px]')}
+          <div className="min-w-0 lg:w-[609px] lg:shrink-0">
             {feature.heading ? (
               <DisplayHeading
                 as={featureTag}
                 level="lg"
-                className="font-sans text-[28px] leading-[38px] tracking-normal"
+                className="max-w-[499px] font-sans text-[28px] leading-[38px] tracking-normal"
               >
                 {feature.heading}
               </DisplayHeading>
@@ -220,17 +177,7 @@ export function FeatureGridSection({
       width={orbital ? 'full' : 'section'}
       className={DECORATED_BAND_CLASS}
     >
-      {/*
-       * `2354:2551` — 1219px at 25%, hung off the right edge of the ink band
-       * and running past its foot. 84.6% of the 1440 frame, anchored right so
-       * the copy keeps the left of the band whatever the viewport does.
-       */}
-      <MoleculeDecoration
-        decoration={decoration}
-        block="featureGridSection"
-        surface={resolved}
-        className="right-[-24%] top-1/4 w-[85vw] opacity-25"
-      />
+      <MoleculeDecoration decoration={decoration} block="featureGridSection" surface={resolved} />
 
       <div
         className={

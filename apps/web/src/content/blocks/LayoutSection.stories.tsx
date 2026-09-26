@@ -192,6 +192,13 @@ export const CurrentOverview: Story = {
     bleed: 'end',
   },
   parameters: { design: figmaDesign('2360:2861') },
+  play: async ({ canvasElement }) => {
+    const image = canvasElement.querySelector('figure img')!
+    await expect(getComputedStyle(image).borderRadius).toBe('32px')
+    await expect(image.getBoundingClientRect().height).toBe(502)
+    const plate = image.closest('figure')!.parentElement!
+    await expect(getComputedStyle(plate).boxShadow).not.toBe('none')
+  },
 }
 
 export const CurrentBrandFamily: Story = {

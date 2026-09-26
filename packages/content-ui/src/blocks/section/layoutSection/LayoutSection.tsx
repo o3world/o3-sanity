@@ -216,18 +216,7 @@ export function LayoutSection({
           '[--media-card-height:370px] [--media-card-radius:32px] [--media-card-shadow:0_24px_32px_0_rgb(0_0_0/0.2)] max-lg:[--media-card-aspect:1] max-lg:[--media-card-height:auto] lg:[--media-card-height:396px]',
       )}
     >
-      {/*
-       * `2357:2690` — the Solutions proof-point band hangs the molecule at
-       * 1300px and 25%, running off the band's right edge and past its foot,
-       * the same treatment `featureGridSection` gives "Why Sanity + O3"
-       * (`2354:2551`).
-       */}
-      <MoleculeDecoration
-        decoration={decoration}
-        block="layoutSection"
-        surface={resolved}
-        className="right-[-28%] top-0 w-[90vw] opacity-25"
-      />
+      <MoleculeDecoration decoration={decoration} block="layoutSection" surface={resolved} />
       <Content
         {...(sequence ? { boundaries: 'items' as const } : {})}
         className={cn(
@@ -283,7 +272,7 @@ export function LayoutSection({
               <div
                 className={
                   overview
-                    ? 'lg:mr-[min(calc(-1*var(--spacing-gutter)),calc(var(--container-section-half)-50vw))] lg:h-[502px] lg:overflow-hidden lg:[&_figure]:h-full lg:[&_img]:h-full lg:[&_img]:object-cover'
+                    ? 'rounded-[32px] shadow-[-32px_32px_64px_rgba(0,0,0,0.2)] lg:mr-[min(calc(-1*var(--spacing-gutter)),calc(var(--container-section-half)-50vw))] lg:h-[502px] lg:[&_figure]:h-full [&_img]:rounded-[32px] lg:[&_img]:h-full lg:[&_img]:object-cover'
                     : BLEED_MEDIA_CLASS
                 }
               >

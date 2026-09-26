@@ -1,7 +1,5 @@
 import { cn } from '@o3/ui/lib/utils'
 
-import { Mark, markProps } from '../../base/mark/Mark'
-
 export interface PanelRowDetail {
   _key?: string
   label?: string | null
@@ -13,7 +11,6 @@ export interface PanelRowItem {
   heading?: string | null
   note?: string | null
   body?: string | null
-  mark?: Parameters<typeof markProps>[0]
   details?: readonly PanelRowDetail[] | null
   dataSanity?: string
 }
@@ -45,9 +42,6 @@ export function PanelRows({ items, onInk = false, lastDetailIsOutcome = true }: 
             )}
           >
             <div className="flex min-w-0 flex-col gap-3">
-              {panel.mark ? (
-                <Mark {...markProps(panel.mark)} onInk={onInk} className="w-[37px]" />
-              ) : null}
               {panel.heading ? (
                 <h3 className="font-display break-words text-[40px] leading-[44px] lg:text-[48px] lg:leading-[58px]">
                   {panel.heading}

@@ -3,7 +3,7 @@ import { figmaDesign } from '@o3/story-kit'
 import { Reveal } from '@o3/ui'
 import { expect, waitFor } from 'storybook/test'
 
-import { seedImage, seededSectionArgs } from '../../../testing/seedContent'
+import { seedImage, seedImageReference, seededSectionArgs } from '../../../testing/seedContent'
 
 import { RailPanelsSection } from './RailPanelsSection'
 
@@ -136,8 +136,29 @@ export const TrackMobile: Story = {
 
 /** The Solutions composition (`1925:6108`): `layout: cards`, three engagement cards. */
 export const Cards: Story = {
-  args: seededSectionArgs('solutions', 'railPanelsSection'),
-  parameters: { design: figmaDesign('1925:6108') },
+  args: {
+    ...seededSectionArgs('solutions', 'railPanelsSection'),
+    decoration: 'molecule',
+    panels: seededSectionArgs('solutions', 'railPanelsSection').panels!.map((panel, index) => ({
+      ...panel,
+      mark: {
+        _type: 'mark',
+        kind: 'image',
+        media: {
+          _type: 'figure',
+          image: seedImageReference(
+            `tools/migration/data/seed/assets/figma-current-${['engagement-key', 'engagement-squad', 'engagement-team'][index]}.svg`,
+          ),
+          alt: '',
+        },
+      },
+    })),
+  },
+  parameters: { design: figmaDesign('4030:38346') },
+  play: async ({ canvasElement }) => {
+    await expect(canvasElement.querySelectorAll('article img').length).toBe(3)
+    await expect(canvasElement.querySelector('canvas')).toBeNull()
+  },
 }
 
 /**
@@ -250,7 +271,10 @@ export const RowsMobile: Story = {
  */
 export const Grid: Story = {
   args: seededSectionArgs('solutions-software-engineering', 'railPanelsSection'),
-  parameters: { design: figmaDesign('2358:2788') },
+  parameters: { design: figmaDesign('4039:49386') },
+  play: async ({ canvasElement }) => {
+    await expect(canvasElement.querySelector('li canvas, li img, li svg')).toBeNull()
+  },
 }
 
 /** The grid below `lg` — three columns become one stack. */

@@ -464,7 +464,7 @@ export type LayoutSection = {
 export type FormSection = {
   _type: 'formSection'
   variant?: 'band' | 'hero'
-  decoration?: 'none' | 'orbs'
+  decoration?: 'none' | 'molecule'
   eyebrow?: string
   heading?: string
   note?: string
@@ -661,6 +661,7 @@ export type RailPanelsSection = {
     _type: 'panel'
     _key: string
   }>
+  decoration?: 'none' | 'molecule'
   plate?: 'square' | 'bleed'
   surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
@@ -769,7 +770,8 @@ export type BackgroundMedia = {
 
 export type Mark = {
   _type: 'mark'
-  kind?: 'orb' | 'disc'
+  kind?: 'orb' | 'disc' | 'image'
+  media?: Figure
   state?:
     | 'working'
     | 'searching'
@@ -2139,7 +2141,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         _key: string
         _type: 'formSection'
         variant?: 'band' | 'hero'
-        decoration?: 'none' | 'orbs'
+        decoration?: 'molecule' | 'none'
         eyebrow?: string
         heading?: string
         note?: string
@@ -2581,7 +2583,8 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           | {
               _key: string
               _type: 'mark'
-              kind?: 'disc' | 'orb'
+              kind?: 'disc' | 'image' | 'orb'
+              media?: Figure
               state?:
                 | 'breathing'
                 | 'composing'
@@ -3043,6 +3046,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'panel'
           _key: string
         }> | null
+        decoration?: 'molecule' | 'none'
         plate?: 'bleed' | 'square'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
@@ -3402,7 +3406,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         _key: string
         _type: 'formSection'
         variant?: 'band' | 'hero'
-        decoration?: 'none' | 'orbs'
+        decoration?: 'molecule' | 'none'
         eyebrow?: string
         heading?: string
         note?: string
@@ -3844,7 +3848,8 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           | {
               _key: string
               _type: 'mark'
-              kind?: 'disc' | 'orb'
+              kind?: 'disc' | 'image' | 'orb'
+              media?: Figure
               state?:
                 | 'breathing'
                 | 'composing'
@@ -4306,6 +4311,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'panel'
           _key: string
         }> | null
+        decoration?: 'molecule' | 'none'
         plate?: 'bleed' | 'square'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
@@ -4854,7 +4860,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         _key: string
         _type: 'formSection'
         variant?: 'band' | 'hero'
-        decoration?: 'none' | 'orbs'
+        decoration?: 'molecule' | 'none'
         eyebrow?: string
         heading?: string
         note?: string
@@ -5296,7 +5302,8 @@ export type CASE_STUDY_QUERY_RESULT = {
           | {
               _key: string
               _type: 'mark'
-              kind?: 'disc' | 'orb'
+              kind?: 'disc' | 'image' | 'orb'
+              media?: Figure
               state?:
                 | 'breathing'
                 | 'composing'
@@ -5758,6 +5765,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _type: 'panel'
           _key: string
         }> | null
+        decoration?: 'molecule' | 'none'
         plate?: 'bleed' | 'square'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
@@ -6274,7 +6282,7 @@ export type PAGE_QUERY_RESULT = {
         _key: string
         _type: 'formSection'
         variant?: 'band' | 'hero'
-        decoration?: 'none' | 'orbs'
+        decoration?: 'molecule' | 'none'
         eyebrow?: string
         heading?: string
         note?: string
@@ -6716,7 +6724,8 @@ export type PAGE_QUERY_RESULT = {
           | {
               _key: string
               _type: 'mark'
-              kind?: 'disc' | 'orb'
+              kind?: 'disc' | 'image' | 'orb'
+              media?: Figure
               state?:
                 | 'breathing'
                 | 'composing'
@@ -7178,6 +7187,7 @@ export type PAGE_QUERY_RESULT = {
           _type: 'panel'
           _key: string
         }> | null
+        decoration?: 'molecule' | 'none'
         plate?: 'bleed' | 'square'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {

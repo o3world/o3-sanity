@@ -479,3 +479,11 @@ export function seedImage(source: string) {
     asset: { _id: assetIdFor(source), metadata: null },
   }
 }
+
+/** A committed image kept as a reference inside an unprojected nested object. */
+export function seedImageReference(source: string) {
+  return {
+    _type: 'image' as const,
+    asset: { _type: 'reference' as const, _ref: assetIdFor(source) },
+  }
+}

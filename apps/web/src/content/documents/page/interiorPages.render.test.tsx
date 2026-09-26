@@ -324,7 +324,7 @@ describe('the seeded Software Engineering service page', () => {
       .filter((s) => s._type === 'layoutSection')
       .map((s) => (s as { decoration?: string }).decoration)
     expect(decorations).toEqual(['none', 'molecule'])
-    expect(html.match(/viewBox="0 0 699 699"/g) ?? []).toHaveLength(1)
+    expect(html.match(/viewBox="0 0 562 562"/g) ?? []).toHaveLength(1)
   })
 
   it('gives the page a single h1', () => {

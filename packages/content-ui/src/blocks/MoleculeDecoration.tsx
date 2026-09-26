@@ -22,36 +22,22 @@ export interface MoleculeDecorationProps {
   className?: string
   /**
    * The width the glyph is drawn from. `lg` — the default — hides it below the
-   * large breakpoint, which is where a 699–1300px decoration stops being a
-   * decoration and becomes the band. `base` is for a glyph sized in the band's
-   * own terms rather than the frame's pixels, which the CTA's is.
+   * large breakpoint. `base` keeps the decoration visible on mobile frames
+   * that include it.
    */
   visibleFrom?: 'lg' | 'base'
 }
 
 /**
- * The molecule hung behind a band's copy — `ctaSection`, `quoteSection`,
- * `featureGridSection` and `layoutSection`.
- *
- * The seam owns the three things every band needs identically: the **guard**
- * (is this band's knob set to `molecule`?), the **tone**, and the **gate** —
- * inert, behind the copy, and off the small frames.
- *
- * What stays at the call site is what the frames disagree about: the offsets,
- * the width and the opacity, each measured per band. A shared default for them
- * would be a number no frame drew.
- *
- * **Tone is resolved, not declared.** `surface` is the same value the band
- * hands `SectionShell`, so turning the surface knob turns the glyph with it —
- * white on ink, ink on the light surfaces. A band that paints something the
- * three surfaces do not name can still spell its own tone in `className`,
- * which wins.
+ * Inert molecule behind a band's copy. The default position is shared by the
+ * current proof, Why, and engagement bands; other frames supply their offsets.
+ * Surface determines its tone, and the decoration knob controls visibility.
  */
 export function MoleculeDecoration({
   decoration,
   block,
   surface,
-  className,
+  className = 'right-[-327px] top-[-536px] w-[980px] opacity-10',
   visibleFrom = 'lg',
 }: MoleculeDecorationProps) {
   if (resolveDecoration(decoration, block) !== 'molecule') return null

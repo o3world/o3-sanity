@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
+import { expect, waitFor } from 'storybook/test'
+import { seedImageReference } from '../../../testing/seedContent'
+
 import { Mark } from './Mark'
 
 /**
@@ -7,7 +10,7 @@ import { Mark } from './Mark'
  * an editor drops into a `layoutSection` column on its own, where it is
  * titled "Orb".
  *
- * The stories are the values an editor can reach: the two `kind`s, the
+ * The stories are the values an editor can reach: the three `kind`s, the
  * animation knobs, and the empty case that proves the default. How the orb is
  * drawn lives in `UI/ThinkingOrb`.
  */
@@ -63,4 +66,26 @@ export const OnInk: Story = {
       <Mark kind="disc" onInk className="w-[132px]" />
     </div>
   ),
+}
+
+/** The source-exact artwork branch contains no animated canvas. */
+export const Artwork: Story = {
+  args: {
+    kind: 'image',
+    media: {
+      _type: 'figure',
+      image: seedImageReference(
+        'tools/migration/data/seed/assets/figma-current-engagement-key.svg',
+      ),
+      alt: 'Ownership key',
+    },
+    className: 'h-[66px] w-[66px]',
+  },
+  play: async ({ canvasElement }) => {
+    const image = canvasElement.querySelector('img')!
+    await expect(image).not.toBeNull()
+    await waitFor(() => expect(image.naturalWidth).toBeGreaterThan(0))
+    await expect(image.getBoundingClientRect().width).toBe(66)
+    await expect(canvasElement.querySelector('canvas')).toBeNull()
+  },
 }

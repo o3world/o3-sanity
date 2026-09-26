@@ -1,4 +1,5 @@
 import { defineBlockKnobs, knob } from '@o3/block-spec'
+import { decorationKnob } from './decoration'
 import { surfaceKnob } from './surface'
 import type { RailPanelsSection } from '../types/generated'
 
@@ -15,6 +16,10 @@ export const railPanelsSectionKnobs = defineBlockKnobs({
   title: 'Rail + panels',
   tier: 'section',
   knobs: [
+    {
+      ...decorationKnob(['none', 'molecule']),
+      showWhen: { at: 'layout', mode: 'oneOf', values: ['cards'] },
+    },
     knob({
       name: 'layout',
       title: 'Layout',

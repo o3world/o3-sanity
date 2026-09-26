@@ -28,7 +28,7 @@ describe('the quote band’s molecule decoration', () => {
   const html = render('molecule')
 
   it('renders the mark, and not the spheres', () => {
-    expect(html).toContain('viewBox="0 0 699 699"')
+    expect(html).toContain('viewBox="0 0 562 562"')
     expect(html).toContain('w-[776px]')
     expect(html).toContain('opacity-10')
     // OrbitalSphere's own markup — the two are alternatives, never both.
@@ -111,13 +111,13 @@ describe('the quote band’s other decorations', () => {
     const html = render('orbs')
     expect(html).toContain('lg:w-[1155px]')
     expect(html).toContain('lg:w-[1304px]')
-    expect(html).not.toContain('viewBox="0 0 699 699"')
+    expect(html).not.toContain('viewBox="0 0 562 562"')
   })
 
   it('draws neither on `none`', () => {
     const html = render('none')
     expect(html).not.toContain('lg:w-[1155px]')
-    expect(html).not.toContain('viewBox="0 0 699 699"')
+    expect(html).not.toContain('viewBox="0 0 562 562"')
     expect(html).toContain('Simply the best.')
   })
 })

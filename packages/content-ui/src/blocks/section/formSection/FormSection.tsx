@@ -1,4 +1,4 @@
-import { DisplayHeading, Eyebrow, OrbitalSphere, SectionShell, surfaceAttrs } from '@o3/ui'
+import { DisplayHeading, Eyebrow, SectionShell, surfaceAttrs } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 import { cn } from '@o3/ui/lib/utils'
 import type { SectionProps } from '@o3/content-runtime/blocks'
@@ -6,7 +6,7 @@ import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
 import { SanityImage } from '../../../SanityImage'
 import { resolveSurface } from '../../surface'
-import { resolveDecoration } from '../../decoration'
+import { MoleculeDecoration } from '../../MoleculeDecoration'
 import './form-section.css'
 
 import { InquiryForm, type FormStatus } from './InquiryForm'
@@ -68,13 +68,13 @@ export function FormSection({
         hero ? 'form-section-texture pb-16 pt-32 lg:pb-32 lg:pt-64' : 'py-16 lg:py-32',
       )}
     >
-      {resolveDecoration(decoration, 'formSection') === 'orbs' ? (
-        <OrbitalSphere
-          preset={resolved === 'ink' ? 'hero' : 'line'}
-          motion="orbit"
-          className="pointer-events-none absolute right-[-449px] top-[367px] -z-10 w-[900px] lg:right-[-329px] lg:top-[-223px] lg:w-[1100px]"
-        />
-      ) : null}
+      <MoleculeDecoration
+        decoration={decoration}
+        block="formSection"
+        surface={resolved}
+        visibleFrom="base"
+        className="right-[-449px] top-[367px] w-[900px] opacity-10 lg:right-[-329px] lg:top-[-223px] lg:w-[1100px]"
+      />
       <div className="flex flex-col gap-16 lg:gap-32">
         <div className={cn('grid items-center gap-16 lg:gap-8', header && 'lg:grid-cols-2')}>
           {header}

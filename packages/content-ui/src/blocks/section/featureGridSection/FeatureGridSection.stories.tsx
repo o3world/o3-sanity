@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { expect } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 
-import { seededSectionArgs } from '../../../testing/seedContent'
+import { seedImageReference, seededSectionArgs } from '../../../testing/seedContent'
 
 import { FeatureGridSection } from './FeatureGridSection'
 
@@ -141,7 +141,16 @@ export const StackHeadingsOnly: Story = {
  */
 export const Rows: Story = {
   args: seededSectionArgs('partners-sanity', 'featureGridSection', 1),
-  parameters: { design: figmaDesign('2341:2250') },
+  parameters: { design: figmaDesign('4043:49741') },
+  play: async ({ canvasElement }) => {
+    await expect(canvasElement.querySelector('li canvas, li img, li svg')).toBeNull()
+    const row = canvasElement.querySelector('li')!
+    const heading = row.querySelector('h3')!
+    await expect(heading.getBoundingClientRect().left).toBeCloseTo(
+      row.getBoundingClientRect().left,
+      0,
+    )
+  },
 }
 
 /** The rows composition below `lg`, where the two columns stack. */
@@ -157,13 +166,26 @@ export const StackMobile: Story = {
   parameters: { backgrounds: { value: 'ink' } },
 }
 
-/** Current outcomes preserve animated marks inside the raised cards. */
+/** Current outcomes render the five source-exact illustrations. */
 export const Cards: Story = {
   args: {
     ...seededSectionArgs('partners-sanity', 'featureGridSection', 2),
     layout: 'cards',
     features: seededSectionArgs('partners-sanity', 'featureGridSection', 2).features?.map(
-      (feature) => ({ ...feature, mark: { _type: 'mark', kind: 'orb' } }),
+      (feature, index) => ({
+        ...feature,
+        mark: {
+          _type: 'mark',
+          kind: 'image',
+          media: {
+            _type: 'figure',
+            image: seedImageReference(
+              `tools/migration/data/seed/assets/figma-current-${['outcome-speed', 'outcome-publish', 'outcome-collaboration', 'outcome-performance', 'outcome-governance'][index]}.svg`,
+            ),
+            alt: '',
+          },
+        },
+      }),
     ),
   },
   parameters: { design: figmaDesign('4116:50601') },
@@ -174,11 +196,45 @@ export const Cards: Story = {
     await expect(getComputedStyle(card).backgroundColor).toBe('rgb(255, 255, 255)')
     await expect(card.getBoundingClientRect().height).toBeGreaterThanOrEqual(296)
     await expect(getComputedStyle(heading).fontSize).toBe('24px')
-    await expect(card.querySelector('[data-orbital-preset], canvas, svg')).not.toBeNull()
+    await expect(card.querySelector('img')).not.toBeNull()
+    await expect(card.querySelector('canvas')).toBeNull()
+    await expect(card.querySelector('img')!.getBoundingClientRect().height).toBe(180)
   },
 }
 
 export const CardsMobile: Story = {
   ...Cards,
   globals: { viewport: { value: 'mobile' } },
+}
+
+export const CurrentGlyphColumns: Story = {
+  args: {
+    ...seededSectionArgs('partners-sanity', 'featureGridSection'),
+    layout: 'stack',
+    features: seededSectionArgs('partners-sanity', 'featureGridSection').features?.map(
+      (feature, index) => ({
+        ...feature,
+        mark: {
+          _type: 'mark',
+          kind: 'image',
+          media: {
+            _type: 'figure',
+            image: seedImageReference(
+              `tools/migration/data/seed/assets/figma-current-${['why-arrow', 'why-network', 'why-heart'][index]}.svg`,
+            ),
+            alt: '',
+          },
+        },
+      }),
+    ),
+  },
+  parameters: { design: figmaDesign('2354:2532') },
+  play: async ({ canvasElement }) => {
+    const images = canvasElement.querySelectorAll('img')
+    await expect(images.length).toBe(3)
+    await expect(images[0]!.getBoundingClientRect().height).toBe(66)
+    await expect(canvasElement.querySelector('canvas')).toBeNull()
+    const molecule = canvasElement.querySelector('svg[viewBox="0 0 562 562"]')!
+    await expect(getComputedStyle(molecule).opacity).toBe('0.1')
+  },
 }

@@ -50,7 +50,7 @@ export const markKnobs = defineObjectKnobs({
     knob({
       name: 'kind',
       title: 'Kind',
-      description: 'Orb is the animated canvas; disc is the frame’s static halftone.',
+      description: 'Orb is the animated canvas; disc is a halftone; image uses authored artwork.',
       options: [...MARK_KINDS],
       initialValue: MARK_KINDS[0],
     }),

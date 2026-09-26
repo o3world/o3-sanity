@@ -7,7 +7,7 @@ import { classTokens } from '../testing/responsive'
 import { MoleculeDecoration } from './MoleculeDecoration'
 
 /** MoleculeMark's own markup — the one thing that says the glyph is on the page. */
-const MARK = 'viewBox="0 0 699 699"'
+const MARK = 'viewBox="0 0 562 562"'
 
 function render(props: {
   decoration?: string | null

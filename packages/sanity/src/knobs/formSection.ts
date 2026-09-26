@@ -18,7 +18,7 @@ export const formSectionKnobs = defineBlockKnobs({
       initialValue: 'band',
       bar: true,
     }),
-    decorationKnob(['none', 'orbs']),
+    decorationKnob(['none', 'molecule']),
     surfaceKnob({ initialValue: 'bone' }),
   ],
   /**

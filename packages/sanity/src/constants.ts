@@ -70,7 +70,7 @@ export type VerdictResult = (typeof VERDICT_RESULTS)[number]
  * What a `mark` can draw: the animated orb, or the halftone disc the canonical
  * frames draw. First value is the default, so a mark left alone animates.
  */
-export const MARK_KINDS = ['orb', 'disc'] as const
+export const MARK_KINDS = ['orb', 'disc', 'image'] as const
 export type MarkKind = (typeof MARK_KINDS)[number]
 
 /**

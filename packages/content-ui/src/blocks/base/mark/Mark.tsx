@@ -1,6 +1,8 @@
 import { cn, HalftoneDisc, ThinkingOrb, type OrbSize, type OrbState } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
+import { SanityImage } from '../../../SanityImage'
+
 import type { BaseProps } from '@o3/content-runtime/blocks'
 
 type MarkData = BaseProps<'mark'>
@@ -17,29 +19,22 @@ export type MarkProps = MarkData & {
 }
 
 /**
- * The dotted circle beside a card, a row or a discipline — and the base block
- * an editor can drop into a `layoutSection` column on its own.
- *
- * **The one place either drawing is chosen.** Four section blocks and the base
- * tier all draw this slot; before this component each held its own
- * `<HalftoneDisc className="w-…" />`, and adding the orb to all of them would
- * have copied a `stegaClean`-and-cast block five times. The blocks now own the
- * diameter (which is composition, and differs per frame — 138, 132, 113, 70)
- * and nothing else.
- *
- * **Orb unless told otherwise**, including when the field is absent entirely:
- * content authored before the field existed animates, and so does a panel
- * added tomorrow. `disc` is the deliberate step back to the frame's halftone.
- *
- * `stegaClean` before every comparison and cast: a value from a
- * Presentation-mode draft carries invisible encoding characters, so
- * `"disc…"` is not `"disc"` and `"weaving…"` matches no state.
- *
- * Theme is pinned from the surface rather than left on the library's `auto`,
- * which falls through to `prefers-color-scheme` — this site has one palette,
- * and a dark-mode OS would otherwise paint a light-ink orb on a white page.
+ * Decorative artwork beside an item, or a standalone mark in a layout column.
+ * The section owns its dimensions; this component chooses the authored image,
+ * halftone disc, or animated orb. An unset kind retains the orb default.
  */
-export function Mark({ kind, state, size, speed, paused, onInk, className }: MarkProps) {
+export function Mark({ kind, media, state, size, speed, paused, onInk, className }: MarkProps) {
+  if (stegaClean(kind) === 'image') {
+    return (
+      <SanityImage
+        source={media?.image}
+        alt=""
+        width={662}
+        sizes="(min-width: 1024px) 331px, 100vw"
+        className={cn('object-contain', className)}
+      />
+    )
+  }
   if (stegaClean(kind) === 'disc') return <HalftoneDisc className={className} />
   return (
     <ThinkingOrb

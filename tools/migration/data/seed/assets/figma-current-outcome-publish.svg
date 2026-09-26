@@ -1,0 +1,53 @@
+<svg width="331" height="180" viewBox="0 0 331 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Illo">
+<circle id="Ellipse 1176" cx="69" cy="90" r="69" fill="#FFF1F0"/>
+<g id="Page">
+<path id="Rectangle 4344" d="M36 51C36 47.6863 38.6863 45 42 45L84.5858 45C84.851 45 85.1054 45.1054 85.2929 45.2929L102.707 62.7071C102.895 62.8946 103 63.149 103 63.4142V129C103 132.314 100.314 135 97 135H42C38.6863 135 36 132.314 36 129L36 51Z" fill="white" stroke="#EB1000" stroke-width="2"/>
+<path id="Vector 36" d="M49 76H90" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 37" d="M49 88H90" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 38" d="M49 100H90" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 39" d="M49 112H70" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 3" d="M103 63H86C85.4477 63 85 62.5523 85 62V45" stroke="#EB1000" stroke-width="2"/>
+</g>
+<circle id="Ellipse 1179" cx="252" cy="67" r="4" stroke="#EB1000" stroke-width="2"/>
+<g id="Group 77484">
+<circle id="Ellipse 1178" cx="205" cy="21" r="4" stroke="#EB1000" stroke-width="2"/>
+<circle id="Ellipse 1180" cx="205" cy="113" r="4" stroke="#EB1000" stroke-width="2"/>
+<circle id="Ellipse 1182" cx="205" cy="159" r="4" stroke="#EB1000" stroke-width="2"/>
+<circle id="Ellipse 1183" cx="205" cy="67" r="4" stroke="#EB1000" stroke-width="2"/>
+</g>
+<circle id="Ellipse 1181" cx="250" cy="159" r="4" stroke="#EB1000" stroke-width="2"/>
+<g id="Video">
+<rect id="Rectangle 4341" x="274" y="143" width="43" height="32" rx="6" stroke="#EB1000" stroke-width="2"/>
+<path id="Rectangle 4355" d="M291 154.618C291 153.875 291.782 153.391 292.447 153.724L301.211 158.106C301.948 158.474 301.948 159.526 301.211 159.894L292.447 164.276C291.782 164.609 291 164.125 291 163.382V154.618Z" fill="#EB1000"/>
+</g>
+<path id="Vector 35" d="M209 21H219" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 36_2" d="M256 67H264" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 39_2" d="M209 67H248" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 41" d="M201 21C167 21 167 75 134 75H124" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 42" d="M201 159C167 159 167 105 134 105H124" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 43" d="M201 113C167 113 167 95 134 95H124" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 44" d="M201 67C167 67 167 85 134 85H124" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 40" d="M209 159H246" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 37_2" d="M254 159H262" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 38_2" d="M209 113H227" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<g id="Envelope">
+<rect id="Rectangle 4357" x="276" y="51" width="44" height="32" rx="6" stroke="#EB1000" stroke-width="2"/>
+<path id="Vector 34" d="M278 54L297.4 68.55C297.756 68.8167 298.244 68.8167 298.6 68.55L318 54" stroke="#EB1000" stroke-width="2" stroke-linecap="square"/>
+</g>
+<g id="Phone">
+<rect id="Rectangle 4356" x="239" y="92" width="26" height="42" rx="6" stroke="#EB1000" stroke-width="2"/>
+<path id="Vector 32" d="M249 96H255" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 33" d="M250 128H254" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+</g>
+<g id="Globe">
+<circle id="Ellipse 1177" cx="252" cy="21" r="20" stroke="#EB1000" stroke-width="2"/>
+<path id="Vector 32_2" d="M232 21H272" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 46" d="M236 9C236 9 242.4 12 252 12C261.6 12 268 9 268 9" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 48" d="M236 33C236 33 242.4 30 252 30C261.6 30 268 33 268 33" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 50" d="M247 2C247 2 242 9.6 242 21C242 32.4 247 40 247 40" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 51" d="M257 2C257 2 262 9.6 262 21C262 32.4 257 40 257 40" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 45" d="M252 1V41" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+</g>
+</g>
+</svg>

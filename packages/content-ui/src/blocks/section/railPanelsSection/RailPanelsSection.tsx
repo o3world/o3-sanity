@@ -12,6 +12,8 @@ import { resolveSurface } from '../../surface'
 import { PanelBand } from './PanelBand'
 import { PanelCards } from './PanelCards'
 import { PanelPlate } from './PanelPlate'
+import { MoleculeDecoration } from '../../MoleculeDecoration'
+import { DECORATED_BAND_CLASS } from '../../decoration'
 import { PanelRows } from './PanelRows'
 import { PanelTrack } from './PanelTrack'
 import { PLATE_BLEED_CLASS, PLATE_BLEED_SIZES } from './plateBleed'
@@ -58,6 +60,7 @@ export function RailPanelsSection({
   panels,
   surface,
   backgroundMedia,
+  decoration,
   loc,
 }: RailPanelsSectionProps) {
   const items = panels ?? []
@@ -152,7 +155,6 @@ export function RailPanelsSection({
               heading: panel.heading ?? panel.railLabel,
               note: panel.note,
               body: panel.body,
-              mark: isGrid ? (panel.mark ?? {}) : panel.mark,
               details: panel.details,
               dataSanity: itemAttr(loc, 'panels', panel._key),
             }))}
@@ -164,7 +166,14 @@ export function RailPanelsSection({
 
   if (isCards) {
     return (
-      <SectionShell surface={resolved} top="md" bottom="md" background={background}>
+      <SectionShell
+        surface={resolved}
+        top="md"
+        bottom="md"
+        background={background}
+        className={DECORATED_BAND_CLASS}
+      >
+        <MoleculeDecoration decoration={decoration} block="railPanelsSection" surface={resolved} />
         <div className="flex flex-col gap-16">
           {header}
           <PanelCards
