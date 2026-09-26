@@ -1,22 +1,24 @@
 {
   "fileKey": "RvraLJaZ0zWm8UaD5AJf43",
-  "sectionNodeIds": ["1632:1510"],
+  "sectionNodeIds": ["1126:1100", "1238:557"],
   "entries": [
     {
-      "nodeId": "1680:2134",
+      "nodeId": "3720:60473",
       "kind": "pageFrame",
       "name": "Home",
-      "figmaName": "Home",
+      "figmaName": "Homepage",
       "route": "/",
-      "variant": "desktop"
+      "variant": "desktop",
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
       "nodeId": "1814:1618",
       "kind": "pageFrame",
       "name": "Home",
-      "figmaName": "Home - Mobile",
+      "figmaName": "Home (Mobile)",
       "route": "/",
-      "variant": "mobile"
+      "variant": "mobile",
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
       "nodeId": "1634:1167",
@@ -24,55 +26,53 @@
       "name": "Work index",
       "figmaName": "Work",
       "route": "/work",
-      "variant": "desktop"
+      "variant": "desktop",
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
       "nodeId": "1906:851",
       "kind": "pageFrame",
       "name": "Work index",
-      "figmaName": "Work - Mobile",
+      "figmaName": "Work (Mobile)",
       "route": "/work",
-      "variant": "mobile"
+      "variant": "mobile",
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
-      "nodeId": "1710:2300",
+      "nodeId": "2748:5295",
       "kind": "pageFrame",
       "name": "Case Study detail",
-      "figmaName": "Case Study",
-      "route": "/work/{slug}",
-      "variant": "desktop"
-    },
-    {
-      "nodeId": "1906:928",
-      "kind": "pageFrame",
-      "name": "Case Study detail",
-      "figmaName": "Case Study - Mobile",
-      "route": "/work/{slug}",
-      "variant": "mobile"
+      "figmaName": "Case Study/Ironman",
+      "route": "/work/case-studies-ironman-digital-experience-drupal-acquia",
+      "variant": "desktop",
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
       "nodeId": "1710:2823",
       "kind": "pageFrame",
       "name": "Insight detail",
-      "figmaName": "Insights",
+      "figmaName": "Insights Detail",
       "route": "/insights/{slug}",
-      "variant": "desktop"
+      "variant": "desktop",
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
       "nodeId": "1906:1046",
       "kind": "pageFrame",
       "name": "Insight detail",
-      "figmaName": "Insights",
+      "figmaName": "Insights Detail (Mobile)",
       "route": "/insights/{slug}",
-      "variant": "mobile"
+      "variant": "mobile",
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
-      "nodeId": "1924:5344",
+      "nodeId": "3754:78274",
       "kind": "pageFrame",
       "name": "About",
-      "figmaName": "Insights",
+      "figmaName": "About",
       "route": "/about",
-      "variant": "desktop"
+      "variant": "desktop",
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
       "nodeId": "1925:6138",
@@ -81,34 +81,34 @@
       "figmaName": "Solutions",
       "route": "/solutions",
       "variant": "desktop",
-      "note": "Re-tracked 2026-08-16: the 2026-08-13 ruling took `2360:2879` for a /solutions redesign, but that frame is a service landing page under /solutions/ — this frame stays the route's source of record."
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
       "nodeId": "2360:2879",
       "kind": "pageFrame",
       "name": "Software Engineering service page",
-      "figmaName": "Solutions",
+      "figmaName": "Solutions Detail (Engineering)",
       "route": "/solutions/software-engineering",
       "variant": "desktop",
-      "note": "Named \"Solutions\" in the file but re-ruled by Nick 2026-08-16: a standalone service landing page under /solutions/, not the index — Interior Hero, Service Grid, statement band, Use cases. #93 built the layer at this route; `1925:6138` stays the /solutions frame."
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
-      "nodeId": "2336:4310",
+      "nodeId": "3739:71101",
       "kind": "pageFrame",
       "name": "Insight index",
       "figmaName": "Insights",
       "route": "/insights",
       "variant": "desktop",
-      "note": "The frame #61 commissioned — Interior Hero, filter bar, card grid. Ruled canonical 2026-08-13; #61 clears the provisional marker against it."
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
       "nodeId": "2354:2446",
       "kind": "pageFrame",
       "name": "Sanity partnership",
-      "figmaName": "Sanity",
+      "figmaName": "Partner (Sanity)",
       "route": "/partners/sanity",
       "variant": "desktop",
-      "note": "A platform-partnership landing page, ruled canonical 2026-08-13. #92 settled the route as /partners/sanity — a multi-segment page slug under a new pageType 'partner', with Vercel and Lovable behind it; the Home platforms rail already names all three. No 402 frame, the same gap About and Solutions have."
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
       "nodeId": "1644:1889",
@@ -116,7 +116,8 @@
       "name": "Live",
       "figmaName": "Live",
       "route": "/live",
-      "variant": "desktop"
+      "variant": "desktop",
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
       "nodeId": "1906:334",
@@ -124,31 +125,16 @@
       "name": "Live",
       "figmaName": "Live - Mobile",
       "route": "/live",
-      "variant": "mobile"
-    },
-    {
-      "nodeId": "136:754",
-      "kind": "componentSet",
-      "name": "Button / Solid",
-      "figmaName": "Button / Solid",
-      "codeComponent": null,
-      "note": "Superseded by the 2026-08 `Button` set (`2134:1785`), which `Button` is now built to (#150). Still tracked so an edit to it reads as a change to a dead set rather than as an unexplained frame diff."
-    },
-    {
-      "nodeId": "264:260",
-      "kind": "componentSet",
-      "name": "Button / Ghost",
-      "figmaName": "Button / Ghost",
-      "codeComponent": "packages/ui/src/components/ui/button.tsx#Button",
-      "note": "The `variant=\"ghost\"` case; still needs Figma's fill and label treatment."
+      "variant": "mobile",
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
       "nodeId": "2134:1785",
       "kind": "componentSet",
-      "name": "Button (2026-08 rebuild)",
+      "name": "Button",
       "figmaName": "Button",
       "codeComponent": "packages/ui/src/components/ui/button.tsx#Button",
-      "note": "The redesign's button — Theme = Black | White | Red, radius 5, 12x16 padding, 12px gap — which every redesigned frame instances. `Button` carries its geometry (#150) and `FilterChip` (packages/ui/src/components/filter-chip.tsx) is drawn from it too, so a change here routes to both. The set has no size axis; `Button`'s base | large is authored."
+      "note": "Current Theme and Type axes, with hover, pressed, focused and disabled states. Match page instances and retain authored destinations."
     },
     {
       "nodeId": "2177:1556",
@@ -156,103 +142,31 @@
       "name": "Icon (2026-08 set)",
       "figmaName": "Icon",
       "codeComponent": "packages/ui/src/components/button-icons.tsx#BUTTON_ICONS",
-      "note": "Twenty-nine glyphs in a 20x20 frame, one variant axis (`Icon`) — Lucide-traced strokes, plus four filled social brand marks (`2177:1603`, `2177:1605`, `2177:1607`, `2177:1609`) that route nowhere. Three of the strokes are the curated set a button's `icon` knob picks from (#151) — arrow-right (2177:1559), external-link (2177:1585), chevron-down (2177:1567) — vendored as inline SVG rather than installed (ADR 0009). A change to one of those three routes to `button-icons.tsx`; a change to the other twenty-six routes nowhere yet."
-    },
-    {
-      "nodeId": "264:50",
-      "kind": "componentSet",
-      "name": "Brand / Logo",
-      "figmaName": "Brand / Logo",
-      "codeComponent": "packages/ui/src/components/brand-logo.tsx#BrandLogo",
-      "note": "`Color` is the one axis. `White` is unbuilt on purpose — no canonical frame instances it, and the 2026-08 Footer's white logo is the plate-less `BrandMark`, not this variant (#87)."
-    },
-    {
-      "nodeId": "778:1862",
-      "kind": "componentSet",
-      "name": "Icon / Surface",
-      "figmaName": "Icon / Surface",
-      "codeComponent": "packages/ui/src/components/carousel-control.tsx#CarouselControl",
-      "note": "The insights prev/next. Live's instances are links, not controls, so `InFlightSection` inlines the circle instead (#50)."
-    },
-    {
-      "nodeId": "1203:1227",
-      "kind": "componentSet",
-      "name": "Icon / Soft",
-      "figmaName": "Icon / Soft",
-      "codeComponent": null,
-      "note": "Not standalone — a part: the inner chip of `Icon / Surface`."
-    },
-    {
-      "nodeId": "136:14",
-      "kind": "componentSet",
-      "name": ".building block Icon_text",
-      "figmaName": ".building block Icon_text",
-      "codeComponent": null,
-      "note": "No component — ADR 0009. Material Symbols glyphs are inline SVG (`ArrowIcon`, `CloseIcon`), never a string prop."
+      "note": "Twenty-nine glyphs in a 20x20 frame, one variant axis (`Icon`) \u2014 Lucide-traced strokes, plus four filled social brand marks (`2177:1603`, `2177:1605`, `2177:1607`, `2177:1609`) that route nowhere. Three of the strokes are the curated set a button's `icon` knob picks from (#151) \u2014 arrow-right (2177:1559), external-link (2177:1585), chevron-down (2177:1567) \u2014 vendored as inline SVG rather than installed (ADR 0009). A change to one of those three routes to `button-icons.tsx`; a change to the other twenty-six routes nowhere yet."
     },
     {
       "nodeId": "3271:17013",
       "kind": "componentSet",
-      "name": "NavBar",
-      "figmaName": "NavBar",
+      "name": "Main Navigation (Desktop)",
+      "figmaName": "Main Navigation (Desktop)",
       "codeComponent": "packages/content-ui/src/chrome/SiteNav.tsx#SiteNav",
-      "note": "A two-variant set — `Property 1` = Dark (`2225:2920`, the node canonical frames instance) | Light (`3271:17012`). Both draw the pill at `40px 12px 12px 40px` and differ only in fill: Dark `rgba(3,3,3,0.6)`, Light `rgba(255,255,255,0.8)` — the bar's two skins, which `--color-scrim-pill` and `--color-scrim-light` carry. Source of record for the nav's display labels (Work · Live · Insights · Solutions · About + \"Let's talk\"), for the pill's radius, and for both scrims. Tracked at the SET from 2026-09-03: the manifest had `2225:2920`, which the Light variant's arrival demoted from set to child — the read-a-child-not-the-parent trap `docs/agents/figma.md` names."
+      "note": "Current page instances: 80px high, 12px radius, centered hug-content width; separate O3 home mark at the left."
     },
     {
-      "nodeId": "2250:1445",
+      "nodeId": "3726:68984",
       "kind": "componentSet",
-      "name": "Utility Nav",
-      "figmaName": "Utility Nav",
-      "codeComponent": "packages/content-ui/src/chrome/UtilityNav.tsx#UtilityNav",
-      "note": "New 2026-08 brand-property bar above the NavBar (O3 World · 1682 Conference · O3XO), instanced by canonical frames. Built in #88: in flow at the top of the document (the frame marks it `SCROLLS` where the NavBar is `FIXED`), desktop only, links from `siteSettings.utilityNavItems`."
+      "name": "Brand Navigation",
+      "figmaName": "Brand Navigation",
+      "codeComponent": "packages/content-ui/src/chrome/SiteNav.tsx#SiteNav",
+      "note": "Current O3 home mark. User direction on 2026-09-25 overrides the hover variant: companion brand logos remain in the footer."
     },
     {
-      "nodeId": "1280:1885",
+      "nodeId": "3720:62476",
       "kind": "componentSet",
-      "name": "Footer",
-      "figmaName": "Footer",
+      "name": "Combined CTA + Footer",
+      "figmaName": "Combined CTA + Footer",
       "codeComponent": "packages/content-ui/src/chrome/SiteFooter.tsx#SiteFooter",
-      "note": "Became canonical 2026-08: the Home frame's footer (`2435:1840`) is now an override-free instance of this component — the old frame footer `1680:2096` is gone, superseding #41's from-the-frame decision. `SiteFooter` was realigned to it in #87 — black band, 64px 96px, the plate-less white mark (`1280:1856`), \"Go birds.\" on hover. One open delta: the legal row is `#AAA69E` against `--color-fg-subtle`; the ring matches (`SiteFooter` draws the filled `#0A0A0B` donut, `1320:117`)."
-    },
-    {
-      "nodeId": "264:573",
-      "kind": "componentSet",
-      "name": "Case study cards",
-      "figmaName": "Case study cards",
-      "codeComponent": null,
-      "note": "Generation-1, one of three competing sets. Canonical Home draws its cards as frames (`1683:2661`), not instances."
-    },
-    {
-      "nodeId": "1393:3025",
-      "kind": "componentSet",
-      "name": "Case study cards",
-      "figmaName": "Case study cards",
-      "codeComponent": null,
-      "note": "The one non-canonical set a canonical frame instances — Solutions' three engagement cards (`1925:6113`–`6115`, #47). Nothing case-study about the content, so `PanelCards` composes it locally and the set stays non-canonical."
-    },
-    {
-      "nodeId": "242:310",
-      "kind": "componentSet",
-      "name": "Icon / Solid",
-      "figmaName": "Icon / Solid",
-      "codeComponent": null,
-      "note": "Superseded by `Icon / Surface`."
-    },
-    {
-      "nodeId": "270:748",
-      "kind": "componentSet",
-      "name": "Badge",
-      "figmaName": "Badge",
-      "codeComponent": null,
-      "note": "No canonical use."
-    },
-    {
-      "nodeId": "1261:4877",
-      "kind": "componentSet",
-      "name": "Pro-series",
-      "figmaName": "Pro-series",
-      "codeComponent": null,
-      "note": "AB WIP canvas."
+      "note": "Current combined section; maps to SiteFooter and CtaSection. Preserve existing vGPU motion while matching the page instance."
     },
     {
       "nodeId": "1275:1631",
@@ -263,20 +177,12 @@
       "note": "Easter egg, instanced beside the Footer's copyright line. Not a component in code: the string is Site Settings' `copyrightNote` and the set's `State=Hover` is a `hover:` utility on it (#87). The set's eagle vector draws nothing in that instance and is not exported."
     },
     {
-      "nodeId": "2177:1354",
-      "kind": "componentSet",
-      "name": "CTA",
-      "figmaName": "CTA",
-      "codeComponent": "packages/content-ui/src/blocks/section/ctaSection/CtaSection.tsx#CtaSection",
-      "note": "The closing band: Device = Desktop (`2124:72`) | Mobile (`2177:1353`), 1440/402, black, one decoration — the molecule at 775.9 square, 15%, centred, over a \"Get in touch\" button. The software-engineering (`2354:2640`) and Sanity partner (`2478:2134`) frames instance it override-free; the rest close on a copy of Home's bespoke `1680:2132` instead, whose raster is a video capture of that band's own sphere (#303) rather than anything this set draws. Tracked from 2026-08-16: #163 found the band a generation behind and nothing reported the drift, because the set the band is built to was not watched."
-    },
-    {
       "nodeId": "2107:1051",
       "kind": "componentSet",
       "name": "Interior Hero",
       "figmaName": "Interior Hero",
       "codeComponent": "packages/ui/src/components/collection-hero.tsx#CollectionHero",
-      "note": "The ink hero on every interior and collection frame: Device = Desktop (`2101:828`) | Mobile (`2107:1042`), #0A0A0B, eyebrow + h2 + standfirst. `CollectionHero`'s `interior` variant is built to it. Tracked from 2026-08-16 alongside `CTA` and `Blog` — the three page-level sets the component map had never carried."
+      "note": "The ink hero on every interior and collection frame: Device = Desktop (`2101:828`) | Mobile (`2107:1042`), #0A0A0B, eyebrow + h2 + standfirst. `CollectionHero`'s `interior` variant is built to it. Tracked from 2026-08-16 alongside `CTA` and `Blog` \u2014 the three page-level sets the component map had never carried."
     },
     {
       "nodeId": "2205:1146",
@@ -284,15 +190,7 @@
       "name": "Blog",
       "figmaName": "Blog",
       "codeComponent": "packages/content-ui/src/blocks/section/insightsCarouselSection/InsightsCarouselSection.tsx#InsightsCarouselSection",
-      "note": "The insight band on Home and the insight index: Property 1 = Default (`2134:1302`, 1440×866) | Mobile (`2204:1145`, 402×1372), bone, 48px gap. Its axis is the unnamed `Property 1` where the other two page sets use `Device`; the values still read Desktop/Mobile, so it is one axis, not a second vocabulary. `CarouselTrack` already reads the mobile variant. Tracked from 2026-08-16."
-    },
-    {
-      "nodeId": "2846:5637",
-      "kind": "componentSet",
-      "name": "Services",
-      "figmaName": "Services",
-      "codeComponent": "packages/content-ui/src/blocks/section/railPanelsSection/PanelTrack.tsx#PanelTrack",
-      "note": "One column of the sideways track — index, 64/76 heading, 24/34 body, a quieter \"Best when…\" line and a text link — instanced three times by Home's \"How we work\" (`2846:5480`, #309) and three times again by About's \"What we optimize for.\" (`2960:7022`, #305). A component, not a set: no variant axis, so a change to it is a change to every column on both bands. The link the component draws is its own default on all six instances and neither band builds it. Tracked from 2026-08-24."
+      "note": "The insight band on Home and the insight index: Property 1 = Default (`2134:1302`, 1440\u00d7866) | Mobile (`2204:1145`, 402\u00d71372), bone, 48px gap. Its axis is the unnamed `Property 1` where the other two page sets use `Device`; the values still read Desktop/Mobile, so it is one axis, not a second vocabulary. `CarouselTrack` already reads the mobile variant. Tracked from 2026-08-16."
     },
     {
       "nodeId": "2089:4169",
@@ -300,7 +198,7 @@
       "name": "Case Study Card",
       "figmaName": "Case Study Card",
       "codeComponent": "packages/content-ui/src/cards/CaseStudyCard.tsx#CaseStudyCard",
-      "note": "The case-study card as a set at last: 1246 × 550 filling a 1248 column, radius 32, padding 64 uniform, space-between over a gap floor of 66 — a 180 × 80 logo holder above a 1118 content row that is 559 of text beside 559 of deadspace, holding an eyebrow (18/24 bold, red #C90E00), a 24/34 narrative, a stat row and a white `Button / Solid`. The /work index instances it three times (`2107:1094`–`1096`) and the case-study detail's next-project band once (`2250:1564`); at 402 the stack `2975:8428` overrides the padding to 24 side / 64 top-and-bottom. Its axis — the `Variant` property, Caron | Ironman | Vertex — is which client the demo shows, so it maps to no `cva` key. The gen-1 sets `264:573` / `1393:3025` never became canonical; this one did. Tracked from 2026-08-24 (#302), internals read from the node tree at file version 2391349966960467923 (#314); the renderer draws all of it since #319."
+      "note": "The case-study card as a set at last: 1246 \u00d7 550 filling a 1248 column, radius 32, padding 64 uniform, space-between over a gap floor of 66 \u2014 a 180 \u00d7 80 logo holder above a 1118 content row that is 559 of text beside 559 of deadspace, holding an eyebrow (18/24 bold, red #C90E00), a 24/34 narrative, a stat row and a white `Button / Solid`. The /work index instances it three times (`2107:1094`\u2013`1096`) and the case-study detail's next-project band once (`2250:1564`); at 402 the stack `2975:8428` overrides the padding to 24 side / 64 top-and-bottom. Its axis \u2014 the `Variant` property, Caron | Ironman | Vertex \u2014 is which client the demo shows, so it maps to no `cva` key. The gen-1 sets `264:573` / `1393:3025` never became canonical; this one did. Tracked from 2026-08-24 (#302), internals read from the node tree at file version 2391349966960467923 (#314); the renderer draws all of it since #319."
     },
     {
       "nodeId": "2748:4672",
@@ -308,7 +206,7 @@
       "name": "Quote",
       "figmaName": "Quote",
       "codeComponent": "packages/content-ui/src/blocks/section/quoteSection/QuoteSection.tsx#QuoteSection",
-      "note": "The pull quote as a band-level set — Device = Device3 | Mobile, where `Device3` is the desktop value under a default name. Bone #F1F0EC, 96 of side padding at 1440 (`2748:4829`) and 16 at 402 (`2748:4686`), a centred 1034 column at 192 of vertical padding (128 at 402), 48 between the quote and the attribution (24 at 402); the quote is 64/76 Light at -1px of tracking in #232323 (36/44 at 402), the attribution 18/24 bold uppercase at 0.1em in fg-muted #76746F (16/20 at 402). Home instances it twice — `2748:4767` at 1440 × 1012 and `2748:4804` at 402 × 804 — both hanging the 776px molecule off the bottom-left corner at 10%. The case-study detail's loose `Section - Quote` (`2250:1525`) is the same block drawn a generation earlier and still disagrees with the set on alignment, type step and a gradient fill; that is #323's open question. Tracked from 2026-08-24 (#323)."
+      "note": "Current Default and Small size variants; homepage instance3720:60563 uses Small, Figtree36/44 desktop and28/34 mobile."
     },
     {
       "nodeId": "2960:7557",
@@ -317,85 +215,133 @@
       "figmaName": "Contact",
       "route": "/contact",
       "variant": "desktop",
-      "note": "A full /contact page: Interior Hero, form card with quote/portrait/address in the right column. Ruled canonical 2026-08-24 (the 2026-08 design pass; updates are canonical per #308)."
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
       "nodeId": "2975:10037",
       "kind": "pageFrame",
       "name": "Contact",
-      "figmaName": "Insights - Mobile",
+      "figmaName": "Contact - Mobile",
       "route": "/contact",
       "variant": "mobile",
-      "note": "Duplicated from the Insights mobile frame and never renamed; content is the Contact page at 402. Ruled canonical 2026-08-24 (the 2026-08 design pass; updates are canonical per #308)."
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
       "nodeId": "2975:8499",
       "kind": "pageFrame",
       "name": "Insight index",
-      "figmaName": "Insights - Mobile",
+      "figmaName": "Insights (Mobile)",
       "route": "/insights",
       "variant": "mobile",
-      "note": "The /insights index at 402 - the mobile companion the desktop frame never had. Ruled canonical 2026-08-24 (the 2026-08 design pass; updates are canonical per #308)."
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
     },
     {
-      "nodeId": "2975:9343",
-      "kind": "pageFrame",
-      "name": "Sanity partnership",
-      "figmaName": "Insights - Mobile",
-      "route": "/partners/sanity",
-      "variant": "mobile",
-      "note": "Duplicated from the Insights mobile frame and never renamed; content is /partners/sanity at 402, closing the gap the desktop entry notes. Ruled canonical 2026-08-24 (the 2026-08 design pass; updates are canonical per #308)."
-    },
-    {
-      "nodeId": "2975:8865",
+      "nodeId": "3883:16493",
       "kind": "pageFrame",
       "name": "About",
-      "figmaName": "About  - Mobile",
+      "figmaName": "About (Mobile)",
       "route": "/about",
       "variant": "mobile",
-      "note": "Band-for-band companion to the About desktop redesign. Carries scratch tells (a CTA band named ClaudeTest, raw chrome, divergent CTA copy) - flagged to design, tracked anyway per #308. Ruled canonical 2026-08-24 (the 2026-08 design pass; updates are canonical per #308)."
+      "note": "Verified against the current Designs / Case Studies canvases on 2026-09-25; see docs/figma-frames.md."
+    },
+    {
+      "nodeId": "2748:5775",
+      "kind": "pageFrame",
+      "name": "Case Study detail",
+      "figmaName": "Case Study/Vertex",
+      "route": "/work/vertex",
+      "variant": "desktop",
+      "note": "Current case-study page frame. L.E.K. is a template reference where its CMS route is not confirmed."
+    },
+    {
+      "nodeId": "3503:10881",
+      "kind": "pageFrame",
+      "name": "Case Study detail",
+      "figmaName": "Case Study/Best Egg",
+      "route": "/work/best-egg",
+      "variant": "desktop",
+      "note": "Current case-study page frame. L.E.K. is a template reference where its CMS route is not confirmed."
+    },
+    {
+      "nodeId": "3174:8901",
+      "kind": "pageFrame",
+      "name": "Case Study detail",
+      "figmaName": "Case Study/Caron",
+      "route": "/work/caron",
+      "variant": "desktop",
+      "note": "Current case-study page frame. L.E.K. is a template reference where its CMS route is not confirmed."
+    },
+    {
+      "nodeId": "2817:2589",
+      "kind": "pageFrame",
+      "name": "Case Study detail",
+      "figmaName": "Case Study/L.E.K.",
+      "route": "/work/{slug}",
+      "variant": "desktop",
+      "note": "Current case-study page frame. L.E.K. is a template reference where its CMS route is not confirmed."
+    },
+    {
+      "nodeId": "3737:69217",
+      "kind": "componentSet",
+      "name": "Main Navigation (Mobile)",
+      "figmaName": "Main Navigation (Mobile)",
+      "codeComponent": "packages/content-ui/src/chrome/SiteNav.tsx#SiteNav",
+      "note": "Current 402px navigation."
+    },
+    {
+      "nodeId": "3720:62493",
+      "kind": "componentSet",
+      "name": "Standard Content Lockup",
+      "figmaName": "Standard Content Lockup",
+      "codeComponent": "packages/ui/src/components/collection-hero.tsx#CollectionHero",
+      "note": "Use actual page instances for surface colors and copy."
     }
   ],
   "ignoredNodeIds": [
     {
       "nodeId": "2117:800",
       "name": "Blog Post",
-      "note": "Hero-treatment study (full-bleed image, left gradient) of the IRONMAN×Sanity article — one of five variants of one hero, no footer/CTA. Ruled noise 2026-08-13."
+      "note": "Hero-treatment study (full-bleed image, left gradient) of the IRONMAN\u00d7Sanity article \u2014 one of five variants of one hero, no footer/CTA. Ruled noise 2026-08-13."
     },
     {
       "nodeId": "2118:858",
       "name": "Blog Post",
-      "note": "Hero-treatment study (full-bleed image, bottom gradient) — same family as `2117:800`. Ruled noise 2026-08-13."
+      "note": "Hero-treatment study (full-bleed image, bottom gradient) \u2014 same family as `2117:800`. Ruled noise 2026-08-13."
     },
     {
       "nodeId": "2118:909",
       "name": "Blog Post",
-      "note": "Hero-treatment study (side image, row layout) — same family as `2117:800`. Ruled noise 2026-08-13."
+      "note": "Hero-treatment study (side image, row layout) \u2014 same family as `2117:800`. Ruled noise 2026-08-13."
     },
     {
       "nodeId": "2118:1068",
       "name": "Blog Post",
-      "note": "Hero-treatment study (side image, circle crop) — same family as `2117:800`. Ruled noise 2026-08-13."
+      "note": "Hero-treatment study (side image, circle crop) \u2014 same family as `2117:800`. Ruled noise 2026-08-13."
     },
     {
       "nodeId": "2118:1015",
       "name": "Blog Post",
-      "note": "Hero-treatment study (large circular background image) — same family as `2117:800`. Ruled noise 2026-08-13."
+      "note": "Hero-treatment study (large circular background image) \u2014 same family as `2117:800`. Ruled noise 2026-08-13."
     },
     {
       "nodeId": "2252:3535",
       "name": "Frame 2611219",
-      "note": "Bare hero fragment of the same IRONMAN×Sanity article as the Blog Post studies — unnamed, no chrome. Ruled noise 2026-08-13."
+      "note": "Bare hero fragment of the same IRONMAN\u00d7Sanity article as the Blog Post studies \u2014 unnamed, no chrome. Ruled noise 2026-08-13."
     },
     {
       "nodeId": "1799:1607",
       "name": "Intro section",
-      "note": "A cover study for the section itself — 1440x693, no nav and no footer, two decorative groups. Not a page."
+      "note": "A cover study for the section itself \u2014 1440x693, no nav and no footer, two decorative groups. Not a page."
     },
     {
       "nodeId": "1893:478",
       "name": "Case Studies",
       "note": "A section study (heading + `Desktop - 33`, 1440x1130), not a page frame. The canonical Work index is `1634:1167`."
+    },
+    {
+      "nodeId": "1710:2300",
+      "name": "Case Study placeholder",
+      "note": "Current node directs readers to the Case Studies canvas; it is not a page design."
     }
   ]
 }

@@ -3,31 +3,13 @@ import { figmaDesign } from '@o3/story-kit'
 
 import { InsightIndexMockup } from '../InsightIndexMockup'
 
-/**
- * `/insights` — the canonical index frame (`2336:4310`), the one #61
- * commissioned and the file gained on 2026-08-13.
- *
- * Four bands: the Interior Hero on ink, the bone Blog band holding the filter
- * bar over the card grid, the shared CTA, the footer. The **surface sequence**
- * is what only a page mockup shows — ink → bone → ink → black — and it is why
- * the grid band is bone rather than the white the Work index uses: two ink
- * bands with a white one between them would read as two pages.
- *
- * The other page-level property here is the filter bar's relationship to the
- * grid: 48px, close enough that the chips read as a control on the cards
- * rather than as a second band. The frame is emphatic about that gap.
- *
- * The index gained its 402 companion in the 2026-08 design pass
- * (`2975:8499`), so the mobile story transcribes a frame rather than deciding
- * one: one column, the chips wrapping, the same 48px stack the Blog band uses
- * at 402.
- */
+/** Current Insights index, including authored filtering and pagination. */
 const meta = {
   title: 'Pages/Insights',
   component: InsightIndexMockup,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('2336:4310'),
+    design: figmaDesign('3739:71101'),
   },
   argTypes: {
     category: {

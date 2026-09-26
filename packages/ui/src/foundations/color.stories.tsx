@@ -1,142 +1,80 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { figmaDesign } from '@o3/story-kit'
+import { expect } from 'storybook/test'
 
-import { alphaOnInk, alphaOnLight, colors, figmaUrl, type ColorSpec } from './figma-home-spec'
-import { Callout, Mono, Page, Row, Section, SpecTable } from './spec-ui'
+import { Mono, Page, Section } from './spec-ui'
 
 const meta = {
   title: 'Foundations/Color',
   parameters: {
     layout: 'fullscreen',
-    design: { type: 'figma', url: figmaUrl('1680-2134') },
+    design: figmaDesign('3720:60473'),
   },
 } satisfies Meta
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-function Swatch({ spec }: { spec: ColorSpec }) {
-  return (
-    <div className="border-line flex flex-col border">
-      <div className="h-24 w-full" style={{ background: spec.value }} />
-      <div className="flex flex-col gap-1 p-4">
-        <p className="text-[15px] font-medium">{spec.name}</p>
-        <Mono className="text-fg-muted">{spec.value}</Mono>
-        {spec.variable ? <Mono className="text-fg-subtle">Figma: {spec.variable}</Mono> : null}
-      </div>
-    </div>
-  )
-}
+const groups = [
+  {
+    title: 'Surfaces',
+    note: 'Page and chrome backgrounds.',
+    tokens: ['white', 'paper', 'bone', 'ink', 'ink-warm', 'ink-deep', 'utility'],
+  },
+  {
+    title: 'Copy on light',
+    note: 'Primary, body and supporting text on light surfaces.',
+    tokens: ['fg', 'fg-body', 'fg-muted', 'fg-quiet', 'fg-subtle'],
+  },
+  {
+    title: 'Copy on dark',
+    note: 'White tints composite over the ink surface; utility copy uses its own chrome role.',
+    dark: true,
+    tokens: ['on-ink', 'on-ink-muted', 'on-ink-subtle', 'on-utility', 'on-utility-line'],
+  },
+  {
+    title: 'Brand and rules',
+    note: 'Brand accents and the rules that separate content.',
+    tokens: ['brand', 'brand-deep', 'line', 'line-soft'],
+  },
+] as const
 
-/**
- * The five neutrals, the one red, and where each is actually used. The "token"
- * column is now an equivalence, not a mapping — `@o3/tailwind-config` carries
- * these values since #37.
- */
+/** The gallery paints the same CSS variables as the current application. */
 export const Palette: Story = {
   render: () => (
     <Page
       title="Color"
-      intro={
-        <>
-          Every fill on the Home frame, read off Figma. The design runs on <strong>five</strong>{' '}
-          neutrals rather than the prototype&rsquo;s three: <Mono>#0A0A0A</Mono> carries almost all
-          the ink weight, <Mono>#030303</Mono> survives mainly inside gradient stops and the footer,
-          and <Mono>#0F100B</Mono> is the warm-black hero band on Work and Live.
-        </>
-      }
+      intro="Live color roles from the O3 token package. Each swatch uses its CSS variable, so changes to the palette appear here and in the site together."
     >
-      <Section
-        title="Solid fills"
-        note="Bound Figma variables are named where they exist; the rest are raw fills."
-      >
-        <div className="grid grid-cols-2 gap-5 md:grid-cols-3">
-          {colors.map((spec) => (
-            <Swatch key={spec.name} spec={spec} />
-          ))}
-        </div>
-      </Section>
-
-      <Section
-        title="Roles"
-        note="Where each fill appears on the page, and the token that now carries it."
-      >
-        <SpecTable columns={['Name', 'Value', 'Role', 'Token']}>
-          {colors.map((spec) => (
-            <Row key={spec.name}>
-              <td className="whitespace-nowrap align-top font-medium">{spec.name}</td>
-              <td className="align-top">
-                <Mono>{spec.value}</Mono>
-              </td>
-              <td className="text-fg-muted max-w-[38ch] align-top leading-[1.55]">{spec.role}</td>
-              <td className="text-fg-subtle align-top">
-                {spec.token ? <Mono>{spec.token}</Mono> : '—'}
-              </td>
-            </Row>
-          ))}
-        </SpecTable>
-      </Section>
-
-      <Section
-        title="Copy on dark"
-        note="On ink bands the design tints white rather than reaching for a solid grey — so the copy composites over whatever photography sits behind it."
-      >
-        <Callout>
-          This is a real behavioural difference, not a shade preference — a solid grey stays flat
-          over an image where an alpha does not. <Mono>fg-inverse-muted</Mono> was{' '}
-          <Mono>#A4A4A4</Mono> and is now an alias for <Mono>on-ink-muted</Mono>, so its existing
-          call sites composite correctly without being touched.
-        </Callout>
-        <div className="grid grid-cols-2 gap-5 bg-[#0A0A0A] p-6 md:grid-cols-3">
-          {alphaOnInk.map((spec) => (
-            <div key={spec.name} className="flex flex-col border border-white/15">
-              <div className="h-24 w-full" style={{ background: spec.value }} />
-              <div className="flex flex-col gap-1 p-4">
-                <p className="text-[15px] font-medium text-white">{spec.name}</p>
-                <Mono className="text-white/60">{spec.value}</Mono>
+      {groups.map((group) => (
+        <Section key={group.title} title={group.title} note={group.note}>
+          <div
+            className={`grid grid-cols-1 gap-5 p-6 sm:grid-cols-2 lg:grid-cols-3 ${'dark' in group ? 'bg-ink text-white' : 'bg-bone text-fg'}`}
+          >
+            {group.tokens.map((token) => (
+              <div key={token} className="flex min-w-0 flex-col">
+                <div
+                  data-color-token={token}
+                  className="h-24 w-full"
+                  style={{ backgroundColor: `var(--color-${token})` }}
+                />
+                <div className="flex flex-col gap-1 py-4">
+                  <p className="text-[15px] font-medium">{token}</p>
+                  <Mono className="break-all">--color-{token}</Mono>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-        <SpecTable columns={['Name', 'Value', 'Role']}>
-          {alphaOnInk.map((spec) => (
-            <Row key={spec.name}>
-              <td className="whitespace-nowrap align-top font-medium">{spec.name}</td>
-              <td className="align-top">
-                <Mono>{spec.value}</Mono>
-              </td>
-              <td className="text-fg-muted max-w-[52ch] align-top leading-[1.55]">{spec.role}</td>
-            </Row>
-          ))}
-        </SpecTable>
-      </Section>
-
-      <Section
-        title="Copy on light"
-        note="The same trick in reverse — the one place the design tints ink rather than reaching for a grey."
-      >
-        <div className="grid grid-cols-2 gap-5 bg-[#F0F0F0] p-6 md:grid-cols-3">
-          {alphaOnLight.map((spec) => (
-            <div key={spec.name} className="border-line flex flex-col border">
-              <div className="h-24 w-full" style={{ background: spec.value }} />
-              <div className="flex flex-col gap-1 bg-white p-4">
-                <p className="text-[15px] font-medium">{spec.name}</p>
-                <Mono className="text-fg-muted">{spec.value}</Mono>
-                <p className="text-fg-muted mt-1 text-[13px] leading-normal">{spec.role}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      <Section title="Where the red went">
-        <Callout>
-          Brand red appears as a <strong>flat fill exactly once</strong> on the entire 9573px frame
-          — the three footer link-group headers. Everywhere else it arrives as the{' '}
-          <Mono>--gradient-brand-glow</Mono> radial. The token package currently defaults{' '}
-          <Mono>Eyebrow</Mono> and <Mono>Button</Mono> to brand red, which is the single loudest
-          disagreement between the two generations.
-        </Callout>
-      </Section>
+            ))}
+          </div>
+        </Section>
+      ))}
     </Page>
   ),
+  play: async ({ canvasElement }) => {
+    await expect(
+      getComputedStyle(canvasElement.querySelector('[data-color-token="bone"]')!).backgroundColor,
+    ).toBe('rgb(241, 240, 236)')
+    await expect(
+      getComputedStyle(canvasElement.querySelector('[data-color-token="ink"]')!).backgroundColor,
+    ).toBe('rgb(10, 10, 11)')
+  },
 }

@@ -9,7 +9,6 @@
 export { MobileNavMenu } from './MobileNavMenu'
 export { NavLink, isCurrentSection } from './NavLink'
 export { NavInk, NAV_INK_TARGET } from './NavInk'
-export { NavPin } from './NavPin'
 export { NavInkFirstPaint, NAV_INK_FIRST_PAINT_SCRIPT } from './NavInkFirstPaint'
 export { SiteFooter } from './SiteFooter'
 export { SiteNav } from './SiteNav'

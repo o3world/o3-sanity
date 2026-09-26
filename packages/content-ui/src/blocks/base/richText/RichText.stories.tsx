@@ -75,7 +75,7 @@ export const Headings: Story = {
     const style = getComputedStyle(heading)
     await expect(parseFloat(style.fontSize)).toBeCloseTo(36, 1)
     await expect(parseFloat(style.lineHeight)).toBeCloseTo(44, 1)
-    await expect(style.fontWeight).toBe('300')
+    await expect(style.fontWeight).toBe('400')
     await expect(style.marginBottom).toBe('32px')
   },
   args: {
@@ -96,7 +96,7 @@ export const HeadingsMobile: Story = {
     const style = getComputedStyle(heading)
     await expect(parseFloat(style.fontSize)).toBeCloseTo(32, 1)
     await expect(parseFloat(style.lineHeight)).toBeCloseTo(38, 1)
-    await expect(style.fontWeight).toBe('300')
+    await expect(style.fontWeight).toBe('400')
     await expect(heading.scrollWidth).toBeLessThanOrEqual(heading.clientWidth)
   },
 }

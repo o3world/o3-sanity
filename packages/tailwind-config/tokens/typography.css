@@ -1,340 +1,118 @@
-/*
- * Typography — Figtree at the canonical Figma ramp.
- *
- * FONT LOADING IS THE APP'S JOB, not this package's. A Next.js app uses
- * next/font/google and exposes the family on `--font-figtree`; the stacks
- * below read that variable first and fall back to the plain family name.
- *
- * TWO THINGS CHANGED WHEN THESE MOVED FROM THE PROTOTYPE TO FIGMA:
- *
- *   1. Named headings use Figtree Light 300: `Heading/h1` 64/76
- *      (`2089:4313`), `Heading/h2` 48/58 (`1864:2393`) and `Heading/h3`
- *      36/44 (`2360:2868`). The display and CTA tokens carry that weight.
- *      Older unbound headings and stat figures retain Regular explicitly
- *      at their consumers (#350).
- *   2. LINE HEIGHT IS 1.2 nearly everywhere, replacing the prototype's
- *      1.05 → 1.3 spread.
- *
- * THE RAMP IS FIXED PX IN FIGMA — 64 / 60 / 48 / 36 / 28 / 24 / 18 / 16 / 14 /
- * 13 / 12 at 1440, and a second set at 402. Each clamp below is SOLVED so it
- * hits the mobile frame's value at 402 and the desktop frame's at 1440; both
- * ends are read values, not taste (ADR 0006).
- *
- *   token           402    1440
- *   hero            36  →  64
- *   quote           36  →  64   (rides the hero variable pair)
- *   cta             36  →  64   (2026-08: rides the hero variable now)
- *   interior-hero   40  →  64
- *   display-xl      40  →  48
- *   display-lg      18  →  36
- *   display-sm      20  →  24
- *   lead            20  →  24   (2026-08: floor rose to match display-sm)
- *   body            16  →  20
- *   body-heading    40  →  36   ← descends; see the token
- *
- * THE 2026-08 TOKEN PASS BOUND THE RAMP TO VARIABLES with a desktop and a
- * mobile mode (names unreadable on this seat; ids in the token comments), and
- * the modes land exactly on ADR 0006's two endpoint widths — the variables
- * confirm the clamp scheme rather than replacing it. What they moved:
- * display-size LINE HEIGHTS are now read px pairs rather than a flat 1.2
- * (hero/cta 44 → 76, display-xl 48 → 58, lead/display-sm 26 → 34), and lead's
- * tracking went to 0.
- *
- * ⚠️ READ THE BINDING, NOT THE RESOLVED SIZE. A 402 frame does not put every
- * node in the mobile mode — the mode is set per node, so a bound node the
- * designer never switched renders the DESKTOP number on a 402 frame. Both
- * modes of one variable therefore appear side by side on the same frame:
- * `2050:1311` resolves 40 on `2262:3931` and 48 on `2975:8190`, four bands
- * apart on `1814:1618`. Where a node carries a `boundVariables.fontSize`, the
- * variable's mobile mode is the 402 endpoint; a raw size is only a read when
- * nothing is bound.
- *
- * The mode pairs, desktop → mobile: `2050:1306` h1 64/76 → 36/44,
- * `2050:1311` h2 48/58 → 40/48, `2050:1312` h3 36/44 → 32/38,
- * `2050:1307` 18/24 → 16/20, `2050:1308` 24/34 → 20/26.
- *
- * MOST SMALL UI TEXT DOES NOT SCALE. button, eyebrow, meta, nav and legal are
- * identical at both widths — read, not assumed (`1814:1656` against
- * `1868:3262`). `eyebrow-lg` is the one exception: its bound pair
- * (`2050:1307` / `2050:1317`) carries a mobile mode of 16/20 against the
- * desktop 18/24, read on the Interior Hero at both widths (`I2101:861;2101:791`
- * against `I2107:1086;2107:1039`) and on the case-study hero (`1710:2304`
- * against `1906:925`). It interpolates like the display steps do.
- *
- * Nothing here steps at a breakpoint. Composition switches at `lg`; size
- * interpolates. See ADR 0006 for why the frames are endpoints, not
- * breakpoints.
- *
- * `hero` AND `display-xl` ARE TWO STEPS, and Figma's own heading styles are
- * the line between them: `Heading/h1` (`2050:1306`) is the 64/76 statement and
- * `Heading/h2` (`2050:1311`) is the 48/58 section headline under it. A band
- * belongs to whichever style its heading binds, not to whichever it used to
- * draw — the Home hero (`2089:4313`), the platforms rail (`2747:4488`) and the
- * case-study showcase (`1683:2659`) all bind h1; the partners wall
- * (`1864:2393`) and the services track (`2846:5485`) bind h2.
- *
- * `hero` and `quote` carry the same numbers — the `Quote` set binds the hero's
- * variable pair at both ends. `quote` survives as its own name because the
- * type-scale enum names it; see the tokens.
- */
+/* September 2026 Figma foundation: Newsreader headings, Figtree body and UI.
+ * Fluid sizes interpolate between the 402 and 1440 design endpoints.
+ * The app loads fonts; Storybook bundles the same families locally. */
 
 @theme {
-  /* ── Families ──────────────────────────────────────────────────────────── */
   --font-sans: var(--font-figtree, Figtree), 'Helvetica Neue', Arial, sans-serif;
-  /* The display face is the same family — the voice difference is size and
-   * tracking, not weight. Kept separate so a future display face can diverge
-   * without touching call sites. */
-  --font-display: var(--font-figtree, Figtree), 'Helvetica Neue', Arial, sans-serif;
 
-  /* ── Display scale ─────────────────────────────────────────────────────── */
-  /* hero — 64px. The 64/76 statement step, Figma's `Heading/h1`: the Home
-   * hero headline pair (`2089:4313` / `2089:4318`) and every other band that
-   * binds `2050:1306` — the platforms rail (`2747:4488`) and the case-study
-   * showcase (`1683:2659` at 1440, `2975:8110` at 402).
-   *
-   * FLOOR IS 36, NOT 30 — both 402 nodes read 36 (ADR 0006 amendment
-   * 2026-08-02). The 30 this token shipped with was read off `1814:1684`,
-   * which is the pull quote; that value now lives on `--text-quote`.
-   *
-   * Line-height is the bound pair `2050:1318` — 76px at 1440, 44px at 402
-   * (the 2026-08 variables replaced the flat 1.2 ≈ 76.8/43.2 this shipped
-   * with), solved as a clamp the same way the size is. The size pair is
-   * `2050:1306`, confirming 64/36. */
-  --text-hero: clamp(36px, calc(2.7vw + 25.15px), 64px);
-  --text-hero--line-height: clamp(44px, calc(3.083vw + 31.61px), 76px);
-  /* -1px, ABSOLUTE at both widths — the same shape as --text-cta's tracking
-   * and read the same way. The redesigned Home hero (`2089:4313`/`2089:4318`)
-   * draws Figma's `Heading/h1` style at -0.0156em on 64px = -0.998px; the
-   * un-migrated 402 node (`1814:1624`) reads -0.0389em on 36px = -1.4px, so
-   * the mobile end is a straggler rather than a second value. Was 0, which
-   * came from the pre-redesign hero raster having no live text to read. */
+  --font-display: var(--font-newsreader, Newsreader), Georgia, serif;
+
+  /* Homepage: 3720:60482 at 1440; 2975:8420 at 402. */
+  --text-hero-xl: clamp(42px, calc(2.890173vw + 30.381503px), 72px);
+  --text-hero-xl--line-height: clamp(50px, calc(3.468208vw + 36.057803px), 86px);
+  --text-hero-xl--letter-spacing: -1px;
+  --text-hero-xl--font-weight: 300;
+
+  --text-hero: clamp(40px, calc(2.312139vw + 30.705202px), 64px);
+  --text-hero--line-height: clamp(44px, calc(3.082852vw + 31.606936px), 76px);
+
   --text-hero--letter-spacing: -1px;
-  /* 300. `Heading/h1` is Figtree LIGHT on the redesigned frames, and every
-   * band bound to it draws it that way, so no consumer sets the weight
-   * itself: the Home hero headline, the case-showcase heading, and the
-   * case-study opener's title (`1710:2305` / `1906:926`). The wider question
-   * the same reading raises is in this file's header note: `Heading/h2`
-   * (48/58) and
-   * `Heading/h3` (36/44) are Light too, so the whole display ramp has
-   * probably moved off 400. That is a token pass, not a page layer's call. */
-  --text-hero--font-weight: 300;
 
-  /* quote — 64px. The pull quote, and only the pull quote. The `Quote` set
-   * (`2748:4672`) draws it Light on the hero's variable pair — 64/76 at 1440
-   * (`2748:4839`), 36/44 at 402 (`2748:4715`) — with -1px of tracking read
-   * absolute at both ends, the same shape `hero` and `cta` ship. Numerically
-   * identical to `hero`; kept as its own name because the type-scale enum has
-   * it. */
-  --text-quote: clamp(36px, calc(2.7vw + 25.15px), 64px);
-  --text-quote--line-height: clamp(44px, calc(3.083vw + 31.61px), 76px);
-  --text-quote--letter-spacing: -1px;
+  --text-hero--font-weight: 400;
+
+  --text-quote: clamp(30px, calc(1.734104vw + 23.028902px), 48px);
+  --text-quote--line-height: clamp(36px, calc(2.119461vw + 27.479769px), 58px);
+  --text-quote--letter-spacing: 0;
   --text-quote--font-weight: 300;
 
-  /* cta — 64px. The CTA band headline. THE 60px STEP IS GONE: the 2026-08
-   * shared CTA component (`2112:1165`, instanced on seven frames) binds the
-   * hero's variable pair (`2050:1306` / `2050:1318` — 64/76 desktop, 36/44
-   * mobile) with its own -1px tracking on top. Kept as a separate token
-   * because the tracking differs and because the type-scale enum names it.
-   *
-   * The current component and Home headline (`1680:2088`) use Light 300.
-   * Tracking is -1px ABSOLUTE at both widths (read off the 64 and the 36
-   * alike), so it ships in px, not em. */
-  --text-cta: clamp(36px, calc(2.7vw + 25.15px), 64px);
+  /* Quote Small: 3265:2244 desktop and 3265:2256 mobile. */
+  --text-quote-sm: clamp(28px, calc(0.770713vw + 24.901734px), 36px);
+  --text-quote-sm--line-height: clamp(34px, calc(0.963391vw + 30.127168px), 44px);
+  --text-quote-sm--letter-spacing: 0;
+  --text-quote-sm--font-weight: 300;
+
+  --text-cta: clamp(40px, calc(2.312139vw + 30.705202px), 64px);
   --text-cta--line-height: clamp(44px, calc(3.083vw + 31.61px), 76px);
   --text-cta--letter-spacing: -1px;
-  --text-cta--font-weight: 300;
+  --text-cta--font-weight: 400;
 
-  /* interior-hero — 64px. The `Interior Hero` component's headline
-   * (`2107:1051`), which every interior page opens on: 64/76 Light at -1px of
-   * tracking at 1440, 40/48 Light at 0 at 402 — both read off the set's two
-   * device variants.
-   *
-   * A third 64px step rather than `hero` or `cta`, and the floor is why: those
-   * two land on 36/44 at 402 and this set draws 40/48, which is `display-xl`'s
-   * floor under `hero`'s ceiling. Same argument the file makes for `hero`
-   * against `quote` — the frames split at one end and not the other.
-   *
-   * The tracking is the one clamp on the ramp that CLOSES rather than opens,
-   * and it is read that way: the Mobile variant sets 0 where Desktop sets -1.
-   * `hero` and `cta` ship -1px flat because their 402 nodes are un-migrated
-   * stragglers; this set's is not. */
   --text-interior-hero: clamp(40px, calc(2.312vw + 30.7px), 64px);
-  --text-interior-hero--line-height: clamp(48px, calc(2.697vw + 37.16px), 76px);
-  --text-interior-hero--letter-spacing: clamp(-1px, calc(0.3875px - 0.0964vw), 0px);
-  --text-interior-hero--font-weight: 300;
+  --text-interior-hero--line-height: clamp(44px, calc(3.082852vw + 31.606936px), 76px);
+  --text-interior-hero--letter-spacing: -1px;
+  --text-interior-hero--font-weight: 400;
 
-  /* detail-hero — 48px LIGHT. The insight detail page's h1 (`2252:3559` at
-   * 1440, `2262:3863` at 402), whose size and leading land on display-xl's
-   * endpoints but whose weight is 300, not 400. Its own name for the reason
-   * `interior-hero` has one (#311): display-xl is the workhorse section
-   * headline across frames the redesign has not reached, and flipping its
-   * weight to serve one opener would repaint all of them.
-   *
-   * Line height is the read pair — 58 at 1440, 48 at 402. */
-  --text-detail-hero: clamp(40px, calc(0.771vw + 36.9px), 48px);
-  --text-detail-hero--line-height: clamp(48px, calc(0.963vw + 44.13px), 58px);
+  --text-detail-hero: clamp(38px, calc(0.963391vw + 34.127168px), 48px);
+  --text-detail-hero--line-height: clamp(42px, calc(1.541426vw + 35.803468px), 58px);
   --text-detail-hero--letter-spacing: 0;
-  --text-detail-hero--font-weight: 300;
+  --text-detail-hero--font-weight: 400;
 
-  /* display-xl — 48px. THE WORKHORSE SECTION HEADLINE: Figma's `Heading/h2`,
-   * anchored on the partners wall (`1864:2393`), which binds the pair
-   * `2050:1311` / `2050:1319` — 48/58 desktop, 40/48 mobile, tracking 0. Both
-   * ends of both clamps are the variable's two modes, so the floor is read
-   * rather than interpolated; the 40 is on `2262:3931` and `2435:1939`, the
-   * two bands on `1814:1618` switched to the mobile mode.
-   *
-   * A 402 NODE READING 48/58 IS THE DESKTOP MODE, not a second floor.
-   * `2975:8190` and `2975:8360` bind this same pair and were never switched —
-   * the file header has the rule.
-   *
-   * Light follows Heading/h2. Unbound Regular headings and stat figures
-   * declare font-normal at their consumers (#350). */
-  --text-display-xl: clamp(40px, calc(0.77vw + 36.9px), 48px);
-  --text-display-xl--line-height: clamp(48px, calc(0.963vw + 44.13px), 58px);
+  --text-display-xl: clamp(38px, calc(0.963391vw + 34.127168px), 48px);
+  --text-display-xl--line-height: clamp(42px, calc(1.541426vw + 35.803468px), 58px);
   --text-display-xl--letter-spacing: 0;
-  --text-display-xl--font-weight: 300;
+  --text-display-xl--font-weight: 400;
 
-  /* display-lg — 36px. Heading/h3 is Light (`2360:2868`). Rail numerals
-   * use their own explicit 36px step and keep Regular. */
   --text-display-lg: clamp(18px, calc(1.73vw + 11px), 36px);
   --text-display-lg--line-height: 1.2;
   --text-display-lg--letter-spacing: 0;
-  --text-display-lg--font-weight: 300;
+  --text-display-lg--font-weight: 400;
 
-  /* display-md — 28px. The case-study problem statement inside the card,
-   * white over the scrim (1883:3562).
-   * ⚠️ The 402 frames carry no example of this step, so unlike its neighbours
-   * the floor here is INTERPOLATED from the ramp rather than read. */
   --text-display-md: clamp(22px, calc(0.58vw + 19.7px), 28px);
   --text-display-md--line-height: 1.2;
   --text-display-md--letter-spacing: -0.0286em;
   --text-display-md--font-weight: 400;
 
-  /* display-sm — 24px. The insight-card title: 24 at 1440 (`1683:2491`),
-   * 20 at 402 (`1814:1873` / `1814:1887`) — both read, found while #49 built
-   * `/insights` on the Blog row's card. One call site, like `quote` — and
-   * tokenised for the same reason: a solved two-endpoint clamp inlined in a
-   * `className` is where nothing would ever check it against the frame again
-   * (ADR 0006). */
   --text-display-sm: clamp(20px, calc(0.385vw + 18.45px), 24px);
-  /* 34px at 1440 / 26px at 402 — the 2026-08 pass moved the 24px step onto
-   * one variable pair shared with `lead` (`2050:1308` / `2050:1320`) and
-   * opened its leading from 1.2 to these read pairs. */
+
   --text-display-sm--line-height: clamp(26px, calc(0.771vw + 22.9px), 34px);
   --text-display-sm--letter-spacing: 0;
   --text-display-sm--font-weight: 400;
 
-  /* ── Body ──────────────────────────────────────────────────────────────── */
-  /* lead — 24px. The standfirst beside a section headline (1762:2123), the
-   * Work hero standfirst (1634:1185), and the CTA subhead.
-   *
-   * THE 2026-08 VARIABLES UNIFIED LEAD WITH display-sm: both ride the same
-   * pair (`2050:1308` / `2050:1320` — 24/34 desktop, 20/26 mobile), which
-   * raised this floor from 18 to 20, opened the leading from 1.2, and zeroed
-   * the tracking (read 0 on the bound nodes; was -0.0333em). Two names are
-   * kept because the roles differ — a card title is not a standfirst — and
-   * the enum names both. */
   --text-lead: clamp(20px, calc(0.385vw + 18.45px), 24px);
   --text-lead--line-height: clamp(26px, calc(0.771vw + 22.9px), 34px);
   --text-lead--letter-spacing: 0;
   --text-lead--font-weight: 400;
 
-  /* body — 20px/1.6. LONG-FORM PROSE: the insight article body
-   * (`1894:3914` at 1440, `1906:1057` at 402) and every other `bodyText`
-   * field that renders through the same Portable Text renderer. The one step
-   * on the ramp with a line-height of 1.6 rather than 1.2 — it is the only
-   * type on the site set to be read in paragraphs rather than scanned.
-   * Recurs six times across the two Insights frames, so it is vocabulary
-   * rather than composition. */
-  --text-body: clamp(16px, calc(0.385vw + 14.45px), 20px);
-  --text-body--line-height: 1.6;
+  --text-body: 20px;
+  --text-body--line-height: 1.4;
   --text-body--letter-spacing: 0;
   --text-body--font-weight: 400;
 
-  /* body-heading — the h2 INSIDE a body. `1894:3912` reads 36px at 1440;
-   * `1906:1056` reads 40px at 402.
-   *
-   * ⚠️ THIS CLAMP DESCENDS, and that is deliberate. Both ends are read
-   * values, and ADR 0006's rule is to solve each clamp to hit the mobile
-   * frame at 402 and the desktop frame at 1440 — which here means shrinking
-   * 4px across 1038px of viewport, a ramp nobody can see. The alternatives
-   * were worse: `display-lg` hits the 36 but floors at 18px, which is smaller
-   * than the body copy under it, and stepping at `lg` would jump 45px → 29px
-   * mid-resize. The mobile frame also colours it `#0A0A0A` against the
-   * desktop's `#000000`; the renderer takes ink at both widths. */
   --text-body-heading: clamp(36px, calc(-0.385vw + 41.55px), 40px);
   --text-body-heading--line-height: 1.2;
   --text-body-heading--letter-spacing: 0;
   --text-body-heading--font-weight: 400;
 
-  /* button — 18/24 Medium. Shared by the button label and every 18px
-   * interactive label beside it: the nav links (`Link`, 2225:2894), the
-   * utility strip, the mobile menu rows, the pagination links. Figma's
-   * `Interactive/Large` variable still names Inter; the instances all render
-   * Figtree, so the variable's family is stale.
-   *
-   * Tracking is 0 because that is what the `Link` set and the rest draw. The
-   * `Button` label (2134:1789) is the one exception at 0.01em, and it sets
-   * that itself. */
   --text-button: 18px;
-  --text-button--line-height: 1.333; /* 24px / 18px */
+  --text-button--line-height: 1.333;
   --text-button--letter-spacing: 0;
   --text-button--font-weight: 500;
 
-  /* ── Eyebrows ──────────────────────────────────────────────────────────── */
-  /* eyebrow — 16px. The card-level kicker ("HEALTHCARE", 1883:3561) and the
-   * Work hero kicker ("WORK", 1634:1183). The uppercase transform can't live
-   * in a @theme token — pair with the `eyebrow` utility below. */
   --text-eyebrow: 16px;
   --text-eyebrow--line-height: 1.2;
   --text-eyebrow--letter-spacing: 0.1em;
   --text-eyebrow--font-weight: 700;
 
-  /* eyebrow-lg — 18px. The section-level kicker ("OUR PARTNERS", 1864:2392),
-   * set in NEUTRAL fg-muted (#76746F since the 2026-08 warm shift) rather
-   * than brand red — except on the two hero sets, which draw it brand red.
-   *
-   * THE ONE SMALL STEP THAT INTERPOLATES. Its bound pair (`2050:1307` /
-   * `2050:1317`) carries both modes — 18/24 desktop, 16/20 mobile — read on
-   * the Interior Hero at each width (`I2101:861;2101:791` against
-   * `I2107:1086;2107:1039`). Both clamps are solved to ADR 0006's endpoints
-   * the way the display steps are. */
   --text-eyebrow-lg: clamp(16px, calc(0.193vw + 15.22px), 18px);
   --text-eyebrow-lg--line-height: clamp(20px, calc(0.385vw + 18.45px), 24px);
-  --text-eyebrow-lg--letter-spacing: 0.1em;
+  --text-eyebrow-lg--letter-spacing: 0.2em;
   --text-eyebrow-lg--font-weight: 700;
 
-  /* ── Small ─────────────────────────────────────────────────────────────── */
-  /* meta — 13px. The insights-card meta row ("3 MINS · 7/27/26",
-   * 1683:2490). Uppercase and tracked like an eyebrow. */
   --text-meta: 13px;
   --text-meta--line-height: 1.2;
   --text-meta--letter-spacing: 0.1em;
   --text-meta--font-weight: 700;
 
-  /* nav — 14px. Footer navigation links (1680:2105); the link-group headers
-   * above them are the same size at 600 with 0.07em, uppercase, in brand red
-   * (1680:2104) — the page's one flat use of the red. */
   --text-nav: 14px;
-  --text-nav--line-height: 1.2;
+  --text-nav--line-height: 1.428571;
   --text-nav--letter-spacing: 0;
   --text-nav--font-weight: 400;
 
-  /* legal — 12px. The footer legal row (1680:2121). */
   --text-legal: 12px;
-  --text-legal--line-height: 1.167; /* 14px / 12px */
+  --text-legal--line-height: 1.167;
   --text-legal--letter-spacing: 0;
   --text-legal--font-weight: 400;
 }
 
-/* ── Eyebrow utilities ─────────────────────────────────────────────────────── */
-/*
- * The full eyebrow style in one class, because text-transform has no @theme
- * namespace. COLOR IS THE CALL SITE'S JOB, and the canonical default is
- * neutral `text-fg-muted` (#76746F since the 2026-08 warm shift) — not brand
- * red. On dark bands the frames use plain white, except the two 2026-08 hero
- * sets, which draw brand red on ink and on light alike (`2457:1854`).
- */
 @utility eyebrow {
   font-size: var(--text-eyebrow);
   line-height: var(--text-eyebrow--line-height);
@@ -343,7 +121,6 @@
   text-transform: uppercase;
 }
 
-/* The section-level kicker — same style one step up. */
 @utility eyebrow-lg {
   font-size: var(--text-eyebrow-lg);
   line-height: var(--text-eyebrow-lg--line-height);

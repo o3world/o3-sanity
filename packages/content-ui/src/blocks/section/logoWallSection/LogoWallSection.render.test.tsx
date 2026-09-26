@@ -5,21 +5,7 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { LogoWallSection } from './LogoWallSection'
 
-/**
- * The band has one arrangement again, and it is not the one this file was
- * written for: the 2026-08 frame (`1864:2390`, #89) replaced the 3 × 2 wall of
- * large marks with a single centred ROW of six hairlined 280 × 280 plates,
- * deliberately wider than the page.
- *
- * What is guarded here is the part of that composition a browser cannot be
- * relied on to show an agent: the row is one row and not a grid, the plates
- * are square, the seams between them collapse to a single hairline, and the
- * strip bleeds past the gutter WITHOUT becoming a scroll region — the last one
- * being the 402 regression `home.render.test` exists to stop.
- *
- * The logos are `null`: `SanityImage` renders nothing for an absent asset, and
- * what is under test is the row, not the pictures.
- */
+/** Content, accessibility and motion contracts of the current partners strip. */
 const CLIENTS = ['vertex', 'ironman', 'chop', 'lacolombe', 'caron', 'hireheroes'].map((id) => ({
   _id: id,
   name: id,
@@ -91,27 +77,11 @@ describe('the partners band', () => {
     expect(html).not.toContain('lg:flex-nowrap')
   })
 
-  it('gives every tile the frame’s square plate and one shared hairline', () => {
-    // 280 × 280 with 64px side padding at 1440, hairlined `border-line`
-    // (#D6D3CC since this band anchored the token); the smaller steps below
-    // `lg` are the phone's. `-ml-px` / `-mt-px` is what collapses two adjacent
-    // 1px borders into the single rule Figma's centred stroke draws — between
-    // two copies of the marquee as readily as within one.
-    for (const tile of tiles) {
-      expect(tile).toContain('lg:size-[280px]')
-      expect(tile).toContain('size-[168px]')
-      expect(tile).toContain('lg:px-16')
-      expect(tile).toContain('border-line')
-      expect(tile).toContain('-ml-px')
-      expect(tile).toContain('-mt-px')
-    }
-  })
-
   it('bleeds the strip past the gutter without making it a scroll region', () => {
     // The row is 1680 wide against a 1248 column, so it has to escape the
     // gutter and be clipped. `overflow-hidden` is the clip; an `overflow-x-*`
     // here would be a silent sideways scroll at 402 (ADR 0006).
-    expect(html).toContain('-mx-gutter')
+    expect(html).toContain('-mx-4')
     expect(html).toContain('overflow-hidden')
     expect(html).not.toContain('overflow-x-')
     // The track takes its content width from `shrink-0`, never from `w-max`:

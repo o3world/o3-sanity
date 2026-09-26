@@ -1,5 +1,5 @@
 import { expect, test, type Page } from 'playwright/test'
-import { navLink, ordinaryPage, primary } from './journey'
+import { navLink, ordinaryPage } from './journey'
 
 async function pixel(page: Page, image: Buffer) {
   return page.evaluate(async (base64) => {
@@ -89,7 +89,8 @@ test('the home entrance remains the sole opacity owner on fresh and cached arriv
   await page.goto('/work')
   for (const returnHome of [
     () =>
-      primary(page)
+      page
+        .locator('#site-nav')
         .getByRole('link', { name: / home$/ })
         .click(),
     () => page.goBack(),

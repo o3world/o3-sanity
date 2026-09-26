@@ -122,7 +122,7 @@ test('the representative reader journey separates ready content from settled mot
 test('the logo returns Home to the top without reloading or adding history', async ({ page }) => {
   await page.goto('/')
   await expect(page.locator('html')).not.toHaveAttribute('data-nav-entrance')
-  const logo = primary(page).getByRole('link', { name: / home$/i })
+  const logo = page.locator('#site-nav').getByRole('link', { name: / home$/i })
   const documentStart = await page.evaluate(() => performance.timeOrigin)
   const historyLength = await page.evaluate(() => history.length)
 
@@ -148,7 +148,7 @@ test('back, forward and a deep link retain usable content and keyboard focus', a
   page,
 }, info) => {
   await page.goto(IRONMAN)
-  await expect(page.getByRole('heading', { name: 'IRONMAN', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   const oldLink = await page.locator('main a:visible').first().elementHandle()
   await page.evaluate(() => window.scrollTo({ top: 800, behavior: 'instant' }))
   const originalScroll = await page.evaluate(() => scrollY)
@@ -201,7 +201,6 @@ test('back, forward and a deep link retain usable content and keyboard focus', a
 })
 
 test('browsers without animation APIs still navigate completely', async ({ page }, info) => {
-  const desktop = info.project.use.viewport!.width >= 1024
   await page.addInitScript(() => {
     Object.defineProperty(document, 'startViewTransition', { value: undefined })
     Object.defineProperty(Element.prototype, 'animate', { value: undefined })
@@ -222,9 +221,9 @@ test('browsers without animation APIs still navigate completely', async ({ page 
   )
   expect(light.readyNav).toMatchObject({
     color: 'rgb(35, 35, 35)',
-    background: 'rgba(255, 255, 255, 0.6)',
-    button: desktop ? 'rgb(255, 255, 255)' : null,
-    buttonBackground: desktop ? 'rgb(10, 10, 11)' : null,
+    background: 'rgba(255, 255, 255, 0.8)',
+    button: 'rgb(255, 255, 255)',
+    buttonBackground: 'rgb(10, 10, 11)',
   })
   await navigate(page, '/work', async () => (await navLink(page, 'Work')).press('Enter'), info)
   await navigate(
@@ -348,25 +347,24 @@ test('the destination nav skin is complete on the first arriving frame', async (
   const desktop = info.project.use.viewport!.width >= 1024
   const lightSkin = {
     color: 'rgb(35, 35, 35)',
-    background: 'rgba(255, 255, 255, 0.6)',
+    background: 'rgba(255, 255, 255, 0.8)',
     link: 'rgb(35, 35, 35)',
     inactiveLink: desktop ? 'rgb(35, 35, 35)' : null,
-    button: desktop ? 'rgb(255, 255, 255)' : null,
-    buttonBackground: desktop ? 'rgb(10, 10, 11)' : null,
+    button: 'rgb(255, 255, 255)',
+    buttonBackground: 'rgb(10, 10, 11)',
   }
   const darkSkin = {
     color: 'rgb(255, 255, 255)',
-    background: desktop ? 'rgba(3, 3, 3, 0.45)' : 'rgba(3, 3, 3, 0.2)',
+    background: 'rgba(3, 3, 3, 0.6)',
     link: 'rgb(255, 255, 255)',
     inactiveLink: desktop ? 'rgb(255, 255, 255)' : null,
-    button: desktop ? 'rgb(10, 10, 11)' : null,
-    buttonBackground: desktop ? 'rgb(255, 255, 255)' : null,
+    button: 'rgb(10, 10, 11)',
+    buttonBackground: 'rgb(255, 255, 255)',
   }
   const pinned = desktop ? 32 : 0
   await page.goto('/work')
   await ordinaryPage(page)
-  const spatial = (await page.locator('main').getAttribute('data-spatial-layout')) === 'true'
-  const atTop = desktop ? (spatial ? 32 : 124) : 0
+  const atTop = pinned
   await page.mouse.move(1, 500)
   const arrival = await navigate(
     page,
@@ -534,7 +532,7 @@ test('a direct request retains readable complete content without JavaScript', as
   try {
     const page = await context.newPage()
     await page.goto(`${baseURL}${IRONMAN}`)
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('IRONMAN')
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     await expect(page.locator('main')).toHaveCSS('opacity', '1')
     await expect(page.locator('main h2').first()).toBeVisible()
     await expect(page.getByRole('navigation', { name: 'Footer', exact: true })).toBeAttached()
@@ -547,12 +545,22 @@ test('a revealing band does not pull the viewport away from its scroll position'
   page,
 }, info) => {
   await page.goto('/solutions')
-  const paper = page.locator('main section[data-surface="paper"]:visible').first()
-  const translate = () =>
-    paper.evaluate((section) => getComputedStyle(section.parentElement!).translate)
   const reduced = info.project.use.contextOptions?.reducedMotion === 'reduce'
+  const bands = page.locator('main [data-reveal]')
+  // Authored bands can exceed the viewport and intentionally remain static.
+  // Exercise a real armed reveal instead of assuming a particular surface animates.
+  const armedIndex = () =>
+    bands.evaluateAll((elements) =>
+      elements.findIndex(
+        (element) => getComputedStyle(element.firstElementChild!).translate === '0px 24px',
+      ),
+    )
+  if (!reduced) await expect.poll(armedIndex).toBeGreaterThanOrEqual(0)
+  const band = bands.nth(reduced ? 0 : await armedIndex())
+  const translate = () =>
+    band.evaluate((element) => getComputedStyle(element.firstElementChild!).translate)
   await expect.poll(translate).toBe(reduced ? 'none' : '0px 24px')
-  const before = await paper.evaluate((section) => {
+  const before = await band.evaluate((section) => {
     scrollTo({ top: section.getBoundingClientRect().top + scrollY + 150, behavior: 'instant' })
     return scrollY
   })

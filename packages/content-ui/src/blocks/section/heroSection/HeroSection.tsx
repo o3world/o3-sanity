@@ -33,51 +33,7 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
   brandMark: ReactNode
 }
 
-/**
- * Section block: the page hero, built to the Home frame's opening band and
- * re-measured against the 2026-08 redesign of it (`2089:4316`, #89).
- *
- * The band's live nodes now carry every dimension — the raster the #42 build
- * had to read off pixels is gone:
- *
- * | Part       | 1440 (`2089:4316`)                    | 402 (`1814:1619`)          |
- * | ---------- | ------------------------------------- | -------------------------- |
- * | Band       | 1440 × **940** of `#0A0A0B`           | 402 × 874 of `#030303`     |
- * | Headline   | centred, `Heading/h1` 64/76 **Light** | centred, 36/44 Light       |
- * | 2nd line   | white at 50% (`2089:4318`)            | white at 50% (`2975:8419`) |
- * | Standfirst | centred, 24/34, **724** wide, solid   | centred, 24/34, 362 wide   |
- * | CTA        | white fill, radius 5 (`2205:1298`)    | the same set (`2975:8417`) |
- * | Rhythm     | 288 above, 0, 41, 33, 310 below       | 173 above, 16, 39, 39, 247 |
- * | Graphic    | 1926 × 400 on the foot (`1866:2412`)  | same fill (`1814:1927`)    |
- *
- * The `Graphic` row is a raster of this site's own orbital sphere, seated on
- * the band's foot under a 50% scrim that hides its top edge — a stand-in for
- * the animation, which `OrbitalSphere` is the implementation of. Its geometry
- * is what the sphere is seated to (see the call site); its pixels are not.
- *
- * Two of the band's numbers deliberately sit off the frame's reading: the
- * drawn globe is scaled down about a tenth and the head of the column lifted
- * by the same, both landed at the call sites below (launch review, 2026-09).
- * Neither is a drift to correct back toward the frame.
- *
- * Both widths draw the same composition — a centred column with a standfirst.
- * What splits is the step, the measure and the rhythm.
- *
- * The band is padding, not a `min-h` with the content centred inside it: both
- * frames place the headline at a measured distance from the top of the band
- * and let the sphere have the rest, so the two paddings are read values and
- * the height between them is whatever the copy needs.
- *
- * **The band's two layers move at different rates as it scrolls off** — the
- * sphere trails the page, the column leads it (#398). Both are scroll-driven
- * CSS on one named timeline; the arithmetic and the reason it cannot be a
- * scroll handler are in tokens/motion.css.
- *
- * **The band's foot is a hard edge.** Neither frame draws a curve into the
- * section below: `2089:4316`'s children are the headline, the standfirst, the
- * button and the graphic, and `1814:1619` is the same with `clipsContent` on
- * plus its own `Links` bar. The partners band opens flush against this one.
- */
+/** The Figma page composition with the existing orbital renderer and entrance lifecycle. */
 export function HeroSection({
   variant,
   alignment,
@@ -101,9 +57,6 @@ export function HeroSection({
   // drifting apart — drawn as the `Interior Hero` set (`2107:1051`), which
   // #308 ruled canonical for every route that opens on this band.
   if (stegaClean(variant) === 'band') {
-    // Left everywhere but Solutions (`1925:6141`), which stacks the eyebrow and
-    // the headline on the centre line. Anything a client could write past the
-    // form falls back to the arrangement every other instance draws.
     const centred = stegaClean(alignment) === 'center'
     const detailGroups = details ?? []
     // The knob's own roster, all three. Anything else a client could write past
@@ -169,17 +122,9 @@ export function HeroSection({
         aside={aside}
         surface={band}
         background={sectionBackground(backgroundMedia, band)}
-        /*
-         * The redesigned set. Both of its instances put the copy against the
-         * left gutter with the globe on the right (`2107:1051`, `2960:6876`);
-         * `center` is the arrangement the Solutions frame draws instead
-         * (`1925:6141`) — one column on the centre line, and the right of the
-         * band given back to the band.
-         */
         align={centred ? 'center' : 'start'}
-        variant="interior"
         decoration={
-          showOrbs && !centred ? (
+          showOrbs ? (
             /*
              * ONE SEATING FOR EVERY SURFACE. The interior hero hangs its
              * sphere in the same place whichever colour the band is painted;
@@ -297,32 +242,11 @@ export function HeroSection({
           </div>
         ) : null}
 
-        {/*
-         * The band's rhythm, read off both frames rather than centred inside a
-         * `min-h`: the graphic gets 310px under the column at 1440
-         * (`2089:4316`) and 247px at 402 (`1814:1622`).
-         *
-         * The head is a step shallower than the frames' 288 / 173 — the launch
-         * review read the headline about a tenth too low — landing on the 4px
-         * spacing scale at 256 / 160. Desktop feedback now sets the head to 200px.
-         * Both clear the pinned pill, whose foot sits
-         * at 96px once `--spacing-nav-offset` resolves to the strip-less 32.
-         * The clearance is checked here, not derived: the band's head is a
-         * composition value that happens to be larger than the chrome needs.
-         *
-         * The column is centred at both widths — `1814:1622` centres on its
-         * cross axis and every text node in it is centre-set.
-         */}
         <div
           data-route-foreground=""
-          className="hero-lead max-w-content relative z-10 mx-auto flex flex-col items-center pb-[247px] pt-40 text-center lg:pb-[310px] lg:pt-[200px]"
+          className="hero-lead relative z-10 mx-auto flex max-w-[1248px] flex-col items-center pb-[237px] pt-[173px] text-center lg:pb-[259px] lg:pt-[254px]"
         >
-          {/*
-           * 16 between the two headline blocks at 402 (`2975:8420` over
-           * `2975:8419`); at 1440 they are set solid, one 76px step apart with
-           * nothing added (`2089:4313` → `2089:4318`).
-           */}
-          <h1 className="text-hero font-display space-y-4 text-balance lg:space-y-0">
+          <h1 className="text-hero-xl font-display space-y-4 text-balance">
             <StaggeredLines
               baseDelay={lineStagger * 2}
               stagger={lineStagger}
@@ -344,23 +268,19 @@ export function HeroSection({
           </h1>
 
           {subheading ? (
-            // Supporting copy uses 16px on mobile and 22px on desktop,
-            // with the font's natural line height at both sizes.
-            <Entrance delay={columnDelay} className={cn('mt-10', HERO_ENTRANCE)}>
-              <p className="mx-auto max-w-[724px] text-balance text-[16px] leading-[normal] text-white lg:text-[22px]">
+            <Entrance delay={columnDelay} className={cn('mt-12 lg:mt-20', HERO_ENTRANCE)}>
+              <p className="text-lead mx-auto max-w-[732px] text-balance text-white">
                 {subheading}
               </p>
             </Entrance>
           ) : null}
 
           {button ? (
-            // 33 below the standfirst at 1440, 39 at 402 (`1814:1622`'s
-            // column gap, which is the same 39 above the standfirst).
             <Entrance
               delay={columnDelay + (subheading ? 300 : 0)}
-              className={cn('mt-10 lg:mt-8', HERO_ENTRANCE)}
+              className={cn('mt-12', HERO_ENTRANCE)}
             >
-              <ButtonLink button={button} className="p-5 text-[16px] font-medium leading-6" />
+              <ButtonLink button={button} />
             </Entrance>
           ) : null}
         </div>

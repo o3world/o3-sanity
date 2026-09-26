@@ -1,7 +1,14 @@
 # Figma components → code
 
+> Current-source update, verified September 25, 2026: use the
+> [current frame inventory](figma-frames.md) and active tracked-node manifest.
+> Main Navigation is `3271:17013` (desktop) / `3737:69217` (mobile), Brand Navigation
+> is `3726:68984`, and Combined CTA + Footer is `3720:62476`. The detailed August
+> inventory below is historical wherever those sources supersede it. Current page
+> instances and the user's footer-only companion-logo direction take precedence.
+
 The component half of map #33's committed mapping. Frames are
-[`docs/figma-frames.md`](https://github.com/o3world/o3-sanity/blob/research/figma-frame-inventory/docs/figma-frames.md); this is every component set in
+[the current verified inventory](figma-frames.md); this is every component set in
 `RvraLJaZ0zWm8UaD5AJf43`, what it maps to, and what deliberately maps to nothing.
 
 Read [`docs/agents/figma.md`](./agents/figma.md) before opening the file.

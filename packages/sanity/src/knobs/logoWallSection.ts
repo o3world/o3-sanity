@@ -17,17 +17,16 @@ export const logoWallSectionKnobs = defineBlockKnobs({
       name: 'layout',
       title: 'Layout',
       description:
-        'Plates is the Home partners band — 280px hairlined squares, six across, clipped at the viewport. Bar is the partner page’s: the same six marks in a short unplated strip, so the row reads as a footnote to the heading rather than as the band’s subject.',
-      // `1864:2390`'s 280×280 tiles against `2332:1713`'s 280×100 frames
-      // (#92). Same content — one centred row of client marks — in two
-      // arrangements, which is a `layout` axis rather than a second block:
-      // the call `featureGridSection`, `railPanelsSection` and
-      // `inFlightSection` have each already made.
+        'Plates is the Home partners band: an intro and separator above an unboxed logo strip on a warm light surface. Bar is the compact partner-page strip and supports an authored surface.',
+      // Keep the stored layout values; current Home is 3720:60483 / 3726:62792.
       options: ['plates', 'bar'],
       initialValue: 'plates',
       bar: true,
     }),
-    surfaceKnob({ initialValue: 'bone' }),
+    surfaceKnob({
+      initialValue: 'bone',
+      showWhen: { at: 'layout', mode: 'oneOf', values: ['bar'] },
+    }),
   ],
   /**
    * `clients` is left empty, and it is the field the band is FOR. A client is a

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import type React from 'react'
-import { Figtree } from 'next/font/google'
+import { Figtree, Newsreader } from 'next/font/google'
 
 import { AnchorGlide } from '@o3/ui'
 import { HeroStartup } from '@/components/globe/HeroStarfield'
@@ -10,12 +10,17 @@ import '@/app/globals.css'
 // Side-effect import: validates env vars at build/boot (see src/env.ts).
 import '@/env'
 
-// Figtree is both the display and body face (tokens/typography.css reads
-// `--font-figtree` first in every stack).
 const figtree = Figtree({
   subsets: ['latin'],
   variable: '--font-figtree',
   display: 'swap',
+})
+
+const newsreader = Newsreader({
+  subsets: ['latin'],
+  variable: '--font-newsreader',
+  display: 'swap',
+  axes: ['opsz'],
 })
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1 }
@@ -50,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
       lang="en"
       data-scroll-behavior="smooth"
-      className={figtree.variable}
+      className={`${figtree.variable} ${newsreader.variable}`}
       style={{ backgroundColor: 'var(--page-background, #000)' }}
     >
       <body className="text-fg font-sans antialiased">

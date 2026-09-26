@@ -1,5 +1,5 @@
 import { expect, test } from 'playwright/test'
-import { navLink, primary } from './journey'
+import { navLink } from './journey'
 
 for (const route of [
   {
@@ -75,7 +75,8 @@ for (const route of [
       await (await navLink(page, 'About')).click()
       await expect(page).toHaveURL(/\/about\/?$/)
       if (route.path === '/')
-        await primary(page)
+        await page
+          .locator('#site-nav')
           .getByRole('link', { name: / home$/ })
           .click()
       else await (await navLink(page, 'Work')).click()
@@ -154,7 +155,8 @@ test('Home entered from an interior document does not start a spatial entrance',
   page,
 }) => {
   await page.goto('/about')
-  await primary(page)
+  await page
+    .locator('#site-nav')
     .getByRole('link', { name: / home$/ })
     .click()
   await expect(page).toHaveURL(/\/$/)

@@ -157,30 +157,9 @@
   /* rgba(3,3,3,0.2) — the 402 bar's dark skin (`Links` 1814:1630). Sits over
    * whatever the hero is showing, so it must stay an alpha. */
   --color-scrim: rgba(3, 3, 3, 0.2);
-  /* rgba(3,3,3,0.45) — the 1440 pill's dark skin (`NavBar` 2225:2920, as the
-   * Case Study frame instances it at 2250:2155).
-   *
-   * NOT THE FRAME'S 60%, AND THE EFFECT IS WHY. The set puts a `GLASS` effect
-   * over that fill, and Figma's Glass refracts rather than covers — the fill
-   * under it is one input to a rendered result, not the result. We draw an
-   * alpha plus a backdrop blur, so transcribing 60% literally and dropping the
-   * effect gave a pill you could not see through at all: an opaque slab where
-   * the design has glass. 45% is where the photograph reads as shapes under
-   * the bar while white links hold. The alpha answers to the effect, which is
-   * what the frame actually declares. */
-  --color-scrim-pill: rgba(3, 3, 3, 0.45);
-  /* rgba(255,255,255,0.6) — the same pill once it floats over a LIGHT band.
-   * White rather than a tint of the dark scrim, because a near-black at a low
-   * alpha over a pale band is grey, and grey chrome reads as a smudge rather
-   * than a pill.
-   *
-   * Retuned from the frame's 80% for the reason `--color-scrim-pill` carries:
-   * the fill sits under a `GLASS` effect and is not the rendered result. At
-   * 80% over a white page there is nothing to see through — the pill and the
-   * page are the same white. 60% keeps ink copy passing under it a ghost while
-   * the band still reads as a pill rather than as a hole. Brand-neutral, like
-   * the white alphas above, so no overlay restates it. */
-  --color-scrim-light: rgba(255, 255, 255, 0.6);
+  /* Main Navigation (3271:17013), dark and light fills. */
+  --color-scrim-pill: rgba(3, 3, 3, 0.6);
+  --color-scrim-light: rgba(255, 255, 255, 0.8);
   /* rgba(0,0,0,0.10) — the hairline on the flipped pill; --color-on-ink-line's
    * opposite number, and the same NO CANONICAL ANCHOR note applies. */
   --color-on-light-line: rgba(0, 0, 0, 0.1);
@@ -213,13 +192,7 @@
   --color-on-utility-line: #242321;
 
   /* ── Button states ─────────────────────────────────────────────────────── */
-  /* The `Button` set (2134:1785) draws four states and paints each one the same
-   * on every theme, so the state fills are the button's own roles rather than
-   * per-fill values. Hover is --color-brand (variable `2050:1200`) and needs no
-   * token; the other three do. They are named for what consumes them, which is
-   * why #242321 and #D6D3CC appear here as well as under Chrome and Borders —
-   * a button state and a hairline are two roles that happen to share a swatch. */
-  /* #242321 — Focus (2134:1804). */
+  /* Legacy roles remain for other controls; Button uses the theme-specific ramps below. */
   --color-btn-focus: #242321;
   /* #E5E3DE — Press (2205:1310). The set's own value; no other role reads it. */
   --color-btn-press: #e5e3de;
@@ -229,6 +202,15 @@
    * --color-fg-muted, which carries the same value but INVERTS on a dark band:
    * the fill above does not, so the pair has to move together or a disabled
    * button on the CTA band wears white at 65% on light grey. */
+  /* Button Theme/State values, Figma 2134:1785 (September 2026). */
+  --color-btn-neutral-hover: #171615;
+  --color-btn-inverse-press: #55524e;
+  --color-btn-brand-press: #a80b00;
+  --color-btn-brand-focus: #ff958c;
+  --color-btn-brand-wash-hover: #fff1f0;
+  --color-btn-brand-wash-press: #ffe0dd;
+  --color-btn-disabled-dark: #393633;
+  --color-btn-disabled-light: #e5e3de;
   --color-btn-disabled-fg: #76746f;
 
   /* ── Borders / placeholders ────────────────────────────────────────────── */

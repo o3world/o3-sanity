@@ -9,13 +9,13 @@ import { resolveSurface } from '../../surface'
 type PersonGridSectionProps = SectionProps<'personGridSection'>
 
 /**
- * Section block: the About frame's "Our team" band (`1927:6435`) — #56.
+ * Section block: the current About team cards (`3771:80239`, `3883:16545`).
  *
  * ```
  * header  padding-left 96, gap 8    18px eyebrow #757575 | 48px heading
  * rows    gap 32, three up          card 394.67 wide, gap 24
  *   tile  square, black + red arc, greyscale portrait
- *   meta  gap 6                     13px role eyebrow #636363 | 25.9px name
+ *   meta  gap 8                     Figtree name 20/26 → 24/34, then 13px role
  * ```
  *
  * **This is the block the 12 migrated `person` documents existed for.** They
@@ -103,23 +103,12 @@ export function PersonGridSection({
                   sizes={PERSON_GRID_COLUMN}
                 />
               </PortraitTile>
-              <div className="flex flex-col gap-1.5">
-                {/* 13px/0.1em bold uppercase in #636363 — `--text-meta` and
-                    `--color-fg-muted` exactly, one step below `Eyebrow`'s
-                    smaller size, so this is the token rather than the
-                    component. */}
+              <div className="flex flex-col gap-2">
+                <p className="text-lead text-balance font-sans">{person.name}</p>
                 {person.title ? (
-                  <p className="text-meta text-fg-muted uppercase">{person.title}</p>
+                  <p className="text-meta text-fg-muted uppercase leading-[15px]">{person.title}</p>
                 ) : null}
-                {/* 25.9px — between display-lg and display-md, and read once.
-                    A call-site literal rather than a token nothing shares. */}
-                <p className="font-display text-balance text-[26px] leading-[1.2]">{person.name}</p>
-                {/* The few lines a card says about a person, at the `body`
-                    step and 12px clear of the name — the kit's People card
-                    (`4404:5726`), whose own gap the 6px above adds up to. O3's
-                    frame draws no bio, so on o3world.com this prints only for
-                    a person an editor has written one for. */}
-                {person.bio ? <p className="text-body text-fg-body mt-1.5">{person.bio}</p> : null}
+                {person.bio ? <p className="text-body text-fg-body mt-1">{person.bio}</p> : null}
               </div>
             </li>
           ))}

@@ -8,45 +8,18 @@ import { SITE_SETTINGS } from '../testing/seedContent'
 
 import { SiteNav } from './SiteNav'
 
-/**
- * Figma's `NavBar` (`2225:2920`), rendered from the **real committed Site
- * Settings document** rather than a fixture — the chrome is authored entirely
- * in data, so a fixture here would be testing the fixture.
- *
- * The bar is `position: fixed` at every width, which makes it awkward to look
- * at on its own: with nothing under it there is nothing for it to float over.
- * Each story therefore supplies a band, and the bands are chosen to exercise
- * the one behaviour that only exists in a browser —
- *
- * ── THE INK FLIP ───────────────────────────────────────────────────────────
- *
- * `NavInk` hit-tests what is under the bar's midpoint on every scroll frame
- * and sets `data-ink="dark"` on the header when it finds a light surface. The
- * default — and everything SSR and no-JS ever sees — is the dark scrim with
- * white copy. `ScrollsOverBands` is the story that actually shows the flip;
- * scroll it.
- *
- * Two widths, structurally different (ADR 0006): a structural-width desktop bar with a
- * 12px corner, a full-width square bar at 402 with the links behind
- * "Open menu".
- *
- * The button is **`Theme=White` on both skins** and is the one thing on the bar
- * that does not move. The bar declares itself an `ink` surface and the button's
- * Auto contrast reads it (#147), so the fill is the frame's rather than a
- * chrome override — and it does not follow the flip, because contrast resolves
- * from a declared surface and the flip is a read of what is passing under.
- */
+/** Current Figma navigation, with the site's authored links and destinations. */
 const meta = {
   title: 'Chrome/SiteNav',
   component: SiteNav,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('2225:2920'),
+    design: figmaDesign('3271:17013'),
   },
   // The mark comes from the app (#228). These stories are the O3 chrome —
   // their frames are O3's — so they render what `apps/web` hands the bar, and
   // it is `currentColor`, which is what makes the flip below carry it.
-  args: { settings: SITE_SETTINGS, brandMark: <BrandMark size={64} className="lg:size-12" /> },
+  args: { settings: SITE_SETTINGS, brandMark: <BrandMark size={64} className="-m-2" /> },
 } satisfies Meta<typeof SiteNav>
 
 export default meta
@@ -63,14 +36,21 @@ export const AlignedWithContent: Story = {
   ),
   play: async ({ canvasElement }) => {
     const nav = canvasElement.querySelector('#site-nav > nav')!
-    const content = canvasElement.querySelector('[data-content-stage]')!
-    await expect(nav.getBoundingClientRect().left).toBeCloseTo(
-      content.getBoundingClientRect().left,
+    const bounds = nav.getBoundingClientRect()
+    await expect(bounds.left).toBeCloseTo(
+      (document.documentElement.clientWidth - bounds.width) / 2,
       0,
     )
-    await expect(nav.getBoundingClientRect().right).toBeCloseTo(
-      content.getBoundingClientRect().right,
-      0,
+    await expect(bounds.height).toBe(80)
+    await expect(getComputedStyle(nav).borderTopLeftRadius).toBe('12px')
+    const home = within(canvasElement).getByRole('link', { name: / home$/ })
+    await expect(home.getBoundingClientRect().left).toBe(32)
+    await expect(home.getBoundingClientRect().width).toBe(80)
+    await expect(getComputedStyle(home).transitionDuration).toBe(
+      getComputedStyle(nav).transitionDuration,
+    )
+    await expect(getComputedStyle(home).transitionProperty).toBe(
+      getComputedStyle(nav).transitionProperty,
     )
     await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
     await expect(within(canvasElement).getByRole('link', { name: 'Let’s talk' })).toBeVisible()
@@ -87,8 +67,8 @@ export const AlignedOnWideScreens: Story = {
   },
   play: async ({ canvasElement }) => {
     const nav = canvasElement.querySelector('#site-nav > nav')!.getBoundingClientRect()
-    await expect(nav.width).toBe(1034)
-    await expect(nav.left).toBeCloseTo((document.documentElement.clientWidth - 1034) / 2, 0)
+    await expect(nav.width).toBeLessThan(900)
+    await expect(nav.left).toBeCloseTo((document.documentElement.clientWidth - nav.width) / 2, 0)
     await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
     await expect(within(canvasElement).getByRole('link', { name: 'Let’s talk' })).toBeVisible()
   },
@@ -158,7 +138,7 @@ export const ScrollsOverBands: Story = {
   ),
 }
 
-/** 402: the primary button belongs in the menu, not the collapsed bar. */
+/** 402: the contact action is visible beside the menu trigger. */
 export const Mobile: Story = {
   globals: { backgrounds: { value: 'ink' }, viewport: { value: 'mobile' } },
   parameters: {
@@ -177,12 +157,19 @@ export const Mobile: Story = {
     await expect(nav.getBoundingClientRect().left).toBe(0)
     await expect(nav.getBoundingClientRect().width).toBe(document.documentElement.clientWidth)
     const canvas = within(canvasElement)
-    await expect(canvas.queryByRole('link', { name: 'Let’s talk' })).not.toBeInTheDocument()
+    await expect(canvas.getByRole('link', { name: 'Let’s talk' })).toBeVisible()
     const trigger = canvas.getByRole('button', { name: 'Open menu' })
     await expect(trigger).toBeVisible()
-    const content = canvasElement.querySelector('[data-content-stage]')!
+    await expect(trigger.getBoundingClientRect().width).toBe(48)
+    await expect(trigger.getBoundingClientRect().height).toBe(48)
+    const icon = trigger.querySelector('svg')!.getBoundingClientRect()
+    await expect(icon.width).toBe(20)
+    await expect(icon.height).toBe(20)
+    await expect(icon.left - trigger.getBoundingClientRect().left).toBe(14)
+    await expect(icon.top - trigger.getBoundingClientRect().top).toBe(14)
+    await expect(nav.getBoundingClientRect().height).toBe(80)
     await expect(trigger.getBoundingClientRect().right).toBeCloseTo(
-      content.getBoundingClientRect().right,
+      document.documentElement.clientWidth - 16,
       0,
     )
     await userEvent.click(trigger)
@@ -231,4 +218,32 @@ export const WithoutNavItems: Story = {
       <SiteNav {...args} />
     </div>
   ),
+}
+
+/** Related brands belong in the footer; header interaction never reveals them. */
+export const HeaderBrand: Story = {
+  ...OverInk,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const home = canvas.getByRole('link', { name: / home$/ })
+    await userEvent.hover(home)
+    home.focus()
+    await expect(canvas.queryByRole('link', { name: 'O3XO' })).not.toBeInTheDocument()
+    await expect(canvas.queryByRole('link', { name: '1682 Conference' })).not.toBeInTheDocument()
+    await expect(home.getBoundingClientRect().width).toBe(80)
+    const primary = canvas.getByRole('navigation', { name: 'Primary' }).getBoundingClientRect()
+    await expect(home.getBoundingClientRect().right).toBeLessThan(primary.left)
+  },
+}
+
+export const SmallDesktop: Story = {
+  ...HeaderBrand,
+  globals: { viewport: { value: 'smallDesktop' } },
+  parameters: {
+    viewport: {
+      options: {
+        smallDesktop: { name: 'Small desktop', styles: { width: '1048px', height: '874px' } },
+      },
+    },
+  },
 }

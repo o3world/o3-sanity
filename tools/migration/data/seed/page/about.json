@@ -12,6 +12,7 @@
       "_type": "heroSection",
       "_key": "hero",
       "variant": "band",
+      "alignment": "center",
       "eyebrow": "About us",
       "headlineLines": [
         "Consultancy that has spent 20+ years prioritizing quality over scale"

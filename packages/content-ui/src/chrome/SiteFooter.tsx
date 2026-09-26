@@ -24,16 +24,8 @@ interface SiteFooterProps {
 }
 
 /**
- * The site footer, built to the `Footer` component (`1280:1885`, mobile
- * `2225:2671`) — `#000000`, `64px 96px`.
- *
- * The component is the source of record as of the 2026-08-13 sync (#87): the
- * 2026-08 pass reworked it and made Home's footer an override-free instance,
- * and the frame footer this was first built from (`1680:2096`) no longer
- * exists in the file.
- *
- * Every string still comes from Site Settings (#19); the component decides
- * only the arrangement.
+ * Footer from the current Combined CTA + Footer (3720:62476), as instanced
+ * on Home at 3720:62172 and 3726:68508. Site Settings owns its content.
  */
 export function SiteFooter({
   settings,
@@ -60,29 +52,29 @@ export function SiteFooter({
       <footer
         id="footer"
         {...surfaceAttrs('ink')}
-        className="px-gutter relative overflow-hidden bg-black py-16 text-white"
+        className="relative overflow-hidden bg-black px-4 pb-16 pt-32 text-white lg:px-24"
       >
-        {/*
-         * The 'O' the footer bleeds off its left edge — the component's
-         * `Vector` (`1320:117`, mobile `2225:2609`): a 1052×1053 donut FILLED
-         * `ink`, its ring 211.76 thick. It sits 40px below the footer's top
-         * edge at both widths; its left is -374.24 in the 1440 component and
-         * -526 in the 402 one, which puts the circle's centre exactly on that
-         * frame's left edge. Decorative and drawn once, so it is inline SVG at
-         * the call site rather than a component.
-         */}
+        {/* Exact Home watermark vectors; the same centered lockup is clipped at mobile. */}
         <svg
           viewBox="0 0 1052 1053"
           aria-hidden="true"
           focusable="false"
-          className="fill-ink pointer-events-none absolute -left-[526px] top-10 h-[1053px] w-[1052px] lg:-left-[374.24px]"
+          className="fill-ink pointer-events-none absolute left-[calc(50%-869px)] top-10 h-[1053px] w-[1052px]"
         >
-          <path d="M0 526.47C0 816.764 235.998 1053 526 1053C816.002 1053 1052 816.825 1052 526.47C1052 236.115 816.062 0 526 0C235.938 0 0 236.176 0 526.47ZM840.239 526.47C840.239 699.892 699.309 841.087 526 841.087C352.692 841.087 211.761 699.953 211.761 526.47C211.761 352.986 352.752 211.913 526 211.913C699.248 211.913 840.239 352.986 840.239 526.47Z" />
+          <path d="M0 526.47C0 816.764 235.998 1053 526 1053C816.002 1053 1052 816.824 1052 526.47C1052 236.115 816.062 0 526 0C235.938 0 0 236.176 0 526.47ZM840.239 526.47C840.239 699.892 699.309 841.087 526 841.087C352.692 841.087 211.761 699.953 211.761 526.47C211.761 352.986 352.752 211.913 526 211.913C699.248 211.913 840.239 352.986 840.239 526.47Z" />
+        </svg>
+        <svg
+          viewBox="0 0 657.765686 1053"
+          aria-hidden="true"
+          focusable="false"
+          className="fill-ink pointer-events-none absolute left-[calc(50%+211px)] top-10 h-[1053px] w-[657.765686px]"
+        >
+          <path d="M329.702 882.727C255.761 882.727 191.657 840.528 188.87 747.428L0 747.428C2.78714 964.169 161.162 1053 329.538 1053C506.604 1053 657.766 951.033 657.766 744.636C657.766 619.518 598.252 548.257 524.147 509.013C592.35 472.561 643.174 408.688 643.174 296.705C643.174 122.163 511.031 0 328.063 0C145.095 0 15.9027 110.505 11.4761 295.227L200.182 295.227C204.609 216.577 256.909 170.273 328.063 170.273C399.217 170.273 454.468 215.263 454.468 302.616C454.468 375.356 415.284 432.004 323.636 432.004L296.093 432.004L296.093 596.53L323.636 596.53C416.76 596.53 468.896 653.179 468.896 739.054C468.896 831.99 410.857 883.056 329.538 883.056L329.702 882.727Z" />
         </svg>
 
-        <div className="max-w-section relative mx-auto flex w-full flex-col gap-12 lg:gap-32">
+        <div className="max-w-section relative mx-auto flex w-full flex-col gap-16 lg:gap-32">
           {/* "Left" — logo beside the tagline block at 1440, stacked at 402. */}
-          <div className="flex flex-col gap-9 lg:flex-row lg:justify-between">
+          <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[minmax(0,588fr)_minmax(0,628fr)] lg:gap-8 lg:pb-[43px]">
             {/* The app's mark (#228), first thing in the left column. O3's
               Figma vector here is the mark alone in white, tight-bounded at
               148px and 128 at 402 (`1280:1856`, `2225:2613`) — a read of one
@@ -90,15 +82,18 @@ export function SiteFooter({
               being imposed on every brand's from here. */}
             {brandMark}
 
-            <div className="flex flex-col gap-24 lg:w-[600px] lg:gap-9">
+            <div className="flex min-w-0 flex-col gap-16 lg:gap-8">
               {settings?.footerTagline ? (
-                <p className="text-display-xl max-w-[600px] text-balance">
+                <p className="text-display-xl font-display max-w-[588px] text-balance">
                   {settings.footerTagline}
                 </p>
               ) : null}
 
-              {/* "Upper" — three columns side by side at both widths. */}
-              <nav aria-label="Footer" className="flex justify-between gap-6 pb-16">
+              {/* Company and Socials share the first mobile row; companion brands wrap below. */}
+              <nav
+                aria-label="Footer"
+                className="flex flex-wrap justify-between gap-x-8 gap-y-16 pb-8 lg:flex-nowrap lg:gap-8 lg:pb-0"
+              >
                 {leadGroup ? (
                   <FooterColumn label={leadGroup.label}>
                     {(leadGroup.links ?? []).map((link) => (
@@ -121,7 +116,7 @@ export function SiteFooter({
                         {/* External profiles, so a plain anchor, not next/link. */}
                         <a
                           href={social.url ?? '#'}
-                          className="text-nav duration-(--duration-hover) text-white transition-opacity ease-out hover:opacity-70"
+                          className="text-nav duration-(--duration-hover) leading-[1.2] text-white transition-opacity ease-out hover:opacity-70"
                           rel="noreferrer"
                           target="_blank"
                         >
@@ -155,7 +150,7 @@ export function SiteFooter({
             Figma variable here as the Utility Nav's links (`2050:1226`) — the
             warm solid for muted copy on the black chrome, which replaced the
             `fg-subtle` grey this row shipped with (2026-08-13 token pass). */}
-          <div className="text-legal text-on-utility flex flex-col gap-3 lg:flex-row lg:items-baseline lg:justify-between">
+          <div className="text-legal text-on-utility flex flex-col gap-4 lg:flex-row lg:items-baseline lg:justify-between">
             <ul className="flex flex-wrap items-baseline gap-6">
               {legalLinks.map((link) => (
                 <li key={link._key}>
@@ -200,14 +195,14 @@ export function SiteFooter({
  */
 function FooterColumn({ label, children }: { label?: string | null; children: React.ReactNode }) {
   return (
-    <div className="lg:w-[188px]">
+    <div className="w-[calc((100%_-_2rem)/2)] lg:w-[188px]">
       {/* 14px / 600 / 0.07em uppercase. A footer-only step doing its job in
           exactly one place, so it stays a literal rather than earning a token
           (packages/tailwind-config README — "what earns a token"). */}
-      <p className="text-brand mb-3 text-[14px] font-semibold uppercase tracking-[0.07em]">
+      <p className="text-brand mb-3 text-[14px] font-semibold uppercase leading-[1.2] tracking-[0.07em]">
         {label}
       </p>
-      <ul className="flex flex-col gap-3 has-[img]:gap-6">{children}</ul>
+      <ul className="text-nav flex flex-col gap-3 leading-[1.2] has-[img]:gap-6">{children}</ul>
     </div>
   )
 }
@@ -229,7 +224,7 @@ function FooterLink({
   return (
     <Link
       href={href}
-      className="text-nav duration-(--duration-hover) text-white transition-opacity ease-out hover:opacity-70"
+      className="text-nav duration-(--duration-hover) leading-[1.2] text-white transition-opacity ease-out hover:opacity-70"
     >
       {children}
     </Link>

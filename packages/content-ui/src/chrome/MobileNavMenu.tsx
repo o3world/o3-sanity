@@ -29,7 +29,7 @@ interface MobileNavMenuProps {
 }
 
 /**
- * The 402 nav's menu, behind the "Open menu" affordance (`1814:1636`).
+ * The 402 nav's menu, behind the "Open menu" affordance (`3737:69134`).
  *
  * **The opened panel has no Figma frame** — the mobile frames draw the closed
  * hamburger and stop (ADR 0006 records this as a genuine coverage gap). So
@@ -47,11 +47,7 @@ export function MobileNavMenu({ items, button, utilities }: MobileNavMenuProps) 
     <Sheet open={state === 'open'} onOpenChange={(open) => setState(open ? 'open' : 'closed')}>
       <SheetTrigger
         aria-label="Open menu"
-        // The frame draws the bars at `rgba(255,255,255,0.85)`. Expressed as
-        // opacity on an inherited `currentColor` rather than as a white at an
-        // alpha, so the 402 bar's ink flip (SiteNav) reaches the hamburger the
-        // same way it reaches the links — 85% of whichever ink is live.
-        className="focus-visible:ring-brand duration-(--duration-hover) opacity-85 transition-opacity ease-out hover:opacity-70 focus-visible:outline-none focus-visible:ring-2"
+        className="focus-visible:ring-brand duration-(--duration-hover) flex size-12 shrink-0 items-center justify-center transition-opacity ease-out hover:opacity-70 focus-visible:outline-none focus-visible:ring-2"
       >
         <MenuIcon />
       </SheetTrigger>
