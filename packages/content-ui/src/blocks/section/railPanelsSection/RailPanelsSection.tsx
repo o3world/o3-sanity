@@ -37,13 +37,10 @@ const HEADER_SHAPE = {
     intro: 'text-lead text-fg-body',
   },
   split: {
-    // 18 between the heading and the standfirst at 402 (`2975:8355`), where
-    // every other band takes 24.
-    wrapper: 'gap-[18px] lg:flex-row lg:items-start lg:justify-between lg:gap-8',
-    heading: 'text-display-xl',
-    // 20/32 on both of the track's frames — flat, so `text-body`'s 16px floor
-    // would undersize it at 402.
-    intro: 'text-[20px] leading-8 lg:w-[340px]',
+    // About values: 3771:80605 desktop, 3883:16533 mobile.
+    wrapper: 'max-w-[608px] gap-2',
+    heading: 'text-hero',
+    intro: 'text-lead text-fg-body',
   },
 } as const
 
