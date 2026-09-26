@@ -149,6 +149,14 @@ export const RailMobile: Story = {
   args: seededSectionArgs('index', 'railPanelsSection', 0),
   globals: { viewport: { value: 'mobile' } },
   parameters: { design: figmaDesign('2975:8188') },
+  play: async ({ canvasElement }) => {
+    const section = canvasElement.querySelector('section')!
+    const heading = canvasElement.querySelector('h2')!
+    await expect(getComputedStyle(section).paddingLeft).toBe('24px')
+    await expect(getComputedStyle(section).paddingTop).toBe('64px')
+    await expect(getComputedStyle(section).paddingBottom).toBe('64px')
+    await expect(getComputedStyle(heading.parentElement!.parentElement!).rowGap).toBe('64px')
+  },
 }
 
 /**

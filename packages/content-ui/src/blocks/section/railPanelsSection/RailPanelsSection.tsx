@@ -186,8 +186,7 @@ export function RailPanelsSection({
   }
 
   return (
-    // `2747:4486` — 128 above and below, and 128 between the header and the
-    // band, at both widths.
+    // Current technology band: 64px rhythm / 24px gutters on mobile (2975:8188).
     <SectionShell
       surface={resolved}
       top="md"
@@ -195,9 +194,12 @@ export function RailPanelsSection({
       background={background}
       // Clip the bleeding artwork without creating a scroll container that
       // prevents the rail from sticking to the viewport.
-      className={bleeding ? 'relative isolate overflow-clip' : undefined}
+      className={cn(
+        mode === 'label' && 'max-lg:px-6 max-lg:pb-16 max-lg:pt-16',
+        bleeding && 'relative isolate overflow-clip',
+      )}
     >
-      <div className="flex flex-col gap-32">
+      <div className={cn('flex flex-col', mode === 'label' ? 'gap-16 lg:gap-32' : 'gap-32')}>
         {header}
 
         <PanelBand
