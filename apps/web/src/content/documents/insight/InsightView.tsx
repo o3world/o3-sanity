@@ -132,7 +132,7 @@ export function InsightView({
       <CtaSection
         heading={'Let’s put some of\nthis thinking to work.'}
         body={
-          'If something here sparked an idea, surfaced a challenge, or got\nyou thinking differently, we’d love to talk about where it could lead.'
+          'If something here sparked an idea, surfaced a challenge, or got\nyou thinking differently, we’d love to talk about what could be next.'
         }
         button={{
           _type: 'button',

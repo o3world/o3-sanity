@@ -3,6 +3,7 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { sectionBackground } from '../../sectionBackground'
 import { ButtonLink } from '../../../ButtonLink'
+import { CtaFooterPaint } from './CtaFooterPaint'
 
 type CtaSectionProps = SectionProps<'ctaSection'> & {
   /** Alternate line grouping from the mobile frame, when it differs. */
@@ -23,6 +24,7 @@ export function CtaSection({
         {...surfaceAttrs('ink')}
         className="cta-band relative isolate px-4 text-white lg:px-24"
       >
+        <CtaFooterPaint />
         {sectionBackground(backgroundMedia, 'ink')}
         <div className="relative z-10 mx-auto flex max-w-[822px] flex-col items-center gap-12 pb-16 pt-32 text-center lg:pb-48">
           {heading || body ? (

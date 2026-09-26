@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
-import { expect, within } from 'storybook/test'
+import { expect, waitFor, within } from 'storybook/test'
 
 import { seedImage, seededSectionArgs } from '../../../testing/seedContent'
 
@@ -70,5 +70,40 @@ export const OnPhotograph: Story = {
       _type: 'backgroundMedia',
       image: seedImage('tools/migration/data/seed/assets/work-city.png'),
     },
+  },
+}
+
+/** The footer and authored CTA can both differ from the source frame's height. */
+export const ReflowingFooter: Story = {
+  args: seededSectionArgs('about', 'ctaSection'),
+  render: (args) => (
+    <>
+      <CtaSection {...args} />
+      <footer id="footer" className="site-footer" style={{ height: 137 }}>
+        Footer content
+      </footer>
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const cta = canvasElement.querySelector('section')!
+    const footer = canvasElement.querySelector('footer')!
+    const check = async () =>
+      waitFor(() => {
+        const total = `${cta.getBoundingClientRect().height + footer.getBoundingClientRect().height}px`
+        expect(cta.style.getPropertyValue('--cta-combined-height')).toBe(total)
+        expect(footer.style.getPropertyValue('--cta-combined-height')).toBe(total)
+        expect(getComputedStyle(cta).backgroundSize).toBe(getComputedStyle(footer).backgroundSize)
+      })
+    await check()
+    footer.style.height = '311px'
+    await check()
+    cta.style.paddingBottom = '101px'
+    await check()
+    cta.style.marginBottom = '20px'
+    footer.style.height = '312px'
+    await waitFor(() => {
+      expect(cta.style.getPropertyValue('--cta-combined-height')).toBe('')
+      expect(footer.style.getPropertyValue('--cta-combined-height')).toBe('')
+    })
   },
 }
