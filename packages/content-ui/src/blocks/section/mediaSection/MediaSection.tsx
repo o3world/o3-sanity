@@ -100,8 +100,8 @@ export function MediaSection({
                       </h2>
                     ) : null}
                     {subheading ? (
-                      <p className="max-w-[728px] text-[20px] leading-[26px] lg:text-[24px] lg:leading-[34px]">
-                        {subheading}
+                      <p className="max-w-[728px] whitespace-pre-line text-[20px] leading-[26px] lg:text-[24px] lg:leading-[34px]">
+                        {subheading.replace(/\u2028/g, '\n')}
                       </p>
                     ) : null}
                   </div>
