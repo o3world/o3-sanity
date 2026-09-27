@@ -11,7 +11,7 @@ const bodyVariants = cva('text-fg max-w-prose [&>:first-child]:mt-0 [&>:last-chi
   variants: {
     variant: {
       body: 'text-body',
-      article: 'text-body leading-8',
+      article: 'text-body leading-8 [&_h2]:font-light',
       chapter: 'text-lead text-fg-body',
     },
   },
@@ -29,6 +29,9 @@ const bodyVariants = cva('text-fg max-w-prose [&>:first-child]:mt-0 [&>:last-chi
  */
 function componentsFor(figureSizes: string, leadKey?: string): PortableTextComponents {
   return {
+    hardBreak: () => (
+      <span className="in-[h2]:max-lg:whitespace-normal whitespace-pre-line">{'\n'}</span>
+    ),
     block: {
       /*
        * The article measure's rhythm (`2252:3607`): blocks 32px apart, one

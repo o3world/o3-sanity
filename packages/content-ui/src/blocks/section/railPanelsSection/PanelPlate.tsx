@@ -31,7 +31,7 @@ export interface PanelPlateProps {
  *
  * ```
  * 1440   row, gap 33      copy 500  |  plate 395 × 396
- *   copy   column, gap 48    logo 257 × 70 over 24/34 prose, 12 apart
+ *   copy   column, gap 48    logo 257 × 70 over 20/28 prose, 12 apart
  *                            then the link
  *  402   column, gap 33    copy full width, plate under it
  * ```
@@ -40,11 +40,6 @@ export interface PanelPlateProps {
  * `plate: square` draws the 395 the band's own sum leaves for it — 82 + 238 +
  * 500 + 33 + 395 = 1248, the standard content column; `plate: bleed` draws the
  * frame's 491 and keeps going to the viewport's edge (`plateBleed.ts`).
- *
- * **An empty plate holds the row open at 1440 and is drawn nowhere else.** The
- * frame's plates are flat grey on every panel — no picture is chosen yet — and
- * a 402 column has no row to hold open, so a panel with nothing to show is
- * copy alone on a phone rather than a full-width grey field.
  *
  * The call to action is the frame's `Link`, not its `Button`: 18/24 flush with
  * the copy above it, the arrow 4px off the label. The fill is still the
@@ -95,9 +90,10 @@ export function PanelPlate({
             <h3 className="text-display-xl font-display text-balance">{heading}</h3>
           ) : null}
 
-          {/* Platform wordmarks use lead copy; discipline panels use 20/28 (4027:38291). */}
           {body ? (
-            <p className={logo ? 'text-lead text-fg-body' : 'text-fg-body text-[20px] leading-7'}>
+            <p
+              className={`text-fg-body text-[20px] ${logo ? 'leading-[26px] lg:leading-7' : 'leading-7'}`}
+            >
               {body}
             </p>
           ) : null}
@@ -109,7 +105,7 @@ export function PanelPlate({
             button={button}
             // `Link` (`2747:4647`), not `Button`: no padding, and 4px to the
             // arrow rather than the button set's 12.
-            className="text-brand gap-1 p-0"
+            className="text-brand gap-1 p-0 font-semibold"
           />
         ) : null}
       </div>
@@ -143,9 +139,7 @@ export function PanelPlate({
           sizes="(min-width: 640px) 395px, 90vw"
           className="w-full sm:max-w-[395px] lg:h-[396px] lg:w-[395px] lg:shrink-0"
         />
-      ) : (
-        <div className="bg-bone hidden lg:block lg:h-[396px] lg:w-[395px] lg:shrink-0" />
-      )}
+      ) : null}
     </article>
   )
 }

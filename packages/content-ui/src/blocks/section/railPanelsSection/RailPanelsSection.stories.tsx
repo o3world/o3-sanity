@@ -196,6 +196,10 @@ export const RailBleed: Story = {
     await expect(getComputedStyle(plate).boxShadow).not.toBe('none')
     const link = canvasElement.querySelector('article a')!
     await expect(getComputedStyle(link).color).toBe('rgb(235, 16, 0)')
+    await expect(getComputedStyle(link).fontWeight).toBe('600')
+    const body = canvasElement.querySelector('article p')!
+    await expect(getComputedStyle(body).fontSize).toBe('20px')
+    await expect(getComputedStyle(body).lineHeight).toBe('28px')
     const win = canvasElement.ownerDocument.defaultView!
     const top = parseFloat(win.getComputedStyle(rail).top)
     const start = rail.getBoundingClientRect().top + win.scrollY
@@ -348,5 +352,19 @@ export const WideRowsHeader: Story = {
     await expect(
       canvasElement.querySelector('h2')!.parentElement!.getBoundingClientRect().width,
     ).toBe(1035)
+  },
+}
+
+export const WithoutMedia: Story = {
+  args: {
+    ...RailByLabel.args,
+    panels: RailByLabel.args!.panels!.map((panel) => ({ ...panel, media: null, logo: undefined })),
+  },
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    for (const panel of canvasElement.querySelectorAll('article[id]')) {
+      await expect(panel.querySelector('img')).toBeNull()
+      await expect(panel.getBoundingClientRect().height).toBeLessThan(396)
+    }
   },
 }

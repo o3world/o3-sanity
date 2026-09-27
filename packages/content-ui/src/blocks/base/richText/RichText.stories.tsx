@@ -5,6 +5,7 @@ import type { BaseProps } from '@o3/content-runtime/blocks'
 import { seedImage } from '../../../testing/seedContent'
 
 import { RichText } from './RichText'
+import { PortableTextBody } from '../../../portable-text/PortableTextBody'
 
 type Body = NonNullable<BaseProps<'richText'>['body']>
 
@@ -179,4 +180,41 @@ export const OnInk: Story = {
       <RichText {...args} />
     </div>
   ),
+}
+
+export const ArticleHeadingBreak: Story = {
+  args: {
+    body: [
+      block('h2', 'Nothing should be sacred anymore.\nNothing is “too big to cut.”'),
+      block('normal', 'First line.\nSecond line.'),
+    ] as unknown as Body,
+  },
+  render: ({ body }) => (
+    <div className="max-w-[822px]">
+      <PortableTextBody value={body} variant="article" />
+    </div>
+  ),
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const heading = canvasElement.querySelector('h2')!
+    await expect(getComputedStyle(heading).fontWeight).toBe('300')
+    await expect(heading.getBoundingClientRect().height).toBeCloseTo(88, 0)
+    await expect(canvasElement.querySelector('p')!.getBoundingClientRect().height).toBeCloseTo(
+      64,
+      0,
+    )
+  },
+}
+
+export const ArticleHeadingBreakMobile: Story = {
+  ...ArticleHeadingBreak,
+  globals: { viewport: { value: 'mobile' } },
+  play: async ({ canvasElement }) => {
+    const heading = canvasElement.querySelector('h2')!
+    await expect(getComputedStyle(heading).fontWeight).toBe('300')
+    await expect(getComputedStyle(heading.querySelector('span')!).whiteSpace).toBe('normal')
+    await expect(getComputedStyle(canvasElement.querySelector('p span')!).whiteSpace).toBe(
+      'pre-line',
+    )
+  },
 }

@@ -34,7 +34,7 @@ export function MediaCard({ media, heading, body, button, slotSizes }: MediaCard
           button={button}
           // `Link`, not `Button`: no plate and no padding, and the label is
           // brand red at Bold rather than the button label's Medium.
-          className="text-brand self-start p-0 pt-6 text-[18px] font-medium leading-6"
+          className="text-brand self-start p-0 pt-6 text-[18px] font-semibold leading-6"
         />
       </div>
     </article>
