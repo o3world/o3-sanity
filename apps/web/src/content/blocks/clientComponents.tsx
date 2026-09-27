@@ -15,7 +15,6 @@ import {
   type ClientBlockRenderBinding,
   type SectionProps,
 } from '@o3/content-runtime/blocks'
-import { BrandLogo } from '@o3/ui'
 
 import { StatsSection } from './statsSection/StatsSection'
 import '@/components/work/work-cards.css'
@@ -39,21 +38,6 @@ import {
   RailPanelsSection,
   RoleListSection,
 } from '@o3/content-ui'
-
-/**
- * The hero, with this app's mark bound into it (#228).
- *
- * The partner lockup draws the brand's mark beside the partner's, and a
- * renderer's props arrive from Sanity — so the app's channel for a mark is
- * this binding rather than a field. `brandMark` being required is what makes
- * an app that binds the bare `HeroSection` a compile error at `registry.ts`'s
- * `satisfies`, instead of a page quietly drawing no mark.
- *
- * The tile is `2479:2205`'s: O3's mark on its red plate at 71px.
- */
-function HeroSectionWithMark(props: SectionProps<'heroSection'>) {
-  return <HeroSection {...props} brandMark={<BrandLogo color="red" size={71} />} />
-}
 
 /**
  * The layout band, sequencing its entrance on headed interior bands.
@@ -91,7 +75,7 @@ function CaseShowcaseSectionInStack(props: SectionProps<'caseShowcaseSection'>) 
  * still catch a missing binding via its own `satisfies` clause.
  */
 export const CLIENT_SECTION_BINDINGS = [
-  defineBlockRender('heroSection', { component: HeroSectionWithMark }),
+  defineBlockRender('heroSection', { component: HeroSection }),
   defineBlockRender('logoWallSection', { component: LogoWallSection }),
   defineBlockRender('caseShowcaseSection', { component: CaseShowcaseSectionInStack }),
   defineBlockRender('railPanelsSection', { component: RailPanelsSection }),

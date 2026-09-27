@@ -1,9 +1,7 @@
-import type { ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { heroSectionKnobs } from '@o3/sanity/knobs'
 import { defineKnobStories } from '@o3/story-kit'
-import { BrandLogo } from '@o3/ui'
 
 import type { SectionProps } from '@o3/content-runtime/blocks'
 
@@ -32,11 +30,7 @@ import { HeroSection } from './HeroSection'
  * Band stories cover current ink interiors and the bone About composition.
  * The orbital Home composition retains its independent ink surface.
  */
-const fixture: SectionProps<'heroSection'> & { brandMark: ReactNode } = {
-  // The mark reaches the hero from the app's binding, not from Sanity (#228),
-  // so a story stands in for one. This is what `apps/web` binds — the red tile
-  // the partner lockup's `2479:2205` draws.
-  brandMark: <BrandLogo color="red" size={71} />,
+const fixture: SectionProps<'heroSection'> = {
   variant: 'orbital',
   eyebrow: 'WORK',
   headlineLines: ['You see the problem in front of you.', 'We’re working on the one behind it.'],

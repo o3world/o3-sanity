@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react'
 import { stegaClean } from '@sanity/client/stega'
 
 import {
@@ -23,16 +22,6 @@ import { sectionBackground } from '../../sectionBackground'
 import { resolveSurface } from '../../surface'
 import { MoleculeDecoration } from '../../MoleculeDecoration'
 
-type HeroSectionProps = SectionProps<'heroSection'> & {
-  /**
-   * The brand's mark, for the partner lockup (#228). It reaches a block
-   * renderer through the app's own binding in `clientComponents.tsx` rather
-   * than from Sanity — the other half of the lockup is the content, and this
-   * half is the app that is rendering it.
-   */
-  brandMark: ReactNode
-}
-
 /** The Figma page composition with the existing orbital renderer and entrance lifecycle. */
 export function HeroSection({
   variant,
@@ -46,7 +35,7 @@ export function HeroSection({
   decoration,
   surface,
   backgroundMedia,
-}: HeroSectionProps) {
+}: SectionProps<'heroSection'>) {
   const lines = headlineLines ?? []
   const showOrbs = stegaClean(decoration) !== 'none'
 
