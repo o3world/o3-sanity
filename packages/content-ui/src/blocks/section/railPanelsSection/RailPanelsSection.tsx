@@ -106,14 +106,25 @@ export function RailPanelsSection({
       className={cn('flex w-full flex-col', HEADER_SHAPE[shape].wrapper)}
     >
       {eyebrow ? (
-        <Eyebrow size="lg" className="pb-4">
+        <Eyebrow size="lg" tone={resolved === 'ink' ? 'inverse' : 'brand'} className="pb-4">
           {eyebrow}
         </Eyebrow>
       ) : null}
       {heading ? (
-        <h2 className={cn('font-display text-balance', HEADER_SHAPE[shape].heading)}>{heading}</h2>
+        <h2
+          className={cn(
+            'font-display whitespace-normal lg:whitespace-pre-line',
+            HEADER_SHAPE[shape].heading,
+          )}
+        >
+          {heading.replace(/\u2028/g, '\n')}
+        </h2>
       ) : null}
-      {intro ? <p className={HEADER_SHAPE[shape].intro}>{intro}</p> : null}
+      {intro ? (
+        <p className={cn(HEADER_SHAPE[shape].intro, 'whitespace-normal lg:whitespace-pre-line')}>
+          {intro.replace(/\u2028/g, '\n')}
+        </p>
+      ) : null}
     </div>
   )
 

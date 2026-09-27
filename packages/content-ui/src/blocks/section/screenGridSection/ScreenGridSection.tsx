@@ -24,6 +24,7 @@ const TONE_CLASS = {
 
 const SPAN_CLASS = {
   standard: 'self-start',
+  narrow: 'self-start',
   wide: 'aspect-4/3 lg:aspect-[1248/700]',
 } as const
 
@@ -36,7 +37,8 @@ function toneOf(value: string | null | undefined): Tone {
 }
 
 function spanOf(value: string | null | undefined): Span {
-  return stegaClean(value) === 'wide' ? 'wide' : 'standard'
+  const clean = stegaClean(value)
+  return clean === 'wide' || clean === 'narrow' ? clean : 'standard'
 }
 
 export function ScreenGridSection({
@@ -55,7 +57,7 @@ export function ScreenGridSection({
     <ul className={`mx-auto grid w-full gap-8 ${feature ? 'lg:grid-cols-4' : 'lg:grid-cols-2'}`}>
       {screens.map((screen, index) => {
         const span = spanOf(screen.span)
-        const fill = span === 'standard' || stegaClean(screen.framing) === 'image'
+        const fill = span !== 'wide' || stegaClean(screen.framing) === 'image'
         const placement = feature
           ? index === 0
             ? 'lg:col-span-3 lg:row-span-2'
@@ -63,7 +65,9 @@ export function ScreenGridSection({
               ? 'lg:col-span-1'
               : span === 'wide'
                 ? 'lg:col-span-4'
-                : 'lg:col-span-2'
+                : span === 'narrow'
+                  ? 'lg:col-span-1'
+                  : 'lg:col-span-2'
           : span === 'wide'
             ? 'lg:col-span-2'
             : ''
@@ -113,11 +117,13 @@ export function ScreenGridSection({
                     ? index === 0
                       ? '(min-width: 1024px) calc((100vw - 192px) * .75 - 8px), calc(100vw - 32px)'
                       : '(min-width: 1024px) calc((100vw - 192px) * .25 - 24px), calc(100vw - 32px)'
-                    : span === 'wide' && fill
-                      ? '(min-width: 1024px) calc(100vw - 192px), calc(100vw - 32px)'
-                      : span === 'wide'
-                        ? '(min-width: 1440px) calc(100vw - 278px), (min-width: 1024px) calc(89.402vw - 125.396px), calc(90vw - 64px)'
-                        : '(min-width: 1440px) calc(50vw - 91px), (min-width: 1024px) calc(44.701vw - 14.698px), 90vw'
+                    : span === 'narrow'
+                      ? '(min-width: 1024px) calc((100vw - 192px) * .25 - 24px), calc(100vw - 32px)'
+                      : span === 'wide' && fill
+                        ? '(min-width: 1024px) calc(100vw - 192px), calc(100vw - 32px)'
+                        : span === 'wide'
+                          ? '(min-width: 1440px) calc(100vw - 278px), (min-width: 1024px) calc(89.402vw - 125.396px), calc(90vw - 64px)'
+                          : '(min-width: 1440px) calc(50vw - 91px), (min-width: 1024px) calc(44.701vw - 14.698px), 90vw'
                 }
               />
             </div>

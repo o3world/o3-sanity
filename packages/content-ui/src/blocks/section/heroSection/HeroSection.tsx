@@ -104,7 +104,7 @@ export function HeroSection({
     return (
       <CollectionHero
         eyebrow={eyebrow}
-        heading={lines.join(' ')}
+        heading={lines.join('\n')}
         subheading={subheading}
         lockup={lockup}
         aside={aside}

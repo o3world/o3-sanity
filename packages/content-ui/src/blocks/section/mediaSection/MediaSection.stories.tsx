@@ -182,3 +182,28 @@ export const FeatureMobile: Story = {
     await expect(canvasElement.querySelector('p')).toHaveTextContent('A little edge.')
   },
 }
+
+export const CompleteComposition: Story = {
+  args: {
+    variant: 'composition',
+    media: {
+      _type: 'figure',
+      alt: 'IRONMAN Pro Series composition',
+      image: {
+        _type: 'image',
+        asset: {
+          _id: 'image-e725da203afd363d6be87c496d6f2d98bc29dfe8-2880x3800-png',
+          metadata: null,
+        },
+      },
+    },
+  },
+  globals: { viewport: { value: 'desktop' } },
+  parameters: { design: figmaDesign('3576:24877') },
+  play: async ({ canvasElement }) => {
+    const image = canvasElement.querySelector('img')!
+    const box = image.getBoundingClientRect()
+    await expect(box.width).toBe(window.innerWidth)
+    await expect(box.height / box.width).toBeCloseTo(1900 / 1440, 2)
+  },
+}

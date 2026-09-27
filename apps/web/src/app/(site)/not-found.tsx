@@ -37,11 +37,11 @@ export default function NotFound() {
         heading={'You may be feeling lost\nright now, but don’t panic.'}
         mobileHeading={'You may be feeling\nlost right now,\nbut don’t panic.'}
         body={
-          'We love a new challenge. If you’re ready to\ntackle what’s next, we’re ready to help.'
+          'Helping folks find their way through complex digital\nchallenges is our day job. Consider this the warm-up.'
         }
         button={{
           _type: 'button',
-          label: 'Let’s talk',
+          label: 'Talk to our team',
           href: '/contact',
           contrast: 'light',
           target: null,

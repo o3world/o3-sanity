@@ -1,0 +1,2580 @@
+{
+  "sourceFile": "RvraLJaZ0zWm8UaD5AJf43",
+  "sourceVersion": "2402903657143566810",
+  "documents": [
+    {
+      "id": "collectionIndex-seed-insights",
+      "type": "collectionIndex",
+      "slug": null,
+      "patches": [
+        {
+          "path": "sectionsBelow[_key==\"cta\"].button.href",
+          "before": "/work",
+          "after": "/contact",
+          "source": "R1: conversation intent and article CTA destination"
+        }
+      ]
+    },
+    {
+      "id": "page-seed-index",
+      "type": "page",
+      "slug": "index",
+      "patches": [
+        {
+          "path": "sections[_key==\"platforms\"].eyebrow",
+          "before": null,
+          "after": "Technology partnerships",
+          "source": "I3720:62626;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"insights\"].eyebrow",
+          "before": null,
+          "after": "Insights",
+          "source": "I3720:60615;3754:73420;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"insights\"].body",
+          "before": null,
+          "after": "What we’re learning, questioning, and putting into practice across AI, design, and technology.",
+          "source": "I3720:60615;3754:73420;3720:62491"
+        }
+      ]
+    },
+    {
+      "id": "page-seed-solutions-software-engineering",
+      "type": "page",
+      "slug": "solutions/software-engineering",
+      "patches": [
+        {
+          "path": "sections[_key==\"use-cases\"].eyebrow",
+          "before": null,
+          "after": "Engineering challenges",
+          "source": "I4039:49502;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"use-cases\"].subheading",
+          "before": null,
+          "after": "If your team keeps running into the same bottlenecks, workarounds, and technical headaches, you’re in familiar territory. Chances are, we’ve helped teams just like yours solve engineering challenges just like these.",
+          "source": "I4039:49502;3720:62491"
+        },
+        {
+          "path": "sections[_key==\"proof\"].heading",
+          "before": "Code doesn't ship and disappear",
+          "after": "Code doesn’t ship and disappear.",
+          "source": "I4036:49062;3720:62490"
+        }
+      ]
+    },
+    {
+      "id": "page-seed-partners-sanity",
+      "type": "page",
+      "slug": "partners/sanity",
+      "patches": [
+        {
+          "path": "sections[_key==\"why\"].eyebrow",
+          "before": null,
+          "after": "Why O3",
+          "source": "I3897:17944;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"why\"].subheading",
+          "before": null,
+          "after": "We know Sanity deeply, but we also know the platform only matters if the strategy, experience, content, and organization around it work too.",
+          "source": "I3897:17944;3720:62491"
+        },
+        {
+          "path": "sections[_key==\"use-cases\"].eyebrow",
+          "before": null,
+          "after": "Use Cases",
+          "source": "I4043:49740;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"enables\"].eyebrow",
+          "before": null,
+          "after": "Outcomes",
+          "source": "I3911:18113;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"enables\"].heading",
+          "before": "A content operation that moves faster without losing the standards that made it good in the first place.",
+          "after": "A content operation that keeps up.",
+          "source": "I3911:18113;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"enables\"].features[_key==\"en-speed\"].heading",
+          "before": "5–10x faster content production cycles",
+          "after": "Faster content production cycles",
+          "source": "2354:2446 outcomes cards: completed labels, no quantitative claim"
+        },
+        {
+          "path": "sections[_key==\"enables\"].features[_key==\"en-channels\"].heading",
+          "before": "Multi-channel publishing from one source",
+          "after": "Publish everywhere from one source",
+          "source": "2354:2446 outcomes cards: completed labels, no quantitative claim"
+        },
+        {
+          "path": "sections[_key==\"enables\"].features[_key==\"en-collab\"].heading",
+          "before": "Team collaboration without version chaos",
+          "after": "Better collaboration, less version chaos",
+          "source": "2354:2446 outcomes cards: completed labels, no quantitative claim"
+        },
+        {
+          "path": "sections[_key==\"enables\"].features[_key==\"en-governance\"].heading",
+          "before": "Scalable content governance",
+          "after": "Content governance that scales with you",
+          "source": "2354:2446 outcomes cards: completed labels, no quantitative claim"
+        }
+      ]
+    },
+    {
+      "id": "caseStudy-wp-10028",
+      "type": "caseStudy",
+      "slug": "case-studies-ironman-digital-experience-drupal-acquia",
+      "patches": [
+        {
+          "path": "story",
+          "before": [
+            {
+              "_key": "chapter-0",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "e16543c9343e",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "5e0be80fdedb",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "IRONMAN's digital platform had reached its limit. Their legacy CMS was slowing down content production, creating unnecessary work for internal teams, and approaching end-of-life. At the same time, the brand was preparing to launch the new IRONMAN Pro Series before tackling a full rebuild of ironman.com. They needed a partner who could move quickly, solve the technical challenges, and deliver a digital experience that matched the scale of the brand."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "details": [
+                {
+                  "_key": "detail-0",
+                  "_type": "detail",
+                  "body": "We turned an ambitious transformation into a phased roadmap: launch the Pro Series quickly, prove the approach, then scale it across the broader IRONMAN ecosystem.",
+                  "label": "Strategy"
+                },
+                {
+                  "_key": "detail-1",
+                  "_type": "detail",
+                  "body": "We created a flexible, component-driven experience centered around athletes, events, compelling live content, and the stories that bring IRONMAN to life.",
+                  "label": "Design"
+                },
+                {
+                  "_key": "detail-2",
+                  "_type": "detail",
+                  "body": "We replatformed IRONMAN on Drupal and Acquia, connected its fragmented data and tools, and created a scalable system for managing thousands of pages.",
+                  "label": "Technology"
+                }
+              ],
+              "kicker": "Overview",
+              "title": "The starting line"
+            },
+            {
+              "_key": "d8b526739b37",
+              "_type": "mediaSection",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-1da36699b9088a709684480ec5d1b5834924730c-3744x4200-png",
+                    "_type": "reference"
+                  }
+                },
+                "tint": "none"
+              },
+              "media": {
+                "_type": "figure",
+                "alt": "IRONMAN Homepage screenshot",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-9bc492c6bfe96f1da9abebb2d589d3259e0b3b4d-2658x4105-png",
+                    "_type": "reference"
+                  }
+                }
+              },
+              "surface": "white",
+              "variant": "plain",
+              "width": "contained"
+            },
+            {
+              "_key": "d9b2942b2fae",
+              "_type": "screenGridSection",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "tint": "dim"
+              },
+              "screens": [
+                {
+                  "_key": "641ac4eebb3a",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Ironman mobile screenshot",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-541868b8cfcf15e035eb6adfc4d3c2a3aa5d47aa-1216x1432-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "ink"
+                },
+                {
+                  "_key": "7f438f64da0e",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Ironman image of female athlete",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-c337f3f0a5d7ec64268e735a964d39f7dc5b597c-1216x1432-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "ink"
+                }
+              ],
+              "surface": "white"
+            },
+            {
+              "_key": "chapter-1",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "10fa412ab87f",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "d1734949e62c",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "With the new IRONMAN Pro Series set to launch in just 75 days, there wasn’t time for a conventional rebuild."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "d0110bd40939",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "d1734949e62c",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Rather than treating Pro Series as a temporary microsite, we used it to establish the principles that would guide a larger transformation. Athletes took center stage, supported by live race standings, real-time statistics, video streaming, and on-demand content that let fans follow the competition as it unfolded."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "d7dd4b643083",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "d1734949e62c",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Drupal gave IRONMAN control of the experience behind the scenes, while Brightcove powered the live and on-demand video that brought race day to the screen."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "Phase one",
+              "title": "A race against the clock"
+            },
+            {
+              "_key": "media-1",
+              "_type": "mediaSection",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-4aa64170ca7a4c4290beefd81cd2cf2c9c32239f-3744x3000-png",
+                    "_type": "reference"
+                  }
+                },
+                "tint": "none"
+              },
+              "media": {
+                "_key": "fig-1",
+                "_type": "figure",
+                "alt": "IRONMAN digital transformation",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-13fb4720fc80ac2dd92ac1f9cafff22fa1954a11-887x968-png",
+                    "_type": "reference"
+                  }
+                }
+              },
+              "surface": "bone",
+              "variant": "plain"
+            },
+            {
+              "_key": "bc453566926b",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "2f2ba4515391",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "bdd938ee06fe",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "The experience needed to capture the energy of IRONMAN by putting the athletes and competition at the center of the story."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "aaf2a67793ba",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "bdd938ee06fe",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Live standings, real-time stats, video, and athlete-focused storytelling brought fans closer to the action as races unfolded. Beyond race day, flexible content components gave IRONMAN new ways to tell stories, highlight athletes, and keep people connected throughout the season."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "9dfb6a484f28",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "bdd938ee06fe",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "The result was an experience designed to feel alive whenever fans arrived."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "UX & UI Design",
+              "title": "Built for race day, and every day"
+            },
+            {
+              "_key": "screens-0",
+              "_type": "screenGridSection",
+              "screens": [
+                {
+                  "_key": "media-2",
+                  "_type": "screen",
+                  "media": {
+                    "_key": "fig-2",
+                    "_type": "figure",
+                    "alt": "IRONMAN digital transformation",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-b350d0f1e1c5610cf332d40060c2defab636d639-1776x810-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "ink"
+                },
+                {
+                  "_key": "media-3",
+                  "_type": "screen",
+                  "media": {
+                    "_key": "fig-3",
+                    "_type": "figure",
+                    "alt": "IRONMAN digital transformation",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-11e5532f1370548a6466623cae017b93c5bd7017-1216x684-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "ink"
+                },
+                {
+                  "_key": "media-4",
+                  "_type": "screen",
+                  "media": {
+                    "_key": "fig-4",
+                    "_type": "figure",
+                    "alt": "IRONMAN digital transformation",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-4aaf2ec6621051e440c92eacaf24509445244125-1216x684-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "ink"
+                },
+                {
+                  "_key": "media-5",
+                  "_type": "screen",
+                  "media": {
+                    "_key": "fig-5",
+                    "_type": "figure",
+                    "alt": "IRONMAN digital transformation",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-8bb1fae8fdd6a6f0431ad82d825b12d848492762-1216x684-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "ink"
+                }
+              ],
+              "surface": "white"
+            },
+            {
+              "_key": "45953e332de2",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "06eddda718cf",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "682193f32935",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "What began with the Pro Series became the foundation for reimagining ironman.com at a much larger scale."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "05e02c243e0a",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "682193f32935",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "We migrated thousands of pages into a more structured, component-driven platform and brought previously disconnected content, event data, video, and tools into a more cohesive ecosystem."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "9ae233a666bb",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "682193f32935",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "For IRONMAN’s teams, that meant less time working around the CMS and more freedom to create. For the brand, it meant a digital foundation built to evolve alongside the sport."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "Platform & migration",
+              "title": "Going the distance, going for speed"
+            },
+            {
+              "_key": "e315d1025439",
+              "_type": "quoteSection",
+              "attribution": "Business Leader, IRONMAN",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "tint": "dim"
+              },
+              "decoration": "molecule",
+              "quote": "A huge milestone has been achieved with today's Pro Series website launch. It’s been very well received internally, as well by our athletes.",
+              "surface": "bone"
+            },
+            {
+              "_key": "ec60307bf3d9",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "be87c845e009",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "f0a4c149ff7b",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "The Pro Series launched on schedule just 75 days after work began and welcomed 40,000 new users on its first day."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "9ff85b965114",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "f0a4c149ff7b",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Just as importantly, IRONMAN came away with a platform capable of supporting what came next rather than another system already approaching its limits."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "Outcomes",
+              "title": "Across the finish line"
+            },
+            {
+              "_key": "stats-band",
+              "_type": "statsSection",
+              "layout": "stacked",
+              "stats": [
+                {
+                  "_key": "stat-0",
+                  "_type": "stat",
+                  "label": "Days from start to delivery of the Pro-Series experience",
+                  "value": "75"
+                },
+                {
+                  "_key": "stat-1",
+                  "_type": "stat",
+                  "label": "New users on Pro Series site on launch day",
+                  "value": "40K"
+                },
+                {
+                  "_key": "stat-2",
+                  "_type": "stat",
+                  "label": "increase y/y actions taken (IRONMAN.COM)",
+                  "value": "33%"
+                }
+              ],
+              "surface": "white"
+            }
+          ],
+          "after": [
+            {
+              "_key": "chapter-0",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "e16543c9343e",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "5e0be80fdedb",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "IRONMAN's digital platform had reached its limit. Their legacy CMS was slowing down content production, creating unnecessary work for internal teams, and approaching end-of-life. At the same time, the brand was preparing to launch the new IRONMAN Pro Series before tackling a full rebuild of ironman.com. They needed a partner who could move quickly, solve the technical challenges, and deliver a digital experience that matched the scale of the brand."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "details": [
+                {
+                  "_key": "detail-0",
+                  "_type": "detail",
+                  "body": "We turned an ambitious transformation into a phased roadmap: launch the Pro Series quickly, prove the approach, then scale it across the broader IRONMAN ecosystem.",
+                  "label": "Strategy"
+                },
+                {
+                  "_key": "detail-1",
+                  "_type": "detail",
+                  "body": "We created a flexible, component-driven experience centered around athletes, events, compelling live content, and the stories that bring IRONMAN to life.",
+                  "label": "Design"
+                },
+                {
+                  "_key": "detail-2",
+                  "_type": "detail",
+                  "body": "We replatformed IRONMAN on Drupal and Acquia, connected its fragmented data and tools, and created a scalable system for managing thousands of pages.",
+                  "label": "Technology"
+                }
+              ],
+              "kicker": "Overview",
+              "title": "The starting line"
+            },
+            {
+              "_key": "d8b526739b37",
+              "_type": "mediaSection",
+              "media": {
+                "_type": "figure",
+                "alt": "IRONMAN Pro Series desktop experience on its dark patterned background.",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_type": "reference",
+                    "_ref": "image-e725da203afd363d6be87c496d6f2d98bc29dfe8-2880x3800-png"
+                  }
+                }
+              },
+              "surface": "white",
+              "variant": "composition",
+              "width": "contained"
+            },
+            {
+              "_key": "chapter-1",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "10fa412ab87f",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "d1734949e62c",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "With the new IRONMAN Pro Series set to launch in just 75 days, there wasn’t time for a conventional rebuild."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "d0110bd40939",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "d1734949e62c",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Rather than treating Pro Series as a temporary microsite, we used it to establish the principles that would guide a larger transformation. Athletes took center stage, supported by live race standings, real-time statistics, video streaming, and on-demand content that let fans follow the competition as it unfolded."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "d7dd4b643083",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "d1734949e62c",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Drupal gave IRONMAN control of the experience behind the scenes, while Brightcove powered the live and on-demand video that brought race day to the screen."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "Phase one",
+              "title": "A race against the clock"
+            },
+            {
+              "_key": "d9b2942b2fae",
+              "_type": "screenGridSection",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "tint": "dim"
+              },
+              "screens": [
+                {
+                  "_key": "figma-athlete-bio",
+                  "_type": "screen",
+                  "span": "wide",
+                  "framing": "image",
+                  "tone": "bone",
+                  "media": {
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_type": "reference",
+                        "_ref": "image-acf951df3864e7cb0137b9ac9dd1fe18c1cc6c03-2496x1400-png"
+                      }
+                    },
+                    "alt": "IRONMAN athlete profile on a dark patterned stage."
+                  }
+                },
+                {
+                  "_key": "641ac4eebb3a",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Ironman mobile screenshot",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-541868b8cfcf15e035eb6adfc4d3c2a3aa5d47aa-1216x1432-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "ink"
+                },
+                {
+                  "_key": "7f438f64da0e",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Ironman image of female athlete",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-c337f3f0a5d7ec64268e735a964d39f7dc5b597c-1216x1432-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "ink"
+                }
+              ],
+              "surface": "white"
+            },
+            {
+              "_key": "bc453566926b",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "2f2ba4515391",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "bdd938ee06fe",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "The experience needed to capture the energy of IRONMAN by putting the athletes and competition at the center of the story."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "aaf2a67793ba",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "bdd938ee06fe",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Live standings, real-time stats, video, and athlete-focused storytelling brought fans closer to the action as races unfolded. Beyond race day, flexible content components gave IRONMAN new ways to tell stories, highlight athletes, and keep people connected throughout the season."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "9dfb6a484f28",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "bdd938ee06fe",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "The result was an experience designed to feel alive whenever fans arrived."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "UX & UI Design",
+              "title": "Built for race day, and every day"
+            },
+            {
+              "_key": "screens-0",
+              "_type": "screenGridSection",
+              "screens": [
+                {
+                  "_key": "media-2",
+                  "_type": "screen",
+                  "media": {
+                    "_key": "fig-2",
+                    "_type": "figure",
+                    "alt": "IRONMAN digital transformation",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-b350d0f1e1c5610cf332d40060c2defab636d639-1776x810-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "ink"
+                },
+                {
+                  "_key": "media-3",
+                  "_type": "screen",
+                  "media": {
+                    "_key": "fig-3",
+                    "_type": "figure",
+                    "alt": "IRONMAN digital transformation",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-11e5532f1370548a6466623cae017b93c5bd7017-1216x684-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "ink"
+                },
+                {
+                  "_key": "figma-lionel-banner",
+                  "_type": "screen",
+                  "span": "wide",
+                  "framing": "image",
+                  "tone": "bone",
+                  "media": {
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_type": "reference",
+                        "_ref": "image-9d7054de0622fc46f30978169a926c014e8d4e8f-2496x668-png"
+                      }
+                    },
+                    "alt": "Lionel Sanders race results for bike, run and swim."
+                  }
+                },
+                {
+                  "_key": "media-4",
+                  "_type": "screen",
+                  "media": {
+                    "_key": "fig-4",
+                    "_type": "figure",
+                    "alt": "IRONMAN digital transformation",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-4aaf2ec6621051e440c92eacaf24509445244125-1216x684-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "ink"
+                },
+                {
+                  "_key": "media-5",
+                  "_type": "screen",
+                  "media": {
+                    "_key": "fig-5",
+                    "_type": "figure",
+                    "alt": "IRONMAN digital transformation",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-8bb1fae8fdd6a6f0431ad82d825b12d848492762-1216x684-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "ink"
+                }
+              ],
+              "surface": "white"
+            },
+            {
+              "_key": "45953e332de2",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "06eddda718cf",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "682193f32935",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "What began with the Pro Series became the foundation for reimagining ironman.com at a much larger scale."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "05e02c243e0a",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "682193f32935",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "We migrated thousands of pages into a more structured, component-driven platform and brought previously disconnected content, event data, video, and tools into a more cohesive ecosystem."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "9ae233a666bb",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "682193f32935",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "For IRONMAN’s teams, that meant less time working around the CMS and more freedom to create. For the brand, it meant a digital foundation built to evolve alongside the sport."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "Platform & migration",
+              "title": "Going the distance, going for speed"
+            },
+            {
+              "_key": "e315d1025439",
+              "_type": "quoteSection",
+              "attribution": "Business Leader, IRONMAN",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "tint": "dim"
+              },
+              "decoration": "molecule",
+              "quote": "A huge milestone has been achieved with today's Pro Series website launch. It’s been very well received internally, as well by our athletes.",
+              "surface": "bone",
+              "size": "medium"
+            },
+            {
+              "_key": "ec60307bf3d9",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "be87c845e009",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "f0a4c149ff7b",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "The Pro Series launched on schedule just 75 days after work began and welcomed 40,000 new users on its first day."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "9ff85b965114",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "f0a4c149ff7b",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Just as importantly, IRONMAN came away with a platform capable of supporting what came next rather than another system already approaching its limits."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "Outcomes",
+              "title": "Across the finish line"
+            },
+            {
+              "_key": "stats-band",
+              "_type": "statsSection",
+              "layout": "stacked",
+              "stats": [
+                {
+                  "_key": "stat-0",
+                  "_type": "stat",
+                  "label": "Days from start to delivery of the Pro-Series experience",
+                  "value": "75"
+                },
+                {
+                  "_key": "stat-1",
+                  "_type": "stat",
+                  "label": "New users on Pro Series site on launch day",
+                  "value": "40K"
+                },
+                {
+                  "_key": "stat-2",
+                  "_type": "stat",
+                  "label": "increase y/y actions taken (IRONMAN.COM)",
+                  "value": "33%"
+                }
+              ],
+              "surface": "white"
+            }
+          ],
+          "source": "R7/R8: canonical case frame image composition; all narrative chapters preserved verbatim"
+        }
+      ]
+    },
+    {
+      "id": "caseStudy-wp-5805",
+      "type": "caseStudy",
+      "slug": "caron",
+      "patches": [
+        {
+          "path": "story",
+          "before": [
+            {
+              "_key": "chapter-0",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "4b9f78de28e7",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "2c751fac4624",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "People often arrive at Caron during one of the most difficult moments of their lives, searching for help for themselves or someone they love. They may not know what kind of treatment they need, where to begin, or even what questions to ask."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "cdf61da9c714",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "2c751fac4624",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "There was an opportunity to make that first step feel a little easier. By bringing important information forward, simplifying how people explored programs, and making pathways to human support more visible, the digital experience could better meet people where they were."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "edcaedadcb75",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "2c751fac4624",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "We set out to create an experience rooted in empathy: one that could reduce uncertainty, remove unnecessary barriers, and help people feel supported from the moment they began looking for care."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "details": [
+                {
+                  "_key": "detail-0",
+                  "_type": "detail",
+                  "body": "We combined interviews, journey mapping, analytics, and ongoing behavioral data to understand the emotions, questions, and decisions behind the search for treatment, and where the experience was getting in their way. ",
+                  "label": "Strategy"
+                },
+                {
+                  "_key": "detail-1",
+                  "_type": "detail",
+                  "body": "We simplified the information architecture and created clearer pathways through programs, locations, admissions, and other critical treatment information.",
+                  "label": "Design"
+                },
+                {
+                  "_key": "a9958698f299",
+                  "_type": "detail",
+                  "body": "We connected content, marketing, and the digital experience within a scalable foundation that could continue evolving alongside Caron’s services and the needs of the people they serve.",
+                  "label": "Engineering"
+                }
+              ],
+              "kicker": "Opportunity",
+              "title": "When every next step matters"
+            },
+            {
+              "_key": "media-0",
+              "_type": "mediaSection",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-1d0e397e464f9a4af856154589bef71d78c73574-2880x2800-png",
+                    "_type": "reference"
+                  }
+                },
+                "tint": "dim"
+              },
+              "media": {
+                "_key": "fig-0",
+                "_type": "figure",
+                "alt": "Caron homepage screenshot",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-2c78211c5c4de14406ecaf72fa0883f551ac7202-2658x4104-png",
+                    "_type": "reference"
+                  }
+                }
+              },
+              "variant": "plain",
+              "width": "contained"
+            },
+            {
+              "_key": "chapter-1",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "4f5bddfdbf5a",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "de65b3d219d5",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Designing for someone in a vulnerable moment requires more than understanding what they click. We needed to understand what they were going through."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "4c64c2371d89",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "de65b3d219d5",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Conversations with patients, families, and referring professionals helped us uncover the questions, uncertainty, and emotional barriers surrounding the search for treatment. We combined those perspectives with journey mapping and behavioral data to identify where the digital experience could provide reassurance, clarity, and a more obvious way forward."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "ee42c46a2007",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "de65b3d219d5",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "That understanding became the foundation for every decision that followed."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "Research & Strategy",
+              "title": "Understanding the journey before changing the path."
+            },
+            {
+              "_key": "c6bc078c7f82",
+              "_type": "mediaSection",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "tint": "none"
+              },
+              "media": {
+                "_type": "figure",
+                "alt": "Caron customer journey",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-412163e661925f4c14b85f23a7157941e9e4f0c9-3744x1941-png",
+                    "_type": "reference"
+                  }
+                }
+              },
+              "surface": "white",
+              "variant": "plain",
+              "width": "contained"
+            },
+            {
+              "_key": "14ca61bc337d",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "cc0b6c0ef8eb",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "969fde9bc6fb",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "We redesigned the experience around a simple principle: people looking for treatment shouldn’t have to understand Caron’s organizational structure before they can find help."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "cd0b0b7db88f",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "969fde9bc6fb",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Navigation became simpler. Programs and locations became easier to understand. Important questions were answered sooner. And opportunities to connect with a real person became clearer throughout the experience."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "36f445004386",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "969fde9bc6fb",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Every decision was intended to reduce cognitive and emotional burden, helping people focus less on navigating a website and more on deciding what was right for themselves or someone they cared about."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "UX & Design",
+              "title": "Reducing the barriers between people and help"
+            },
+            {
+              "_key": "screens-0",
+              "_type": "screenGridSection",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-0b7a4797cd9999c3cbfd6fe63ee6f4c28845e952-2880x2800-png",
+                    "_type": "reference"
+                  }
+                },
+                "tint": "dim"
+              },
+              "screens": [
+                {
+                  "_key": "media-1",
+                  "_type": "screen",
+                  "framing": "image",
+                  "media": {
+                    "_key": "fig-1",
+                    "_type": "figure",
+                    "alt": "Caron homepage that communicates recovery is not just possible - it's probable. Background features a happy mother and child hugging.",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-46f9ef486c755bc9d1501fa248684addff2bdbcd-3744x2100-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "wide",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "media-2",
+                  "_type": "screen",
+                  "media": {
+                    "_key": "fig-2",
+                    "_type": "figure",
+                    "alt": "Screenshots of Caron website on mobile.",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-455d74d99ac91f48e73b2fa4f47ff9249bd3e118-1216x668-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "70b0a9108cde",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Caron CTA image of a man and woman embracing",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-3922e305996d98c1117a4da3d12d763a0dcb16e7-1824x1002-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                }
+              ],
+              "surface": "white"
+            },
+            {
+              "_key": "478acdb50ef0",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "b0292b7fd6e9",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "7eaca726590d",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "As we learned more about how people moved through the experience, we identified new opportunities to reduce friction around some of the most consequential moments: exploring treatment, understanding admissions, choosing whether to call, and deciding whether to complete a form."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "f8ba7af08dad",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "7eaca726590d",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "That led to ongoing improvements designed around the realities of the people using them: fewer unnecessary decisions, clearer expectations, more reassuring language, simpler forms, and more consistent access to Caron’s admissions team."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "80f4380024e4",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "7eaca726590d",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "The experience continues to evolve as we learn more about what people need when they reach out for help."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "Ongoing Optimization",
+              "title": "A journey shaped by the people on it"
+            }
+          ],
+          "after": [
+            {
+              "_key": "chapter-0",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "4b9f78de28e7",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "2c751fac4624",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "People often arrive at Caron during one of the most difficult moments of their lives, searching for help for themselves or someone they love. They may not know what kind of treatment they need, where to begin, or even what questions to ask."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "cdf61da9c714",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "2c751fac4624",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "There was an opportunity to make that first step feel a little easier. By bringing important information forward, simplifying how people explored programs, and making pathways to human support more visible, the digital experience could better meet people where they were."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "edcaedadcb75",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "2c751fac4624",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "We set out to create an experience rooted in empathy: one that could reduce uncertainty, remove unnecessary barriers, and help people feel supported from the moment they began looking for care."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "details": [
+                {
+                  "_key": "detail-0",
+                  "_type": "detail",
+                  "body": "We combined interviews, journey mapping, analytics, and ongoing behavioral data to understand the emotions, questions, and decisions behind the search for treatment, and where the experience was getting in their way. ",
+                  "label": "Strategy"
+                },
+                {
+                  "_key": "detail-1",
+                  "_type": "detail",
+                  "body": "We simplified the information architecture and created clearer pathways through programs, locations, admissions, and other critical treatment information.",
+                  "label": "Design"
+                },
+                {
+                  "_key": "a9958698f299",
+                  "_type": "detail",
+                  "body": "We connected content, marketing, and the digital experience within a scalable foundation that could continue evolving alongside Caron’s services and the needs of the people they serve.",
+                  "label": "Engineering"
+                }
+              ],
+              "kicker": "Opportunity",
+              "title": "When every next step matters"
+            },
+            {
+              "_key": "media-0",
+              "_type": "mediaSection",
+              "media": {
+                "_key": "fig-0",
+                "_type": "figure",
+                "alt": "Caron homepage with treatment programs and recovery resources.",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_type": "reference",
+                    "_ref": "image-b29406ddea573052b659fd81de28c6dd61492d96-2880x2402-png"
+                  }
+                }
+              },
+              "variant": "composition",
+              "width": "contained"
+            },
+            {
+              "_key": "chapter-1",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "4f5bddfdbf5a",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "de65b3d219d5",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Designing for someone in a vulnerable moment requires more than understanding what they click. We needed to understand what they were going through."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "4c64c2371d89",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "de65b3d219d5",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Conversations with patients, families, and referring professionals helped us uncover the questions, uncertainty, and emotional barriers surrounding the search for treatment. We combined those perspectives with journey mapping and behavioral data to identify where the digital experience could provide reassurance, clarity, and a more obvious way forward."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "ee42c46a2007",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "de65b3d219d5",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "That understanding became the foundation for every decision that followed."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "Research & Strategy",
+              "title": "Understanding the journey before changing the path."
+            },
+            {
+              "_key": "c6bc078c7f82",
+              "_type": "mediaSection",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "tint": "none"
+              },
+              "media": {
+                "_type": "figure",
+                "alt": "Caron customer journey",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-412163e661925f4c14b85f23a7157941e9e4f0c9-3744x1941-png",
+                    "_type": "reference"
+                  }
+                }
+              },
+              "surface": "white",
+              "variant": "plain",
+              "width": "section"
+            },
+            {
+              "_key": "14ca61bc337d",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "cc0b6c0ef8eb",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "969fde9bc6fb",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "We redesigned the experience around a simple principle: people looking for treatment shouldn’t have to understand Caron’s organizational structure before they can find help."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "cd0b0b7db88f",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "969fde9bc6fb",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Navigation became simpler. Programs and locations became easier to understand. Important questions were answered sooner. And opportunities to connect with a real person became clearer throughout the experience."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "36f445004386",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "969fde9bc6fb",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Every decision was intended to reduce cognitive and emotional burden, helping people focus less on navigating a website and more on deciding what was right for themselves or someone they cared about."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "UX & Design",
+              "title": "Reducing the barriers between people and help"
+            },
+            {
+              "_key": "screens-0",
+              "_type": "screenGridSection",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-0b7a4797cd9999c3cbfd6fe63ee6f4c28845e952-2880x2800-png",
+                    "_type": "reference"
+                  }
+                },
+                "tint": "dim"
+              },
+              "screens": [
+                {
+                  "_key": "media-1",
+                  "_type": "screen",
+                  "framing": "image",
+                  "media": {
+                    "_key": "fig-1",
+                    "_type": "figure",
+                    "alt": "Caron homepage that communicates recovery is not just possible - it's probable. Background features a happy mother and child hugging.",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-46f9ef486c755bc9d1501fa248684addff2bdbcd-3744x2100-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "wide",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "figma-recovery-banner",
+                  "_type": "screen",
+                  "span": "wide",
+                  "framing": "image",
+                  "tone": "bone",
+                  "media": {
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_type": "reference",
+                        "_ref": "image-24165b803734fd0343d86a9596372838d31913fb-2496x668-png"
+                      }
+                    },
+                    "alt": "Real results, real care, real about recovery, over a forest."
+                  }
+                },
+                {
+                  "_key": "media-2",
+                  "_type": "screen",
+                  "media": {
+                    "_key": "fig-2",
+                    "_type": "figure",
+                    "alt": "Screenshots of Caron website on mobile.",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-455d74d99ac91f48e73b2fa4f47ff9249bd3e118-1216x668-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "70b0a9108cde",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Caron CTA image of a man and woman embracing",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-3922e305996d98c1117a4da3d12d763a0dcb16e7-1824x1002-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                }
+              ],
+              "surface": "white"
+            },
+            {
+              "_key": "478acdb50ef0",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "b0292b7fd6e9",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "7eaca726590d",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "As we learned more about how people moved through the experience, we identified new opportunities to reduce friction around some of the most consequential moments: exploring treatment, understanding admissions, choosing whether to call, and deciding whether to complete a form."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "f8ba7af08dad",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "7eaca726590d",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "That led to ongoing improvements designed around the realities of the people using them: fewer unnecessary decisions, clearer expectations, more reassuring language, simpler forms, and more consistent access to Caron’s admissions team."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "80f4380024e4",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "7eaca726590d",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "The experience continues to evolve as we learn more about what people need when they reach out for help."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "Ongoing Optimization",
+              "title": "A journey shaped by the people on it"
+            }
+          ],
+          "source": "R7/R8: canonical case frame image composition; all narrative chapters preserved verbatim"
+        }
+      ]
+    },
+    {
+      "id": "caseStudy-wp-5803",
+      "type": "caseStudy",
+      "slug": "best-egg",
+      "patches": [
+        {
+          "path": "story",
+          "before": [
+            {
+              "_key": "chapter-0",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "e6c547d62ea4",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "37bea4fe2919",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Best Egg had built its business around helping people navigate everyday financial needs. But customer research revealed an opportunity to do more: people weren’t just looking for financial products, they wanted help understanding their financial health and how to improve it."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "17f7ac612ecc",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "37bea4fe2919",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Best Egg had a vision for expanding into financial wellness, but needed to define what that experience should actually be. We partnered with their team to understand where customers needed guidance, imagine an ideal journey, and turn that vision into something tangible enough to test, prioritize, and build."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "details": [
+                {
+                  "_key": "f4a940c5094c",
+                  "_type": "detail",
+                  "body": "We mapped the personal loan journey, brought together existing customer insights and data, and facilitated workshops to identify where guidance could create the most value.",
+                  "label": "Strategy"
+                },
+                {
+                  "_key": "75a1827435d1",
+                  "_type": "detail",
+                  "body": "We translated those findings into an end-to-end experience that helped customers better understand their financial position and see clearer paths forward.",
+                  "label": "Design"
+                },
+                {
+                  "_key": "4b8809ece742",
+                  "_type": "detail",
+                  "body": "We created an interactive prototype that became a shared vision for product, design, and engineering, helping teams align around priorities and move confidently toward production.",
+                  "label": "Engineering"
+                }
+              ],
+              "kicker": "Overview",
+              "title": "A clearer path to financial confidence"
+            },
+            {
+              "_key": "media-0",
+              "_type": "mediaSection",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-a1c244ba52db527735f9bac528eec3620cc1d58e-2078x1258-png",
+                    "_type": "reference"
+                  }
+                },
+                "tint": "none"
+              },
+              "media": {
+                "_key": "fig-0",
+                "_type": "figure",
+                "alt": "Best Egg logo.",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-4643e30036bdb5c041a372175e6d9a43fad8cb34-3264x3631-png",
+                    "_type": "reference"
+                  }
+                }
+              },
+              "surface": "white",
+              "width": "contained"
+            },
+            {
+              "_key": "chapter-1",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "1b3cad87c135",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "e723910fd325",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Financial decisions rarely happen in isolation. Someone applying for a loan may also be thinking about debt, their credit score, an unexpected expense, or how to feel more in control of their finances."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "5c898f116268",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "e723910fd325",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "We examined the existing personal loan journey alongside customer insights and historical data to uncover where people felt uncertain and where Best Egg could provide more meaningful guidance."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "ca5d8f01aac8",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "e723910fd325",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Through collaborative workshops, we defined an ideal journey focused not just on completing a transaction, but on helping customers understand where they stood and feel more confident about what came next."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "Research & strategy",
+              "title": "Cracking the customer journey"
+            },
+            {
+              "_key": "8ff06278311d",
+              "_type": "screenGridSection",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "tint": "none"
+              },
+              "screens": [
+                {
+                  "_key": "af0de3092aa7",
+                  "_type": "screen",
+                  "framing": "image",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Various Best Egg mobile screens",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-715dec532b4d49324981a33a92e0a7a751cda830-3744x2100-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "wide",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "b0a6d4fda66e",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Best Egg Spending Graph",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-8a5a90ae07feffbce343f2d509a23bdb70f5b1cf-1824x2100-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "2a4b04e10642",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Best Egg chart for credit score",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-729a3856237546765b1004f73e1aeab520ea05a6-1824x2100-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                }
+              ],
+              "surface": "white"
+            },
+            {
+              "_key": "9e0e8e96c0ef",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "a2aed68e731f",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "b00d6a1ab4ef",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Research gave us the direction. The next challenge was making the vision real enough to experience and evaluate."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "ace38365c548",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "b00d6a1ab4ef",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "We designed an interactive prototype that brought financial information, educational content, product features, and moments of guidance together across the full journey. Rather than reacting to requirements or feature lists, teams could experience the product as a customer would."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "daf811c1c285",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "b00d6a1ab4ef",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "That made it easier to test ideas in context, uncover gaps early, and align around the features that mattered most."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "UX & Product Design",
+              "title": "Hatching the experience"
+            },
+            {
+              "_key": "10f6027a8e0e",
+              "_type": "screenGridSection",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "tint": "dim"
+              },
+              "layout": "feature",
+              "screens": [
+                {
+                  "_key": "980bd5de4a66",
+                  "_type": "screen",
+                  "framing": "image",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Best Egg Dashboard",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-668bf0e9e446a4fa4e2e30bec61914c901da9cb2-2784x2100-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "wide",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "d276fac530b0",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Best Egg graphic of a bride and groom",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-6b3f9d9f7f9f99324fd0ee7e37dc44b92a46338c-864x1002-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "6fad31ab3b16",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Best Egg account graphs",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-a2a859554866d5a0c6d8f48f3d83a9c009ac189e-864x1002-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "f83f1855998d",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Best Egg graphic asking about building credit",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-02e5f3c8aabf4b08ccd5d7754b86aea0ee34a7ed-1824x1002-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "7fbe1f51d32b",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Best Egg call to action about not stressing",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-8f7247c644227efbfb2b52916515572396f34921-1260x1500-webp",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                }
+              ],
+              "surface": "white"
+            },
+            {
+              "_key": "68f04278caf9",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "0b0b847f3d33",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "c2716ac28928",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "The prototype became a shared reference point for what Best Egg wanted the experience to become, helping product prioritize the roadmap, design evaluate new ideas, and engineering understand how individual features fit into the larger journey."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "a04033f90245",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "c2716ac28928",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Our work continued as Best Egg explored ways to optimize core features and create new paths for attracting and engaging customers."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "a00ca9fafc98",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "c2716ac28928",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "What began as a customer insight became a broader vision for Best Egg’s role: not simply providing financial products, but helping people better understand their finances and feel more confident about what comes next."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "Product Evolution",
+              "title": "A fledgling idea takes flight"
+            }
+          ],
+          "after": [
+            {
+              "_key": "chapter-0",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "e6c547d62ea4",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "37bea4fe2919",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Best Egg had built its business around helping people navigate everyday financial needs. But customer research revealed an opportunity to do more: people weren’t just looking for financial products, they wanted help understanding their financial health and how to improve it."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "17f7ac612ecc",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "37bea4fe2919",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Best Egg had a vision for expanding into financial wellness, but needed to define what that experience should actually be. We partnered with their team to understand where customers needed guidance, imagine an ideal journey, and turn that vision into something tangible enough to test, prioritize, and build."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "details": [
+                {
+                  "_key": "f4a940c5094c",
+                  "_type": "detail",
+                  "body": "We mapped the personal loan journey, brought together existing customer insights and data, and facilitated workshops to identify where guidance could create the most value.",
+                  "label": "Strategy"
+                },
+                {
+                  "_key": "75a1827435d1",
+                  "_type": "detail",
+                  "body": "We translated those findings into an end-to-end experience that helped customers better understand their financial position and see clearer paths forward.",
+                  "label": "Design"
+                },
+                {
+                  "_key": "4b8809ece742",
+                  "_type": "detail",
+                  "body": "We created an interactive prototype that became a shared vision for product, design, and engineering, helping teams align around priorities and move confidently toward production.",
+                  "label": "Engineering"
+                }
+              ],
+              "kicker": "Overview",
+              "title": "A clearer path to financial confidence"
+            },
+            {
+              "_key": "media-0",
+              "_type": "mediaSection",
+              "media": {
+                "_key": "fig-0",
+                "_type": "figure",
+                "alt": "Best Egg financial planning homepage and personalized planner.",
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_type": "reference",
+                    "_ref": "image-ba5469c65830d3396076262ce33c39c492943092-2880x2516-png"
+                  }
+                }
+              },
+              "surface": "white",
+              "width": "contained",
+              "variant": "composition"
+            },
+            {
+              "_key": "chapter-1",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "1b3cad87c135",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "e723910fd325",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Financial decisions rarely happen in isolation. Someone applying for a loan may also be thinking about debt, their credit score, an unexpected expense, or how to feel more in control of their finances."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "5c898f116268",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "e723910fd325",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "We examined the existing personal loan journey alongside customer insights and historical data to uncover where people felt uncertain and where Best Egg could provide more meaningful guidance."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "ca5d8f01aac8",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "e723910fd325",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Through collaborative workshops, we defined an ideal journey focused not just on completing a transaction, but on helping customers understand where they stood and feel more confident about what came next."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "Research & strategy",
+              "title": "Cracking the customer journey"
+            },
+            {
+              "_key": "8ff06278311d",
+              "_type": "screenGridSection",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "tint": "none"
+              },
+              "screens": [
+                {
+                  "_key": "af0de3092aa7",
+                  "_type": "screen",
+                  "framing": "image",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Various Best Egg mobile screens",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-715dec532b4d49324981a33a92e0a7a751cda830-3744x2100-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "wide",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "b0a6d4fda66e",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Best Egg Spending Graph",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-8a5a90ae07feffbce343f2d509a23bdb70f5b1cf-1824x2100-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "2a4b04e10642",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Best Egg chart for credit score",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-729a3856237546765b1004f73e1aeab520ea05a6-1824x2100-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                }
+              ],
+              "surface": "white"
+            },
+            {
+              "_key": "9e0e8e96c0ef",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "a2aed68e731f",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "b00d6a1ab4ef",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Research gave us the direction. The next challenge was making the vision real enough to experience and evaluate."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "ace38365c548",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "b00d6a1ab4ef",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "We designed an interactive prototype that brought financial information, educational content, product features, and moments of guidance together across the full journey. Rather than reacting to requirements or feature lists, teams could experience the product as a customer would."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "daf811c1c285",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "b00d6a1ab4ef",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "That made it easier to test ideas in context, uncover gaps early, and align around the features that mattered most."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "UX & Product Design",
+              "title": "Hatching the experience"
+            },
+            {
+              "_key": "10f6027a8e0e",
+              "_type": "screenGridSection",
+              "backgroundMedia": {
+                "_type": "backgroundMedia",
+                "tint": "dim"
+              },
+              "layout": "feature",
+              "screens": [
+                {
+                  "_key": "980bd5de4a66",
+                  "_type": "screen",
+                  "framing": "image",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Best Egg Dashboard",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-668bf0e9e446a4fa4e2e30bec61914c901da9cb2-2784x2100-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "wide",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "d276fac530b0",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Best Egg graphic of a bride and groom",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-6b3f9d9f7f9f99324fd0ee7e37dc44b92a46338c-864x1002-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "6fad31ab3b16",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Best Egg account graphs",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-a2a859554866d5a0c6d8f48f3d83a9c009ac189e-864x1002-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                },
+                {
+                  "_key": "figma-money-banner",
+                  "_type": "screen",
+                  "span": "wide",
+                  "framing": "image",
+                  "tone": "bone",
+                  "media": {
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_type": "reference",
+                        "_ref": "image-b225dd4fdc419207a0b33e48d075a9dfdd5d7900-2496x668-png"
+                      }
+                    },
+                    "alt": "Make your money management easy with Best Egg."
+                  }
+                },
+                {
+                  "_key": "figma-lifestyle",
+                  "_type": "screen",
+                  "span": "narrow",
+                  "framing": "image",
+                  "tone": "bone",
+                  "media": {
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_type": "reference",
+                        "_ref": "image-29d1b7beccbdb40f31d8c8e3a116c632b64453bc-576x668-png"
+                      }
+                    },
+                    "alt": "Best Egg customer using her phone outdoors."
+                  }
+                },
+                {
+                  "_key": "7fbe1f51d32b",
+                  "_type": "screen",
+                  "span": "narrow",
+                  "framing": "image",
+                  "tone": "bone",
+                  "media": {
+                    "_type": "figure",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_type": "reference",
+                        "_ref": "image-ef8aa923044ee61929133a4d5118e1b0c32c93c8-576x668-png"
+                      }
+                    },
+                    "alt": "Don’t stress. You’ve got this!"
+                  }
+                },
+                {
+                  "_key": "f83f1855998d",
+                  "_type": "screen",
+                  "media": {
+                    "_type": "figure",
+                    "alt": "Best Egg graphic asking about building credit",
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-02e5f3c8aabf4b08ccd5d7754b86aea0ee34a7ed-1824x1002-png",
+                        "_type": "reference"
+                      }
+                    }
+                  },
+                  "span": "standard",
+                  "tone": "bone"
+                }
+              ],
+              "surface": "white"
+            },
+            {
+              "_key": "68f04278caf9",
+              "_type": "chapter",
+              "body": [
+                {
+                  "_key": "0b0b847f3d33",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "c2716ac28928",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "The prototype became a shared reference point for what Best Egg wanted the experience to become, helping product prioritize the roadmap, design evaluate new ideas, and engineering understand how individual features fit into the larger journey."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "a04033f90245",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "c2716ac28928",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Our work continued as Best Egg explored ways to optimize core features and create new paths for attracting and engaging customers."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                },
+                {
+                  "_key": "a00ca9fafc98",
+                  "_type": "block",
+                  "children": [
+                    {
+                      "_key": "c2716ac28928",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "What began as a customer insight became a broader vision for Best Egg’s role: not simply providing financial products, but helping people better understand their finances and feel more confident about what comes next."
+                    }
+                  ],
+                  "markDefs": [],
+                  "style": "normal"
+                }
+              ],
+              "kicker": "Product Evolution",
+              "title": "A fledgling idea takes flight"
+            }
+          ],
+          "source": "R7/R8: canonical case frame image composition; all narrative chapters preserved verbatim"
+        }
+      ]
+    }
+  ]
+}

@@ -33,17 +33,17 @@ export function CtaSection({
                 <h2 className="text-cta font-display text-on-ink whitespace-pre-line">
                   {mobileHeading ? (
                     <>
-                      <span className="lg:hidden">{mobileHeading}</span>
-                      <span className="hidden lg:inline">{heading}</span>
+                      <span className="lg:hidden">{mobileHeading.replace(/\u2028/g, '\n')}</span>
+                      <span className="hidden lg:inline">{heading.replace(/\u2028/g, '\n')}</span>
                     </>
                   ) : (
-                    heading
+                    heading.replace(/\u2028/g, '\n')
                   )}
                 </h2>
               ) : null}
               {body ? (
                 <p className="text-lead text-on-ink-subtle whitespace-normal lg:whitespace-pre-line">
-                  {body}
+                  {body.replace(/\u2028/g, '\n')}
                 </p>
               ) : null}
             </div>

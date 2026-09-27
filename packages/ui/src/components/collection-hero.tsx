@@ -86,23 +86,23 @@ export function CollectionHero({
             {!centred && lockup ? lockup : null}
             <h1
               className={cn(
-                'font-display text-balance',
+                'font-display whitespace-normal text-balance lg:whitespace-pre-line',
                 centred && 'text-interior-hero',
                 centred && surface === 'ink' && 'text-on-ink',
                 !centred && (aside ? 'text-display-xl' : 'text-interior-hero'),
               )}
             >
-              {heading}
+              {typeof heading === 'string' ? heading.replace(/\u2028/g, '\n') : heading}
             </h1>
             {subheading ? (
               <p
                 className={cn(
-                  'text-lead',
+                  'text-lead whitespace-normal lg:whitespace-pre-line',
                   surface === 'ink' ? 'text-on-utility' : 'text-fg-body',
                   centred && surface !== 'ink' && 'max-w-[728px]',
                 )}
               >
-                {subheading}
+                {typeof subheading === 'string' ? subheading.replace(/\u2028/g, '\n') : subheading}
               </p>
             ) : null}
           </div>

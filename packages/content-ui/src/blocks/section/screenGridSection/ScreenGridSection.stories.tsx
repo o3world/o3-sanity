@@ -250,3 +250,27 @@ export const DefaultGeometry: Story = {
     await expect(Math.abs(right!.left - left!.right - 32)).toBeLessThan(1)
   },
 }
+
+export const NarrowFeatureRow: Story = {
+  args: {
+    surface: 'white',
+    layout: 'feature',
+    screens: [
+      ...featureScreens.slice(0, 3),
+      ...featureScreens
+        .slice(1, 3)
+        .map((screen) => ({ ...screen, _key: `narrow-${screen._key}`, span: 'narrow' as const })),
+      featureScreens[3]!,
+    ],
+  },
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const boxes = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
+      tile.getBoundingClientRect(),
+    )
+    await expect(Math.abs(boxes[3]!.width - 288)).toBeLessThan(1)
+    await expect(Math.abs(boxes[4]!.width - 288)).toBeLessThan(1)
+    await expect(Math.abs(boxes[5]!.width - 608)).toBeLessThan(1)
+    await expect(boxes[3]!.top).toBe(boxes[5]!.top)
+  },
+}

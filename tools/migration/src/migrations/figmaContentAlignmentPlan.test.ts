@@ -86,3 +86,34 @@ describe('finishing alignment', () => {
     )
   })
 })
+
+describe('review findings migration', () => {
+  it('preserves every case narrative, rejects editorial drift and reruns as a no-op', async () => {
+    const { default: review } = await import('./figmaReviewFixes.json')
+    for (const spec of review.documents.filter((document) => document.type === 'caseStudy')) {
+      const field = spec.patches.find((patch) => patch.path === 'story')!
+      const before = field.before as { _type: string; _key: string }[]
+      const after = field.after as { _type: string; _key: string }[]
+      expect(after.filter((item) => item._type === 'chapter')).toEqual(
+        before.filter((item) => item._type === 'chapter'),
+      )
+      expect(new Set(after.map((item) => item._key)).size).toBe(after.length)
+      const row = {
+        _id: spec.id,
+        _rev: 'reviewed',
+        _type: spec.type,
+        slug: { current: spec.slug! },
+        story: before,
+        migration: { locked: true },
+      }
+      expect(() => planFigmaContentAlignment(row, false, review)).toThrow('Content locked')
+      expect(planFigmaContentAlignment(row, true, review)?.set.story).toEqual(after)
+      expect(planFigmaContentAlignment({ ...row, story: after }, true, review)).toBeNull()
+      expect(() => planFigmaContentAlignment({ ...row, story: [] }, true, review)).toThrow(
+        'Editorial change',
+      )
+    }
+    const home = review.documents.find((document) => document.id === 'page-seed-index')!
+    expect(home.patches.some((patch) => patch.path.includes('"hero"'))).toBe(false)
+  })
+})

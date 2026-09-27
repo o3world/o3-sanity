@@ -4,6 +4,7 @@ import { resolve } from 'node:path'
 import { getCliClient } from 'sanity/cli'
 import contentManifest from './figmaContentAlignment.json'
 import finishManifest from './figmaAlignmentFinish.json'
+import reviewManifest from './figmaReviewFixes.json'
 import { planFigmaContentAlignment, type ContentRow } from './figmaContentAlignmentPlan'
 
 const client = getCliClient({ apiVersion: '2026-07-01' })
@@ -19,7 +20,11 @@ async function main() {
     throw new Error(
       'This reviewed content migration requires naorcr6k and explicit --dataset production',
     )
-  const manifest = args.includes('--finish') ? finishManifest : contentManifest
+  const manifest = args.includes('--review')
+    ? reviewManifest
+    : args.includes('--finish')
+      ? finishManifest
+      : contentManifest
   const contentDocumentIds = manifest.documents.map((document) => document.id)
   const plan = (row: ContentRow, allowLocked: boolean) =>
     planFigmaContentAlignment(row, allowLocked, manifest)

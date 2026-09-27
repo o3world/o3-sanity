@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../lib/utils'
 import { StaggeredLines } from './staggered-lines'
 
-const displayHeadingVariants = cva('font-display', {
+const displayHeadingVariants = cva('font-display whitespace-normal lg:whitespace-pre-line', {
   variants: {
     level: {
       // hero — the largest shared section heading.
@@ -51,7 +51,13 @@ export function DisplayHeading({
 }: DisplayHeadingProps) {
   return (
     <Tag className={cn(displayHeadingVariants({ level }), className)} {...rest}>
-      {lines ? <StaggeredLines lines={lines} baseDelay={revealDelay} /> : children}
+      {lines ? (
+        <StaggeredLines lines={lines} baseDelay={revealDelay} />
+      ) : typeof children === 'string' ? (
+        children.replace(/\u2028/g, '\n')
+      ) : (
+        children
+      )}
     </Tag>
   )
 }

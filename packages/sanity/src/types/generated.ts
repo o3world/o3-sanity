@@ -384,7 +384,7 @@ export type ScreenGridSection = {
   screens?: Array<{
     media?: Figure
     tone?: 'ink' | 'brand' | 'bone'
-    span?: 'standard' | 'wide'
+    span?: 'standard' | 'wide' | 'narrow'
     framing?: 'plate' | 'image'
     _type: 'screen'
     _key: string
@@ -413,7 +413,7 @@ export type MediaSection = {
     crop?: SanityImageCrop
     _type: 'image'
   }
-  variant?: 'plain' | 'capture' | 'overlap' | 'feature'
+  variant?: 'plain' | 'capture' | 'composition' | 'overlap' | 'feature'
   width?: 'contained' | 'section' | 'full-bleed'
   surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
@@ -2886,7 +2886,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           crop?: SanityImageCrop
           _type: 'image'
         }
-        variant?: 'capture' | 'feature' | 'overlap' | 'plain'
+        variant?: 'capture' | 'composition' | 'feature' | 'overlap' | 'plain'
         width?: 'contained' | 'full-bleed' | 'section'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
@@ -3152,7 +3152,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             caption?: string
           } | null
           tone?: 'bone' | 'brand' | 'ink'
-          span?: 'standard' | 'wide'
+          span?: 'narrow' | 'standard' | 'wide'
           framing?: 'image' | 'plate'
           _type: 'screen'
           _key: string
@@ -4153,7 +4153,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           crop?: SanityImageCrop
           _type: 'image'
         }
-        variant?: 'capture' | 'feature' | 'overlap' | 'plain'
+        variant?: 'capture' | 'composition' | 'feature' | 'overlap' | 'plain'
         width?: 'contained' | 'full-bleed' | 'section'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
@@ -4419,7 +4419,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             caption?: string
           } | null
           tone?: 'bone' | 'brand' | 'ink'
-          span?: 'standard' | 'wide'
+          span?: 'narrow' | 'standard' | 'wide'
           framing?: 'image' | 'plate'
           _type: 'screen'
           _key: string
@@ -5609,7 +5609,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           crop?: SanityImageCrop
           _type: 'image'
         }
-        variant?: 'capture' | 'feature' | 'overlap' | 'plain'
+        variant?: 'capture' | 'composition' | 'feature' | 'overlap' | 'plain'
         width?: 'contained' | 'full-bleed' | 'section'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
@@ -5875,7 +5875,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             caption?: string
           } | null
           tone?: 'bone' | 'brand' | 'ink'
-          span?: 'standard' | 'wide'
+          span?: 'narrow' | 'standard' | 'wide'
           framing?: 'image' | 'plate'
           _type: 'screen'
           _key: string
@@ -7033,7 +7033,7 @@ export type PAGE_QUERY_RESULT = {
           crop?: SanityImageCrop
           _type: 'image'
         }
-        variant?: 'capture' | 'feature' | 'overlap' | 'plain'
+        variant?: 'capture' | 'composition' | 'feature' | 'overlap' | 'plain'
         width?: 'contained' | 'full-bleed' | 'section'
         surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
@@ -7299,7 +7299,7 @@ export type PAGE_QUERY_RESULT = {
             caption?: string
           } | null
           tone?: 'bone' | 'brand' | 'ink'
-          span?: 'standard' | 'wide'
+          span?: 'narrow' | 'standard' | 'wide'
           framing?: 'image' | 'plate'
           _type: 'screen'
           _key: string

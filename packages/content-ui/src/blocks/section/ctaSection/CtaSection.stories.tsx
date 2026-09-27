@@ -113,3 +113,16 @@ export const ReflowingFooter: Story = {
     })
   },
 }
+
+export const DesignedBreaks: Story = {
+  args: {
+    ...seededSectionArgs('index', 'ctaSection'),
+    heading: 'But enough about us.\u2028Tell us about you.',
+  },
+  globals: { backgrounds: { value: 'ink' }, viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', { level: 2 })
+    await expect(heading.textContent).toBe('But enough about us.\nTell us about you.')
+    await expect(getComputedStyle(heading).whiteSpace).toBe('pre-line')
+  },
+}

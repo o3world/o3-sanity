@@ -120,6 +120,30 @@ export function MediaSection({
     )
   }
 
+  if (composition === 'composition') {
+    return (
+      <SurfaceProvider surface={resolved}>
+        <section {...surfaceAttrs(resolved)} className={bandClass}>
+          <LayeredMediaReveal
+            enabled={sequence}
+            className="relative overflow-hidden"
+            foregroundClassName="w-full"
+            caption={media.caption}
+            captionClassName="text-fg-subtle px-gutter mt-4 text-sm"
+          >
+            <SanityImage
+              source={media.image}
+              alt={media.alt}
+              width={2880}
+              sizes={FULL_BLEED}
+              className="w-full"
+            />
+          </LayeredMediaReveal>
+        </section>
+      </SurfaceProvider>
+    )
+  }
+
   if (stegaClean(variant) === 'capture') {
     return (
       <SurfaceProvider surface={resolved}>
