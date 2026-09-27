@@ -67,11 +67,20 @@ export const VERDICT_RESULTS = ['pass', 'fail'] as const
 export type VerdictResult = (typeof VERDICT_RESULTS)[number]
 
 /**
- * What a `mark` can draw: the animated orb, or the halftone disc the canonical
- * frames draw. First value is the default, so a mark left alone animates.
+ * What a `mark` can draw: the animated orb, the halftone disc, authored
+ * artwork, or a Figma Dot Circle. First value is the default, so a mark left
+ * alone animates.
  */
-export const MARK_KINDS = ['orb', 'disc', 'image'] as const
+export const MARK_KINDS = ['orb', 'disc', 'image', 'dotCircle'] as const
 export type MarkKind = (typeof MARK_KINDS)[number]
+
+/**
+ * The pictograms a Dot Circle carries, named for the Figma exports
+ * (`figma-current-why-*`, `figma-current-engagement-*`). `squad` and `team`
+ * export as the same plain disc; their motion is what tells them apart.
+ */
+export const DOT_CIRCLE_ICONS = ['arrow', 'heart', 'network', 'key', 'squad', 'team'] as const
+export type DotCircleIcon = (typeof DOT_CIRCLE_ICONS)[number]
 
 /**
  * The nine animations `thinking-orbs` ships (orbs.jakubantalik.com). Values

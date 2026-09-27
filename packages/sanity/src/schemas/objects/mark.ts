@@ -1,5 +1,5 @@
 import { defineField } from 'sanity'
-import { ORB_STATES } from '../../constants'
+import { DOT_CIRCLE_ICONS, ORB_STATES } from '../../constants'
 import { markKnobs, ORB_ONLY } from '../../knobs/mark'
 import { hiddenUnless } from '../blocks/knobFields'
 import { defineSharedObject } from './defineSharedObject'
@@ -8,7 +8,7 @@ import { defineSharedObject } from './defineSharedObject'
 export const mark = defineSharedObject({
   knobs: markKnobs,
   description:
-    'A decorative mark set beside a piece of copy — an animated orb, halftone disc, or authored illustration. Used two ways: as the mark field on a card, a row or a discipline, and on its own in a layout column, where it is the animation rather than a bullet. Same object either way, so it is configured identically wherever it sits.',
+    'A decorative mark set beside a piece of copy — an animated orb, halftone disc, authored illustration, or an animated Figma Dot Circle. Used two ways: as the mark field on a card, a row or a discipline, and on its own in a layout column, where it is the animation rather than a bullet. Same object either way, so it is configured identically wherever it sits.',
   fields: [
     'kind',
     defineField({
@@ -18,6 +18,7 @@ export const mark = defineSharedObject({
       description: 'The designed glyph or illustration, shown without cropping.',
       hidden: hiddenUnless({ at: 'kind', mode: 'oneOf', values: ['image'] }),
     }),
+    'icon',
     'state',
     'size',
     defineField({
@@ -38,12 +39,14 @@ export const mark = defineSharedObject({
     }),
   ],
   preview: {
-    select: { kind: 'kind', state: 'state' },
-    prepare: ({ kind, state }) =>
+    select: { kind: 'kind', state: 'state', icon: 'icon' },
+    prepare: ({ kind, state, icon }) =>
       kind === 'image'
         ? { title: 'Artwork', subtitle: 'Image' }
         : kind === 'disc'
           ? { title: 'Disc', subtitle: 'Halftone' }
-          : { title: state ?? ORB_STATES[0], subtitle: 'Orb' },
+          : kind === 'dotCircle'
+            ? { title: icon ?? DOT_CIRCLE_ICONS[0], subtitle: 'Dot Circle' }
+            : { title: state ?? ORB_STATES[0], subtitle: 'Orb' },
   },
 })

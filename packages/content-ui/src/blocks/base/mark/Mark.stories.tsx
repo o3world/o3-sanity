@@ -10,7 +10,7 @@ import { Mark } from './Mark'
  * an editor drops into a `layoutSection` column on its own, where it is
  * titled "Orb".
  *
- * The stories are the values an editor can reach: the three `kind`s, the
+ * The stories are the values an editor can reach: the four `kind`s, the
  * animation knobs, and the empty case that proves the default. How the orb is
  * drawn lives in `UI/ThinkingOrb`.
  */
@@ -66,6 +66,42 @@ export const OnInk: Story = {
       <Mark kind="disc" onInk className="w-[132px]" />
     </div>
   ),
+}
+
+/**
+ * The six Figma Dot Circles as their own kind: whole dots with the pictogram
+ * cut out, moved by CSS. The why marks sit on ink and the engagement marks on
+ * bone, as they do on the Sanity partner page and Solutions.
+ */
+export const DotCircles: Story = {
+  args: { kind: 'dotCircle', icon: 'arrow', className: 'w-[132px]' },
+  render: (args) => (
+    <div className="grid gap-px sm:grid-cols-2">
+      <div className="bg-ink flex items-center justify-center gap-8 p-12 text-white">
+        {(['arrow', 'heart', 'network'] as const).map((icon) => (
+          <Mark key={icon} {...args} icon={icon} />
+        ))}
+      </div>
+      <div className="bg-bone text-ink flex items-center justify-center gap-8 p-12">
+        {(['key', 'squad', 'team'] as const).map((icon) => (
+          <Mark key={icon} {...args} icon={icon} />
+        ))}
+      </div>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const marks = [...canvasElement.querySelectorAll('svg[data-dot-circle]')]
+    await expect(marks.map((mark) => mark.getAttribute('data-dot-circle'))).toEqual([
+      'arrow',
+      'heart',
+      'network',
+      'key',
+      'squad',
+      'team',
+    ])
+    await expect(canvasElement.querySelector('canvas')).toBeNull()
+    for (const mark of marks) await expect(mark.getBoundingClientRect().width).toBe(132)
+  },
 }
 
 /** The source-exact artwork branch contains no animated canvas. */

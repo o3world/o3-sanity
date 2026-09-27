@@ -772,8 +772,9 @@ export type BackgroundMedia = {
 
 export type Mark = {
   _type: 'mark'
-  kind?: 'orb' | 'disc' | 'image'
+  kind?: 'orb' | 'disc' | 'image' | 'dotCircle'
   media?: Figure
+  icon?: 'arrow' | 'heart' | 'network' | 'key' | 'squad' | 'team'
   state?:
     | 'working'
     | 'searching'
@@ -2585,8 +2586,9 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           | {
               _key: string
               _type: 'mark'
-              kind?: 'disc' | 'image' | 'orb'
+              kind?: 'disc' | 'dotCircle' | 'image' | 'orb'
               media?: Figure
+              icon?: 'arrow' | 'heart' | 'key' | 'network' | 'squad' | 'team'
               state?:
                 | 'breathing'
                 | 'composing'
@@ -3852,8 +3854,9 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           | {
               _key: string
               _type: 'mark'
-              kind?: 'disc' | 'image' | 'orb'
+              kind?: 'disc' | 'dotCircle' | 'image' | 'orb'
               media?: Figure
+              icon?: 'arrow' | 'heart' | 'key' | 'network' | 'squad' | 'team'
               state?:
                 | 'breathing'
                 | 'composing'
@@ -5308,8 +5311,9 @@ export type CASE_STUDY_QUERY_RESULT = {
           | {
               _key: string
               _type: 'mark'
-              kind?: 'disc' | 'image' | 'orb'
+              kind?: 'disc' | 'dotCircle' | 'image' | 'orb'
               media?: Figure
+              icon?: 'arrow' | 'heart' | 'key' | 'network' | 'squad' | 'team'
               state?:
                 | 'breathing'
                 | 'composing'
@@ -6732,8 +6736,9 @@ export type PAGE_QUERY_RESULT = {
           | {
               _key: string
               _type: 'mark'
-              kind?: 'disc' | 'image' | 'orb'
+              kind?: 'disc' | 'dotCircle' | 'image' | 'orb'
               media?: Figure
+              icon?: 'arrow' | 'heart' | 'key' | 'network' | 'squad' | 'team'
               state?:
                 | 'breathing'
                 | 'composing'
