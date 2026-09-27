@@ -1,6 +1,6 @@
 import { defineObjectKnobs, knob } from '@o3/block-spec'
 import type { ShowWhen } from '@o3/block-spec'
-import { MARK_KINDS, ORB_SIZES, ORB_STATES } from '../constants'
+import { DOT_CIRCLE_ICONS, MARK_KINDS, ORB_SIZES, ORB_STATES } from '../constants'
 
 /**
  * The gate the orb's own options ride, and the one `speed` and `paused` borrow.
@@ -50,9 +50,19 @@ export const markKnobs = defineObjectKnobs({
     knob({
       name: 'kind',
       title: 'Kind',
-      description: 'Orb is the animated canvas; disc is a halftone; image uses authored artwork.',
+      description:
+        'Orb is the animated canvas; disc is a halftone; image uses authored artwork; Dot Circle draws and animates one of the Figma dot pictograms.',
       options: [...MARK_KINDS],
       initialValue: MARK_KINDS[0],
+    }),
+    knob({
+      name: 'icon',
+      title: 'Icon',
+      description:
+        'Which pictogram the Dot Circle cuts from its dots. Each one moves in its own way; squad and team share a plain disc.',
+      options: [...DOT_CIRCLE_ICONS],
+      initialValue: DOT_CIRCLE_ICONS[0],
+      showWhen: { at: 'kind', mode: 'oneOf', values: ['dotCircle'] },
     }),
     knob({
       name: 'state',

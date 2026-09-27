@@ -2,6 +2,7 @@ import { cn, HalftoneDisc, ThinkingOrb, type OrbSize, type OrbState } from '@o3/
 import { stegaClean } from '@sanity/client/stega'
 
 import { SanityImage } from '../../../SanityImage'
+import { DotCircle } from './DotCircle'
 
 import type { BaseProps } from '@o3/content-runtime/blocks'
 
@@ -21,9 +22,21 @@ export type MarkProps = MarkData & {
 /**
  * Decorative artwork beside an item, or a standalone mark in a layout column.
  * The section owns its dimensions; this component chooses the authored image,
- * halftone disc, or animated orb. An unset kind retains the orb default.
+ * halftone disc, Dot Circle, or animated orb. An unset kind retains the orb default.
  */
-export function Mark({ kind, media, state, size, speed, paused, onInk, className }: MarkProps) {
+export function Mark({
+  kind,
+  media,
+  icon,
+  state,
+  size,
+  speed,
+  paused,
+  onInk,
+  className,
+}: MarkProps) {
+  if (stegaClean(kind) === 'dotCircle')
+    return <DotCircle icon={stegaClean(icon) ?? undefined} className={className} />
   if (stegaClean(kind) === 'image') {
     return (
       <SanityImage

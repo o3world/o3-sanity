@@ -27,7 +27,8 @@
     "about-composition": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/aboutComposition.ts --with-user-token --",
     "presentation-alignment": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/presentationAlignment.ts --with-user-token --",
     "best-egg-gallery-layout": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/bestEggGalleryLayout.ts --with-user-token --",
-    "retire-cta-decoration": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/retireCtaDecoration.ts --with-user-token --"
+    "retire-cta-decoration": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/retireCtaDecoration.ts --with-user-token --",
+    "dot-circle-marks": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/dotCircleMarks.ts --with-user-token --"
   },
   "dependencies": {
     "@o3/block-spec": "workspace:*",
