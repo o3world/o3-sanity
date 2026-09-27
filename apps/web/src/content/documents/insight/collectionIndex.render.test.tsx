@@ -1,3 +1,4 @@
+import { STRUCTURAL_THREE_UP } from '@o3/content-ui/image-sizes'
 import { describe, expect, it } from 'vitest'
 
 import { COLLECTION_INDEX_QUERY, INSIGHTS_PAGE_QUERY } from '@o3/sanity/queries'
@@ -139,11 +140,7 @@ describe('insights collection index route', () => {
     expect(preloaded).toHaveLength(1)
     expect(preloaded[0]).toContain('alt="Picture 0"')
     // …and every card declares the three-up slot rather than the viewport.
-    expect(declaredSizes(html)).toEqual(
-      Array(3).fill(
-        '(min-width: 1878px) 555px, (min-width: 1440px) calc(33.333vw - 71.333px), (min-width: 1024px) calc(29.801vw - 20.465px), (min-width: 640px) 395px, 90vw',
-      ),
-    )
+    expect(declaredSizes(html)).toEqual(Array(3).fill(STRUCTURAL_THREE_UP))
   })
 
   it('links each card at its own detail URL', async () => {
@@ -327,11 +324,12 @@ describe('insights index composition', () => {
     expect(tokens).not.toContain('bg-ink-warm')
   })
 
-  it('lays the cards on a bone band at the frame’s 128px rhythm', () => {
+  it('lays the cards on a bone band with the mobile and desktop feed rhythm', () => {
     // `2337:4485`: fill #F1F0EC, padding 128px 96px.
     const tokens = classTokens(page.html)
     expect(tokens).toContain('bg-bone')
-    expect(tokens).toContain('py-band-md')
+    expect(tokens).toContain('py-6')
+    expect(tokens).toContain('lg:py-band-md')
   })
 
   it('fills the 1248 column with three of the frame’s own cards', () => {
@@ -366,16 +364,9 @@ describe('insights index composition', () => {
     expect(page.html).toContain('href="/work"')
   })
 
-  /**
-   * The closer is the sphere, not the molecule. Both closer frames
-   * (`2975:8788` at 1440, `2975:8801` at 402) are a full-bleed raster
-   * `imageRef 51458151e760cc2e868b5f9aa7f2e939609a9a6c` over a native
-   * `--gradient-ink-fade` strip (`2975:8795` / `2975:8807`) — the same
-   * construction #317 ruled on, and the same imageRef Home's own orbs band
-   * carries. So it is Home's band pasted, and the route draws `orbs`.
-   */
-  it('closes on the sphere band Home originated', () => {
-    expect(page.html).toContain('--gradient-ink-fade')
+  /** The current CTA has a quiet gradient behind its authored copy. */
+  it('closes on the current gradient band', () => {
+    expect(page.html).toContain('cta-band')
     expect(page.html).not.toContain('w-[54%]')
   })
 

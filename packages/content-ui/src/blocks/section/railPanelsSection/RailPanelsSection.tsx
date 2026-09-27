@@ -1,4 +1,4 @@
-import { SectionShell } from '@o3/ui'
+import { Eyebrow, SectionShell } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { fieldAttr, itemAttr } from '@o3/content-runtime/data-attribute'
@@ -11,133 +11,54 @@ import { resolveSurface } from '../../surface'
 
 import { PanelBand } from './PanelBand'
 import { PanelCards } from './PanelCards'
-import { PanelGrid } from './PanelGrid'
 import { PanelPlate } from './PanelPlate'
+import { MoleculeDecoration } from '../../MoleculeDecoration'
+import { DECORATED_BAND_CLASS } from '../../decoration'
 import { PanelRows } from './PanelRows'
 import { PanelTrack } from './PanelTrack'
 import { PLATE_BLEED_CLASS, PLATE_BLEED_SIZES } from './plateBleed'
-import { STATEMENT_STEP } from './statementStep'
 
-/**
- * The four measures the band's header comes in. Every layout draws the same
- * heading and standfirst; what differs is the step and the column each gets,
- * and both are read off the frame the layout answers to.
- *
- * - `spread` — the rail band: the full column, heading over 571 and standfirst
- *   over 385, pushed apart and centred against each other (`2747:4487`). The
- *   one header on the 48 → 64 statement step rather than `display-xl`.
- * - `measured` — the rows and grid bands: a 928px header, heading over 500 and
- *   standfirst over 385 (`1762:2149`).
- * - `wide` — the Solutions cards band: the full column, 571 and 607, baselines
- *   aligned at the foot (`1925:6108`).
- * - `split` — the track: the full column, the heading hugging its words and
- *   the standfirst holding the far edge in 340 (`2846:5480`).
- */
+/** Current stacked lockups: Home 3720:62626, Solutions 4018:37996,
+ * Engineering 4039:49385. The track retains its separate composition. */
 const HEADER_SHAPE = {
   spread: {
-    // 24 between the two at 402 (`2975:8189`), 64 apart across the row at 1440.
-    wrapper: 'gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-16',
-    heading: `${STATEMENT_STEP} lg:w-[571px]`,
-    // 24/34 on both frames — flat, so `text-lead`'s 20px floor would undersize
-    // it at 402.
-    intro: 'text-[24px] leading-[34px] lg:w-[385px]',
+    wrapper: 'max-w-[821px] gap-2',
+    heading: 'text-hero',
+    intro: 'text-lead text-fg-body',
   },
   measured: {
-    wrapper: 'gap-6 lg:w-[928px] lg:flex-row lg:items-center lg:gap-8',
-    heading: 'text-display-xl lg:w-[500px]',
-    intro: 'text-lead leading-[1.2] lg:w-[385px]',
+    wrapper: 'max-w-[1035px] gap-2',
+    heading: 'text-hero',
+    intro: 'text-lead text-fg-body',
   },
   wide: {
-    wrapper: 'gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-8',
-    heading: 'text-display-xl font-normal lg:w-[571px]',
-    // 30px against the 24px step on the Solutions band — 1.25 rather than
-    // 1.2, and the only value the three headers disagree on.
-    intro: 'text-lead leading-[1.2] lg:w-[607px] lg:leading-[1.25]',
+    wrapper: 'max-w-[821px] gap-2',
+    heading: 'text-hero',
+    intro: 'text-lead text-fg-body',
   },
   split: {
-    // 18 between the heading and the standfirst at 402 (`2975:8355`), where
-    // every other band takes 24.
-    wrapper: 'gap-[18px] lg:flex-row lg:items-start lg:justify-between lg:gap-8',
-    heading: 'text-display-xl',
-    // 20/32 on both of the track's frames — flat, so `text-body`'s 16px floor
-    // would undersize it at 402.
-    intro: 'text-[20px] leading-8 lg:w-[340px]',
+    // About values: 3771:80605 desktop, 3883:16533 mobile.
+    wrapper: 'max-w-[608px] gap-2',
+    heading: 'text-hero',
+    intro: 'text-lead text-fg-body',
   },
 } as const
 
 type RailPanelsSectionProps = SectionProps<'railPanelsSection'>
 
-/**
- * Section block: rail + panels — an ordered set of parallel things, in five
- * arrangements. The rail composition below is Home's "The platforms we go deep
- * on" (`2747:4486` at 1440, `2975:8188` at 402), #310.
- *
- * ```
- * 128px 96px 128px, 128 between header and body
- *   header  full column      64px heading in 571  |  24px standfirst in 385
- *   body    row, justified   rail 82px            |  panels, 128 apart
- *     panel row, gap 33      copy 500             |  plate 395 × 396
- * ```
- *
- * 82 + 238 + 500 + 33 + 395 = 1248 — the whole band is the standard content
- * column, and the 238 is the space `justify-between` leaves at exactly that
- * measure. Below 1440 the content column is narrower than the sum, so the
- * gap compresses first and then the copy column gives (`PanelBand`,
- * `PanelPlate`); only the rail and the plate hold their width.
- *
- * What the rail counts off is the `rail` field, not a second block type. Panel
- * numbering derives from array order (CONTEXT.md), so `01` is a position
- * rather than a string someone typed.
- *
- * The body row is `PanelBand`, the section's one client boundary: it owns the
- * scroll-linked index that tells the rail which stop is in view.
- *
- * ## At 402
- *
- * The label rail keeps every part it has at 1440 and re-lays them: the rail
- * becomes a tab row over the panels (`PanelRail`) and each panel stacks its
- * plate under its copy (`PanelPlate`). That is a reflow, not a second
- * composition — see ADR 0006's 2026-08-24 amendment.
- *
- * The number rail is the one that still switches: no rail column, no media
- * square and no prose, each panel collapsing to a single ink row 24px from
- * the next (`1814:1714`), with the numeral moved into the row because a
- * sticky 82px column has nowhere to stand.
- *
- * ## `layout: cards` — the Solutions band (`1925:6108`), #47
- *
- * The Solutions frame carries **this band**, not a variation on it: the same
- * heading, the same standfirst, the same three engagements. What changes is
- * the arrangement — no rail, no media square, three ink cards side by side —
- * so it is a `layout` axis rather than a second block, the same call
- * `featureGridSection` and `inFlightSection` already make.
- *
- * ```
- * 128px 0, gap 65
- *   header  0 96px, space-between, align-END   48px heading in 571 | 24/30 standfirst in 607
- *   row     gap 39                             three cards — see PanelCards
- * ```
- *
- * The header is the same three parts in a different measure, which is why it
- * is one element with three width sets rather than three headers — see
- * `HEADER_SHAPE`.
- *
- * ## `layout: track` — Home's "How we work" (`2846:5480`), #309
- *
- * What the numbered rail became. The three engagements are no longer a
- * vertical stack beside a sticky rail; they are a horizontal carousel of
- * hairline-separated columns, with the rail's job — where am I in the set —
- * done by an ink third of the rule above them. See `PanelTrack`.
- */
+/** Parallel offers arranged as rails, service rows, columns, or a scrolling track. */
 export function RailPanelsSection({
+  eyebrow,
   heading,
   intro,
   layout,
+  headerWidth,
   rail,
   plate,
   panels,
   surface,
   backgroundMedia,
+  decoration,
   loc,
 }: RailPanelsSectionProps) {
   const items = panels ?? []
@@ -164,7 +85,16 @@ export function RailPanelsSection({
     `rail-panel-${sectionKey ? `${sectionKey}-` : ''}${key ?? index}`
 
   const isRail = !isCards && !isRows && !isGrid && !isTrack
-  const shape = isCards ? 'wide' : isTrack ? 'split' : isRail ? 'spread' : 'measured'
+  const shape =
+    isRows && stegaClean(headerWidth) === 'wide'
+      ? 'measured'
+      : isCards || isRows
+        ? 'wide'
+        : isTrack
+          ? 'split'
+          : isRail
+            ? 'spread'
+            : 'measured'
 
   const header = (
     <div
@@ -175,10 +105,26 @@ export function RailPanelsSection({
       data-sanity={fieldAttr(loc, 'heading')}
       className={cn('flex w-full flex-col', HEADER_SHAPE[shape].wrapper)}
     >
-      {heading ? (
-        <h2 className={cn('font-display text-balance', HEADER_SHAPE[shape].heading)}>{heading}</h2>
+      {eyebrow ? (
+        <Eyebrow size="lg" tone={resolved === 'ink' ? 'inverse' : 'brand'} className="pb-4">
+          {eyebrow}
+        </Eyebrow>
       ) : null}
-      {intro ? <p className={HEADER_SHAPE[shape].intro}>{intro}</p> : null}
+      {heading ? (
+        <h2
+          className={cn(
+            'font-display whitespace-normal lg:whitespace-pre-line',
+            HEADER_SHAPE[shape].heading,
+          )}
+        >
+          {heading.replace(/\u2028/g, '\n')}
+        </h2>
+      ) : null}
+      {intro ? (
+        <p className={cn(HEADER_SHAPE[shape].intro, 'whitespace-normal lg:whitespace-pre-line')}>
+          {intro.replace(/\u2028/g, '\n')}
+        </p>
+      ) : null}
     </div>
   )
 
@@ -214,15 +160,14 @@ export function RailPanelsSection({
     )
   }
 
-  if (isRows) {
+  if (isRows || isGrid) {
     return (
-      // `2749:6863` — 128px above, 64px below, and the header is the heading
-      // alone: the frame writes no standfirst over the services. `intro` still
-      // renders if a band carries one, in the rail header's measure.
-      <SectionShell surface={resolved} top="md" bottom="sm" background={background}>
-        <div className="flex flex-col gap-10 lg:gap-16">
+      <SectionShell surface={resolved} top="md" bottom="md" background={background}>
+        <div className="flex flex-col gap-16 lg:gap-32">
           {header}
           <PanelRows
+            onInk={resolved === 'ink'}
+            lastDetailIsOutcome={isRows}
             items={items.map((panel, index) => ({
               key: panel._key ?? String(index),
               heading: panel.heading ?? panel.railLabel,
@@ -237,35 +182,20 @@ export function RailPanelsSection({
     )
   }
 
-  if (isGrid) {
-    return (
-      // `2358:2788` — 128px above and below, 48px between the heading and the
-      // columns. The header is the heading alone on the frame; `intro` still
-      // renders if a band carries one, in the rows header's measure.
-      <SectionShell surface={resolved} top="md" bottom="md" background={background}>
-        <div className="flex flex-col gap-10 lg:gap-12">
-          {header}
-          <PanelGrid
-            onInk={resolved === 'ink'}
-            items={items.map((panel, index) => ({
-              key: panel._key ?? String(index),
-              heading: panel.heading ?? panel.railLabel,
-              mark: panel.mark,
-              details: panel.details,
-              dataSanity: itemAttr(loc, 'panels', panel._key),
-            }))}
-          />
-        </div>
-      </SectionShell>
-    )
-  }
-
   if (isCards) {
     return (
-      <SectionShell surface={resolved} top="md" bottom="md" background={background}>
-        <div className="flex flex-col gap-10 lg:gap-[65px]">
+      <SectionShell
+        surface={resolved}
+        top="md"
+        bottom="md"
+        background={background}
+        className={DECORATED_BAND_CLASS}
+      >
+        <MoleculeDecoration decoration={decoration} block="railPanelsSection" surface={resolved} />
+        <div className="flex flex-col gap-16">
           {header}
           <PanelCards
+            onInk={resolved === 'ink'}
             items={items.map((panel, index) => ({
               key: panel._key ?? String(index),
               heading: panel.heading ?? panel.railLabel,
@@ -283,8 +213,7 @@ export function RailPanelsSection({
   }
 
   return (
-    // `2747:4486` — 128 above and below, and 128 between the header and the
-    // band, at both widths.
+    // Current technology band: 64px rhythm / 24px gutters on mobile (2975:8188).
     <SectionShell
       surface={resolved}
       top="md"
@@ -292,9 +221,12 @@ export function RailPanelsSection({
       background={background}
       // Clip the bleeding artwork without creating a scroll container that
       // prevents the rail from sticking to the viewport.
-      className={bleeding ? 'relative isolate overflow-clip' : undefined}
+      className={cn(
+        mode === 'label' && 'max-lg:px-6 max-lg:pb-16 max-lg:pt-16',
+        bleeding && 'relative isolate overflow-clip',
+      )}
     >
-      <div className="flex flex-col gap-32">
+      <div className={cn('flex flex-col', mode === 'label' ? 'gap-16 lg:gap-32' : 'gap-32')}>
         {header}
 
         <PanelBand

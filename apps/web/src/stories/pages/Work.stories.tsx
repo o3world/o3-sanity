@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 
 import { CaseStudyIndexMockup } from '../CaseStudyIndexMockup'
@@ -44,6 +45,11 @@ export const Desktop: Story = {
 
 /** One column, the cards stacked the same 48 apart — the 402 frame (`1906:851`). */
 export const Mobile: Story = {
+  play: async ({ canvasElement }) => {
+    const feed = canvasElement.querySelector('#feed')!
+    await expect(getComputedStyle(feed).paddingTop).toBe('64px')
+    await expect(getComputedStyle(feed).paddingBottom).toBe('64px')
+  },
   args: { page: 1 },
   globals: { viewport: { value: 'mobile' } },
   parameters: { design: figmaDesign('1906:851') },

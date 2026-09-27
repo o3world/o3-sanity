@@ -1,3 +1,4 @@
+import { CONTENT_COLUMN } from '@o3/content-ui/image-sizes'
 import { describe, expect, it } from 'vitest'
 
 import { COLLECTION_INDEX_QUERY } from '@o3/sanity/queries'
@@ -59,18 +60,12 @@ describe('the /work index', () => {
     expect(html).toContain('Not the deliverable.')
   })
 
-  /**
-   * The closer both frames draw (`2975:8738`, `2975:8751`) — the seed's
-   * `ctaSection` since #348, which is what "/work has no document to seed one
-   * on" stopped being true. Its raster is a capture of the sphere over a
-   * native fade strip, so it is `orbs` rather than a photograph, and the
-   * button leaves the page it closes.
-   */
+  /** The authored closing CTA shares the current gradient composition. */
   it('closes on the shared CTA band', () => {
     expect(html).toContain('Let’s get started on your next big thing.')
     expect(html).toContain('We partner with businesses like yours')
     expect(html).toContain('href="/contact"')
-    expect(html).toContain('--gradient-ink-fade')
+    expect(html).toContain('cta-band')
   })
 
   it('renders a card per case study, linked to its detail route', () => {
@@ -111,16 +106,14 @@ describe('the /work index', () => {
     // The card's picture is decorative (`alt=""` — the client logo beside it
     // carries the name), so document order is what identifies it.
     expect(preloadedImageTags(withPhotos)).toEqual([imageTags(withPhotos)[0]])
-    expect(declaredSizes(withPhotos)).toEqual(
-      Array(3).fill('(min-width: 1878px) 1728px, (min-width: 1440px) calc(100vw - 150px), 90vw'),
-    )
+    expect(declaredSizes(withPhotos)).toEqual(Array(3).fill(CONTENT_COLUMN))
   })
 
-  it('pads the card 64 all round at lg and 24 at the sides below it', () => {
+  it('pads the card 64 all round at lg and 32 at the sides below it', () => {
     // `2089:4169` pads 64 uniformly; the 402 instances (`2975:8429`–`8431`)
-    // override the sides to 24 and leave 64 top and bottom.
+    // override the sides to 32 and leave 64 top and bottom.
     expect(html).toContain('py-16')
-    expect(html).toContain('px-6')
+    expect(html).toContain('px-8')
     expect(html).toContain('lg:px-16')
     expect(variantsOf(html, 'pb-[88px]')).toEqual([])
   })

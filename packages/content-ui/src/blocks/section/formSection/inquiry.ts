@@ -18,30 +18,20 @@
  * import.
  */
 
-/**
- * The field set, fixed in code.
- *
- * Transcribed from **Gravity Form 1**, the form WordPress served on
- * `/contact`: first name and last name at half width, email, a Reason
- * dropdown, a message, and a newsletter opt-in. Recovered from the live
- * markup rather than the extract — the WP extract records the module as
- * `{ acf_fc_layout: "form", form_id: "1" }` and never captured the fields.
- */
-export type InquiryField = 'firstName' | 'lastName' | 'email' | 'reason' | 'message'
+/** Contact frame 2960:7557: one name, email, reason, optional referral, message. */
+export type InquiryField = 'name' | 'email' | 'reason' | 'referral' | 'message'
 
 /** In the order the card draws them. */
 export const INQUIRY_FIELDS: readonly InquiryField[] = [
-  'firstName',
-  'lastName',
+  'name',
   'email',
   'reason',
+  'referral',
   'message',
 ]
 
-/** Every one is `gfield_contains_required` on the live form. */
-export const REQUIRED_MESSAGE: Record<InquiryField, string> = {
-  firstName: 'Add your first name.',
-  lastName: 'Add your last name.',
+export const REQUIRED_MESSAGE: Partial<Record<InquiryField, string>> = {
+  name: 'Add your name.',
   email: 'Add your email address.',
   reason: 'Pick a reason.',
   message: 'Tell us what you need.',
@@ -78,8 +68,8 @@ export const HONEYPOT_FIELD = 'website'
 export const MINIMUM_FILL_MS = 3000
 
 export interface InquiryInput {
-  firstName?: string
-  lastName?: string
+  name?: string
+  referral?: string
   email?: string
   reason?: string
   message?: string
@@ -184,12 +174,12 @@ export function isSpam(input: InquiryInput): boolean {
   if (typeof input.elapsedMs !== 'number' || !Number.isFinite(input.elapsedMs)) return true
   if (input.elapsedMs < MINIMUM_FILL_MS) return true
 
-  if (hasUrl(text(input.firstName)) || hasUrl(text(input.lastName))) return true
+  if (hasUrl(text(input.name))) return true
 
   const message = text(input.message)
   const words = message.split(/\s+/).filter(Boolean)
   if (words.length === 1 && hasUrl(words[0]!)) return true
-  return urlCount(message) >= MESSAGE_URL_LIMIT
+  return urlCount(message) + urlCount(text(input.referral)) >= MESSAGE_URL_LIMIT
 }
 
 /**
@@ -206,8 +196,8 @@ export function parseInquiryInput(body: unknown): InquiryInput | null {
   const source = body as Record<string, unknown>
 
   const input: InquiryInput = {
-    firstName: text(source.firstName),
-    lastName: text(source.lastName),
+    name: text(source.name),
+    referral: text(source.referral),
     email: text(source.email),
     reason: text(source.reason),
     message: text(source.message),
@@ -227,15 +217,6 @@ export function parseInquiryInput(body: unknown): InquiryInput | null {
 
 /** HubSpot's contact object. Every property this form writes is one. */
 const CONTACT_OBJECT_TYPE = '0-1'
-
-/** Our field name → the HubSpot property it writes. */
-const HUBSPOT_PROPERTY: Record<InquiryField, string> = {
-  firstName: 'firstname',
-  lastName: 'lastname',
-  email: 'email',
-  reason: 'reason',
-  message: 'message',
-}
 
 const CONSENT_PROPERTY = 'sign_up_for_mailing_list'
 
@@ -272,10 +253,21 @@ export function toHubSpotSubmission(
   input: InquiryInput,
   { pageUri, pageName, ipAddress, now }: SubmissionContext,
 ): HubSpotSubmission {
-  const fields: HubSpotField[] = INQUIRY_FIELDS.map((field) => ({
+  // ponytail: the existing CRM has separate name properties; split at the first
+  // word until a dedicated full-name property is available, retaining every word.
+  const [firstName = '', ...remainingName] = text(input.name).split(/\s+/)
+  const referral = text(input.referral)
+  const values = {
+    firstname: firstName,
+    lastname: remainingName.join(' '),
+    email: text(input.email),
+    reason: text(input.reason),
+    message: text(input.message) + (referral ? `\n\nHow you heard about us: ${referral}` : ''),
+  }
+  const fields: HubSpotField[] = Object.entries(values).map(([name, value]) => ({
     objectTypeId: CONTACT_OBJECT_TYPE,
-    name: HUBSPOT_PROPERTY[field],
-    value: text(input[field]),
+    name,
+    value,
   }))
 
   // Only when the document gave the checkbox a label: an opt-in nobody was

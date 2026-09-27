@@ -42,16 +42,11 @@ export default async function SiteLayout({ children }: ShellProps) {
 
 async function Shell({ children }: ShellProps) {
   const [settings, year] = await Promise.all([getSiteSettings(), currentYear()])
-  const navSettings = settings ? { ...settings, utilityNavItems: [] } : settings
 
   return (
     <GlobeProvider>
       {/* The chrome draws no mark of its own (#228); these are this app's. */}
-      <SiteNav
-        settings={navSettings}
-        brandMark={NAV_MARK}
-        menuUtilities={<SpatialMotionControl />}
-      />
+      <SiteNav settings={settings} brandMark={NAV_MARK} menuUtilities={<SpatialMotionControl />} />
       {/* Bands paint their own surfaces over the document ground. Matching the
           opening band also covers space around streamed loading content. */}
       <main

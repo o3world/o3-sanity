@@ -139,34 +139,6 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     expect(header).not.toContain('view-transition-name')
   })
 
-  it('draws the corner, the padding and the row the frames draw (#152)', () => {
-    // 1440 (`2225:2920`): 900 × 80, radius 12, 16px all round, a 48px gap
-    // down the link row. 402 (`1814:1630`): a full-width square bar at
-    // `8px 20px`. The corner and the padding are both `lg:` for that reason,
-    // and the corner is a token because 12px is a value the design draws.
-    // `3271:17013` draws the pill `40px 12px 12px 40px` — a round cap at the
-    // mark's end, `--radius-nav` at the button's.
-    expect(navHtml).toContain('lg:rounded-l-[40px]')
-    expect(navHtml).toContain('lg:rounded-r-nav')
-    expect(navHtml).not.toContain('rounded-full')
-    // The approved mobile refinement shares the page's fluid gutter (#446).
-    expect(navHtml).toContain('px-gutter')
-    expect(navHtml).toContain('py-2')
-    expect(navHtml).toContain('lg:px-4')
-    expect(navHtml).toContain('lg:py-4')
-    expect(navHtml).toContain('lg:gap-12')
-    // Two alphas, both the frames': `--color-scrim` is the 402 bar's 20%
-    // (`1814:1630`) and `--color-scrim-pill` the 1440 pill's 45% (`2225:2920`,
-    // retuned from the frame's 60% — see the token).
-    expect(navHtml).toContain('bg-scrim ')
-    expect(navHtml).toContain('lg:bg-scrim-pill')
-    // The shared chrome preserves the supplied mark. The app-owned mark's
-    // artwork alignment and hit target are covered by its Home stories.
-    expect(navMark).toContain('lg:-m-2')
-    expect(navMark).not.toContain('lg:size-12')
-    expect(navMark).toContain('width="64"')
-  })
-
   it('blurs whatever it is floating over', () => {
     // The Case Study frame's glass (`1710:2300`): the photograph under the
     // pill is a tone, not a shape.
@@ -188,7 +160,6 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     // The flipped fill is a WHITE scrim: an alpha, so the bar's blur still
     // reads through it, but never the grey a dark scrim makes of a pale band.
     expect(navHtml).toContain('group-data-[ink=dark]:bg-scrim-light')
-    expect(navHtml).toContain('group-data-[ink=dark]:border-on-light-line')
     expect(navHtml).toContain('group-data-[ink=dark]:text-fg')
     expect(navHtml).toContain('duration-(--duration-ink)')
   })
@@ -201,19 +172,19 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     // They are anchors: the nav button carries a destination, and a button
     // with one renders a link. `rounded-btn` is the button's own base class,
     // which separates the desktop CTA from the plain nav links. The mobile
-    // CTA is inside the menu, not duplicated in the collapsed header.
+    // CTA is also visible in the collapsed header in the September design.
     const buttons = (navHtml.match(/<a [^>]*>/g) ?? []).filter((b) => b.includes('rounded-btn'))
-    expect(buttons.length, 'only the desktop CTA belongs in the collapsed header').toBe(1)
+    expect(buttons.length, 'desktop and mobile both expose the contact action').toBe(2)
     for (const button of buttons) {
       // The resolved skin, and the only one a server, no-JS or jsdom render
       // ever draws — `data-ink` exists solely because a browser measured a
       // light band under the bar.
-      expect(button).toContain('bg-white')
-      expect(button).toContain('text-ink')
+      expect(button).toContain('[--button-bg:var(--color-white)]')
+      expect(button).toContain('[--button-fg:var(--color-ink)]')
       // Flipped, it inverts with the links and the hairline. White on the
       // white scrim keeps the label and loses the button.
-      expect(button).toContain('group-data-[ink=dark]:bg-ink')
-      expect(button).toContain('group-data-[ink=dark]:text-white')
+      expect(button).toContain('group-data-[ink=dark]:[--button-bg:var(--color-ink)]')
+      expect(button).toContain('group-data-[ink=dark]:[--button-fg:var(--color-white)]')
     }
   })
 
@@ -365,13 +336,15 @@ describe('site footer', () => {
     expect(footerMark).toContain('fill="currentColor"')
   })
 
-  it('sits on the component’s black band, padded 64px 96px (#87)', () => {
+  it('uses the current footer insets on its black band', () => {
     // `1280:1885` is `#000000`, not `--color-ink-deep`'s `#030303`, and 64px
     // top AND bottom where the frame footer this was first built from had
     // `96px 96px 16px`.
     expect(footerHtml).toContain('bg-black')
-    expect(footerHtml).toContain('px-gutter')
-    expect(footerHtml).toContain('py-16')
+    expect(footerHtml).toContain('px-4')
+    expect(footerHtml).toContain('lg:px-24')
+    expect(footerHtml).toContain('pt-32')
+    expect(footerHtml).toContain('pb-16')
     expect(footerHtml).not.toContain('bg-ink-deep')
   })
 

@@ -4,9 +4,9 @@ import { cn } from '../lib/utils'
 import { Eyebrow } from './eyebrow'
 
 export interface CaseStudyHeroProps {
-  /** The brand-red uppercase kicker — the client's name ("IRONMAN"). */
+  /** The white uppercase kicker — the client's name ("IRONMAN"). */
   eyebrow?: ReactNode
-  /** The case study's title, 64px Light flush left in a 571px measure. */
+  /** The case study's title, 48px heading flush left in a 571px measure. */
   heading: ReactNode
   /** The 24px narrative headline, pinned bottom-right in a 395px measure. */
   subheading?: ReactNode
@@ -18,33 +18,7 @@ export interface CaseStudyHeroProps {
   className?: string
 }
 
-/**
- * The Case Study detail opener — built to `1710:2301` (desktop) and
- * `1906:923` (mobile), #44.
- *
- * ```
- * 1440 × 819 photograph, cover
- *   scrim   linear-gradient(0deg, #030303 15%, transparent) — 34% on mobile
- *   row     164px 96px 64px, space-between, aligned to the FLOOR
- *     black band behind the whole row at 1440 (`2846:4538`, 1248 × 136)
- *     left  gap 16   eyebrow brand red uppercase | title 64/76 Light in 571
- *     right          narrative headline 24/34 in 395px
- * ```
- *
- * Two things separate it from `CollectionHero`, which is otherwise the same
- * geometry: this band is **photographic** (the collection heroes are a flat
- * `ink-warm` strip), and its two columns sit on the band's floor rather than
- * on its centre line — the scrim only reaches 15% up, so anything higher
- * would sit on open photograph.
- *
- * At 402 the frame stacks the columns, deepens the scrim to 34% and drops the
- * black band (`1906:924` is unfilled) — the same trade `CaseStudyCard` makes:
- * a narrow band has no clear side to keep legible, so the wash has to cover
- * more of it.
- *
- * The 164px top padding is the floating pill's clearance — the same figure
- * the Home and Work heroes use.
- */
+/** Current case-study hero: 3249:20846, with a white eyebrow and 48/58 title. */
 export function CaseStudyHero({
   eyebrow,
   heading,
@@ -80,11 +54,11 @@ export function CaseStudyHero({
       >
         <div className="flex flex-col justify-center gap-4 lg:w-[571px]">
           {eyebrow ? (
-            <Eyebrow size="lg" tone="brand">
+            <Eyebrow size="lg" tone="inverse">
               {eyebrow}
             </Eyebrow>
           ) : null}
-          <h1 className="text-hero font-display text-balance">{heading}</h1>
+          <h1 className="text-detail-hero font-display text-balance">{heading}</h1>
         </div>
         {subheading ? <p className="text-lead lg:w-[395px]">{subheading}</p> : null}
       </div>

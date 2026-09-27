@@ -2,12 +2,7 @@ import { defineBlockKnobs, knob } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
 import type { LogoWallSection } from '../types/generated'
 
-/**
- * The logo wall's design options.
- *
- * `bone` because the block asked for it before knobs existed — the warm wash
- * the marks sit on is what both frames draw.
- */
+/** Current Home and partner logo bands share the dark ruled composition. */
 export const logoWallSectionKnobs = defineBlockKnobs({
   type: 'logoWallSection',
   title: 'Logo wall',
@@ -17,17 +12,15 @@ export const logoWallSectionKnobs = defineBlockKnobs({
       name: 'layout',
       title: 'Layout',
       description:
-        'Plates is the Home partners band — 280px hairlined squares, six across, clipped at the viewport. Bar is the partner page’s: the same six marks in a short unplated strip, so the row reads as a footnote to the heading rather than as the band’s subject.',
-      // `1864:2390`'s 280×280 tiles against `2332:1713`'s 280×100 frames
-      // (#92). Same content — one centred row of client marks — in two
-      // arrangements, which is a `layout` axis rather than a second block:
-      // the call `featureGridSection`, `railPanelsSection` and
-      // `inFlightSection` have each already made.
+        'An intro and separator above an unboxed logo strip. Plates uses the solid Home surface; Bar adds the partner-page texture on ink.',
+      // Keep the stored layout values; current Home is 3720:60483 / 3726:62792.
       options: ['plates', 'bar'],
       initialValue: 'plates',
       bar: true,
     }),
-    surfaceKnob({ initialValue: 'bone' }),
+    surfaceKnob({
+      initialValue: 'ink',
+    }),
   ],
   /**
    * `clients` is left empty, and it is the field the band is FOR. A client is a

@@ -9,19 +9,9 @@
   "pageType": "standard",
   "sections": [
     {
-      "_type": "heroSection",
-      "_key": "hero",
-      "variant": "band",
-      "eyebrow": "Contact",
-      "headlineLines": ["Let’s make exceptional", "experiences together"],
-      "subheading": "Tell us what you’re working on, or what’s in the way of it. We read everything that comes in, and a person writes back.",
-      "decoration": "orbs",
-      "surface": "ink"
-    },
-    {
       "_type": "formSection",
       "_key": "inquiry",
-      "surface": "bone",
+      "surface": "paper",
       "reasons": [
         "New business inquiry",
         "1682 inquiries",
@@ -32,7 +22,12 @@
         "Other"
       ],
       "consentLabel": "Sign up for our newsletter",
-      "button": { "_type": "button", "label": "Send message", "icon": "arrow" },
+      "button": {
+        "_type": "button",
+        "label": "Send message",
+        "icon": "arrow",
+        "contrast": "brand"
+      },
       "media": {
         "_type": "figure",
         "alt": "Black and white photo of Justin Handler with red semi circles in the background",
@@ -48,15 +43,25 @@
           "_type": "detail",
           "_key": "visit",
           "label": "Visit us",
-          "items": ["1339 Frankford Ave, Suite 3\nPhiladelphia, PA 19125"]
+          "items": [
+            "1339 Frankford Ave, Suite 3\nPhiladelphia, PA 19125"
+          ]
         },
         {
           "_type": "detail",
           "_key": "reach",
           "label": "Reach us",
-          "items": ["(215) 592-4739", "hello@o3world.com"]
+          "items": [
+            "(215) 592-4739",
+            "hello@o3world.com"
+          ]
         }
-      ]
+      ],
+      "variant": "hero",
+      "heading": "Let’s make exceptional\nexperiences together",
+      "eyebrow": "Contact",
+      "note": "Tell us what you’re working on, or what’s in the way of it. We read everything that comes in, and a person writes back.",
+      "decoration": "molecule"
     }
   ],
   "seo": {

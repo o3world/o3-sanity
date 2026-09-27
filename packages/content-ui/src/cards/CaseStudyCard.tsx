@@ -87,15 +87,13 @@ export function CaseStudyCard(
       // out the surplus either way) and holds the two groups apart on one that
       // doesn't.
       //
-      // Padding is 64 uniform in the set and only the sides step down at 402,
-      // where the 362-wide instances (`2975:8429`–`8431`) override to 24 and
-      // leave 64 top and bottom.
+      // Current Work mobile (3813:88951) uses 32px sides and 64px top/bottom.
       //
       // The focus ring hugs the card's own radius with no offset: the
       // photograph runs to the edge, so a gap between ring and card would read
       // as a border the card doesn't have.
       className={cn(
-        'rounded-case-card group relative isolate flex min-h-[550px] flex-col justify-between gap-6 overflow-hidden px-6 py-16 text-white lg:px-16',
+        'rounded-case-card group relative isolate flex min-h-[550px] flex-col justify-between gap-6 overflow-hidden px-8 py-16 text-white shadow-[0_32px_64px_rgba(0,0,0,0.2)] lg:px-16',
         CARD_LINK_FOCUS,
         'focus-visible:ring-offset-0',
       )}
@@ -188,14 +186,14 @@ export function CaseStudyCard(
               {eyebrow}
             </Eyebrow>
           ) : null}
-          <h3 className="text-display-sm font-display text-balance">
+          <h3 className="text-display-sm text-balance font-sans lg:max-w-[472px]">
             {narrativeHeadline ?? title}
           </h3>
         </div>
 
         {headlineStat?.value ? (
-          <p className="flex items-center gap-6 [text-shadow:0_1px_12px_rgba(3,3,3,0.5)]">
-            <span className="text-display-xl font-display font-normal tracking-[-0.0208em]">
+          <p className="flex items-center gap-4 [text-shadow:0_1px_12px_rgba(3,3,3,0.5)] lg:gap-6">
+            <span className="font-sans text-[32px] font-normal leading-[1.2] tracking-[-0.0208em] lg:text-[48px]">
               {headlineStat.value}
             </span>
             {headlineStat.label ? (

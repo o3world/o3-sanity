@@ -117,7 +117,9 @@ export async function navigate(
           const button = [...nav.querySelectorAll('a[href="/contact"]')].find(
             (element) => element.getBoundingClientRect().width > 0,
           )
-          const link = nav.querySelector('a[aria-label$=" home"]')!
+          const link = [...document.querySelectorAll('#site-nav a[aria-label$=" home"]')].find(
+            (element) => element.getBoundingClientRect().width > 0,
+          )!
           const inactiveLink = nav.querySelector('a[href="/about"]')!
           sample.readyNav = {
             color: getComputedStyle(nav).color,

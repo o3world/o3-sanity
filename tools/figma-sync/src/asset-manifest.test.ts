@@ -201,7 +201,12 @@ describe('asset-manifest.json', () => {
     }
   })
 
-  it('never resolves an SVG to a node — none of them came out of Figma', () => {
-    for (const asset of resolvedAssets(manifest)) expect(asset.format, asset.path).toBe('png')
+  it('records exact SVG exports as rendered source nodes', () => {
+    const vectors = resolvedAssets(manifest).filter((asset) => asset.format === 'svg')
+    expect(vectors.length).toBeGreaterThan(0)
+    for (const asset of vectors) {
+      expect(asset.export, asset.path).toBe('render')
+      expect(asset.nodeId, asset.path).toMatch(/^\d+:\d+$/)
+    }
   })
 })

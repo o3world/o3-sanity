@@ -117,7 +117,7 @@ export const AboutHeadingWithPhoto: Story = {
   play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { name: aboutHeading.heading })
     await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(48, 0)
-    await expect(getComputedStyle(heading).fontWeight).toBe('300')
+    await expect(getComputedStyle(heading).fontWeight).toBe('400')
   },
 }
 
@@ -127,8 +127,8 @@ export const AboutHeadingMobile: Story = {
   parameters: { design: figmaDesign('2975:9043') },
   play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { name: aboutHeading.heading })
-    await expect(getComputedStyle(heading).fontSize).toBe('40px')
-    await expect(getComputedStyle(heading).fontWeight).toBe('300')
+    await expect(getComputedStyle(heading).fontSize).toBe('38px')
+    await expect(getComputedStyle(heading).fontWeight).toBe('400')
     await expect(heading.scrollWidth).toBeLessThanOrEqual(heading.clientWidth)
   },
 }
@@ -145,7 +145,7 @@ export const OverviewAutomaticMobile: Story = {
   play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { name: 'Overview' })
     await expect(getComputedStyle(heading).fontSize).toBe('18px')
-    await expect(getComputedStyle(heading).fontWeight).toBe('300')
+    await expect(getComputedStyle(heading).fontWeight).toBe('400')
   },
 }
 
@@ -154,7 +154,7 @@ export const LegacyHeading: Story = {
   globals: { viewport: { value: 'mobile' } },
   play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { name: aboutHeading.heading })
-    await expect(getComputedStyle(heading).fontSize).toBe('40px')
+    await expect(getComputedStyle(heading).fontSize).toBe('38px')
     await expect(getComputedStyle(heading).fontWeight).toBe('400')
   },
 }
@@ -162,4 +162,68 @@ export const LegacyHeading: Story = {
 /** A headed interior band uses one cadence for its heading and base-block groups. */
 export const GroupedEntrance: Story = {
   args: { ...seededSectionArgs('about', 'layoutSection', 1), sequence: true },
+}
+
+/** Current prose foundation, with the existing authored text. */
+export const CurrentProse: Story = {
+  args: {
+    ...seededSectionArgs('about', 'layoutSection', 0),
+    variant: 'prose',
+    width: 'article',
+    columns: 1,
+    bleed: 'none',
+    heading: 'The thinking and the making belong together.',
+  },
+  parameters: { design: figmaDesign('3764:78635') },
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', {
+      name: 'The thinking and the making belong together.',
+    })
+    await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(64, 0)
+    await expect(heading.getBoundingClientRect().width).toBeLessThanOrEqual(822)
+  },
+}
+
+export const CurrentOverview: Story = {
+  args: {
+    ...seededSectionArgs('solutions-software-engineering', 'layoutSection', 0),
+    variant: 'overview',
+    bleed: 'end',
+  },
+  parameters: { design: figmaDesign('2360:2861') },
+  play: async ({ canvasElement }) => {
+    const image = canvasElement.querySelector('figure img')!
+    await expect(getComputedStyle(image).borderRadius).toBe('32px')
+    await expect(image.getBoundingClientRect().height).toBe(502)
+    const plate = image.closest('figure')!.parentElement!
+    await expect(getComputedStyle(plate).boxShadow).not.toBe('none')
+  },
+}
+
+export const CurrentBrandFamily: Story = {
+  args: {
+    ...seededSectionArgs('about', 'layoutSection', 1),
+    variant: 'brand',
+    columns: 2,
+    bleed: 'none',
+  },
+  parameters: { design: figmaDesign('3720:60564') },
+  play: async ({ canvasElement }) => {
+    const image = canvasElement.querySelector('article img')
+    await expect(image).not.toBeNull()
+    await expect(image!.getBoundingClientRect().height).toBe(396)
+    await expect(within(canvasElement).getByText(/Our annual conference/)).toBeVisible()
+  },
+}
+
+export const CurrentBrandFamilyMobile: Story = {
+  ...CurrentBrandFamily,
+  globals: { viewport: { value: 'mobile' } },
+  play: async ({ canvasElement }) => {
+    const image = canvasElement.querySelector('article img')!
+    const box = image.getBoundingClientRect()
+    await expect(box.height).toBeCloseTo(box.width, 0)
+    await expect(box.width).toBeGreaterThan(0)
+  },
 }

@@ -9,6 +9,7 @@
   /* The family name the @fontsource-variable package registers. Feeding the
    * SAME variable apps/web will set means theme.css needs no Storybook
    * special-case. */
+  --font-newsreader: 'Newsreader Variable';
   --font-figtree: 'Figtree Variable';
 }
 

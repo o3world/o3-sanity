@@ -1,0 +1,1204 @@
+{
+  "figmaVersion": "2402903657143566810",
+  "approval": "2026-09-26: apply finished Figma copy and confirmed typography from content-alignment ledger; retain homepage hero, pending claims and editorial decisions.",
+  "documents": [
+    {
+      "id": "page-seed-about",
+      "type": "page",
+      "slug": "about",
+      "patches": [
+        {
+          "path": "sections[_key==\"hero\"].headlineLines",
+          "before": [
+            "A digital product consultancy that has spent over 20 years prioritizing quality over scale"
+          ],
+          "after": [
+            "Small studio. Big ideas.",
+            "20+ years of asking better questions and building better answers."
+          ],
+          "source": "C01 I3754:78488;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"hero\"].subheading",
+          "before": null,
+          "after": " We’re an experience design and engineering consultancy built for ambitious teams, complex challenges, and partnerships that only get better over time.",
+          "source": "C02 I3754:78488;3720:62491"
+        },
+        {
+          "path": "sections[_key==\"why\"].heading",
+          "before": "Built to go end to end",
+          "after": "The thinking and the making belong together.",
+          "source": "C03 I3764:78637;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"why\"].items[_key==\"why-body\"].body",
+          "before": [
+            {
+              "_key": "p0",
+              "_type": "block",
+              "children": [
+                {
+                  "_key": "p0s",
+                  "_type": "span",
+                  "marks": [],
+                  "text": "O3 was founded on a simple frustration: companies were forced to choose. Hire a strategy firm that hands you a deck and leaves, or an execution shop that builds exactly what's on the brief without ever asking if the brief is right. The gap between them is where good work goes to die  and where most of the cost hides."
+                }
+              ],
+              "markDefs": [],
+              "style": "normal"
+            },
+            {
+              "_key": "p1",
+              "_type": "block",
+              "children": [
+                {
+                  "_key": "p1s",
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We built O3 to close that gap. Strategy and execution in one world, so the people who build your roadmap are the people who build it. 21 years later, that's still the whole idea."
+                }
+              ],
+              "markDefs": [],
+              "style": "normal"
+            },
+            {
+              "_key": "p2",
+              "_type": "block",
+              "children": [
+                {
+                  "_key": "p2s",
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We're founder-led, and we've chosen quality over scale: a deliberately senior team, long-standing client relationships, and partners whose outcomes we're invested in. "
+                }
+              ],
+              "markDefs": [],
+              "style": "normal"
+            }
+          ],
+          "after": [
+            {
+              "_key": "p0",
+              "_type": "block",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_key": "p0s",
+                  "_type": "span",
+                  "text": "Too many agencies separate the people who shape the strategy from the people who actually execute it. One team hands over a deck, another inherits the brief, and the thinking gets diluted somewhere along the way.",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_key": "p1",
+              "_type": "block",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_key": "p1s",
+                  "_type": "span",
+                  "text": "We built O3 to close that gap.",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_key": "p2",
+              "_type": "block",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_key": "p2s",
+                  "_type": "span",
+                  "text": "The same senior team stays with the problem from the first question through launch-day celebrations, challenging assumptions, shaping the path, and making it real.",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_key": "figma-p3",
+              "_type": "block",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_key": "figma-p3-span",
+                  "_type": "span",
+                  "text": "We stay closer to the work, to our partners, and to each other. That’s how we create meaningful experiences and genuine value, and why our partnerships only get stronger over time.",
+                  "marks": []
+                }
+              ]
+            }
+          ],
+          "source": "C04 I3764:78637;3720:62491"
+        },
+        {
+          "path": "sections[_key==\"optimize\"].eyebrow",
+          "before": null,
+          "after": "How we show up",
+          "source": "C05 I3771:80605;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"optimize\"].heading",
+          "before": "What we optimize for",
+          "after": "What we bring to the work.",
+          "source": "C06 I3771:80605;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"cta\"].heading",
+          "before": "Let’s get started on your next big thing",
+          "after": "But enough about us. Tell us about you.",
+          "source": "C60 I3771:80902;3720:61899,I3771:80902;3720:61901,I3771:80902;3720:61902;2205:1301"
+        },
+        {
+          "path": "sections[_key==\"cta\"].body",
+          "before": "We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready.",
+          "after": "We love a new challenge. If you’re ready to tackle what’s next, we’re ready to help.",
+          "source": "C60 I3771:80902;3720:61899,I3771:80902;3720:61901,I3771:80902;3720:61902;2205:1301"
+        },
+        {
+          "path": "sections[_key==\"cta\"].button.label",
+          "before": "Get in touch",
+          "after": "Start the conversation",
+          "source": "C60 I3771:80902;3720:61899,I3771:80902;3720:61901,I3771:80902;3720:61902;2205:1301"
+        },
+        {
+          "path": "sections[_key==\"optimize\"].intro",
+          "before": "Not a menu of services. One senior team that carries a problem from the first question to the shipped thing",
+          "after": "New clients, new challenges, new technology. Through all of it, a few beliefs continue to shape the way we work and the kind of partner we want to be.",
+          "source": "I3771:80605;3720:62491"
+        }
+      ]
+    },
+    {
+      "id": "page-seed-solutions",
+      "type": "page",
+      "slug": "solutions",
+      "patches": [
+        {
+          "path": "sections[_key==\"c88fd5d67474\"].headlineLines",
+          "before": ["Strategy, design, engineering, and AI in one world"],
+          "after": ["Strategy, design, engineering,", "and AI within one orbit."],
+          "source": "C11 I4018:37925;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"c88fd5d67474\"].subheading",
+          "before": "Marketing and product teams are often held back by technology. We remove those barriers so you can move fast and go higher.",
+          "after": "We work across disciplines as one team, bringing the right mix of thinking and making to every challenge without the usual handoffs, silos, or lost-in-translation moments.",
+          "source": "C12 I4018:37925;3720:62491"
+        },
+        {
+          "path": "sections[_key==\"dddfc2a572a8\"].eyebrow",
+          "before": null,
+          "after": "How the work connects",
+          "source": "C13 I4018:38215;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"dddfc2a572a8\"].heading",
+          "before": "How the work connects",
+          "after": "Four disciplines. One team.",
+          "source": "C14 I4018:38215;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"dddfc2a572a8\"].intro",
+          "before": "We create smart marketing and product engines that help your digital take off.",
+          "after": "Strategy, design, engineering, and AI overlap from the start. That means ideas get pressure-tested earlier, details don’t disappear between teams, and the people shaping the solution are the ones that actually build it.",
+          "source": "C15 I4018:38215;3720:62491"
+        },
+        {
+          "path": "sections[_key==\"dddfc2a572a8\"].panels[_key==\"466e8e3e342d\"].body",
+          "before": "The root of every engagement. We find the real problem and the develop the digital strategy for execution.",
+          "after": "We dig into your business, your customers, and the constraints to find where the biggest opportunities really are. Collaboratively, we shape a direction the whole team can act on.",
+          "source": "C16 4027:38291,4028:38294"
+        },
+        {
+          "path": "sections[_key==\"dddfc2a572a8\"].panels[_key==\"466e8e3e342d\"].button.label",
+          "before": "Learn about our strategy solutions",
+          "after": "See how we find the way forward",
+          "source": "C16 4027:38291,4028:38294"
+        },
+        {
+          "path": "sections[_key==\"dddfc2a572a8\"].panels[_key==\"8f216ab304a8\"].heading",
+          "before": "UX/UI design ",
+          "after": "Design",
+          "source": "C17 4029:38300,4029:38302"
+        },
+        {
+          "path": "sections[_key==\"dddfc2a572a8\"].panels[_key==\"8f216ab304a8\"].body",
+          "before": "Data-backed, human centered design that's AI-ready, conversion-focused, and delightfully performant.",
+          "after": "We make the complicated feel simple, the important feel obvious, and the experience feel like it’s actually designed around the person using it. Because it is.",
+          "source": "C17 4029:38300,4029:38302"
+        },
+        {
+          "path": "sections[_key==\"dddfc2a572a8\"].panels[_key==\"8f216ab304a8\"].button.label",
+          "before": "Learn about our design services",
+          "after": "See how we make it click",
+          "source": "C17 4029:38300,4029:38302"
+        },
+        {
+          "path": "sections[_key==\"dddfc2a572a8\"].panels[_key==\"3eb05e6b2089\"].heading",
+          "before": "Software engineering",
+          "after": "Engineering",
+          "source": "C18 4029:38308,4029:38310"
+        },
+        {
+          "path": "sections[_key==\"dddfc2a572a8\"].panels[_key==\"3eb05e6b2089\"].body",
+          "before": "AI-enabled software engineering that's built for scale and speed. Composable content management systems and applications.",
+          "after": "Our engineers are part of the conversation from the start, helping shape what’s possible early so ideas get stronger, tradeoffs get clearer, and fewer surprises show up when it’s time to build.",
+          "source": "C18 4029:38308,4029:38310"
+        },
+        {
+          "path": "sections[_key==\"dddfc2a572a8\"].panels[_key==\"3eb05e6b2089\"].button.label",
+          "before": "Learn about engineering solutions",
+          "after": "See how we bring it to life",
+          "source": "C18 4029:38308,4029:38310"
+        },
+        {
+          "path": "sections[_key==\"dddfc2a572a8\"].panels[_key==\"712c92971332\"].heading",
+          "before": "AI Solutions",
+          "after": "AI",
+          "source": "C19 4029:38317,4029:38319"
+        },
+        {
+          "path": "sections[_key==\"dddfc2a572a8\"].panels[_key==\"712c92971332\"].body",
+          "before": "Applied where it compounds the work, not where it decorates it. Our dedicated AI practice, O3XO, helps guide executive teams from education to execution. ",
+          "after": "Through O3XO, we help teams identify where AI can create real leverage, then move from exploration into practical implementation.",
+          "source": "C19 4029:38317,4029:38319"
+        },
+        {
+          "path": "sections[_key==\"dddfc2a572a8\"].panels[_key==\"712c92971332\"].button.label",
+          "before": "Visit the O3XO site",
+          "after": "See what’s possible with O3XO",
+          "source": "C19 4029:38317,4029:38319"
+        },
+        {
+          "path": "sections[_key==\"engagements\"].eyebrow",
+          "before": null,
+          "after": "Ways to work together",
+          "source": "C21 I4018:37996;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"engagements\"].heading",
+          "before": "Three ways to engage",
+          "after": "Bring the problem to us or bring us to the problem.",
+          "source": "C22 I4018:37996;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"engagements\"].intro",
+          "before": "From senior hands inside your team to owning the whole outcome, the right engagement depends on how much of the problem is yours to keep.",
+          "after": "Sometimes you need a partner to own the outcome. Sometimes you need the right team alongside yours. We can shape the engagement around how much ownership, momentum, and expertise you need.",
+          "source": "C23 I4018:37996;3720:62491"
+        },
+        {
+          "path": "sections[_key==\"engagements\"].panels[_key==\"eng-full\"].body",
+          "before": "Hand us the outcome, not the tasks.",
+          "after": "Tell us the desired outcome and we’ll own the path to get there. Best when you want one accountable team to take a challenge from definition through delivery.",
+          "source": "C24 4030:38350"
+        },
+        {
+          "path": "sections[_key==\"engagements\"].panels[_key==\"eng-full\"].note",
+          "before": "Best when a single point of accountability is worth more than a seat at every standup.",
+          "after": null,
+          "source": "C24 4030:38350"
+        },
+        {
+          "path": "sections[_key==\"engagements\"].panels[_key==\"eng-squad\"].body",
+          "before": "A cross-functional pod that takes a problem and runs.",
+          "after": "A focused, cross-functional O3 team built around solving the problem. We work alongside your team and keep the work moving from idea to shipped product.",
+          "source": "C25 4030:38354"
+        },
+        {
+          "path": "sections[_key==\"engagements\"].panels[_key==\"eng-squad\"].note",
+          "before": "Best when you need momentum and a team that owns delivery.",
+          "after": null,
+          "source": "C25 4030:38354"
+        },
+        {
+          "path": "sections[_key==\"engagements\"].panels[_key==\"eng-embedded\"].body",
+          "before": "Senior hands, inside your team.",
+          "after": "Add experienced talent where you need it most to accelerate the work, strengthen the team, and bring an outside perspective without adding unnecessary process.",
+          "source": "C26 4030:38358"
+        },
+        {
+          "path": "sections[_key==\"engagements\"].panels[_key==\"eng-embedded\"].note",
+          "before": "Best when you trust the direction and need the horsepower.",
+          "after": null,
+          "source": "C26 4030:38358"
+        },
+        {
+          "path": "sections[_key==\"cta\"].heading",
+          "before": "Ready to remove what's in the way?",
+          "after": "But enough about us. Tell us about you.",
+          "source": "C61 I4018:37931;3720:61899,I4018:37931;3720:61901,I4018:37931;3720:61902;2205:1301"
+        },
+        {
+          "path": "sections[_key==\"cta\"].body",
+          "before": "We partner with enterprise teams to design, build, and optimize systems that perform.",
+          "after": "We love a new challenge. If you’re ready to tackle what’s next, we’re ready to help.",
+          "source": "C61 I4018:37931;3720:61899,I4018:37931;3720:61901,I4018:37931;3720:61902;2205:1301"
+        },
+        {
+          "path": "sections[_key==\"cta\"].button.label",
+          "before": "Let's talk",
+          "after": "Start the conversation",
+          "source": "C61 I4018:37931;3720:61899,I4018:37931;3720:61901,I4018:37931;3720:61902;2205:1301"
+        },
+        {
+          "path": "sections[_key==\"engagements\"].panels[_key==\"eng-embedded\"].heading",
+          "before": "Embedded Team Member",
+          "after": "Embedded Team",
+          "source": "4030:38357"
+        }
+      ]
+    },
+    {
+      "id": "page-seed-solutions-software-engineering",
+      "type": "page",
+      "slug": "solutions/software-engineering",
+      "patches": [
+        {
+          "path": "sections[_key==\"hero\"].eyebrow",
+          "before": "Solutions",
+          "after": "Engineering",
+          "source": "C27 I2354:2583;3726:68726;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"hero\"].headlineLines",
+          "before": ["Build for scale and performance"],
+          "after": ["Building for scale", "and performance."],
+          "source": "C28 I2354:2583;3726:68726;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"hero\"].subheading",
+          "before": "Software engineering that solves today's problems and scales for the future. That means architecting for performance, flexibility, and growth from day one.",
+          "after": "We engineer digital products and platforms to perform today, adapt tomorrow, and keep getting better.",
+          "source": "C29 I2354:2583;3726:68726;3720:62491"
+        },
+        {
+          "path": "sections[_key==\"overview\"].heading",
+          "before": "Overview",
+          "after": "We build it, improve it, and stick with it.",
+          "source": "C30 I4043:49782;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"overview\"].items[_key==\"overview-body\"].body",
+          "before": [
+            {
+              "_key": "p0",
+              "_type": "block",
+              "children": [
+                {
+                  "_key": "p0s",
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We build, optimize, and migrate legacy systems without breaking them. We maintain the systems we build while agencies hand off code and move to the next project. Our team continues to monitor and improve the applications we deliver. That continuity matters, especially when you're running a business on the platform we built."
+                }
+              ],
+              "markDefs": [],
+              "style": "normal"
+            }
+          ],
+          "after": [
+            {
+              "_key": "p0",
+              "_type": "block",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_key": "p0s",
+                  "_type": "span",
+                  "text": "We build new products, optimize existing platforms, and migrate legacy systems without losing what already works. And because the job doesn’t end at launch, we stay close to monitor, improve, and evolve what we’ve built as your business and technology change.",
+                  "marks": []
+                }
+              ]
+            }
+          ],
+          "source": "C31 I4043:49782;3720:62491"
+        },
+        {
+          "path": "sections[_key==\"services\"].eyebrow",
+          "before": null,
+          "after": "engineering services",
+          "source": "C32 I4039:49385;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"services\"].heading",
+          "before": "Software engineering services",
+          "after": "From new builds to what comes next.",
+          "source": "C33 I4039:49385;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"use-cases\"].heading",
+          "before": "Engineering challenges we solve",
+          "after": "The problems we solve.",
+          "source": "C35 I4039:49502;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"cta\"].heading",
+          "before": "Engineering that scales with your business",
+          "after": "Let’s build something that lasts.",
+          "source": "C62 I4043:49566;3720:61899,I4043:49566;3720:61901,I4043:49566;3720:61902;2205:1301"
+        },
+        {
+          "path": "sections[_key==\"cta\"].body",
+          "before": "Let's build something together.",
+          "after": "Whether you’re starting fresh, evolving what you have, or trying  to get unstuck, we’re ready to help you move it forward.",
+          "source": "C62 I4043:49566;3720:61899,I4043:49566;3720:61901,I4043:49566;3720:61902;2205:1301"
+        },
+        {
+          "path": "sections[_key==\"cta\"].button.label",
+          "before": "Contact us",
+          "after": "Talk to our team",
+          "source": "C62 I4043:49566;3720:61899,I4043:49566;3720:61901,I4043:49566;3720:61902;2205:1301"
+        },
+        {
+          "path": "sections[_key==\"services\"].intro",
+          "before": null,
+          "after": "We design, build, connect, and evolve the technology behind digital experiences, with performance and longevity built in from the start.",
+          "source": "I4039:49385;3720:62491"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-development\"].heading",
+          "before": "Custom development",
+          "after": "Custom development",
+          "source": "I4068:50469;4061:50299"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-development\"].note",
+          "before": null,
+          "after": "Built around the problem, not the template.",
+          "source": "I4068:50469;4061:50300"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-development\"].body",
+          "before": null,
+          "after": "We create frontend and backend systems tailored to what the experience actually needs, from high-performing Next.js applications to APIs, CMS integrations, and the infrastructure connecting everything behind the scenes.",
+          "source": "I4068:50469;4061:50302"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-development\"].details",
+          "before": [
+            {
+              "_key": "frontend",
+              "_type": "detail",
+              "items": ["React, Next.js, TypeScript (with rendering strategies)"],
+              "label": "Frontend"
+            },
+            {
+              "_key": "backend",
+              "_type": "detail",
+              "items": ["Node.js, API design, serverless vs. traditional approaches"],
+              "label": "Backend"
+            },
+            {
+              "_key": "cms",
+              "_type": "detail",
+              "items": ["Sanity, Drupal, WordPress (no template constraints)"],
+              "label": "CMS integration"
+            },
+            {
+              "_key": "crm",
+              "_type": "detail",
+              "items": ["HubSpot, Salesforce APIs (unified data systems)"],
+              "label": "CRM integration"
+            },
+            {
+              "_key": "performance",
+              "_type": "detail",
+              "items": ["Caching strategies, query optimization, image optimization"],
+              "label": "Performance as architecture"
+            }
+          ],
+          "after": [
+            {
+              "_key": "frontend",
+              "_type": "detail",
+              "label": "Technologies we work with",
+              "items": [
+                "React",
+                "Next.js",
+                "Typescript",
+                "Node.js",
+                "Sanity",
+                "Drupal",
+                "WordPress",
+                "HubSpot",
+                "Salesforce",
+                "Custom APIs"
+              ]
+            },
+            {
+              "_key": "outcome",
+              "_type": "detail",
+              "label": "What you get",
+              "items": [
+                "A tailored platform that’s built for the experience you need now and the flexibility you’ll need later."
+              ]
+            }
+          ],
+          "source": "I4068:50469;4061:50304,I4068:50469;4061:50330"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-architecture\"].heading",
+          "before": "Headless & composable architectures",
+          "after": "Headless & composable architecture",
+          "source": "4039:49424"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-architecture\"].note",
+          "before": null,
+          "after": "Build the pieces to work better together",
+          "source": "4039:49425"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-architecture\"].body",
+          "before": null,
+          "after": "We connect content, data, services, and frontends through flexible architectures that let each part evolve without forcing the whole platform to start over.",
+          "source": "4039:49427"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-architecture\"].details",
+          "before": [
+            {
+              "_key": "cms-first",
+              "_type": "detail",
+              "items": ["Sanity + Next.js + Edge Functions"],
+              "label": "CMS-first"
+            },
+            {
+              "_key": "api",
+              "_type": "detail",
+              "items": ["Multiple systems integrated via API"],
+              "label": "API-driven integrations"
+            },
+            {
+              "_key": "composable",
+              "_type": "detail",
+              "items": ["React components in Storybook, versioned and reusable"],
+              "label": "Composable frontend"
+            },
+            {
+              "_key": "database",
+              "_type": "detail",
+              "items": ["Caching strategies that fit the data (Redis, CDN caching, ISR)"],
+              "label": "Database architecture"
+            },
+            {
+              "_key": "channels",
+              "_type": "detail",
+              "items": ["One Sanity instance, multiple frontends (web, email, mobile, APIs)"],
+              "label": "Multi-channel"
+            }
+          ],
+          "after": [
+            {
+              "_key": "cms-first",
+              "_type": "detail",
+              "label": "Key capabilities",
+              "items": [
+                "Sanity + Next.js + Edge",
+                "API integrations",
+                "Reusable components",
+                "Caching strategies",
+                "Multi-channel delivery"
+              ]
+            },
+            {
+              "_key": "outcome",
+              "_type": "detail",
+              "label": "What you get",
+              "items": [
+                "A system that scales cleanly, adapts faster, and avoids big expensive rebuilds."
+              ]
+            }
+          ],
+          "source": "4039:49429,4039:49445"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-migration\"].heading",
+          "before": "Migration & Replatforming",
+          "after": "Migration & replatforming",
+          "source": "4039:49449"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-migration\"].note",
+          "before": null,
+          "after": "Move forward without bringing the old constraints with you.",
+          "source": "4039:49450"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-migration\"].body",
+          "before": null,
+          "after": "We untangle legacy systems, migrate content and data, and rebuild the architecture around where the business is headed next, with testing, validation, and transition planning built into the process.",
+          "source": "4039:49452"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-migration\"].details",
+          "before": [
+            {
+              "_key": "data",
+              "_type": "detail",
+              "items": ["From legacy CMS to Sanity. Fully automated content migration."],
+              "label": "Data migration and transformation"
+            },
+            {
+              "_key": "testing",
+              "_type": "detail",
+              "items": ["Automated tests, API contracts, performance benchmarking"],
+              "label": "Testing & validation"
+            },
+            {
+              "_key": "database-migration",
+              "_type": "detail",
+              "items": ["Monolith breaking, schema redesign (Drupal + Acquia to Next.js + Sanity)"],
+              "label": "Database migration"
+            },
+            {
+              "_key": "zero-downtime",
+              "_type": "detail",
+              "items": ["DNS switches, automated rollback"],
+              "label": "Zero-downtime"
+            }
+          ],
+          "after": [
+            {
+              "_key": "data",
+              "_type": "detail",
+              "label": "Key capabilities",
+              "items": [
+                "Automated migration",
+                "Schema redesign",
+                "Automated testing",
+                "Performance benchmarking",
+                "API validation",
+                "Zero-downtime launches",
+                "DNS switches",
+                "Automated rollback"
+              ]
+            },
+            {
+              "_key": "outcome",
+              "_type": "detail",
+              "label": "What you get",
+              "items": [
+                "A smoother transition, a stronger foundation, and less risk on the way there."
+              ]
+            }
+          ],
+          "source": "4039:49454,4039:49476"
+        },
+        {
+          "path": "sections[_key==\"services\"].layout",
+          "before": "grid",
+          "after": "rows",
+          "source": "C34 / 4068:50469"
+        }
+      ]
+    },
+    {
+      "id": "page-seed-partners-sanity",
+      "type": "page",
+      "slug": "partners/sanity",
+      "patches": [
+        {
+          "path": "sections[_key==\"hero\"].headlineLines",
+          "before": ["Sanity Development Partner"],
+          "after": ["Sanity development partner"],
+          "source": "C36 3895:17010"
+        },
+        {
+          "path": "sections[_key==\"hero\"].subheading",
+          "before": "Structure, flexibility, and scale. That's what Sanity does. That's what we build on it.",
+          "after": "Sanity gives ambitious teams the flexibility to move faster with a content platform built around how your business works.",
+          "source": "C37 3895:17011"
+        },
+        {
+          "path": "sections[_key==\"brands\"].eyebrow",
+          "before": null,
+          "after": "Brands using Sanity",
+          "source": "C38 I3895:17713;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"brands\"].heading",
+          "before": "Trusted brands using Sanity",
+          "after": "In good company",
+          "source": "C39 I3895:17713;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"services\"].heading",
+          "before": "Three Core Services",
+          "after": "Core services",
+          "source": "C40 I4061:50190;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"why\"].heading",
+          "before": "Why Sanity + O3",
+          "after": "Platform expertise is only half the point.",
+          "source": "C41 I3897:17944;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"use-cases\"].heading",
+          "before": "What problems are you trying to solve?",
+          "after": "Where Sanity makes a difference",
+          "source": "C42 I4043:49740;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"enables\"].heading",
+          "before": "What it enables.",
+          "after": "A content operation that moves faster without losing the standards that made it good in the first place.",
+          "source": "C43 4061:50263"
+        },
+        {
+          "path": "sections[_key==\"cta\"].heading",
+          "before": "Ready to move your content operations to Sanity?",
+          "after": "Ready to see how this looks for your business?",
+          "source": "C63 I3911:18053;3720:61899,I3911:18053;3720:61901,I3911:18053;3720:61902;2205:1301"
+        },
+        {
+          "path": "sections[_key==\"cta\"].body",
+          "before": "Let's build your marketing engine together.",
+          "after": "The challenges change but we bring the same curiosity, ambition, and expertise to every project. We’d love to hear about yours.",
+          "source": "C63 I3911:18053;3720:61899,I3911:18053;3720:61901,I3911:18053;3720:61902;2205:1301"
+        },
+        {
+          "path": "sections[_key==\"cta\"].button.label",
+          "before": "Talk to our team",
+          "after": "Start the conversation",
+          "source": "C63 I3911:18053;3720:61899,I3911:18053;3720:61901,I3911:18053;3720:61902;2205:1301"
+        },
+        {
+          "path": "sections[_key==\"brands\"].body",
+          "before": null,
+          "after": "Sanity powers content for some of the most ambitious digital teams in the world.",
+          "source": "I3895:17713;3720:62491"
+        },
+        {
+          "path": "sections[_key==\"services\"].eyebrow",
+          "before": null,
+          "after": "Sanity expertise",
+          "source": "I4061:50190;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"services\"].intro",
+          "before": null,
+          "after": "A great Sanity implementation is more than a CMS swap. We bring content strategy, experience design, engineering, and operations together to build the whole system around it.",
+          "source": "I4061:50190;3720:62491"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-implementation\"].heading",
+          "before": "Sanity Implementation & Migration",
+          "after": "Implementation & Migration",
+          "source": "4061:50194"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-implementation\"].note",
+          "before": "Move to Sanity without the chaos",
+          "after": "Built around the problem, not the template.",
+          "source": "4061:50195"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-implementation\"].body",
+          "before": "We handle the full lifecycle: audit your current CMS, design scalable content models, build custom migration frameworks to move your data safely, and set up editorial workflows that match how your team actually works.",
+          "after": "We audit what you have, design the content model you need, move your data safely. Together, we shape workflows around how your team actually works.",
+          "source": "4061:50197"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-implementation\"].details",
+          "before": [
+            {
+              "_key": "targets",
+              "_type": "detail",
+              "items": [
+                "Legacy CMSs (Drupal, AEM, Sitecore)",
+                "Headless platforms (Contentful, Strapi, WordPress)",
+                "Completely unstructured content"
+              ],
+              "label": "Migration targets we've handled:"
+            },
+            {
+              "_key": "outcome",
+              "_type": "detail",
+              "items": [
+                "A live Sanity instance with clean data, documented schemas, and a team trained on how to use it."
+              ],
+              "label": "what you get:"
+            }
+          ],
+          "after": [
+            {
+              "_key": "targets",
+              "_type": "detail",
+              "label": "Technologies we work with",
+              "items": ["Drupal", "AEM", "Sitecore", "Contentful", "Strapi", "WordPress"]
+            },
+            {
+              "_key": "outcome",
+              "_type": "detail",
+              "label": "What you get",
+              "items": [
+                "A clean Sanity instance, documented schemas, intentional workflows, and a team trained to use it."
+              ]
+            }
+          ],
+          "source": "4061:50199,4061:50217"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-front-end\"].heading",
+          "before": "Composable Front Ends",
+          "after": "Composable front ends",
+          "source": "4061:50221"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-front-end\"].note",
+          "before": "The half your customers actually see",
+          "after": "Build the pieces to work better together",
+          "source": "4061:50222"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-front-end\"].body",
+          "before": "Sanity holds the content. We build what it becomes — a Next.js front end on Vercel, a design system your engineers can extend, and visual editing so an editor can see the page they are changing while they change it.",
+          "after": "We pair Sanity with fast, flexible front ends built to make life better on both sides of the screen, from the customers experiencing it to the people publishing it.",
+          "source": "4061:50224"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-front-end\"].details",
+          "before": [
+            {
+              "_key": "build",
+              "_type": "detail",
+              "items": [
+                "Next.js front ends on Vercel",
+                "Design systems in code, tied to Figma",
+                "Live preview and visual editing"
+              ],
+              "label": "What we build on it:"
+            },
+            {
+              "_key": "outcome",
+              "_type": "detail",
+              "items": [
+                "A site your editors can change without a ticket, and your engineers can extend without a rewrite."
+              ],
+              "label": "what you get:"
+            }
+          ],
+          "after": [
+            {
+              "_key": "build",
+              "_type": "detail",
+              "label": "Key capabilities",
+              "items": [
+                "Next.js  on Vercel",
+                "Design systems in code",
+                "Live preview",
+                "Visual editing"
+              ]
+            },
+            {
+              "_key": "outcome",
+              "_type": "detail",
+              "label": "What you get",
+              "items": [
+                "An experience that your editors can change without a ticket and your engineers can extend without a rewrite."
+              ]
+            }
+          ],
+          "source": "4061:50226,4061:50240"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-operations\"].heading",
+          "before": "Content Operations & AI",
+          "after": "Content ops and AI",
+          "source": "4061:50244"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-operations\"].note",
+          "before": "The part that starts after launch",
+          "after": "Move forward without bringing the old constraints with you.",
+          "source": "4061:50245"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-operations\"].body",
+          "before": "A content model is only as good as the operation around it. We set the editorial standards, put them in the dataset where the tools can read them, and wire AI into the drafting work that is genuinely repetitive — leaving the judgment calls with your team.",
+          "after": "We turn your content standards, governance, and repetitive workflows into systems that Sanity and AI can actually use, automating the busywork without automating the judgment.",
+          "source": "4061:50247"
+        },
+        {
+          "path": "sections[_key==\"services\"].panels[_key==\"svc-operations\"].details",
+          "before": [
+            {
+              "_key": "applies",
+              "_type": "detail",
+              "items": [
+                "Voice and brand guidance agents can read",
+                "Draft generation inside the studio",
+                "Performance and content-health monitoring"
+              ],
+              "label": "Where it applies:"
+            },
+            {
+              "_key": "outcome",
+              "_type": "detail",
+              "items": [
+                "An editorial operation that holds its standards as it scales, and the numbers to show it is working."
+              ],
+              "label": "what you get:"
+            }
+          ],
+          "after": [
+            {
+              "_key": "applies",
+              "_type": "detail",
+              "label": "Key capabilities",
+              "items": [
+                "AI-enabled brand guidance",
+                "In-studio drafts",
+                "Performance monitoring",
+                "Content health monitoring"
+              ]
+            },
+            {
+              "_key": "outcome",
+              "_type": "detail",
+              "label": "What you get",
+              "items": [
+                "A content operation that moves faster without losing the standards that made it good in the first place."
+              ]
+            }
+          ],
+          "source": "4061:50249,4061:50263"
+        }
+      ]
+    },
+    {
+      "id": "page-seed-contact",
+      "type": "page",
+      "slug": "contact",
+      "patches": [
+        {
+          "path": "sections[_key==\"inquiry\"].eyebrow",
+          "before": "Contact us",
+          "after": "Let’s talk",
+          "source": "C46 I3754:78016;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"inquiry\"].heading",
+          "before": "Let’s make exceptional experiences together",
+          "after": "Tell us what you’ve got cooking.",
+          "source": "C47 I3754:78016;3720:62490"
+        },
+        {
+          "path": "sections[_key==\"inquiry\"].note",
+          "before": "Tell us what you’re working on, or what’s in the way of it.",
+          "after": "Whether you’re building something new, fixing something broken, or still figuring out the right questions to ask, we’d love to hear from you.",
+          "source": "C48 I3754:78016;3720:62491"
+        }
+      ]
+    },
+    {
+      "id": "collectionIndex-seed-insights",
+      "type": "collectionIndex",
+      "slug": null,
+      "patches": [
+        {
+          "path": "sectionsAbove[_key==\"hero\"].headlineLines",
+          "before": ["Learn what drives our experiences"],
+          "after": ["Looking past", "the horizon."],
+          "source": "C50 I3739:71309;3726:68726;3720:62490"
+        },
+        {
+          "path": "sectionsAbove[_key==\"hero\"].subheading",
+          "before": "What we're learning about AI, conversion, and what works right now.",
+          "after": "What we’re learning, questioning, and putting into practice across AI, design, and technology.",
+          "source": "C51 I3739:71309;3726:68726;3720:62491"
+        },
+        {
+          "path": "sectionsBelow[_key==\"cta\"].heading",
+          "before": "Let’s get started on your next big thing",
+          "after": "Let’s put some of this thinking to work.",
+          "source": "C64 I3771:80361;3720:61899,I3771:80361;3720:61901,I3771:80361;3720:61902;2205:1301"
+        },
+        {
+          "path": "sectionsBelow[_key==\"cta\"].body",
+          "before": "We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready.",
+          "after": "If something here sparked an idea, surfaced a challenge, or got you thinking differently, we’d love to talk about where it could lead.",
+          "source": "C64 I3771:80361;3720:61899,I3771:80361;3720:61901,I3771:80361;3720:61902;2205:1301"
+        },
+        {
+          "path": "sectionsBelow[_key==\"cta\"].button.label",
+          "before": "View our work",
+          "after": "Start the conversation",
+          "source": "C64 I3771:80361;3720:61899,I3771:80361;3720:61901,I3771:80361;3720:61902;2205:1301"
+        }
+      ]
+    },
+    {
+      "id": "page-seed-index",
+      "type": "page",
+      "slug": "index",
+      "patches": [
+        {
+          "path": "sections[_key==\"partners\"].eyebrow",
+          "before": null,
+          "after": "Our partners",
+          "source": "C52 I3720:62656;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"work\"].eyebrow",
+          "before": null,
+          "after": "Our work",
+          "source": "C53 I3720:62644;3720:62489"
+        },
+        {
+          "path": "sections[_key==\"cta\"].heading",
+          "before": "But enough about us.\nTell us about you.",
+          "after": "But enough about us. Tell us about you.",
+          "source": "C59 I3720:62172;3720:61899,I3720:62172;3720:61901,I3720:62172;3720:61902;2205:1301"
+        },
+        {
+          "path": "sections[_key==\"cta\"].body",
+          "before": "We love a new challenge. If you're ready to tackle what's in the way, we're ready to help.",
+          "after": "We love a new challenge. If you’re ready to tackle what’s next, we’re ready to help.",
+          "source": "C59 I3720:62172;3720:61899,I3720:62172;3720:61901,I3720:62172;3720:61902;2205:1301"
+        }
+      ]
+    },
+    {
+      "id": "siteSettings",
+      "type": "siteSettings",
+      "slug": null,
+      "patches": [
+        {
+          "path": "navItems",
+          "before": [
+            {
+              "_key": "nav-0",
+              "_type": "button",
+              "href": "/work",
+              "label": "Work"
+            },
+            {
+              "_key": "nav-3",
+              "_type": "button",
+              "href": "/solutions",
+              "label": "Solutions"
+            },
+            {
+              "_key": "nav-2",
+              "_type": "button",
+              "href": "/insights",
+              "label": "Insights"
+            },
+            {
+              "_key": "nav-4",
+              "_type": "button",
+              "href": "/about",
+              "label": "About"
+            }
+          ],
+          "after": [
+            {
+              "_key": "nav-0",
+              "_type": "button",
+              "href": "/work",
+              "label": "Work"
+            },
+            {
+              "_key": "nav-2",
+              "_type": "button",
+              "href": "/insights",
+              "label": "Insights"
+            },
+            {
+              "_key": "nav-3",
+              "_type": "button",
+              "href": "/solutions",
+              "label": "Solutions"
+            },
+            {
+              "_key": "nav-4",
+              "_type": "button",
+              "href": "/about",
+              "label": "About"
+            }
+          ],
+          "source": "C57 "
+        },
+        {
+          "path": "footerGroups[_key==\"group-1\"].label",
+          "before": "Our world",
+          "after": "Beyond O3",
+          "source": "C58 I3720:62172;3720:61924"
+        }
+      ]
+    },
+    {
+      "id": "collectionIndex-seed-work",
+      "type": "collectionIndex",
+      "slug": null,
+      "patches": [
+        {
+          "path": "sectionsBelow[_key==\"cta\"].heading",
+          "before": "Let’s get started on your next big thing",
+          "after": "Ready to see how this looks for your business?",
+          "source": "C65 I3726:62891;3720:61899,I3726:62891;3720:61901,I3726:62891;3720:61902;2205:1301"
+        },
+        {
+          "path": "sectionsBelow[_key==\"cta\"].body",
+          "before": "We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready.",
+          "after": "The challenges change but we bring the same curiosity, ambition, and expertise to every project. We’d love to hear about yours.",
+          "source": "C65 I3726:62891;3720:61899,I3726:62891;3720:61901,I3726:62891;3720:61902;2205:1301"
+        },
+        {
+          "path": "sectionsBelow[_key==\"cta\"].button.label",
+          "before": "Get in touch",
+          "after": "Start the conversation",
+          "source": "C65 I3726:62891;3720:61899,I3726:62891;3720:61901,I3726:62891;3720:61902;2205:1301"
+        }
+      ]
+    },
+    {
+      "id": "caseStudy-wp-5804",
+      "type": "caseStudy",
+      "slug": "vertex",
+      "patches": [
+        {
+          "path": "title",
+          "before": "Making global tax feel a whole lot simpler.",
+          "after": "A partnership that keeps adding up",
+          "source": "C66 3565:23182"
+        },
+        {
+          "path": "narrativeHeadline",
+          "before": "A partnership that keeps adding up",
+          "after": "Vertex takes the complexity out of tax for some of the world’s largest retailers. Its partner network, its products and its marketing were all growing at once.",
+          "source": "Restore original teaser: CaseStudyView binds title to heading and narrativeHeadline to subheading."
+        }
+      ]
+    },
+    {
+      "id": "caseStudy-wp-5805",
+      "type": "caseStudy",
+      "slug": "caron",
+      "patches": [
+        {
+          "path": "title",
+          "before": "Marking the first step feel possible",
+          "after": "Making the first step feel possible",
+          "source": "C67 3249:20111"
+        },
+        {
+          "path": "narrativeHeadline",
+          "before": "Making the first step feel possible",
+          "after": "We helped Caron create a more empathetic digital experience, helping people find answers and feel confident taking the vital next step toward care.",
+          "source": "Restore original teaser: CaseStudyView binds title to heading and narrativeHeadline to subheading."
+        }
+      ]
+    }
+  ]
+}

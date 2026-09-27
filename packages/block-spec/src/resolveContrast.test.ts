@@ -44,11 +44,9 @@ const rows: {
   { what: 'ghost on ink', stored: 'ghost', surface: 'ink', fill: 'ghost' },
   { what: 'ghost with no surface', stored: 'ghost', surface: undefined, fill: 'ghost' },
 
-  // The pre-#42 enum, still in any dataset that has not been rebuilt and in
-  // every locked document. Mapped, not resolved: `brand` is dark on an ink
-  // band too, because it is a choice somebody made.
-  { what: 'legacy brand', stored: 'brand', surface: 'white', fill: 'dark' },
-  { what: 'legacy brand on ink', stored: 'brand', surface: 'ink', fill: 'dark' },
+  // The current brand fill is explicit; the retired inverse spelling stays readable.
+  { what: 'brand on white', stored: 'brand', surface: 'white', fill: 'brand' },
+  { what: 'brand on ink', stored: 'brand', surface: 'ink', fill: 'brand' },
   { what: 'legacy inverse', stored: 'inverse', surface: 'ink', fill: 'light' },
   { what: 'legacy inverse on white', stored: 'inverse', surface: 'white', fill: 'light' },
   // A stored value naming an `Object.prototype` member is still just an
@@ -56,7 +54,12 @@ const rows: {
   // inherited member as a fill and paint the button with neither.
   { what: 'a prototype member on ink', stored: 'constructor', surface: 'ink', fill: 'light' },
   { what: 'a prototype member on white', stored: 'toString', surface: 'white', fill: 'dark' },
-  { what: 'a prototype member with no surface', stored: 'valueOf', surface: undefined, fill: 'dark' },
+  {
+    what: 'a prototype member with no surface',
+    stored: 'valueOf',
+    surface: undefined,
+    fill: 'dark',
+  },
 
   // Anything else resolves like Auto rather than like dark, because that is
   // what the knob's control is showing the editor: `resolveKnobValue` falls an

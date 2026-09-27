@@ -1,37 +1,27 @@
 import type { SVGProps } from 'react'
 
 export interface MenuIconProps extends SVGProps<SVGSVGElement> {
-  /** Rendered width/height in px. The 402 nav draws it in a 42px box. */
   size?: number
 }
 
-/**
- * The 402 nav's "Open menu" affordance (`1814:1636`).
- *
- * Not a Material Symbols glyph — the mobile frame draws it by hand as **two**
- * 24×1.5 bars, 5px apart, right-aligned inside a 42×42 box, at
- * `rgba(255,255,255,0.85)`. (ADR 0009 describes it as three bars in passing;
- * the frame has two — `1814:1637` and `1814:1638`.)
- *
- * Two bars rather than the conventional three is the design's, so it is kept.
- * Fills with `currentColor` so it follows the bar's text color.
- */
-export function MenuIcon({ size = 42, className, ...rest }: MenuIconProps) {
+/** Current mobile menu glyph (2177:1600), centered in the 20px icon slot. */
+export function MenuIcon({ size = 20, className, ...rest }: MenuIconProps) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 42 42"
-      fill="none"
+      viewBox="0 0 20 20"
+      fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
       focusable="false"
       className={className}
       {...rest}
     >
-      {/* Right-aligned: 42 − 24 = x 18. Centred vertically about the 5px gap. */}
-      <rect x="18" y="18.75" width="24" height="1.5" fill="currentColor" />
-      <rect x="18" y="25.25" width="24" height="1.5" fill="currentColor" />
+      <path
+        transform="translate(3.333333 4.166666)"
+        d="M0 -1L-1 -1L-1 1L0 1L0 0L0 -1ZM13.3333 1L14.3333 1L14.3333 -1L13.3333 -1L13.3333 0L13.3333 1ZM0 4.83333L-1 4.83333L-1 6.83333L0 6.83333L0 5.83333L0 4.83333ZM13.3333 6.83333L14.3333 6.83333L14.3333 4.83333L13.3333 4.83333L13.3333 5.83333L13.3333 6.83333ZM0 10.6667L-1 10.6667L-1 12.6667L0 12.6667L0 11.6667L0 10.6667ZM13.3333 12.6667L14.3333 12.6667L14.3333 10.6667L13.3333 10.6667L13.3333 11.6667L13.3333 12.6667ZM0 0L0 1L13.3333 1L13.3333 0L13.3333 -1L0 -1L0 0ZM0 5.83333L0 6.83333L13.3333 6.83333L13.3333 5.83333L13.3333 4.83333L0 4.83333L0 5.83333ZM0 11.6667L0 12.6667L13.3333 12.6667L13.3333 11.6667L13.3333 10.6667L0 10.6667L0 11.6667Z"
+      />
     </svg>
   )
 }

@@ -19,18 +19,18 @@ export const mediaSectionKnobs = defineBlockKnobs({
       name: 'variant',
       title: 'Variant',
       description:
-        'Plain draws the figure itself. Capture floats a tall page screenshot on a dark stage and crops it at the band’s floor — the frame’s "here is the whole page" moment.',
+        'Plain draws the figure itself. Composition preserves an exported image’s complete edge-to-edge artwork and proportions. Capture floats a tall page screenshot on a dark stage and crops it at the band’s floor — the frame’s "here is the whole page" moment. Overlap lifts a section-width photograph over the preceding band. Feature places a wordmark and supporting copy over a photograph.',
       // `1647:1720` (#97): the same block, a different treatment — a 700px
       // dark band the capture is CROPPED by, rather than a figure sized to
       // its own aspect. A variant on the block instead of a second block,
       // the call `railPanelsSection.layout` and `heroSection.variant` make.
-      options: ['plain', 'capture'],
+      options: ['plain', 'capture', 'composition', 'overlap', 'feature'],
       initialValue: 'plain',
     }),
     knob({
       name: 'width',
       title: 'Width',
-      options: ['contained', 'full-bleed'],
+      options: ['contained', 'section', 'full-bleed'],
       initialValue: 'contained',
       // A capture is a full-bleed stage by construction, so the axis has
       // nothing left to choose. Was `({parent}) => parent?.variant ===
@@ -38,7 +38,11 @@ export const mediaSectionKnobs = defineBlockKnobs({
       // `hiddenUnless` wrapper, because `width` is itself a design option:
       // the toolbar has to know not to draw it on a capture, and a closure
       // would tell it nothing (ADR 0020).
-      showWhen: { at: 'variant', mode: 'notOneOf', values: ['capture'] },
+      showWhen: {
+        at: 'variant',
+        mode: 'notOneOf',
+        values: ['capture', 'composition', 'overlap', 'feature'],
+      },
     }),
     surfaceKnob({ initialValue: 'white' }),
   ],

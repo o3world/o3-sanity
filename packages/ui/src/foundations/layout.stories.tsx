@@ -105,10 +105,9 @@ export const Layout: Story = {
       title="Layout"
       intro={
         <>
-          O3 uses a product-owned <Mono>75px</Mono> gutter and <Mono>1290px</Mono> structural canvas
-          at 1440, then grows to a <Mono>1728px</Mono> stage on wide screens. Figma&apos;s former
-          96px edge remains the evidence for the surrounding system; this is its explicit #429
-          override. Vertical rhythm is still hand-tuned per band.
+          O3 follows Figma&apos;s <Mono>96px</Mono> gutter and <Mono>1248px</Mono> structural canvas
+          at 1440, then grows to a <Mono>1728px</Mono> stage on wide screens. Mobile gutters are{' '}
+          <Mono>16px</Mono>. Vertical rhythm is hand-tuned per band.
         </>
       }
     >
@@ -140,7 +139,7 @@ export const Layout: Story = {
         </div>
         <Callout>
           <Mono>--container-section: 1728px</Mono> is structural, not a reading measure. It fills
-          the 1290px canvas at 1440 and caps at 1728px; <Mono>--container-content: 1034px</Mono> and{' '}
+          the 1248px canvas at 1440 and caps at 1728px; <Mono>--container-content: 1034px</Mono> and{' '}
           <Mono>--container-article: 822px</Mono> keep statements and prose readable inside it.
         </Callout>
       </Section>
@@ -232,16 +231,16 @@ export const GeometryAt402: Story = {
   play: async ({ canvasElement }) => {
     await expectGeometry(canvasElement, {
       viewport: 402,
-      gutter: 20,
+      gutter: 16,
       tightGutter: 16,
-      stage: 362,
-      statement: 362,
-      article: 362,
+      stage: 370,
+      statement: 370,
+      article: 370,
     })
   },
 }
 
-/** The 1440px design viewport opens to 75px gutters and a 1290px stage. */
+/** The 1440px design viewport opens to 96px gutters and a 1248px stage. */
 export const GeometryAt1440: Story = {
   parameters: { viewport: geometryViewport },
   globals: { viewport: { value: 'layout1440' } },
@@ -249,9 +248,9 @@ export const GeometryAt1440: Story = {
   play: async ({ canvasElement }) => {
     await expectGeometry(canvasElement, {
       viewport: 1440,
-      gutter: 75,
-      tightGutter: 75,
-      stage: 1290,
+      gutter: 96,
+      tightGutter: 96,
+      stage: 1248,
       statement: 1034,
       article: 822,
     })
@@ -266,8 +265,8 @@ export const GeometryAt1920: Story = {
   play: async ({ canvasElement }) => {
     await expectGeometry(canvasElement, {
       viewport: 1920,
-      gutter: 75,
-      tightGutter: 75,
+      gutter: 96,
+      tightGutter: 96,
       stage: 1728,
       statement: 1034,
       article: 822,

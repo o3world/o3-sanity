@@ -4,14 +4,7 @@ import { figmaDesign } from '@o3/story-kit'
 
 import { PageMockup } from '../PageMockup'
 
-/**
- * `/contact`, from `data/seed/page/contact.json`. Two bands: the interior hero
- * (`2960:7558`) and the form card beside its rail (`2960:7792`).
- *
- * The form posts to the app's `/api/contact` route, which forwards the
- * submission to HubSpot (#412). No mockup reaches that route — Storybook has
- * no app behind it — so what this shows is the card as a page draws it.
- */
+/** Contact uses one introductory form band, followed by its preserved secondary content. */
 const meta = {
   title: 'Pages/Contact',
   component: PageMockup,
@@ -27,7 +20,7 @@ export const Desktop: Story = {
   parameters: { design: figmaDesign('2960:7557') },
 }
 
-/** The rail drops under the card, and the two name fields stay side by side. */
+/** Introduction, form, and secondary content stack on mobile. */
 export const Mobile: Story = {
   args: { page: 'contact' },
   globals: { viewport: { value: 'mobile' } },

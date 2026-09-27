@@ -1,0 +1,51 @@
+<svg width="331" height="180" viewBox="0 0 331 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Illo">
+<circle id="Ellipse 1176" cx="81.5" cy="67.5" r="67.5" fill="#FFF1F0"/>
+<path id="Rectangle 4344" d="M69 31C69 27.6863 71.6863 25 75 25L256 25C259.314 25 262 27.6863 262 31V149C262 152.314 259.314 155 256 155H75C71.6863 155 69 152.314 69 149L69 31Z" fill="white" stroke="#EB1000" stroke-width="2"/>
+<path id="Rectangle 4348" d="M1 71C1 67.6863 3.68629 65 7 65L45 65C48.3137 65 51 67.6863 51 71V109C51 112.314 48.3137 115 45 115H7C3.68629 115 1 112.314 1 109L1 71Z" fill="white" stroke="#EB1000" stroke-width="2"/>
+<g id="Group 77485">
+<path id="Vector 60" d="M12 102V95C12 94.4477 12.4477 94 13 94H16C16.5523 94 17 94.4477 17 95V102" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 61" d="M23 102V79C23 78.4477 23.4477 78 24 78H27C27.5523 78 28 78.4477 28 79V102" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 62" d="M34 102V85C34 84.4477 34.4477 84 35 84H38C38.5523 84 39 84.4477 39 85V102" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+</g>
+<path id="Rectangle 4349" d="M280 60C280 56.6863 282.686 54 286 54L324 54C327.314 54 330 56.6863 330 60V120C330 123.314 327.314 126 324 126H286C282.686 126 280 123.314 280 120L280 60Z" stroke="#EB1000" stroke-width="2"/>
+<rect id="Rectangle 4353" x="261" y="89" width="20" height="2" rx="1" fill="#EB1000"/>
+<rect id="Rectangle 4354" x="50" y="89" width="20" height="2" rx="1" fill="#EB1000"/>
+<rect id="Rectangle 4350" x="291" y="101" width="30" height="2" rx="1" fill="#EB1000"/>
+<path id="Subtract" fill-rule="evenodd" clip-rule="evenodd" d="M307 65C314.18 65 320 70.8203 320 78C320 85.1797 314.18 91 307 91C299.82 91 294 85.1797 294 78C294 70.8203 299.82 65 307 65ZM307 71C303.134 71 300 74.134 300 78C300 81.866 303.134 85 307 85C310.866 85 314 81.866 314 78C314 74.134 310.866 71 307 71Z" fill="#EB1000"/>
+<rect id="Rectangle 4351" x="291" y="108" width="30" height="2" rx="1" fill="#EB1000"/>
+<rect id="Rectangle 4352" x="291" y="115" width="19" height="2" rx="1" fill="#EB1000"/>
+<path id="Vector 14" d="M262 46H70" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 21" d="M93 154V47" stroke="#FF958C" stroke-width="2"/>
+<path id="Vector 22" d="M198 154V47" stroke="#FF958C" stroke-width="2"/>
+<path id="Vector 9" d="M84 135H79" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 15" d="M84 125H79" stroke="#FF958C" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 16" d="M84 115H79" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 17" d="M84 105H79" stroke="#FF958C" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 18" d="M84 95H79" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 24" d="M106 139V126C106 125.448 106.448 125 107 125H110C110.552 125 111 125.448 111 126V139" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 26" d="M124 139V117C124 116.448 124.448 116 125 116H128C128.552 116 129 116.448 129 117V139" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 27" d="M141 139V111C141 110.448 141.448 110 142 110H145C145.552 110 146 110.448 146 111V139" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 28" d="M158 139V108C158 107.448 158.448 107 159 107H162C162.552 107 163 107.448 163 108V139" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 25" d="M176 139V94C176 93.4477 176.448 93 177 93H180C180.552 93 181 93.4477 181 94V139" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 19" d="M84 85H79" stroke="#FF958C" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 20" d="M84 75H79" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 23" d="M108.5 100.5L132.938 78.9944C133.271 78.7013 133.758 78.6627 134.133 78.8996L151.851 90.0904C152.234 90.332 152.731 90.2866 153.064 89.9797L178.5 66.5" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<circle id="Ellipse 1182" cx="81.5" cy="35.5" r="2.5" fill="#EB1000"/>
+<circle id="Ellipse 1185" cx="108.5" cy="100.5" r="3.5" fill="white" stroke="#EB1000" stroke-width="2"/>
+<circle id="Ellipse 1186" cx="133.5" cy="78.5" r="3.5" fill="white" stroke="#EB1000" stroke-width="2"/>
+<circle id="Ellipse 1187" cx="152.5" cy="90.5" r="3.5" fill="white" stroke="#EB1000" stroke-width="2"/>
+<circle id="Ellipse 1188" cx="178.5" cy="66.5" r="3.5" fill="white" stroke="#EB1000" stroke-width="2"/>
+<path id="Vector 56" d="M217.566 78H210.61C210.294 78 210.058 78.2887 210.12 78.5981L211.481 85.403C211.493 85.467 211.519 85.528 211.555 85.5823L215.436 91.4037C215.478 91.4671 215.534 91.5199 215.6 91.5583L221.418 94.9521C221.472 94.9838 221.532 95.0049 221.594 95.0144L227.424 95.9114C227.727 95.958 228 95.7236 228 95.4172V88.3693C228 88.1498 227.857 87.956 227.647 87.8914L221.67 86.0524C221.56 86.0185 221.465 85.9477 221.401 85.8518L218.563 81.5944C218.521 81.5322 218.495 81.4616 218.484 81.3877L218.061 78.4293C218.026 78.183 217.815 78 217.566 78Z" fill="#EB1000"/>
+<path id="Vector 57" d="M238.434 78L245.39 78C245.706 78 245.942 77.7113 245.88 77.4019L244.519 70.597C244.507 70.533 244.481 70.472 244.445 70.4177L240.564 64.5963C240.522 64.5329 240.466 64.4801 240.4 64.4417L234.582 61.0479C234.528 61.0162 234.468 60.9951 234.406 60.9856L228.576 60.0886C228.273 60.042 228 60.2764 228 60.5828L228 67.6307C228 67.8502 228.143 68.044 228.353 68.1086L234.33 69.9476C234.44 69.9815 234.535 70.0523 234.599 70.1482L237.437 74.4056C237.479 74.4678 237.505 74.5384 237.516 74.6123L237.939 77.5707C237.974 77.817 238.185 78 238.434 78Z" fill="#EB1000"/>
+<path id="Vector 58" d="M228 67.5664L228 60.6099C228 60.2944 227.711 60.0577 227.402 60.1196L220.597 61.4806C220.533 61.4934 220.472 61.5186 220.418 61.5549L214.596 65.4358C214.533 65.4781 214.48 65.5342 214.442 65.5999L211.048 71.418C211.016 71.4722 210.995 71.5318 210.986 71.5939L210.089 77.424C210.042 77.7268 210.276 78 210.583 78L217.631 78C217.85 78 218.044 77.8568 218.109 77.647L219.948 71.6702C219.982 71.5601 220.052 71.4651 220.148 71.4012L224.406 68.5629C224.468 68.5215 224.538 68.4945 224.612 68.484L227.571 68.0613C227.817 68.0261 228 67.8152 228 67.5664Z" fill="#FF958C"/>
+<path id="Vector 59" d="M228 88.4336L228 95.3901C228 95.7056 228.289 95.9423 228.598 95.8804L235.403 94.5194C235.467 94.5066 235.528 94.4814 235.582 94.4451L241.404 90.5642C241.467 90.5219 241.52 90.4658 241.558 90.4001L244.952 84.582C244.984 84.5278 245.005 84.4682 245.014 84.4061L245.911 78.576C245.958 78.2732 245.724 78 245.417 78L238.369 78C238.15 78 237.956 78.1432 237.891 78.353L236.052 84.3298C236.018 84.4399 235.948 84.5349 235.852 84.5988L231.594 87.4371C231.532 87.4785 231.462 87.5055 231.388 87.516L228.429 87.9387C228.183 87.9739 228 88.1848 228 88.4336Z" fill="#FF958C"/>
+<circle id="Ellipse 1189" cx="228" cy="78" r="18" stroke="#EB1000" stroke-width="2"/>
+<circle id="Ellipse 1190" cx="228" cy="78" r="10" stroke="#EB1000" stroke-width="2"/>
+<circle id="Ellipse 1183" cx="92.5" cy="35.5" r="2.5" fill="#EB1000"/>
+<circle id="Ellipse 1184" cx="103.5" cy="35.5" r="2.5" fill="#EB1000"/>
+<rect id="Rectangle 4345" x="209" y="109" width="43" height="2" rx="1" fill="#EB1000"/>
+<rect id="Rectangle 4346" x="209" y="124" width="43" height="2" rx="1" fill="#EB1000"/>
+<rect id="Rectangle 4347" x="209" y="139" width="21" height="2" rx="1" fill="#EB1000"/>
+</g>
+</svg>

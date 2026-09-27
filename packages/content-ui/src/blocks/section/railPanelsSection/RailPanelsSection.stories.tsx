@@ -3,7 +3,7 @@ import { figmaDesign } from '@o3/story-kit'
 import { Reveal } from '@o3/ui'
 import { expect, waitFor } from 'storybook/test'
 
-import { seedImage, seededSectionArgs } from '../../../testing/seedContent'
+import { seedImage, seedImageReference, seededSectionArgs } from '../../../testing/seedContent'
 
 import { RailPanelsSection } from './RailPanelsSection'
 
@@ -136,8 +136,29 @@ export const TrackMobile: Story = {
 
 /** The Solutions composition (`1925:6108`): `layout: cards`, three engagement cards. */
 export const Cards: Story = {
-  args: seededSectionArgs('solutions', 'railPanelsSection'),
-  parameters: { design: figmaDesign('1925:6108') },
+  args: {
+    ...seededSectionArgs('solutions', 'railPanelsSection'),
+    decoration: 'molecule',
+    panels: seededSectionArgs('solutions', 'railPanelsSection').panels!.map((panel, index) => ({
+      ...panel,
+      mark: {
+        _type: 'mark',
+        kind: 'image',
+        media: {
+          _type: 'figure',
+          image: seedImageReference(
+            `tools/migration/data/seed/assets/figma-current-${['engagement-key', 'engagement-squad', 'engagement-team'][index]}.svg`,
+          ),
+          alt: '',
+        },
+      },
+    })),
+  },
+  parameters: { design: figmaDesign('4030:38346') },
+  play: async ({ canvasElement }) => {
+    await expect(canvasElement.querySelectorAll('article img').length).toBe(3)
+    await expect(canvasElement.querySelector('canvas')).toBeNull()
+  },
 }
 
 /**
@@ -149,6 +170,14 @@ export const RailMobile: Story = {
   args: seededSectionArgs('index', 'railPanelsSection', 0),
   globals: { viewport: { value: 'mobile' } },
   parameters: { design: figmaDesign('2975:8188') },
+  play: async ({ canvasElement }) => {
+    const section = canvasElement.querySelector('section')!
+    const heading = canvasElement.querySelector('h2')!
+    await expect(getComputedStyle(section).paddingLeft).toBe('24px')
+    await expect(getComputedStyle(section).paddingTop).toBe('64px')
+    await expect(getComputedStyle(section).paddingBottom).toBe('64px')
+    await expect(getComputedStyle(heading.parentElement!.parentElement!).rowGap).toBe('64px')
+  },
 }
 
 /**
@@ -162,6 +191,15 @@ export const RailBleed: Story = {
   globals: { viewport: { value: 'desktop' } },
   play: async ({ canvasElement }) => {
     const rail = canvasElement.querySelector('ol')!
+    const plate = canvasElement.querySelector('article > div:last-child')!
+    await expect(getComputedStyle(plate).borderRadius).toBe('32px')
+    await expect(getComputedStyle(plate).boxShadow).not.toBe('none')
+    const link = canvasElement.querySelector('article a')!
+    await expect(getComputedStyle(link).color).toBe('rgb(235, 16, 0)')
+    await expect(getComputedStyle(link).fontWeight).toBe('600')
+    const body = canvasElement.querySelector('article p')!
+    await expect(getComputedStyle(body).fontSize).toBe('20px')
+    await expect(getComputedStyle(body).lineHeight).toBe('28px')
     const win = canvasElement.ownerDocument.defaultView!
     const top = parseFloat(win.getComputedStyle(rail).top)
     const start = rail.getBoundingClientRect().top + win.scrollY
@@ -237,7 +275,10 @@ export const RowsMobile: Story = {
  */
 export const Grid: Story = {
   args: seededSectionArgs('solutions-software-engineering', 'railPanelsSection'),
-  parameters: { design: figmaDesign('2358:2788') },
+  parameters: { design: figmaDesign('4039:49386') },
+  play: async ({ canvasElement }) => {
+    await expect(canvasElement.querySelector('li canvas, li img, li svg')).toBeNull()
+  },
 }
 
 /** The grid below `lg` — three columns become one stack. */
@@ -273,5 +314,57 @@ export const OnPhotographUntinted: Story = {
       image: seedImage('tools/migration/data/seed/assets/work-city.png'),
       tint: 'none',
     },
+  },
+}
+
+/** Current Home label rail: a stacked header and 20/26 mobile panel copy. */
+export const HomeMobile: Story = {
+  ...RailByLabel,
+  globals: { viewport: { value: 'mobile' } },
+  parameters: { design: figmaDesign('2975:8188') },
+  play: async ({ canvasElement }) => {
+    const heading = canvasElement.querySelector('h2')!
+    await expect(getComputedStyle(heading).fontSize).toBe('40px')
+    await expect(getComputedStyle(heading).lineHeight).toBe('44px')
+    const panel = canvasElement.querySelector('article')!
+    const body = panel.querySelector('p')!
+    await expect(getComputedStyle(body).fontSize).toBe('20px')
+    await expect(getComputedStyle(body).lineHeight).toBe('26px')
+    await expect(getComputedStyle(panel.parentElement!).gap).toBe('64px')
+  },
+}
+
+export const LabelsOnInk: Story = {
+  ...RailByLabel,
+  args: { ...RailByLabel.args, surface: 'ink' },
+  play: async ({ canvasElement }) => {
+    const active = canvasElement.querySelector('a[aria-current="true"]')!
+    await expect(getComputedStyle(active).color).toBe('rgb(255, 255, 255)')
+  },
+}
+
+/** Engineering's wider header, with the same service-row layout as Partner. */
+export const WideRowsHeader: Story = {
+  args: { ...Rows.args, heading: 'From new builds to what comes next.', headerWidth: 'wide' },
+  globals: { viewport: { value: 'desktop' } },
+  parameters: { design: figmaDesign('4039:49385') },
+  play: async ({ canvasElement }) => {
+    await expect(
+      canvasElement.querySelector('h2')!.parentElement!.getBoundingClientRect().width,
+    ).toBe(1035)
+  },
+}
+
+export const WithoutMedia: Story = {
+  args: {
+    ...RailByLabel.args,
+    panels: RailByLabel.args!.panels!.map((panel) => ({ ...panel, media: null, logo: undefined })),
+  },
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    for (const panel of canvasElement.querySelectorAll('article[id]')) {
+      await expect(panel.querySelector('img')).toBeNull()
+      await expect(panel.getBoundingClientRect().height).toBeLessThan(396)
+    }
   },
 }

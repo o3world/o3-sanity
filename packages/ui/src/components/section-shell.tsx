@@ -113,7 +113,7 @@ export function SectionBackground({
 
 /** The container measures the frames use (tokens/layout.css). */
 export const SECTION_WIDTH_CLASS = {
-  /** 1728px cap — the structural shell, 1290px between 75px gutters at 1440. */
+  /** 1728px cap — the structural shell, 1248px between 96px gutters at 1440. */
   section: 'max-w-section',
   /** 1034px — the narrower measure for centred statements (the pull quote). */
   content: 'max-w-content',
@@ -152,7 +152,7 @@ const PAD_BOTTOM = {
 export type BandStep = keyof typeof PAD_TOP
 
 const sectionShellVariants = cva(
-  // 75px at 1440, 20px at 402 — the #429 O3 product edge.
+  // 96px at 1440, 16px at 402 — the current Figma frame edges.
   'px-gutter',
   {
     variants: {

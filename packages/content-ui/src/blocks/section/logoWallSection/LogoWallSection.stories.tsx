@@ -1,80 +1,57 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
+import { expect, within } from 'storybook/test'
 
 import { seededSectionArgs } from '../../../testing/seedContent'
 
 import { LogoWallSection } from './LogoWallSection'
 
-/**
- * The Home frame's `Section - Partners` (`1864:2390`) as the 2026-08 redesign
- * draws it — eyebrow, solid-ink heading, standfirst, a single row of six
- * hairlined plates, and a dark CTA, all on the warm wash.
- *
- * `LogoWallSection.render.test.tsx` guards the structure against the 3 × 2
- * wall it replaced, with `logo: null` fixtures because that test is about the
- * row rather than the pictures. These stories are the other half: the real six
- * marks, desaturated, inside their plates, in a real browser — which is where
- * "the strip clips the same way the frame does" is a claim you can check.
- */
 const meta = {
   title: 'Content/Blocks/Section/LogoWallSection',
   component: LogoWallSection,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('1864:2390'),
+    design: figmaDesign('3720:60483'),
   },
 } satisfies Meta<typeof LogoWallSection>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-/**
- * The homepage band, exactly as seeded — six partners, real logos.
- *
- * The row is 1680px wide against a 1248px column, so the first and last plates
- * are clipped by the viewport. That is the frame's own composition, not a
- * layout bug: compare the export of `1864:2390` — and it is a still of a strip
- * that travels, so in a browser the marks crawl left. Hover to stop them.
- */
 export const AsSeeded: Story = {
-  args: seededSectionArgs('index', 'logoWallSection'),
-  globals: { backgrounds: { value: 'bone' } },
+  args: { ...seededSectionArgs('index', 'logoWallSection'), surface: 'ink' },
+  globals: { backgrounds: { value: 'bone' }, viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    await assertStrip(canvasElement)
+    const body = canvasElement.querySelector('section > div p.text-lead')!
+    await expect(body.getBoundingClientRect().width).toBe(900)
+  },
 }
 
-/**
- * The band on a phone. One row still, crawling — the wrap this story used to
- * show is gone, because a moving strip shows all six marks at 402 without a
- * second composition.
- */
 export const Mobile: Story = {
-  args: seededSectionArgs('index', 'logoWallSection'),
+  args: { ...seededSectionArgs('index', 'logoWallSection'), surface: 'ink' },
   globals: { backgrounds: { value: 'bone' }, viewport: { value: 'mobile' } },
+  parameters: { design: figmaDesign('3726:62792') },
+  play: async ({ canvasElement }) => {
+    await assertStrip(canvasElement)
+    const heading = within(canvasElement).getByRole('heading', { level: 2 })
+    await expect(getComputedStyle(heading).fontFamily).toContain('Newsreader')
+    await expect(getComputedStyle(heading).fontWeight).toBe('400')
+    await expect(getComputedStyle(heading).fontSize).toBe('38px')
+    await expect(getComputedStyle(heading).lineHeight).toBe('42px')
+  },
 }
 
-/**
- * Heading and strip with no button — the band must not leave the 128px gap where
- * the button was.
- */
 export const NoButton: Story = {
   args: { ...seededSectionArgs('index', 'logoWallSection'), button: null },
   globals: { backgrounds: { value: 'bone' } },
 }
 
-/**
- * Heading with no standfirst. The split into `heading` + `body` is what #89
- * changed about this block, so the half-filled case is the one an editor will
- * actually produce first.
- */
 export const NoBody: Story = {
   args: { ...seededSectionArgs('index', 'logoWallSection'), body: undefined },
   globals: { backgrounds: { value: 'bone' } },
 }
 
-/**
- * A partial strip. Six is what the frame draws and what the seed carries, but
- * the count is the editor's — three must fill the row and travel at the same
- * speed six do, which is what the copy count exists to hold.
- */
 export const ThreeClients: Story = {
   args: {
     ...seededSectionArgs('index', 'logoWallSection'),
@@ -83,11 +60,6 @@ export const ThreeClients: Story = {
   globals: { backgrounds: { value: 'bone' } },
 }
 
-/**
- * A client with no uploaded logo. `SanityImage` renders nothing for an absent
- * asset, so the plate is empty rather than broken — and because the plate is
- * hairlined now, an empty one is visible instead of silent.
- */
 export const MissingLogo: Story = {
   args: {
     ...seededSectionArgs('index', 'logoWallSection'),
@@ -98,19 +70,114 @@ export const MissingLogo: Story = {
   globals: { backgrounds: { value: 'bone' } },
 }
 
-/**
- * `layout: bar` — the partner page's band (`2332:1708`), #92. The same six
- * marks with the plate dropped and the tile at 100 tall, under a 36px heading
- * in a 64px strip: a footnote to the heading rather than the band's subject.
- */
 export const Bar: Story = {
-  args: seededSectionArgs('partners-sanity', 'logoWallSection'),
-  parameters: { design: figmaDesign('2332:1708') },
-  globals: { backgrounds: { value: 'bone' } },
+  args: { ...seededSectionArgs('partners-sanity', 'logoWallSection'), surface: 'ink' },
+  parameters: { design: figmaDesign('3895:17711') },
+  play: async ({ canvasElement }) => {
+    await assertStrip(canvasElement)
+    const section = canvasElement.querySelector('section')!
+    await expect(getComputedStyle(section).backgroundImage).toContain('partner-texture')
+    const heading = within(canvasElement).getByRole('heading', { level: 2 })
+    await expect(getComputedStyle(heading).fontSize).toBe('48px')
+  },
+  globals: { backgrounds: { value: 'bone' }, viewport: { value: 'desktop' } },
 }
 
-/** The bar on a phone — clipped and crawling, like the plates band. */
 export const BarMobile: Story = {
-  args: seededSectionArgs('partners-sanity', 'logoWallSection'),
+  args: { ...seededSectionArgs('partners-sanity', 'logoWallSection'), surface: 'ink' },
   globals: { viewport: { value: 'mobile' }, backgrounds: { value: 'bone' } },
+}
+
+async function assertStrip(canvasElement: HTMLElement) {
+  const section = canvasElement.querySelector('section')!
+  const track = section.querySelector('ul')!
+  const marks = Array.from(track.querySelectorAll('li'))
+  await expect(getComputedStyle(section).paddingTop).toBe('128px')
+  await expect(getComputedStyle(section).paddingBottom).toBe('64px')
+  await expect(track.getBoundingClientRect().height).toBe(43)
+  await expect(getComputedStyle(marks[0]!).borderWidth).toBe('0px')
+  await expect(getComputedStyle(marks[0]!).paddingRight).toBe('64px')
+  await expect(marks[0]!.clientWidth - 64).toBe(175)
+  const firstCopy = marks.filter((mark) => !mark.hasAttribute('aria-hidden'))
+  const copies = marks.length / firstCopy.length
+  const copyWidth = firstCopy.reduce((width, mark) => width + mark.getBoundingClientRect().width, 0)
+  await expect(track.getBoundingClientRect().width / copies).toBeCloseTo(copyWidth, 1)
+  await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
+}
+
+/** The authored ink surface is honored by both current logo-wall layouts. */
+export const SavedInkSurface: Story = {
+  ...AsSeeded,
+  args: { ...AsSeeded.args, surface: 'ink' },
+  play: async ({ canvasElement }) => {
+    const section = canvasElement.querySelector('section')!
+    const body = section.querySelector('p.text-lead')!
+    await expect(section).toHaveAttribute('data-surface', 'ink')
+    await expect(getComputedStyle(body).color).toBe('rgb(170, 166, 158)')
+  },
+}
+
+export const BarOnInk: Story = {
+  ...Bar,
+  args: { ...Bar.args, surface: 'ink' },
+  play: async ({ canvasElement }) => {
+    const section = canvasElement.querySelector('section')!
+    const heading = within(canvasElement).getByRole('heading', { level: 2 })
+    await expect(section).toHaveAttribute('data-surface', 'ink')
+    await expect(getComputedStyle(section).backgroundImage).toContain('partner-texture')
+    await expect(getComputedStyle(heading).color).toBe('rgb(255, 255, 255)')
+  },
+}
+
+export const AuthoredLightSurface: Story = {
+  ...AsSeeded,
+  args: { ...AsSeeded.args, surface: 'white' },
+  play: async ({ canvasElement }) => {
+    const section = canvasElement.querySelector('section')!
+    await expect(section).toHaveAttribute('data-surface', 'white')
+    await expect(getComputedStyle(section).backgroundColor).toBe('rgb(255, 255, 255)')
+    await expect(getComputedStyle(section.querySelector('h2')!).color).toBe('rgb(10, 10, 11)')
+  },
+}
+
+/** Uploaded white-matte logos share the strip with transparent and older references. */
+export const OpaqueAndAlphaMarks: Story = {
+  ...AsSeeded,
+  args: {
+    ...AsSeeded.args,
+    clients: (
+      [
+        ['American Family', 'b42b1199a726124f20ffefeb144fc906ebab46ef-921x570-webp', false],
+        ['Essity', 'b0b44ade94dd026f1dcc435e8b93dbd674ac8993-921x570-webp', false],
+        ['Cencora', '55d9985b53b1e04ca118fa2b8854d20a329f32d7-921x570-webp', false],
+        ['Ironman', '79d44c241bc1bab4c6dd9dcde12ae2f4917986da-1200x297-png', true],
+        ['Vertex', 'c4e6317ffd073039904d3e1c833aec3a504c8a11-1200x221-png', undefined],
+      ] as const
+    ).map(([name, asset, hasAlpha]) => ({
+      _id: String(name),
+      name: String(name),
+      logo: {
+        _type: 'image' as const,
+        asset: {
+          _type: 'reference' as const,
+          _ref: `image-${asset}`,
+          _id: `image-${asset}`,
+          metadata: { hasAlpha: hasAlpha ?? null },
+        },
+      },
+    })),
+  },
+  play: async ({ canvasElement }) => {
+    const track = canvasElement.querySelector('ul')!
+    await expect(getComputedStyle(track).mixBlendMode).toBe('screen')
+    const marks = Array.from(track.querySelectorAll('li:not([aria-hidden]) img'))
+    await expect(marks).toHaveLength(5)
+    for (const mark of marks.slice(0, 3)) {
+      await expect(getComputedStyle(mark).filter).toContain('invert(1)')
+      await expect(getComputedStyle(mark).filter).not.toContain('brightness(0)')
+    }
+    for (const mark of marks.slice(3)) {
+      await expect(getComputedStyle(mark).filter).toContain('brightness(0)')
+    }
+  },
 }

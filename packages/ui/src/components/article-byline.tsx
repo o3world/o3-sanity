@@ -22,35 +22,14 @@ function initial(name: string | null | undefined): string {
   return (name ?? '').trim().charAt(0).toUpperCase()
 }
 
-/**
- * The article byline — the insight hero's author line (`1710:2946`), #45.
- *
- * ```
- * row, 12px above, gap 13, centre
- *   disc   42×42 round, brand red, the initial at 15px/500 white
- *   text   14px/21px
- *     name  "Jay Forbes, Director of Engineering"   white 75%
- *     meta  "Jun 2026 · 6 min read"                 white 45%
- * ```
- *
- * **The disc is a fallback the frame happens to be showing.** Its "J" belongs
- * to Jay Forbes, who is a real migrated `person` carrying a real headshot — so
- * the monogram is what an author without one gets, not the design. Pass the
- * portrait as `headshot` and it takes the disc's place at the same size.
- *
- * Ink-band only, so the two text tones are baked in rather than exposed as a
- * variant: both Insights frames draw this on `#0F100B` and nowhere else. The
- * 75%/45% pair is not on the token ramp (`on-ink` is 92%, `on-ink-muted` 65%)
- * — it appears once, which per `@o3/tailwind-config` is composition, not
- * vocabulary.
- */
+/** Current Blog Hero attribution (I3739:73191;3378:9190). Portraits stay data-owned. */
 export function ArticleByline({ name, role, meta, headshot, className }: ArticleBylineProps) {
   const monogram = initial(name)
   const line = [name, role].filter(Boolean).join(', ')
   if (!line && !meta) return null
 
   return (
-    <div className={cn('flex items-center gap-[13px] pt-3', className)}>
+    <div className={cn('flex items-center gap-3', className)}>
       {headshot ? (
         <div className="size-[42px] shrink-0 overflow-hidden rounded-full">{headshot}</div>
       ) : monogram ? (
@@ -62,9 +41,9 @@ export function ArticleByline({ name, role, meta, headshot, className }: Article
         </div>
       ) : null}
 
-      <div className="flex flex-col text-[14px] leading-[21px]">
-        {line ? <span className="text-white/75">{line}</span> : null}
-        {meta ? <span className="text-white/45">{meta}</span> : null}
+      <div className="flex flex-col gap-0.5 text-[14px] leading-5 text-white">
+        {line ? <span>{line}</span> : null}
+        {meta ? <span>{meta}</span> : null}
       </div>
     </div>
   )

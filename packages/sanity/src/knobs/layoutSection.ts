@@ -17,6 +17,15 @@ export const layoutSectionKnobs = defineBlockKnobs({
   tier: 'section',
   knobs: [
     knob({
+      name: 'variant',
+      title: 'Composition',
+      description:
+        'Standard columns, a measured prose lockup, an overview beside bleeding media, or brand image panels. Authored content remains available in each composition.',
+      options: ['standard', 'prose', 'overview', 'brand'],
+      initialValue: 'standard',
+      bar: true,
+    }),
+    knob({
       name: 'headingLevel',
       title: 'Heading size',
       description:

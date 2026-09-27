@@ -402,6 +402,105 @@
       "locked": true,
       "unresolved": true,
       "note": "Not from Figma, and not ours to author. Nike's mark, fetched from sanity.io's own customer logo bar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the trademark position in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: it re-fetches the mark and centres it on the partner strip's 480x140 canvas (`src/lib/logoCanvas.ts`), so the committed file is a placement of the vendor's file rather than the file. Drawn for the /partners/sanity strip, whose claim is sourced from the same page the mark is."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/figma-current-why-arrow.svg",
+      "nodeId": "3974:25980",
+      "figmaName": "Dot Circle",
+      "format": "svg",
+      "export": "render",
+      "locked": false,
+      "note": "Exact outlined SVG export from current canonical interior frames, Figma version 2402903657143566810 (2026-09-24). Rendered with absolute bounds and outlined text."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/figma-current-why-network.svg",
+      "nodeId": "3984:34825",
+      "figmaName": "Dot Circle",
+      "format": "svg",
+      "export": "render",
+      "locked": false,
+      "note": "Exact outlined SVG export from current canonical interior frames, Figma version 2402903657143566810 (2026-09-24). Rendered with absolute bounds and outlined text."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/figma-current-why-heart.svg",
+      "nodeId": "3977:32431",
+      "figmaName": "Dot Circle",
+      "format": "svg",
+      "export": "render",
+      "locked": false,
+      "note": "Exact outlined SVG export from current canonical interior frames, Figma version 2402903657143566810 (2026-09-24). Rendered with absolute bounds and outlined text."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/figma-current-engagement-key.svg",
+      "nodeId": "4030:43753",
+      "figmaName": "Dot Circle",
+      "format": "svg",
+      "export": "render",
+      "locked": false,
+      "note": "Exact outlined SVG export from current canonical interior frames, Figma version 2402903657143566810 (2026-09-24). Rendered with absolute bounds and outlined text."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/figma-current-engagement-squad.svg",
+      "nodeId": "4030:39561",
+      "figmaName": "Dot Circle",
+      "format": "svg",
+      "export": "render",
+      "locked": false,
+      "note": "Exact outlined SVG export from current canonical interior frames, Figma version 2402903657143566810 (2026-09-24). Rendered with absolute bounds and outlined text."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/figma-current-engagement-team.svg",
+      "nodeId": "4030:39269",
+      "figmaName": "Dot Circle",
+      "format": "svg",
+      "export": "render",
+      "locked": false,
+      "note": "Exact outlined SVG export from current canonical interior frames, Figma version 2402903657143566810 (2026-09-24). Rendered with absolute bounds and outlined text."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/figma-current-outcome-speed.svg",
+      "nodeId": "4141:51128",
+      "figmaName": "Illo",
+      "format": "svg",
+      "export": "render",
+      "locked": false,
+      "note": "Exact outlined SVG export from current canonical interior frames, Figma version 2402903657143566810 (2026-09-24). Rendered with absolute bounds and outlined text."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/figma-current-outcome-publish.svg",
+      "nodeId": "4141:51180",
+      "figmaName": "Illo",
+      "format": "svg",
+      "export": "render",
+      "locked": false,
+      "note": "Exact outlined SVG export from current canonical interior frames, Figma version 2402903657143566810 (2026-09-24). Rendered with absolute bounds and outlined text."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/figma-current-outcome-collaboration.svg",
+      "nodeId": "4189:14784",
+      "figmaName": "Illo",
+      "format": "svg",
+      "export": "render",
+      "locked": false,
+      "note": "Exact outlined SVG export from current canonical interior frames, Figma version 2402903657143566810 (2026-09-24). Rendered with absolute bounds and outlined text."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/figma-current-outcome-performance.svg",
+      "nodeId": "4192:16257",
+      "figmaName": "Illo",
+      "format": "svg",
+      "export": "render",
+      "locked": false,
+      "note": "Exact outlined SVG export from current canonical interior frames, Figma version 2402903657143566810 (2026-09-24). Rendered with absolute bounds and outlined text."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/figma-current-outcome-governance.svg",
+      "nodeId": "4192:16645",
+      "figmaName": "Illo",
+      "format": "svg",
+      "export": "render",
+      "locked": false,
+      "note": "Exact outlined SVG export from current canonical interior frames, Figma version 2402903657143566810 (2026-09-24). Rendered with absolute bounds and outlined text."
     }
   ]
 }

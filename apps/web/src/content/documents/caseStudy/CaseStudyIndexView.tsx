@@ -31,7 +31,7 @@ function pageHref(page: number): string {
  *
  * ```
  * hero    2101:861    Interior Hero — eyebrow, 64px headline, standfirst under
- * grid    1634:1186   white, 128px vertical (96 at 402), 48px gap, 1248 cards
+ * grid    1634:1186   white, 128px vertical (64 at 402), 48px gap, 1248 cards
  * cta     2975:8738   the shared closer, the sphere and its fade strip
  * ```
  *
@@ -66,7 +66,7 @@ export function CaseStudyIndexView({ items, pagination, above, below }: CaseStud
 
       <div
         id="feed"
-        className="px-gutter py-band-sm lg:py-band-md scroll-mt-20 bg-white lg:scroll-mt-[calc(var(--spacing-nav-pinned)+96px)]"
+        className="px-gutter lg:py-band-md scroll-mt-20 bg-white py-16 lg:scroll-mt-[calc(var(--spacing-nav-pinned)+96px)]"
       >
         {/*
          * The band the frame draws has no heading — the hero's job, and the

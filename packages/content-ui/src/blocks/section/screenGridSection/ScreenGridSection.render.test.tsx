@@ -110,6 +110,55 @@ describe('the screen grid band', () => {
     expect(odd).not.toContain('lg:col-span-2')
   })
 
+  it.each([
+    [1824, 2100],
+    [1216, 684],
+  ])('preserves the complete %sx%s standard image', (width, height) => {
+    const dimensions = `${width}x${height}`
+    const markup = renderToStaticMarkup(
+      <ScreenGridSection
+        {...({
+          screens: [
+            {
+              _key: 'image',
+              span: 'standard',
+              media: {
+                image: {
+                  asset: {
+                    _ref: `image-${'1'.repeat(40)}-${dimensions}-png`,
+                    _type: 'reference',
+                  },
+                },
+                alt: 'Full screenshot',
+              },
+            },
+          ],
+          surface: 'white',
+        } as unknown as SectionProps<'screenGridSection'>)}
+      />,
+    )
+    expect(markup).toContain('h-auto w-full')
+    expect(markup).not.toContain('object-cover')
+    expect(markup).not.toContain('aspect-')
+    expect(markup).toContain(`height="${Math.round((1600 * height) / width)}"`)
+  })
+
+  it('renders a composed wide image without a second plate or crop', () => {
+    const markup = renderToStaticMarkup(
+      <ScreenGridSection
+        {...({
+          screens: [{ ...SCREENS[0], framing: 'image' }],
+          surface: 'white',
+        } as unknown as SectionProps<'screenGridSection'>)}
+      />,
+    )
+    expect(markup).toContain('lg:col-span-2')
+    expect(markup).not.toContain('--gradient-screen-plate')
+    expect(markup).not.toContain('aspect-')
+    expect(markup).not.toContain('shadow-')
+    expect(markup).not.toContain('lg:px-16')
+  })
+
   it('renders nothing when there are no screens', () => {
     expect(
       renderToStaticMarkup(

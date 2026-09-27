@@ -1,3 +1,4 @@
+import { ARTICLE_COLUMN, CONTENT_COLUMN, LAYOUT_COLUMN } from '@o3/content-ui/image-sizes'
 import { describe, expect, it } from 'vitest'
 
 import { PAGE_QUERY } from '@o3/sanity/queries'
@@ -77,17 +78,9 @@ describe('the seeded About page', () => {
    */
   it('sizes a card’s picture to its layout column, not to the whole content column', () => {
     const slots = declaredSizes(html)
-    expect(
-      slots.filter(
-        (slot) =>
-          slot ===
-          '(min-width: 1878px) 550px, (min-width: 1440px) calc(33.333vw - 76.667px), (min-width: 768px) 28vw, 90vw',
-      ),
-    ).toHaveLength(3)
-    expect(slots).not.toContain(
-      '(min-width: 1878px) 1728px, (min-width: 1440px) calc(100vw - 150px), 90vw',
-    )
-    expect(slots).not.toContain('(min-width: 917px) 822px, 90vw')
+    expect(slots.filter((slot) => slot === LAYOUT_COLUMN[3])).toHaveLength(3)
+    expect(slots).not.toContain(CONTENT_COLUMN)
+    expect(slots).not.toContain(ARTICLE_COLUMN)
   })
 
   /**
@@ -325,19 +318,13 @@ describe('the seeded Software Engineering service page', () => {
     expect(band?.panels?.some((panel) => panel.button ?? panel.media)).toBe(false)
   })
 
-  /**
-   * The proof-point band (`2357:2690`) and the CTA (`2354:2640`) both hang
-   * the molecule — the first through `layoutSection`'s decoration knob, the
-   * second through `ctaSection`'s. Exactly two glyphs: the Overview band's
-   * molecule is almost entirely cropped off-canvas in the frame and is
-   * deliberately not drawn.
-   */
-  it('hangs the molecule behind the proof point and the CTA', () => {
+  /** The proof point retains its molecule; the current CTA uses its gradient. */
+  it('hangs the current molecule in the hero and proof point', () => {
     const decorations = sections
       .filter((s) => s._type === 'layoutSection')
       .map((s) => (s as { decoration?: string }).decoration)
     expect(decorations).toEqual(['none', 'molecule'])
-    expect(html.match(/viewBox="0 0 699 699"/g) ?? []).toHaveLength(2)
+    expect(html.match(/viewBox="0 0 562 562"/g) ?? []).toHaveLength(2)
   })
 
   it('gives the page a single h1', () => {
@@ -348,11 +335,13 @@ describe('the seeded Software Engineering service page', () => {
    * The frame (`2360:2879`) is 1440-only, so every mobile composition on
    * this page is a renderer decision under ADR 0006, and these are the
    * invariants that keep it honest: nothing scrolls sideways, and the
-   * three-across service grid is `lg:`.
+   * service columns begin at `lg:`.
    */
   it('is a stack at 402, with no frame to copy', () => {
     expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
-    expect(variantsOf(html, 'grid-cols-3')).toEqual(['lg:grid-cols-3'])
+    expect(variantsOf(html, 'grid-cols-[minmax(0,395fr)_minmax(0,821fr)]')).toEqual([
+      'lg:grid-cols-[minmax(0,395fr)_minmax(0,821fr)]',
+    ])
   })
 })
 
@@ -448,10 +437,10 @@ describe('the seeded Contact page', () => {
     expect(bandPaths(html)).toHaveLength(sections.length)
   })
 
-  // `2960:7557` draws two bands, and the second one holds everything the
-  // portrait, the quote and the address used to have bands of their own for.
-  it('resolves to its two bands', () => {
-    expect(sections.map((s) => s._type)).toEqual(['heroSection', 'formSection'])
+  // `2960:7792` pairs the introduction and form in one hero.
+  it('resolves to one form hero with the supporting content retained', () => {
+    expect(sections.map((s) => s._type)).toEqual(['formSection'])
+    expect(sections[0]).toMatchObject({ variant: 'hero' })
   })
 
   it.each([
@@ -492,8 +481,8 @@ describe('the seeded Contact page', () => {
    */
   describe('the inquiry form', () => {
     it.each([
-      ['first name', 'field-firstName'],
-      ['last name', 'field-lastName'],
+      ['your name', 'field-name'],
+      ['how’d you hear about us?', 'field-referral'],
       ['email', 'field-email'],
       ['reason', 'field-reason'],
       ['message', 'field-message'],
@@ -503,17 +492,17 @@ describe('the seeded Contact page', () => {
     })
 
     it('gives every field a label pointing at its own control', () => {
-      for (const field of ['firstName', 'lastName', 'email', 'reason', 'message', 'consent']) {
+      for (const field of ['name', 'referral', 'email', 'reason', 'message', 'consent']) {
         expect(html, `no label for ${field}`).toContain(`for="field-${field}"`)
       }
     })
 
-    // All five are `gfield_contains_required` on the live form. The asterisk
+    // The four required Figma fields retain both required indicators. The asterisk
     // is the sighted half and `aria-required` the other; a marker drawn
     // without its pair is decoration.
-    it('marks all five required fields, in both halves', () => {
-      expect(html.match(/aria-required="true"/g) ?? []).toHaveLength(5)
-      expect(html.match(/\(required\)/g) ?? []).toHaveLength(5)
+    it('marks all four required fields, in both halves', () => {
+      expect(html.match(/aria-required="true"/g) ?? []).toHaveLength(4)
+      expect(html.match(/\(required\)/g) ?? []).toHaveLength(4)
     })
 
     // The options are the editor's (`reasons`), not the renderer's — which is
@@ -567,17 +556,12 @@ describe('the seeded Contact page', () => {
       expect(html).toContain('Send message')
     })
 
-    /**
-     * `2975:10198` keeps the two names SIDE BY SIDE at 402 — a horizontal row
-     * of two 131-wide fields inside a 282 card — so the pair is unprefixed and
-     * a `sm:` variant on it would be the bug. Only the mobile frame proves
-     * this, which is why it is asserted rather than left to the renderer.
-     */
-    it('keeps the two names paired at 402, with nothing escaping sideways', () => {
+    // `3754:78225` stacks the fields on mobile; desktop pairs them.
+    it('stacks fields on mobile, with nothing escaping sideways', () => {
       expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
       const variants = variantsOf(html, 'grid-cols-2')
-      expect(variants).toContain('grid-cols-2')
-      expect(variants).not.toContain('sm:grid-cols-2')
+      expect(variants).toContain('lg:grid-cols-2')
+      expect(variants).not.toContain('grid-cols-2')
     })
   })
 })
@@ -628,44 +612,17 @@ describe('the seeded 1682 conference page', () => {
   })
 })
 
-/**
- * WHICH GENERATION EACH CLOSER DRAWS (#163).
- *
- * Software Engineering instances the `CTA` component (`2124:72`) override-free
- * inside `2360:2879`, and that component hangs the molecule and no bleed
- * strip. 1682 has no frame at all, so it takes the same generation.
- *
- * About (`2975:8826`), Solutions (`2975:8839`) and Live (`2975:8763`) close on
- * a copy of Home's bespoke band. #303 read the raster: it is Home's own `orbs`
- * band (cursor pixels included), not a photograph, so their seeds pin `orbs`
- * (#317) — not `backgroundMedia`, which `ctaSection` supports but no seed
- * uses. Live's button is the frame's "View our work" (#308 q9).
- *
- * Home is tested where it lives: its seed pins `orbs`, and its closer fades
- * into the footer.
- */
+/** The current Combined CTA + Footer replaces obsolete stored decorations. */
 describe('the closing CTA band', () => {
   it.each([
-    ['About', about.html, 'about'],
-    ['Solutions', solutions.html, 'solutions'],
-    ['Live', live.html, 'live'],
-  ])('closes %s on the sphere band Home originated', (_label, html, slug) => {
-    const sections = (aSeededPage(slug).sections ?? []) as { _type: string; decoration?: string }[]
-    expect(sections.find((s) => s._type === 'ctaSection')?.decoration).toBe('orbs')
-    // The sphere's fade into the footer, and no molecule.
-    expect(html).toContain('--gradient-ink-fade')
+    ['About', about.html],
+    ['Solutions', solutions.html],
+    ['Live', live.html],
+    ['Software Engineering', softwareEngineering.html],
+    ['1682', conference.html],
+  ])('closes %s on the current gradient band', (_label, html) => {
+    expect(html).toContain('cta-band')
+    expect(html).not.toContain('cta-lag')
     expect(html).not.toContain('w-[54%]')
-  })
-
-  it.each([
-    ['Software Engineering', softwareEngineering.html, 'solutions-software-engineering'],
-    ['1682', conference.html, '1682-conference-ai-innovation'],
-  ])('closes %s on the molecule the component hangs', (_label, html, slug) => {
-    const sections = (aSeededPage(slug).sections ?? []) as { _type: string; decoration?: string }[]
-    expect(sections.find((s) => s._type === 'ctaSection')?.decoration).toBe('molecule')
-    // CtaSection's own molecule and bleed strip — neither shared with any
-    // other band on these pages.
-    expect(html).toContain('w-[54%]')
-    expect(html).not.toContain('--gradient-ink-fade')
   })
 })

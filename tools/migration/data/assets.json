@@ -1754,5 +1754,49 @@
   "file:tools/migration/data/seed/assets/partner-nike.svg": {
     "sha256": "52551aeec093fda9d4e06db33527827affa5e819",
     "assetId": "image-52551aeec093fda9d4e06db33527827affa5e819-480x140-svg"
+  },
+  "file:tools/migration/data/seed/assets/figma-current-why-arrow.svg": {
+    "sha256": "fb2bf8c4eaab8e0804d9b14406034fd1059c7c0a86938a34ff8dc6016a75f6a9",
+    "assetId": "image-030f9cd68e0fb696fef977516f426cf39ba81cf4-66x66-svg"
+  },
+  "file:tools/migration/data/seed/assets/figma-current-why-network.svg": {
+    "sha256": "a3a4584139acfb05d3aa04f6d05b851074a98440b1500e33f8f18e4f53634c8d",
+    "assetId": "image-de8cee3d058adc508124fa0701a9b4fe42ae2d38-66x66-svg"
+  },
+  "file:tools/migration/data/seed/assets/figma-current-why-heart.svg": {
+    "sha256": "88ed9a082a5de25bd67bffc596109630cea81013bf299c49577df3a653503a18",
+    "assetId": "image-3719713e41ab2b8385ec73cbdbbe50ff8e5c2b9b-66x66-svg"
+  },
+  "file:tools/migration/data/seed/assets/figma-current-engagement-key.svg": {
+    "sha256": "34bb1b1693a07d476c3f8b2c911b44d9d490f98e8125f6adb4b8d9826be25398",
+    "assetId": "image-06209950ecc2975e61ed4d6d0868779ee4cb2e6d-66x66-svg"
+  },
+  "file:tools/migration/data/seed/assets/figma-current-engagement-squad.svg": {
+    "sha256": "1128a84e073d9d3747e26bf23308ca69d5523c9b62451a35f2964fd176cb341f",
+    "assetId": "image-18fe4b0aa9889cb9fe9f3277d2bc0a063691c964-66x66-svg"
+  },
+  "file:tools/migration/data/seed/assets/figma-current-engagement-team.svg": {
+    "sha256": "db0f4b2b62d8327710710298451fe5c3efce38db4b6e68f926e6f7a766914694",
+    "assetId": "image-e127a4172c1a2be558f18641ccd9065680ebbd43-66x66-svg"
+  },
+  "file:tools/migration/data/seed/assets/figma-current-outcome-speed.svg": {
+    "sha256": "1af4258c6fcb8b980c98c9419a59a1001d4b93ad40b64c634505a8b12918699b",
+    "assetId": "image-36963f738ee6739887938f7f79fd3d8a2c3f1957-331x180-svg"
+  },
+  "file:tools/migration/data/seed/assets/figma-current-outcome-publish.svg": {
+    "sha256": "bcb3fd92a2fe2bc558975ec3d8f26a8e67875b654e65354a80b9fd3c15a0032b",
+    "assetId": "image-b69071ef96e62c24ff805c0c716a0cd31b29edc1-331x180-svg"
+  },
+  "file:tools/migration/data/seed/assets/figma-current-outcome-collaboration.svg": {
+    "sha256": "2b7e45c98097a265ae450682c33c7274271ff6e2f5c82cd61bc4fcdd70ee333b",
+    "assetId": "image-0c5f8d70f20829d4d91fe9fe83349bb2b66d2971-331x180-svg"
+  },
+  "file:tools/migration/data/seed/assets/figma-current-outcome-performance.svg": {
+    "sha256": "0f79fab2af6d35afc7d66eb61051557a0bf143d6b9013a0c617a80ee6d20e552",
+    "assetId": "image-999f8e6063508ff420f8b0a9f5e5788acef0b910-331x180-svg"
+  },
+  "file:tools/migration/data/seed/assets/figma-current-outcome-governance.svg": {
+    "sha256": "c888493d8edfec002ff4170d3b36f40106f6d9652b22b8e2719802310a8bf2a9",
+    "assetId": "image-6a85abfe03993e7df1368ea4023cb9d754f6dfdb-331x180-svg"
   }
 }

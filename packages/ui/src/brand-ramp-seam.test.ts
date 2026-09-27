@@ -24,7 +24,7 @@ const TAILWIND = createRequire(import.meta.url).resolve('tailwindcss/index.css')
 const BASE = resolve(PACKAGES, 'tailwind-config/theme.css')
 
 /** O3's #429 product geometry. */
-const O3_LAYOUT = { gutterMobile: '20px', gutterDesktop: '75px', stage: '108rem', half: '54rem' }
+const O3_LAYOUT = { gutterMobile: '16px', gutterDesktop: '96px', stage: '108rem', half: '54rem' }
 
 /**
  * One app's stylesheet, compiled from the theme files it imports and the
@@ -114,7 +114,7 @@ describe('the breakpoints', () => {
 describe('the layout geometry', () => {
   const layoutUtilities = ['px-gutter', 'px-gutter-tight', 'max-w-section', 'max-w-section-half']
 
-  it('compiles with the 75px edge and 1728px structural stage', async () => {
+  it('compiles with the 96px edge and 1728px structural stage', async () => {
     const css = await build([BASE], layoutUtilities)
     const root = block(css, ':root, :host')
 

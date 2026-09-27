@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { ArrowIcon, cn, CARD_LINK_FOCUS, CARD_MEDIA_ZOOM, Eyebrow } from '@o3/ui'
+import { cn, CARD_LINK_FOCUS, CARD_MEDIA_ZOOM } from '@o3/ui'
 import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
 import { hrefForDoc } from '@o3/content-runtime/urls'
 
@@ -11,74 +11,22 @@ import { CaseStudyCard } from '@o3/content-ui/cards'
 
 type NextCase = NonNullable<NonNullable<CASE_STUDY_QUERY_RESULT>['next']>
 
-/**
- * The band that closes a case study — the frame's "Section - Next"
- * (`1710:2609`, mobile `1906:1039`), which holds the **next project**, not a
- * insights row. #44.
- *
- * ```
- *            402                        1440
- * band       96px 20px, gap 24          64px 96px, gap 48
- * heading    stacked, flush left        a 634px row pinned FLUSH RIGHT
- *   kicker   "NEXT PROJECT - IRONMAN"   ”
- *   title    36px                       48px
- *   control  absent                     58px `Icon / Surface` at the row's end
- * media      full-width 362 square,     the whole Case Study Card, 1248 × 550
- *            a bare photograph          (`2250:1564`, set `2089:4169`)
- * ```
- *
- * The two widths differ in kind, so both are drawn and CSS picks one — the
- * same move `FeatureGridSection` makes for its orbital diagram. At 1440 the
- * neighbour arrives as a full card: logo, eyebrow, narrative line, stat row
- * and CTA, composed from `CaseStudyCard` rather than re-derived here, which is
- * why `CASE_STUDY_QUERY`'s `next` is the card projection. At 402 the frame
- * still draws the photograph alone, with nothing over it.
- *
- * The heading COPY is text at both widths — the card below it is the anchor
- * and carries its own CTA, so a linked headline would be a second tab stop to
- * one href. The chip beside it is a pointer-only link to that same href; see
- * the note at it. At 402 the photograph is the tap target and names itself.
- */
+/** Current next-case composition (3267:9463); supporting copy comes from the next case. */
 export function NextCaseBand({ next }: { next: NextCase }) {
   if (!next.slug) return null
   const label = ['Next project', next.client?.name].filter(Boolean).join(' — ')
   const href = hrefForDoc({ _type: 'caseStudy', slug: next.slug })
 
   return (
-    <section className="bg-white px-5 py-24 lg:px-24 lg:py-16">
-      <div className="mx-auto flex max-w-[1248px] flex-col gap-6 lg:gap-12">
-        <div className="flex items-center justify-between lg:ml-auto lg:w-[634px]">
-          <div className="flex min-w-0 flex-col gap-1.5 lg:w-[576px] lg:gap-3">
-            <Eyebrow size="lg">{label}</Eyebrow>
-            <p className="font-display text-ink lg:text-display-xl text-balance text-[36px]/[1.2] font-normal">
-              {next.title}
-            </p>
-          </div>
-          {/*
-           * `Icon / Surface` (`1710:2615`) — the chip's geometry is that
-           * instance's: a 58px square around the 34.8px arrow. Absent from
-           * the 402 frame.
-           *
-           * IT IS A LINK THE KEYBOARD CANNOT REACH, and both halves of that
-           * are deliberate. It reads as a control, so a click on it has to go
-           * where the card goes — a chip that looks pressable and does nothing
-           * is the failure. But the card below is already an anchor to this
-           * same href, so `tabIndex={-1}` and `aria-hidden` keep the band at
-           * one tab stop and one announcement: the pointer gets a second
-           * target, assistive technology gets no duplicate.
-           */}
-          <Link
-            href={href}
-            aria-hidden
-            tabIndex={-1}
-            className="bg-surface-muted hidden size-[58px] shrink-0 items-center justify-center lg:flex"
-          >
-            <span className="text-ink flex size-[34.8px] items-center justify-center">
-              {/* The chip strokes the glyph at 2, not ArrowIcon's 2.2 — read
-                  off `1710:2615`. */}
-              <ArrowIcon size={34.8} strokeWidth={2} />
-            </span>
-          </Link>
+    <section className="bg-bone px-gutter py-16">
+      <div className="max-w-section mx-auto flex flex-col gap-12">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <h2 className="font-display text-ink text-display-xl text-balance lg:max-w-[571px]">
+            There’s more where that came from.
+          </h2>
+          {next.narrativeHeadline ? (
+            <p className="text-lead text-fg-body lg:w-[385px]">{next.narrativeHeadline}</p>
+          ) : null}
         </div>
 
         <Link

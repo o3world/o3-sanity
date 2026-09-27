@@ -1,11 +1,12 @@
 import type { ComponentType } from 'react'
+import { cn } from '@o3/ui/lib/utils'
 
 import { DisplayHeading, Eyebrow, RevealSequence, SectionShell } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { stegaClean } from '@sanity/client/stega'
 
 import { BASE_BLOCK_COMPONENTS } from '../../base/baseComponents'
-import { LAYOUT_BLEED_COLUMN, LAYOUT_COLUMN } from '../../../imageSizes'
+import { ARTICLE_COLUMN, LAYOUT_BLEED_COLUMN, LAYOUT_COLUMN } from '../../../imageSizes'
 import { DECORATED_BAND_CLASS, resolveDecoration } from '../../decoration'
 import { MoleculeDecoration } from '../../MoleculeDecoration'
 import { resolveSurface } from '../../surface'
@@ -64,6 +65,7 @@ function resolveColumns(value: number | null | undefined): 1 | 2 | 3 {
  * contains sections, so the full registry isn't needed here.
  */
 export function LayoutSection({
+  variant,
   eyebrow,
   heading,
   headingLevel,
@@ -78,14 +80,37 @@ export function LayoutSection({
 }: LayoutSectionProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const components: Record<string, ComponentType<any>> = BASE_BLOCK_COMPONENTS
-  const bleeding = stegaClean(bleed) === 'end'
+  const composition = stegaClean(variant)
+  const prose = composition === 'prose'
+  const overview = composition === 'overview'
+  const brand = composition === 'brand'
+  const current = prose || overview || brand
+  const bleeding = overview || stegaClean(bleed) === 'end'
   const selectedHeadingLevel = stegaClean(headingLevel)
   const explicitHeadingLevel = selectedHeadingLevel === 'xl' || selectedHeadingLevel === 'lg'
-  const resolvedHeadingLevel = explicitHeadingLevel ? selectedHeadingLevel : bleeding ? 'lg' : 'xl'
+  const resolvedHeadingLevel = current
+    ? 'hero'
+    : explicitHeadingLevel
+      ? selectedHeadingLevel
+      : bleeding
+        ? 'lg'
+        : 'xl'
   const showMolecule = resolveDecoration(decoration, 'layoutSection') === 'molecule'
   const columnCount = resolveColumns(columns)
-  const columnClass = bleeding ? BLEED_COLUMN_CLASS : COLUMN_CLASSES[columnCount]
+  const columnClass = overview
+    ? 'grid-cols-1 lg:grid-cols-[minmax(0,501px)_minmax(0,1fr)]'
+    : bleeding
+      ? BLEED_COLUMN_CLASS
+      : COLUMN_CLASSES[columnCount]
   const entries = items ?? []
+  const slotSizes =
+    current && columnCount > 1
+      ? columnCount === 2
+        ? '(min-width: 1920px) 848px, (min-width: 1440px) calc(50vw - 112px), (min-width: 768px) calc(42.29287vw - 1.01734px), (min-width: 402px) calc(84.58574vw + 29.96532px), calc(100vw - 32px)'
+        : '(min-width: 1920px) 555px, (min-width: 1440px) calc(33.333333vw - 85.333333px), (min-width: 768px) calc(28.195247vw - 11.344893px), (min-width: 402px) calc(84.58574vw + 29.96532px), calc(100vw - 32px)'
+      : stegaClean(width) === 'article'
+        ? ARTICLE_COLUMN
+        : LAYOUT_COLUMN[columnCount]
   /*
    * WHERE THE HEADER SITS is what the bleed changes about the band, and not
    * only where the picture ends. `2360:2861` gives the copy column the heading
@@ -96,9 +121,12 @@ export function LayoutSection({
   const Content = sequence ? RevealSequence : 'div'
   const header =
     eyebrow || heading || subheading ? (
-      <header data-reveal-step={sequence ? 'heading' : undefined} className="flex flex-col gap-6">
+      <header
+        data-reveal-step={sequence ? 'heading' : undefined}
+        className={cn('flex flex-col', current ? 'max-w-[822px] gap-2' : 'gap-6')}
+      >
         {eyebrow ? (
-          <Eyebrow size="lg" tone="brand">
+          <Eyebrow size="lg" tone="brand" className={current ? 'pb-4' : undefined}>
             {eyebrow}
           </Eyebrow>
         ) : null}
@@ -113,7 +141,15 @@ export function LayoutSection({
           </DisplayHeading>
         ) : null}
         {subheading ? (
-          <p className="text-display-lg font-display text-fg-muted text-balance">{subheading}</p>
+          <p
+            className={
+              current
+                ? 'text-lead text-fg-body'
+                : 'text-display-lg font-display text-fg-muted text-balance'
+            }
+          >
+            {subheading}
+          </p>
         ) : null}
       </header>
     ) : null
@@ -129,7 +165,21 @@ export function LayoutSection({
     if (!Component) return null
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { _type, ...props } = item
-    const content = <Component key={item._key} {...props} slotSizes={slotSizes} />
+    const content = (
+      <Component
+        key={item._key}
+        {...props}
+        slotSizes={slotSizes}
+        {...(item._type === 'richText' && (prose || overview)
+          ? {
+              bodyClassName: cn(
+                'max-w-[822px] text-lead text-fg-body',
+                overview && 'lg:text-[28px] lg:leading-[38px]',
+              ),
+            }
+          : {})}
+      />
+    )
     return sequence ? (
       <div
         key={item._key}
@@ -158,23 +208,21 @@ export function LayoutSection({
       // blocks, and an unconditional clip cuts the edge off any that overruns
       // the band — `/1682-conference-ai-innovation`'s CTA button is 13px wider
       // than a 390px viewport (#181) and loses the end of its label.
-      className={showMolecule || bleeding ? DECORATED_BAND_CLASS : undefined}
+      className={cn(
+        (showMolecule || bleeding) && DECORATED_BAND_CLASS,
+        current && 'max-lg:pb-16',
+        (prose || overview) && 'max-lg:pt-16',
+        brand &&
+          '[--media-card-height:370px] [--media-card-radius:32px] [--media-card-shadow:0_24px_32px_0_rgb(0_0_0/0.2)] max-lg:[--media-card-aspect:1] max-lg:[--media-card-height:auto] lg:[--media-card-height:396px]',
+      )}
     >
-      {/*
-       * `2357:2690` — the Solutions proof-point band hangs the molecule at
-       * 1300px and 25%, running off the band's right edge and past its foot,
-       * the same treatment `featureGridSection` gives "Why Sanity + O3"
-       * (`2354:2551`).
-       */}
-      <MoleculeDecoration
-        decoration={decoration}
-        block="layoutSection"
-        surface={resolved}
-        className="right-[-28%] top-0 w-[90vw] opacity-25"
-      />
+      <MoleculeDecoration decoration={decoration} block="layoutSection" surface={resolved} />
       <Content
         {...(sequence ? { boundaries: 'items' as const } : {})}
-        className="flex flex-col gap-12"
+        className={cn(
+          'flex flex-col',
+          current ? (prose && columnCount === 1 ? 'gap-2' : 'gap-16') : 'gap-12',
+        )}
       >
         {/*
          * The three-part band header the interior frames use everywhere
@@ -204,23 +252,44 @@ export function LayoutSection({
          * loop takes `itemAttr(loc, 'items', item._key)` and `loc` comes back
          * into the destructure above.
          */}
-        <div className={`grid items-start ${bleeding ? 'gap-8' : 'gap-10'} ${columnClass}`}>
+        <div
+          className={cn(
+            'grid items-start',
+            overview ? 'gap-8 lg:gap-[139px]' : current || bleeding ? 'gap-8' : 'gap-10',
+            columnClass,
+          )}
+        >
           {bleeding ? (
             <>
               {/* Everything but the last item is the copy column, under the
                   header the band did not draw above it. */}
-              <div className="flex flex-col gap-6">
+              <div className={overview ? 'flex flex-col gap-2' : 'flex flex-col gap-6'}>
                 {header}
                 {/* 395 in the frame; the three-up column's 389 is the value
                     already written down for that width. */}
                 {entries.slice(0, -1).map((item) => renderItem(item, LAYOUT_COLUMN[3]))}
               </div>
-              <div className={BLEED_MEDIA_CLASS}>
-                {entries.slice(-1).map((item) => renderItem(item, LAYOUT_BLEED_COLUMN))}
+              <div
+                className={
+                  overview
+                    ? 'rounded-[32px] shadow-[-32px_32px_64px_rgba(0,0,0,0.2)] lg:mr-[min(calc(-1*var(--spacing-gutter)),calc(var(--container-section-half)-50vw))] lg:h-[502px] lg:[&_figure]:h-full [&_img]:rounded-[32px] lg:[&_img]:h-full lg:[&_img]:object-cover'
+                    : BLEED_MEDIA_CLASS
+                }
+              >
+                {entries
+                  .slice(-1)
+                  .map((item) =>
+                    renderItem(
+                      item,
+                      overview
+                        ? '(min-width: 1920px) calc(50vw + 224px), (min-width: 1440px) calc(100vw - 736px), (min-width: 1024px) calc(92.29287vw - 625.01734px), (min-width: 402px) calc(84.58574vw + 29.96532px), calc(100vw - 32px)'
+                        : LAYOUT_BLEED_COLUMN,
+                    ),
+                  )}
               </div>
             </>
           ) : (
-            entries.map((item) => renderItem(item, LAYOUT_COLUMN[columnCount]))
+            entries.map((item) => renderItem(item, slotSizes))
           )}
         </div>
       </Content>

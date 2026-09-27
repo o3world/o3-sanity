@@ -1,7 +1,7 @@
 import { defineArrayMember, defineField } from 'sanity'
 import { defineArrayItem } from './defineArrayItem'
 import { defineSectionBlock } from './defineBlocks'
-import { detailsField } from './fields'
+import { detailsField, eyebrowField, bodyField } from './fields'
 import { hiddenUnless } from './knobFields'
 import { blockArrayMembers, BLOCK_ARRAYS } from './registry'
 import { PAGE_TYPES } from '../../constants'
@@ -132,11 +132,13 @@ export const logoWallSection = defineSectionBlock({
 export const caseShowcaseSection = defineSectionBlock({
   name: 'caseShowcaseSection',
   description:
-    'Proof by work — sticky-stacking cards for referenced case studies, each projecting that document’s narrative headline and headline stat. Reach for it when a claim needs evidence that actually shipped. There is nothing to write here: the band renders only what the referenced case studies already say.',
+    'Proof by work — sticky-stacking cards for referenced case studies, each projecting that document’s narrative headline and headline stat. Reach for it when a claim needs evidence that actually shipped. The optional heading and supporting text introduce the referenced work.',
   title: 'Case study showcase',
   knobs: caseShowcaseSectionKnobs,
   fields: [
+    eyebrowField(),
     defineField({ name: 'heading', type: 'string', initialValue: 'Our Work' }),
+    bodyField(),
     defineField({ name: 'button', type: 'button' }),
     defineField({
       name: 'caseStudies',
@@ -162,6 +164,7 @@ export const railPanelsSection = defineSectionBlock({
   title: 'Rail + panels',
   knobs: railPanelsSectionKnobs,
   fields: [
+    eyebrowField(),
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'intro', type: 'text', rows: 3 }),
     'layout',
@@ -290,7 +293,9 @@ export const insightsCarouselSection = defineSectionBlock({
   title: 'Insights carousel',
   knobs: insightsCarouselSectionKnobs,
   fields: [
+    eyebrowField(),
     defineField({ name: 'heading', type: 'string', initialValue: 'The thinking behind the work.' }),
+    bodyField(),
     defineField({
       name: 'insights',
       type: 'array',
@@ -308,10 +313,7 @@ export const insightsCarouselSection = defineSectionBlock({
   preview: { select: { title: 'heading' } },
 })
 
-/**
- * `decoration` and `surface` are declared in `src/knobs/ctaSection.ts`
- * (ADR 0020).
- */
+/** Current CTA content over the Combined CTA + Footer gradient (3720:62476). */
 export const ctaSection = defineSectionBlock({
   name: 'ctaSection',
   description:
@@ -322,7 +324,6 @@ export const ctaSection = defineSectionBlock({
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'body', type: 'text', rows: 2 }),
     defineField({ name: 'button', type: 'button' }),
-    'decoration',
   ],
   preview: { select: { title: 'heading' } },
 })
@@ -350,7 +351,9 @@ export const featureGridSection = defineSectionBlock({
   title: 'Feature grid',
   knobs: featureGridSectionKnobs,
   fields: [
+    defineField({ name: 'eyebrow', type: 'string' }),
     defineField({ name: 'heading', type: 'string' }),
+    defineField({ name: 'subheading', type: 'text', rows: 3 }),
     'layout',
     defineField({
       name: 'features',
@@ -596,19 +599,19 @@ export const inFlightSection = defineSectionBlock({
 export const formSection = defineSectionBlock({
   name: 'formSection',
   description:
-    'The inquiry band: a form card beside a rail carrying a portrait, a short quote and the ways to reach the studio. Reach for it on a page whose purpose is to start a conversation. The reasons list is the only part of the form’s shape an editor owns; a submission goes to HubSpot through the app’s contact route.',
+    'An invitation to start a conversation, with an introduction beside a form and optional contact details below. Reach for it at the top of a contact page or within a longer page. The reasons list is authored; the input fields remain the contract with the submission handler.',
   title: 'Form',
   knobs: formSectionKnobs,
   fields: [
+    'variant',
+    'decoration',
     defineField({ name: 'eyebrow', type: 'string' }),
-    // Optional: `2960:7792` opens the card at the first name field, so the
-    // whole header is absent on the band the frame draws.
     defineField({ name: 'heading', type: 'string' }),
     defineField({
       name: 'note',
       type: 'text',
       rows: 2,
-      description: 'The quieter line under the heading, above the first field.',
+      description: 'The supporting line under the introduction’s heading.',
     }),
     defineField({
       name: 'reasons',
@@ -718,7 +721,7 @@ export const layoutSection = defineSectionBlock({
 /**
  * `variant`, `width` and `surface` are declared in `src/knobs/mediaSection.ts`
  * (ADR 0020), including the gate that withholds `width` from a capture.
- * `media` is the only editorial field the band has.
+ * Feature adds optional heading, supporting copy and graphics over the figure.
  */
 export const mediaSection = defineSectionBlock({
   name: 'mediaSection',
@@ -728,6 +731,22 @@ export const mediaSection = defineSectionBlock({
   knobs: mediaSectionKnobs,
   fields: [
     defineField({ name: 'media', type: 'figure', validation: (rule) => rule.required() }),
+    defineField({
+      name: 'heading',
+      type: 'string',
+      description: 'Accessible heading, also used when no wordmark is supplied.',
+    }),
+    defineField({ name: 'subheading', type: 'text', rows: 3 }),
+    defineField({
+      name: 'logo',
+      type: 'image',
+      description: 'Wordmark displayed in place of the heading.',
+    }),
+    defineField({
+      name: 'badge',
+      type: 'image',
+      description: 'Small graphic above the feature heading.',
+    }),
     'variant',
     'width',
   ],
@@ -743,31 +762,22 @@ export const mediaSection = defineSectionBlock({
  * any content type can compose, so this is available to `page.sections` on the
  * day it lands.
  *
- * Two design options per screen and no more. The frame's plates differ in
- * exactly two ways — the colour behind the screenshot (`tone`) and whether the
- * tile takes one column or both (`span`) — and everything else about a tile
- * (32px radius, the 12px-radius screenshot inside it, the crop) is composition
- * the renderer owns. Plate HEIGHT is deliberately not a field: `2230:7559`
- * draws 716 for a wide tile and 342 for a small one, so height follows `span`
- * (ADR 0006 — renderers decide).
- *
- * Both of those belong to the SCREEN rather than to the band, so they are
- * declared against the member and their fields come from `defineArrayItem` —
- * the first item-surface knobs in the repo (#118, ADR 0021). The block's own
- * roster is `surface` and nothing else, which is why its declaration looks
- * thin: the knobs an editor reaches for on this band are on the tiles.
+ * Each screen owns its span, plate tone, and whether the image already
+ * contains the complete composition (current Best Egg and Caron frames).
  */
 export const screenGridSection = defineSectionBlock({
   name: 'screenGridSection',
   description:
-    'Product screenshots on gradient plates, tiled two to a row. Reach for it to show an interface actually existing, usually in more than one state. Each screen picks its plate tone and whether it spans one column or both; plate height follows the span and is not something to set.',
+    'Product screenshots or composed images, tiled two to a row. Wide images can keep their complete composition or place a raw screenshot on a colored plate. Each screen picks its span and framing.',
   title: 'Screen grid',
   knobs: screenGridSectionKnobs,
   fields: [
+    'layout',
     defineField({
       name: 'screens',
       type: 'array',
-      description: 'Tiles fill the two-column grid in order; a wide screen takes both columns.',
+      description:
+        'Tiles retain their order. Feature pairs the first image with two stacked tiles, then returns to the grid.',
       validation: (rule) => rule.required().min(1),
       of: [
         defineArrayItem({
@@ -776,6 +786,7 @@ export const screenGridSection = defineSectionBlock({
             defineField({ name: 'media', type: 'figure', validation: (rule) => rule.required() }),
             'tone',
             'span',
+            'framing',
           ],
           preview: { select: { title: 'media.alt', subtitle: 'tone', media: 'media.image' } },
         }),

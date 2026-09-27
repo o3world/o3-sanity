@@ -1,0 +1,62 @@
+<svg width="331" height="180" viewBox="0 0 331 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Illo" clip-path="url(#clip0_4141_51128)">
+<circle id="Ellipse 1176" cx="262" cy="90" r="69" fill="#FFF1F0"/>
+<path id="Rectangle 4340" d="M77 66C77 62.6863 79.6863 60 83 60H118.586C118.851 60 119.105 60.1054 119.293 60.2929L134.707 75.7071C134.895 75.8946 135 76.149 135 76.4142V130C135 133.314 132.314 136 129 136H83C79.6863 136 77 133.314 77 130V66Z" stroke="#EB1000" stroke-width="2"/>
+<path id="Rectangle 4348" d="M101 59V48.4142C101 48.149 100.895 47.8946 100.707 47.7071L85.2929 32.2929C85.1054 32.1054 84.851 32 84.5858 32H49C45.6863 32 43 34.6863 43 38V102C43 105.314 45.6863 108 49 108H77" stroke="#EB1000" stroke-width="2"/>
+<path id="Rectangle 4349" d="M51 63C51 62.4477 51.4477 62 52 62H78C78.5523 62 79 62.4477 79 63C79 63.5523 78.5523 64 78 64H52C51.4477 64 51 63.5523 51 63Z" fill="#EB1000"/>
+<path id="Rectangle 4354" d="M51 54C51 53.4477 51.4477 53 52 53H92C92.5523 53 93 53.4477 93 54C93 54.5523 92.5523 55 92 55H52C51.4477 55 51 54.5523 51 54Z" fill="#EB1000"/>
+<path id="Rectangle 4350" d="M51 72C51 71.4477 51.4477 71 52 71H76C76.5523 71 77 71.4477 77 72C77 72.5523 76.5523 73 76 73H52C51.4477 73 51 72.5523 51 72Z" fill="#EB1000"/>
+<path id="Rectangle 4351" d="M51 81C51 80.4477 51.4477 80 52 80H76C76.5523 80 77 80.4477 77 81C77 81.5523 76.5523 82 76 82H52C51.4477 82 51 81.5523 51 81Z" fill="#EB1000"/>
+<path id="Rectangle 4352" d="M51 90C51 89.4477 51.4477 89 52 89H76C76.5523 89 77 89.4477 77 90C77 90.5523 76.5523 91 76 91H52C51.4477 91 51 90.5523 51 90Z" fill="#EB1000"/>
+<path id="Rectangle 4353" d="M51 99C51 98.4477 51.4477 98 52 98H76C76.5523 98 77 98.4477 77 99C77 99.5523 76.5523 100 76 100H52C51.4477 100 51 99.5523 51 99Z" fill="#EB1000"/>
+<rect id="Rectangle 4341" x="90" y="83" width="32" height="24" rx="2" stroke="#EB1000" stroke-width="2"/>
+<rect id="Rectangle 4342" x="89" y="115" width="34" height="2" rx="1" fill="#EB1000"/>
+<rect id="Rectangle 4343" x="89" y="124" width="20" height="2" rx="1" fill="#FF958C"/>
+<path id="Vector 2" d="M135 76H120C119.448 76 119 75.5523 119 75V60" stroke="#EB1000" stroke-width="2"/>
+<path id="Vector 1" d="M90 104L99.2948 95.6347C99.6901 95.2789 100.295 95.2948 100.671 95.6709L105.293 100.293C105.683 100.683 106.317 100.683 106.707 100.293L113.293 93.7071C113.683 93.3166 114.317 93.3166 114.707 93.7071L122 101" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 21" d="M101 48H86C85.4477 48 85 47.5523 85 47V32" stroke="#EB1000" stroke-width="2"/>
+<g id="Page">
+<path id="Rectangle 4344" d="M229 51C229 47.6863 231.686 45 235 45L290 45C293.314 45 296 47.6863 296 51V129C296 132.314 293.314 135 290 135H235C231.686 135 229 132.314 229 129L229 51Z" fill="white" stroke="#EB1000" stroke-width="2"/>
+<path id="Vector 36" d="M229 53H296" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<circle id="Ellipse 1184" cx="291" cy="49" r="1" fill="#EB1000"/>
+<circle id="Ellipse 1185" cx="288" cy="49" r="1" fill="#EB1000"/>
+<circle id="Ellipse 1186" cx="285" cy="49" r="1" fill="#EB1000"/>
+<path id="Vector 37" d="M229 87H296" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 38" d="M241 99H270" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 39" d="M241 111H261" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 40" d="M241 123H257" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+</g>
+<path id="Vector 4" d="M229 109H202" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 6" d="M155 59H136" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 22" d="M29 91H1" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 23" d="M43 91H37" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 27" d="M43 60H41" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 24" d="M12 74H6" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 28" d="M31 60H25" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 29" d="M37 46H26" stroke="#FF958C" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 31" d="M31 32H16" stroke="#FF958C" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 30" d="M20 46H5" stroke="#FF958C" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 20" d="M43 74H18" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 26" d="M31 108H9" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 11" d="M197 121C189.58 121 180.42 121 173 121" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 18" d="M149 45C141.58 45 132.42 45 125 45" stroke="#FF958C" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 14" d="M205 135H193" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 15" d="M143 108H155" stroke="#FF958C" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 9" d="M194 59H190" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 10" d="M202 59H198" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 12" d="M167 121H161" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 19" d="M119 45H113" stroke="#FF958C" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 13" d="M187 135H181" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 16" d="M161 108H167" stroke="#FF958C" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 7" d="M214 91H204C184 91 185 59 165 59" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 8" d="M192 109C172 109 167 77 147 77" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<path id="Vector 5" d="M229 91H224" stroke="#EB1000" stroke-width="2" stroke-linecap="round"/>
+<circle id="Ellipse 1175" cx="296" cy="127" r="27" fill="white" stroke="#EB1000" stroke-width="2"/>
+<path id="bolt" d="M301.055 112.41C301.348 112.176 301.699 112 302.051 112C303.047 112 303.75 113.055 303.398 113.992L299.414 125.125H305.918C306.738 125.125 307.5 125.887 307.5 126.707C307.5 127.176 307.266 127.645 306.914 127.938L291.387 141.648C291.094 141.883 290.742 142 290.391 142C289.395 142 288.691 141.004 289.043 140.066L293.027 128.875H286.465C285.645 128.875 285 128.23 285 127.41C285 126.941 285.176 126.531 285.469 126.238L301.055 112.41ZM301.113 114.871L287.461 127H294.375C294.668 127 294.961 127.176 295.137 127.41C295.312 127.703 295.312 127.996 295.254 128.289L291.328 139.188L305.098 127H298.125C297.773 127 297.48 126.883 297.305 126.648C297.129 126.355 297.129 126.062 297.188 125.77L301.113 114.871Z" fill="#EB1000"/>
+</g>
+<defs>
+<clipPath id="clip0_4141_51128">
+<rect width="331" height="180" fill="white"/>
+</clipPath>
+</defs>
+</svg>

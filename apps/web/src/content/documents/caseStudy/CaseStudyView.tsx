@@ -159,7 +159,12 @@ export function CaseStudyView(props: CaseStudyViewProps) {
               body: detail.body,
             }))}
           >
-            <PortableTextBody value={run.chapter.body} revealLead className="max-w-none" />
+            <PortableTextBody
+              value={run.chapter.body}
+              variant="chapter"
+              revealLead
+              className="max-w-none"
+            />
           </CaseChapter>
         ) : (
           <Blocks

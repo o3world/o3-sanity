@@ -3,55 +3,23 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 import { stegaClean } from '@sanity/client/stega'
 
 import { SanityImage } from '../../../SanityImage'
-import { ARTICLE_COLUMN, FULL_BLEED } from '../../../imageSizes'
+import { ARTICLE_COLUMN, CONTENT_COLUMN, FULL_BLEED } from '../../../imageSizes'
 import { sectionBackground } from '../../sectionBackground'
 import { resolveSurface } from '../../surface'
 
 type MediaSectionProps = SectionProps<'mediaSection'> & { sequence?: boolean }
 
-/**
- * Section block: a full-width figure moment, built to the Case Study frame's
- * two media treatments (#44) — the only canonical frame that draws this block.
- *
- * | `variant` / `width`     | Frame                    | Shape                                  |
- * | ----------------------- | ------------------------ | -------------------------------------- |
- * | `plain` / `full-bleed`  | `1647:1721` / `1906:900` | edge to edge, 1440 × 576 (402 × 257)   |
- * | `plain` / `contained`   | `1899:4186`              | the 822px article measure, soft shadow |
- * | `capture`               | `1647:1720`              | a 700px dark stage the capture is cropped by |
- *
- * **`capture` is a band that crops, not a figure that fits** (#97). The frame
- * hangs an 822 × 1555 page screenshot on a full-bleed dark stage, 64px from
- * the top, and lets the band's 700px floor cut it off — the "here is the whole
- * page, and it keeps going" move. So the image renders at its own proportions
- * on the article measure and the band clips it, exactly as `ScreenGridSection`
- * treats a plate. `width` is hidden in Studio when this variant is on, because
- * a capture is full-bleed by construction.
- *
- * `contained` sits on the **article measure**, not `--container-content` —
- * the frame lines a contained figure up with the chapter prose around it (824
- * drawn against the chapters' 822) rather than with the wider statement
- * column. Its `0 0 64px rgba(0,0,0,0.1)` lift is what makes a screenshot read
- * as a page rather than as a picture; it occurs once, so it stays a literal.
- *
- * **Neither variant pads its own top.** The frame lets the chapter band above
- * supply the air and runs the media straight into the band below, so a media
- * block that opened with its own 164px would double it.
- *
- * **A picture under the band is `backgroundMedia`**, the field every section
- * carries — laid full-bleed behind the figure the way the hero and the CTA lay
- * theirs. On `capture` it replaces the stage's gradient rather than sitting
- * under it: the gradient is opaque, so a band cannot have both, and the frame's
- * own stage (`1647:1720`) hangs its picture in exactly that slot.
- *
- * The band builds its own `<section>` rather than using `SectionShell`,
- * because `full-bleed` has to escape the gutter the shell always applies.
- */
+/** Case-study media plus About's inset photograph (3754:78276) and feature (4061:50283). */
 export function MediaSection({
   media,
   variant,
   width,
   surface,
   backgroundMedia,
+  heading,
+  subheading,
+  logo,
+  badge,
   sequence = false,
 }: MediaSectionProps) {
   if (!media) return null
@@ -63,6 +31,118 @@ export function MediaSection({
   // band only when there is something to position.
   const picture = sectionBackground(backgroundMedia, resolved)
   const bandClass = picture ? `${surfaceClass} relative isolate` : surfaceClass
+
+  const composition = stegaClean(variant)
+  if (composition === 'overlap' || composition === 'feature') {
+    const feature = composition === 'feature'
+    return (
+      <SurfaceProvider surface={resolved}>
+        <section
+          {...surfaceAttrs(resolved)}
+          className={`${bandClass} px-gutter relative flow-root`}
+        >
+          {picture}
+          <figure className={`max-w-section relative mx-auto ${feature ? 'z-10 -mb-16' : ''}`}>
+            <div
+              className={
+                feature
+                  ? 'relative isolate overflow-hidden rounded-2xl px-4 pb-16 pt-32 shadow-[0_32px_64px_rgba(0,0,0,0.2)] [--feature-gradient-end:61.34%] lg:rounded-[32px] lg:px-12 lg:pb-[99px] lg:pt-[163px] lg:[--feature-gradient-end:100%]'
+                  : 'relative isolate aspect-[1248/550] -translate-y-8 overflow-hidden rounded-2xl shadow-[0_32px_64px_rgba(0,0,0,0.2)] lg:-translate-y-16 lg:rounded-[32px]'
+              }
+            >
+              <SanityImage
+                source={media.image}
+                alt={media.alt}
+                ratio="fill"
+                width={2496}
+                sizes={CONTENT_COLUMN}
+                className="absolute inset-0 -z-10"
+              />
+              {feature ? (
+                <>
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(10,10,11,0.2),rgba(0,0,0,0.8)_var(--feature-gradient-end))]"
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,#eb1000,#ad0c00_var(--feature-gradient-end))] mix-blend-screen"
+                  />
+                  {badge ? (
+                    <SanityImage
+                      source={badge}
+                      alt=""
+                      width={314}
+                      sizes="(min-width: 1024px) 314px, 147px"
+                      className="absolute left-1/2 top-[18px] w-[147px] -translate-x-1/2 lg:top-12 lg:w-[314px]"
+                    />
+                  ) : null}
+                  <div className="relative mx-auto flex max-w-[884px] flex-col items-center gap-8 text-center text-white">
+                    {heading ? (
+                      <h2
+                        className={
+                          logo
+                            ? 'relative h-[55px] w-full max-w-[338px] lg:h-[154px] lg:max-w-[884px]'
+                            : 'w-full'
+                        }
+                      >
+                        {logo ? (
+                          <>
+                            <span className="sr-only">{heading}</span>
+                            <SanityImage
+                              source={logo}
+                              alt=""
+                              width={884}
+                              sizes="(min-width: 1024px) 884px, calc(100vw - 64px)"
+                              className="absolute left-[4.335%] top-[-2.915px] h-auto w-[90.092%] lg:left-[-0.035%] lg:top-[-8.36px] lg:w-[98.691%]"
+                            />
+                          </>
+                        ) : (
+                          <span className="font-display text-hero">{heading}</span>
+                        )}
+                      </h2>
+                    ) : null}
+                    {subheading ? (
+                      <p className="max-w-[728px] whitespace-pre-line text-[20px] leading-[26px] lg:text-[24px] lg:leading-[34px]">
+                        {subheading.replace(/\u2028/g, '\n')}
+                      </p>
+                    ) : null}
+                  </div>
+                </>
+              ) : null}
+            </div>
+            {media.caption ? (
+              <figcaption className="text-fg-subtle mt-4 text-sm">{media.caption}</figcaption>
+            ) : null}
+          </figure>
+        </section>
+      </SurfaceProvider>
+    )
+  }
+
+  if (composition === 'composition') {
+    return (
+      <SurfaceProvider surface={resolved}>
+        <section {...surfaceAttrs(resolved)} className={bandClass}>
+          <LayeredMediaReveal
+            enabled={sequence}
+            className="relative overflow-hidden"
+            foregroundClassName="w-full"
+            caption={media.caption}
+            captionClassName="text-fg-subtle px-gutter mt-4 text-sm"
+          >
+            <SanityImage
+              source={media.image}
+              alt={media.alt}
+              width={2880}
+              sizes={FULL_BLEED}
+              className="w-full"
+            />
+          </LayeredMediaReveal>
+        </section>
+      </SurfaceProvider>
+    )
+  }
 
   if (stegaClean(variant) === 'capture') {
     return (
@@ -119,13 +199,15 @@ export function MediaSection({
     <SurfaceProvider surface={resolved}>
       <section {...surfaceAttrs(resolved)} className={`${bandClass} px-gutter pb-band-article`}>
         {picture}
-        <figure className="max-w-article mx-auto w-full">
+        <figure
+          className={`${stegaClean(width) === 'section' ? 'max-w-section' : 'max-w-article'} mx-auto w-full`}
+        >
           <SanityImage
             source={media.image}
             alt={media.alt}
             width={1650}
             className="w-full shadow-[0_0_64px_0_rgba(0,0,0,0.1)]"
-            sizes={ARTICLE_COLUMN}
+            sizes={stegaClean(width) === 'section' ? CONTENT_COLUMN : ARTICLE_COLUMN}
           />
           {media.caption ? (
             <figcaption className="text-fg-subtle mt-4 text-sm">{media.caption}</figcaption>

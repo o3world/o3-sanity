@@ -156,12 +156,14 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `slug`            | URL segment(s); required on every routable type                                                     | —                                                         |
 | `eyebrow`         | Small label above a heading                                                                         | `kicker` (reserved: `chapter.kicker`), `label`            |
 | `heading`         | A block's primary display text                                                                      | `title`, `headline`                                       |
+| `headerWidth`     | The service-row header measure: standard 821px or wide 1035px, independent of panel layout          | Whole-section width                                       |
 | `headingLevel`    | A layout section’s visual heading step, independent of media bleed                                  | HTML heading rank                                         |
 | `subheading`      | The secondary line under a `heading`                                                                | `subtitle`, `deck`                                        |
 | `body`            | Long-form prose (`text` or `bodyText`)                                                              | `content`, `description`, `copy`                          |
 | `excerpt`         | Short summary shown on cards and listings                                                           | `summary`, `intro`, `teaser`                              |
 | `label`           | Short UI string on a leaf object                                                                    | `name`, `text`                                            |
 | `note`            | Quieter secondary line (the "Best when…" line)                                                      | `caption` (reserved: `figure.caption`)                    |
+| `badge`           | A small supporting graphic above a media feature heading                                            | A content label or heading text                           |
 | `media`           | A `figure` on a block                                                                               | `image` — that's the raw asset field inside `figure`      |
 | `heroMedia`       | A document's lead `figure` — the detail page's hero and nothing else                                | `featuredImage`, `banner`                                 |
 | `cardMedia`       | The `figure` a document shows on cards and in feeds                                                 | `featuredImage`, `thumbnail`, `cardImage`, `featureMedia` |
@@ -169,8 +171,9 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `button`          | A single button (type `button`), the form's submit included                                         | `cta`, `link`, `action`, `submitLabel`                    |
 | `anchor`          | The name a band is given, and the name a button jumps to; no `#`                                    | `id`, `hash`, `fragment`, `jumpTo`                        |
 | `alignment`       | Where a row or a column sits in the space it was given (`buttonGroup`, `heroSection`)               | `align`, `justify`, `position`, `float`                   |
+| `framing`         | Whether a wide screen is a complete image or a raw screenshot on a plate                            | Inferring composition from asset dimensions               |
 | `bleed`           | Which edge a band's content runs past, or `none` (`layoutSection`)                                  | `fullWidth`, `overflow`, `edge`                           |
-| `mark`            | The dotted circle beside an item (type `mark`)                                                      | `icon`, `disc`, `orb` — `orb` is one of its `kind`s       |
+| `mark`            | A decorative glyph or illustration beside an item (type `mark`)                                     | `icon`, `disc`, `orb` — `orb` is one of its `kind`s       |
 | `icon`            | A glyph from a curated set — trailing a button, or beside a feature (`button`, `feature`)           | `glyph`, `symbol`, `arrow`                                |
 | `date`            | When a leaf object's thing happens (the Live MON / DD marker)                                       | `publishedAt` — that's a document's publication time      |
 | `name`            | A person's or organization's real-world name                                                        | Anything that isn't a proper noun                         |

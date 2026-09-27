@@ -7,29 +7,13 @@ import { seededSectionArgs } from '@o3/content-ui/testing/seed'
 
 import { SECTION_CLIENT_COMPONENTS } from './clientComponents'
 
-/**
- * The Home frame's "Case Studies" band (`1683:2656`).
- *
- * The band is one flat `neutral/black` band padded `64px 96px`, and that is
- * the thing to look at first: the cards are photographs behind their own
- * scrim, so the join between a card's floor and the band around it should read
- * as one dark field rather than two.
- *
- * The block offers no `surface` (see the component) — the band is ink on every
- * page it appears on, so there is no white story here.
- *
- * The cards stack on scroll from the desktop breakpoint up, so this is the
- * story to scroll rather than glance at: each card should pin clear of the
- * chrome and fade as the next covers it. At rest — which is all a screenshot
- * ever sees — every card is fully opaque and the band is the flat stack the
- * frame draws.
- */
+/** Home showcase with the existing sticky card motion. */
 const meta = {
   title: 'Content/Blocks/Section/CaseShowcaseSection',
   component: CaseShowcaseSection,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('1683:2656'),
+    design: figmaDesign('3720:60492'),
   },
 } satisfies Meta<typeof CaseShowcaseSection>
 
@@ -38,7 +22,11 @@ type Story = StoryObj<typeof meta>
 
 /** Three real case studies, dereferenced from the committed translations. */
 export const AsSeeded: Story = {
-  args: seededSectionArgs('index', 'caseShowcaseSection'),
+  args: {
+    ...seededSectionArgs('index', 'caseShowcaseSection'),
+    eyebrow: 'Our work',
+    body: 'A selection of recent work.',
+  },
   render: (args) => <SECTION_CLIENT_COMPONENTS.caseShowcaseSection {...args} />,
   globals: { viewport: { value: 'desktop' } },
   play: async ({ canvasElement }) => {
@@ -49,9 +37,18 @@ export const AsSeeded: Story = {
     for (const card of cards) {
       await expect(getComputedStyle(card.parentElement!).position).toBe('sticky')
       await expect(getComputedStyle(card).clipPath).toBe('none')
+      await expect(getComputedStyle(card).boxShadow).not.toBe('none')
+      await expect(getComputedStyle(card.querySelector('h3')!).maxWidth).toBe('472px')
     }
     await expect(canvasElement.querySelector('.work-organic-card')).toBeNull()
     await expect(canvasElement.querySelector('canvas')).toBeNull()
+    const heading = within(canvasElement).getByRole('heading', { level: 2 })
+    await expect(heading.getBoundingClientRect().width).toBe(821)
+    const section = heading.closest('section')!
+    await expect(getComputedStyle(section).paddingTop).toBe('128px')
+    await expect(getComputedStyle(section).backgroundColor).toBe('rgb(247, 247, 246)')
+    await expect(within(canvasElement).getByText('Our work')).toBeVisible()
+    await expect(within(canvasElement).getByText('A selection of recent work.')).toBeVisible()
   },
 }
 
@@ -96,6 +93,15 @@ export const ShortViewport: Story = {
 export const Mobile: Story = {
   args: seededSectionArgs('index', 'caseShowcaseSection'),
   globals: { viewport: { value: 'mobile' } },
+  play: async ({ canvasElement }) => {
+    const card = canvasElement.querySelector('a[data-surface="ink"]')!
+    await expect(getComputedStyle(card).paddingLeft).toBe('32px')
+    const stat = card.querySelector('p > span')!
+    await expect(getComputedStyle(stat).fontSize).toBe('32px')
+    await expect(parseFloat(getComputedStyle(stat).lineHeight)).toBeCloseTo(38.4, 1)
+    await expect(getComputedStyle(stat.parentElement!).gap).toBe('16px')
+    await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
+  },
 }
 
 /**

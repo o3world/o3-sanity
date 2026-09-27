@@ -23,9 +23,8 @@ const componentSets = entries.filter((entry) => entry.kind === 'componentSet')
 describe('tracked-nodes.json', () => {
   it('points at the design source of record', () => {
     expect(manifest.fileKey).toBe('RvraLJaZ0zWm8UaD5AJf43')
-    // The Design Concept section — canonical frames live inside it (#34).
-    // One section, and the probe reads frames: this file is a site, not a kit.
-    expect(manifest.sectionNodeIds).toEqual(['1632:1510'])
+    // Current page frames live directly on these two canvases.
+    expect(manifest.sectionNodeIds).toEqual(['1126:1100', '1238:557'])
     expect(manifest.probeNodeTypes).toBeUndefined()
   })
 
@@ -70,25 +69,12 @@ describe('tracked-nodes.json', () => {
   })
 
   it('uses this project’s language for names, not Figma’s', () => {
-    // Seven frames are *named* "Insights" in Figma and two of them are the
-    // Insight index — the rest are About, Contact, /partners/sanity and the
-    // two insight details, mislabelled because they were duplicated from the
-    // Insights frame and never renamed. That is the failure this guards, and
-    // it is unchanged by ADR 0017.
-    //
-    // Most now agree with `name` because the project adopted the word Figma
-    // was already using. That coincidence is a decision, not a reason to
-    // collapse the two fields: `figmaName` still records what the file says,
-    // and the About row is the standing proof it can be wrong.
     const insights = entries.filter((entry) => entry.figmaName?.startsWith('Insights'))
     expect(insights.map((entry) => entry.name).sort()).toEqual([
-      'About',
-      'Contact',
       'Insight detail',
       'Insight detail',
       'Insight index',
       'Insight index',
-      'Sanity partnership',
     ])
   })
 
@@ -106,14 +92,7 @@ describe('tracked-nodes.json', () => {
  */
 describe('tracked component sets', () => {
   it('carries the whole component→code map, canonical and not', () => {
-    // Every set `docs/figma-components.md` maps, canonical and not, that the
-    // Figma file still holds. The 2026-08 design pass deleted nine gen-1 sets
-    // outright (466:570, 172:140, 778:1447, 356:639, 270:819, 172:54, 734:1073,
-    // 400:2219, 270:814), all of them `codeComponent: null`; the document still
-    // lists them as non-canonical, which is why its row count is the larger
-    // number. `Quote` 2748:4672 is the newest — the pull-quote band Home
-    // instances at both widths (#323).
-    expect(componentSets.length).toBe(23)
+    expect(componentSets.length).toBe(12)
   })
 
   it('states a code target for every set, `null` included', () => {

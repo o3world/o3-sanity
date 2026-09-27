@@ -163,8 +163,8 @@ Read `docs/agents/figma.md` before reading the file: which of the two registered
 (the official one is rate-limited and will fail), how to avoid reading a child node instead of the
 frame, and the two-generations distinction that tells canonical frames from imported captures.
 
-Frame → route map: [`docs/figma-frames.md`](https://github.com/o3world/o3-sanity/blob/research/figma-frame-inventory/docs/figma-frames.md)
-(on branch `research/figma-frame-inventory`). Never build a page layer without checking it first.
+Frame → route map: [current verified inventory](./docs/figma-frames.md). Read it before building or
+reviewing a page layer, and re-read the live Figma file before a parity pass.
 Its canonical page frames are also on `main` as a machine-readable manifest —
 [`tools/figma-sync/data/tracked-nodes.json`](./tools/figma-sync/data/tracked-nodes.json), every node
 id verified as a frame. `pnpm figma:sync` tells you which of them changed since the last sync (one

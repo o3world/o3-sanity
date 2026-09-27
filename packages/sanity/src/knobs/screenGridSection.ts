@@ -37,19 +37,26 @@ export const screenKnobs = defineItemKnobs({
     knob({
       name: 'span',
       title: 'Span',
-      description: 'Wide takes both columns — the frame’s lead tile.',
+      description:
+        'Wide spans the grid. Standard takes half the grid; narrow takes a quarter in the desktop feature layout.',
       // Plate HEIGHT follows from this rather than being a second option —
       // `2230:7559` is 716 for a wide tile and 342 for a small one — so the
       // grid's whole shape is this one pick per tile (ADR 0006).
-      options: ['standard', 'wide'],
+      options: ['standard', 'wide', 'narrow'],
       initialValue: 'standard',
+    }),
+    knob({
+      name: 'framing',
+      title: 'Wide framing',
+      description: 'Image preserves a complete composition. Plate frames a raw wide screenshot.',
+      options: ['plate', 'image'],
+      initialValue: 'plate',
     }),
   ],
 })
 
 /**
- * The screen grid's design options — a band whose own roster is one knob, and
- * whose interesting ones belong to its tiles.
+ * The screen grid's band and tile design options.
  *
  * Read this file to know what the band offers. The Sanity fields, and the
  * canvas toolbar's controls, are generated from it, so neither can offer a
@@ -65,7 +72,17 @@ export const screenGridSectionKnobs = defineBlockKnobs({
   type: 'screenGridSection',
   title: 'Screen grid',
   tier: 'section',
-  knobs: [surfaceKnob({ initialValue: 'white' })],
+  knobs: [
+    surfaceKnob({ initialValue: 'white' }),
+    knob({
+      name: 'layout',
+      title: 'Layout',
+      description:
+        'Grid pairs tiles. Feature puts the first image beside two stacked tiles on desktop.',
+      options: ['grid', 'feature'],
+      initialValue: 'grid',
+    }),
+  ],
   items: { screens: screenKnobs },
   /**
    * One screen, because `screens` declares `min(1)` and the band renders

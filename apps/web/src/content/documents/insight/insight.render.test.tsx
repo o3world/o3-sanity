@@ -75,7 +75,7 @@ describe('insight detail route', () => {
       }),
     )
     expect(html).toContain('6 min read')
-    expect(html).toContain('Jun 2026')
+    expect(html).toContain('June 4, 2026')
   })
 
   /** The byline's monogram disc — what an author with no headshot gets. */
@@ -104,31 +104,27 @@ describe('insight detail route', () => {
         publishedAt: '2026-06-04T13:20:00Z',
       }),
     )
-    expect(html).toContain('Jun 2026 · 4 min read')
+    expect(html).toContain('June 4, 2026 · 4 min read')
     expect(html).not.toContain('Brian Crumley')
     // The monogram disc is the author's initial; with no name there is no disc.
     expect(html).not.toContain('size-[42px]')
   })
 
-  // No Site Settings needed: the collection's name in the UI is its type name
-  // (ADR 0017), not a label an editor has to keep in step with it.
-  it('links back to the collection', async () => {
-    const { html } = await renderRoute(route, {
-      data: withSettings(anInsight(), siteSettings()),
-      params: { slug: 'an-insight' },
-    })
-    expect(html).toContain('href="/insights"')
-    expect(html).toContain('All Insights')
+  it('uses the current hero without the retired back link and includes a closing CTA', async () => {
+    const { html } = await render(anInsight())
+    expect(html).not.toContain('All Insights')
+    expect(html).toContain('Start the conversation')
+    expect(html).toContain('href="/contact"')
   })
 
-  it('closes on the "Keep reading." band, category-matched first', async () => {
+  it('closes on the "More ideas worth looking into." band, category-matched first', async () => {
     const { html } = await render(
       anInsight({
         related: [{ ...anInsight({ _id: 'p-1', title: 'The related one' }) } as never],
         latest: [{ ...anInsight({ _id: 'p-2', title: 'The fallback one' }) } as never],
       }),
     )
-    expect(html).toContain('Keep reading.')
+    expect(html).toContain('More ideas worth looking into.')
     expect(html).toContain('The related one')
     expect(html).not.toContain('The fallback one')
   })
@@ -143,9 +139,9 @@ describe('insight detail route', () => {
     expect(html).toContain('The fallback one')
   })
 
-  it('drops the "Keep reading." band entirely when there is nothing to read next', async () => {
+  it('drops the "More ideas worth looking into." band entirely when there is nothing to read next', async () => {
     const { html } = await render(anInsight({ related: [], latest: [] }))
-    expect(html).not.toContain('Keep reading.')
+    expect(html).not.toContain('More ideas worth looking into.')
   })
 
   /**
@@ -195,9 +191,9 @@ describe('insight detail route', () => {
       // The body used to repeat it at the top of the 822px column, which is
       // the same photograph twice on one screen.
       expect(html.slice(html.indexOf('</header>'))).not.toContain(HERO_ID)
-      expect(header).toContain('linear-gradient(90deg,rgba(3,3,3,1)_0%,rgba(3,3,3,0.5)_100%)')
+      expect(header).toContain('linear-gradient(90deg,rgba(3,3,3,1)_28.846%,rgba(3,3,3,0.5)_100%)')
       expect(header).toContain(
-        'lg:bg-[linear-gradient(90deg,rgba(3,3,3,1)_16.83%,rgba(3,3,3,0)_100%)]',
+        'lg:bg-[linear-gradient(90deg,rgba(3,3,3,1)_55%,rgba(3,3,3,0)_100%)]',
       )
     })
 

@@ -234,7 +234,6 @@
     {
       "_type": "ctaSection",
       "_key": "cta",
-      "decoration": "molecule",
       "heading": "Which tool in your stack is worth replacing?",
       "body": "Pull up your renewals for the next 12 months and find the tools you pay the most for and love the least. We'll tell you what a replacement costs now.",
       "button": {

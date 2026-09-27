@@ -1,4 +1,4 @@
-import { DisplayHeading, OrbitalDiagram, SectionShell } from '@o3/ui'
+import { DisplayHeading, Eyebrow, OrbitalDiagram, SectionShell } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { stegaClean } from '@sanity/client/stega'
 
@@ -10,58 +10,15 @@ import { resolveSurface } from '../../surface'
 type FeatureGridSectionProps = SectionProps<'featureGridSection'>
 
 /**
- * Section block: a set of parallel short claims, in the four compositions the
- * canonical frames draw them in — #56, surfaced by #46 and #47, extended by
- * #92.
- *
- * Every layout renders the same three fields — a `mark`, a `heading`, an
- * optional `body`. What changes is how they are set against each other.
- *
- * **`grid` — About `1925:5915`.** Mark and copy paired, two across.
- *
- * ```
- * 128px 0, gap 65
- *   header  padding-left 96      48px heading, flush left
- *   body    padding 0 96         two rows, space-between
- *     cell  48px 32px, gap 32    disc 138 | name 36px / body 24px in 560
- * ```
- *
- * **`stack` — "Why Sanity + O3" `2354:2530`, "What it enables." `2334:2122`.**
- * Mark above the copy, three across. The two bands are the same composition at
- * two densities: the first sets a 37px disc over a 28px lead and a 20px
- * paragraph in 288px columns; the second sets a 59px disc over a 28px line and
- * no body at all, wrapping five features onto two rows. That is why `body` is
- * optional on the member — a whole canonical band omits it.
- *
- * **`rows` — "Use cases." `2341:2250`.** One hairlined full-width row per
- * feature: a 75px disc and the heading left in 609, the body right in 500,
- * 48px of padding above and below, a 1px `#76746F` rule under each.
- *
- * **`orbital` — Solutions `1928:6524`.** Exactly four features on a
- * 1120×1172 dotted tetrahedron. See `OrbitalDiagram` for why that is a new
- * drawing rather than `OrbitalSphere` plus labels.
- *
- * **One block, one `layout` field, not four blocks.** The bands carry
- * identical content and differ only in arrangement, which is the same test
- * `railPanelsSection`'s `rail` field passed. Four block types would have made
- * "add a feature" a question about which page you were on — and it is what
- * renamed this block: as `disciplineGridSection` it told an editor adding
- * "Multi-channel publishing from one source" that they were authoring a
- * discipline.
- *
- * **The mark is per feature** (`Mark`): the animated orb by default, the
- * frame's halftone disc when a feature asks for it, so a band can mix them.
- * A feature may name an **icon** instead, and the app supplies the drawing —
- * see `beside`. The `orbital` composition is the exception to both: the diagram
- * draws its own nodes into one canvas and has no slot to swap.
- *
- * The orbital composition is `lg` and up. 1120px of absolutely-positioned copy
- * has no honest 402 form and no 402 frame to copy, so below `lg` it falls back
- * to the grid — which is the same content in a shape that does work there
- * (ADR 0006).
+ * Parallel claims in the current Partner and Engineering compositions:
+ * 66px glyph columns (2354:2532), illustration cards (4116:50601), and plain
+ * two-column use-case rows (4043:49741 / 4039:49503). The existing grid and
+ * orbital layouts remain available to authored sections using those values.
  */
 export function FeatureGridSection({
+  eyebrow,
   heading,
+  subheading,
   layout,
   features,
   decoration,
@@ -70,6 +27,7 @@ export function FeatureGridSection({
   const items = features ?? []
   const chosen = stegaClean(layout)
   const orbital = chosen === 'orbital'
+  const cards = chosen === 'cards'
   const resolved = resolveSurface(surface, 'featureGridSection')
   const onInk = resolved === 'ink'
 
@@ -88,14 +46,18 @@ export function FeatureGridSection({
   const featureTag = heading ? 'h3' : 'h2'
 
   /** The disc's ink. On ink, white is the only honest inversion. */
-  const markTone = onInk ? 'text-white' : 'text-ink'
+  const markTone = onInk && !cards ? 'text-white' : 'text-ink'
 
   /**
    * WHAT STANDS BESIDE THE COPY — the dotted mark. A stored `icon` draws
    * nothing: the site has no icon set.
    */
   const beside = (feature: (typeof items)[number], className: string) => (
-    <Mark {...markProps(feature.mark)} onInk={onInk} className={`${markTone} ${className}`} />
+    <Mark
+      {...markProps(feature.mark)}
+      onInk={onInk && !cards}
+      className={`${markTone} ${className}`}
+    />
   )
 
   const grid = (
@@ -121,39 +83,51 @@ export function FeatureGridSection({
     </div>
   )
 
-  /*
-   * `2354:2532` sets three 288px columns 32px apart on a 1248 content column,
-   * which is a fixed row rather than a grid — but `2334:2115` is a declared
-   * `repeat(3, minmax(0,1fr))` holding five cells, so the grid is what both
-   * bands are. 24px gap is the second frame's; the first's 32 is the same
-   * rhythm at a narrower measure.
-   *
-   * The mark's box is the one thing that differs between them (37 against 59),
-   * and it follows the body: a feature with a paragraph under it gets the
-   * smaller disc, because that is what the denser band draws.
-   */
+  // Current partner columns and illustration cards.
   const stack = (
-    <div className="grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+    <div
+      className={
+        cards
+          ? 'grid gap-8 md:grid-cols-2 lg:grid-cols-3'
+          : 'grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3'
+      }
+    >
       {items.map((feature) => (
-        <div key={feature._key} className="flex flex-col gap-6">
-          {beside(feature, feature.body ? 'w-[37px]' : 'w-[59px]')}
-          {/*
-           * `Body/Large` — 28/38 regular, no tracking. `text-display-md` is
-           * the 28px step; its −0.0286em is the case-study h3's and does not
-           * belong on a line this short, so it is overridden rather than a
-           * fifth level being invented for one band.
-           */}
+        <div
+          key={feature._key}
+          className={
+            cards
+              ? 'text-ink flex min-h-[296px] flex-col gap-4 rounded-2xl bg-white px-8 py-4 shadow-[0_24px_32px_0_rgb(0_0_0/0.2)]'
+              : 'flex flex-col gap-6'
+          }
+        >
+          {cards ? (
+            <div className="flex h-[180px] items-center justify-center">
+              {beside(
+                feature,
+                stegaClean(feature.mark?.kind) === 'image' ? 'h-full w-full' : 'w-[138px]',
+              )}
+            </div>
+          ) : (
+            beside(feature, 'h-[66px] w-[66px]')
+          )}
           {feature.heading ? (
             <DisplayHeading
               as={featureTag}
               level="md"
-              className="text-balance leading-[1.357] tracking-normal"
+              className={
+                cards
+                  ? 'font-sans text-[24px] leading-[34px] tracking-normal'
+                  : 'text-balance font-sans text-[28px] leading-[38px] tracking-normal'
+              }
             >
               {feature.heading}
             </DisplayHeading>
           ) : null}
           {feature.body ? (
-            <p className={`text-body leading-[1.2] ${onInk ? 'text-white/65' : 'text-fg-muted'}`}>
+            <p
+              className={`text-[20px] leading-7 ${onInk && !cards ? 'text-white/65' : cards ? 'text-ink/65' : 'text-fg-muted'}`}
+            >
               {feature.body}
             </p>
           ) : null}
@@ -162,29 +136,29 @@ export function FeatureGridSection({
     </div>
   )
 
-  /*
-   * `2341:2231` — 48px above and below, a 139px gutter between the two
-   * columns, and a hairline under every row including the last. The rule is
-   * `border-b` on each row rather than `divide-y`, because the frame draws one
-   * under the final row too.
-   */
+  // Current use-case lists have no graphic slot.
   const rows = (
-    <ul className="flex flex-col">
+    <ul className="divide-line flex flex-col divide-y">
       {items.map((feature) => (
         <li
           key={feature._key}
-          className="border-fg-muted flex flex-col gap-6 border-b py-8 lg:flex-row lg:items-center lg:gap-[139px] lg:py-12"
+          className="flex flex-col gap-6 py-8 first:pt-0 last:pb-0 lg:flex-row lg:items-start lg:gap-[139px] lg:py-12"
         >
-          <div className="flex items-center gap-8 lg:w-[609px] lg:shrink-0">
-            {beside(feature, 'w-[75px]')}
+          <div className="min-w-0 lg:w-[609px] lg:shrink-0">
             {feature.heading ? (
-              <DisplayHeading as={featureTag} level="lg" className="tracking-[-0.0222em]">
+              <DisplayHeading
+                as={featureTag}
+                level="lg"
+                className="max-w-[499px] font-sans text-[28px] leading-[38px] tracking-normal"
+              >
                 {feature.heading}
               </DisplayHeading>
             ) : null}
           </div>
           {feature.body ? (
-            <p className={`text-lead lg:w-[500px] ${onInk ? 'text-white/65' : 'text-fg-muted'}`}>
+            <p
+              className={`text-[20px] leading-7 lg:w-[500px] ${onInk && !cards ? 'text-white/65' : cards ? 'text-ink/65' : 'text-fg-muted'}`}
+            >
               {feature.body}
             </p>
           ) : null}
@@ -193,7 +167,7 @@ export function FeatureGridSection({
     </ul>
   )
 
-  const composition = chosen === 'stack' ? stack : chosen === 'rows' ? rows : grid
+  const composition = chosen === 'stack' || cards ? stack : chosen === 'rows' ? rows : grid
 
   return (
     <SectionShell
@@ -203,20 +177,28 @@ export function FeatureGridSection({
       width={orbital ? 'full' : 'section'}
       className={DECORATED_BAND_CLASS}
     >
-      {/*
-       * `2354:2551` — 1219px at 25%, hung off the right edge of the ink band
-       * and running past its foot. 84.6% of the 1440 frame, anchored right so
-       * the copy keeps the left of the band whatever the viewport does.
-       */}
-      <MoleculeDecoration
-        decoration={decoration}
-        block="featureGridSection"
-        surface={resolved}
-        className="right-[-24%] top-1/4 w-[85vw] opacity-25"
-      />
+      <MoleculeDecoration decoration={decoration} block="featureGridSection" surface={resolved} />
 
-      <div className="flex flex-col gap-10 lg:gap-16">
-        {heading ? <DisplayHeading>{heading}</DisplayHeading> : null}
+      <div
+        className={
+          chosen === 'rows'
+            ? 'flex flex-col gap-16 lg:gap-32'
+            : cards
+              ? 'flex flex-col gap-12'
+              : 'flex flex-col gap-16'
+        }
+      >
+        {eyebrow || heading || subheading ? (
+          <header className="flex max-w-[822px] flex-col gap-2">
+            {eyebrow ? (
+              <Eyebrow size="lg" tone="brand" className="pb-4">
+                {eyebrow}
+              </Eyebrow>
+            ) : null}
+            {heading ? <DisplayHeading level="hero">{heading}</DisplayHeading> : null}
+            {subheading ? <p className="text-lead text-fg-body">{subheading}</p> : null}
+          </header>
+        ) : null}
 
         {orbital ? (
           <>

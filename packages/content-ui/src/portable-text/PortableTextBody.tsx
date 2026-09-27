@@ -1,10 +1,22 @@
 import { PortableText, type PortableTextComponents } from 'next-sanity'
+import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@o3/ui'
 
 import { SanityImage } from '../SanityImage'
 import { ARTICLE_COLUMN } from '../imageSizes'
 import { toEmbedSrc } from './embedSrc'
+
+const bodyVariants = cva('text-fg max-w-prose [&>:first-child]:mt-0 [&>:last-child]:mb-0', {
+  variants: {
+    variant: {
+      body: 'text-body',
+      article: 'text-body leading-8 [&_h2]:font-light',
+      chapter: 'text-lead text-fg-body',
+    },
+  },
+  defaultVariants: { variant: 'body' },
+})
 
 /**
  * The Portable Text renderer for insight bodies and case-study chapter
@@ -17,6 +29,9 @@ import { toEmbedSrc } from './embedSrc'
  */
 function componentsFor(figureSizes: string, leadKey?: string): PortableTextComponents {
   return {
+    hardBreak: () => (
+      <span className="in-[h2]:max-lg:whitespace-normal whitespace-pre-line">{'\n'}</span>
+    ),
     block: {
       /*
        * The article measure's rhythm (`2252:3607`): blocks 32px apart, one
@@ -27,7 +42,7 @@ function componentsFor(figureSizes: string, leadKey?: string): PortableTextCompo
       normal: ({ children, value }) => (
         <p
           data-reveal-step={leadKey && value._key === leadKey ? 'lead' : undefined}
-          className="text-fg my-8"
+          className="my-8"
         >
           {children}
         </p>
@@ -35,7 +50,7 @@ function componentsFor(figureSizes: string, leadKey?: string): PortableTextCompo
       // Heading/h3 (2050:1312): 32/38 at 402 → 36/44 at 1440. The shared
       // display-lg weight applies, but its legacy 18px mobile floor does not.
       h2: ({ children }) => (
-        <h2 className="font-display mb-8 mt-16 text-[clamp(32px,calc(0.3854vw_+_30.4507px),36px)] leading-[clamp(38px,calc(0.578vw_+_35.6764px),44px)] [font-weight:var(--text-display-lg--font-weight)]">
+        <h2 className="mb-8 mt-16 font-sans text-[clamp(32px,calc(0.3854vw_+_30.4507px),36px)] leading-[clamp(38px,calc(0.578vw_+_35.6764px),44px)] [font-weight:var(--text-display-lg--font-weight)]">
           {children}
         </h2>
       ),
@@ -57,7 +72,7 @@ function componentsFor(figureSizes: string, leadKey?: string): PortableTextCompo
       link: ({ children, value }) => (
         <a
           href={(value as { href?: string } | undefined)?.href ?? '#'}
-          className="decoration-brand underline underline-offset-4"
+          className="decoration-brand underline underline-offset-4 [overflow-wrap:anywhere]"
         >
           {children}
         </a>
@@ -105,10 +120,14 @@ function componentsFor(figureSizes: string, leadKey?: string): PortableTextCompo
         const quote = value as { text?: string | null; attribution?: string | null }
         if (!quote.text) return null
         return (
-          <blockquote className="my-12">
-            <p className="text-display-md font-display text-balance">&ldquo;{quote.text}&rdquo;</p>
+          <blockquote className="border-brand my-8 flex flex-col gap-6 border-l-2 py-6 pl-8">
+            <p className="text-fg font-sans text-[28px] leading-[38px]">
+              &ldquo;{quote.text}&rdquo;
+            </p>
             {quote.attribution ? (
-              <footer className="eyebrow text-brand mt-4">{quote.attribution}</footer>
+              <footer className="text-meta text-fg-body uppercase leading-[15px]">
+                {quote.attribution}
+              </footer>
             ) : null}
           </blockquote>
         )
@@ -125,9 +144,9 @@ const ARTICLE_COMPONENTS = componentsFor(ARTICLE_COLUMN)
  * ~65ch column, but a case-study chapter is already inside the frame's 822px
  * article measure (`1710:2631`) and would otherwise be narrowed twice — pass
  * `max-w-none` there. The type step is `body` — the token minted from this
- * body's own frame (`1894:3914`, 20/32 at 1440) — and it is set here rather
- * than by the band around it, so every `bodyText` field reads at the same
- * size wherever it lands.
+ * body's own frame. Article prose uses Body/Open (20/32); case chapters use
+ * Body/Default (20/26 → 24/34). Ordinary rich-text blocks keep Body/Small
+ * (20/28), so a document chooses its treatment without changing block copy.
  *
  * The body's outer margins are dropped at its first and last block. Every
  * block carries its own `my-*`, which spaces blocks from each other; but the
@@ -140,6 +159,7 @@ export function PortableTextBody({
   className,
   figureSizes,
   revealLead = false,
+  variant,
 }: {
   value: unknown
   className?: string
@@ -150,7 +170,7 @@ export function PortableTextBody({
    * measure — a `richText` block passes its column's (#268).
    */
   figureSizes?: string
-}) {
+} & VariantProps<typeof bodyVariants>) {
   if (!value || !Array.isArray(value) || value.length === 0) return null
   const first = value[0] as { _type?: string; _key?: string; style?: string; listItem?: string }
   const leadKey =
@@ -161,9 +181,7 @@ export function PortableTextBody({
       ? first._key
       : undefined
   return (
-    <div
-      className={cn('text-body max-w-prose [&>:first-child]:mt-0 [&>:last-child]:mb-0', className)}
-    >
+    <div className={cn(bodyVariants({ variant }), className)}>
       <PortableText
         value={value as Parameters<typeof PortableText>[0]['value']}
         components={

@@ -1,5 +1,5 @@
 import { expect, test } from 'playwright/test'
-import { navLink, primary } from './journey'
+import { navLink } from './journey'
 
 type EntranceWindow = Window & {
   entranceTravel: number
@@ -38,7 +38,8 @@ test('internal Home arrivals keep the sky visible throughout the GPU handoff', a
     })
     if (arrival === 'back') await page.goBack()
     else
-      await primary(page)
+      await page
+        .locator('#site-nav')
         .getByRole('link', { name: / home$/ })
         .click()
     await expect(page).toHaveURL(/\/$/)
@@ -127,7 +128,8 @@ test('the Home camera entrance belongs to a full document load, not internal nav
     await reset()
     if (arrival === 'back') await page.goBack()
     else
-      await primary(page)
+      await page
+        .locator('#site-nav')
         .getByRole('link', { name: / home$/ })
         .click()
     await expect(page).toHaveURL(/\/$/)
@@ -156,7 +158,8 @@ test('the Home camera entrance belongs to a full document load, not internal nav
 
   await page.goto('/work')
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
-  await primary(page)
+  await page
+    .locator('#site-nav')
     .getByRole('link', { name: / home$/ })
     .click()
   await expect(page).toHaveURL(/\/$/)
@@ -175,7 +178,8 @@ test('the Home startup script stays in the initial document on an index-to-Home 
   })
   await page.goto('/insights')
   await expect(page.locator('[data-insight-feed]')).toBeVisible()
-  await primary(page)
+  await page
+    .locator('#site-nav')
     .getByRole('link', { name: / home$/ })
     .click()
   await expect(page).toHaveURL(/\/$/)

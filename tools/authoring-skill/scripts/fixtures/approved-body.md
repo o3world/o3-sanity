@@ -86,11 +86,11 @@ Philadelphia is home. We show up for the design and engineering community that m
 
 We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready.
 
-Tell us what you’re working on, or what’s in the way of it. We read everything that comes in, and a person writes back.
-
 Black and white photo of Justin Handler with red semi circles in the background
 
 It’s a pleasure helping our clients solve their complex business challenges with our suite of experience-centric solutions and our creative, collaborative team.
+
+Tell us what you’re working on, or what’s in the way of it. We read everything that comes in, and a person writes back.
 
 If you're looking for guidance with your company's customer experience (CX) contact O3 today to discuss your unique business needs.
 

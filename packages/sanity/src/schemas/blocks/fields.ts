@@ -169,3 +169,12 @@ export function detailsField({ description }: { description?: string } = {}) {
     ],
   })
 }
+
+/** Optional text in the standard section heading lockup. */
+export function eyebrowField() {
+  return defineField({ name: 'eyebrow', type: 'string' })
+}
+
+export function bodyField() {
+  return defineField({ name: 'body', type: 'text', rows: 3 })
+}

@@ -1,59 +1,8 @@
-/*
- * Layout — page gutter, containers, and the section rhythm.
- *
- * The canonical frames are a stack of full-bleed surface bands. Their values
- * remain the source for the rhythm below; the horizontal frame is the one
- * explicit product override. Issue #429 opens O3 from the frame's 96px inset
- * to 75px at 1440 and lets structural compositions grow to a 1728px stage.
- *
- * SECTION RHYTHM IS NOT ONE VALUE. The prototype used a single
- * clamp(120px, 14vw, 200px) on every band; the frames hand-tune it per band
- * from a three-step scale, and the top and bottom of a band often differ:
- *
- *   Partners           128px 96px        gap 128   (1864:2390)
- *   Case studies       64px 64px         gap 64    (1683:2656, one ink band;
- *                                                   cards gap 48, 1683:2661)
- *   Pull quote         192px 96px        gap 48    (2748:4672)
- *   Platforms          128px 96px 192px  gap 128   (1762:2149)
- *   Insights           128px 0           gap 48    (2134:1352)
- *   Insight detail     128px 96px        —         (1710:2835, 2252:3675;
- *                                                   both bands drop to 64 at
- *                                                   402 — 2262:3818/2262:3905)
- *   Work hero          164px 96px 64px   —         (1634:1181)
- *   Footer             64px 96px         gap 128   (1280:1885)
- *
- * So this file ships the STEPS as tokens and keeps `--spacing-section-y` as a
- * sane default for a band that has no frame of its own. Teaching SectionShell
- * to take a per-band rhythm is component work — #41.
- *
- * WHAT CHANGES BETWEEN THE TWO FRAME WIDTHS (ADR 0006). Reading the 402 Home
- * frame against the 1440 one, only two of these move:
- *
- *   gutter        20px → 75px   (#429 product override of the 96px frame)
- *   band-lg      128px → 192px   (the 192 bands compress; 1814:1679)
- *   band-detail   64px → 128px   (the insight detail page; 2262:3818)
- *   band-sm       96px → 96px    unchanged
- *   band-md      128px → 128px   unchanged
- *
- * The two that move are solved to hit each frame's value at its own width,
- * the same way the type ramp is.
- */
-
+/* Layout values from the current 402px and 1440px Figma frames. */
 @theme {
-  /* ── Page gutter ───────────────────────────────────────────────────────── */
-  /* 20px at 402, 75px at 1440. This deliberately supersedes Figma's 96px O3
-   * desktop inset (#429) while retaining the mobile endpoint. Class-accessible
-   * via px-gutter. */
-  --spacing-gutter: clamp(20px, calc(5.299vw - 1.302px), 75px);
-
-  /* gutter-tight — 16px at 402, converging on the same 75px at 1440. The 2026-08 `Interior
-   * Hero` set draws its band at 16 on every 402 frame that instances it —
-   * /work `2107:1086`, /insights `2975:8500`, /about `2975:9022`,
-   * /partners/sanity `2975:9501`, /contact `2975:10038` — as does the contact
-   * form band (`2975:10195`), where the older bands beside them on the same
-   * frames still read 20. Two values because the frames draw two, not because
-   * one of them is stale. */
-  --spacing-gutter-tight: clamp(16px, calc(5.684vw - 6.85px), 75px);
+  /* 16px at 402, 96px at 1440. */
+  --spacing-gutter: clamp(16px, calc(7.70713vw - 14.98266px), 96px);
+  --spacing-gutter-tight: var(--spacing-gutter);
 
   /* ── Section rhythm ────────────────────────────────────────────────────── */
   /* The three vertical steps the frames actually use. 128 is bound to the
@@ -85,35 +34,17 @@
   --spacing-section-y: clamp(96px, calc(9.25vw + 58.8px), 192px);
 
   /* ── Chrome clearance ──────────────────────────────────────────────────── */
-  /* nav-offset — where the nav pill RESTS at `lg`, before the page scrolls:
-   * the Utility Nav strip's 69px plus a 55px gap, read off the Home frame's
-   * `NavBar` at y: 124 (`2225:2967` in `1680:2134`). The strip is in flow and
-   * scrolls away, and the pill rides up with it until it parks at
-   * `--spacing-nav-pinned` (`SiteNav`, `NavPin`). So this token is the hero's
-   * business — `+ 100px` for an ink hero's top padding — and nothing that
-   * sits under the pill once the page has scrolled should read it.
-   *
-   * The strip is data-driven, so an app whose settings carry no
-   * `utilityNavItems` re-declares this as the 32px every strip-less interior
-   * frame draws (`NavBar` at y: 32 — `2336:4382`, `2250:2251`, `2250:2131`;
-   * a `[--spacing-nav-offset:32px]` override on its `<main>`).
-   *
-   * Derive AT THE USE SITE. A derived token declared here would bake the
-   * root's value in at declaration time (a custom property substitutes its
-   * var() references where it is DEFINED, not where it is used) and no
-   * override could reach it. */
+  /* Context-specific top clearance for detail headers. The O3 site shell
+   * sets 32px; compose derived padding at the use site so it inherits that
+   * override. */
   --spacing-nav-offset: 124px;
-  /* nav-pinned — where the pill sits once the strip has scrolled off, and
-   * where it sits from the start on a page with no strip: the 32px of the
-   * strip-less frames. The clearance under the pinned pill —
-   * `calc(var(--spacing-nav-pinned) + 96px)` for a sticky top or a jump
-   * target's scroll margin — derives from this, not from nav-offset: anything
-   * pinned or jumped to is below the strip, where the pill is already parked. */
+  /* Fixed desktop header offset. Sticky content and scroll targets add
+   * their own clearance to this value. */
   --spacing-nav-pinned: 32px;
 
   /* ── Containers ────────────────────────────────────────────────────────── */
-  /* section — the structural stage. It fills the 1290px canvas between the
-   * 75px gutters at 1440 and keeps growing to 1728px on wider viewports.
+  /* section — the structural stage. It fills the 1248px canvas between the
+   * 96px gutters at 1440 and keeps growing to 1728px on wider viewports.
    * Class-accessible via max-w-section. */
   --container-section: 108rem; /* 1728px */
   /* #446 aligns the desktop nav cap with the hero's inner content measure. */

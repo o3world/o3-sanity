@@ -87,14 +87,14 @@ export const featureGridSectionKnobs = defineBlockKnobs({
       name: 'layout',
       title: 'Layout',
       description:
-        'Grid pairs each mark with its copy, two across. Stack sets the mark above the copy, three across. Rows gives each feature a hairlined full-width row, heading left and body right. Orbital places exactly four on the dotted tetrahedron.',
+        'Grid pairs each mark with its copy, two across. Stack sets the mark above the copy, three across. Cards places each feature on a raised white card. Rows gives each feature a hairlined full-width row, heading left and body right. Orbital places exactly four on the dotted tetrahedron.',
       // Four arrangements of one shape — {mark, heading, body} — read off five
       // canonical bands: About's rows (`1925:5915`), Solutions' diagram
       // (`1928:6524`), and the partner page's "Why Sanity + O3" (`2354:2530`),
       // "What it enables." (`2334:2122`) and "Use cases." (`2341:2250`). Same
       // content, four compositions, which is a `layout` axis rather than four
       // blocks (#56, #47, #92).
-      options: ['grid', 'stack', 'rows', 'orbital'],
+      options: ['grid', 'stack', 'cards', 'rows', 'orbital'],
       initialValue: 'grid',
       // The axis that changes the most about what an editor is looking at.
       bar: true,

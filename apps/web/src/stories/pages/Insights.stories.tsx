@@ -1,33 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, within } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 
 import { InsightIndexMockup } from '../InsightIndexMockup'
 
-/**
- * `/insights` — the canonical index frame (`2336:4310`), the one #61
- * commissioned and the file gained on 2026-08-13.
- *
- * Four bands: the Interior Hero on ink, the bone Blog band holding the filter
- * bar over the card grid, the shared CTA, the footer. The **surface sequence**
- * is what only a page mockup shows — ink → bone → ink → black — and it is why
- * the grid band is bone rather than the white the Work index uses: two ink
- * bands with a white one between them would read as two pages.
- *
- * The other page-level property here is the filter bar's relationship to the
- * grid: 48px, close enough that the chips read as a control on the cards
- * rather than as a second band. The frame is emphatic about that gap.
- *
- * The index gained its 402 companion in the 2026-08 design pass
- * (`2975:8499`), so the mobile story transcribes a frame rather than deciding
- * one: one column, the chips wrapping, the same 48px stack the Blog band uses
- * at 402.
- */
+/** Current Insights index, including authored filtering and pagination. */
 const meta = {
   title: 'Pages/Insights',
   component: InsightIndexMockup,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('2336:4310'),
+    design: figmaDesign('3739:71101'),
   },
   argTypes: {
     category: {
@@ -42,6 +25,14 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Desktop: Story = {
+  play: async ({ canvasElement }) => {
+    const feed = canvasElement.querySelector('#feed')!
+    const title = within(feed as HTMLElement).getAllByRole('heading', { level: 3 })[0]!
+    await expect(getComputedStyle(feed).paddingTop).toBe('128px')
+    await expect(getComputedStyle(title).fontSize).toBe('20px')
+    await expect(getComputedStyle(title).lineHeight).toBe('28px')
+    await expect(getComputedStyle(title.parentElement!).gap).toBe('8px')
+  },
   args: { category: null },
   globals: { viewport: { value: 'desktop' } },
 }
@@ -58,6 +49,11 @@ export const Filtered: Story = {
 
 /** One column, and the chip bar wrapping — the 402 index frame (`2975:8499`). */
 export const Mobile: Story = {
+  play: async ({ canvasElement }) => {
+    const feed = canvasElement.querySelector('#feed')!
+    await expect(getComputedStyle(feed).paddingTop).toBe('24px')
+    await expect(getComputedStyle(feed).paddingBottom).toBe('24px')
+  },
   args: { category: null },
   globals: { viewport: { value: 'mobile' } },
   parameters: { design: figmaDesign('2975:8499') },

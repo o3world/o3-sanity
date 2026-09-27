@@ -1,26 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { figmaDesign } from '@o3/story-kit'
+import { expect, within } from 'storybook/test'
 
 import { seededSectionArgs } from '../../../testing/seedContent'
 
 import { FormSection } from './FormSection'
 
-/**
- * The inquiry form band — `/contact`'s conversion path (#58).
- *
- * A form card beside a rail: `2960:7792` at 1440, `2975:10195` at 402. The
- * rail carries the portrait, the quote, the attribution and the studio's
- * address — the two bands that used to follow this one.
- *
- * The submit posts to the app's `/api/contact` route, which forwards to
- * HubSpot (#412). No story reaches that route — Storybook has no app behind it
- * — so `Sent` and `Failed` below open the card on each answer directly.
- *
- * The fields are **code**, not content (ADR 0014). The dropdown's options, the
- * submit's words and everything in the rail come from the document, which is
- * why the stories vary those and nothing else.
- */
+/** Contact's current split introduction and form; existing secondary content follows below. */
 const meta = {
   title: 'Content/Blocks/Section/FormSection',
   component: FormSection,
@@ -33,19 +20,53 @@ type Story = StoryObj<typeof meta>
 /** `/contact` as seeded. */
 export const AsSeeded: Story = {
   args: seededSectionArgs('contact', 'formSection'),
-  globals: { backgrounds: { value: 'bone' } },
+  globals: { viewport: { value: 'desktop' } },
   parameters: { design: figmaDesign('2960:7792') },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    await expect(canvasElement.querySelector('canvas')).toBeNull()
+    const heading = canvas.getByRole('heading', { level: 1 })
+    const name = canvas.getByLabelText(/Your name/)
+    const email = canvas.getByLabelText(/Email/)
+    const form = name.closest('form')!
+    const section = heading.closest('section')!
+    await expect(getComputedStyle(section).paddingTop).toBe('256px')
+    await expect(getComputedStyle(section).paddingLeft).toBe('96px')
+    await expect(form.parentElement!.getBoundingClientRect().width).toBe(608)
+    await expect(getComputedStyle(form.parentElement!).paddingLeft).toBe('32px')
+    await expect(name.getBoundingClientRect().y).toBe(email.getBoundingClientRect().y)
+    await expect(name.getBoundingClientRect().height).toBe(44)
+    await expect(
+      form.parentElement!.getBoundingClientRect().left - heading.getBoundingClientRect().right,
+    ).toBe(32)
+  },
 }
 
-/** The columns stack, and the two name fields still share a row (`2975:10198`). */
+/** Every field gets the full mobile card width. */
 export const Mobile: Story = {
   args: seededSectionArgs('contact', 'formSection'),
   globals: { backgrounds: { value: 'bone' }, viewport: { value: 'mobile' } },
-  parameters: { design: figmaDesign('2975:10195') },
+  parameters: { design: figmaDesign('3754:78225') },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    await expect(canvasElement.querySelector('canvas')).toBeNull()
+    const name = canvas.getByLabelText(/Your name/)
+    const email = canvas.getByLabelText(/Email/)
+    const form = name.closest('form')!
+    const section = name.closest('section')!
+    await expect(getComputedStyle(section).paddingTop).toBe('128px')
+    await expect(getComputedStyle(section).paddingLeft).toBe('16px')
+    await expect(form.parentElement!.getBoundingClientRect().width).toBe(window.innerWidth - 32)
+    await expect(name.getBoundingClientRect().width).toBe(window.innerWidth - 96)
+    await expect(email.getBoundingClientRect().top).toBeGreaterThan(
+      name.getBoundingClientRect().bottom,
+    )
+    await expect(document.documentElement.scrollWidth).toBe(window.innerWidth)
+  },
 }
 
 /**
- * Blur an empty field to see the validation. Every field is required, and the
+ * Blur an empty field to see the validation. The name, email, reason, and message are required, and the
  * email check is deliberately loose — it catches the typo it can prove (no
  * `@`, no dot after it) and leaves the rest to the reply bouncing.
  */
@@ -76,6 +97,10 @@ export const WithoutConsent: Story = {
 export const FormOnly: Story = {
   args: {
     ...seededSectionArgs('contact', 'formSection'),
+    variant: 'band',
+    eyebrow: undefined,
+    heading: undefined,
+    note: undefined,
     media: null,
     quote: undefined,
     attribution: undefined,
@@ -85,8 +110,7 @@ export const FormOnly: Story = {
 }
 
 /**
- * With a header. The frame draws none — the card opens at the first name field
- * — so this is the shape a page that introduces the form some other way gets.
+ * The introduction fields remain authorable on the form.
  */
 export const WithHeader: Story = {
   args: {

@@ -1,0 +1,229 @@
+{
+  "sourceFile": "RvraLJaZ0zWm8UaD5AJf43",
+  "sourceVersion": "2402903657143566810",
+  "documents": [
+    {
+      "id": "page-seed-about",
+      "type": "page",
+      "slug": "about",
+      "patches": [
+        {
+          "path": "sections[_key==\"f69a9dad6819\"]",
+          "before": {
+            "_key": "f69a9dad6819",
+            "_type": "railPanelsSection",
+            "heading": "Welcome to our world",
+            "intro": "One universe, three orbits, interconnected to deliver maximum value for your business.",
+            "layout": "rail",
+            "panels": [
+              {
+                "_key": "019570d91257",
+                "_type": "panel",
+                "body": "Digital product consultancy with over 20 years of experience helping B2B enterprise organizations design, build, and scale their digital ecosystems.",
+                "button": {
+                  "_type": "button",
+                  "contrast": "ghost",
+                  "href": "/work",
+                  "label": "View our work"
+                },
+                "heading": "For marketing and product teams",
+                "media": {
+                  "_type": "figure",
+                  "alt": "Sample image",
+                  "image": {
+                    "_type": "image",
+                    "asset": {
+                      "_ref": "image-3dd88a92630c4167122d26c5f83091e2b7d189de-721x721-png",
+                      "_type": "reference"
+                    }
+                  }
+                },
+                "railLabel": "O3"
+              },
+              {
+                "_key": "9cc4d2afe20e",
+                "_type": "panel",
+                "body": "AI strategy and activation consultancy, helping organizations put AI to work in ways that are meaningful, measurable, and built for real impact.",
+                "button": {
+                  "_type": "button",
+                  "contrast": "ghost",
+                  "href": "https://o3xo.ai",
+                  "label": "Learn about our AI solutions"
+                },
+                "heading": "For C-suite and technology leaders",
+                "media": {
+                  "_type": "figure",
+                  "alt": "The Vercel mark, a white triangle centered on a black square.",
+                  "image": {
+                    "_type": "image",
+                    "asset": {
+                      "_ref": "image-7ce29297beb04af7d28460cf0898cd4cac95ee5a-1920x1900-png",
+                      "_type": "reference"
+                    }
+                  }
+                },
+                "railLabel": "O3XO"
+              },
+              {
+                "_key": "44d2a684299b",
+                "_type": "panel",
+                "body": "AI and innovation conference that brings together leaders, innovators, and visionaries to explore the power of AI in shaping profit and process.",
+                "button": {
+                  "_type": "button",
+                  "contrast": "ghost",
+                  "label": "More about the 1682 Conference",
+                  "target": {
+                    "_ref": "page-seed-1682-conference-ai-innovation",
+                    "_type": "reference"
+                  }
+                },
+                "heading": "For innovative leaders",
+                "logo": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-3e0bfe09bd876c08103642db7a66aa8a5edfa88f-1500x542-webp",
+                    "_type": "reference"
+                  }
+                },
+                "media": {
+                  "_type": "figure",
+                  "alt": "The Lovable mark, a rounded heart filled with a gradient running from orange through pink to blue.",
+                  "image": {
+                    "_type": "image",
+                    "asset": {
+                      "_ref": "image-8185cbac81b3b4d3507e9a19bd8f965e0ed90092-1500x1000-webp",
+                      "_type": "reference"
+                    }
+                  }
+                },
+                "railLabel": "1682"
+              }
+            ],
+            "plate": "bleed",
+            "rail": "label",
+            "surface": "ink"
+          },
+          "after": null,
+          "source": "3754:78274: omit extra audience band and third ecosystem card; retain original in migration backup."
+        },
+        {
+          "path": "sections[_key==\"beyond\"].items[_key==\"b-community\"]",
+          "before": {
+            "_key": "b-community",
+            "_type": "mediaCard",
+            "body": "Philadelphia is home. We show up for the design and engineering community that made us.",
+            "heading": "Community",
+            "media": {
+              "_type": "figure",
+              "alt": "The O3 team in black and white: twenty people in 1682 conference tees, standing and seated on benches in a stone-walled hall.",
+              "image": {
+                "_type": "image",
+                "asset": {
+                  "_ref": "image-8fc90480ac67ac6125c6cf1d542bc71912a66770-2000x1333-jpg",
+                  "_type": "reference"
+                }
+              }
+            }
+          },
+          "after": null,
+          "source": "3754:78274: omit extra audience band and third ecosystem card; retain original in migration backup."
+        }
+      ]
+    },
+    {
+      "id": "page-seed-solutions-software-engineering",
+      "type": "page",
+      "slug": "solutions/software-engineering",
+      "patches": [
+        {
+          "path": "sections[_key==\"services\"].headerWidth",
+          "before": null,
+          "after": "wide",
+          "source": "4039:49385: 1035px header measure."
+        }
+      ]
+    },
+    {
+      "id": "page-seed-index",
+      "type": "page",
+      "slug": "index",
+      "patches": [
+        {
+          "path": "sections[_key==\"work\"].caseStudies",
+          "before": [
+            {
+              "_key": "case-0",
+              "_ref": "caseStudy-wp-10028",
+              "_type": "reference"
+            },
+            {
+              "_key": "case-1",
+              "_ref": "caseStudy-wp-5804",
+              "_type": "reference"
+            },
+            {
+              "_key": "case-2",
+              "_ref": "caseStudy-wp-5805",
+              "_type": "reference"
+            }
+          ],
+          "after": [
+            {
+              "_key": "case-0",
+              "_ref": "caseStudy-wp-10028",
+              "_type": "reference"
+            },
+            {
+              "_key": "case-1",
+              "_ref": "caseStudy-wp-5804",
+              "_type": "reference"
+            },
+            {
+              "_key": "case-2",
+              "_ref": "caseStudy-wp-5805",
+              "_type": "reference"
+            },
+            {
+              "_key": "case-best-egg",
+              "_type": "reference",
+              "_ref": "caseStudy-wp-5803"
+            }
+          ],
+          "source": "3720:60492: four cards, using published real cases."
+        },
+        {
+          "path": "sections[_key==\"work\"].body",
+          "before": null,
+          "after": "Enterprise teams trust us to design, build, and optimize their digital ecosystem over the long-term.",
+          "source": "3720:60492: intro position; reuse authored Work introduction instead of Figma placeholder."
+        }
+      ]
+    },
+    {
+      "id": "collectionIndex-seed-work",
+      "type": "collectionIndex",
+      "slug": null,
+      "patches": [
+        {
+          "path": "sectionsAbove[_key==\"hero\"].headlineLines",
+          "before": ["We uncover what's in the way so that your team can accelerate"],
+          "after": ["Strategy, design, and technology working together."],
+          "source": "1634:1167: completed Work headline; preserve real intro and case cards."
+        }
+      ]
+    },
+    {
+      "id": "page-seed-contact",
+      "type": "page",
+      "slug": "contact",
+      "patches": [
+        {
+          "path": "sections[_key==\"inquiry\"].button.label",
+          "before": "Send message",
+          "after": "Start a conversation",
+          "source": "I3754:77996;2134:2017: Contact submit label."
+        }
+      ]
+    }
+  ]
+}

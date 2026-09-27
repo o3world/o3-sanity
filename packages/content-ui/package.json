@@ -13,7 +13,8 @@
     "@o3/block-spec": "workspace:*",
     "@o3/content-runtime": "workspace:*",
     "@o3/sanity": "workspace:*",
-    "@o3/ui": "workspace:*"
+    "@o3/ui": "workspace:*",
+    "class-variance-authority": "^0.7.1"
   },
   "devDependencies": {
     "@o3/story-kit": "workspace:*",
@@ -46,7 +47,6 @@
     "./cards": "./src/cards/index.ts",
     "./chrome": "./src/chrome/index.ts",
     "./chrome/nav-ink": "./src/chrome/NavInk.tsx",
-    "./chrome/nav-pin": "./src/chrome/NavPin.tsx",
     "./format-date": "./src/lib/format-date.ts",
     "./image-sizes": "./src/imageSizes.ts",
     "./inquiry": "./src/blocks/section/formSection/inquiry.ts",

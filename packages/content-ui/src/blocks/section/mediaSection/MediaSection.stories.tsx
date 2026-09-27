@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 
 import { seededSectionArgs } from '../../../testing/seedContent'
@@ -111,4 +112,98 @@ export const Sequence: Story = {
       </div>
     ),
   ],
+}
+
+/** About inset photo lifts above the band without clipping the next section. */
+export const Overlap: Story = {
+  args: { ...AsSeeded.args, variant: 'overlap', width: 'section' },
+  globals: { viewport: { value: 'desktop' } },
+  parameters: { design: figmaDesign('3754:78276') },
+  play: async ({ canvasElement }) => {
+    const panel = canvasElement.querySelector('figure > div')!
+    await expect(panel.getBoundingClientRect().height).toBeCloseTo(550, 0)
+    await expect(getComputedStyle(panel).translate).toBe('0px -64px')
+  },
+}
+
+export const Feature: Story = {
+  args: {
+    ...AsSeeded.args,
+    variant: 'feature',
+    surface: 'white',
+    heading: 'Philly made.',
+    subheading:
+      'We’re proud of where we started and it shows up in how we work. Straightforward conversations, practical thinking, zero pretense.\u2028A lot of grit. A little edge.',
+    media: {
+      _type: 'figure',
+      alt: 'Philadelphia skyline',
+      image: {
+        _type: 'image',
+        asset: {
+          _id: 'image-1ac527f77f4c0726250fbf7340cf31cb4d3854af-3840x2160-png',
+          metadata: null,
+        },
+      },
+    },
+    logo: {
+      _type: 'image',
+      asset: {
+        _type: 'reference',
+        _ref: 'image-8e867702ffba83004e58a7ee4b5beaaa4c5c9b6c-873x181-svg',
+      },
+    },
+    badge: {
+      _type: 'image',
+      asset: {
+        _type: 'reference',
+        _ref: 'image-8ad65e117756cfc5a9059c89c2766b889df36470-314x36-svg',
+      },
+    },
+  },
+  globals: { viewport: { value: 'desktop' } },
+  parameters: { design: figmaDesign('4061:50283') },
+  play: async ({ canvasElement }) => {
+    await expect(canvasElement.querySelector('h2')).toHaveTextContent('Philly made.')
+    await expect(canvasElement.querySelector('p')).toHaveTextContent('A little edge.')
+    await expect(
+      canvasElement.querySelector('figure > div')!.getBoundingClientRect().height,
+    ).toBeCloseTo(550, 0)
+  },
+}
+
+export const FeatureMobile: Story = {
+  ...Feature,
+  globals: { viewport: { value: 'mobile' } },
+  parameters: { design: figmaDesign('3883:16517') },
+  play: async ({ canvasElement }) => {
+    const panel = canvasElement.querySelector('figure > div')!
+    await expect(panel.getBoundingClientRect().width).toBeCloseTo(343, 0)
+    await expect(panel.getBoundingClientRect().height).toBeGreaterThanOrEqual(383)
+    await expect(canvasElement.querySelector('p')).toHaveTextContent('A little edge.')
+  },
+}
+
+export const CompleteComposition: Story = {
+  args: {
+    variant: 'composition',
+    media: {
+      _type: 'figure',
+      alt: 'IRONMAN Pro Series composition',
+      image: {
+        _type: 'image',
+        asset: {
+          _id: 'image-e725da203afd363d6be87c496d6f2d98bc29dfe8-2880x3800-png',
+          metadata: null,
+        },
+      },
+    },
+  },
+  globals: { viewport: { value: 'desktop' } },
+  parameters: { design: figmaDesign('3576:24877') },
+  play: async ({ canvasElement }) => {
+    const image = canvasElement.querySelector('img')!
+    const box = image.getBoundingClientRect()
+    await expect(box.width).toBe(window.innerWidth)
+    await expect(box.height / box.width).toBeCloseTo(1900 / 1440, 2)
+  },
 }

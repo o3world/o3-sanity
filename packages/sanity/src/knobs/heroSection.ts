@@ -33,10 +33,7 @@ export const heroSectionKnobs = defineBlockKnobs({
       name: 'alignment',
       title: 'Alignment',
       description:
-        'Band composition only. Left puts the copy against the gutter and leaves the right of the band to the globe or a rail; Centred stacks the eyebrow and the headline on the centre line, and nothing else fits beside them.',
-      // Solutions (`1925:6141`) is the centred one — an eyebrow over a 650-wide
-      // headline on the centre line, no standfirst, no rail, no globe. Every
-      // other band instance draws the copy left (`2107:1051`, `2960:6876`).
+        'Band composition only. Left puts the copy against the gutter and leaves the right of the band to a faint molecule or a rail; Centred stacks the eyebrow, headline and supporting copy on the centre line.',
       options: [
         { value: 'start', title: 'Left' },
         { value: 'center', title: 'Centred' },
@@ -51,35 +48,11 @@ export const heroSectionKnobs = defineBlockKnobs({
     // two; #120 converted them, so the shared meaning moved to the pure side
     // and the factory that generated a field directly is gone.
     //
-    // Gated, because the centred band has nowhere to hang a sphere: the copy
-    // owns the middle and the frame draws no art beside it. Without the gate
-    // this is a control that turns and repaints nothing, which is what ADR
-    // 0020's guard exists to remove. `emptyMatches` because `alignment` is
-    // unset on every document saved before it existed, and on the orbital
-    // opener, which the gate above closes.
-    {
-      ...decorationKnob(['orbs', 'none']),
-      showWhen: { at: 'alignment', mode: 'oneOf', values: ['start'], emptyMatches: true },
-    },
-    /*
-     * Ink or a light band, and only on the band composition (#311).
-     *
-     * The orbital opener paints ink whatever a document stores, and it has to:
-     * the sphere and the white copy over it are one composition drawn on that
-     * colour. So the control is gated rather than offered and ignored — a knob
-     * that turns and repaints nothing is the failure ADR 0020's guard exists
-     * to remove.
-     *
-     * The `Interior Hero` set is instanced on ink everywhere but About, which
-     * draws "Interior Hero – White" (`2960:6876`, and `2975:9022` at 402) —
-     * a set whose fill is **#F5F4F1** despite the name, which is `paper`.
-     * White stays on the roster for a band that wants the plain one.
-     *
-     * `emptyMatches` is not set: `variant` defaults to `orbital`, so an unset
-     * value is the composition this gate is closed for.
-     */
+    decorationKnob(['orbs', 'none']),
+    // Current About (3754:78486) uses bone; the orbital Home opener keeps
+    // its own ink surface and does not expose this band-only choice.
     surfaceKnob({
-      options: ['ink', 'white', 'paper'],
+      options: ['ink', 'white', 'paper', 'bone'],
       initialValue: 'ink',
       showWhen: { at: 'variant', mode: 'oneOf', values: ['band'] },
     }),

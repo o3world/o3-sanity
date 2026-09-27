@@ -28,7 +28,7 @@ describe('the quote band’s molecule decoration', () => {
   const html = render('molecule')
 
   it('renders the mark, and not the spheres', () => {
-    expect(html).toContain('viewBox="0 0 699 699"')
+    expect(html).toContain('viewBox="0 0 562 562"')
     expect(html).toContain('w-[776px]')
     expect(html).toContain('opacity-10')
     // OrbitalSphere's own markup — the two are alternatives, never both.
@@ -62,11 +62,9 @@ describe('the quote band’s molecule decoration', () => {
     expect(html).toContain('Business Leader, Global Health Brand')
   })
 
-  it('centres the column the way the set does, and opens the gap at 1440', () => {
-    // `2748:4839` / `2748:4840` are both centred; the column gap is 24 at 402
-    // (`2748:4689`) and 48 at 1440 (`2748:4838`).
+  it('centres the column with the current shared attribution gap', () => {
     expect(html).toContain('text-center')
-    expect(html).toMatch(/gap-6[^"]*lg:gap-12/)
+    expect(html).toContain('gap-12')
   })
 
   it('sets the attribution as the eyebrow the set draws', () => {
@@ -113,13 +111,13 @@ describe('the quote band’s other decorations', () => {
     const html = render('orbs')
     expect(html).toContain('lg:w-[1155px]')
     expect(html).toContain('lg:w-[1304px]')
-    expect(html).not.toContain('viewBox="0 0 699 699"')
+    expect(html).not.toContain('viewBox="0 0 562 562"')
   })
 
   it('draws neither on `none`', () => {
     const html = render('none')
     expect(html).not.toContain('lg:w-[1155px]')
-    expect(html).not.toContain('viewBox="0 0 699 699"')
+    expect(html).not.toContain('viewBox="0 0 562 562"')
     expect(html).toContain('Simply the best.')
   })
 })

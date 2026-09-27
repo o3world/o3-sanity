@@ -3,11 +3,6 @@ import { renderToStaticMarkup } from 'react-dom/server'
 
 import { PanelRows } from './PanelRows'
 
-/**
- * The two detail labels a service row draws. The frame sets the breakdown's
- * label in ink (`2975:9554`, `#0A0A0B`) and the promise's in brand red
- * (`2975:9560`, `#EB1000`); neither is the muted grey a bare `Eyebrow` takes.
- */
 const html = renderToStaticMarkup(
   <PanelRows
     items={[
@@ -36,8 +31,8 @@ describe('a service row’s detail labels', () => {
   const breakdown = labelTag("Migration targets we've handled:")
   const promise = labelTag('what you get:')
 
-  it('draws the breakdown label in ink', () => {
-    expect(breakdown).toContain('text-ink')
+  it('draws the breakdown label in supporting copy', () => {
+    expect(breakdown).toContain('text-fg-body')
   })
 
   it('draws the promise label in brand red', () => {
@@ -48,4 +43,24 @@ describe('a service row’s detail labels', () => {
     expect(breakdown).not.toContain('text-fg-muted')
     expect(promise).not.toContain('text-fg-muted')
   })
+})
+
+it('keeps every detail in the breakdown when the content has no outcome', () => {
+  const markup = renderToStaticMarkup(
+    <PanelRows
+      lastDetailIsOutcome={false}
+      items={[
+        {
+          key: 'engineering',
+          details: [
+            { label: 'Frontend', items: ['React'] },
+            { label: 'Backend', items: ['Node'] },
+          ],
+        },
+      ]}
+    />,
+  )
+  expect(markup).toContain('React')
+  expect(markup).toContain('Node')
+  expect(markup).not.toContain('text-brand')
 })
