@@ -6,6 +6,7 @@ import contentManifest from './figmaContentAlignment.json'
 import finishManifest from './figmaAlignmentFinish.json'
 import reviewManifest from './figmaReviewFixes.json'
 import crosscheckManifest from './figmaCrosscheckFixes.json'
+import premergeManifest from './figmaPremergeCopy.json'
 import { planFigmaContentAlignment, type ContentRow } from './figmaContentAlignmentPlan'
 
 const client = getCliClient({ apiVersion: '2026-07-01' })
@@ -21,13 +22,15 @@ async function main() {
     throw new Error(
       'This reviewed content migration requires naorcr6k and explicit --dataset production',
     )
-  const manifest = args.includes('--crosscheck')
-    ? crosscheckManifest
-    : args.includes('--review')
-      ? reviewManifest
-      : args.includes('--finish')
-        ? finishManifest
-        : contentManifest
+  const manifest = args.includes('--premerge')
+    ? premergeManifest
+    : args.includes('--crosscheck')
+      ? crosscheckManifest
+      : args.includes('--review')
+        ? reviewManifest
+        : args.includes('--finish')
+          ? finishManifest
+          : contentManifest
   const contentDocumentIds = manifest.documents.map((document) => document.id)
   const plan = (row: ContentRow, allowLocked: boolean) =>
     planFigmaContentAlignment(row, allowLocked, manifest)
