@@ -4,6 +4,7 @@ import { itemAttr } from '@o3/content-runtime/data-attribute'
 import { stegaClean } from '@sanity/client/stega'
 
 import { SanityImage } from '../../../SanityImage'
+import { CONTENT_COLUMN } from '../../../imageSizes'
 import { resolveSurface } from '../../surface'
 
 type ScreenGridSectionProps = SectionProps<'screenGridSection'> & { sequence?: boolean }
@@ -55,7 +56,7 @@ export function ScreenGridSection({
 
   const grid = (
     <ul
-      className={`mx-auto grid w-full gap-8 ${feature ? 'grid-cols-2 lg:grid-cols-4' : 'lg:grid-cols-2'}`}
+      className={`max-w-section mx-auto grid w-full gap-8 ${feature ? 'grid-cols-2 lg:grid-cols-4' : 'lg:grid-cols-2'}`}
     >
       {screens.map((screen, index) => {
         const span = spanOf(screen.span)
@@ -99,33 +100,19 @@ export function ScreenGridSection({
                     ? 'h-auto w-full'
                     : 'w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.25)]'
                 }
-                /*
-                 * The plate is the tile less its padding — 32px a side
-                 * below `lg`, 64px above — and this band takes the gutter
-                 * without `max-w-section`, so the tile keeps growing past
-                 * the structural stage cap.
-                 *
-                 *   wide      the whole column less 64 before `lg`, then
-                 *             less 128; 100vw − 2×75 − 128 once pinned
-                 *   standard  the full half-column tile, less half the 32px gap:
-                 *             45vw − 16, and 50vw − 91 once pinned
-                 *
-                 * At 1440 that is 1162 and 629 after the #429 gutter
-                 * override. The 90vw stand-in is derived in
-                 * `imageSizes.ts`.
-                 */
+                // The 1728px stage and 32px gaps cap the full, half, quarter,
+                // and three-quarter slots at 1728, 848, 408, and 1288px.
+                // Framed wide images also lose 64px/128px to plate padding.
                 sizes={
-                  feature && index < 3
+                  feature && (index < 3 || span === 'narrow')
                     ? index === 0
-                      ? '(min-width: 1024px) calc((100vw - 192px) * .75 - 8px), calc(100vw - 32px)'
-                      : '(min-width: 1024px) calc((100vw - 192px) * .25 - 24px), calc(50vw - 32px)'
-                    : span === 'narrow'
-                      ? `(min-width: 1024px) calc((100vw - 192px) * .25 - 24px), ${feature ? 'calc(50vw - 32px)' : 'calc(100vw - 32px)'}`
-                      : span === 'wide' && fill
-                        ? '(min-width: 1024px) calc(100vw - 192px), calc(100vw - 32px)'
-                        : span === 'wide'
-                          ? '(min-width: 1440px) calc(100vw - 278px), (min-width: 1024px) calc(89.402vw - 125.396px), calc(90vw - 64px)'
-                          : '(min-width: 1440px) calc(50vw - 91px), (min-width: 1024px) calc(44.701vw - 14.698px), 90vw'
+                      ? `(min-width: 1920px) 1288px, (min-width: 1440px) calc(75vw - 152px), (min-width: 1024px) calc(63.439305vw + 14.47399px), ${CONTENT_COLUMN}`
+                      : '(min-width: 1920px) 408px, (min-width: 1440px) calc(25vw - 72px), (min-width: 1024px) calc(21.146435vw - 16.50867px), (min-width: 402px) calc(42.29287vw - 1.01734px), calc(50vw - 32px)'
+                    : span === 'wide' && fill
+                      ? CONTENT_COLUMN
+                      : span === 'wide'
+                        ? '(min-width: 1920px) 1600px, (min-width: 1440px) calc(100vw - 320px), (min-width: 1024px) calc(84.58574vw - 98.03468px), (min-width: 402px) calc(84.58574vw - 34.03468px), calc(100vw - 96px)'
+                        : `(min-width: 1920px) 848px, (min-width: 1440px) calc(50vw - 112px), (min-width: 1024px) calc(42.29287vw - 1.01734px), ${CONTENT_COLUMN}`
                 }
               />
             </div>

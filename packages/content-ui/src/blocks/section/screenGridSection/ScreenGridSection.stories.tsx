@@ -295,3 +295,25 @@ export const NarrowFeatureRowMobile: Story = {
     await expect(Math.abs(boxes[5]!.top - boxes[3]!.bottom - 32)).toBeLessThan(1)
   },
 }
+
+/** Wide browser windows retain the site's centered 1728px structural column. */
+export const WideViewport: Story = {
+  args: NarrowFeatureRow.args,
+  parameters: {
+    viewport: {
+      options: { wide: { name: 'Wide 2560', styles: { width: '2560px', height: '1440px' } } },
+    },
+  },
+  globals: { viewport: { value: 'wide' } },
+  play: async ({ canvasElement }) => {
+    const grid = canvasElement.querySelector('ul')!.getBoundingClientRect()
+    const tiles = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
+      tile.getBoundingClientRect(),
+    )
+    await expect(grid.width).toBe(1728)
+    await expect(grid.left).toBe(416)
+    await expect(tiles[0]!.width).toBe(1288)
+    await expect(tiles[1]!.width).toBe(408)
+    await expect(tiles[5]!.width).toBe(848)
+  },
+}
