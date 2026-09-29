@@ -132,7 +132,7 @@ export type { OrbitalSphereProps } from './components/orbital-sphere'
 export { ThinkingOrb } from './components/thinking-orb'
 export type { OrbSize, OrbState, OrbTheme, ThinkingOrbProps } from './components/thinking-orb'
 
-// PortraitTile — the black-and-red-arc tile a team headshot sits on (1925:5864)
+// PortraitTile — the current About employee-card image (3771:80239)
 export { PortraitTile } from './components/portrait-tile'
 export type { PortraitTileProps } from './components/portrait-tile'
 

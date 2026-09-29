@@ -501,6 +501,76 @@
       "export": "render",
       "locked": false,
       "note": "Exact outlined SVG export from current canonical interior frames, Figma version 2402903657143566810 (2026-09-24). Rendered with absolute bounds and outlined text."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/about-portrait-current-gadsby.png",
+      "nodeId": "3771:80239",
+      "figmaName": "Employee Card",
+      "format": "png",
+      "scale": 2,
+      "export": "render",
+      "locked": true,
+      "note": "Current About employee card, Mike Gadsby, Figma version 2404735173450726473. Exact 2x render of its image rectangle I3771:80239;3767:80004, 790x790. Preserves authored composition and crop; CSS owns the 16px radius. Locked because rendering the numeric parent card also exports name and role; a manual re-export must select the image instance child above. The locked older Gadsby reference remains untouched."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/about-portrait-current-scandone.png",
+      "nodeId": "3771:80240",
+      "figmaName": "Employee Card",
+      "format": "png",
+      "scale": 2,
+      "export": "render",
+      "locked": true,
+      "note": "Current About employee card, Keith Scandone, Figma version 2404735173450726473. Exact 2x render of its image rectangle I3771:80240;3767:80004, 790x790. Preserves authored composition and crop; CSS owns the 16px radius. Locked because rendering the numeric parent card also exports name and role; a manual re-export must select the image instance child above. The locked older Gadsby reference remains untouched."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/about-portrait-current-edmundson.png",
+      "nodeId": "3771:80241",
+      "figmaName": "Employee Card",
+      "format": "png",
+      "scale": 2,
+      "export": "render",
+      "locked": true,
+      "note": "Current About employee card, Talia Edmundson, Figma version 2404735173450726473. Exact 2x render of its image rectangle I3771:80241;3767:80004, 790x790. Preserves authored composition and crop; CSS owns the 16px radius. Locked because rendering the numeric parent card also exports name and role; a manual re-export must select the image instance child above. The locked older Gadsby reference remains untouched."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/about-portrait-current-forbes.png",
+      "nodeId": "3771:80242",
+      "figmaName": "Employee Card",
+      "format": "png",
+      "scale": 2,
+      "export": "render",
+      "locked": true,
+      "note": "Current About employee card, Jay Forbes, Figma version 2404735173450726473. Exact 2x render of its image rectangle I3771:80242;3767:80004, 790x790. Preserves authored composition and crop; CSS owns the 16px radius. Locked because rendering the numeric parent card also exports name and role; a manual re-export must select the image instance child above. The locked older Gadsby reference remains untouched."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/about-portrait-current-halligan.png",
+      "nodeId": "3771:80243",
+      "figmaName": "Employee Card",
+      "format": "png",
+      "scale": 2,
+      "export": "render",
+      "locked": true,
+      "note": "Current About employee card, Brady Halligan, Figma version 2404735173450726473. Exact 2x render of its image rectangle I3771:80243;3767:80004, 790x790. Preserves authored composition and crop; CSS owns the 16px radius. Locked because rendering the numeric parent card also exports name and role; a manual re-export must select the image instance child above. The locked older Gadsby reference remains untouched."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/about-portrait-current-handler.png",
+      "nodeId": "3771:80244",
+      "figmaName": "Employee Card",
+      "format": "png",
+      "scale": 2,
+      "export": "render",
+      "locked": true,
+      "note": "Current About employee card, Justin Handler, Figma version 2404735173450726473. Exact 2x render of its image rectangle I3771:80244;3767:80004, 790x790. Preserves authored composition and crop; CSS owns the 16px radius. Locked because rendering the numeric parent card also exports name and role; a manual re-export must select the image instance child above. The locked older Gadsby reference remains untouched."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/about-portrait-current-ost.png",
+      "nodeId": "3771:80246",
+      "figmaName": "Employee Card",
+      "format": "png",
+      "scale": 2,
+      "export": "render",
+      "locked": true,
+      "note": "Current About employee card, Jackie Ost, Figma version 2404735173450726473. Exact 2x render of its image rectangle I3771:80246;3767:80004, 790x790. Preserves authored composition and crop; CSS owns the 16px radius. Locked because rendering the numeric parent card also exports name and role; a manual re-export must select the image instance child above. The locked older Gadsby reference remains untouched."
     }
   ]
 }

@@ -8,32 +8,7 @@ import { resolveSurface } from '../../surface'
 
 type PersonGridSectionProps = SectionProps<'personGridSection'>
 
-/**
- * Section block: the current About team cards (`3771:80239`, `3883:16545`).
- *
- * ```
- * header  padding-left 96, gap 8    18px eyebrow #757575 | 48px heading
- * rows    gap 32, three up          card 394.67 wide, gap 24
- *   tile  square, black + red arc, greyscale portrait
- *   meta  gap 8                     Figtree name 20/26 → 24/34, then 13px role
- * ```
- *
- * **This is the block the 12 migrated `person` documents existed for.** They
- * came in with #17 and were rendered nowhere until this band; that is why the
- * people are **referenced**, not inlined. A person is already a document —
- * they author insights — so inlining names here would have created a
- * second, drifting copy of the same fact. The reference goes both ways now:
- * since #32 dropped the `post_author` byline, this band is the *only* thing
- * keeping Kelly Navari (`person-wp-4`) in the corpus.
- *
- * The frame draws six cards, all the same placeholder, so the count is the
- * editor's rather than the design's: whatever is referenced renders, three to
- * a row.
- *
- * The role sits in a `title` field on `person` (WordPress's user title), which
- * is the one place this band reads a document field whose name the block
- * lexicon would otherwise reserve for a document's own name.
- */
+/** Current About team cards (3771:80239,3883:16545), with editor-owned person references. */
 export function PersonGridSection({
   eyebrow,
   heading,

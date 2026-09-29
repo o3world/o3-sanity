@@ -28,7 +28,8 @@
     "presentation-alignment": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/presentationAlignment.ts --with-user-token --",
     "best-egg-gallery-layout": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/bestEggGalleryLayout.ts --with-user-token --",
     "ironman-grid-spans": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/ironmanGridSpans.ts --with-user-token --",
-    "retire-cta-decoration": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/retireCtaDecoration.ts --with-user-token --"
+    "retire-cta-decoration": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/retireCtaDecoration.ts --with-user-token --",
+    "about-portraits": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/aboutPortraits.ts --with-user-token --"
   },
   "dependencies": {
     "@o3/block-spec": "workspace:*",
