@@ -228,11 +228,15 @@ export const FeatureMobile: Story = {
     const tiles = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
       tile.getBoundingClientRect(),
     )
-    for (const [index, tile] of tiles.entries()) {
-      await expect(Math.abs(tile.width - 370)).toBeLessThan(1)
-      if (index > 0)
-        await expect(Math.abs(tile.top - tiles[index - 1]!.bottom - 32)).toBeLessThan(1)
-    }
+    const [lead, upper, lower, following] = tiles
+    await expect(Math.abs(lead!.width - 370)).toBeLessThan(1)
+    await expect(Math.abs(upper!.width - 169)).toBeLessThan(1)
+    await expect(Math.abs(lower!.width - 169)).toBeLessThan(1)
+    await expect(upper!.top).toBe(lower!.top)
+    await expect(Math.abs(upper!.top - lead!.bottom - 32)).toBeLessThan(1)
+    await expect(Math.abs(lower!.left - upper!.right - 32)).toBeLessThan(1)
+    await expect(Math.abs(following!.width - 370)).toBeLessThan(1)
+    await expect(Math.abs(following!.top - upper!.bottom - 32)).toBeLessThan(1)
   },
 }
 
@@ -272,5 +276,22 @@ export const NarrowFeatureRow: Story = {
     await expect(Math.abs(boxes[4]!.width - 288)).toBeLessThan(1)
     await expect(Math.abs(boxes[5]!.width - 608)).toBeLessThan(1)
     await expect(boxes[3]!.top).toBe(boxes[5]!.top)
+  },
+}
+
+/** Quarter-width desktop tiles stay paired on mobile, including later narrow items. */
+export const NarrowFeatureRowMobile: Story = {
+  args: NarrowFeatureRow.args,
+  parameters: FeatureMobile.parameters,
+  globals: FeatureMobile.globals,
+  play: async ({ canvasElement }) => {
+    const boxes = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
+      tile.getBoundingClientRect(),
+    )
+    await expect(Math.abs(boxes[3]!.width - 169)).toBeLessThan(1)
+    await expect(Math.abs(boxes[4]!.width - 169)).toBeLessThan(1)
+    await expect(boxes[3]!.top).toBe(boxes[4]!.top)
+    await expect(Math.abs(boxes[5]!.width - 370)).toBeLessThan(1)
+    await expect(Math.abs(boxes[5]!.top - boxes[3]!.bottom - 32)).toBeLessThan(1)
   },
 }

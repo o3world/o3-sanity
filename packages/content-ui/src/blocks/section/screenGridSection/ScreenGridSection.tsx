@@ -54,20 +54,22 @@ export function ScreenGridSection({
   const feature = stegaClean(layout) === 'feature' && screens.length >= 3
 
   const grid = (
-    <ul className={`mx-auto grid w-full gap-8 ${feature ? 'lg:grid-cols-4' : 'lg:grid-cols-2'}`}>
+    <ul
+      className={`mx-auto grid w-full gap-8 ${feature ? 'grid-cols-2 lg:grid-cols-4' : 'lg:grid-cols-2'}`}
+    >
       {screens.map((screen, index) => {
         const span = spanOf(screen.span)
         const fill = span !== 'wide' || stegaClean(screen.framing) === 'image'
         const placement = feature
           ? index === 0
-            ? 'lg:col-span-3 lg:row-span-2'
+            ? 'col-span-2 lg:col-span-3 lg:row-span-2'
             : index < 3
               ? 'lg:col-span-1'
               : span === 'wide'
-                ? 'lg:col-span-4'
+                ? 'col-span-2 lg:col-span-4'
                 : span === 'narrow'
                   ? 'lg:col-span-1'
-                  : 'lg:col-span-2'
+                  : 'col-span-2'
           : span === 'wide'
             ? 'lg:col-span-2'
             : ''
@@ -116,9 +118,9 @@ export function ScreenGridSection({
                   feature && index < 3
                     ? index === 0
                       ? '(min-width: 1024px) calc((100vw - 192px) * .75 - 8px), calc(100vw - 32px)'
-                      : '(min-width: 1024px) calc((100vw - 192px) * .25 - 24px), calc(100vw - 32px)'
+                      : '(min-width: 1024px) calc((100vw - 192px) * .25 - 24px), calc(50vw - 32px)'
                     : span === 'narrow'
-                      ? '(min-width: 1024px) calc((100vw - 192px) * .25 - 24px), calc(100vw - 32px)'
+                      ? `(min-width: 1024px) calc((100vw - 192px) * .25 - 24px), ${feature ? 'calc(50vw - 32px)' : 'calc(100vw - 32px)'}`
                       : span === 'wide' && fill
                         ? '(min-width: 1024px) calc(100vw - 192px), calc(100vw - 32px)'
                         : span === 'wide'
