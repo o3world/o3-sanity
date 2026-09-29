@@ -116,11 +116,7 @@ export function CaseCardStack({ children }: CaseCardStackProps) {
   }, [])
 
   return (
-    /*
-     * Gap 24 at 402 (`1889:3620`), 48 at 1440 (`1683:2661`). ADR 0006 lists
-     * this band precisely because it is *not* a composition divergence — both
-     * frames stack the cards, and only the gap moves.
-     */
+    /* Both current home frames stack cards with 48px gaps (3720:60473 / 1814:1618). */
     <div ref={ref} className="flex flex-col gap-12">
       {children}
     </div>

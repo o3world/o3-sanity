@@ -26,14 +26,14 @@ export function CaseShowcaseSection({
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <div className="flex w-full max-w-[821px] flex-col gap-2">
               {eyebrow ? (
-                <Eyebrow size="lg" className="pb-4">
+                <Eyebrow size="lg" className="text-brand-deep pb-4">
                   {eyebrow}
                 </Eyebrow>
               ) : null}
               {heading ? <h2 className="text-hero font-display text-balance">{heading}</h2> : null}
               {body ? <p className="text-lead text-fg-body">{body}</p> : null}
             </div>
-            {button ? <ButtonLink button={button} /> : null}
+            {button ? <ButtonLink button={button} className="shrink-0" /> : null}
           </div>
 
           <CaseCardStack>

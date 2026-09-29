@@ -48,6 +48,14 @@ export const AsSeeded: Story = {
     await expect(getComputedStyle(section).paddingTop).toBe('128px')
     await expect(getComputedStyle(section).backgroundColor).toBe('rgb(247, 247, 246)')
     await expect(within(canvasElement).getByText('Our work')).toBeVisible()
+    await expect(getComputedStyle(within(canvasElement).getByText('Our work')).color).toBe(
+      'rgb(201, 14, 0)',
+    )
+    const stack = cards[0]!.parentElement!.parentElement!
+    await expect(getComputedStyle(stack).gap).toBe('48px')
+    for (const card of cards) {
+      await expect(card.getBoundingClientRect().width).toBe(stack.getBoundingClientRect().width)
+    }
     await expect(within(canvasElement).getByText('A selection of recent work.')).toBeVisible()
   },
 }
@@ -89,17 +97,47 @@ export const ShortViewport: Story = {
   },
 }
 
-/** Gap 24 at 402, 48 at 1440 — the band's one responsive move (ADR 0006). */
+/** Current mobile frame keeps full-column cards with 48px gaps. */
 export const Mobile: Story = {
   args: seededSectionArgs('index', 'caseShowcaseSection'),
+  render: AsSeeded.render,
   globals: { viewport: { value: 'mobile' } },
   play: async ({ canvasElement }) => {
     const card = canvasElement.querySelector('a[data-surface="ink"]')!
-    await expect(getComputedStyle(card).paddingLeft).toBe('32px')
+    await expect(getComputedStyle(card).paddingLeft).toBe('24px')
+    const stack = card.parentElement!.parentElement!
+    await expect(getComputedStyle(stack).gap).toBe('48px')
+    await expect(card.getBoundingClientRect().width).toBe(stack.getBoundingClientRect().width)
     const stat = card.querySelector('p > span')!
     await expect(getComputedStyle(stat).fontSize).toBe('32px')
     await expect(parseFloat(getComputedStyle(stat).lineHeight)).toBeCloseTo(38.4, 1)
     await expect(getComputedStyle(stat.parentElement!).gap).toBe('16px')
+    await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
+  },
+}
+
+/** The section CTA keeps its single-line label at the annotated 1026px width. */
+export const IntermediateViewport: Story = {
+  ...AsSeeded,
+  globals: { viewport: { value: 'intermediate' } },
+  parameters: {
+    viewport: {
+      options: {
+        intermediate: {
+          name: 'Intermediate desktop',
+          styles: { width: '1026px', height: '1000px' },
+        },
+      },
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const button = within(canvasElement).getByRole('link', { name: 'View our work' })
+    const style = getComputedStyle(button)
+    const labelHeight =
+      button.getBoundingClientRect().height -
+      parseFloat(style.paddingTop) -
+      parseFloat(style.paddingBottom)
+    await expect(labelHeight).toBeCloseTo(parseFloat(style.lineHeight), 1)
     await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
   },
 }

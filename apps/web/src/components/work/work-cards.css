@@ -48,16 +48,6 @@
   );
 }
 
-.work-showcase > section > div > div:has(> div > a[data-surface='ink']) {
-  gap: 112px;
-}
-
-@media (min-width: 768px) {
-  .work-showcase div:has(> a[data-surface='ink']) {
-    width: 90%;
-    margin-inline: auto;
-  }
-}
 .work-showcase a[data-surface='ink'] {
   padding: 56px;
   min-height: 550px;
@@ -79,10 +69,6 @@
 }
 
 @media (max-width: 767px) {
-  .work-showcase > section > div > div:has(> div > a[data-surface='ink']) {
-    gap: 80px;
-  }
-
   .work-showcase a[data-surface='ink'] {
     padding: 56px 24px;
     min-height: 550px;
