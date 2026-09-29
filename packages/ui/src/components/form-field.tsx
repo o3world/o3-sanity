@@ -113,8 +113,8 @@ export function FormField({
         'aria-describedby': describedBy,
       })}
 
-      {/* Keep the alert mounted; an empty alert consumes no space. */}
-      <p id={errorId} role="alert" className="text-legal text-brand empty:-mt-2">
+      {/* Reserve two lines for validation, allowing longer messages to wrap. */}
+      <p id={errorId} role="alert" className="text-legal text-brand min-h-[2lh]">
         {error}
       </p>
     </div>

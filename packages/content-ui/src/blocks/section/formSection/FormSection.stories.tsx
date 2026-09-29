@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { figmaDesign } from '@o3/story-kit'
-import { expect, within } from 'storybook/test'
+import { expect, userEvent, within } from 'storybook/test'
 
 import { seededSectionArgs } from '../../../testing/seedContent'
 
@@ -72,7 +72,39 @@ export const Mobile: Story = {
  */
 export const Interaction: Story = {
   args: seededSectionArgs('contact', 'formSection'),
-  globals: { backgrounds: { value: 'bone' } },
+  globals: { backgrounds: { value: 'bone' }, viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const name = canvas.getByLabelText(/Your name/)
+    const email = canvas.getByLabelText(/Email/)
+    const form = name.closest('form')!
+    const heading = canvas.getByRole('heading', { level: 1 })
+    const geometry = () =>
+      [form, form.parentElement!, heading].map((element) => {
+        const rect = element.getBoundingClientRect()
+        return { top: rect.top + window.scrollY, height: rect.height }
+      })
+    const before = geometry()
+
+    await userEvent.click(canvas.getByRole('button', { name: /Send message/i }))
+    await expect(name).toHaveFocus()
+    await expect(name).toHaveAccessibleDescription('Add your name.')
+    await expect(geometry()).toEqual(before)
+
+    await userEvent.type(email, 'invalid')
+    await expect(email).toHaveAccessibleDescription('That email address doesn’t look right.')
+    await expect(geometry()).toEqual(before)
+
+    await userEvent.clear(email)
+    await userEvent.type(email, 'preview@example.com')
+    await expect(email).toHaveAttribute('aria-invalid', 'false')
+    await expect(geometry()).toEqual(before)
+  },
+}
+
+export const MobileInteraction: Story = {
+  ...Interaction,
+  globals: { backgrounds: { value: 'bone' }, viewport: { value: 'mobile' } },
 }
 
 /** The answer a person gets once the submission is HubSpot's. */
