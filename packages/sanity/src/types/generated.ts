@@ -384,7 +384,7 @@ export type ScreenGridSection = {
   screens?: Array<{
     media?: Figure
     tone?: 'ink' | 'brand' | 'bone'
-    span?: 'standard' | 'wide' | 'narrow'
+    span?: 'standard' | 'wide' | 'narrow' | 'third' | 'twoThirds'
     framing?: 'plate' | 'image'
     _type: 'screen'
     _key: string
@@ -3152,7 +3152,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             caption?: string
           } | null
           tone?: 'bone' | 'brand' | 'ink'
-          span?: 'narrow' | 'standard' | 'wide'
+          span?: 'narrow' | 'standard' | 'third' | 'twoThirds' | 'wide'
           framing?: 'image' | 'plate'
           _type: 'screen'
           _key: string
@@ -4419,7 +4419,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             caption?: string
           } | null
           tone?: 'bone' | 'brand' | 'ink'
-          span?: 'narrow' | 'standard' | 'wide'
+          span?: 'narrow' | 'standard' | 'third' | 'twoThirds' | 'wide'
           framing?: 'image' | 'plate'
           _type: 'screen'
           _key: string
@@ -5875,7 +5875,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             caption?: string
           } | null
           tone?: 'bone' | 'brand' | 'ink'
-          span?: 'narrow' | 'standard' | 'wide'
+          span?: 'narrow' | 'standard' | 'third' | 'twoThirds' | 'wide'
           framing?: 'image' | 'plate'
           _type: 'screen'
           _key: string
@@ -7299,7 +7299,7 @@ export type PAGE_QUERY_RESULT = {
             caption?: string
           } | null
           tone?: 'bone' | 'brand' | 'ink'
-          span?: 'narrow' | 'standard' | 'wide'
+          span?: 'narrow' | 'standard' | 'third' | 'twoThirds' | 'wide'
           framing?: 'image' | 'plate'
           _type: 'screen'
           _key: string

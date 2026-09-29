@@ -317,3 +317,86 @@ export const WideViewport: Story = {
     await expect(tiles[5]!.width).toBe(848)
   },
 }
+
+/** 3578:29877 / 3578:29880 — an authored two-thirds + one-third row. */
+export const Thirds: Story = {
+  args: {
+    surface: 'white',
+    layout: 'grid',
+    screens: [
+      {
+        ...featureScreens[3]!,
+        _key: 'ctas',
+        span: 'twoThirds',
+        media: {
+          _type: 'figure',
+          alt: 'IRONMAN race calls to action',
+          image: {
+            _type: 'image',
+            asset: {
+              _id: 'image-4aaf2ec6621051e440c92eacaf24509445244125-1216x684-png',
+              metadata: null,
+            },
+          },
+        },
+      },
+      {
+        ...featureScreens[3]!,
+        _key: 'icons',
+        span: 'third',
+        media: {
+          _type: 'figure',
+          alt: 'IRONMAN digital experience icons',
+          image: {
+            _type: 'image',
+            asset: {
+              _id: 'image-8bb1fae8fdd6a6f0431ad82d825b12d848492762-1216x684-png',
+              metadata: null,
+            },
+          },
+        },
+      },
+    ],
+  },
+  globals: { viewport: { value: 'desktop' } },
+  parameters: { design: figmaDesign('3578:29877') },
+  play: async ({ canvasElement }) => {
+    const [ctas, icons] = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
+      tile.getBoundingClientRect(),
+    )
+    await expect(Math.abs(ctas!.width - 821.333333)).toBeLessThan(1)
+    await expect(Math.abs(icons!.width - 394.666667)).toBeLessThan(1)
+    await expect(ctas!.top).toBe(icons!.top)
+    await expect(Math.abs(icons!.left - ctas!.right - 32)).toBeLessThan(1)
+  },
+}
+
+export const ThirdsMobile: Story = {
+  args: Thirds.args,
+  parameters: FeatureMobile.parameters,
+  globals: FeatureMobile.globals,
+  play: async ({ canvasElement }) => {
+    const [ctas, icons] = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
+      tile.getBoundingClientRect(),
+    )
+    await expect(Math.abs(ctas!.width - 370)).toBeLessThan(1)
+    await expect(Math.abs(icons!.width - 370)).toBeLessThan(1)
+    await expect(Math.abs(icons!.top - ctas!.bottom - 32)).toBeLessThan(1)
+  },
+}
+
+export const ThirdsWideViewport: Story = {
+  args: Thirds.args,
+  parameters: WideViewport.parameters,
+  globals: WideViewport.globals,
+  play: async ({ canvasElement }) => {
+    const grid = canvasElement.querySelector('ul')!.getBoundingClientRect()
+    const [ctas, icons] = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
+      tile.getBoundingClientRect(),
+    )
+    await expect(grid.width).toBe(1728)
+    await expect(Math.abs(ctas!.width - 1141.333333)).toBeLessThan(1)
+    await expect(Math.abs(icons!.width - 554.666667)).toBeLessThan(1)
+    await expect(Math.abs(icons!.left - ctas!.right - 32)).toBeLessThan(1)
+  },
+}

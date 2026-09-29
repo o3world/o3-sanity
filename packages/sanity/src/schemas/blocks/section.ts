@@ -778,7 +778,19 @@ export const screenGridSection = defineSectionBlock({
       type: 'array',
       description:
         'Tiles retain their order. Feature pairs the first image with two stacked tiles, then returns to the grid.',
-      validation: (rule) => rule.required().min(1),
+      validation: (rule) =>
+        rule
+          .required()
+          .min(1)
+          .custom((screens, context) => {
+            const layout = (context.parent as { layout?: string } | undefined)?.layout
+            const hasThirds = (screens as { span?: string }[] | undefined)?.some(
+              (screen) => screen.span === 'third' || screen.span === 'twoThirds',
+            )
+            return layout === 'feature' && hasThirds
+              ? 'Third and two-thirds spans require Grid layout.'
+              : true
+          }),
       of: [
         defineArrayItem({
           knobs: screenKnobs,
