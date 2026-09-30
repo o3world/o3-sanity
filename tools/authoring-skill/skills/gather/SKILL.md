@@ -128,7 +128,7 @@ Set these fields and no others:
 | `decisions`  | the weight you announced, and the collision the human resolved below                               |
 
 `thesis`, `readerQuestions`, `outline`, `draft`, `verdict` and `pieceId` belong
-to stages nobody has dispatched. Leave them empty. Never set `sourcePath`.
+to stages nobody has dispatched. Leave them empty.
 
 ## 4. Put the gate to the human
 

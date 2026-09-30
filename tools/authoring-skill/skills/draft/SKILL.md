@@ -352,7 +352,7 @@ One field per patch, under `ifRevisionId` — CORE's two patch mechanics:
 | `gaps`          | anything the drafting found that nobody has, appended to what is there |
 
 `thesis`, `readerQuestions`, `verdict` and `pieceId` belong to other stages.
-Leave them. Never set `sourcePath`.
+Leave them.
 
 Close by saying which brief you wrote to, which dataset, the arc or band list by
 name, the word or band count against the forecast, and what is still on `gaps`.
