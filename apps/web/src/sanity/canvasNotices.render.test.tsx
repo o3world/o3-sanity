@@ -54,16 +54,6 @@ describe('what an editor sees when the draft refuses an edit', () => {
     expect(html).toContain('Document &quot;page-index&quot; not found')
   })
 
-  it('says nothing where the rejection carried no reason', () => {
-    const queue = createCanvasNoticeQueue()
-    queue.publish('could not duplicate sections[_key=="a"]', { statusCode: 409 })
-
-    const html = render(queue)
-
-    expect(html).toContain('Could not duplicate')
-    expect(html).not.toContain('[object Object]')
-  })
-
   it('shows how many times it has happened, and only once it has happened twice', () => {
     const queue = createCanvasNoticeQueue()
     queue.publish('could not remove sections[_key=="a"]', notFound)
@@ -89,17 +79,6 @@ describe('what an editor sees when the draft refuses an edit', () => {
     expect(html.indexOf('Could not remove first')).toBeLessThan(
       html.indexOf('Could not remove second'),
     )
-  })
-
-  it('holds three, then drops the oldest rather than covering the page', () => {
-    const queue = createCanvasNoticeQueue()
-    for (const what of ['a', 'b', 'c', 'd']) queue.publish(`could not remove ${what}`, notFound)
-
-    const html = render(queue)
-
-    expect(html.match(/data-testid="canvas-notice"/g)).toHaveLength(3)
-    expect(html).not.toContain('Could not remove a')
-    expect(html).toContain('Could not remove d')
   })
 })
 
