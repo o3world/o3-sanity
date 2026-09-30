@@ -28,6 +28,7 @@ import { PrototypeFrame, prototypeParameters } from './frame'
 const meta = {
   title: 'Prototypes/Globe — official exports (Aug 2026)',
   component: PrototypeFrame,
+  tags: ['!test'],
   parameters: prototypeParameters,
 } satisfies Meta<typeof PrototypeFrame>
 
