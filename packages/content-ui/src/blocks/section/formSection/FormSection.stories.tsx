@@ -74,6 +74,7 @@ export const Interaction: Story = {
   args: seededSectionArgs('contact', 'formSection'),
   globals: { backgrounds: { value: 'bone' }, viewport: { value: 'desktop' } },
   play: async ({ canvasElement }) => {
+    await document.fonts.ready
     const canvas = within(canvasElement)
     const name = canvas.getByLabelText(/Your name/)
     const email = canvas.getByLabelText(/Email/)
@@ -161,6 +162,7 @@ export const NarrowDesktopInteraction: Story = {
     },
   },
   play: async ({ canvasElement }) => {
+    await document.fonts.ready
     const canvas = within(canvasElement)
     const email = canvas.getByLabelText(/Email/)
     const name = canvas.getByLabelText(/Your name/)
