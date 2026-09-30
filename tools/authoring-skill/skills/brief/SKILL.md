@@ -203,7 +203,7 @@ in context and sent back whole, and `ifRevisionId` on the call.
 | `nextStep`        | what stage 3 does first, in a sentence                                                                             |
 
 `outline`, `draft`, `verdict` and `pieceId` belong to stages nobody has
-dispatched. Leave them empty, and never set `sourcePath`.
+dispatched. Leave them empty.
 
 ## Then hand on
 

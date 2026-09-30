@@ -118,7 +118,7 @@ pass `ifRevisionId` on this patch and on every other one — see
 | `decisions` | any call this stage made, and the override entry above if there was one    |
 
 `thesis`, `readerQuestions`, `outline`, `draft` and `verdict` belong to earlier
-stages. Leave them. Never set `sourcePath`.
+stages. Leave them.
 
 Then close with the hand-off summary: the document id and the path it will serve
 at, the dataset, the brief it ran from, every gap and empty slot, and what the

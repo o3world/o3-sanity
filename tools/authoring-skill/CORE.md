@@ -122,9 +122,7 @@ and puts the material back. `gaps` is gather's to open and **every stage's to
 append to** — a stage that finds nobody has something adds a line and never
 rewrites the list, because the entries above it were findings too.
 
-`key` and `sourcePath` are never yours to set past creation. A brief written
-here has no `sourcePath` at all: its absence is what tells `brief:check` this
-document was born in the dataset and is not its to audit.
+`key` is never yours to set past creation.
 
 ## How a stage patches the brief
 
