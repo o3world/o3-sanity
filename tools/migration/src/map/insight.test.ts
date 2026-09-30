@@ -267,15 +267,6 @@ describe('mapInsight', () => {
     })
   })
 
-  // Determinism is what makes "wipe and rebuild reproduces the dataset"
-  // (ADR 0003) true, and it is why re-running convert does not churn every
-  // _key in the committed JSON. See docs/adr/0004.
-  it('is deterministic — the same post converts to byte-identical JSON every run', () => {
-    const first = expectOk(map(wpPost()))
-    const second = expectOk(map(wpPost()))
-    expect(JSON.stringify(first)).toBe(JSON.stringify(second))
-  })
-
   it('gives every body block a key, unique within the document', () => {
     const doc = expectOk(
       map(

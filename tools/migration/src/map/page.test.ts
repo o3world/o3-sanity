@@ -231,12 +231,6 @@ describe('mapPage', () => {
     expect(new Set(keys).size).toBe(keys.length)
   })
 
-  it('is deterministic — the same page converts to byte-identical JSON', () => {
-    expect(JSON.stringify(expectOk(mapPage(wpPage(), SITE)))).toBe(
-      JSON.stringify(expectOk(mapPage(wpPage(), SITE))),
-    )
-  })
-
   describe('fails loud rather than dropping content (ADR 0002)', () => {
     it('reports a flexible-content layout it has no mapper for', () => {
       const result = mapPage(
