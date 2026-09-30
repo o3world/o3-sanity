@@ -230,6 +230,13 @@ copy — it reports before it writes, refuses a dataset it was not told about ou
 loud, reruns as a no-op, and overwrites no field it did not come to change. Run
 it, then say on the ticket what it touched.
 
+**A migration is deleted once it has run.** When its production run is on its
+ticket, a follow-up removes the script, its plan, its test and its
+`package.json` entry; the ticket and git history keep the record. A migration
+whose dry run now refuses because the documents it targets have moved on is
+dead too. If its change is still wanted, write a new one against the content as
+it stands. `statsToBand.ts` stays as the pattern.
+
 `pnpm --filter @o3/migration verify` remains useful as a read-only check.
 
 The production protections still apply to targeted work there: ADR 0003 is
