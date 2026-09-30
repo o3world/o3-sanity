@@ -3,14 +3,6 @@
   "_type": "collectionIndex",
   "title": "Insights index",
   "collection": "insight",
-  "pinnedItems": [
-    { "_type": "reference", "_key": "insight-10635", "_ref": "insight-wp-10635" },
-    { "_type": "reference", "_key": "insight-10623", "_ref": "insight-wp-10623" },
-    { "_type": "reference", "_key": "insight-10601", "_ref": "insight-wp-10601" },
-    { "_type": "reference", "_key": "insight-10590", "_ref": "insight-wp-10590" },
-    { "_type": "reference", "_key": "insight-10579", "_ref": "insight-wp-10579" },
-    { "_type": "reference", "_key": "insight-10569", "_ref": "insight-wp-10569" }
-  ],
   "sectionsAbove": [
     {
       "_type": "heroSection",
@@ -19,9 +11,10 @@
       "surface": "ink",
       "eyebrow": "Insights",
       "headlineLines": [
-        "Learn about what drives our experiences."
+        "Looking past",
+        "the horizon."
       ],
-      "subheading": "Looking for some firsthand knowledge from our world? Check out our in-depth thoughts about the industry today, our culture at O3, the future of AI and digital experiences, and other relevant topics.",
+      "subheading": "What we’re learning, questioning, and putting into practice across AI, design, and technology.",
       "decoration": "orbs"
     }
   ],
@@ -29,12 +22,12 @@
     {
       "_type": "ctaSection",
       "_key": "cta",
-      "heading": "Let’s get started on your next big thing.",
-      "body": "We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready.",
+      "heading": "Let’s put some of this thinking to work.",
+      "body": "If something here sparked an idea, surfaced a challenge, or got you thinking differently, we’d love to talk about where it could lead.",
       "button": {
         "_type": "button",
-        "label": "View our work",
-        "href": "/work"
+        "label": "Start the conversation",
+        "href": "/contact"
       }
     }
   ],
@@ -47,7 +40,7 @@
     "locked": false,
     "sourceId": "seed:insights",
     "extractedAt": "2026-08-25T00:00:00Z",
-    "figmaNode": "2336:4310",
+    "figmaNode": "3739:71101",
     "provisional": false
   }
 }

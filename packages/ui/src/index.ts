@@ -41,7 +41,7 @@ export type { ButtonProps } from './components/ui/button'
 export { BUTTON_ICONS, ChevronDownIcon, ExternalLinkIcon } from './components/button-icons'
 export type { ButtonIconProps } from './components/button-icons'
 
-// FilterChip — the Insights index filter bar's chip (2337:4486)
+// FilterChip — the Insights index filter bar's chip (3739:71110)
 export { FilterChip, filterChipVariants } from './components/filter-chip'
 export type { FilterChipProps } from './components/filter-chip'
 

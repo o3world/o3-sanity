@@ -6,7 +6,7 @@ import { cn } from '../lib/utils'
 
 /**
  * The filter bar's chip, from Figma's `Button` set (`2134:1785`) as the
- * Insights index instances it (`2337:4542` selected, `2337:4551` not) — #61.
+ * Insights index instances it (`3739:71111` selected, `3739:71112` not) — #61.
  *
  * ```
  * 12px 16px, gap 12, radius 5 (`--radius-btn`), label 18/24 Figtree Medium
@@ -41,10 +41,10 @@ const filterChipVariants = cva(
   {
     variants: {
       selected: {
-        // Theme=Black (2337:4542) — the chip for the category being shown.
+        // Theme=Black (3739:71111) — the chip for the category being shown.
         true: 'bg-ink text-white border-ink',
         /*
-         * Theme=White (2337:4551). Both of the chip's own colours are on the
+         * Theme=White (3739:71112). Both of the chip's own colours are on the
          * ramp: the label is `fg-body` — the warm dark grey the 2026-08 frames
          * set body copy in — and the stroke is the `fg-muted` the card meta
          * uses.

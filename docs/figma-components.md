@@ -261,7 +261,7 @@ ink, which is what lets `SiteNav` flip it by inheritance alone.
 
 `2134:1785` draws one button at both frame widths — **12×16 padding, a 12px
 gap, radius 5, an 18/24 Figtree Medium label** — and every redesigned frame
-instances it, including the CTA band (`2336:4351`) and the nav pill
+instances it, including the CTA band (`3771:80361`) and the nav pill
 (`2225:2877`). `Button` and `FilterChip` are both built to it.
 
 The set has **no size axis**. `Button`'s `base | large` is this repo's own

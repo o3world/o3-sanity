@@ -36,7 +36,7 @@ import { cn } from '@o3/ui'
  * hairlines (`brand-token-seam.test.ts`).
  *
  * O3's own Figma draws no pager at all — `docs/figma-components.md` has no
- * pagination row, and the Insights frame `2336:4310` fits nine cards on one
+ * pagination row, and the Insights frame `3739:71101` fits twelve cards on one
  * canvas.
  *
  * ## Why it lives here and not in `@o3/ui`

@@ -334,7 +334,7 @@ const NEXT_CASE_STUDY_ID =
  * so switching category re-pages rather than leaving page 4 of an unfiltered
  * collection pointing at nothing.
  *
- * The third key is the **filter bar's own options** (`2337:4486`), fetched in
+ * The third key is the **filter bar's own options** (`3739:71110`), fetched in
  * the same round-trip rather than as a second request. Two rules shape it:
  *
  * - **only categories that have an article** — a chip that returns an empty
