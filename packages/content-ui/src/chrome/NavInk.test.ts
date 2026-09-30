@@ -90,10 +90,14 @@ function picture({
   return element
 }
 
-/** One frame of the browser's, plus the microtask an observer wakes on. */
-const settle = () => new Promise((resolve) => setTimeout(resolve, 64))
+/**
+ * Four frames on the faked clock: enough for a batched sample, with the
+ * microtasks an observer wakes on flushed between them.
+ */
+const settle = () => vi.advanceTimersByTimeAsync(64)
 
 beforeEach(() => {
+  vi.useFakeTimers()
   document.body.innerHTML = ''
   painted = []
 
@@ -128,6 +132,7 @@ afterEach(() => {
   stop?.()
   vi.restoreAllMocks()
   vi.unstubAllGlobals()
+  vi.useRealTimers()
 })
 
 /** Wipe the page and repaint it, the way a route change or a reflow does. */
