@@ -23,10 +23,9 @@ export type { ArrowIconProps } from './components/arrow-icon'
 export { ArticleByline } from './components/article-byline'
 export type { ArticleBylineProps } from './components/article-byline'
 
-// BrandLogo — Figma's `Brand / Logo` set (264:50)
-// BrandMark — the same mark without its plate; no Figma set draws it
-export { BrandLogo, BrandMark, brandLogoVariants } from './components/brand-logo'
-export type { BrandLogoProps, BrandMarkProps } from './components/brand-logo'
+// BrandMark — the O3 mark without its plate; no Figma set draws it
+export { BrandMark } from './components/brand-logo'
+export type { BrandMarkProps } from './components/brand-logo'
 
 // CloseIcon / MenuIcon — the chrome glyphs (ADR 0009)
 export { CloseIcon } from './components/close-icon'

@@ -190,8 +190,7 @@ describe('the nav bar’s pinned, dark-ink default', () => {
 
   it('draws the mark without its plate, so there is nothing to invert', () => {
     // Nick's direction, 2026-08-02: the O3 changes colour to stay visible,
-    // "without the square box". `BrandLogo`'s filled square IS the plate, so
-    // the nav uses `BrandMark`.
+    // "without the square box" — `BrandMark` draws no plate.
     //
     // Scoped to the mark's own svg: the hamburger draws its two bars as
     // `<rect>` too, so a document-wide probe for one would pass on the wrong
