@@ -127,11 +127,9 @@ export function slugsByType(
 }
 
 /**
- * The document types this pipeline does not own. `brief` is synced from repo
- * markdown by `tools/guidance`
- * ([ADR 0027](../../../../docs/adr/0027-the-brief-is-a-document.md)) and
- * outlives this pipeline, which is deleted post-migration. So a brief is never
- * committed under `data/`, and `verify` does not count one an orphan.
+ * The document types the committed corpus does not hold. A `brief` lives only
+ * in the dataset, so one is never committed under `data/`, and `verify` does
+ * not count one an orphan.
  *
  * `guidance` is a retired type with no schema and no writer (#192), named here
  * because the `production` dataset still holds six of its documents: without
@@ -145,9 +143,8 @@ export function isInternalType(type: string): boolean {
 }
 
 /**
- * A brief's deterministic id — `brief-<key>`, the id a `briefs` reference in
- * seed JSON points at. A matcher only: the id is constructed by `idFor` in
- * `tools/guidance/src/corpus/plan.ts`, which this tool does not import
- * because it is deleted post-migration and the corpus tool is not.
+ * A brief's id — `brief-<key>`, from the `key` field the brief schema defines,
+ * and the id a `briefs` reference in seed JSON points at. A matcher only:
+ * briefs are written in the dataset, never from here.
  */
 export const BRIEF_ID = /^brief-[a-z0-9]+(-[a-z0-9]+)*$/

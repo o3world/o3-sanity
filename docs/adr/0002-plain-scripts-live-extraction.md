@@ -1,5 +1,7 @@
 # 0002. Migrate with plain TypeScript scripts and live `wp eval` extraction — no staging database
 
+Status: superseded in part 2026-09-30; the WordPress import is frozen. Extract, convert and the redirect generator are deleted, and the JSON they committed is edited as data.
+
 - **Status:** Accepted
 - **Date:** 2026-07-31
 - **Deciders:** NickO3 + Claude

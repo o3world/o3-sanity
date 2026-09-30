@@ -1,4 +1,3 @@
-import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -13,6 +12,11 @@ export const REPO_ROOT = join(ROOT, '..', '..')
  */
 const DATA = join(ROOT, 'data')
 
+/**
+ * What is left of the WordPress snapshot: the case-study sources the
+ * translations hash against, the run manifest `drift` stamps from, and the
+ * live sitemap list `redirects.test.ts` checks the redirect table against.
+ */
 export const EXTRACT_DIR = join(DATA, 'extract')
 export const CONVERTED_DIR = join(DATA, 'converted')
 export const TRANSLATED_DIR = join(DATA, 'translated')
@@ -22,8 +26,3 @@ export const RULES_DIR = join(ROOT, 'rules')
 export const ASSET_MAP = join(DATA, 'assets.json')
 /** Source URLs whose binary is gone — a committed record `drift` reads. */
 export const MISSING_MEDIA = join(DATA, 'missing-media.json')
-
-export function writeJson(path: string, value: unknown) {
-  mkdirSync(dirname(path), { recursive: true })
-  writeFileSync(path, JSON.stringify(value, null, 2) + '\n')
-}

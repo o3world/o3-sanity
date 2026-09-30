@@ -1,8 +1,7 @@
-# Machine-generated migration data. `convert` writes these with
-# JSON.stringify(…, null, 2); prettier formats short arrays differently, so
-# letting it reformat them on commit means every subsequent `pnpm convert`
-# re-dirties the tree and the committed JSON stops being byte-reproducible.
-# The pipeline owns these directories (ADR 0003) — prettier does not.
+# Migration data, kept in JSON.stringify(…, null, 2) form — the form every
+# file was written in and the one `sync-docs` still writes `assets.json` in.
+# Prettier formats short arrays differently, so letting it reformat them on
+# commit would churn every file it touched.
 tools/migration/data/
 
 # Machine-written figma-sync output, for the same reason (#78). `tracked-nodes.json`
@@ -17,11 +16,9 @@ tools/figma-sync/data/report.md
 # the story files and frame.tsx beside them are formatted normally.
 apps/storybook/prototypes/*/
 
-# The generated redirect table (#24). `pnpm --filter @o3/migration redirects`
-# writes it from the committed WordPress export, and prettier wraps the long
-# URLs — so letting it reformat means every regeneration re-dirties the tree
-# and the committed file stops matching what the generator produces, which is
-# the one thing `redirects.test.ts` checks.
+# The redirect table (#24), kept in the layout it was generated in. Prettier
+# wraps the long URLs, so a reformat would rewrite all 300 rows and bury the
+# next real edit in the diff.
 apps/web/src/lib/redirects.generated.ts
 
 # Next writes this file on every dev and build, with double quotes and a
@@ -41,10 +38,3 @@ apps/web/next-env.d.ts
 # read is the same bytes. Prettier rewrites the emphasis markers in one of them.
 # Only the scripts; the README beside them is formatted normally.
 tools/authoring-skill/scenarios/scenario-*.md
-
-# Generated calibration copy (#143). `scripts/fixtures/extract-approved-copy.mjs`
-# writes these from the seed JSON, verbatim, so the linter scores the copy the
-# site actually publishes. Prettier rewrites emphasis markers and dash runs
-# inside the copy — which is the linter's input, so a reformat would have it
-# measure prettier's punctuation instead of ours.
-tools/authoring-skill/scripts/fixtures/approved-*.md

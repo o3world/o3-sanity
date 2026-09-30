@@ -161,10 +161,9 @@ describe('committed seed content', () => {
 
   // A dangling reference loads without complaint and renders as a hole.
   //
-  // A brief is the one exception: it is synced by `brief:sync` rather than
-  // loaded, so it is never committed under `data/` and its reference is weak
-  // for exactly that reason (ADR 0027). The shape of those references is
-  // checked below instead.
+  // A brief is the one exception: it lives only in the dataset, so it is never
+  // committed under `data/` and its reference is weak for exactly that reason.
+  // The shape of those references is checked below instead.
   it('resolves every reference to another committed document', () => {
     for (const { file, doc } of seeds) {
       for (const ref of refsIn(doc)) {
@@ -243,11 +242,9 @@ describe('committed seed content', () => {
     })
 
     /**
-     * The other end of the reference — that a markdown file registers the key
-     * it points at — is asserted in `tools/guidance`, where the corpus reader
-     * lives. Checking it here meant re-implementing frontmatter parsing, and
-     * the copy disagreed with the reader about quoted values and where a fence
-     * ends.
+     * The other end of the reference — that the brief it names exists — is a
+     * fact about the dataset, not the corpus, so no committed-JSON test can
+     * assert it.
      *
      * No committed seed carries a `briefs` entry right now — the one that did
      * was a test post, deleted 2026-08-25 — so the corpus-wide assertions

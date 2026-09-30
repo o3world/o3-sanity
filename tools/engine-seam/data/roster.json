@@ -332,7 +332,7 @@
     {
       "path": "tools/migration",
       "verdict": "product",
-      "why": "The WordPress migration pipeline for this site.",
+      "why": "This site's committed content corpus and the scripts that compare or change the dataset against it.",
       "overrides": [
         {
           "path": "src/core/state.ts",
@@ -342,7 +342,7 @@
         {
           "path": "src/core/read.ts",
           "verdict": "engine",
-          "why": "The corpus tree walker and id-ownership contract."
+          "why": "The corpus tree walker."
         }
       ],
       "impurities": [

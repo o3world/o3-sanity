@@ -1,32 +1,35 @@
 import { collectionPrefixes } from '@o3/sanity/brand'
 import { WORDPRESS_PREFIXES } from '@o3/sanity/constants'
 
-import type { ConversionIssue } from '../lib/htmlToPortableText'
-
 /**
  * Path parity (#26). **A migrated document keeps the URL path WordPress
  * serves it at today.** Not "roughly", not "the slug matches" — the full
  * path, character for character, minus the trailing slash WordPress adds and
  * Next.js does not.
  *
- * The rule is enforced rather than documented: every mapper compares the new
- * path against Yoast's own `canonicalRendered` and fails loud on a mismatch
- * (ADR 0002), so a slug that quietly changes shape during conversion stops
- * the run instead of silently costing the ranking.
+ * The rule is enforced rather than documented: `translated.test.ts` compares
+ * every case study's path against Yoast's own `canonicalRendered`, and
+ * `redirects.test.ts` holds every URL the live sitemaps advertise to "served
+ * or redirected".
  *
- * A deliberate path change is therefore a two-line act — add an entry to
- * `PATH_EXCEPTIONS` with its reason — and that map is the input to the #24
- * redirect map. If a path change is not written down here, it does not
- * happen.
+ * A deliberate path change is therefore a recorded act — an entry in
+ * `PATH_EXCEPTIONS` with its reason, and a row for it in the app's redirect
+ * table. If a path change is not written down here, it does not happen.
  */
 
+/** A parity failure, in the shape the gates report. */
+interface PathIssue {
+  readonly element: string
+  readonly detail: string
+}
+
 /** One path that moved. */
-export interface PathException {
+interface PathException {
   /** The path WordPress serves today, no host, no trailing slash. */
   readonly from: string
   /** The path the new site serves. */
   readonly to: string
-  /** Why the change is worth a redirect. Shows up in the #24 redirect map. */
+  /** Why the change is worth a redirect. */
   readonly reason: string
 }
 
@@ -35,10 +38,10 @@ export interface PathException {
  *
  * A collection rename is a single decision, not N of them. Spelling it out per
  * document would bury that decision in 272 identical rows, go stale the first
- * time a slug changed, and make the redirect generator ship 272 rows where one
+ * time a slug changed, and make the redirect table carry 272 rows where one
  * prefix rule says the same thing.
  */
-export interface PathPrefixException {
+interface PathPrefixException {
   readonly fromPrefix: string
   readonly toPrefix: string
   readonly reason: string
@@ -46,16 +49,13 @@ export interface PathPrefixException {
 
 /**
  * Deliberate path changes — the record of every URL this redesign moves.
- *
- * Both lists were empty by design until ADR 0017: the WordPress URL space was
- * exactly the URL space ADR 0001 routes, so nothing had to move. Entries here
- * are decisions, not conversion accidents, and this is the only place a moved
- * path is declared — `checkPathParity` reads it, and so does the #24 redirect
- * generator.
+ * Entries here are decisions, not accidents, and this is the only place a
+ * moved path is declared: `movedPath` reads it, for `checkPathParity` and for
+ * `redirects.test.ts`.
  */
 export const PATH_EXCEPTIONS: readonly PathException[] = []
 
-export const PATH_PREFIX_EXCEPTIONS: readonly PathPrefixException[] = [
+const PATH_PREFIX_EXCEPTIONS: readonly PathPrefixException[] = [
   {
     fromPrefix: WORDPRESS_PREFIXES.insight!,
     toPrefix: collectionPrefixes().insight,
@@ -114,10 +114,7 @@ export function wpPath(canonicalUrl: string): string | null {
  * serves today. Returns the issue to report, or `null` when they agree (or when
  * the difference is a recorded exception).
  */
-export function checkPathParity(
-  canonicalRendered: string,
-  newPath: string,
-): ConversionIssue | null {
+export function checkPathParity(canonicalRendered: string, newPath: string): PathIssue | null {
   const from = wpPath(canonicalRendered)
   if (from === null) {
     return {
@@ -133,6 +130,6 @@ export function checkPathParity(
     element: 'path parity',
     detail:
       `WordPress serves "${from}" but this document maps to "${newPath}". ` +
-      `Either fix the slug or record the change in PATH_EXCEPTIONS / PATH_PREFIX_EXCEPTIONS (map/paths.ts) so it becomes a redirect.`,
+      `Either fix the slug or record the change in PATH_EXCEPTIONS / PATH_PREFIX_EXCEPTIONS (map/paths.ts) and give it a redirect.`,
   }
 }
