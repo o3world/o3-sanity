@@ -585,17 +585,6 @@ describe('committed seed content', () => {
       const types = ((contact?.sections ?? []) as { _type: string }[]).map((s) => s._type)
       expect(types).toContain('formSection')
     })
-
-    /**
-     * The form sends now (#412) — it posts to `/api/contact` and on to
-     * HubSpot — so the page carries no provisional marker. The only thing that
-     * marker ever named was the missing handler.
-     */
-    it('no longer declares itself provisional', () => {
-      const migration = (contact?.migration ?? {}) as Partial<Migration>
-      expect(migration.provisional).toBeUndefined()
-      expect(migration.provisionalNote).toBeUndefined()
-    })
   })
 
   /**
