@@ -229,11 +229,6 @@
           "why": "Delay and intersection-observer wrapper, token-free."
         },
         {
-          "path": "src/components/logo-tile.tsx",
-          "verdict": "engine",
-          "why": "An image box with no token names."
-        },
-        {
           "path": "src/components/thinking-orb.tsx",
           "verdict": "engine",
           "why": "A thin wrapper over the thinking-orbs npm package."

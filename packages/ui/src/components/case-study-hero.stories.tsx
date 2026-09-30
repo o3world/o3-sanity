@@ -7,13 +7,11 @@ const meta = {
   title: 'Case Study/CaseStudyHero',
   component: CaseStudyHero,
   parameters: { layout: 'fullscreen' },
+  // The title reaches its 48px cap at 1440, so the stories run at that width.
+  globals: { viewport: { value: 'desktop' } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    if (window.innerWidth >= 1440) {
-      await expect(getComputedStyle(canvas.getByRole('heading', { level: 1 })).fontSize).toBe(
-        '48px',
-      )
-    }
+    await expect(getComputedStyle(canvas.getByRole('heading', { level: 1 })).fontSize).toBe('48px')
     const eyebrow = canvasElement.querySelector('p')
     if (eyebrow) await expect(getComputedStyle(eyebrow).color).toBe('rgb(255, 255, 255)')
   },
@@ -30,7 +28,7 @@ const photograph = (
   <div className="h-full w-full bg-[radial-gradient(circle_at_30%_20%,#5a5a5a_0%,#141414_70%)]" />
 )
 
-/** The frames' own copy: a red kicker, the 64px Light title, the standfirst. */
+/** The frames' own copy: a white kicker, the 48px title, the standfirst. */
 export const Default: Story = {
   args: {
     eyebrow: 'IRONMAN',

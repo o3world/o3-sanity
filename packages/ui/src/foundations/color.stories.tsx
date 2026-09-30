@@ -6,6 +6,8 @@ import { Mono, Page, Section } from './spec-ui'
 
 const meta = {
   title: 'Foundations/Color',
+  // A reference page, not a component: shown in Storybook, not mounted by the stories run.
+  tags: ['!test'],
   parameters: {
     layout: 'fullscreen',
     design: figmaDesign('3720:60473'),

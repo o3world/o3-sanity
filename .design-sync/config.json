@@ -68,13 +68,10 @@
     "SectionShell": {
       "cardMode": "column"
     },
-    "BrandLogo": {
+    "BrandMark": {
       "cardMode": "column"
     },
     "Button": {
-      "cardMode": "column"
-    },
-    "Card": {
       "cardMode": "column"
     },
     "PortraitTile": {

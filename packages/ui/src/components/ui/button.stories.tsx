@@ -28,7 +28,9 @@ const meta: Meta<typeof Button> = { ...kit.meta, component: Button }
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Playground = kit.Playground as Story
+// Playground, Ghost, Disabled and DownIcon repeat what Matrix, States and
+// ExternalIcon already mount, so they stay in the sidebar and out of the run.
+export const Playground = { ...kit.Playground, tags: ['!test'] } as Story
 export const Matrix = kit.Matrix as Story
 
 /** `Theme=Black` (2134:1786) on a light band, at the repo's `large` step. */
@@ -72,11 +74,17 @@ export const LongLabel: Story = {
       </div>
     ),
   ],
+  play: async ({ canvasElement }) => {
+    const button = within(canvasElement).getByRole('button')
+    await expect(button.getBoundingClientRect().width).toBeLessThanOrEqual(320)
+    await expect(button.scrollWidth).toBeLessThanOrEqual(button.clientWidth)
+  },
 }
 
 /** `Button / Ghost` (264:260). */
 export const Ghost: Story = {
   args: { variant: 'ghost', children: 'Ghost' },
+  tags: ['!test'],
 }
 
 /** The slot left empty — the label alone, and the 12px gap goes with it. */
@@ -94,11 +102,13 @@ export const ExternalIcon: Story = {
 
 export const DownIcon: Story = {
   args: { children: 'How we work', icon: <ChevronDownIcon /> },
+  tags: ['!test'],
 }
 
 /** `#D6D3CC` under a `#76746F` label (`2134:1810`). */
 export const Disabled: Story = {
   args: { children: 'Disabled', disabled: true },
+  tags: ['!test'],
 }
 
 /** Real pseudo-classes keep this gallery aligned with the component's state rules. */

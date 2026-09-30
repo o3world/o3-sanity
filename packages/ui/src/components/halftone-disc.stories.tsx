@@ -13,11 +13,15 @@ type Story = StoryObj<typeof meta>
 
 /** 138px — beside a discipline on the About grid (`1925:5922`). */
 export const Discipline: Story = {
+  // `Discipline` and `Role` are each one half of `BothSizes`, which alone is
+  // mounted by the stories run.
+  tags: ['!test'],
   args: { className: 'text-ink w-[138px]' },
 }
 
 /** 70px — beside a job role in the Careers band (`1925:6068`). */
 export const Role: Story = {
+  tags: ['!test'],
   args: { className: 'text-ink w-[70px]' },
 }
 

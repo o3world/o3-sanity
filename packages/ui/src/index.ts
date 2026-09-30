@@ -23,10 +23,9 @@ export type { ArrowIconProps } from './components/arrow-icon'
 export { ArticleByline } from './components/article-byline'
 export type { ArticleBylineProps } from './components/article-byline'
 
-// BrandLogo — Figma's `Brand / Logo` set (264:50)
-// BrandMark — the same mark without its plate; no Figma set draws it
-export { BrandLogo, BrandMark, brandLogoVariants } from './components/brand-logo'
-export type { BrandLogoProps, BrandMarkProps } from './components/brand-logo'
+// BrandMark — the O3 mark without its plate; no Figma set draws it
+export { BrandMark } from './components/brand-logo'
+export type { BrandMarkProps } from './components/brand-logo'
 
 // CloseIcon / MenuIcon — the chrome glyphs (ADR 0009)
 export { CloseIcon } from './components/close-icon'
@@ -73,19 +72,6 @@ export {
 } from './components/ui/carousel'
 export type { CarouselApi } from './components/ui/carousel'
 
-// Card
-export {
-  Card,
-  CardMedia,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  cardVariants,
-} from './components/ui/card'
-export type { CardProps } from './components/ui/card'
-
 // DisplayHeading (+ the line stagger it composes)
 export { DisplayHeading, displayHeadingVariants } from './components/display-heading'
 export type { DisplayHeadingProps } from './components/display-heading'
@@ -107,10 +93,6 @@ export type { FormFieldControl, FormFieldProps } from './components/form-field'
 // HalftoneDisc — the dotted disc beside a discipline (1925:5922) or a role (1925:6068)
 export { HalftoneDisc } from './components/halftone-disc'
 export type { HalftoneDiscProps } from './components/halftone-disc'
-
-// LogoTile
-export { LogoTile } from './components/logo-tile'
-export type { LogoTileProps } from './components/logo-tile'
 
 // Skeleton — the block a streamed route holds while its data is in flight
 export { Skeleton } from './components/skeleton'

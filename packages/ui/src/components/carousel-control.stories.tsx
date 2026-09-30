@@ -20,16 +20,21 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Next: Story = {
+  // `Next`, `Prev`, `Pair` and `OnInk` are covered by `AtTheStart`, which mounts
+  // both directions, enabled and disabled; they stay out of the stories run.
+  tags: ['!test'],
   args: { direction: 'next' },
 }
 
 /** The same glyph, rotated — not a second drawing. */
 export const Prev: Story = {
+  tags: ['!test'],
   args: { direction: 'prev' },
 }
 
 /** How the pair actually ships: prev then next, on the heading row. */
 export const Pair: Story = {
+  tags: ['!test'],
   args: { direction: 'prev' },
   render: () => (
     <div className="flex items-center gap-4">
@@ -56,6 +61,7 @@ export const AtTheStart: Story = {
 
 /** On ink — the control is a fixed `surface-muted` fill, so it does not invert. */
 export const OnInk: Story = {
+  tags: ['!test'],
   args: { direction: 'next' },
   globals: { backgrounds: { value: 'ink' } },
 }

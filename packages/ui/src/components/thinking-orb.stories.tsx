@@ -36,6 +36,9 @@ const STATES = [
 
 /** The default: `working`, at the 64px preset. */
 export const Default: Story = {
+  // `Default`, `Slow`, `Paused` and `OnInk` each change one prop of what `States`
+  // mounts, so they stay in the sidebar and out of the stories run.
+  tags: ['!test'],
   args: { state: 'working' },
 }
 
@@ -79,11 +82,13 @@ export const Sizes: Story = {
 
 /** Half pace. `speed` multiplies the animation's baked tempo. */
 export const Slow: Story = {
+  tags: ['!test'],
   args: { state: 'weaving', speed: 0.5, theme: 'light' },
 }
 
 /** Held on a frame — what `paused` gives an editor who wants a still mark. */
 export const Paused: Story = {
+  tags: ['!test'],
   args: { state: 'shaping', paused: true, theme: 'light' },
 }
 
@@ -92,6 +97,7 @@ export const Paused: Story = {
  * the document, and an ink band is a section of an otherwise light page.
  */
 export const OnInk: Story = {
+  tags: ['!test'],
   args: { state: 'searching', theme: 'dark' },
   globals: { backgrounds: { value: 'ink' } },
   render: (args) => (

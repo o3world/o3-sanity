@@ -29,11 +29,15 @@ export const Default: Story = {
 }
 
 export const OnInk: Story = {
+  // `OnInk` and `Sizes` differ from `Default` only in colour or size; `Default`
+  // alone is mounted by the stories run.
+  tags: ['!test'],
   args: { className: 'text-white' },
   globals: { backgrounds: { value: 'ink' } },
 }
 
 export const Sizes: Story = {
+  tags: ['!test'],
   args: { className: 'text-ink' },
   render: () => (
     <div className="text-ink flex items-center gap-6">
