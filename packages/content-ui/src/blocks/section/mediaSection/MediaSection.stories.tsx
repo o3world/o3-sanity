@@ -29,7 +29,13 @@ const meta = {
   component: MediaSection,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('1647:1721'),
+    design: [],
+    docs: {
+      description: {
+        component:
+          'Includes historical fixtures retained for authorable behavior coverage. Current design references are linked on individual stories.',
+      },
+    },
   },
 } satisfies Meta<typeof MediaSection>
 
@@ -49,14 +55,12 @@ export const FullBleed: Story = {
 /** The 822px article measure, with the `0 0 64px rgba(0,0,0,0.1)` lift. */
 export const Contained: Story = {
   args: { ...seededSectionArgs('ventures-urvin', 'mediaSection'), width: 'contained' },
-  parameters: { design: figmaDesign('1899:4186') },
 }
 
 /** `1906:900` — full-bleed at 402, where the box is 402 × 257. */
 export const FullBleedMobile: Story = {
   args: { ...seededSectionArgs('ventures-urvin', 'mediaSection'), width: 'full-bleed' },
   globals: { viewport: { value: 'mobile' } },
-  parameters: { design: figmaDesign('1906:900') },
 }
 
 /**
@@ -72,14 +76,12 @@ export const Capture: Story = {
     variant: 'capture',
     width: 'contained',
   },
-  parameters: { design: figmaDesign('1647:1720') },
 }
 
 /** The capture stage at 402, where the band shortens rather than scaling. */
 export const CaptureMobile: Story = {
   args: { ...seededSectionArgs('ventures-urvin', 'mediaSection'), variant: 'capture' },
   globals: { viewport: { value: 'mobile' } },
-  parameters: { design: figmaDesign('1647:1720') },
 }
 
 /** On ink — the contained shadow is authored for a light band. */
@@ -205,5 +207,21 @@ export const CompleteComposition: Story = {
     const box = image.getBoundingClientRect()
     await expect(box.width).toBe(window.innerWidth)
     await expect(box.height / box.width).toBeCloseTo(1900 / 1440, 2)
+  },
+}
+
+/** Past the 1728px structural column the composition stops growing and centres, like the bento grids. */
+export const CompleteCompositionWide: Story = {
+  args: CompleteComposition.args,
+  parameters: {
+    viewport: {
+      options: { wide: { name: 'Wide 2560', styles: { width: '2560px', height: '1440px' } } },
+    },
+  },
+  globals: { viewport: { value: 'wide' } },
+  play: async ({ canvasElement }) => {
+    const box = canvasElement.querySelector('img')!.getBoundingClientRect()
+    await expect(box.width).toBe(1728)
+    await expect(box.left).toBe(416)
   },
 }

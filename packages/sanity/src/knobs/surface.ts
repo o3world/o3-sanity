@@ -4,7 +4,7 @@ import { SURFACES } from '../constants'
 import type { Surface } from '../constants'
 
 /**
- * The knob every section block has: which of the three surfaces the band is
+ * The knob every section block has: which surface the band is
  * painted on.
  *
  * `surfaceForKnobPath` routes it to the `band` surface, so a nested block drops

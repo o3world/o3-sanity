@@ -73,7 +73,15 @@ export const GridDiscs: Story = {
 /** `/solutions` — the dotted tetrahedron, at `lg` and up. */
 export const Orbital: Story = {
   args: seededSectionArgs('solutions', 'featureGridSection'),
-  parameters: { design: figmaDesign('1928:6524') },
+  parameters: {
+    design: [],
+    docs: {
+      description: {
+        story:
+          'Historical fixture: its original Figma frame was removed. Retained for authorable behavior coverage.',
+      },
+    },
+  },
 }
 
 /**

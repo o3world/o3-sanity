@@ -10,7 +10,7 @@ import { optionKey } from './optionValue'
  * **Not `KnobSurface`.** That is the chrome a knob is delivered on
  * (`band | block | item | instance`, `surfaces.ts`); this is paint.
  */
-export type BandSurface = 'white' | 'paper' | 'bone' | 'ink'
+export type BandSurface = 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
 
 /** What the presentational button actually draws. `auto` is never one of these. */
 export type ButtonFill = 'dark' | 'light' | 'ghost' | 'brand'
@@ -27,6 +27,7 @@ const READABLE_ON: Record<BandSurface, ButtonFill> = {
   paper: 'dark',
   bone: 'dark',
   ink: 'light',
+  charcoal: 'light',
 }
 
 /** The retired inverse fill still means light. Brand is an explicit current choice. */

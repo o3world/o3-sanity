@@ -20,6 +20,7 @@ const rows: {
   // the white one.
   { what: 'auto on white', stored: 'auto', surface: 'white', fill: 'dark' },
   { what: 'auto on bone', stored: 'auto', surface: 'bone', fill: 'dark' },
+  { what: 'auto on charcoal', stored: 'auto', surface: 'charcoal', fill: 'light' },
   { what: 'auto on ink', stored: 'auto', surface: 'ink', fill: 'light' },
 
   // No surface at all: a button outside the band system whose chrome forgot to

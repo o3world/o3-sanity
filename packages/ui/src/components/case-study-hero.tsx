@@ -37,12 +37,12 @@ export function CaseStudyHero({
     >
       <div className="absolute inset-0 -z-20">{media}</div>
       {/*
-       * `1710:2302` — ink-deep to transparent, opaque up to 15% of the band.
-       * The 402 frame (`1906:923`) runs the same stop to 34% because the copy
+       * Historical hero extraction: ink-deep to transparent, opaque to 15%.
+       * The retained mobile treatment runs the stop to 34% because the copy
        * stacks and reaches higher up the photograph.
        *
        * Two arbitrary gradients rather than one `--gradient-*` token: the two
-       * frames differ only in that stop, and a gradient custom property cannot
+       * viewport treatments differ only in that stop, and a gradient custom property cannot
        * take a stop from the call site. The COLOUR still comes from the token,
        * so the wash is the palette's own darkest ink.
        */}

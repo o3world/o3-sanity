@@ -44,7 +44,7 @@ const route = buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY)
 async function render(slug: string) {
   return renderRoute(route, {
     data: withSettings(aSeededPage(slug), siteSettings()),
-    params: { segments: [slug] },
+    params: { path: [slug] },
   })
 }
 
@@ -58,7 +58,7 @@ const conference = await render('1682-conference-ai-innovation')
 // vs `solutions/software-engineering`), so it cannot go through `render()`.
 const softwareEngineering = await renderRoute(route, {
   data: withSettings(aSeededPage('solutions-software-engineering'), siteSettings()),
-  params: { segments: ['solutions', 'software-engineering'] },
+  params: { path: ['solutions', 'software-engineering'] },
 })
 
 describe('the seeded About page', () => {

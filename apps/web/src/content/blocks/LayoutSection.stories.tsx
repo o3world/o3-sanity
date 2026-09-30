@@ -89,7 +89,15 @@ export const OnInk: Story = {
  */
 export const WithMolecule: Story = {
   args: seededSectionArgs('solutions-software-engineering', 'layoutSection', 1),
-  parameters: { design: figmaDesign('2357:2690') },
+  parameters: {
+    design: [],
+    docs: {
+      description: {
+        story:
+          'Historical fixture: its original Figma frame was removed. Retained for authorable behavior coverage.',
+      },
+    },
+  },
   globals: { backgrounds: { value: 'ink' } },
 }
 
@@ -113,7 +121,15 @@ const aboutHeading = {
 export const AboutHeadingWithPhoto: Story = {
   args: aboutHeading,
   globals: { viewport: { value: 'desktop' } },
-  parameters: { design: figmaDesign('2960:6890') },
+  parameters: {
+    design: [],
+    docs: {
+      description: {
+        story:
+          'Historical fixture: its original Figma frame was removed. Retained for authorable behavior coverage.',
+      },
+    },
+  },
   play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { name: aboutHeading.heading })
     await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(48, 0)
@@ -124,7 +140,15 @@ export const AboutHeadingWithPhoto: Story = {
 export const AboutHeadingMobile: Story = {
   ...AboutHeadingWithPhoto,
   globals: { viewport: { value: 'mobile' } },
-  parameters: { design: figmaDesign('2975:9043') },
+  parameters: {
+    design: [],
+    docs: {
+      description: {
+        story:
+          'Historical fixture: its original Figma frame was removed. Retained for authorable behavior coverage.',
+      },
+    },
+  },
   play: async ({ canvasElement }) => {
     const heading = within(canvasElement).getByRole('heading', { name: aboutHeading.heading })
     await expect(getComputedStyle(heading).fontSize).toBe('38px')

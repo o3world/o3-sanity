@@ -112,7 +112,7 @@ export function PanelPlate({
 
       {media?.image && plate === 'bleed' ? (
         <div
-          className={`${PLATE_BLEED_CLASS} rounded-[32px] shadow-[-32px_32px_64px_rgba(0,0,0,0.2)]`}
+          className={`${PLATE_BLEED_CLASS} rounded-l-[32px] shadow-[-32px_32px_64px_rgba(0,0,0,0.2)]`}
         >
           <SanityImage
             source={media.image}

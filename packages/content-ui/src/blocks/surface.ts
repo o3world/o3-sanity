@@ -29,7 +29,7 @@ const DECLARED_SURFACE: Readonly<Record<string, Surface>> = Object.fromEntries(
 )
 
 /**
- * Resolve a block's editor-chosen `surface` to the three-surface union
+ * Resolve a block's editor-chosen `surface` to the surface union
  * `SectionShell` accepts. `stegaClean` strips the invisible stega characters
  * draft-mode strings carry (a stega'd `"ink"` would fail the comparison and
  * silently fall back).
@@ -48,4 +48,9 @@ export function resolveSurface(
   const clean = stegaClean(value)
   if (SURFACES.includes(clean as Surface)) return clean as Surface
   return DECLARED_SURFACE[block] ?? 'white'
+}
+
+/** Dark band roles share white copy, marks and automatic button contrast. */
+export function isDarkSurface(surface: Surface): boolean {
+  return surface === 'ink' || surface === 'charcoal'
 }

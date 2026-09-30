@@ -6,10 +6,10 @@ import { SurfaceProvider } from './surface-context'
 
 /**
  * The surface system every section block renders on (docs/specs/schema.md).
- * Three bands plus `paper`, the light step between white and bone that the
- * `Interior Hero – White` set is painted on (`2960:6876`).
+ * `charcoal` is the Neutral-900 band on About (`3771:80621`);
+ * `ink` remains the darker ground used by the other dark bands.
  */
-export const SURFACES = ['white', 'paper', 'bone', 'ink'] as const
+export const SURFACES = ['white', 'paper', 'bone', 'ink', 'charcoal'] as const
 export type Surface = (typeof SURFACES)[number]
 
 /**
@@ -24,6 +24,7 @@ export const SURFACE_CLASS: Record<Surface, string> = {
   paper: 'bg-paper text-fg',
   bone: 'bg-bone text-fg',
   ink: 'bg-ink text-white',
+  charcoal: 'bg-charcoal text-white',
 }
 
 /**
@@ -67,6 +68,7 @@ const TINT_CLASS: Record<Surface, string> = {
   paper: 'bg-paper/70',
   bone: 'bg-bone/70',
   ink: 'bg-ink/40',
+  charcoal: 'bg-charcoal/40',
 }
 
 /**

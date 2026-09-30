@@ -11,7 +11,7 @@ let fixture: string
 
 beforeEach(() => {
   fixture = mkdtempSync(join(tmpdir(), 'build-assert-'))
-  const pages = ['/', '/[...segments]', '/insights/[slug]', '/work/[slug]', '/studio/[[...tool]]']
+  const pages = ['/', '/[...path]', '/insights/[slug]', '/work/[slug]', '/studio/[[...tool]]']
   const handlers = [
     '/api/draft-mode/disable',
     '/api/draft-mode/enable',

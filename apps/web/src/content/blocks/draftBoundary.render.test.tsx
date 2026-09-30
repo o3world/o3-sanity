@@ -23,7 +23,7 @@ async function render(draft: boolean) {
   const doc = aMigratedPage(slug)
   const { html } = await renderRoute(route, {
     data: withSettings(doc, siteSettings()),
-    params: { segments: [slug] },
+    params: { path: [slug] },
     draft,
   })
   return { doc, html }

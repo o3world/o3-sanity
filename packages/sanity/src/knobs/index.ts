@@ -31,6 +31,7 @@ import { listingSectionKnobs } from './listingSection'
 import { logoWallSectionKnobs } from './logoWallSection'
 import { markKnobs } from './mark'
 import { mediaSectionKnobs } from './mediaSection'
+import { mediaCardKnobs } from './mediaCard'
 import { personGridSectionKnobs } from './personGridSection'
 import { quoteSectionKnobs } from './quoteSection'
 import { railPanelsSectionKnobs } from './railPanelsSection'
@@ -54,6 +55,7 @@ export { listingSectionKnobs } from './listingSection'
 export { logoWallSectionKnobs } from './logoWallSection'
 export { markKnobs, ORB_ONLY } from './mark'
 export { mediaSectionKnobs } from './mediaSection'
+export { mediaCardKnobs } from './mediaCard'
 export { personGridSectionKnobs } from './personGridSection'
 export { quoteSectionKnobs } from './quoteSection'
 export { railPanelsSectionKnobs } from './railPanelsSection'
@@ -117,6 +119,7 @@ export const BLOCK_KNOBS: Readonly<Record<string, BlockKnobs>> = {
  * its declaration does not answer to.
  */
 export const OBJECT_KNOBS: Readonly<Record<string, ObjectKnobs>> = {
+  [mediaCardKnobs.type]: mediaCardKnobs,
   [markKnobs.type]: markKnobs,
   [backgroundMediaKnobs.type]: backgroundMediaKnobs,
   [buttonKnobs.type]: buttonKnobs,

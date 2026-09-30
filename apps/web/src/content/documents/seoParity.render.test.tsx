@@ -52,7 +52,7 @@ const eHazard = await renderRoute(buildDetailRoute(caseStudy), {
 
 const privacy = await renderRoute(buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY), {
   data: withSettings(aMigratedPage('privacy-policy'), siteSettings()),
-  params: { segments: ['privacy-policy'] },
+  params: { path: ['privacy-policy'] },
 })
 
 const anyInsight = await renderRoute(buildDetailRoute(insight), {

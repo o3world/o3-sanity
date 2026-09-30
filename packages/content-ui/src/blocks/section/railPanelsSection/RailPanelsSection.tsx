@@ -7,7 +7,7 @@ import { stegaClean } from '@sanity/client/stega'
 import { ButtonLink } from '../../../ButtonLink'
 import { SanityImage } from '../../../SanityImage'
 import { sectionBackground } from '../../sectionBackground'
-import { resolveSurface } from '../../surface'
+import { isDarkSurface, resolveSurface } from '../../surface'
 
 import { PanelBand } from './PanelBand'
 import { PanelCards } from './PanelCards'
@@ -106,7 +106,7 @@ export function RailPanelsSection({
       className={cn('flex w-full flex-col', HEADER_SHAPE[shape].wrapper)}
     >
       {eyebrow ? (
-        <Eyebrow size="lg" tone={resolved === 'ink' ? 'inverse' : 'brand'} className="pb-4">
+        <Eyebrow size="lg" tone={isDarkSurface(resolved) ? 'inverse' : 'brand'} className="pb-4">
           {eyebrow}
         </Eyebrow>
       ) : null}
@@ -166,7 +166,7 @@ export function RailPanelsSection({
         <div className="flex flex-col gap-16 lg:gap-32">
           {header}
           <PanelRows
-            onInk={resolved === 'ink'}
+            onInk={isDarkSurface(resolved)}
             lastDetailIsOutcome={isRows}
             items={items.map((panel, index) => ({
               key: panel._key ?? String(index),
@@ -195,7 +195,7 @@ export function RailPanelsSection({
         <div className="flex flex-col gap-16">
           {header}
           <PanelCards
-            onInk={resolved === 'ink'}
+            onInk={isDarkSurface(resolved)}
             items={items.map((panel, index) => ({
               key: panel._key ?? String(index),
               heading: panel.heading ?? panel.railLabel,

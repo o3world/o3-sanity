@@ -1,13 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import { figmaUrl, gradients } from './figma-home-spec'
+import { gradients } from './figma-home-spec'
 import { Callout, Mono, Page, Row, Section, SpecTable } from './spec-ui'
 
 const meta = {
   title: 'Foundations/Gradient',
   parameters: {
     layout: 'fullscreen',
-    design: { type: 'figma', url: figmaUrl('1680-2134') },
+    docs: {
+      description: {
+        component:
+          'Historical extraction from the retired Home frame. These specimens record the original token adoption; they are not current page-parity references.',
+      },
+    },
   },
 } satisfies Meta
 

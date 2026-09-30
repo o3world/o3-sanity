@@ -63,7 +63,7 @@ describe('a fetch that throws', () => {
     await expect(
       renderRoute(buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY), {
         data: throwsAfterMetadata(1),
-        params: { segments: ['about'] },
+        params: { path: ['about'] },
       }),
     ).rejects.toThrow(boom)
   })
@@ -92,7 +92,7 @@ describe('a document that genuinely is not there', () => {
   it('still 404s on the catch-all route', async () => {
     await expectNotFound(buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY), {
       data: null,
-      params: { segments: ['no-such-page'] },
+      params: { path: ['no-such-page'] },
     })
   })
 

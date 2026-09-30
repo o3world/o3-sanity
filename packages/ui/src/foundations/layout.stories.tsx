@@ -2,21 +2,19 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { expect } from 'storybook/test'
 import type { ViewportParameters } from 'storybook/viewport'
 
-import {
-  elementPadding,
-  figmaUrl,
-  layout,
-  radius,
-  sectionRhythm,
-  spacingScale,
-} from './figma-home-spec'
+import { elementPadding, layout, radius, sectionRhythm, spacingScale } from './figma-home-spec'
 import { Callout, Mono, Page, Row, Section, SpecTable } from './spec-ui'
 
 const meta = {
   title: 'Foundations/Layout',
   parameters: {
     layout: 'fullscreen',
-    design: { type: 'figma', url: figmaUrl('1680-2134') },
+    docs: {
+      description: {
+        component:
+          'Historical extraction from the retired Home frame. These specimens record the original token adoption; they are not current page-parity references.',
+      },
+    },
   },
 } satisfies Meta
 

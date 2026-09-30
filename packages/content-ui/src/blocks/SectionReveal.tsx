@@ -13,6 +13,7 @@ const SURFACE_GROUND = {
   paper: 'bg-paper',
   bone: 'bg-bone',
   ink: 'bg-ink',
+  charcoal: 'bg-charcoal',
 } as const
 
 /**

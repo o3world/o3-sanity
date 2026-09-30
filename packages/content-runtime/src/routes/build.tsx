@@ -87,10 +87,8 @@ export interface DetailRouteShim {
 }
 
 export interface CatchAllRouteShim {
-  readonly generateMetadata: (props: {
-    params: Promise<{ segments?: string[] }>
-  }) => Promise<Metadata>
-  readonly Page: (props: { params: Promise<{ segments?: string[] }> }) => Promise<JSX.Element>
+  readonly generateMetadata: (props: { params: Promise<{ path?: string[] }> }) => Promise<Metadata>
+  readonly Page: (props: { params: Promise<{ path?: string[] }> }) => Promise<JSX.Element>
 }
 
 export interface SingletonRouteShim {
@@ -216,7 +214,7 @@ export function buildDetailRoute<Q extends string>(entry: DetailEntry<Q>): Detai
 }
 
 /**
- * Build a catch-all-route shim for `[...segments]/page.tsx` where one or more
+ * Build a catch-all-route shim for `[...path]/page.tsx` where one or more
  * content types share the slug-from-segments dispatch. One merged GROQ query
  * matches `slug.current == segments.join('/')`; the fetched doc carries
  * `_type`, and the helper narrows on it and dispatches to the matching
@@ -258,8 +256,8 @@ export function buildCatchAllRoute(
   }
 
   const generateMetadata: CatchAllRouteShim['generateMetadata'] = async ({ params }) => {
-    const { segments } = await params
-    const slug = resolveSlug(segments)
+    const { path } = await params
+    const slug = resolveSlug(path)
     if (!slug) return {}
     const doc = await fetchDoc(slug, metadataRead(await currentReadMode()))
     if (!doc) return {}
@@ -268,8 +266,8 @@ export function buildCatchAllRoute(
   }
 
   const Page: CatchAllRouteShim['Page'] = async ({ params }) => {
-    const { segments } = await params
-    const slug = resolveSlug(segments)
+    const { path } = await params
+    const slug = resolveSlug(path)
     if (!slug) notFound()
     const doc = await fetchDoc(slug, await currentReadMode())
     if (!doc) notFound()

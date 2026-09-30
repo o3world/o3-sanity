@@ -1,13 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import { drift, FIGMA_SOURCE, figmaUrl } from './figma-home-spec'
+import { drift, FIGMA_SOURCE } from './figma-home-spec'
 import { Callout, Mono, Page, Row, Section, SpecTable } from './spec-ui'
 
 const meta = {
   title: 'Foundations/Overview',
   parameters: {
     layout: 'fullscreen',
-    design: { type: 'figma', url: figmaUrl(FIGMA_SOURCE.nodeId) },
+    docs: {
+      description: {
+        component:
+          'Historical token extraction from the retired Home frame; not a current page-parity reference.',
+      },
+    },
   },
 } satisfies Meta
 
@@ -29,12 +34,12 @@ export const Overview: Story = {
       title="The design tokens, and where they come from"
       intro={
         <>
-          Every token in <Mono>@o3/tailwind-config</Mono> is read off the canonical Figma frames in{' '}
-          <em>{FIGMA_SOURCE.name}</em> — principally <Mono>{FIGMA_SOURCE.frame}</Mono> (
+          This records the original <Mono>@o3/tailwind-config</Mono> extraction from historical
+          frames in <em>{FIGMA_SOURCE.name}</em> — principally <Mono>{FIGMA_SOURCE.frame}</Mono> (
           {FIGMA_SOURCE.width}×{FIGMA_SOURCE.height}, node <Mono>{FIGMA_SOURCE.nodeId}</Mono>), at
-          the authoritative 1440 desktop width. Nothing is inferred or rounded to taste. The reading
-          record lives as data in <Mono>packages/ui/src/foundations/figma-home-spec.ts</Mono>, and
-          these pages render it.
+          the original 1440 desktop width. Later token changes are recorded beside their
+          definitions. The original reading record lives as data in{' '}
+          <Mono>packages/ui/src/foundations/figma-home-spec.ts</Mono>, and these pages render it.
         </>
       }
     >

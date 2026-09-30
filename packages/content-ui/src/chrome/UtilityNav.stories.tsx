@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { figmaDesign } from '@o3/story-kit'
 import { BrandMark } from '@o3/ui'
 
 import { SITE_SETTINGS } from '../testing/seedContent'
@@ -26,7 +25,13 @@ const meta = {
   component: UtilityNav,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('2250:1445'),
+    design: [],
+    docs: {
+      description: {
+        story:
+          'Historical fixture: its original Figma frame was removed. Retained for authorable behavior coverage.',
+      },
+    },
   },
   args: { settings: SITE_SETTINGS },
 } satisfies Meta<typeof UtilityNav>

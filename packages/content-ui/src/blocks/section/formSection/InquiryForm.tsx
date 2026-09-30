@@ -12,7 +12,7 @@ import {
 // cannot resolve under Storybook's Next preset. A lint rule enforces this.
 import { stegaClean } from '@sanity/client/stega'
 
-import { FIELD_CONTROL_CLASS, FormField } from '@o3/ui'
+import { ChevronDownIcon, FIELD_CONTROL_CLASS, FormField } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
 
 import { ButtonLink } from '../../../ButtonLink'
@@ -202,7 +202,7 @@ export function InquiryForm({
       onSubmit={handleSubmit}
       ref={form}
     >
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 xl:grid-cols-2">
         <FormField name="name" label="Your name" required error={errors.name}>
           {(control) => (
             <input
@@ -234,40 +234,43 @@ export function InquiryForm({
         </FormField>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 xl:grid-cols-2">
         <FormField name="reason" label="Reason" required error={errors.reason}>
           {(control) => (
             // A native select, not a Radix one. ADR 0008 puts a component in
             // `ui/` only when shadcn supplies real behaviour, and here the
             // platform already does it better: a phone draws its own picker.
-            <select
-              {...control}
-              className={cn(FIELD_CONTROL_CLASS, 'pr-8')}
-              value={values.reason}
-              onChange={handleChange('reason')}
-              onBlur={handleBlur('reason')}
-            >
-              <option value="">Select one</option>
-              {reasons.map((reason) => (
-                // `value` is stega-cleaned, the visible child is not — and the
-                // split is the point. In draft mode every string from Sanity
-                // carries invisible stega characters so Presentation can map a
-                // rendered word back to the field that wrote it; keeping them on
-                // the child preserves click-to-edit. Keeping them on the VALUE
-                // would mean the reason a submission carries silently differs
-                // from the one an editor typed, on drafts only, invisibly — and
-                // the route checks the reason against the list it was sent,
-                // exactly, on trimmed values.
-                <option key={optionValue(reason)} value={optionValue(reason)}>
-                  {reason}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                {...control}
+                className={cn(FIELD_CONTROL_CLASS, 'appearance-none pr-12')}
+                value={values.reason}
+                onChange={handleChange('reason')}
+                onBlur={handleBlur('reason')}
+              >
+                <option value="">Select one</option>
+                {reasons.map((reason) => (
+                  // `value` is stega-cleaned, the visible child is not — and the
+                  // split is the point. In draft mode every string from Sanity
+                  // carries invisible stega characters so Presentation can map a
+                  // rendered word back to the field that wrote it; keeping them on
+                  // the child preserves click-to-edit. Keeping them on the VALUE
+                  // would mean the reason a submission carries silently differs
+                  // from the one an editor typed, on drafts only, invisibly — and
+                  // the route checks the reason against the list it was sent,
+                  // exactly, on trimmed values.
+                  <option key={optionValue(reason)} value={optionValue(reason)}>
+                    {reason}
+                  </option>
+                ))}
+              </select>
+              <ChevronDownIcon className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2" />
+            </div>
           )}
         </FormField>
         <FormField
           name="referral"
-          label="How’d you hear about us? (optional)"
+          label="How’d you hear about us?"
           className="[&>label]:font-normal"
         >
           {(control) => (

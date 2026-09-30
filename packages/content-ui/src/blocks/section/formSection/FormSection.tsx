@@ -76,7 +76,7 @@ export function FormSection({
         className="right-[-449px] top-[367px] w-[900px] opacity-10 lg:right-[-329px] lg:top-[-223px] lg:w-[1100px]"
       />
       <div className="flex flex-col gap-16 lg:gap-32">
-        <div className={cn('grid items-center gap-16 lg:gap-8', header && 'lg:grid-cols-2')}>
+        <div className={cn('grid items-center gap-16 xl:gap-8', header && 'xl:grid-cols-2')}>
           {header}
           {/*
             The card declares `white` because it paints white: the text roles

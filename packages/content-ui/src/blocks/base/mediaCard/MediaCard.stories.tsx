@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect } from 'storybook/test'
 
 import { seedImage } from '../../../testing/seedContent'
 
@@ -70,6 +71,30 @@ export const NoButton: Story = {
     heading: 'Community',
     body: 'Philadelphia is home. We show up for the design and engineering community that made us.',
     button: null,
+  },
+  play: async ({ canvasElement }) => {
+    await expect(getComputedStyle(canvasElement.querySelector('img')!).objectFit).toBe('cover')
+  },
+}
+
+/** OWSW-67/68: complete logo artwork, without changing photographic cards. */
+export const ContainedArtwork: Story = {
+  args: {
+    ...Default.args,
+    heading: 'O3XO',
+    fit: 'contain',
+    media: {
+      _type: 'figure',
+      image: seedImage('tools/migration/data/seed/assets/about-beyond-o3xo.png'),
+      alt: 'O3XO',
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const image = canvasElement.querySelector('img')!
+    await expect(getComputedStyle(image).objectFit).toBe('contain')
+    await expect(getComputedStyle(image.parentElement!.parentElement!).backgroundColor).toBe(
+      'rgb(0, 0, 0)',
+    )
   },
 }
 

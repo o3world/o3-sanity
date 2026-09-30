@@ -86,7 +86,7 @@ export function FormField({
   const describedBy = [noteId, errorId].filter(Boolean).join(' ') || undefined
 
   return (
-    <div className={cn('flex flex-col gap-2', className)}>
+    <div className={cn('relative flex flex-col gap-2', className)}>
       {/* Figma 2960:7798: Figtree 600 14/20, 8px above the control. */}
       <label htmlFor={id} className="text-fg text-[14px]/5 font-semibold">
         {label}
@@ -113,8 +113,8 @@ export function FormField({
         'aria-describedby': describedBy,
       })}
 
-      {/* Keep the alert mounted; an empty alert consumes no space. */}
-      <p id={errorId} role="alert" className="text-legal text-brand empty:-mt-2">
+      {/* Validation uses the row gap so showing an error does not move the layout. */}
+      <p id={errorId} role="alert" className="text-legal text-brand absolute left-0 top-full mt-1">
         {error}
       </p>
     </div>

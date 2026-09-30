@@ -5,7 +5,7 @@ import { stegaClean } from '@sanity/client/stega'
 import { Mark, markProps } from '../../base/mark/Mark'
 import { DECORATED_BAND_CLASS } from '../../decoration'
 import { MoleculeDecoration } from '../../MoleculeDecoration'
-import { resolveSurface } from '../../surface'
+import { isDarkSurface, resolveSurface } from '../../surface'
 
 type FeatureGridSectionProps = SectionProps<'featureGridSection'>
 
@@ -29,7 +29,7 @@ export function FeatureGridSection({
   const orbital = chosen === 'orbital'
   const cards = chosen === 'cards'
   const resolved = resolveSurface(surface, 'featureGridSection')
-  const onInk = resolved === 'ink'
+  const onInk = isDarkSurface(resolved)
 
   /**
    * A feature sits under the band's own heading, so it is normally an `h3`.

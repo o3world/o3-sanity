@@ -38,11 +38,17 @@ export const screenKnobs = defineItemKnobs({
       name: 'span',
       title: 'Span',
       description:
-        'Wide spans the grid. Standard takes half the grid; narrow takes a quarter in the desktop feature layout.',
+        'Wide spans the grid. Standard takes half; third and two-thirds compose unequal rows in Grid layout only. Narrow takes a quarter in the desktop Feature layout.',
       // Plate HEIGHT follows from this rather than being a second option —
       // `2230:7559` is 716 for a wide tile and 342 for a small one — so the
       // grid's whole shape is this one pick per tile (ADR 0006).
-      options: ['standard', 'wide', 'narrow'],
+      options: [
+        'standard',
+        'wide',
+        'narrow',
+        { value: 'third', title: 'Third' },
+        { value: 'twoThirds', title: 'Two-thirds' },
+      ],
       initialValue: 'standard',
     }),
     knob({

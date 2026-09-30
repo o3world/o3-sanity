@@ -59,6 +59,8 @@
    * #0A0A0A fills survive only on frames the migration has not reached (Live,
    * About, the mobile set). */
   --color-ink: #0a0a0b;
+  /* Neutral-900, About business band (3771:80621, variable 2050:1231). */
+  --color-charcoal: #171615;
   /* #0F100B — the warm-black hero band on Work (1634:1181) and Live. The only
    * place this value appears; it is a surface, not a text color. */
   --color-ink-warm: #0f100b;
@@ -265,7 +267,8 @@
  * (section-shell.stories.tsx), which reads what a role paints inside the card
  * and what the same role paints on a white band, and fails when they differ.
  */
-[data-surface='ink'] {
+[data-surface='ink'],
+[data-surface='charcoal'] {
   /* --color-fg (#232323) and --color-fg-body (#55524E) both mean "body copy"
    * on a light band; on ink the design draws body copy at one value, so they
    * converge here rather than inventing a distinction the frames don't have. */

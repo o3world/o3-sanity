@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { figmaDesign } from '@o3/story-kit'
 
 import { seededSectionArgs } from '../../../testing/seedContent'
 
@@ -22,7 +21,13 @@ const meta = {
   component: RoleListSection,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('1925:6061'),
+    design: [],
+    docs: {
+      description: {
+        story:
+          'Historical fixture: its original Figma frame was removed. Retained for authorable behavior coverage.',
+      },
+    },
   },
 } satisfies Meta<typeof RoleListSection>
 

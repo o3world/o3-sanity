@@ -11,6 +11,11 @@
   text-align: left;
 }
 
+.site-footer .spatial-motion-setting:hover {
+  color: var(--color-white);
+  opacity: 1;
+}
+
 /* Keep the current CSS animation positions, including the SVG fallback's pulse. */
 html[data-spatial-paused] :is(.hero-lag, .cta-lag, [data-orbital-preset]),
 html[data-spatial-paused] [data-orbital-preset] *,

@@ -54,7 +54,7 @@ describe('stega is left to next-sanity’s draft-mode gate', () => {
   it('on the catch-all route', async () => {
     const { calls } = await renderRoute(buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY), {
       data: withSettings(aSeededPage('index'), siteSettings()),
-      params: { segments: ['about'] },
+      params: { path: ['about'] },
     })
     expect(stegaOn(calls)).toEqual([])
   })

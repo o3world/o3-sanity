@@ -61,7 +61,7 @@ describe('the screen grid band', () => {
     // SectionShell's band steps.
     expect(html).toContain('px-gutter')
     expect(html).toContain('py-8')
-    expect(html).toContain('lg:grid-cols-2')
+    expect(html).toContain('lg:grid-cols-6')
     expect(html).toContain('gap-8')
   })
 
@@ -72,9 +72,9 @@ describe('the screen grid band', () => {
   })
 
   it('spans a wide screen across both columns and leaves a standard one alone', () => {
-    expect(plates[0]).toContain('lg:col-span-2')
-    expect(plates[1]).not.toContain('lg:col-span-2')
-    expect(plates[2]).not.toContain('lg:col-span-2')
+    expect(plates[0]).toContain('lg:col-span-6')
+    expect(plates[1]).toContain('lg:col-span-3')
+    expect(plates[2]).toContain('lg:col-span-3')
   })
 
   it('gives every plate the frame’s 32px radius and clips what runs past it', () => {
@@ -88,12 +88,12 @@ describe('the screen grid band', () => {
     }
   })
 
-  it('declares the image slot after the plate padding changes at lg', () => {
+  it('declares image slots within the capped stage and responsive plate padding', () => {
     expect(illustratedHtml).toContain(
-      'sizes="(min-width: 1440px) calc(100vw - 278px), (min-width: 1024px) calc(89.402vw - 125.396px), calc(90vw - 64px)"',
+      'sizes="(min-width: 1920px) 1600px, (min-width: 1440px) calc(100vw - 320px), (min-width: 1024px) calc(84.58574vw - 98.03468px), (min-width: 402px) calc(84.58574vw - 34.03468px), calc(100vw - 96px)"',
     )
     expect(illustratedHtml).toContain(
-      'sizes="(min-width: 1440px) calc(50vw - 91px), (min-width: 1024px) calc(44.701vw - 14.698px), 90vw"',
+      'sizes="(min-width: 1920px) 848px, (min-width: 1440px) calc(50vw - 112px), (min-width: 1024px) calc(42.29287vw - 1.01734px), (min-width: 402px) calc(84.58574vw + 29.96532px), calc(100vw - 32px)"',
     )
   })
 
@@ -107,7 +107,7 @@ describe('the screen grid band', () => {
       />,
     )
     expect(odd).not.toContain('--gradient-screen-plate')
-    expect(odd).not.toContain('lg:col-span-2')
+    expect(odd).toContain('lg:col-span-3')
   })
 
   it.each([
@@ -152,7 +152,7 @@ describe('the screen grid band', () => {
         } as unknown as SectionProps<'screenGridSection'>)}
       />,
     )
-    expect(markup).toContain('lg:col-span-2')
+    expect(markup).toContain('lg:col-span-6')
     expect(markup).not.toContain('--gradient-screen-plate')
     expect(markup).not.toContain('aspect-')
     expect(markup).not.toContain('shadow-')

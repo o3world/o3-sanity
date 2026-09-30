@@ -32,7 +32,13 @@ const meta = {
   component: ScreenGridSection,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('2230:3315'),
+    design: [],
+    docs: {
+      description: {
+        component:
+          'Includes historical fixtures retained for authorable behavior coverage. Current design references are linked on individual stories.',
+      },
+    },
   },
 } satisfies Meta<typeof ScreenGridSection>
 
@@ -89,7 +95,6 @@ export const AllTones: Story = {
       screen('bone', HOMEPAGE, 'On the bone plate.', 'bone', 'wide'),
     ],
   },
-  parameters: { design: figmaDesign('2230:7559') },
 }
 
 /**
@@ -228,11 +233,15 @@ export const FeatureMobile: Story = {
     const tiles = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
       tile.getBoundingClientRect(),
     )
-    for (const [index, tile] of tiles.entries()) {
-      await expect(Math.abs(tile.width - 370)).toBeLessThan(1)
-      if (index > 0)
-        await expect(Math.abs(tile.top - tiles[index - 1]!.bottom - 32)).toBeLessThan(1)
-    }
+    const [lead, upper, lower, following] = tiles
+    await expect(Math.abs(lead!.width - 370)).toBeLessThan(1)
+    await expect(Math.abs(upper!.width - 169)).toBeLessThan(1)
+    await expect(Math.abs(lower!.width - 169)).toBeLessThan(1)
+    await expect(upper!.top).toBe(lower!.top)
+    await expect(Math.abs(upper!.top - lead!.bottom - 32)).toBeLessThan(1)
+    await expect(Math.abs(lower!.left - upper!.right - 32)).toBeLessThan(1)
+    await expect(Math.abs(following!.width - 370)).toBeLessThan(1)
+    await expect(Math.abs(following!.top - upper!.bottom - 32)).toBeLessThan(1)
   },
 }
 
@@ -272,5 +281,127 @@ export const NarrowFeatureRow: Story = {
     await expect(Math.abs(boxes[4]!.width - 288)).toBeLessThan(1)
     await expect(Math.abs(boxes[5]!.width - 608)).toBeLessThan(1)
     await expect(boxes[3]!.top).toBe(boxes[5]!.top)
+  },
+}
+
+/** Quarter-width desktop tiles stay paired on mobile, including later narrow items. */
+export const NarrowFeatureRowMobile: Story = {
+  args: NarrowFeatureRow.args,
+  parameters: FeatureMobile.parameters,
+  globals: FeatureMobile.globals,
+  play: async ({ canvasElement }) => {
+    const boxes = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
+      tile.getBoundingClientRect(),
+    )
+    await expect(Math.abs(boxes[3]!.width - 169)).toBeLessThan(1)
+    await expect(Math.abs(boxes[4]!.width - 169)).toBeLessThan(1)
+    await expect(boxes[3]!.top).toBe(boxes[4]!.top)
+    await expect(Math.abs(boxes[5]!.width - 370)).toBeLessThan(1)
+    await expect(Math.abs(boxes[5]!.top - boxes[3]!.bottom - 32)).toBeLessThan(1)
+  },
+}
+
+/** Wide browser windows retain the site's centered 1728px structural column. */
+export const WideViewport: Story = {
+  args: NarrowFeatureRow.args,
+  parameters: {
+    viewport: {
+      options: { wide: { name: 'Wide 2560', styles: { width: '2560px', height: '1440px' } } },
+    },
+  },
+  globals: { viewport: { value: 'wide' } },
+  play: async ({ canvasElement }) => {
+    const grid = canvasElement.querySelector('ul')!.getBoundingClientRect()
+    const tiles = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
+      tile.getBoundingClientRect(),
+    )
+    await expect(grid.width).toBe(1728)
+    await expect(grid.left).toBe(416)
+    await expect(tiles[0]!.width).toBe(1288)
+    await expect(tiles[1]!.width).toBe(408)
+    await expect(tiles[5]!.width).toBe(848)
+  },
+}
+
+/** 3578:29877 / 3578:29880 — an authored two-thirds + one-third row. */
+export const Thirds: Story = {
+  args: {
+    surface: 'white',
+    layout: 'grid',
+    screens: [
+      {
+        ...featureScreens[3]!,
+        _key: 'ctas',
+        span: 'twoThirds',
+        media: {
+          _type: 'figure',
+          alt: 'IRONMAN race calls to action',
+          image: {
+            _type: 'image',
+            asset: {
+              _id: 'image-4aaf2ec6621051e440c92eacaf24509445244125-1216x684-png',
+              metadata: null,
+            },
+          },
+        },
+      },
+      {
+        ...featureScreens[3]!,
+        _key: 'icons',
+        span: 'third',
+        media: {
+          _type: 'figure',
+          alt: 'IRONMAN digital experience icons',
+          image: {
+            _type: 'image',
+            asset: {
+              _id: 'image-8bb1fae8fdd6a6f0431ad82d825b12d848492762-1216x684-png',
+              metadata: null,
+            },
+          },
+        },
+      },
+    ],
+  },
+  globals: { viewport: { value: 'desktop' } },
+  parameters: { design: figmaDesign('3578:29877') },
+  play: async ({ canvasElement }) => {
+    const [ctas, icons] = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
+      tile.getBoundingClientRect(),
+    )
+    await expect(Math.abs(ctas!.width - 821.333333)).toBeLessThan(1)
+    await expect(Math.abs(icons!.width - 394.666667)).toBeLessThan(1)
+    await expect(ctas!.top).toBe(icons!.top)
+    await expect(Math.abs(icons!.left - ctas!.right - 32)).toBeLessThan(1)
+  },
+}
+
+export const ThirdsMobile: Story = {
+  args: Thirds.args,
+  parameters: FeatureMobile.parameters,
+  globals: FeatureMobile.globals,
+  play: async ({ canvasElement }) => {
+    const [ctas, icons] = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
+      tile.getBoundingClientRect(),
+    )
+    await expect(Math.abs(ctas!.width - 370)).toBeLessThan(1)
+    await expect(Math.abs(icons!.width - 370)).toBeLessThan(1)
+    await expect(Math.abs(icons!.top - ctas!.bottom - 32)).toBeLessThan(1)
+  },
+}
+
+export const ThirdsWideViewport: Story = {
+  args: Thirds.args,
+  parameters: WideViewport.parameters,
+  globals: WideViewport.globals,
+  play: async ({ canvasElement }) => {
+    const grid = canvasElement.querySelector('ul')!.getBoundingClientRect()
+    const [ctas, icons] = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
+      tile.getBoundingClientRect(),
+    )
+    await expect(grid.width).toBe(1728)
+    await expect(Math.abs(ctas!.width - 1141.333333)).toBeLessThan(1)
+    await expect(Math.abs(icons!.width - 554.666667)).toBeLessThan(1)
+    await expect(Math.abs(icons!.left - ctas!.right - 32)).toBeLessThan(1)
   },
 }

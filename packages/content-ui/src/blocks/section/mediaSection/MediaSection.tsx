@@ -127,15 +127,16 @@ export function MediaSection({
           <LayeredMediaReveal
             enabled={sequence}
             className="relative overflow-hidden"
-            foregroundClassName="w-full"
+            foregroundClassName="max-w-section mx-auto w-full"
             caption={media.caption}
             captionClassName="text-fg-subtle px-gutter mt-4 text-sm"
           >
+            {/* Edge to edge up to the 1728px structural column, then centred at it. */}
             <SanityImage
               source={media.image}
               alt={media.alt}
               width={2880}
-              sizes={FULL_BLEED}
+              sizes="(min-width: 1728px) 1728px, 100vw"
               className="w-full"
             />
           </LayeredMediaReveal>
@@ -206,7 +207,7 @@ export function MediaSection({
             source={media.image}
             alt={media.alt}
             width={1650}
-            className="w-full shadow-[0_0_64px_0_rgba(0,0,0,0.1)]"
+            className="w-full drop-shadow-[0_0_32px_rgba(0,0,0,0.1)]"
             sizes={stegaClean(width) === 'section' ? CONTENT_COLUMN : ARTICLE_COLUMN}
           />
           {media.caption ? (

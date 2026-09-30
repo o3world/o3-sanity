@@ -16,13 +16,14 @@ describe('resolveSurface', () => {
     expect(resolveSurface('white', 'quoteSection')).toBe('white')
     expect(resolveSurface('bone', 'quoteSection')).toBe('bone')
     expect(resolveSurface('ink', 'quoteSection')).toBe('ink')
+    expect(resolveSurface('charcoal', 'layoutSection')).toBe('charcoal')
   })
 
   it('falls back to the surface the block declares', () => {
     // A document saved before the field existed, and a value no knob lists.
     expect(resolveSurface(undefined, 'quoteSection')).toBe('bone')
     expect(resolveSurface(null, 'featureGridSection')).toBe('white')
-    expect(resolveSurface('charcoal', 'heroSection')).toBe('ink')
+    expect(resolveSurface('unknown', 'heroSection')).toBe('ink')
   })
 
   it('answers with what the block declared, for every block that declares one', () => {

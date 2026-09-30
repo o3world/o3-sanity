@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { figmaDesign } from '@o3/story-kit'
 
 import { SITE_SETTINGS } from '../testing/seedContent'
 
@@ -26,7 +25,13 @@ const meta = {
   component: MobileNavMenu,
   parameters: {
     layout: 'centered',
-    design: figmaDesign('1814:1636'),
+    design: [],
+    docs: {
+      description: {
+        story:
+          'Historical fixture: its original Figma frame was removed. Retained for authorable behavior coverage.',
+      },
+    },
   },
   args: {
     items: SITE_SETTINGS?.navItems ?? [],

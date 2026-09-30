@@ -54,7 +54,13 @@ const on = (surface: Surface): Decorator => {
     <SurfaceProvider surface={surface}>
       <div
         className={
-          { white: 'bg-white', paper: 'bg-paper', bone: 'bg-bone', ink: 'bg-ink' }[surface] + ' p-8'
+          {
+            white: 'bg-white',
+            paper: 'bg-paper',
+            bone: 'bg-bone',
+            ink: 'bg-ink',
+            charcoal: 'bg-charcoal',
+          }[surface] + ' p-8'
         }
         data-surface={surface}
       >

@@ -7,19 +7,7 @@ import { seededSectionArgs } from '../../../testing/seedContent'
 
 import { PersonGridSection } from './PersonGridSection'
 
-/**
- * The About frame's "Our team" band (`1927:6435`).
- *
- * The people are **referenced**, not inlined — a person is already a document
- * (they author insights), so inlining names here would have created a
- * second, drifting copy of the same fact. These stories therefore render the
- * real migrated `person` documents, headshots and all, which makes this also
- * the check that the converted person tree still carries them.
- *
- * The frame draws six identical placeholders, so the **count is the editor's**
- * rather than the design's — hence the stories at other counts. Three to a row
- * is the rule; what four or five do to the last row is the thing to look at.
- */
+/** Current About team cards. Counts and identity come from referenced person documents. */
 const meta = {
   title: 'Content/Blocks/Section/PersonGridSection',
   component: PersonGridSection,
@@ -37,7 +25,7 @@ type Story = StoryObj<typeof meta>
  *  by hand. */
 type People = NonNullable<ComponentProps<typeof PersonGridSection>['people']>
 
-/** The six people the About seed references. */
+/** The people the About seed references. */
 export const AsSeeded: Story = {
   args: seededSectionArgs('about', 'personGridSection'),
   globals: { viewport: { value: 'desktop' } },
@@ -93,11 +81,7 @@ export const WithBios: Story = {
   },
 }
 
-/**
- * A person with no headshot. The tile's black-and-red-arc plate is drawn by
- * `PortraitTile`, so the composition survives a missing portrait — the state
- * a newly-added person is in before their photo lands.
- */
+/** A person without an authored portrait gets a black tile. */
 export const MissingHeadshot: Story = {
   args: {
     ...seededSectionArgs('about', 'personGridSection'),

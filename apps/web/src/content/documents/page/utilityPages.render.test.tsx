@@ -8,7 +8,7 @@ import { aMigratedPage, migratedPageSlugs, renderRoute, siteSettings, withSettin
 
 /**
  * The migrated utility pages (#18) through the **catch-all** route — the same
- * `[...segments]/page.tsx` a visitor hits, not a shortcut.
+ * `[...path]/page.tsx` a visitor hits, not a shortcut.
  *
  * This is the first exercise of `page` sections through the pipeline, so the
  * question is whether the two-tier model survives a round trip: WordPress ACF
@@ -27,7 +27,7 @@ describe('migrated utility pages', () => {
     const doc = aMigratedPage(slug)
     const { html } = await renderRoute(route, {
       data: withSettings(doc, siteSettings()),
-      params: { segments: slug.split('/') },
+      params: { path: slug.split('/') },
     })
 
     // Exactly one h1 — heroSection supplies it; a page without one has no
@@ -44,7 +44,7 @@ describe('migrated utility pages', () => {
     const doc = aMigratedPage('privacy-policy')
     const { html } = await renderRoute(route, {
       data: withSettings(doc, siteSettings()),
-      params: { segments: ['privacy-policy'] },
+      params: { path: ['privacy-policy'] },
     })
 
     // 17,000 characters of legal text nobody will retype: the check that
@@ -66,7 +66,7 @@ describe('migrated utility pages', () => {
       const doc = aMigratedPage(slug)
       const { metadata } = await renderRoute(route, {
         data: withSettings(doc, siteSettings()),
-        params: { segments: slug.split('/') },
+        params: { path: slug.split('/') },
       })
       expect(metadata.alternates?.canonical).toBe(`http://localhost:3000/${slug}`)
     }

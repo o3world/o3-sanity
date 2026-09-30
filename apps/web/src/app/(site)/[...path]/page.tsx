@@ -3,6 +3,8 @@ import { buildCatchAllRoute, publishedSlugs } from '@o3/content-runtime/routes'
 
 import { CATCH_ALL_TYPES } from '@/content/documents'
 
+// Keep the parameter distinct from Next’s `$segment` rewrite capture.
+// `segments` collided with it in Vercel’s generated leaf-prefetch destination.
 const route = buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY)
 
 // This route resolves URL segments before it can render content. Keep the
@@ -18,7 +20,7 @@ export const instant = false
 export async function generateStaticParams() {
   return (await publishedSlugs(PAGE_SLUGS_QUERY))
     .filter((slug) => slug !== 'index')
-    .map((slug) => ({ segments: slug.split('/') }))
+    .map((slug) => ({ path: slug.split('/') }))
 }
 
 export const generateMetadata = route.generateMetadata

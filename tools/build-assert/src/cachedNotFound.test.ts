@@ -11,7 +11,7 @@ import type { RenderingOutput } from './rendering'
 const build: RenderingOutput = {
   cacheComponents: true,
   appPathRoutes: {
-    '/(site)/[...segments]/page': '/[...segments]',
+    '/(site)/[...path]/page': '/[...path]',
     '/(site)/insights/[slug]/page': '/insights/[slug]',
     '/(site)/work/[slug]/page': '/work/[slug]',
     '/(site)/page': '/',
@@ -20,7 +20,7 @@ const build: RenderingOutput = {
   prerender: {
     routes: { '/': { srcRoute: '/' } },
     dynamicRoutes: {
-      '/[...segments]': { fallback: null },
+      '/[...path]': { fallback: null },
       '/insights/[slug]': { fallback: null },
       '/work/[slug]': { fallback: null },
       '/studio/[[...tool]]': { fallback: '/studio/[[...tool]]' },

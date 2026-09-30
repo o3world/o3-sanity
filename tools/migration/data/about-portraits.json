@@ -1,0 +1,130 @@
+{
+  "fileKey": "RvraLJaZ0zWm8UaD5AJf43",
+  "version": "2404735173450726473",
+  "portraits": [
+    {
+      "id": "person-wp-18",
+      "name": "Mike Gadsby",
+      "nodeId": "I3771:80239;3767:80004",
+      "file": "about-portrait-current-gadsby.png",
+      "asset": "image-5cbd7ec8808b9c6da1d75cf19bc176c54915bdb9-790x790-png",
+      "expectedHeadshot": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-cce4ceb48649727f7b4494299ac0694a9df68bff-2500x2500-jpg",
+          "_type": "reference"
+        }
+      }
+    },
+    {
+      "id": "person-wp-21",
+      "name": "Keith Scandone",
+      "nodeId": "I3771:80240;3767:80004",
+      "file": "about-portrait-current-scandone.png",
+      "asset": "image-512123edf61374b3156e4a89b87fabf7a87cb2f4-790x790-png",
+      "expectedHeadshot": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-3a62e4d327ca9ccbea4494f32f626b9ef2ce40f6-2500x2500-jpg",
+          "_type": "reference"
+        }
+      }
+    },
+    {
+      "id": "person-wp-10",
+      "name": "Talia Edmundson",
+      "nodeId": "I3771:80241;3767:80004",
+      "file": "about-portrait-current-edmundson.png",
+      "asset": "image-120fca3f9cb98bbe58f8737623a2578077a61e3b-790x790-png",
+      "expectedHeadshot": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-45d36c497ab00900a200949a731633e6c0fd3710-2500x2500-jpg",
+          "_type": "reference"
+        }
+      }
+    },
+    {
+      "id": "person-wp-11",
+      "name": "Jay Forbes",
+      "nodeId": "I3771:80242;3767:80004",
+      "file": "about-portrait-current-forbes.png",
+      "asset": "image-d0da40c675ea1a5635964e7b42a87bdf5f152635-790x790-png",
+      "expectedHeadshot": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-74fa7c8f1df17febb81234f3f075fa453676685b-395x398-png",
+          "_type": "reference"
+        }
+      }
+    },
+    {
+      "id": "person-wp-9147",
+      "name": "Brady Halligan",
+      "nodeId": "I3771:80243;3767:80004",
+      "file": "about-portrait-current-halligan.png",
+      "asset": "image-e8560f3b3c8571dc0e5a5c219511a1483b5af0bd-790x790-png",
+      "expectedHeadshot": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-910d4dd9f0b6f0e5be33703f678abdf307fbb57c-2500x2500-jpg",
+          "_type": "reference"
+        }
+      }
+    },
+    {
+      "id": "person-wp-3",
+      "name": "Justin Handler",
+      "nodeId": "I3771:80244;3767:80004",
+      "file": "about-portrait-current-handler.png",
+      "asset": "image-bb6b7d786ed414278ca97bf830518318e8e09575-790x790-png",
+      "expectedHeadshot": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-e37548a4372210cf72d8ca6cbb49183465675adf-395x398-png",
+          "_type": "reference"
+        }
+      }
+    },
+    {
+      "id": "person-wp-4",
+      "name": "Kelly Navari",
+      "asset": "image-4ea64d19af76ce27002ec5bdea926b96d10fddaf-395x398-png",
+      "expectedHeadshot": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-fadb4246dfad0c94b55bc47d46d4094c1b41f5db-2500x2500-jpg",
+          "_type": "reference"
+        }
+      },
+      "sourceDraft": "drafts.person-wp-4"
+    },
+    {
+      "id": "person-wp-6195",
+      "name": "Jackie Ost",
+      "nodeId": "I3771:80246;3767:80004",
+      "file": "about-portrait-current-ost.png",
+      "asset": "image-cec11373fae1e5c7175f43e25d3a85fdb40600df-790x790-png",
+      "expectedHeadshot": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-0fbaeda2053021d368b940d320bcdb433547ef25-2500x2500-jpg",
+          "_type": "reference"
+        }
+      }
+    },
+    {
+      "id": "person-wp-10559",
+      "name": "Alex Boenisch",
+      "asset": "image-69b8641c0c9509796d0aee121c78949cee67a3c3-395x398-png",
+      "expectedHeadshot": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-65ea3034a000a63471ef5bc6fb283541f3a0ee8d-600x600-avif",
+          "_type": "reference"
+        }
+      },
+      "sourceDraft": "drafts.person-wp-10559"
+    }
+  ]
+}

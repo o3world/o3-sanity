@@ -314,6 +314,13 @@ const PINNED_CASE_STUDIES =
   /* groq */ `coalesce((${CASE_STUDY_INDEX}.pinnedItems[]->)[_type == "caseStudy"], [])` as const
 const UNPINNED_CASE_STUDIES =
   /* groq */ `*[_type == "caseStudy" && !(_id in ${PINNED_CASE_STUDY_REFS})]` as const
+const CASE_STUDY_ORDER = /* groq */ `coalesce(publishedAt, _createdAt) desc, _id asc` as const
+const CASE_STUDY_IDS =
+  /* groq */ `(${PINNED_CASE_STUDIES} + (${UNPINNED_CASE_STUDIES} | order(${CASE_STUDY_ORDER})))[]._id` as const
+
+// Append the first ID for wraparound. Delimiters keep IDs with shared prefixes distinct.
+const NEXT_CASE_STUDY_ID =
+  /* groq */ `string::split(string::split("|" + array::join(${CASE_STUDY_IDS} + (${CASE_STUDY_IDS})[0...1], "|") + "|", "|" + ^._id + "|")[1], "|")[0]` as const
 
 /**
  * The /insights index (#61), filtered by one category slug.
@@ -389,7 +396,7 @@ export const INSIGHT_CATEGORY_SLUGS_QUERY = defineQuery(
  * without the cap the whole collection is materialised to hand back nine.
  */
 export const CASE_STUDIES_PAGE_QUERY = defineQuery(`{
-  "items": (${PINNED_CASE_STUDIES} + (${UNPINNED_CASE_STUDIES} | order(coalesce(publishedAt, _createdAt) desc) [0...$end]))[$offset...$end]{${CASE_STUDY_CARD}},
+  "items": (${PINNED_CASE_STUDIES} + (${UNPINNED_CASE_STUDIES} | order(${CASE_STUDY_ORDER}) [0...$end]))[$offset...$end]{${CASE_STUDY_CARD}},
   "total": count(${PINNED_CASE_STUDIES}) + count(${UNPINNED_CASE_STUDIES})
 }`)
 
@@ -445,7 +452,7 @@ export const CASE_STUDY_QUERY = defineQuery(`*[_type == "caseStudy" && slug.curr
       (`2250:1564`), so the neighbour it fetches is the card projection —
       logo, eyebrow, narrative line and stat included. */ ''
   }
-  "next": *[_type == "caseStudy" && _id != ^._id] | order(_createdAt desc) [0]{${CASE_STUDY_CARD}}
+  "next": *[_type == "caseStudy" && _id != ^._id && _id == ${NEXT_CASE_STUDY_ID}][0]{${CASE_STUDY_CARD}}
 }`)
 
 export const CASE_STUDY_SLUGS_QUERY = defineQuery(

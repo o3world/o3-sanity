@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { figmaDesign } from '@o3/story-kit'
-import { expect, within } from 'storybook/test'
+import { expect, userEvent, within } from 'storybook/test'
 
 import { seededSectionArgs } from '../../../testing/seedContent'
 
@@ -72,7 +72,131 @@ export const Mobile: Story = {
  */
 export const Interaction: Story = {
   args: seededSectionArgs('contact', 'formSection'),
-  globals: { backgrounds: { value: 'bone' } },
+  globals: { backgrounds: { value: 'bone' }, viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    await document.fonts.ready
+    const canvas = within(canvasElement)
+    const name = canvas.getByLabelText(/Your name/)
+    const email = canvas.getByLabelText(/Email/)
+    const form = name.closest('form')!
+    const heading = canvas.getByRole('heading', { level: 1 })
+    const geometry = () =>
+      [form, form.parentElement!, heading].map((element) => {
+        const rect = element.getBoundingClientRect()
+        return { top: rect.top + window.scrollY, height: rect.height }
+      })
+    // Each field's error sits in the 24px gap below it, so it must stay one line.
+    const errorsFitTheirGap = () => {
+      const shown = canvas.getAllByRole('alert').filter((alert) => alert.textContent)
+      for (const alert of shown) {
+        expect(alert.getBoundingClientRect().height).toBeLessThanOrEqual(
+          parseFloat(getComputedStyle(alert).lineHeight),
+        )
+      }
+      return shown.length
+    }
+    const before = geometry()
+    // Figma 2960:7794 (desktop) and 3754:78228 (mobile): the idle card height.
+    const figmaCardHeight = window.innerWidth >= 1024 ? 546 : 738
+    await expect(Math.abs(before[1]!.height - figmaCardHeight)).toBeLessThanOrEqual(1)
+
+    await userEvent.click(canvas.getByRole('button', { name: /Send message/i }))
+    await expect(name).toHaveFocus()
+    await expect(name).toHaveAccessibleDescription('Add your name.')
+    await expect(geometry()).toEqual(before)
+    await expect(errorsFitTheirGap()).toBeGreaterThan(0)
+
+    await userEvent.type(email, 'invalid')
+    await expect(email).toHaveAccessibleDescription('That email address doesn’t look right.')
+    await expect(geometry()).toEqual(before)
+    errorsFitTheirGap()
+
+    await userEvent.clear(email)
+    await userEvent.type(email, 'preview@example.com')
+    await expect(email).toHaveAttribute('aria-invalid', 'false')
+    await expect(geometry()).toEqual(before)
+  },
+}
+
+export const MobileInteraction: Story = {
+  ...Interaction,
+  globals: { backgrounds: { value: 'bone' }, viewport: { value: 'mobile' } },
+}
+
+export const SplitLayoutBoundary: Story = {
+  ...Interaction,
+  globals: { ...Interaction.globals, viewport: { value: 'splitBoundary' } },
+  parameters: {
+    viewport: {
+      options: {
+        splitBoundary: {
+          name: 'Split layout boundary',
+          styles: { width: '1280px', height: '1000px' },
+        },
+      },
+    },
+  },
+  play: async (context) => {
+    await Interaction.play!(context)
+    const canvas = within(context.canvasElement)
+    const reason = canvas.getByLabelText(/Reason/)
+    const referral = canvas.getByLabelText<HTMLInputElement>(/How’d you hear about us/)
+    const label = referral.labels![0]!
+    await expect(label.getBoundingClientRect().height).toBe(
+      parseFloat(getComputedStyle(label).lineHeight),
+    )
+    await expect(referral.getBoundingClientRect().top).toBe(reason.getBoundingClientRect().top)
+    await expect(referral).not.toBeRequired()
+  },
+}
+
+/** Stack the introduction and fields before the desktop columns become cramped. */
+export const NarrowDesktopInteraction: Story = {
+  args: seededSectionArgs('contact', 'formSection'),
+  globals: { viewport: { value: 'narrowDesktop' } },
+  parameters: {
+    viewport: {
+      options: {
+        narrowDesktop: { name: 'Narrow desktop', styles: { width: '1024px', height: '1000px' } },
+      },
+    },
+  },
+  play: async ({ canvasElement }) => {
+    await document.fonts.ready
+    const canvas = within(canvasElement)
+    const email = canvas.getByLabelText(/Email/)
+    const name = canvas.getByLabelText(/Your name/)
+    const reasonLabel = canvas.getByLabelText<HTMLSelectElement>(/Reason/).labels![0]!
+    const form = email.closest('form')!
+    const heading = canvas.getByRole('heading', { level: 1 })
+    await expect(form.getBoundingClientRect().top).toBeGreaterThan(
+      heading.closest('header')!.getBoundingClientRect().bottom,
+    )
+    await expect(email.getBoundingClientRect().top).toBeGreaterThan(
+      name.getBoundingClientRect().bottom,
+    )
+    await expect(email.getBoundingClientRect().width).toBe(form.getBoundingClientRect().width)
+    const geometry = () =>
+      [form, form.parentElement!, heading].map((element) => {
+        const rect = element.getBoundingClientRect()
+        return { top: rect.top + window.scrollY, height: rect.height }
+      })
+    const before = geometry()
+
+    await userEvent.type(email, 'invalid')
+    await userEvent.click(name)
+    await expect(email).toHaveAccessibleDescription('That email address doesn’t look right.')
+    const error = canvas.getByText('That email address doesn’t look right.')
+    await expect(error.getBoundingClientRect().bottom).toBeLessThan(
+      reasonLabel.getBoundingClientRect().top,
+    )
+    await expect(geometry()).toEqual(before)
+
+    await userEvent.clear(email)
+    await userEvent.type(email, 'preview@example.com')
+    await expect(email).toHaveAttribute('aria-invalid', 'false')
+    await expect(geometry()).toEqual(before)
+  },
 }
 
 /** The answer a person gets once the submission is HubSpot's. */
