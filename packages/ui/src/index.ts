@@ -108,10 +108,6 @@ export type { FormFieldControl, FormFieldProps } from './components/form-field'
 export { HalftoneDisc } from './components/halftone-disc'
 export type { HalftoneDiscProps } from './components/halftone-disc'
 
-// LogoTile
-export { LogoTile } from './components/logo-tile'
-export type { LogoTileProps } from './components/logo-tile'
-
 // Skeleton — the block a streamed route holds while its data is in flight
 export { Skeleton } from './components/skeleton'
 export type { SkeletonProps } from './components/skeleton'

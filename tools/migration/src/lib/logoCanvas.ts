@@ -9,9 +9,9 @@
  * height of athenahealth.
  *
  * So the artwork is normalised rather than the component. Each mark is centred
- * on one canvas of fixed proportions and fitted inside a box on it — the same
- * idiom `LogoTile` already uses in CSS (`max-h-[76px] max-w-[78%]`), moved to
- * the asset so the tile can keep filling its width.
+ * on one canvas of fixed proportions and fitted inside a box on it — a
+ * max-height/max-width fit, done on the asset so the tile can keep filling its
+ * width.
  *
  * Pure and deterministic: the same source bytes always produce the same output,
  * which is what lets `brand-assets` treat a changed file as a vendor change
