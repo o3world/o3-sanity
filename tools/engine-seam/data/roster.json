@@ -157,7 +157,7 @@
     {
       "path": "packages/story-kit",
       "verdict": "engine",
-      "why": "Storybook config builders and the knob-matrix story generators.",
+      "why": "Storybook config builders and the variant-matrix story generator.",
       "overrides": [
         {
           "path": "src/figma.ts",
@@ -187,13 +187,8 @@
           "fix": "Story roots arrive as a parameter of the builder."
         },
         {
-          "where": "src/defineKnobStories.tsx (bg-bone, text-fg-muted)",
-          "what": "Brand token classes in a rendered component, with no tailwind dependency declared.",
-          "fix": "Neutral inline styles, or the classes arrive as parameters."
-        },
-        {
           "where": "src/defineVariantStories.tsx (text-fg-muted)",
-          "what": "The same brand token class in the variant grid's row labels.",
+          "what": "A brand token class in the variant grid's row labels, with no tailwind dependency declared.",
           "fix": "Same shape: neutral inline styles, or the classes arrive as parameters."
         }
       ]
