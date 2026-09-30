@@ -166,7 +166,7 @@ export const Cards: Story = {
 /**
  * The rail at 402 (`2975:8188`): the rail is a tab row over the panels, each
  * panel stacks its plate under its copy, and the underline replaces the 3 × 20
- * indicator on the active stop.
+ * indicator on the active stop. The header stacks, and panel copy sets at 20/26.
  */
 export const RailMobile: Story = {
   args: seededSectionArgs('index', 'railPanelsSection', 0),
@@ -179,6 +179,13 @@ export const RailMobile: Story = {
     await expect(getComputedStyle(section).paddingTop).toBe('64px')
     await expect(getComputedStyle(section).paddingBottom).toBe('64px')
     await expect(getComputedStyle(heading.parentElement!.parentElement!).rowGap).toBe('64px')
+    await expect(getComputedStyle(heading).fontSize).toBe('40px')
+    await expect(getComputedStyle(heading).lineHeight).toBe('44px')
+    const panel = canvasElement.querySelector('article')!
+    const body = panel.querySelector('p')!
+    await expect(getComputedStyle(body).fontSize).toBe('20px')
+    await expect(getComputedStyle(body).lineHeight).toBe('26px')
+    await expect(getComputedStyle(panel.parentElement!).gap).toBe('64px')
   },
 }
 
@@ -317,23 +324,6 @@ export const OnPhotographUntinted: Story = {
       image: seedImage('tools/migration/data/seed/assets/work-city.png'),
       tint: 'none',
     },
-  },
-}
-
-/** Current Home label rail: a stacked header and 20/26 mobile panel copy. */
-export const HomeMobile: Story = {
-  ...RailByLabel,
-  globals: { viewport: { value: 'mobile' } },
-  parameters: { design: figmaDesign('2975:8188') },
-  play: async ({ canvasElement }) => {
-    const heading = canvasElement.querySelector('h2')!
-    await expect(getComputedStyle(heading).fontSize).toBe('40px')
-    await expect(getComputedStyle(heading).lineHeight).toBe('44px')
-    const panel = canvasElement.querySelector('article')!
-    const body = panel.querySelector('p')!
-    await expect(getComputedStyle(body).fontSize).toBe('20px')
-    await expect(getComputedStyle(body).lineHeight).toBe('26px')
-    await expect(getComputedStyle(panel.parentElement!).gap).toBe('64px')
   },
 }
 
