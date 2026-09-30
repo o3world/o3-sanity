@@ -2,8 +2,8 @@
  * WHERE EACH PARTNER'S MARK COMES FROM, AND ON WHAT BASIS WE USE IT.
  *
  * One row per borrowed file. `brand-assets.ts` re-fetches every row and reports
- * what the vendor has changed; the bytes stay committed so `load` never depends
- * on a vendor's CDN being up (see that file for why).
+ * what the vendor has changed; the bytes stay committed so a write never
+ * depends on a vendor's CDN being up (see that file for why).
  *
  * Two facts about these URLs that the next person will otherwise learn the hard
  * way. **Several carry a content hash** — Lovable's `-BboAsRf2`, Sanity's

@@ -105,7 +105,7 @@ function imageAssetRefs(
 /**
  * @param locks The raw-perspective lock rows for every live document in both
  * its forms. Raw because a lock can sit on the draft copy while the published
- * copy is the orphan, and `load` treats a lock on either copy as locking the
+ * copy is the orphan, and `sync-docs` treats a lock on either copy as locking the
  * pair — the orphan check has to read it the same way.
  */
 export function report(
@@ -212,7 +212,7 @@ export function report(
   //    `brief` documents live only in the dataset on purpose, and
   //    `guidance` documents are a retired type production still holds
   //    (`INTERNAL_TYPES`), so neither counts as an orphan. A locked one is a
-  //    document `load` skipped on purpose (ADR 0003), so it is named as a
+  //    document an editor took over (ADR 0003), so it is named as a
   //    skip rather than left for an agent to investigate.
   checks.push({
     check: 'every document is committed under data/',

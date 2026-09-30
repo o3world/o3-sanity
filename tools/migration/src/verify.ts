@@ -48,7 +48,7 @@ async function main() {
 
   // The lock flag for every live document in both its forms, read raw
   // (`LOCK_FETCH_OPTIONS`) — a lock on a draft is invisible to the published
-  // perspective, and the orphan check has to see it the way `load` does.
+  // perspective, and the orphan check has to see it the way `sync-docs` does.
   const ids = live.flatMap((d) => [d._id, `drafts.${d._id}`])
   const locks = await client.fetch<LockRow[]>(LOCKED_BY_ID, { ids }, LOCK_FETCH_OPTIONS)
 
@@ -83,16 +83,10 @@ async function main() {
       `\n⚠ placeholder sections (${result.placeholders.length}) — inserted from the canvas and not yet written`,
     )
     for (const line of result.placeholders) console.log(`    ${line}`)
-    // ⚠️ THE THING THAT SURPRISES PEOPLE, said where they will read it. The
-    // committed JSON under `data/` is the source of truth during build-out
-    // (ADR 0003), and `load` recreates every unlocked pipeline-owned document
-    // from it — so a section added in Studio lives ONLY in the dataset. The
-    // next `load` removes it, silently, along with whatever was written into
-    // it. Seed it into `data/seed/` or lock the document; there is no third
-    // option, and nothing in Presentation can say so from inside its iframe.
-    console.log(
-      '    (these live only in the dataset — the next `load` recreates the document from data/)',
-    )
+    // A section added in Studio lives only in the dataset, which is where
+    // content is authored. It renders as the block's placeholder until
+    // someone writes it.
+    console.log('    (added from the canvas and not written yet — they render as placeholders)')
   }
 
   if (findings.length > 0) {

@@ -57,10 +57,10 @@ pnpm dataset:sync       # that backup, then import into development with --repla
 pnpm dataset:drift      # which pipeline-owned documents an editor changed (exit 1 on drift)
 ```
 
-- **`load` refuses, in every dataset.** It prints a refusal and exits
-  non-zero, with no flag. A load deletes and recreates every unlocked
-  pipeline-owned document and clears any draft shadowing one, which means
-  destroying editors' work. A dataset change is a targeted migration instead
+- **Nothing rebuilds a dataset from the seeds.** A rebuild would delete and
+  recreate every unlocked pipeline-owned document and clear any draft
+  shadowing one, which means destroying editors' work. A dataset change is a
+  targeted migration, or `sync-docs` for named committed documents
   (AGENTS.md → "Changing a dataset").
 - **`dataset:sync` never deletes.** `--replace` overwrites a document that
   exists in both datasets with production's copy and leaves
@@ -72,14 +72,14 @@ pnpm dataset:drift      # which pipeline-owned documents an editor changed (exit
 --replace` from `tools/migration`.
 - **A drifted document gets locked, not reloaded.**
   `pnpm --filter @o3/migration drift -- --lock` stamps `migration.locked` on
-  every drifted document, and the pipeline never replaces a locked document
+  every drifted document, and `sync-docs` never replaces a locked document
   from outside it (ADR 0003). To hand one back to the pipeline: port the edit into
   `tools/migration/data/`, then unset the lock.
 
 ## Rebuilding a dataset from scratch
 
-**You cannot, and that is deliberate.** `load` refuses in every dataset, with
-no flag — `tools/migration/src/load.ts` carries the reasoning. There is no
+**You cannot, and that is deliberate.** No command rebuilds a dataset from the
+committed JSON. There is no
 scratch dataset left to rebuild into: `development` mirrors `production` via
 `pnpm dataset:sync`, and both hold content no committed JSON knows about.
 Nor is there a source to rebuild the corpus from: the WordPress import is

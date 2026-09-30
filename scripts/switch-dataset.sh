@@ -11,11 +11,11 @@
 #   pnpm dataset development     Switch everything to `development`
 #   pnpm dataset production      Switch everything to `production`
 #
-# Why every file and not just apps/web: `pnpm --filter migration load` deletes
-# and rewrites documents, and it resolves its dataset from tools/migration —
-# not from apps/web/.env.local. Before this script those two could disagree
+# Why every file and not just apps/web: `sync-docs` and the targeted
+# migrations write documents, and they resolve their dataset from
+# tools/migration — not from apps/web/.env.local. Before this script those two could disagree
 # silently, and did: `SANITY_DATASET` was read by the migration CLI config and
-# set by nothing, so every load went to production. The code default is now
+# set by nothing, so every write went to production. The code default is now
 # `development` (DEFAULT_DATASET in @o3/sanity/constants), so a file this
 # script has not written falls back to the scratch dataset rather than the
 # live one.
@@ -30,11 +30,11 @@ VAR=NEXT_PUBLIC_SANITY_DATASET
 
 # Each entry: "env-file-path|what reads it". One variable name across all of
 # them — the split between NEXT_PUBLIC_SANITY_DATASET and SANITY_DATASET is
-# what allowed the web app and the migration loader to diverge.
+# what allowed the web app and the migration tool to diverge.
 TARGETS=(
   "apps/web/.env.local|web app + embedded Studio"
   "packages/sanity/.env.local|typegen, schema extract/deploy"
-  "tools/migration/.env.local|migration load + verify"
+  "tools/migration/.env.local|migration sync-docs, drift + verify"
 )
 
 # The datasets o3's brand config declares (@o3/sanity/brand). This script
@@ -107,7 +107,7 @@ cmd_set() {
 
   if [ "$target" = production ]; then
     echo "Switching to PRODUCTION — the dataset the deployed site reads."
-    echo "\`pnpm --filter migration load\` against this deletes and rewrites documents."
+    echo "Anything run with --apply from tools/migration now writes to production."
     echo ""
   fi
 

@@ -1,19 +1,18 @@
 /**
- * Drift → which documents the next `load` would damage. Runs under
+ * Drift → which committed documents production has moved past. Runs under
  * `sanity exec --with-user-token`, read-only unless told otherwise.
  *
- * Editors author in `production` now, so a pipeline-owned document can carry
- * edits the committed corpus knows nothing about. `load` would revert those
- * edits and delete any draft shadowing a document it writes. This command
- * names every such document before that happens:
+ * Editors author in `production`, so a pipeline-owned document can carry
+ * edits the committed corpus knows nothing about. A `sync-docs` run of that
+ * document would revert them. This command names every such document:
  *
  *   pnpm dataset:drift                                # report, exit 1 on drift
  *   pnpm --filter @o3/migration drift -- --lock      # stamp migration.locked on each
  *
- * `--lock` is the protection ADR 0003 already defines: a locked document is
- * never touched by `load`, in any mode. Locking is how an editor's version
- * becomes the version; porting their edit back into the seed JSON and
- * unlocking is how the corpus becomes the version again.
+ * `--lock` is the protection ADR 0003 defines: `sync-docs` never replaces a
+ * locked document. Locking is how an editor's version becomes the version;
+ * porting their edit back into the seed JSON and unlocking is how the corpus
+ * becomes the version again.
  *
  * The comparison itself is `core/drift.ts`; this fetches, prints, and locks.
  */
@@ -44,7 +43,7 @@ async function main() {
   const ids = all.flatMap((d) => [d._id, `drafts.${d._id}`])
   const locks = await client.fetch<LockRow[]>(LOCKED_BY_ID, { ids }, LOCK_FETCH_OPTIONS)
   const { runs } = readManifest()
-  const loadPlan = plan(all, locks, {
+  const corpusPlan = plan(all, locks, {
     runs,
     extractSource: (sourceFile) => {
       const path = join(EXTRACT_DIR, sourceFile)
@@ -52,7 +51,7 @@ async function main() {
     },
   })
 
-  const writeIds = loadPlan.writes.flatMap((d) => [d._id, `drafts.${d._id}`])
+  const writeIds = corpusPlan.writes.flatMap((d) => [d._id, `drafts.${d._id}`])
   const live = await client.fetch<AnyDoc[]>('*[_id in $ids]', { ids: writeIds }, LOCK_FETCH_OPTIONS)
 
   const assets: AssetMap = existsSync(ASSET_MAP) ? JSON.parse(readFileSync(ASSET_MAP, 'utf8')) : {}
@@ -60,21 +59,23 @@ async function main() {
     existsSync(MISSING_MEDIA) ? (JSON.parse(readFileSync(MISSING_MEDIA, 'utf8')) as string[]) : [],
   )
 
-  const findings = driftBetween(loadPlan.writes, live, assets, missing)
+  const findings = driftBetween(corpusPlan.writes, live, assets, missing)
 
-  if (loadPlan.lockedSkips.length > 0) {
-    console.log(`locked (safe from load): ${loadPlan.lockedSkips.length}`)
+  if (corpusPlan.lockedSkips.length > 0) {
+    console.log(`locked (sync-docs will not replace them): ${corpusPlan.lockedSkips.length}`)
   }
   if (findings.length === 0) {
-    console.log(`no drift — ${loadPlan.writes.length} unlocked documents match the corpus`)
+    console.log(`no drift — ${corpusPlan.writes.length} unlocked documents match the corpus`)
     return
   }
 
-  console.log(`DRIFT (${findings.length}) — the next load would revert or delete these edits:`)
+  console.log(
+    `DRIFT (${findings.length}) — production differs from data/; a sync-docs run would revert these edits:`,
+  )
   for (const { id, fields, draft } of findings) {
     const notes = [
       fields.length > 0 ? `published differs: ${fields.join(', ')}` : null,
-      draft ? 'has a draft (load deletes it)' : null,
+      draft ? 'has an open draft' : null,
     ].filter(Boolean)
     console.log(`  ${id} — ${notes.join('; ')}`)
   }
@@ -91,9 +92,9 @@ async function main() {
       )
     }
     await tx.commit()
-    console.log(`\nlocked ${findings.length} documents — load will skip them from now on`)
+    console.log(`\nlocked ${findings.length} documents — sync-docs will not replace them`)
     console.log(
-      'To hand one back to the pipeline: port the edit into data/, then unset migration.locked.',
+      'To let sync-docs write one again: port the edit into data/, then unset migration.locked.',
     )
     return
   }

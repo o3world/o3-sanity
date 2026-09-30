@@ -8,23 +8,20 @@
  * ── WHY THIS EXISTS ────────────────────────────────────────────────────────
  *
  * The site is in production mode: editors and content population own the
- * datasets, and `load` recreates every unlocked pipeline-owned document it
- * finds and retires every one the corpus no longer names. Everyday changes
- * therefore ship scoped to the documents they are about (AGENTS.md → "Changing
- * a dataset"). This is that scope, made a command rather than a one-off
- * script that has to be written correctly again next time.
+ * datasets, so a change ships scoped to the documents it is about (AGENTS.md →
+ * "Changing a dataset"). This is that scope, made a command rather than a
+ * one-off script that has to be written correctly again next time.
  *
- * Three things it deliberately does NOT do, all of which `load` does:
+ * Three things it deliberately does NOT do:
  *
  * - **It never retires.** A document outside the selection is not touched,
- *   whatever the corpus says about it. Deleting is what makes `load` dangerous
- *   here, so the targeted command cannot do it at all.
+ *   whatever the corpus says about it, and nothing here can delete one.
  * - **It never clears a draft.** An editor with an open draft keeps it; the
  *   run says so, and porting or discarding it is a decision, not a side effect.
  * - **It does not stamp provenance from the manifest.** The seeds it is for
  *   carry their own `migration` block already.
  *
- * What it keeps from `load` is everything that makes a write safe: the lock
+ * What makes a write safe here: the lock
  * rule (ADR 0003 — a `migration.locked` document is never touched, in any
  * mode), the production gate, asset resolution through `data/assets.json`, and
  * one transaction for the whole run.
