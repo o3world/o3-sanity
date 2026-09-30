@@ -14,8 +14,7 @@ import { OrbitalSphere } from './orbital-sphere'
  * It is `position: absolute` and `aria-hidden` by construction: it is a field a
  * band sits in front of, never a thing on its own. Every placement story
  * therefore supplies the band, and **carries that call site's real values** —
- * these stories are the record of how each band crops the sphere, and the only
- * seam that catches placement drift.
+ * these stories are the record of how each band crops the sphere.
  *
  * The thing to check is the **proportion**, not the numbers: the arcs should run
  * nearly parallel to whatever curve is beneath them. A sphere drawn a sixth too
@@ -282,8 +281,8 @@ export const FramePacing: Story = {
   },
 }
 
-/** Two on one page. The export found its host by a hardcoded global element id,
- *  so the second one never drew; this is the story that would have caught it. */
+/** Two turning on one page. Each globe's loop drives its own paths, so both
+ *  have to move — a loop that found one shared host would leave one still. */
 export const TwoOnAPage: Story = {
   args: { motion: 'orbit' },
   globals: { backgrounds: { value: 'ink' } },
@@ -301,10 +300,26 @@ export const TwoOnAPage: Story = {
       />
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const globes = [...canvasElement.querySelectorAll('svg')].filter(
+      (svg) => svg.querySelectorAll('path').length === 14,
+    )
+    await expect(globes).toHaveLength(2)
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const geometry = (svg: SVGSVGElement) =>
+      [...svg.querySelectorAll('path')].map((path) => path.getAttribute('d')).join('')
+    const initial = globes.map(geometry)
+    await waitFor(() => {
+      for (const [index, svg] of globes.entries()) {
+        expect(geometry(svg)).not.toBe(initial[index])
+      }
+    })
+  },
 }
 
 /* ---------------------------------------------------------------------------
- * The real call sites. Values below are copied from the renderers, not invented.
+ * The real call sites: HeroSection's Home opener and QuoteSection's pair.
+ * Values below are copied from those two renderers, not invented.
  * ------------------------------------------------------------------------- */
 
 /** The Home opener. The sphere is 120% of the frame width, hung so only its cap
@@ -318,49 +333,6 @@ export const HomeOpener: Story = {
       <OrbitalSphere
         {...args}
         className="bottom-[-111vw] left-1/2 w-[148vw] -translate-x-1/2 lg:bottom-[-100vw] lg:w-[120vw]"
-      />
-    </div>
-  ),
-}
-
-/** The interior hero on ink — the red globe, off the band's right shoulder. */
-export const InteriorHeroInk: Story = {
-  args: { preset: 'hero', motion: 'orbit' },
-  globals: { backgrounds: { value: 'ink' } },
-  render: (args) => (
-    <div className="bg-ink relative isolate h-[520px] overflow-hidden">
-      <OrbitalSphere
-        {...args}
-        className="left-[205px] top-[184px] -z-10 w-[918px] lg:left-auto lg:right-[-117px]"
-      />
-    </div>
-  ),
-}
-
-/** The interior hero on bone — the line drawing, most of it past the right edge
- *  with the arcs crossing the copy's right shoulder. */
-export const InteriorHeroBone: Story = {
-  args: { preset: 'line', motion: 'orbit' },
-  globals: { backgrounds: { value: 'bone' } },
-  render: (args) => (
-    <div className="bg-bone relative isolate h-[520px] overflow-hidden">
-      <OrbitalSphere
-        {...args}
-        className="left-[171px] top-[178px] -z-10 w-[720px] lg:left-auto lg:right-[-147px] lg:top-[98px]"
-      />
-    </div>
-  ),
-}
-
-/** The closing CTA band — centred so the band shows the sphere's underside. */
-export const CtaBand: Story = {
-  args: { preset: 'hero', motion: 'orbit' },
-  globals: { backgrounds: { value: 'ink' } },
-  render: (args) => (
-    <div className="bg-ink-deep relative isolate h-[520px] overflow-hidden">
-      <OrbitalSphere
-        {...args}
-        className="bottom-[4%] left-1/2 w-[150vw] -translate-x-1/2 lg:w-[90vw]"
       />
     </div>
   ),
