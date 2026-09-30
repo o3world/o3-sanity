@@ -58,20 +58,21 @@ function sourceFiles(dir: string): string[] {
   })
 }
 
+type Source = { path: string; source: string }
+
 /**
- * The files under `root` that export a component of this name.
+ * The files that export a component of this name.
  *
  * Two forms count: the declaration exported in place, and a local declaration
  * listed in an `export { … }`. A re-export carries `from` and does not, so a
  * barrel cannot stand in for the renderer it points at.
  */
-function filesExporting(root: string, name: string): string[] {
+function filesExporting(sources: readonly Source[], name: string): string[] {
   const declared = new RegExp(`^export (?:default )?(?:function|const|class) ${name}\\b`, 'm')
   const listed = new RegExp(`^export \\{[^}]*\\b${name}\\b[^}]*\\}(?!\\s*from)`, 'm')
-  return sourceFiles(root).filter((path) => {
-    const source = readFileSync(join(REPO, path), 'utf8')
-    return declared.test(source) || listed.test(source)
-  })
+  return sources
+    .filter(({ source }) => declared.test(source) || listed.test(source))
+    .map(({ path }) => path)
 }
 
 const renderers = (Object.keys(TIER_ROSTER) as Tier[]).flatMap((tier) =>
@@ -79,11 +80,19 @@ const renderers = (Object.keys(TIER_ROSTER) as Tier[]).flatMap((tier) =>
 )
 
 describe('every renderer', () => {
-  it.each(renderers)('$tier/$type is drawn exactly once', ({ name }) => {
-    const found = TREES.flatMap((tree) => filesExporting(tree, name))
-    expect(
-      found,
-      `${name} must be exported by exactly one file across ${TREES.join(' and ')}; found ${found.length}.`,
-    ).toHaveLength(1)
+  it(`is exported by exactly one file across ${TREES.join(' and ')}`, () => {
+    // Read once: every renderer asks the same trees.
+    const sources = TREES.flatMap((tree) =>
+      sourceFiles(tree).map((path) => ({ path, source: readFileSync(join(REPO, path), 'utf8') })),
+    )
+    expect(renderers.length).toBeGreaterThan(0)
+    const offenders = renderers
+      .map(({ tier, type, name }) => ({
+        renderer: `${tier}/${type}`,
+        name,
+        files: filesExporting(sources, name),
+      }))
+      .filter(({ files }) => files.length !== 1)
+    expect(offenders).toEqual([])
   })
 })
