@@ -45,7 +45,7 @@ export const Dark: Story = {
   },
 }
 
-/** `Theme=White` (2205:1298) on ink — the CTA band's button (2336:4351). */
+/** `Theme=White` (2205:1298) on ink — the CTA band's button (3771:80361). */
 export const Light: Story = {
   args: { variant: 'light', children: 'View our work', icon: <ArrowIcon /> },
   globals: { backgrounds: { value: 'ink' } },

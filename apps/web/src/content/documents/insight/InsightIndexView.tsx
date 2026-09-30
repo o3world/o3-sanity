@@ -58,20 +58,20 @@ function insightsHref({
  * The /insights index: authored bands, the feed, authored bands (#347).
  *
  * **What this file still owns is the feed and only the feed** — the filter
- * bar, the card grid and the pager, drawn to the frame #61 commissioned
- * (`2336:4310`) and its 402 companion (`2975:8499`):
+ * bar, the card grid and the pager, drawn to the Insights frame
+ * (`3739:71101`) and its 402 companion (`2975:8499`):
  *
  * ```
- * band      2337:4485   bone #F1F0EC, 128px 96px, gap 48
- *   filters 2337:4486   chip row, gap 10, All + one per category
- *   grid    2337:4492   1249 wide, wrap, gap 64 × 32 — three 395px cards
- *   card    2337:4493   the same InsightCard the Home row draws
+ * band      3739:71109   bone #F1F0EC, 128px 96px, gap 48
+ *   filters 3739:71110   chip row, gap 10, All + one per category
+ *   grid    3739:71118   1249 wide, wrap, gap 64 × 32 — three 395px cards
+ *   card    3739:71754   the same InsightCard the Home row draws
  * ```
  *
  * At 402 the chip row scrolls sideways (`2975:8656`) and the grid is one
  * 370px column 64 apart (`2975:8663`).
  *
- * The hero (`2336:4477`) and the closer (`2336:4351`) are **no longer here**.
+ * The hero (`3739:71309`) and the closer (`3771:80361`) are **no longer here**.
  * They are `heroSection` and `ctaSection` blocks on the `collectionIndex`
  * document, which is what makes them an editor's to change — and the hero the
  * block draws at `variant: 'band'` is the same `CollectionHero` this file used
@@ -80,10 +80,10 @@ function insightsHref({
  * ## The filter is the point of the frame
  *
  * #49 declined to invent a category filter and #61 asked the frame to settle
- * it. It did: `2337:4486` draws All plus five categories, and the labels are
- * five real migrated categories (AI, Design, Technology, 1682 Conference, Life
- * at O3) rather than sample words — so the control filters on `category`, and
- * the chips come from the collection instead of from a hand-kept list here.
+ * it. It did: `3739:71110` draws All plus six categories (1682, AI, Design,
+ * Technology, 1682 Conference, Life at O3), real category names rather than
+ * sample words — so the control filters on `category`, and the chips come from
+ * the collection instead of from a hand-kept list here.
  *
  * The initial result is server-rendered at `/insights/category/design` (#370),
  * keeping filtered indexes linkable and crawlable. Hydrated filter changes
@@ -122,7 +122,7 @@ export function InsightIndexView({
     <>
       {above}
 
-      {/* `2337:4485` — bone, 128px 96px, 48px between the filter bar and the
+      {/* `3739:71109` — bone, 128px 96px, 48px between the filter bar and the
           grid. Unlike the Home and About Blog rows the cards do not bleed past
           the right edge: the grid has nothing to scroll to at either width.
 
@@ -152,7 +152,7 @@ export function InsightIndexView({
              *
              * At 402 (`2975:8656`) the six chips run to 657px in one
              * unwrapped row, past the frame's right edge: the bar scrolls
-             * sideways. At 1440 (`2337:4486`) they fit, and the row wraps
+             * sideways. At 1440 (`3739:71110`) they fit, and the row wraps
              * because the number of chips is the collection's business, not
              * the frame's — the bar has to survive a category the frame never
              * drew.
@@ -204,7 +204,7 @@ export function InsightIndexView({
              *
              * 3 × 395 + 2 × 32 = 1249, which is the frame's own row width and
              * `max-w-section` to the pixel. The 64px row gap is flat: both
-             * frames set it, wrapped at 1440 (`2337:4492`) and stacked at 402
+             * frames set it, wrapped at 1440 (`3739:71118`) and stacked at 402
              * (`2975:8663`).
              */
             <RevealSequence key={resultsKey} boundaries="items">

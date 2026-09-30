@@ -30,8 +30,8 @@ import { insightIndex } from './collectionIndex'
  * the category are PATH segments (#370), so a page past the end is a 404
  * rather than a clamp, and a category segment must reach the query as a GROQ
  * param and come back to the view as the chip that looks selected. Both are
- * pinned here, along with the composition the canonical frame (`2336:4310`,
- * #61) settles.
+ * pinned here, along with the composition the Insights frame (`3739:71101`)
+ * settles.
  */
 const route = buildIndexRoute(insightIndex)
 
@@ -149,7 +149,7 @@ describe('insights collection index route', () => {
   })
 
   /**
-   * The card draws no byline in either state — the frame (`2337:4493`) gives
+   * The card draws no byline in either state — the frame (`3739:71754`) gives
    * it a meta line and a title and nothing else. Worth pinning now that a
    * byline is optional (#32 item 1.1): the card is the one surface where
    * "authorless" must be indistinguishable from "authored", and the projection
@@ -179,7 +179,7 @@ describe('insights collection index route', () => {
 })
 
 /**
- * The category filter (#61) — the question `2337:4486` answered and #49 left
+ * The category filter (#61) — the question `3739:71110` answered and #49 left
  * open. It is a URL parameter resolved on the server, so every assertion here
  * is about the request and the markup, and none is about client state.
  */
@@ -217,7 +217,7 @@ describe('insights index category filter', () => {
       params: { category: 'design' },
     })
     expect(html.match(/aria-current="page"/g)).toHaveLength(1)
-    // The selected chip is Theme=Black (`2337:4542`): ink fill, white label.
+    // The selected chip is Theme=Black (`3739:71111`): ink fill, white label.
     expect(html).toMatch(/aria-current="page"[^>]*href="\/insights\/category\/design#feed"/)
   })
 
@@ -284,7 +284,7 @@ describe('insights index category filter', () => {
 })
 
 /**
- * The composition, read off `2336:4310`. Every value below is on the frame and
+ * The composition, read off `3739:71101`. Every value below is on the frame and
  * the node is named beside it, so the next person can check it rather than
  * trust it — the same job the borrowed-values block did while this route was
  * provisional (#49).
@@ -302,18 +302,16 @@ const page = await renderRoute(route, {
 
 describe('insights index composition', () => {
   it('opens on the Interior Hero, in the frame’s own words', () => {
-    // `2336:4477` — the headline and eyebrow the frame writes. The standfirst
-    // beside them is the Interior Hero set's lorem default ("Not the
-    // deliverable…"), so the seed's own line stays.
-    //
+    // `3739:71309` — the eyebrow, headline and standfirst the frame writes.
     // Authored since #347: the words are the seed's `heroSection`, drawn
-    // through the block at `variant: 'band'` — which is the same
-    // `CollectionHero` this route used to call directly, so the frame is
-    // unmoved and only the source of the copy changed.
-    expect(page.html).toContain('Learn about what drives our experiences.')
-    expect(page.html).toContain('Looking for some firsthand knowledge from our world?')
+    // through the block at `variant: 'band'` — the same `CollectionHero` this
+    // route used to call directly.
     expect(page.html).toContain('Insights')
-    expect(page.html).not.toContain('Not the deliverable')
+    expect(page.html).toContain('Looking past')
+    expect(page.html).toContain('the horizon.')
+    expect(page.html).toContain(
+      'What we’re learning, questioning, and putting into practice across AI, design, and technology.',
+    )
   })
 
   it('paints the hero ink rather than the Work band’s warm black', () => {
@@ -325,7 +323,7 @@ describe('insights index composition', () => {
   })
 
   it('lays the cards on a bone band with the mobile and desktop feed rhythm', () => {
-    // `2337:4485`: fill #F1F0EC, padding 128px 96px.
+    // `3739:71109`: fill #F1F0EC, padding 128px 96px.
     const tokens = classTokens(page.html)
     expect(tokens).toContain('bg-bone')
     expect(tokens).toContain('py-6')
@@ -349,19 +347,18 @@ describe('insights index composition', () => {
   })
 
   it('opens the rows to 64px at both widths', () => {
-    // `2337:4492` wraps its rows 64px apart at 1440 and `2975:8663` stacks
+    // `3739:71118` wraps its rows 64px apart at 1440 and `2975:8663` stacks
     // them 64 apart at 402, so the row gap is flat.
     expect(variantsOf(page.html, 'gap-y-16')).toEqual(['gap-y-16'])
     expect(variantsOf(page.html, 'gap-y-12')).toEqual([])
   })
 
-  it('closes on the shared CTA band, pointed at the work', () => {
-    // `2975:8806` — the band's copy is the component's own, its button is the
-    // frame's: "View our work", not the route's old "Get in touch".
-    // Authored since #347: the seed's `ctaSection` in `sectionsBelow`.
-    expect(page.html).toContain('Let’s get started on your next big thing.')
-    expect(page.html).toContain('View our work')
-    expect(page.html).toContain('href="/work"')
+  it('closes on the shared CTA band, pointed at contact', () => {
+    // `3771:80361` — the heading, body and button label the frame writes.
+    // Authored since #347: the seed's `ctaSection` in `sectionsBelow`. The nav
+    // links to /contact too, so the href is read off the button itself.
+    expect(page.html).toContain('Let’s put some of this thinking to work.')
+    expect(page.html).toMatch(/href="\/contact"[^>]*>(?:(?!<\/a>)[\s\S])*Start the conversation/)
   })
 
   it('scrolls the chip row on a phone and nothing else', () => {
@@ -499,8 +496,8 @@ describe('insights index authored bands', () => {
   it('carries no hardcoded hero or closing copy of its own', async () => {
     const { html } = await renderRoute(route, { data: withIndexChrome(feed(), null) })
 
-    expect(html).not.toContain('Learn about what drives our experiences.')
-    expect(html).not.toContain('Let’s get started on your next big thing.')
+    expect(html).not.toContain('Looking past')
+    expect(html).not.toContain('Let’s put some of this thinking to work.')
   })
 })
 

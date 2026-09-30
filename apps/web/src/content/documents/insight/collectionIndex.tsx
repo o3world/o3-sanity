@@ -95,7 +95,7 @@ export const insightIndex = defineIndexType({
     // collection, not further documents.
     path: collectionPrefixes().insight,
   },
-  // The Insights index frame #61 commissioned — hero `2336:4477`, filter bar
-  // `2337:4486`, grid `2337:4492`, CTA `2336:4351`.
-  migration: { figmaNode: '2336:4310' },
+  // The Insights frame — hero `3739:71309`, filter bar `3739:71110`, grid
+  // `3739:71118`, CTA `3771:80361`.
+  migration: { figmaNode: '3739:71101' },
 })
