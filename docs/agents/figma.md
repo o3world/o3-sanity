@@ -86,8 +86,8 @@ ToolSearch: select:mcp__figma_rest__get_figma_data,mcp__figma_rest__download_fig
 ### ⚠️ A share-URL's `node-id` is often _not_ the frame
 
 This is the single most expensive mistake in this file. Figma deep-links to whatever was selected,
-which is frequently a child. The Work page URL carries `node-id=1634-1168` — that is the **hero**;
-the frame is **`1634:1167`**. Reading the child and concluding "the design stops after the hero"
+which is frequently a child. For example, Home `3720:60474` is the **hero**;
+the page frame is **`3720:60473`**. Reading the child and concluding "the design stops after the hero"
 already produced one wrong ticket (#43).
 
 **Always confirm you are on the frame**: read the parent section at `depth: 1` and match the frame
@@ -143,5 +143,5 @@ variant and the earlier meeting instruction to expose those brands on hover.
 
 Figma layer names do not always match this project's ubiquitous language. `CONTEXT.md` wins:
 a Figma frame labelled "Insights" is a **Insight**; the "Work" collection holds **Case Studies**.
-Nav _display_ labels are a separate thing again — they live in Site Settings, and the `NavBar`
-component (`1710:2271`) is their source of record.
+Nav _display_ labels are a separate thing again — they live in Site Settings, and the `Main Navigation`
+component (`3271:17013`, mobile `3737:69217`) is their source of record.

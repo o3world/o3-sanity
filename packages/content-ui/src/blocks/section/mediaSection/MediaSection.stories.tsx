@@ -29,7 +29,13 @@ const meta = {
   component: MediaSection,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('1647:1721'),
+    design: [],
+    docs: {
+      description: {
+        component:
+          'Includes historical fixtures retained for authorable behavior coverage. Current design references are linked on individual stories.',
+      },
+    },
   },
 } satisfies Meta<typeof MediaSection>
 
@@ -49,14 +55,12 @@ export const FullBleed: Story = {
 /** The 822px article measure, with the `0 0 64px rgba(0,0,0,0.1)` lift. */
 export const Contained: Story = {
   args: { ...seededSectionArgs('ventures-urvin', 'mediaSection'), width: 'contained' },
-  parameters: { design: figmaDesign('1899:4186') },
 }
 
 /** `1906:900` — full-bleed at 402, where the box is 402 × 257. */
 export const FullBleedMobile: Story = {
   args: { ...seededSectionArgs('ventures-urvin', 'mediaSection'), width: 'full-bleed' },
   globals: { viewport: { value: 'mobile' } },
-  parameters: { design: figmaDesign('1906:900') },
 }
 
 /**
@@ -72,14 +76,12 @@ export const Capture: Story = {
     variant: 'capture',
     width: 'contained',
   },
-  parameters: { design: figmaDesign('1647:1720') },
 }
 
 /** The capture stage at 402, where the band shortens rather than scaling. */
 export const CaptureMobile: Story = {
   args: { ...seededSectionArgs('ventures-urvin', 'mediaSection'), variant: 'capture' },
   globals: { viewport: { value: 'mobile' } },
-  parameters: { design: figmaDesign('1647:1720') },
 }
 
 /** On ink — the contained shadow is authored for a light band. */

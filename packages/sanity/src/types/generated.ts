@@ -364,7 +364,7 @@ export type StatsSection = {
       _key: string
     } & Stat
   >
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -373,7 +373,7 @@ export type ListingSection = {
   _type: 'listingSection'
   heading?: string
   pageType?: 'standard' | 'service' | 'partner'
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -389,7 +389,7 @@ export type ScreenGridSection = {
     _type: 'screen'
     _key: string
   }>
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -415,7 +415,7 @@ export type MediaSection = {
   }
   variant?: 'plain' | 'capture' | 'composition' | 'overlap' | 'feature'
   width?: 'contained' | 'section' | 'full-bleed'
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -457,7 +457,7 @@ export type LayoutSection = {
   headingLevel?: 'auto' | 'xl' | 'lg'
   bleed?: 'none' | 'end'
   width?: 'section' | 'article'
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -481,7 +481,7 @@ export type FormSection = {
     _type: 'detail'
     _key: string
   }>
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -500,7 +500,7 @@ export type InFlightSection = {
     _type: 'entry'
     _key: string
   }>
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -517,7 +517,7 @@ export type RoleListSection = {
     _type: 'role'
     _key: string
   }>
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -538,7 +538,7 @@ export type PersonGridSection = {
       _key: string
     } & PersonReference
   >
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -577,7 +577,7 @@ export type FeatureGridSection = {
     _key: string
   }>
   decoration?: 'none' | 'molecule'
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -609,7 +609,7 @@ export type InsightsCarouselSection = {
     } & InsightReference
   >
   category?: CategoryReference
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -632,7 +632,7 @@ export type QuoteSection = {
   attribution?: string
   decoration?: 'orbs' | 'molecule' | 'none'
   size?: 'default' | 'medium' | 'small'
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -665,7 +665,7 @@ export type RailPanelsSection = {
   decoration?: 'none' | 'molecule'
   headerWidth?: 'standard' | 'wide'
   plate?: 'square' | 'bleed'
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -704,7 +704,7 @@ export type LogoWallSection = {
     } & ClientReference
   >
   button?: Button
-  surface?: 'white' | 'paper' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -2120,7 +2120,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _key: string
         }>
         decoration?: 'molecule' | 'none'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -2201,7 +2201,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'detail'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -2344,7 +2344,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'entry'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -2376,7 +2376,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           } & InsightReference
         >
         category?: CategoryReference
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -2721,7 +2721,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         headingLevel?: 'auto' | 'lg' | 'xl'
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -2746,7 +2746,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         _type: 'listingSection'
         heading?: string
         pageType?: 'partner' | 'service' | 'standard'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -2831,7 +2831,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -2890,7 +2890,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         }
         variant?: 'capture' | 'composition' | 'feature' | 'overlap' | 'plain'
         width?: 'contained' | 'full-bleed' | 'section'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -2935,7 +2935,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             _type: 'image'
           } | null
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -2963,7 +2963,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
         size?: 'default' | 'medium' | 'small'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -3053,7 +3053,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         decoration?: 'molecule' | 'none'
         headerWidth?: 'standard' | 'wide'
         plate?: 'bleed' | 'square'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -3110,7 +3110,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'role'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -3159,7 +3159,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'screen'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -3188,7 +3188,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             _key: string
           } & Stat
         >
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -3388,7 +3388,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _key: string
         }>
         decoration?: 'molecule' | 'none'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -3469,7 +3469,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'detail'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -3612,7 +3612,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'entry'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -3644,7 +3644,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           } & InsightReference
         >
         category?: CategoryReference
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -3989,7 +3989,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         headingLevel?: 'auto' | 'lg' | 'xl'
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -4014,7 +4014,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         _type: 'listingSection'
         heading?: string
         pageType?: 'partner' | 'service' | 'standard'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -4099,7 +4099,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -4158,7 +4158,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         }
         variant?: 'capture' | 'composition' | 'feature' | 'overlap' | 'plain'
         width?: 'contained' | 'full-bleed' | 'section'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -4203,7 +4203,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             _type: 'image'
           } | null
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -4231,7 +4231,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
         size?: 'default' | 'medium' | 'small'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -4321,7 +4321,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         decoration?: 'molecule' | 'none'
         headerWidth?: 'standard' | 'wide'
         plate?: 'bleed' | 'square'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -4378,7 +4378,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'role'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -4427,7 +4427,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'screen'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -4456,7 +4456,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             _key: string
           } & Stat
         >
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -4845,7 +4845,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _key: string
         }>
         decoration?: 'molecule' | 'none'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -4926,7 +4926,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _type: 'detail'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -5069,7 +5069,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _type: 'entry'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -5101,7 +5101,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           } & InsightReference
         >
         category?: CategoryReference
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -5446,7 +5446,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         headingLevel?: 'auto' | 'lg' | 'xl'
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -5471,7 +5471,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         _type: 'listingSection'
         heading?: string
         pageType?: 'partner' | 'service' | 'standard'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -5556,7 +5556,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -5615,7 +5615,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         }
         variant?: 'capture' | 'composition' | 'feature' | 'overlap' | 'plain'
         width?: 'contained' | 'full-bleed' | 'section'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -5660,7 +5660,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             _type: 'image'
           } | null
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -5688,7 +5688,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
         size?: 'default' | 'medium' | 'small'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -5778,7 +5778,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         decoration?: 'molecule' | 'none'
         headerWidth?: 'standard' | 'wide'
         plate?: 'bleed' | 'square'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -5835,7 +5835,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _type: 'role'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -5884,7 +5884,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _type: 'screen'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -5913,7 +5913,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             _key: string
           } & Stat
         >
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -6270,7 +6270,7 @@ export type PAGE_QUERY_RESULT = {
           _key: string
         }>
         decoration?: 'molecule' | 'none'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -6351,7 +6351,7 @@ export type PAGE_QUERY_RESULT = {
           _type: 'detail'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -6494,7 +6494,7 @@ export type PAGE_QUERY_RESULT = {
           _type: 'entry'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -6526,7 +6526,7 @@ export type PAGE_QUERY_RESULT = {
           } & InsightReference
         >
         category?: CategoryReference
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -6871,7 +6871,7 @@ export type PAGE_QUERY_RESULT = {
         headingLevel?: 'auto' | 'lg' | 'xl'
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -6896,7 +6896,7 @@ export type PAGE_QUERY_RESULT = {
         _type: 'listingSection'
         heading?: string
         pageType?: 'partner' | 'service' | 'standard'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -6981,7 +6981,7 @@ export type PAGE_QUERY_RESULT = {
           contrast?: 'auto' | 'brand' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -7040,7 +7040,7 @@ export type PAGE_QUERY_RESULT = {
         }
         variant?: 'capture' | 'composition' | 'feature' | 'overlap' | 'plain'
         width?: 'contained' | 'full-bleed' | 'section'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -7085,7 +7085,7 @@ export type PAGE_QUERY_RESULT = {
             _type: 'image'
           } | null
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -7113,7 +7113,7 @@ export type PAGE_QUERY_RESULT = {
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
         size?: 'default' | 'medium' | 'small'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -7203,7 +7203,7 @@ export type PAGE_QUERY_RESULT = {
         decoration?: 'molecule' | 'none'
         headerWidth?: 'standard' | 'wide'
         plate?: 'bleed' | 'square'
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -7260,7 +7260,7 @@ export type PAGE_QUERY_RESULT = {
           _type: 'role'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -7309,7 +7309,7 @@ export type PAGE_QUERY_RESULT = {
           _type: 'screen'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {
@@ -7338,7 +7338,7 @@ export type PAGE_QUERY_RESULT = {
             _key: string
           } & Stat
         >
-        surface?: 'bone' | 'ink' | 'paper' | 'white'
+        surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
           image: {

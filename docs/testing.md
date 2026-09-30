@@ -216,3 +216,11 @@ diagnosed rather than replaced by a fake route.
   caught something.
 - **No general end-to-end browser suite.** The production navigation contract above is the narrow
   exception. Deployment previews remain the broader smoke-test surface.
+
+### Hosted prefetch smoke check
+
+After a Vercel deployment, run `node scripts/check-prefetch.mjs <deployment-url>`.
+It observes the browser's real About, Solutions and Contact leaf prefetches and
+requires all three to return 200. Local `next start` cannot exercise Vercel's
+generated rewrites; the hosted check caught a collision between the old
+`segments` catch-all parameter and Next's `$segment` rewrite capture.

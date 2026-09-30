@@ -83,7 +83,7 @@ export function PanelRail({ items, active, mode }: PanelRailProps) {
                 'duration-(--duration-hover) focus-visible:ring-brand flex items-center gap-2 text-[24px] font-medium leading-[1.2] tracking-[-0.0333em] transition-colors ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-4',
                 'border-b-2 lg:border-b-0 lg:pb-0',
                 isActive
-                  ? 'border-brand text-ink pb-3 [[data-surface=ink]_&]:text-white'
+                  ? 'border-brand text-ink pb-3 [[data-surface=charcoal]_&]:text-white [[data-surface=ink]_&]:text-white'
                   : 'text-fg-body border-transparent',
               )}
             >

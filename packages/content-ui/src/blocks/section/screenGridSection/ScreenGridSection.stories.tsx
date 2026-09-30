@@ -32,7 +32,13 @@ const meta = {
   component: ScreenGridSection,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('2230:3315'),
+    design: [],
+    docs: {
+      description: {
+        component:
+          'Includes historical fixtures retained for authorable behavior coverage. Current design references are linked on individual stories.',
+      },
+    },
   },
 } satisfies Meta<typeof ScreenGridSection>
 
@@ -89,7 +95,6 @@ export const AllTones: Story = {
       screen('bone', HOMEPAGE, 'On the bone plate.', 'bone', 'wide'),
     ],
   },
-  parameters: { design: figmaDesign('2230:7559') },
 }
 
 /**

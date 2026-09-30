@@ -20,14 +20,14 @@ Read it when a key surprises you; do not re-derive it here.
 
 Facts you will need repeatedly:
 
-|                        |                                                                                |
-| ---------------------- | ------------------------------------------------------------------------------ |
-| File key               | `RvraLJaZ0zWm8UaD5AJf43` — _O3DX: Visual exploration_                          |
-| Design Concept section | `1632:1510` — the only canonical section                                       |
-| Frame/set manifest     | `tools/figma-sync/data/tracked-nodes.json`                                     |
-| Asset provenance       | `tools/figma-sync/data/asset-manifest.json`                                    |
-| Report                 | `tools/figma-sync/data/report.json` (`report.md` is the same run for a human)  |
-| ↳ what it describes    | the last run that **fetched** something — a short-circuited run writes nothing |
+|                     |                                                                                |
+| ------------------- | ------------------------------------------------------------------------------ |
+| File key            | `RvraLJaZ0zWm8UaD5AJf43` — _2026 O3DX Website_                                 |
+| Canonical canvases  | Designs `1126:1100` and Case Studies `1238:557`                                |
+| Frame/set manifest  | `tools/figma-sync/data/tracked-nodes.json`                                     |
+| Asset provenance    | `tools/figma-sync/data/asset-manifest.json`                                    |
+| Report              | `tools/figma-sync/data/report.json` (`report.md` is the same run for a human)  |
+| ↳ what it describes | the last run that **fetched** something — a short-circuited run writes nothing |
 
 ---
 
@@ -142,10 +142,9 @@ cannot account for one, it is not noise — it is unfinished triage.
   reports the set alongside the frames precisely so you can collapse them.
 - **Independent page-layer changes = one ticket per page layer.** Desktop and mobile of the
   same `route` are the **same ticket** — two frames, one change, one piece of work.
-- **A set that shows everywhere** — `NavBar` `1710:2271` → `packages/content-ui/src/chrome/SiteNav.tsx#SiteNav`
-  — is one ticket at the component. Never one per page. (`Footer` `1280:1885` is the
-  counter-case: tracked, but `codeComponent: null` because `SiteFooter` was built from the
-  frame's footer instead. Read the note before assuming a set routes anywhere.)
+- **A set that shows everywhere** — `Main Navigation` `3271:17013` / `3737:69217` → `packages/content-ui/src/chrome/SiteNav.tsx#SiteNav`
+  — is one ticket at the component. The combined CTA + Footer is `3720:62476`;
+  use the manifest's routing note before assigning it to a renderer.
 - **Different routes are different tickets**, even when the change rhymes: they land in
   different content and different documents.
 
@@ -154,14 +153,14 @@ holding a third of one change are not.
 
 ### `untrackedFrames` → questions for the user, never tickets
 
-A frame in the Design Concept section that the manifest has never heard of is **not** a
+A frame in the canonical canvases that the manifest has never heard of is **not** a
 finding. "It exists in the section" and "it is canonical" are different claims, and this
 skill does not make the second one. Do not file a ticket. Do not edit `tracked-nodes.json`.
 
 Take a quick look at each one (step 2's tooling, `depth: 1` is usually enough), then present
 them and **wait**:
 
-> New frame **Contact** (`2050:891`, 1440w) appeared in the Design Concept section. It looks
+> New frame **Contact** (`2050:891`, 1440w) appeared in the canonical canvases. It looks
 > like a full contact page with a form. Canonical — add it to `entries[]` with a route and
 > variant? Or noise — add it to `ignoredNodeIds[]` with a reason?
 

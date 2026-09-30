@@ -34,7 +34,7 @@ import type { RenderingOutput } from './rendering'
  * legitimately carries a fallback shell, and no field in the build output
  * tells the two kinds apart.
  */
-const CONTENT_ROUTES = ['/[...segments]', '/insights/[slug]', '/work/[slug]'] as const
+const CONTENT_ROUTES = ['/[...path]', '/insights/[slug]', '/work/[slug]'] as const
 
 /** Next writes `null` for blocking, `false` for `dynamicParams: false`. */
 function fallbackOf(entry: unknown): unknown {

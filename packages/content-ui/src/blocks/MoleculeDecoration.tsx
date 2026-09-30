@@ -1,5 +1,7 @@
 import { cn, MoleculeMark } from '@o3/ui'
 
+import { isDarkSurface } from './surface'
+
 import { resolveDecoration } from './decoration'
 import type { Surface } from '@o3/sanity/constants'
 import type { PageSection } from '@o3/content-runtime/blocks'
@@ -47,7 +49,7 @@ export function MoleculeDecoration({
       className={cn(
         'pointer-events-none absolute -z-10',
         visibleFrom === 'lg' && 'hidden lg:block',
-        surface === 'ink' ? 'text-white' : 'text-ink',
+        isDarkSurface(surface) ? 'text-white' : 'text-ink',
         className,
       )}
     />

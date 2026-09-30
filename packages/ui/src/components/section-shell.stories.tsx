@@ -8,6 +8,7 @@ import { DisplayHeading } from './display-heading'
 import { Eyebrow } from './eyebrow'
 import {
   SURFACE_CLASS,
+  SURFACES,
   SectionBackground,
   SectionShell,
   surfaceAttrs,
@@ -20,7 +21,7 @@ const meta = {
   component: SectionShell,
   parameters: { layout: 'fullscreen' },
   argTypes: {
-    surface: { control: 'select', options: ['white', 'bone', 'ink'] },
+    surface: { control: 'select', options: SURFACES },
     width: { control: 'select', options: ['section', 'content'] },
   },
 } satisfies Meta<typeof SectionShell>
@@ -30,16 +31,14 @@ type Story = StoryObj<typeof meta>
 
 /** Placeholder section content that exercises the per-surface text roles. */
 function PlaceholderContent({ surface }: { surface: Surface }) {
-  const onInk = surface === 'ink'
+  const onInk = surface === 'ink' || surface === 'charcoal'
   return (
     <div className="flex flex-col items-start gap-7">
       <Eyebrow tone={onInk ? 'inverse' : 'muted'}>Our Partners</Eyebrow>
       <DisplayHeading level="xl">
         We work with B2B and enterprise teams to reimagine experiences.
       </DisplayHeading>
-      <p
-        className={`max-w-[520px] text-lg leading-[1.55] ${onInk ? 'text-fg-inverse-muted' : 'text-fg-muted'}`}
-      >
+      <p className="text-fg-muted max-w-[520px] text-lg leading-[1.55]">
         Strategy, design, engineering and AI under one roof. The same senior team that finds the
         move is the team that builds it.
       </p>
@@ -81,6 +80,19 @@ export const Ink: Story = {
   args: { surface: 'ink' },
 }
 
+/** About's Neutral-900 band keeps the dark-surface copy roles. */
+export const Charcoal: Story = {
+  ...White,
+  args: { surface: 'charcoal' },
+  play: async ({ canvasElement }) => {
+    const section = canvasElement.querySelector('section')!
+    await expect(getComputedStyle(section).backgroundColor).toBe('rgb(23, 22, 21)')
+    await expect(getComputedStyle(section.querySelector('.text-fg-muted')!).color).toBe(
+      'rgba(255, 255, 255, 0.65)',
+    )
+  },
+}
+
 /** The narrower 1100px measure used for centered statements. */
 export const ContentWidth: Story = {
   args: { surface: 'bone', width: 'content' },
@@ -101,7 +113,7 @@ export const AllSurfaces: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <div>
-      {(['white', 'bone', 'ink'] as const).map((surface) => (
+      {SURFACES.map((surface) => (
         <SectionShell key={surface} surface={surface}>
           <PlaceholderContent surface={surface} />
         </SectionShell>
@@ -266,7 +278,7 @@ export const TintPerSurface: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <div>
-      {(['white', 'bone', 'ink'] as const).map((surface) => (
+      {SURFACES.map((surface) => (
         <SectionShell
           key={surface}
           surface={surface}

@@ -152,46 +152,46 @@ Three rules that are easy to get wrong:
 
 Closed vocabulary. If the field you want isn't here and isn't obviously domain-specific (`industryDetail`, `narrativeHeadline`, `railLabel`), you're probably reaching for a synonym of something that is.
 
-| Field             | Meaning                                                                                             | Don't use for it                                          |
-| ----------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `title`           | A document's own name; the `slug` source                                                            | Never on a block — blocks use `heading`                   |
-| `slug`            | URL segment(s); required on every routable type                                                     | —                                                         |
-| `eyebrow`         | Small label above a heading                                                                         | `kicker` (reserved: `chapter.kicker`), `label`            |
-| `heading`         | A block's primary display text                                                                      | `title`, `headline`                                       |
-| `headerWidth`     | The service-row header measure: standard 821px or wide 1035px, independent of panel layout          | Whole-section width                                       |
-| `headingLevel`    | A layout section’s visual heading step, independent of media bleed                                  | HTML heading rank                                         |
-| `subheading`      | The secondary line under a `heading`                                                                | `subtitle`, `deck`                                        |
-| `body`            | Long-form prose (`text` or `bodyText`)                                                              | `content`, `description`, `copy`                          |
-| `excerpt`         | Short summary shown on cards and listings                                                           | `summary`, `intro`, `teaser`                              |
-| `label`           | Short UI string on a leaf object                                                                    | `name`, `text`                                            |
-| `note`            | Quieter secondary line (the "Best when…" line)                                                      | `caption` (reserved: `figure.caption`)                    |
-| `badge`           | A small supporting graphic above a media feature heading                                            | A content label or heading text                           |
-| `media`           | A `figure` on a block                                                                               | `image` — that's the raw asset field inside `figure`      |
-| `heroMedia`       | A document's lead `figure` — the detail page's hero and nothing else                                | `featuredImage`, `banner`                                 |
-| `cardMedia`       | The `figure` a document shows on cards and in feeds                                                 | `featuredImage`, `thumbnail`, `cardImage`, `featureMedia` |
-| `backgroundMedia` | The full-bleed picture a band sits on; injected by `defineSectionBlock`                             | `backgroundImage`, `bgImage`, `backdrop`, `photo`         |
-| `button`          | A single button (type `button`), the form's submit included                                         | `cta`, `link`, `action`, `submitLabel`                    |
-| `anchor`          | The name a band is given, and the name a button jumps to; no `#`                                    | `id`, `hash`, `fragment`, `jumpTo`                        |
-| `alignment`       | Where a row or a column sits in the space it was given (`buttonGroup`, `heroSection`)               | `align`, `justify`, `position`, `float`                   |
-| `framing`         | Whether a wide screen is a complete image or a raw screenshot on a plate                            | Inferring composition from asset dimensions               |
-| `bleed`           | Which edge a band's content runs past, or `none` (`layoutSection`)                                  | `fullWidth`, `overflow`, `edge`                           |
-| `mark`            | A decorative glyph or illustration beside an item (type `mark`)                                     | `icon`, `disc`, `orb` — `orb` is one of its `kind`s       |
-| `icon`            | A glyph from a curated set — trailing a button, or beside a feature (`button`, `feature`)           | `glyph`, `symbol`, `arrow`                                |
-| `date`            | When a leaf object's thing happens (the Live MON / DD marker)                                       | `publishedAt` — that's a document's publication time      |
-| `name`            | A person's or organization's real-world name                                                        | Anything that isn't a proper noun                         |
-| `bio`             | The few lines a person's card says about them (`person`)                                            | `body`, `excerpt`, `about`, `description`                 |
-| `surface`         | Band surface **role** (`white \| bone \| ink`), painted by tokens; injected by `defineSectionBlock` | Never hand-author it                                      |
-| `reasons`         | The form's "Reason" options, in shown order (`formSection`)                                         | `options`, `choices`                                      |
-| `consentLabel`    | The opt-in checkbox's words; empty = no checkbox (`formSection`)                                    | `consent`, `optIn`                                        |
-| `story`           | A structured document's interleaved narrative array                                                 | `sections` (a page's flat composition), `chapters`        |
-| `sectionsAbove`   | A collection index's bands between the top of the page and the **feed**                             | `aboveContent`, `aboveFold`, `header`                     |
-| `sectionsBelow`   | A collection index's bands between the **feed** and the footer                                      | `belowContent`, `footerSections`                          |
-| `pinnedItems`     | The documents a collection index puts at the head of its feed, in that order                        | `featuredItems`, `sticky`, `order`, a boolean on the item |
-| `details`         | Term/description rows under a body (`chapter.details`)                                              | `specs`, `meta`, a second `body`                          |
-| `utilityNavItems` | The brand-property strip's links (`siteSettings`)                                                   | `properties`, `brandLinks`, a second `footerGroup`        |
-| `background`      | A brief's raw material — research, notes, transcripts                                               | `research`, `context`, `notes`                            |
-| `instructions`    | A brief's directives for how to write the piece                                                     | `prompt`, `directions`, `guidelines`                      |
-| `links`           | A brief's external source URLs                                                                      | `sources`, `urls`, a second `references`                  |
+| Field             | Meaning                                                                                                                  | Don't use for it                                          |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| `title`           | A document's own name; the `slug` source                                                                                 | Never on a block — blocks use `heading`                   |
+| `slug`            | URL segment(s); required on every routable type                                                                          | —                                                         |
+| `eyebrow`         | Small label above a heading                                                                                              | `kicker` (reserved: `chapter.kicker`), `label`            |
+| `heading`         | A block's primary display text                                                                                           | `title`, `headline`                                       |
+| `headerWidth`     | The service-row header measure: standard 821px or wide 1035px, independent of panel layout                               | Whole-section width                                       |
+| `headingLevel`    | A layout section’s visual heading step, independent of media bleed                                                       | HTML heading rank                                         |
+| `subheading`      | The secondary line under a `heading`                                                                                     | `subtitle`, `deck`                                        |
+| `body`            | Long-form prose (`text` or `bodyText`)                                                                                   | `content`, `description`, `copy`                          |
+| `excerpt`         | Short summary shown on cards and listings                                                                                | `summary`, `intro`, `teaser`                              |
+| `label`           | Short UI string on a leaf object                                                                                         | `name`, `text`                                            |
+| `note`            | Quieter secondary line (the "Best when…" line)                                                                           | `caption` (reserved: `figure.caption`)                    |
+| `badge`           | A small supporting graphic above a media feature heading                                                                 | A content label or heading text                           |
+| `media`           | A `figure` on a block                                                                                                    | `image` — that's the raw asset field inside `figure`      |
+| `heroMedia`       | A document's lead `figure` — the detail page's hero and nothing else                                                     | `featuredImage`, `banner`                                 |
+| `cardMedia`       | The `figure` a document shows on cards and in feeds                                                                      | `featuredImage`, `thumbnail`, `cardImage`, `featureMedia` |
+| `backgroundMedia` | The full-bleed picture a band sits on; injected by `defineSectionBlock`                                                  | `backgroundImage`, `bgImage`, `backdrop`, `photo`         |
+| `button`          | A single button (type `button`), the form's submit included                                                              | `cta`, `link`, `action`, `submitLabel`                    |
+| `anchor`          | The name a band is given, and the name a button jumps to; no `#`                                                         | `id`, `hash`, `fragment`, `jumpTo`                        |
+| `alignment`       | Where a row or a column sits in the space it was given (`buttonGroup`, `heroSection`)                                    | `align`, `justify`, `position`, `float`                   |
+| `framing`         | Whether a wide screen is a complete image or a raw screenshot on a plate                                                 | Inferring composition from asset dimensions               |
+| `bleed`           | Which edge a band's content runs past, or `none` (`layoutSection`)                                                       | `fullWidth`, `overflow`, `edge`                           |
+| `mark`            | A decorative glyph or illustration beside an item (type `mark`)                                                          | `icon`, `disc`, `orb` — `orb` is one of its `kind`s       |
+| `icon`            | A glyph from a curated set — trailing a button, or beside a feature (`button`, `feature`)                                | `glyph`, `symbol`, `arrow`                                |
+| `date`            | When a leaf object's thing happens (the Live MON / DD marker)                                                            | `publishedAt` — that's a document's publication time      |
+| `name`            | A person's or organization's real-world name                                                                             | Anything that isn't a proper noun                         |
+| `bio`             | The few lines a person's card says about them (`person`)                                                                 | `body`, `excerpt`, `about`, `description`                 |
+| `surface`         | Band surface **role** (`white \| paper \| bone \| ink \| charcoal`), painted by tokens; injected by `defineSectionBlock` | Never hand-author it                                      |
+| `reasons`         | The form's "Reason" options, in shown order (`formSection`)                                                              | `options`, `choices`                                      |
+| `consentLabel`    | The opt-in checkbox's words; empty = no checkbox (`formSection`)                                                         | `consent`, `optIn`                                        |
+| `story`           | A structured document's interleaved narrative array                                                                      | `sections` (a page's flat composition), `chapters`        |
+| `sectionsAbove`   | A collection index's bands between the top of the page and the **feed**                                                  | `aboveContent`, `aboveFold`, `header`                     |
+| `sectionsBelow`   | A collection index's bands between the **feed** and the footer                                                           | `belowContent`, `footerSections`                          |
+| `pinnedItems`     | The documents a collection index puts at the head of its feed, in that order                                             | `featuredItems`, `sticky`, `order`, a boolean on the item |
+| `details`         | Term/description rows under a body (`chapter.details`)                                                                   | `specs`, `meta`, a second `body`                          |
+| `utilityNavItems` | The brand-property strip's links (`siteSettings`)                                                                        | `properties`, `brandLinks`, a second `footerGroup`        |
+| `background`      | A brief's raw material — research, notes, transcripts                                                                    | `research`, `context`, `notes`                            |
+| `instructions`    | A brief's directives for how to write the piece                                                                          | `prompt`, `directions`, `guidelines`                      |
+| `links`           | A brief's external source URLs                                                                                           | `sources`, `urls`, a second `references`                  |
 
 The lexicon governs **editorial** fields — the ones an author fills in. Machine-written fields are outside it, and are `readOnly` in Studio: the hidden `migration` provenance object (`sourceId`, `extractedAt`, `locked`, `figmaNode`, `provisional`, `provisionalNote`) names pipeline state, and `brief.key` / `brief.sourcePath` name where a synced brief came from and what queries it. A brief carries one more machine-written set — `stage`, `nextStep`, `thesis`, `readerQuestions`, `outline`, `draft`, `verdict`, `decisions`, `gaps`, `pieceId` — one field per artifact an authoring stage produces, each patched by the stage that owns it. All are provenance or run state, not content.
 
@@ -229,7 +229,7 @@ Fix on sight; don't imitate. As of 2026-08-01 the rules above are the target, an
 
 ## Design language
 
-- **Figma is the design source of record** (map #33): the "Design Concept" section of _O3DX: Visual exploration_, at **1440 / 402**. Figma outranks `prototype/`, which is retired (#48). Read [`docs/agents/figma.md`](docs/agents/figma.md) before opening the file.
+- **Figma is the design source of record** (map #33): the Designs (`1126:1100`) and Case Studies (`1238:557`) canvases of _2026 O3DX Website_, at **1440 / 402**. Figma outranks `prototype/`, which is retired (#48). Read [`docs/agents/figma.md`](docs/agents/figma.md) before opening the file.
 - The `o3` visual language: five neutrals (white / bone / ink / ink-warm / ink-deep), brand red almost always arriving as a **gradient** rather than a flat fill, Figtree at weight **400**, square corners. Tokens and their node references: `packages/tailwind-config`.
 - **Responsive is a renderer concern** — the frames are endpoints, not breakpoints (ADR 0006). No per-breakpoint schema field. The site runs Tailwind's breakpoint scale.
 - **Motion is the one thing Figma cannot supply**, so `packages/ui` carries it: `OrbitalSphere` (the wireframe globe), `Reveal`, and `StaggeredLines`. The orbital vocabulary has left `prototype/`.

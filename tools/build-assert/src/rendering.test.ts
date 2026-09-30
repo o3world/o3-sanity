@@ -12,7 +12,7 @@ import type { RenderingOutput, RenderingPolicy } from './rendering'
 const build: RenderingOutput = {
   cacheComponents: false,
   appPathRoutes: {
-    '/(site)/[...segments]/page': '/[...segments]',
+    '/(site)/[...path]/page': '/[...path]',
     '/(site)/insights/[slug]/page': '/insights/[slug]',
     '/(site)/insights/page': '/insights',
     '/(site)/page': '/',
@@ -23,12 +23,12 @@ const build: RenderingOutput = {
   prerender: {
     routes: {
       '/': { srcRoute: '/' },
-      '/about': { srcRoute: '/[...segments]' },
+      '/about': { srcRoute: '/[...path]' },
       '/insights/the-design-team-moved-the-file': { srcRoute: '/insights/[slug]' },
       '/robots.txt': { srcRoute: '/robots.txt' },
     },
     dynamicRoutes: {
-      '/[...segments]': {},
+      '/[...path]': {},
       '/insights/[slug]': {},
     },
   },
@@ -56,7 +56,7 @@ describe('perRequestRoutes', () => {
       ...build,
       prerender: {
         routes: build.prerender.routes,
-        dynamicRoutes: { '/[...segments]': {} },
+        dynamicRoutes: { '/[...path]': {} },
       },
     }
 

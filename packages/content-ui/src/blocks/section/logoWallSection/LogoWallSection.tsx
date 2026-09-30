@@ -6,7 +6,7 @@ import { stegaClean } from '@sanity/client/stega'
 
 import { ButtonLink } from '../../../ButtonLink'
 import { SanityImage } from '../../../SanityImage'
-import { resolveSurface } from '../../surface'
+import { isDarkSurface, resolveSurface } from '../../surface'
 import { MarqueeTrack } from './MarqueeTrack'
 import './logo-wall.css'
 
@@ -38,7 +38,7 @@ export function LogoWallSection({
 }: LogoWallSectionProps) {
   const isBar = stegaClean(layout) === 'bar'
   const resolved = resolveSurface(surface, 'logoWallSection')
-  const onInk = resolved === 'ink'
+  const onInk = isDarkSurface(resolved)
   const marks = clients ?? []
   const copies = marqueeCopies(marks.length)
   const track = Array.from({ length: copies }, (_, copy) =>
@@ -57,7 +57,7 @@ export function LogoWallSection({
         className={cn(
           SURFACE_CLASS[resolved],
           'flex flex-col items-center gap-16 px-4 pb-16 pt-32 lg:px-16',
-          onInk && 'bg-[#171615]',
+          onInk && 'bg-charcoal',
           onInk && isBar && 'logo-wall-texture',
         )}
       >

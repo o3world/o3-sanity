@@ -39,6 +39,7 @@ describe('the molecule decoration', () => {
 
   it('takes the band’s own ink', () => {
     expect(render({ surface: 'ink' })).toContain('text-white')
+    expect(render({ surface: 'charcoal' })).toContain('text-white')
     expect(render({ surface: 'white' })).toContain('text-ink')
     expect(render({ surface: 'bone' })).toContain('text-ink')
   })

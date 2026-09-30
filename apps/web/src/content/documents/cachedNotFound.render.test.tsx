@@ -47,7 +47,7 @@ describe('the read behind a 404', () => {
   it('tags a missing catch-all page the same way', async () => {
     const calls = await expectNotFound(buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY), {
       data: null,
-      params: { segments: [NOT_FOUND_SLUG] },
+      params: { path: [NOT_FOUND_SLUG] },
     })
 
     const misses = reads(calls, PAGE_QUERY)
@@ -64,7 +64,7 @@ describe('the read behind a 404', () => {
     // the same string from the segment array or the two never meet.
     const calls = await expectNotFound(buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY), {
       data: null,
-      params: { segments: ['services', NOT_FOUND_SLUG] },
+      params: { path: ['services', NOT_FOUND_SLUG] },
     })
 
     const misses = reads(calls, PAGE_QUERY)

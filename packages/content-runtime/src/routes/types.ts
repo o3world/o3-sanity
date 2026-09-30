@@ -77,7 +77,7 @@ interface BaseEntry<Q extends string> {
   readonly seo?: (doc: NonNullable<QueryResult<Q>>) => DocumentSeo
 }
 
-/** Catch-all entries serve `[...segments]/page.tsx` (slug from joined segments). */
+/** Catch-all entries serve `[...path]/page.tsx` (slug from joined segments). */
 export interface CatchAllEntry<Q extends string = string> extends BaseEntry<Q> {
   readonly kind: 'catchAll'
 }

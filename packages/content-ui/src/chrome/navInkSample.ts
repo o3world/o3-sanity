@@ -57,7 +57,7 @@ export const LIGHT_LUMINANCE = 140
  * Lists, not sets, because the first-paint script (`NavInkFirstPaint`) is a
  * string and inlines them as JSON; a value in neither is not guessed at.
  */
-export const DARK_SURFACES = ['ink'] as const
+export const DARK_SURFACES = ['ink', 'charcoal'] as const
 export const LIGHT_SURFACES = ['white', 'paper', 'bone'] as const
 
 export function luminance(r: number, g: number, b: number): number {

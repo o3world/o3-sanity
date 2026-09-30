@@ -4,7 +4,7 @@ import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
 import { Mark, markProps } from '../../base/mark/Mark'
 import { ButtonLink } from '../../../ButtonLink'
-import { resolveSurface } from '../../surface'
+import { isDarkSurface, resolveSurface } from '../../surface'
 
 type RoleListSectionProps = SectionProps<'roleListSection'>
 
@@ -37,10 +37,11 @@ type RoleListSectionProps = SectionProps<'roleListSection'>
  */
 export function RoleListSection({ eyebrow, heading, roles, surface, loc }: RoleListSectionProps) {
   const items = roles ?? []
-  const onInk = resolveSurface(surface, 'roleListSection') === 'ink'
+  const band = resolveSurface(surface, 'roleListSection')
+  const onInk = isDarkSurface(band)
 
   return (
-    <SectionShell surface={resolveSurface(surface, 'roleListSection')} top="md" bottom="md">
+    <SectionShell surface={band} top="md" bottom="md">
       <div className="flex flex-col gap-10 lg:gap-16">
         {eyebrow || heading ? (
           <header data-sanity={fieldAttr(loc, 'heading')} className="flex flex-col gap-2">

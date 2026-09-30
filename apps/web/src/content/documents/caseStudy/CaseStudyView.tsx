@@ -50,27 +50,15 @@ function toRuns(story: readonly StoryMember[]): StoryRun[] {
 }
 
 /**
- * Detail view for a case study — built to the canonical **Case Study** frame
- * `1710:2300` (mobile `1906:928`), #44, reworked against the 2230-era frame
- * for #97.
+ * Detail view for a case study. Current desktop references are the per-client
+ * Case Studies frames in docs/figma-frames.md, including IRONMAN `2748:5295`.
+ * No current mobile companion is registered; mobile layout is a renderer decision.
  *
- * The document is **structured around a compositional middle** (ADR 0018): the
- * bands at either end read fixed fields, and everything between them comes out
- * of one `story` array that interleaves chapters with section blocks.
+ * Fixed hero and next-project fields bracket `story`, whose chapters and
+ * section blocks compose the narrative (ADR 0018). Historical seed frames
+ * describe provenance, not current design targets.
  *
- * | Band            | Frame (1440 / 402)         | Field                            |
- * | --------------- | -------------------------- | -------------------------------- |
- * | Hero            | `1710:2301` / `1906:922`   | `heroMedia` (else `cardMedia`), `client`, `title`, `narrativeHeadline` |
- * | Story           | `1647:1714` / `1906:878`   | `story` — chapters, numbered by their order among chapters |
- * | ↳ details rows  | `2274:4009`                | `chapter.details`                |
- * | ↳ screen grids  | `2230:3315`, `2230:7559`   | `screenGridSection`              |
- * | ↳ page capture  | `1647:1720`                | `mediaSection` (`variant: capture`) |
- * | ↳ quote         | `2250:1525`                | `quoteSection` (`decoration: molecule`) |
- * | What we shipped | — **no frame region**      | `deliverables`                   |
- * | Next project    | `1710:2609` / `1906:1039`  | `next`                           |
- * | Footer          | `1710:2463`                | the site layout's `SiteFooter`   |
- *
- * **The eyebrow is the client's name**, not the industry line. `1710:2304`
+ * **The eyebrow is the client's name**, not the industry line. The current IRONMAN hero
  * reads "IRONMAN" — the industry eyebrow ("Consumer Goods · Direct-to-Consumer
  * Coffee") is the card's, drawn by `CaseStudyCard` on `/work` and Home, and
  * the detail frame gives it no region.

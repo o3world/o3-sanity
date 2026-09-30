@@ -156,7 +156,7 @@ export {
   SheetDescription,
 } from './components/ui/sheet'
 
-// SectionShell — the three-surface organism every section block renders inside
+// SectionShell — the surface organism every section block renders inside
 export {
   SectionBackground,
   SectionShell,

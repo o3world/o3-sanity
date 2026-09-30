@@ -28,7 +28,13 @@ const meta = {
   component: RailPanelsSection,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('2747:4486'),
+    design: [],
+    docs: {
+      description: {
+        component:
+          'Includes historical fixtures retained for authorable behavior coverage. Current design references are linked on individual stories.',
+      },
+    },
   },
 } satisfies Meta<typeof RailPanelsSection>
 
@@ -60,7 +66,6 @@ export const RailByNumber: Story = {
  */
 export const Track: Story = {
   args: seededSectionArgs('index', 'railPanelsSection', 1),
-  parameters: { design: figmaDesign('2846:5480') },
 }
 
 /**
@@ -78,7 +83,6 @@ export const Track: Story = {
  */
 export const TrackEntrance: Story = {
   args: seededSectionArgs('index', 'railPanelsSection', 1),
-  parameters: { design: figmaDesign('2846:5480') },
   render: (args) => (
     <>
       <div className="bg-bone flex h-screen items-center justify-center">
@@ -111,7 +115,6 @@ export const TrackEntrance: Story = {
  */
 export const TrackAdvance: Story = {
   args: seededSectionArgs('index', 'railPanelsSection', 1),
-  parameters: { design: figmaDesign('2846:5480') },
   render: (args) => (
     <>
       <div className="bg-bone flex h-screen items-center justify-center">
@@ -131,7 +134,6 @@ export const TrackAdvance: Story = {
 export const TrackMobile: Story = {
   args: seededSectionArgs('index', 'railPanelsSection', 1),
   globals: { viewport: { value: 'mobile' } },
-  parameters: { design: figmaDesign('2975:8355') },
 }
 
 /** The Solutions composition (`1925:6108`): `layout: cards`, three engagement cards. */
@@ -187,7 +189,6 @@ export const RailMobile: Story = {
  */
 export const RailBleed: Story = {
   args: { ...seededSectionArgs('index', 'railPanelsSection', 0), plate: 'bleed' },
-  parameters: { design: figmaDesign('2747:4503') },
   globals: { viewport: { value: 'desktop' } },
   play: async ({ canvasElement }) => {
     const rail = canvasElement.querySelector('ol')!
@@ -258,7 +259,6 @@ export const SinglePanel: Story = {
  */
 export const Rows: Story = {
   args: seededSectionArgs('partners-sanity', 'railPanelsSection'),
-  parameters: { design: figmaDesign('2749:6863') },
 }
 
 /**

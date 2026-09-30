@@ -300,17 +300,20 @@ describe('what counts as the surface', () => {
     expect(header.dataset.ink).toBeUndefined()
   })
 
-  it('reads a declared surface on an element that paints no fill at all', async () => {
-    // A /work case-study card: a photograph under a gradient scrim, so every
-    // background-color in the stack is transparent and only the declaration
-    // says the ground is dark.
-    plate({ surface: 'ink', left: 176, right: 1424 })
-    band(LIGHT)
-    stop = watchNavInk(header)
-    await settle()
+  it.each(['ink', 'charcoal'])(
+    'reads a declared %s surface on an element that paints no fill at all',
+    async (surface) => {
+      // A /work case-study card: a photograph under a gradient scrim, so every
+      // background-color in the stack is transparent and only the declaration
+      // says the ground is dark.
+      plate({ surface, left: 176, right: 1424 })
+      band(LIGHT)
+      stop = watchNavInk(header)
+      await settle()
 
-    expect(header.dataset.ink, 'dark ink over a near-black card').toBeUndefined()
-  })
+      expect(header.dataset.ink, 'dark ink over a near-black card').toBeUndefined()
+    },
+  )
 
   it('lets a declared light plate win over the dark band it sits on', async () => {
     plate({ surface: 'bone' })

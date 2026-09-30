@@ -7,7 +7,7 @@ import { insight } from './insight/entry'
 import { insightIndex } from './insight/collectionIndex'
 
 /**
- * Catch-all entries serve `apps/web/src/app/(site)/[...segments]/page.tsx`,
+ * Catch-all entries serve `apps/web/src/app/(site)/[...path]/page.tsx`,
  * dispatched via `PAGE_QUERY` matching `slug.current == segments.join('/')`.
  * `page` is the only member today; the list keeps the multi-type dispatch
  * seam (`_type` narrowing in `buildCatchAllRoute`) that vtx proved out.
