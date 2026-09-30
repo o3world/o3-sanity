@@ -326,8 +326,7 @@ const NEXT_CASE_STUDY_ID =
  * The /insights index (#61), filtered by one category slug.
  *
  * `$category` is null on the unfiltered index, which the `== null` arm short-
- * circuits — the same shape `LATEST_INSIGHTS_QUERY` uses for its optional
- * category. Matching on the **slug** rather than the reference id is what lets
+ * circuits. Matching on the **slug** rather than the reference id is what lets
  * the filter live in the URL (`/insights/category/design`) instead of leaking
  * a document id into it.
  *
@@ -425,10 +424,6 @@ export const COLLECTION_INDEX_QUERY =
   seo
 }`)
 
-export const LATEST_INSIGHTS_QUERY = defineQuery(
-  `*[_type == "insight" && ($categoryId == null || $categoryId in categories[]._ref)] | order(publishedAt desc) [0...$limit]{${INSIGHT_CARD}}`,
-)
-
 export const CASE_STUDY_QUERY = defineQuery(`*[_type == "caseStudy" && slug.current == $slug][0]{
   ${CASE_STUDY_CARD},
   ${
@@ -459,14 +454,6 @@ export const CASE_STUDY_SLUGS_QUERY = defineQuery(
   `*[_type == "caseStudy" && defined(slug.current)].slug.current`,
 )
 
-export const CASE_STUDIES_QUERY = defineQuery(
-  `*[_type == "caseStudy"] | order(_createdAt desc){${CASE_STUDY_CARD}}`,
-)
-
-export const CASE_STUDIES_BY_REF_QUERY = defineQuery(
-  `*[_type == "caseStudy" && _id in $ids]{${CASE_STUDY_CARD}}`,
-)
-
 export const PAGE_QUERY = defineQuery(`*[_type == "page" && slug.current == $slug][0]{
   _id,
   _type,
@@ -479,15 +466,6 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && slug.current == $slu
 
 export const PAGE_SLUGS_QUERY = defineQuery(
   `*[_type == "page" && defined(slug.current)].slug.current`,
-)
-
-export const PAGES_BY_TYPE_QUERY = defineQuery(
-  `*[_type == "page" && pageType == $pageType] | order(title asc){
-    _id,
-    title,
-    "slug": slug.current,
-    card
-  }`,
 )
 
 /**
