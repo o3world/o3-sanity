@@ -137,7 +137,7 @@ forget it. Where the renderer itself belongs is the table below.
 ### o3xo is deleted
 
 The o3xo app and everything that served it were deleted in #490; `apps/web` is the only app. O3XO
-survives only as a brand name in content, such as the utility-nav mark and the links to o3xo.ai.
+survives only as a brand name in content, such as the footer's property logo and the links to o3xo.ai.
 
 ### Where a component lives
 
@@ -350,12 +350,13 @@ cost more than a review on this repo returns. Run it before a merge, not after e
 
 ### Testing
 
-Three layers — `unit` (`*.test.ts`), `render` (`*.render.test.tsx`), `stories` (`*.stories.tsx`).
+Three layers — `unit` (`*.test.ts`), `render` (`*.render.test.tsx`), `stories` (`*.stories.tsx`) —
+plus a `shell` project for the tests that start a process, which `pnpm test:fast` skips.
 Read `docs/testing.md` before writing one; decisions are in `docs/adr/0004-layered-test-approach.md`.
 
 **Run tests as a checkpoint, not a loop.** `pnpm test` before opening a PR, and after a
 migration batch or a new block — not after every edit, and never in watch mode during agent work.
-There is no git hook; `pnpm verify` does not run tests. CI runs the suite as its own job.
+No git hook runs tests, and `pnpm verify` does not either. CI runs the suite as its own job.
 
 **`pnpm vr` answers a different question than the suite does** — not "did it break?" but "what does
 it look like now?". It builds Storybook for your working tree and for the merge base with `main`,
