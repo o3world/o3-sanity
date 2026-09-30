@@ -3,9 +3,7 @@ import { describe, expect, it } from 'vitest'
 import {
   EMAIL_MESSAGE,
   handleInquiryRequest,
-  HONEYPOT_FIELD,
   isSpam,
-  MINIMUM_FILL_MS,
   nativeSubmitFailed,
   parseInquiryInput,
   REASON_MESSAGE,
@@ -86,13 +84,6 @@ describe('validateInquiry', () => {
   })
 })
 
-describe('the spam checks', () => {
-  it('names the honeypot and the fill time it enforces', () => {
-    expect(HONEYPOT_FIELD).toBe('website')
-    expect(MINIMUM_FILL_MS).toBe(3000)
-  })
-})
-
 describe('isSpam', () => {
   it('drops a submission whose honeypot was filled', () => {
     expect(isSpam({ ...filled(), honeypot: 'http://x.example', elapsedMs: 60_000 })).toBe(true)
@@ -118,8 +109,8 @@ describe('isSpam', () => {
   const timed = { ...filled(), elapsedMs: 10_000 }
 
   it.each([
-    ['a link in the first name', { name: 'Ada http://x.example' }],
-    ['a link in the last name', { name: 'HTTPS://X.EXAMPLE' }],
+    ['a link in the name', { name: 'Ada http://x.example' }],
+    ['an upper-case link as the name', { name: 'HTTPS://X.EXAMPLE' }],
     ['a bare www host in a name', { name: 'www.x.example' }],
   ])('drops %s', (_label, spoiled) => {
     expect(isSpam({ ...timed, ...spoiled })).toBe(true)

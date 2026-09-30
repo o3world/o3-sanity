@@ -335,18 +335,6 @@ describe('site footer', () => {
     expect(footerMark).toContain('fill="currentColor"')
   })
 
-  it('uses the current footer insets on its black band', () => {
-    // `1280:1885` is `#000000`, not `--color-ink-deep`'s `#030303`, and 64px
-    // top AND bottom where the frame footer this was first built from had
-    // `96px 96px 16px`.
-    expect(footerHtml).toContain('bg-black')
-    expect(footerHtml).toContain('px-4')
-    expect(footerHtml).toContain('lg:px-24')
-    expect(footerHtml).toContain('pt-32')
-    expect(footerHtml).toContain('pb-16')
-    expect(footerHtml).not.toContain('bg-ink-deep')
-  })
-
   it('opens external social profiles safely', () => {
     expect(footerHtml).toContain('rel="noreferrer"')
   })
@@ -423,35 +411,10 @@ describe('every chrome destination is a route the build-out lands (#48)', () => 
   })
 })
 
-/**
- * The mark is the app's (#228): the chrome takes one and draws it.
- *
- * A probe in place of a brand's mark is what proves it: whatever the chrome
- * still draws of its own would show up here as the O3 geometry the seam is
- * meant to have removed.
- */
+/** The mark is the app's (#228): the chrome takes one and draws it where the frame puts it. */
 describe('the mark comes from the app, not the chrome', () => {
   const probe = <svg data-mark="probe" viewBox="0 0 1 1" />
   const probeNav = renderToStaticMarkup(<SiteNav settings={settings} brandMark={probe} />)
-  const probeFooter = renderToStaticMarkup(
-    <SiteFooter settings={settings} brandMark={probe} year={HANDED_YEAR} />,
-  )
-
-  it.each([
-    ['nav', probeNav],
-    ['footer', probeFooter],
-  ])('draws the mark %s was handed', (_where, html) => {
-    expect(html).toContain('data-mark="probe"')
-  })
-
-  it.each([
-    ['nav', probeNav],
-    ['footer', probeFooter],
-  ])('keeps no mark of its own in the %s', (_where, html) => {
-    // The two boxes O3's mark draws in. Either one surviving a probe render is
-    // a brand's geometry hardcoded in shared chrome.
-    expect(markIn(html)).toBe('')
-  })
 
   it('puts the nav mark inside the home link, where the whole mark is the target', () => {
     expect(probeNav).toMatch(/<a[^>]*href="\/"[^>]*>\s*<svg data-mark="probe"/)

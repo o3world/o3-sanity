@@ -92,6 +92,10 @@ export const Orbital: Story = {
 export const OrbitalMobile: Story = {
   args: seededSectionArgs('solutions', 'featureGridSection'),
   globals: { viewport: { value: 'mobile' } },
+  play: async ({ canvasElement, args }) => {
+    // No feature here sets a mark, and an unset mark draws the orb, a `<canvas>`.
+    await expect(canvasElement.querySelectorAll('canvas')).toHaveLength(args.features!.length)
+  },
 }
 
 export const GridMobile: Story = {

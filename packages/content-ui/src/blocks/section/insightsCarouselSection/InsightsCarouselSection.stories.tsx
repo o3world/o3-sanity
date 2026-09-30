@@ -45,8 +45,10 @@ export const LatestFeed: Story = {
     await expect(parseFloat(getComputedStyle(heading).fontSize)).toBeCloseTo(48, 1)
     await expect(parseFloat(getComputedStyle(heading).lineHeight)).toBeCloseTo(58, 1)
     await expect(getComputedStyle(heading).fontWeight).toBe('400')
-    await waitFor(() =>
-      expect(canvasElement.querySelector('[aria-roledescription="slide"] a')).not.toBeNull(),
+    // The card is a `next/dynamic` chunk, compiled on first request under a full run.
+    await waitFor(
+      () => expect(canvasElement.querySelector('[aria-roledescription="slide"] a')).not.toBeNull(),
+      { timeout: 5000 },
     )
     const card = canvasElement.querySelector('[aria-roledescription="slide"] a')!
     const media = card.firstElementChild!
