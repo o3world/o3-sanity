@@ -7,9 +7,6 @@
     "node": ">=22.12"
   },
   "scripts": {
-    "brief:check": "pnpm --filter @o3/guidance brief:check",
-    "brief:export": "pnpm --filter @o3/guidance brief:export",
-    "brief:sync": "pnpm --filter @o3/guidance brief:sync",
     "build": "turbo run build",
     "build:assert": "pnpm --filter @o3/build-assert assert",
     "check": "turbo run lint typecheck --affected",

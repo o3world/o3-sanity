@@ -335,11 +335,6 @@
       "why": "The diff, hash, normalize and probe layers are generic Figma-API work; the brand registry and the two file keys are the product."
     },
     {
-      "path": "tools/guidance",
-      "verdict": "product",
-      "why": "Brand-clean, but coupled to @o3/sanity and the brief document type. The nearest tool to promotable."
-    },
-    {
       "path": "tools/migration",
       "verdict": "product",
       "why": "The WordPress migration pipeline for this site.",
