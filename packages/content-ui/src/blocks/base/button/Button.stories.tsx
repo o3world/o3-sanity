@@ -74,6 +74,10 @@ const on = (surface: Surface): Decorator => {
 /**
  * **Auto on white** — no stored contrast at all, which is what a button placed
  * today carries. The band is light, so the button is ink.
+ *
+ * No stored icon either, which is what every button saved before the field
+ * existed carries: the arrow is the knob's default, so the common case costs
+ * an editor nothing.
  */
 export const AutoOnWhite: Story = {
   args: { label: 'View our work', href: '/work', target: null },
@@ -232,19 +236,6 @@ export const UnknownContrast: Story = {
   },
   decorators: [on('ink')],
   globals: { backgrounds: { value: 'ink' } },
-}
-
-/**
- * **No stored icon** — which is what every button saved before the field
- * existed carries, and what every call site used to pass by hand. The arrow is
- * the knob's default, so the common case costs an editor nothing.
- *
- * (`AutoOnWhite` and the arms above are all in this state too; this one says so
- * on purpose.)
- */
-export const DefaultIcon: Story = {
-  args: { label: 'View our work', href: '/work', target: null },
-  decorators: [on('white')],
 }
 
 /** The icon removed. A button that should be bare can be bare. */
