@@ -82,6 +82,9 @@ pnpm dataset:drift      # which pipeline-owned documents an editor changed (exit
 no flag — `tools/migration/src/load.ts` carries the reasoning. There is no
 scratch dataset left to rebuild into: `development` mirrors `production` via
 `pnpm dataset:sync`, and both hold content no committed JSON knows about.
+Nor is there a source to rebuild the corpus from: the WordPress import is
+frozen, so `data/converted/` and `data/translated/` are edited by hand like the
+seeds, and nothing regenerates them.
 
 To get a `development` that matches the live site, sync it. To change documents
 in it, write a targeted migration under `tools/migration/src/migrations/`
@@ -98,14 +101,6 @@ pointed at. It rewrites four gitignored `.env.local` files at once — web app,
 typegen, migration, guidance — because the loader resolves its dataset
 independently of the web app, and the two silently disagreeing is what once
 sent every load to production.
-
-The extract and convert halves still run — they write files, not documents —
-but the chain ends at the corpus rather than at the dataset:
-
-```bash
-pnpm --filter @o3/migration extract      # WordPress → data/extract/
-pnpm --filter @o3/migration convert      # → data/converted/ (Portable Text, refs)
-```
 
 **Then look at it in a browser.** A targeted migration that succeeds against
 the wrong dataset looks exactly like one that worked.

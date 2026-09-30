@@ -213,17 +213,14 @@ pnpm turbo login && pnpm turbo link
 
 ## Shared surfaces — the one real conflict risk
 
-Tickets #17, #18, #21, and #22 all add mappers to the same `tools/migration`
-converter, and any ticket adding a dependency touches `pnpm-lock.yaml`. These
-are deliberately **not** modelled as blocking dependencies — that would
+Tickets that edit the same committed JSON under `tools/migration/data/` touch
+the same files, and any ticket adding a dependency touches `pnpm-lock.yaml`.
+These are deliberately **not** modelled as blocking dependencies — that would
 serialize work that is genuinely parallel, for a merge cost that is small when
 handled and expensive only when ignored.
 
 The discipline instead:
 
-- **Append, don't restructure.** A ticket adds its mapper to the existing
-  registry. Reshaping the converter's interface is a separate conversation
-  (`/grilling` + an ADR), not something one content ticket does on the way past.
 - **Rebase on `main` before you merge**, not after you've finished. A worktree
   that hasn't seen main in a day is the expensive case.
 - **Lockfile conflicts resolve by regenerating**, never by hand-merging: take

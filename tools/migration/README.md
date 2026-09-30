@@ -1,7 +1,16 @@
 # @o3/migration
 
-WordPress → Sanity pipeline for o3world.com, plus the targeted scripts that
-change the dataset now that editors own it (ADR 0002, 0003).
+The committed content corpus for o3world.com, and the scripts that compare it
+with the dataset or change the dataset now that editors own it (ADR 0002,
+0003).
+
+**The WordPress import is frozen.** `data/converted/` (insights, pages, people,
+categories, site settings) and `data/translated/` (the 20 case studies) are
+what the WordPress import committed. Nothing regenerates them; they are edited
+by hand like `data/seed/`. `data/extract/` keeps only what the remaining tools
+read: the case-study sources the translations hash against, the run manifest
+`drift` stamps `extractedAt` from, and the live Yoast sitemap list
+`redirects.test.ts` checks the app's redirect table against.
 
 **The blanket `load` is retired.** `pnpm --filter @o3/migration load` refuses
 and exits non-zero: it would delete and recreate every unlocked pipeline-owned
@@ -12,12 +21,6 @@ reports before it writes, refuses a dataset it was not named, reruns as a
 no-op, and overwrites no field it did not come to change.
 
 ```sh
-pnpm --filter @o3/migration extract -- --posts all       # live WP → data/extract/ (terminus wp eval + ACF get_fields)
-pnpm --filter @o3/migration extract -- --slugs a,b       # …or exactly these posts, by slug
-pnpm --filter @o3/migration extract -- --redirects       # …or just the redirect map (both plugins)
-pnpm --filter @o3/migration extract -- --ventures        # …or just the `ventures` CPT
-pnpm --filter @o3/migration convert                      # data/extract/ → data/converted/ (deterministic, fail-loud)
-pnpm --filter @o3/migration redirects                    # data/extract/site/redirects.json → apps/web/src/lib/redirects.generated.ts
 pnpm --filter @o3/migration verify                       # read-only: is the dataset what data/ says it is?
 pnpm --filter @o3/migration drift                        # read-only: which committed documents an editor changed
 pnpm --filter @o3/migration sync-docs -- 'client/*'      # named committed documents → the dataset (dry run without --apply)
@@ -46,18 +49,17 @@ dataset that is not committed under `data/`. Non-zero exit on any finding.
 Rules of the road:
 
 - **What an editor wrote outranks the committed JSON** (ADR 0003, inverted). `pnpm dataset:drift` names the pipeline-owned documents an editor changed; lock them with `-- --lock` or port the edit into `data/`.
-- **CI converts and fails on any diff.** The `convert drift` job in [`checks.yml`](../../.github/workflows/checks.yml) runs `convert`, then diffs `data/`, so a mapper that disagrees with its committed output is a red build rather than something the next person to run the pipeline notices. It needs no token and no network: `convert` reads the extract tree and writes the converted tree.
+- **The corpus tests guard the hand-edited JSON.** `converted.test.ts`, `translated.test.ts`, `seed.test.ts` and `corpus.test.ts` hold the committed JSON to the zod gates in `src/map/`, to resolving references and to honest provenance; `redirects.test.ts` holds the app's redirect table.
 - **A document with `migration.locked: true` is never replaced from outside it.** Editors lock documents they take over (Studio toggle). A transformation whose only input is the document's own fields is outside the rule (AGENTS.md → "Changing a dataset").
 - Deterministic IDs name the source: `<type>-wp-<id>` (WordPress), `<type>-seed-<slug>` (greenfield).
 - **An image marker names where the bytes come from** — `_wpSrc` a WordPress upload, `_srcUrl` a URL on any other source site, `_localSrc` a repo-relative file committed beside its seed. `data/assets.json` is the source→asset audit map.
-- Agent translation (case studies): input = `data/extract/` + `rules/<type>.md` + typegen types; output = `data/translated/` with `_meta` provenance; reviewed as a PR.
-- **A PHP snippet passed to `wpEval` may contain no single quotes and no `//` comments.** It is flattened to one line before it is sent, so a line comment silently comments out the rest of the program; `wpEval` rejects both up front. Explain the PHP in the TypeScript doc comment above it.
+- **A translated case study pins what it was written from.** Its `_meta` records the sha256 of its `data/extract/caseStudy/` source and of `rules/caseStudy.md`, and `translated.test.ts` fails if either file changes — so neither is edited in place.
 
 ---
 
 ## The full archive: what the long tail turned out to be (#17)
 
-All 272 insights convert with an **empty fail-loud report**. Getting there
+All 272 insights converted with an **empty fail-loud report**. Getting there
 meant two new mapper arms, five recorded drop decisions, and two corrections to
 how authorship was being read — the second one (#32) deleted the byline from
 239 of them, because the live site never showed one.
@@ -65,20 +67,19 @@ how authorship was being read — the second one (#32) deleted the byline from
 ### ACF module types, in full
 
 `flexible_post_content` uses exactly three layouts across the whole archive —
-`text` (277 instances), `video` (7), `image` (3). All three have mappers; a
-fourth would still fail the run.
+`text` (277 instances), `video` (7), `image` (3). All three were mapped.
 
 - **`video`** stores its source two ways. `external` keeps the **iframe HTML**
-  WordPress cached from oEmbed (not a URL), so the mapper pulls the `src` out
-  of it; `file` keeps an uploaded mp4, which migrates as an ordinary asset.
-  Both become an `embed`.
+  WordPress cached from oEmbed (not a URL), so the `src` was pulled out of it;
+  `file` keeps an uploaded mp4, which migrated as an ordinary asset. Both
+  became an `embed`.
 - **`image`** is an ACF image array → a `figure`, alt falling back to the
   attachment title.
 
 ### Recorded drop decisions
 
-Five things do not migrate. None of them is silent — each is reported as a
-**note** on every run (converted, but the source needed cleaning up):
+Five things did not migrate. None of them was silent — each was reported as a
+**note** (converted, but the source needed cleaning up):
 
 1. **`[single_image title="…"]`** (5 uses, 3 posts). Stripped. The shortcode is
    **not registered** in WordPress, so visitors see the literal
@@ -102,12 +103,6 @@ Five things do not migrate. None of them is silent — each is reported as a
    and the live page shows none either. See "The byline is the ACF `author`,
    or nobody" below — that is the whole decision, and this is its one note.
 
-Two false positives are worth knowing about, because both cost a debugging
-round: the old shortcode regex matched editorial prose in square brackets
-("…best entrepreneurial companies **[in the E360 Index]**"), and minified
-Gravity Forms JavaScript (`gform.hooks[o][r]`) reads as a shortcode to any
-bracket-matching pattern. Scripts are stripped before the scan now.
-
 ### The byline is the ACF `author`, or nobody (#32)
 
 Posts carry an ACF `author` field pointing at a **`team` post**. Where one is
@@ -125,11 +120,11 @@ fallback put "Brian Crumley" on 223 articles as their visible author and
 
 The arithmetic across the 272:
 
-| Posts   | ACF `author`           | Result                              |
-| ------- | ---------------------- | ----------------------------------- |
-| **33**  | set, team post exists  | `author` reference — the byline     |
-| **7**   | set, team post deleted | no `author`, **noted** on every run |
-| **232** | not set                | no `author`, silently               |
+| Posts   | ACF `author`           | Result                          |
+| ------- | ---------------------- | ------------------------------- |
+| **33**  | set, team post exists  | `author` reference — the byline |
+| **7**   | set, team post deleted | no `author`, **noted**          |
+| **232** | not set                | no `author`, silently           |
 
 The middle row is the only one worth a human: team ids `5102`, `5320`, `7533`
 and `8031` are named by seven posts and exist nowhere in WordPress any more.
@@ -137,24 +132,21 @@ The live site renders nothing for them either, so the document is right without
 an author — but someone deleted a record a byline still points at, which is
 source cleanup, not a conversion failure.
 
-`PersonDirectory` (`map/person.ts`) owns the rest:
+How the people were joined:
 
 - A WP _user_ and a _team_ post are the same person when they share an email or
   a name. **Email first** — three accounts never had a display name set, so
   their "name" is a login (`handler`, `kelly`) that joins to nothing. The join
-  survives the fallback's removal because it is what gives an ACF-bylined
-  person their `person-wp-<userId>` id and their curated name; what went with
-  the fallback is `refForUser`, a lookup that only ever answered "who published
-  this".
+  is what gives an ACF-bylined person their `person-wp-<userId>` id and their
+  curated name.
 - The team record supplies name, role and headshot; the user record is an
   account. Merged people keep `person-wp-<userId>` so existing references hold;
   team-only people (former staff who still wrote things) get
-  `person-wp-<teamPostId>`, and the directory refuses to build if those two id
-  spaces ever overlap.
-- Team posts are extracted with `post_status => any`. Six referenced members
+  `person-wp-<teamPostId>`; the two id spaces do not overlap.
+- Team posts were extracted with `post_status => any`. Six referenced members
   are unpublished, and a former employee is still the author of what they wrote.
 - **Person documents are reference-driven.** Only people something points at
-  are emitted — the team CPT lists everyone who ever worked here. That "some
+  are committed — the team CPT lists everyone who ever worked here. That "some
   thing" includes the seed tree, not just insights: the About page's team
   grid names six people, one of whom (Kelly Navari, `person-wp-4`) has never
   been a byline. 12 person documents survive; `person-wp-16` (Brian Crumley)
@@ -194,7 +186,7 @@ case study — so they are recorded once, here:
    there rather than dropped.
 4. **Alt text falling back to the attachment title** (5 images across 3 posts).
    Five carousel images have no alt in WordPress. The insight mapper's
-   fallback applies — the attachment title stands in — but the titles describe
+   fallback applied — the attachment title stands in — but the titles describe
    the file (`LegalDocBot (1)`), not the picture, so each carries a `proposed`
    flag. Of everything the batch translated, these five are the fields most in
    need of a rewrite — and since ADR 0016 they are live, so the rewrite is
@@ -212,8 +204,8 @@ Two things the batch could not do, and did not fake:
 - **Logos on the 15 new `client` documents.** `client.logo` is required in
   Studio, and nothing in the extract supplies one — the only client imagery in
   a `work` post is a carousel slide compositing the logo over a photograph.
-  The documents load (the loader writes JSON straight to the dataset, so Studio
-  validation never runs) and read as invalid in Studio until someone supplies
+  The documents loaded (the loader wrote JSON straight to the dataset, so Studio
+  validation never ran) and read as invalid in Studio until someone supplies
   the mark, which is the correct signal. Only the six clients on the homepage
   logo wall have logos today.
 
@@ -228,7 +220,7 @@ whose logos the frame's own cards carry. Their `client` documents stay — the
 real IRONMAN translation references one, and two more are logos on the homepage
 logo wall.
 
-**All 20 load published**, so the flags above are live copy rather than draft
+**All 20 are published**, so the flags above are live copy rather than draft
 copy. The five fallback `alt` strings and the four anonymized client names are
 now fix-forward work, still flagged on the document and still listed here.
 
@@ -253,54 +245,53 @@ to land on here, and waits for a seeded page.
 
 ---
 
-## Seeds: greenfield content, same pipeline (#20)
+## Seeds: greenfield content, same corpus (#20)
 
-Greenfield pages are committed JSON under `data/seed/<type>/<slug>.json`,
-loaded by the same `load` as everything else — so no content is ever entered
-by hand twice. `data/seed/page/index.json` (the homepage) is the worked
-example; #23 seeds the rest against this format.
+Greenfield pages are committed JSON under `data/seed/<type>/<slug>.json`, so no
+content is ever entered by hand twice, and reach the dataset through
+`sync-docs`. `data/seed/page/index.json` (the homepage) is the worked example.
 
 The rules, all enforced by `src/seed.test.ts`:
 
-- **`<type>-seed-<slug>` ids**, matching the folder. Deterministic ids are
-  what make "wipe and rebuild reproduces the dataset" true.
+- **`<type>-seed-<slug>` ids**, matching the folder.
 - **`migration.sourceId` starts `seed:`**, and `locked` is `false`. A seed is
-  re-derivable from git like any pipeline document, so it is never born locked.
+  re-derivable from git, so it is never born locked.
 - **Every reference resolves** to another committed document. A dangling
-  reference loads without complaint and renders as a hole.
+  reference writes without complaint and renders as a hole.
 - **Only registered section blocks.** Composing existing blocks is the whole
   point; a page that needs a new block type is a schema conversation
   (`/grilling` + an ADR), not an inline improvisation.
 - **`surface` is explicit on every section.** `defineSectionBlock` supplies it
-  as a Studio `initialValue`, which the loader never runs — a seed that omits
-  it renders every section on the default surface.
+  as a Studio `initialValue`, which a write from `data/` never runs — a seed
+  that omits it renders every section on the default surface.
 - **Images use `_localSrc`**, a repo-relative path
-  (`tools/migration/data/seed/assets/…`), resolved at load time exactly as
-  `_wpSrc` is. Seed imagery is design-sourced rather than migrated from
+  (`tools/migration/data/seed/assets/…`), resolved to an asset on write exactly
+  as `_wpSrc` is. Seed imagery is design-sourced rather than migrated from
   WordPress, so it is **committed next to the seeds that reference it** — a
-  marker pointing outside the repo (as these did at `prototype/assets/…`, which
-  is gitignored) makes `rebuild` impossible from a fresh clone and fails
-  `seed.test.ts` in CI while passing on the machine that authored it.
+  marker pointing outside the repo fails `seed.test.ts` in CI while passing on
+  the machine that authored it.
 
-Two things the loader guarantees that seeds depend on:
+Two things seeds depend on:
 
-- **One transaction per load.** Sanity validates a strong reference against
-  the state _after_ the transaction, so seeds may reference each other in any
-  order. Writing documents one at a time made directory order load-bearing.
+- **One transaction per write.** `sync-docs` writes its whole selection in one
+  transaction, and Sanity validates a strong reference against the state
+  _after_ the transaction, so seeds may reference each other in any order.
 - **Slug collisions are reported.** Routes resolve `…[0]`, so two documents
-  claiming one slug serve a coin flip. `load` lists any collision in the
+  claiming one slug serve a coin flip. `verify` lists any collision in the
   dataset and exits non-zero.
 
 ---
 
 ## Redirects and sitemap parity (#24)
 
-The generated redirect table lives in the **app**, not here — `tools/migration`
-is deleted when the migration ships (ADR 0002/0003), and the running site
-cannot depend on a package that will not exist. `redirects` reads the committed
-export and rewrites `apps/web/src/lib/redirects.generated.ts`, which
-`next.config.ts` serves and `app/sitemap.ts` reads so the two cannot disagree
-about which URLs this site has.
+The redirect table lives in the **app**, `apps/web/src/lib/redirects.generated.ts`,
+which `next.config.ts` serves and `app/sitemap.ts` reads so the two cannot
+disagree about which URLs this site has. It was generated once from both
+WordPress redirect plugins' export and is maintained by hand now.
+`src/redirects.test.ts` holds it to no chains, no self-redirects, wildcards
+declared after the rows they would swallow, and every URL the live Yoast
+sitemaps advertised (`data/extract/site/yoast-sitemaps.json`) either served or
+redirected.
 
 Three things about the export that cost a debugging round each:
 
@@ -313,10 +304,10 @@ Three things about the export that cost a debugging round each:
   with `match_url = "/"`. Reading that column turns one dead ebook link into a
   permanent redirect on the homepage.
 - **A sitemap diff finds post types nothing else does.** `ventures-sitemap.xml`
-  advertises two URLs that no extraction covered, because `ventures` is a CPT
-  and the extractor pulls `post_type => page` — the same shape of miss ADR 0013
-  records for `services`. That is what the diff is for, and it is why #23 gained
-  two pages after it was written.
+  advertised two URLs the page extract did not cover, because `ventures` is a
+  CPT and the extract pulled `post_type => page` — the same shape of miss ADR
+  0013 records for `services`. That is what the diff is for, and it is why #23
+  gained two pages after it was written.
 
 Findings, counts and every decision: [`docs/seo-parity.md`](../../docs/seo-parity.md).
 
@@ -324,72 +315,40 @@ Findings, counts and every decision: [`docs/seo-parity.md`](../../docs/seo-parit
 
 ## SEO: one discipline, inherited by every type (#26)
 
-Every content ticket — #17, #18, #21, #22 — gets complete, correct SEO by
-following the three rules below. None of them should need re-deciding.
+### `seo` holds overrides, never resolved values
 
-### 1. Extract the whole Yoast set, through Yoast
+Yoast hands back fully resolved output — the title with the site name
+appended, the site OG image standing in for every document that never picked
+one, `index,follow` spelled out 272 times. Copying that in would have baked
+today's defaults into 272 documents and made changing a default a
+272-document edit. So a document's `seo` carries only what it actually
+overrode in WordPress, and `packages/content-runtime/src/seo.ts` re-derives the
+rest at render time. The gate is `seoObject` (`src/map/seo.ts`).
 
-Drop `yoastPhp('$p->ID')` (`src/lib/yoast.ts`) into the type's `wp eval`
-snippet and store the result as `seo`. It reads Yoast's **presentation API**,
-not raw postmeta, for the same reason extraction runs ACF's `get_fields()`
-instead of reassembling flexible content by hand: template expansion, the
-site-wide OG fallback, and robots defaults are Yoast's rules, and a second
-copy in TypeScript would drift.
+Two normalizations were applied on the way in:
 
-It returns each field twice, and the pair is the point:
-
-| Field                  | What it is                                              | Migrates?                        |
-| ---------------------- | ------------------------------------------------------- | -------------------------------- |
-| `titleOverride`        | `_yoast_wpseo_title` — empty unless an editor set it    | decides whether `title` migrates |
-| `titleRendered`        | the `<title>` WordPress serves                          | no — parity reference            |
-| `descriptionOverride`  | `_yoast_wpseo_metadesc`                                 | yes                              |
-| `descriptionRendered`  | what WordPress serves                                   | no — parity reference            |
-| `canonicalOverride`    | `_yoast_wpseo_canonical` (unset across this whole site) | yes                              |
-| `canonicalRendered`    | the canonical WordPress serves                          | **no** — see rule 3              |
-| `noIndex` / `noFollow` | resolved robots                                         | yes, only when `true`            |
-| `ogImage`              | per-document override only                              | yes, as a `_wpSrc` marker        |
-
-The site-wide defaults land once in `data/extract/site/seo.json` (separator,
-site name, default OG image, Twitter handle). `convert` needs them; Site
-Settings' `defaultSeo` (#19) is populated from the same record.
-
-### 2. Convert with `mapSeo`, never by hand
-
-`mapSeo(src, site, docTitle, notes)` (`src/map/seo.ts`) is shared by every
-mapper. **`seo` holds overrides, never resolved values.** Yoast hands back
-fully resolved output — the title with the site name appended, the site OG
-image standing in for every document that never picked one, `index,follow`
-spelled out 272 times. Copying that in would bake today's defaults into 272
-documents and make changing a default a 272-document edit. `packages/content-runtime/src/seo.ts`
-re-derives all of it at render time; `mapSeo` keeps only what a document
-actually overrode.
-
-Two normalizations it performs, both reported through `notes` rather than
-done silently (a `notes` entry does **not** fail the document):
-
-- The site-name suffix Yoast's title template appends is stripped, because the
+- The site-name suffix Yoast's title template appends was stripped, because the
   Next.js root layout appends the same suffix — keeping both ships `Foo | O3 | O3`.
-- A title override that resolves to the document's own title, or whose
+- A title override that resolved to the document's own title, or whose
   template never resolved (`%%title%% %%sep%% %%sitename%% % %` — one real
-  post has this), is dropped. The default composition already produces it.
+  post had this), was dropped. The default composition already produces it.
 
-### 3. Paths are preserved, and the converter enforces it
+No canonical was carried over from `canonicalRendered`: a self-referential
+canonical pointing at www.o3world.com would tell Google the new site is a
+duplicate of the old one.
+`converted.test.ts` fails on any converted document whose canonical names the
+WordPress host.
 
-**A migrated document keeps the URL path WordPress serves it at today** —
-the full path, character for character, minus WordPress's trailing slash.
-The WordPress URL space (`/insights/…`, `/work/…`, `/services/…`,
-`/ventures/…`) is exactly the space ADR 0001 routes, so nothing has to move.
+### Paths are preserved
 
-Every mapper calls `checkPathParity(post.seo.canonicalRendered, newPath)`
-(`src/map/paths.ts`) and pushes the result into its issue list, so a slug that
-changes shape during conversion **stops the run** rather than costing a
-ranking quietly. `converted.test.ts` re-checks the committed corpus, catching
-a hand-edited slug too.
-
-A deliberate path change is therefore a two-line act: add an entry to
-`PATH_EXCEPTIONS` with its `reason`. That array is the input to the #24
-redirect map — **if a path change is not recorded there, it does not happen.**
-It is empty today.
+**A migrated document keeps the URL path WordPress served it at** — the full
+path, character for character, minus WordPress's trailing slash — unless the
+move is recorded. `PATH_EXCEPTIONS` / `PATH_PREFIX_EXCEPTIONS`
+(`src/map/paths.ts`) are that record, and ADR 0017's `/perspectives` →
+`/insights` rule is the only entry. `translated.test.ts` checks every case study
+against Yoast's `canonicalRendered`, and `redirects.test.ts` fails on any live
+sitemap URL the site neither serves nor redirects — so a hand-edited slug that
+moves a page without a redirect is a red test.
 
 ### What the renderer does with it
 

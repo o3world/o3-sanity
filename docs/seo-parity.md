@@ -3,11 +3,11 @@
 What the new site owes the old one, and whether it pays it (#24). Three
 questions, each with an executable answer rather than a promise:
 
-| Question                                 | Answered by                                                                     |
-| ---------------------------------------- | ------------------------------------------------------------------------------- |
-| Does every live URL still resolve?       | `tools/migration/src/map/redirects.test.ts` → "against the live Yoast sitemaps" |
-| Does the redirect table match WordPress? | The same file → "matches the file the app actually serves"                      |
-| Does per-document Yoast meta survive?    | `apps/web/src/content/documents/seoParity.render.test.tsx`                      |
+| Question                              | Answered by                                                                 |
+| ------------------------------------- | --------------------------------------------------------------------------- |
+| Does every live URL still resolve?    | `tools/migration/src/redirects.test.ts` → "against the live Yoast sitemaps" |
+| Is the redirect table sound?          | The same file → no chains, no self-redirects, wildcards declared last       |
+| Does per-document Yoast meta survive? | `apps/web/src/content/documents/seoParity.render.test.tsx`                  |
 
 Everything below is a snapshot of the 2026-08-02 run. The tests are the live
 version; this file is the reasoning.
@@ -47,15 +47,15 @@ link equity, and 243 URLs have to be recrawled before the new address is the
 one search engines serve. It was accepted because the alternative — a URL that
 disagrees forever with the word in the nav next to it — is a cost paid on every
 visit rather than once. The figure is asserted in
-`map/redirects.test.ts` → "moves exactly the URLs ADR 0017 said it would", so
+`redirects.test.ts` → "moves exactly the URLs ADR 0017 said it would", so
 it cannot drift quietly, and a future collection rename shows up there as a
 change rather than a silently larger number.
 
-Path parity is still not an accident: every mapper calls `checkPathParity`
-against Yoast's own `canonicalRendered`, and a moved path has to be declared in
-`PATH_EXCEPTIONS` / `PATH_PREFIX_EXCEPTIONS` (`map/paths.ts`) or conversion
-fails. `translated.test.ts` applies the same check to the 20 translated case
-studies, which have no mapper to do it for them.
+Path parity is still not an accident: a moved path has to be declared in
+`PATH_EXCEPTIONS` / `PATH_PREFIX_EXCEPTIONS` (`map/paths.ts`), and
+`redirects.test.ts` fails on any live sitemap URL the site neither serves nor
+redirects. `translated.test.ts` also checks the 20 translated case studies
+against Yoast's own `canonicalRendered`.
 
 ### The other direction — what the new site adds
 
@@ -80,11 +80,11 @@ invented showcase case studies. They are the other thing this diff is for: a
 
 ## The redirect map
 
-**317 redirects**, generated from the committed export by
-`pnpm --filter @o3/migration redirects` and written to
-`apps/web/src/lib/redirects.generated.ts`, which `next.config.ts` serves and
-`app/sitemap.ts` reads. Regenerating is a build-out act with a diff, not
-something `next build` does over the network.
+**317 redirects** in `apps/web/src/lib/redirects.generated.ts`, which
+`next.config.ts` serves and `app/sitemap.ts` reads. The table was generated
+from the WordPress export once; the WordPress import is frozen, so it is
+maintained by hand now, and `redirects.test.ts` holds each edit to the rules
+below.
 
 ### Where they come from
 
@@ -112,9 +112,9 @@ the plugin the site is administered through.
 | Everything else        |   26 | `/work/*`, `/live`, `/1682-conference-ai-innovation`, `/ventures` |
 
 Nothing chains: every source points at its terminal, per ADR 0013's "redirect
-to the terminal, never to a redirect". The resolver walks WordPress's own
-chains (three deep in places — `/transcend` → `/ai-solutions` →
-`/solutions/ai-solutions` → …) and emits only where they end.
+to the terminal, never to a redirect". WordPress's own chains (three deep in
+places — `/transcend` → `/ai-solutions` → `/solutions/ai-solutions` → …) were
+walked once and only where they end is kept.
 
 ### The 32 that shadow a migrated document
 
@@ -150,8 +150,8 @@ slugs — not by a list anyone maintains.
 ### Eight live URLs with no redirect row
 
 WordPress serves these and this site will not, so they need a redirect nobody
-had written. Each is decided in `UNREDIRECTED_LIVE_URLS` with its reason, on
-ADR 0013's relevance rule — the source URL tells you what the visitor wanted:
+had written. Each was decided on ADR 0013's relevance rule — the source URL
+tells you what the visitor wanted:
 
 | URL                                                             | Goes to                          |
 | --------------------------------------------------------------- | -------------------------------- |
@@ -179,7 +179,7 @@ ADR 0013's relevance rule — the source URL tells you what the visitor wanted:
 One row was **corrected** rather than carried: `/insights/ai-roi-beyond-efficiency`
 points at `https://www.o3xo.ai.com/…`, a host that does not resolve (checked
 2026-08-02) while its 32 siblings all use `o3xo.ai`. Shipping the typo would be
-a redirect into DNS failure; the correction is recorded in `TERMINAL_OVERRIDES`.
+a redirect into DNS failure, so the table carries the corrected host.
 
 ---
 
@@ -234,6 +234,6 @@ and the staging alias never get indexed, and serves `/robots.txt` +
   ADR 0016 settles the publish state (WordPress publishes them, so this site
   does too); what to do with the documents themselves is still an editorial
   call.
-- **The snapshot is a snapshot.** `data/extract/site/{redirects,yoast-sitemaps}.json`
-  are re-fetchable (`extract -- --redirects`; the sitemaps by hand), and the
-  parity test runs against whatever is committed. Re-fetch before cutover.
+- **The snapshot is a snapshot.** `data/extract/site/yoast-sitemaps.json` was
+  fetched by hand, and the parity test runs against whatever is committed.
+  Re-fetch before cutover.
