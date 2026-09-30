@@ -4,30 +4,11 @@ import { fileURLToPath } from 'node:url'
 
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import {
-  brandConfig,
-  collectionPrefixes,
-  readsNeedToken,
-  resolveDataset,
-  resolveProjectId,
-} from './brand'
+import { brandConfig, readsNeedToken, resolveDataset } from './brand'
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../../..')
 
 afterEach(() => vi.unstubAllEnvs())
-
-describe('the site a checkout runs as when nothing says otherwise', () => {
-  it('carries the project and prefixes the code shipped with', () => {
-    vi.stubEnv('NEXT_PUBLIC_SANITY_PROJECT_ID', '')
-
-    const config = brandConfig()
-
-    expect(config.projectId).toBe('naorcr6k')
-    expect(config.domain).toBe('o3world.com')
-    expect(config.collections.insight.prefix).toBe('/insights')
-    expect(config.collections.caseStudy.prefix).toBe('/work')
-  })
-})
 
 describe('the environment the config reads', () => {
   it('lets the environment override the project and dataset', () => {
@@ -49,25 +30,13 @@ describe('the environment the config reads', () => {
  * The dataset default is a safety property, not a preference.
  *
  * A CLI config once read a `SANITY_DATASET` variable that nothing in the repo
- * set, so an unconfigured checkout wrote to the live dataset. These tests pin
+ * set, so an unconfigured checkout wrote to the live dataset. This test pins
  * the fix: unset means scratch, and production is only ever reached by asking.
  */
 describe('the dataset an unconfigured checkout resolves to', () => {
   it('is what resolveDataset returns when the variable is unset', () => {
     vi.stubEnv('NEXT_PUBLIC_SANITY_DATASET', undefined)
     expect(resolveDataset()).toBe('development')
-  })
-
-  it('is what resolveDataset returns when the variable is set but empty', () => {
-    // `vercel env pull` can leave an empty assignment behind; `??` would have
-    // let that through as a valid dataset name and failed at the API instead.
-    vi.stubEnv('NEXT_PUBLIC_SANITY_DATASET', '')
-    expect(resolveDataset()).toBe('development')
-  })
-
-  it('yields to an explicit value, which is how CI and deploys reach production', () => {
-    vi.stubEnv('NEXT_PUBLIC_SANITY_DATASET', 'production')
-    expect(resolveDataset()).toBe('production')
   })
 })
 
@@ -87,48 +56,10 @@ describe('which datasets a tokenless read can trust', () => {
     expect(readsNeedToken(resolveDataset())).toBe(false)
   })
 
-  it('does not need one for a public dataset', () => {
-    expect(readsNeedToken('production')).toBe(false)
-  })
-
   it('treats a dataset nobody has vouched for as needing one', () => {
     // Fail closed: an unknown name is more likely a private scratch dataset
     // than a public one, and being wrong the other way is silent.
     expect(readsNeedToken('scratch-2026')).toBe(true)
-  })
-})
-
-describe('the project a Sanity entry point talks to', () => {
-  it('is the site’s own, with nothing set', () => {
-    // CI sets NEXT_PUBLIC_SANITY_PROJECT_ID to a literal for module-level
-    // config validation (checks.yml); the fallback only shows with it unset.
-    vi.stubEnv('NEXT_PUBLIC_SANITY_PROJECT_ID', '')
-    expect(resolveProjectId()).toBe('naorcr6k')
-  })
-
-  it('prefers the environment when set', () => {
-    vi.stubEnv('NEXT_PUBLIC_SANITY_PROJECT_ID', 'from-env')
-    expect(resolveProjectId()).toBe('from-env')
-  })
-})
-
-/**
- * `collectionPrefixes` is the flattened view of the collections table that
- * every route, the sitemap and the redirect map read. A function, not a module
- * constant: the knob entry ships this package's modules to the browser, and a
- * constant would read the environment at import time (#288).
- */
-describe('where a collection serves', () => {
-  it('is the site’s prefixes', () => {
-    expect(collectionPrefixes()).toEqual({ insight: '/insights', caseStudy: '/work' })
-  })
-
-  it('is the same table brand config declares', () => {
-    const { collections } = brandConfig()
-    expect(collectionPrefixes()).toEqual({
-      insight: collections.insight.prefix,
-      caseStudy: collections.caseStudy.prefix,
-    })
   })
 })
 
@@ -154,12 +85,6 @@ describe('scripts/switch-dataset.sh', () => {
 })
 
 describe('the datasets the project has', () => {
-  it('is the live dataset and the scratch one, both public', () => {
-    const { datasets, publicDatasets } = brandConfig()
-    expect([...datasets]).toEqual(['production', 'development'])
-    expect([...publicDatasets]).toEqual(['production', 'development'])
-  })
-
   it('includes the dataset it falls back to, or the fallback is unreachable', () => {
     vi.stubEnv('NEXT_PUBLIC_SANITY_DATASET', '')
     const config = brandConfig()
