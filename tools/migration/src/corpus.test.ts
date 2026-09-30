@@ -9,7 +9,7 @@ import { corpusPath, corpusTypeDirs, isInternalType, readCorpus } from './core/r
 describe('the committed corpus', () => {
   /**
    * The corpus half of #24's robots parity. `noIndex` and `noFollow` only
-   * migrate when Yoast resolved them `true` (`map/seo.ts`), and on this site
+   * migrated where Yoast resolved them `true` (#26), and on this site
    * exactly one document is noindexed — `error404`, a WordPress page that
    * does not migrate. So the honest parity claim is "nothing migrated is
    * noindexed", and it is worth asserting rather than assuming: a stray

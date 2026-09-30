@@ -4,8 +4,8 @@ import { BLOCK_KNOBS } from '@o3/sanity/knobs'
 /**
  * DOES THIS STORED SECTION OWE A `surface`?
  *
- * Three tests ask it — the seed corpus, the converted corpus and the WordPress
- * mapper — and each of them used to answer it from `paintsOwnSurface` alone.
+ * Two tests ask it — the seed corpus and the converted corpus — and each of
+ * them used to answer it from `paintsOwnSurface` alone.
  * That reading went wrong the moment a knob could be gated: the hero offers a
  * surface on its band composition and hides the control on the orbital one, so
  * "the block declares a surface knob" stopped being the same question as "this

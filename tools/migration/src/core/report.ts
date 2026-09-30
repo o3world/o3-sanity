@@ -46,10 +46,10 @@ export interface VerifyReport {
 /**
  * Zod gates by type. A type without one is only checked structurally.
  *
- * A gate describes what a mapper produces, so `only` is how one that describes
- * a single source says so. `siteSettingsDoc` is the shape of the **WordPress
- * chrome extract** — nav menus plus the ACF options page, which is where its
- * required socials, legal links and legal name come from.
+ * A gate describes the documents one source produced, so `only` is how a gate
+ * that describes a single source says so. `siteSettingsDoc` is the shape of the
+ * **WordPress-converted singleton** — nav menus plus the ACF options page, which
+ * is where its required socials, legal links and legal name come from.
  *
  * `caseStudy` has no gate here. The case studies are the translate track's, and
  * the gate they were written against is applied by `checkTranslation` over the
@@ -181,8 +181,8 @@ export function report(
       .map((doc) => `${doc._id} still carries an unresolved image marker`),
   })
 
-  // 5. Every document validates against its mapper's gate — the same gate
-  //    convert applied, re-run against what actually landed.
+  // 5. Every document validates against its type's gate — the same gate the
+  //    corpus tests apply to the committed JSON, re-run against what landed.
   const invalid: string[] = []
   for (const doc of live) {
     const gate = GATES[doc._type]

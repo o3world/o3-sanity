@@ -159,11 +159,10 @@ describe('the translated case-study archive', () => {
   })
 
   /**
-   * Path parity (#26, `map/paths.ts`). Every *mapper* calls
-   * `checkPathParity` on the way out; the translate track has no mapper to
-   * call it, so a slug an agent shortened or tidied would have changed the
-   * URL with nothing to stop it — and the #24 redirect map is generated from
-   * `PATH_EXCEPTIONS`, which only knows about changes recorded there.
+   * Path parity (#26, `map/paths.ts`). A slug an agent shortened or tidied
+   * would change the URL with nothing else to stop it, and a move is only
+   * honoured when `PATH_EXCEPTIONS` records it and the redirect table carries
+   * a row for it.
    */
   it('serves every case study at the path WordPress serves it at today', () => {
     for (const { file, doc } of translated) {
@@ -214,10 +213,10 @@ describe('the translated case-study archive', () => {
 
   /**
    * `seo` holds overrides, never resolved values (#26, `map/seo.ts`). The
-   * translate track hand-applies what `mapSeo` does for every other type, so
-   * the two ways that goes wrong are checked here: the ` | O3` tail Yoast's
-   * template appends (which the Next.js root layout appends again), and an
-   * unexpanded `%%…%%` template an editor left behind.
+   * translate track applied that rule by hand, so the two ways it goes wrong
+   * are checked here: the ` | O3` tail Yoast's template appends (which the
+   * Next.js root layout appends again), and an unexpanded `%%…%%` template an
+   * editor left behind.
    */
   it('migrates SEO overrides without Yoast’s resolved decoration', () => {
     for (const { file, doc } of translated) {

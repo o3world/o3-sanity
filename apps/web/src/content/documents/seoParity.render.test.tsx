@@ -19,13 +19,12 @@ import { insight } from './insight/entry'
 /**
  * SEO parity with WordPress, spot-checked end to end (#24).
  *
- * `seo.ts` is unit-testable and `mapSeo` has its own tests, but neither
- * answers the question the ticket asks: does a document that overrode its
- * Yoast title in WordPress in 2021 actually serve that title, that
- * description and that social image through the real route today? Three
- * documents are checked because there are three ways a document gets here —
- * converted, translated, and a migrated page — and each has its own entry
- * with its own `DocumentSeo`.
+ * `seo.ts` is unit-testable, but its tests do not answer the question the
+ * ticket asks: does a document that overrode its Yoast title in WordPress in
+ * 2021 actually serve that title, that description and that social image
+ * through the real route today? Three documents are checked because there
+ * are three ways a document gets here — converted, translated, and a migrated
+ * page — and each has its own entry with its own `DocumentSeo`.
  *
  * Robots parity over the whole corpus (all 300 documents, not three) is a
  * corpus invariant and lives in `tools/migration/src/corpus.test.ts`.
@@ -72,7 +71,7 @@ describe('a converted insight that overrode all three Yoast fields', () => {
   })
 
   // Yoast resolved every document's OG image through the site-wide default, so
-  // `mapSeo` keeps only the six real overrides. This is one of them.
+  // only the six real overrides were migrated. This is one of them.
   it('serves the per-document OG image override', () => {
     const images = b2c.metadata.openGraph?.images
     expect(Array.isArray(images) ? images.length : 0).toBe(1)
