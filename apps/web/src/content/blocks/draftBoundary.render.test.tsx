@@ -29,11 +29,15 @@ async function render(draft: boolean) {
   return { doc, html }
 }
 
-describe('the draft block renderer', () => {
-  it('renders every section a published request renders', async () => {
-    const published = await render(false)
-    const draft = await render(true)
+// Rendered once, at module scope: the first draft render is a cold import of
+// `OptimisticBlockRenderer` through the lazy boundary, which can outlast a
+// test's timeout under full-suite load. Sequential, because draft mode is a
+// module-level switch in the `next/headers` stub.
+const published = await render(false)
+const draft = await render(true)
 
+describe('the draft block renderer', () => {
+  it('renders every section a published request renders', () => {
     const sections = (draft.doc.sections ?? []) as unknown[]
     expect(sections.length).toBeGreaterThan(0)
     expect(draft.html).toContain(draft.doc.title as string)
@@ -42,14 +46,11 @@ describe('the draft block renderer', () => {
     )
   })
 
-  it('wraps the array in the container Presentation reorders', async () => {
+  it('wraps the array in the container Presentation reorders', () => {
     // The array-level `data-sanity` needs a real element to sit on, so only
     // the draft renderer emits one — a fragment cannot carry it. It is what
     // tells Presentation the children form a sortable array, and it is the
     // one mark that distinguishes the two renderers' output.
-    const published = await render(false)
-    const draft = await render(true)
-
     const count = (html: string) => (html.match(/data-sanity=/g) ?? []).length
     expect(count(draft.html)).toBe(count(published.html) + 1)
   })
