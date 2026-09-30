@@ -87,6 +87,7 @@ export const Small: Story = {
     await expect(getComputedStyle(band).paddingBottom).toBe('128px')
     await expect(quote.parentElement!.getBoundingClientRect().width).toBe(822)
     await expect(getComputedStyle(quote.parentElement!).gap).toBe('48px')
+    await expect(getComputedStyle(quote.parentElement!).textAlign).toBe('center')
   },
 }
 
