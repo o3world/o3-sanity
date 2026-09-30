@@ -100,5 +100,21 @@ describe('the screen grid’s knobs', () => {
     expect(
       validate?.([{ span: 'wide' }, { span: 'narrow' }], { parent: { layout: 'feature' } }),
     ).toBe(true)
+
+    // Rows on the six-column grid: a tile that does not fit what is left of a
+    // row starts the next one and leaves a hole behind it.
+    const grid = { parent: { layout: 'grid' } }
+    const spans = (...values: string[]) => values.map((span) => ({ span }))
+    expect(validate?.(spans('standard', 'third', 'twoThirds'), grid)).toBe(
+      'Tile 3 leaves a gap in the row before it. Rows that use thirds must fill the full width.',
+    )
+    expect(validate?.(spans('third', 'twoThirds', 'third', 'standard', 'third'), grid)).toBe(
+      'Tile 5 leaves a gap in the row before it. Rows that use thirds must fill the full width.',
+    )
+    expect(validate?.(spans('third', 'twoThirds', 'standard', 'standard', 'wide'), grid)).toBe(true)
+    // The last row may stay short, as an odd standard tile always could.
+    expect(validate?.(spans('wide', 'third'), grid)).toBe(true)
+    // Grids without thirds keep the rules they had.
+    expect(validate?.(spans('standard', 'wide'), grid)).toBe(true)
   })
 })

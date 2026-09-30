@@ -787,9 +787,19 @@ export const screenGridSection = defineSectionBlock({
             const hasThirds = (screens as { span?: string }[] | undefined)?.some(
               (screen) => screen.span === 'third' || screen.span === 'twoThirds',
             )
-            return layout === 'feature' && hasThirds
-              ? 'Third and two-thirds spans require Grid layout.'
-              : true
+            if (!hasThirds) return true
+            if (layout === 'feature') return 'Third and two-thirds spans require Grid layout.'
+            // The grid is six columns and places tiles in order, so a tile
+            // wider than what is left of its row wraps and leaves a hole.
+            const columns = { wide: 6, twoThirds: 4, third: 2 } as Record<string, number>
+            let used = 0
+            for (const [index, screen] of (screens as { span?: string }[]).entries()) {
+              const width = columns[screen.span ?? ''] ?? 3
+              if (used > 0 && used + width > 6)
+                return `Tile ${index + 1} leaves a gap in the row before it. Rows that use thirds must fill the full width.`
+              used = (used + width) % 6
+            }
+            return true
           }),
       of: [
         defineArrayItem({
