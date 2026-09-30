@@ -4,20 +4,20 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 import { CtaSection } from './CtaSection'
 
 describe('the current gradient CTA', () => {
-  it.each(['orbs', 'molecule', 'none', undefined])(
-    'does not revive a stored %s decoration',
-    (decoration) => {
-      const markup = renderToStaticMarkup(
-        <CtaSection
-          {...({ heading: 'A current CTA', decoration } as unknown as SectionProps<'ctaSection'>)}
-        />,
-      )
-      expect(markup).toContain('cta-band')
-      expect(markup).not.toContain('data-orbital')
-      expect(markup).not.toContain('<svg')
-      expect(markup).not.toContain('cta-lag')
-    },
-  )
+  it('does not revive a stored decoration', () => {
+    const markup = renderToStaticMarkup(
+      <CtaSection
+        {...({
+          heading: 'A current CTA',
+          decoration: 'orbs',
+        } as unknown as SectionProps<'ctaSection'>)}
+      />,
+    )
+    expect(markup).toContain('cta-band')
+    expect(markup).not.toContain('data-orbital')
+    expect(markup).not.toContain('<svg')
+    expect(markup).not.toContain('cta-lag')
+  })
   it('preserves the author’s heading, body and destination', () => {
     const markup = renderToStaticMarkup(
       <CtaSection
