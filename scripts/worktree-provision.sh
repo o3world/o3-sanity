@@ -6,25 +6,23 @@
 #   1. the gitignored env files, copied from the main checkout — without them
 #      the worktree cannot reach Sanity or Vercel, and the failure reads like a
 #      code bug rather than a missing file
-#   2. `prototype/`, symlinked — 22 MB of seed image assets the migration seed
-#      test asserts against, gitignored and therefore not carried by git
-#   3. its own dev-server ports, written to the worktree's `.env` — two
+#   2. its own dev-server ports, written to the worktree's `.env` — two
 #      checkouts both booting on 3600 is the first thing that breaks when a
 #      second session starts
-#   4. `pnpm install` — node_modules is not shared between worktrees
+#   3. `pnpm install` — node_modules is not shared between worktrees
 #
 # Callers: `pnpm wt new` (scripts/worktree.sh) and Orca's setup hook
 # (scripts/orca-hooks.sh). Both paths land here so they cannot drift.
 #
 #   bash scripts/worktree-provision.sh [worktree-path] [--no-install]
 #
-# `--no-install` does everything but step 4. It is what `prepare` uses: pnpm
+# `--no-install` does everything but step 3. It is what `prepare` uses: pnpm
 # runs `prepare` at the END of an install, so re-entering install from inside
 # it would recurse.
 #
-# Safe to re-run, and re-run often: existing env files, symlinks, and `.env`
-# are left alone, so the common case is four "keep" lines and no writes. That
-# is what lets `prepare` and `dev.sh` both call it unconditionally.
+# Safe to re-run, and re-run often: existing env files and `.env` are left
+# alone, so the common case is four "keep" lines and no writes. That is what
+# lets `prepare` and `dev.sh` both call it unconditionally.
 
 set -uo pipefail
 
@@ -40,7 +38,6 @@ STORYBOOK_POOL_START=6600
 STORYBOOK_POOL_END=6609
 
 CARRY_FILES=(.env.local apps/web/.env.local .vercel/project.json)
-CARRY_DIRS=(prototype)
 
 NO_INSTALL=0
 WT_ARG=""
@@ -119,18 +116,7 @@ for f in "${CARRY_FILES[@]}"; do
   fi
 done
 
-# --- 2. prototype symlink --------------------------------------------------
-
-for d in "${CARRY_DIRS[@]}"; do
-  if [[ -e "$WT/$d" ]]; then
-    echo "  keep    $d/ (already present)"
-  elif [[ -d "$MAIN_ROOT/$d" ]]; then
-    ln -s "$MAIN_ROOT/$d" "$WT/$d"
-    echo "  linked  $d/ -> $MAIN_ROOT/$d"
-  fi
-done
-
-# --- 3. ports --------------------------------------------------------------
+# --- 2. ports --------------------------------------------------------------
 
 if [[ -f "$WT/.env" ]]; then
   echo "  keep    .env ($(sed -nE 's/^WEB_PORT=([0-9]+).*/web :\1/p' "$WT/.env" | head -1))"
@@ -154,7 +140,7 @@ EOF
   fi
 fi
 
-# --- 4. dependencies -------------------------------------------------------
+# --- 3. dependencies -------------------------------------------------------
 
 if [[ $NO_INSTALL == 1 ]]; then
   echo "provision: done (--no-install)."

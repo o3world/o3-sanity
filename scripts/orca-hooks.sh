@@ -76,10 +76,10 @@ ensure_gh_on_path() {
 # ---------------------------------------------------------------------------
 # setup
 # ---------------------------------------------------------------------------
-# The env files, the prototype symlink and the port allocation are instant and
-# are what make the checkout usable; `pnpm install` is the slow half and runs
-# last. If the 120s hook timeout cuts the install off, the worktree still has
-# its env and ports — finish it with `pnpm install` in the new terminal.
+# The env files and the port allocation are instant and are what make the
+# checkout usable; `pnpm install` is the slow half and runs last. If the 120s
+# hook timeout cuts the install off, the worktree still has its env and ports —
+# finish it with `pnpm install` in the new terminal.
 
 cmd_setup() {
   if ! ensure_node_on_path; then
