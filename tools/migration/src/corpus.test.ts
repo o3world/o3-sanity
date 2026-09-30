@@ -25,11 +25,11 @@ describe('the committed corpus', () => {
   })
 
   /**
-   * `verify` reads the whole dataset, so a document this pipeline never wrote
+   * `verify` reads the whole dataset, so a document the corpus never held
    * would be reported as an orphan — a finding that exits non-zero and is
-   * wrong. Briefs are exactly that: written by `brief:sync`, and outliving the
-   * pipeline, which is deleted post-migration. `guidance` is named alongside
-   * them because `production` still holds documents of a retired type (#192).
+   * wrong. Briefs are exactly that: they live only in the dataset. `guidance`
+   * is named alongside them because `production` still holds documents of a
+   * retired type (#192).
    */
   it('names the types a different tool owns, so verify can stay quiet about them', () => {
     expect(isInternalType('guidance')).toBe(true)
@@ -42,8 +42,8 @@ describe('the committed corpus', () => {
   /**
    * And the corpus is the other side of it: a `brief` or `guidance` document
    * committed under `data/` would give that document a second writer —
-   * `sync-docs` could replace what `brief:sync` wrote, and `verify` would
-   * expect the corpus copy.
+   * `sync-docs` could replace what was written in the dataset, and `verify`
+   * would expect the corpus copy.
    */
   it('commits no document of a type a different tool owns', () => {
     // Directories, not documents: a `brief/` holding nothing but markdown

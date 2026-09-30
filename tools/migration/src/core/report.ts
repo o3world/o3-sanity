@@ -145,10 +145,9 @@ export function report(
       // `live` and cannot be checked here. That they are the *right kind* of
       // asset for the field holding them is check 3.
       //
-      // A `briefs` entry is weak and points at a document this pipeline does
-      // not sync, so an absent brief is a state ADR 0027 accepts rather than a
-      // finding: nothing renders a brief, and a dataset-born one that survived
-      // no rebuild is exactly the standing bet that ADR took.
+      // A `briefs` entry is weak and points at a brief, which lives only in the
+      // dataset and is never committed under `data/`, so an absent one is not
+      // a finding: nothing renders a brief.
       if (BRIEF_ID.test(ref)) continue
       if (!liveById.has(ref) && !ref.startsWith('image-') && !ref.startsWith('file-')) {
         dangling.push(`${doc._id} → ${ref}`)
@@ -210,7 +209,7 @@ export function report(
   // 8. Anything the pipeline did not put there. Not a failure on its own — an
   //    editor may have created it — but during build-out it is usually
   //    leftover scaffolding, and a routable one shadows a seed.
-  //    `brief` documents are owned by a different tool on purpose, and
+  //    `brief` documents live only in the dataset on purpose, and
   //    `guidance` documents are a retired type production still holds
   //    (`INTERNAL_TYPES`), so neither counts as an orphan. A locked one is a
   //    document `load` skipped on purpose (ADR 0003), so it is named as a
