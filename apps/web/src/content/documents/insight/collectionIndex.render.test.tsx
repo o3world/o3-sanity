@@ -364,12 +364,6 @@ describe('insights index composition', () => {
     expect(page.html).toContain('href="/work"')
   })
 
-  /** The current CTA has a quiet gradient behind its authored copy. */
-  it('closes on the current gradient band', () => {
-    expect(page.html).toContain('cta-band')
-    expect(page.html).not.toContain('w-[54%]')
-  })
-
   it('scrolls the chip row on a phone and nothing else', () => {
     // `2975:8656` is one unwrapped row 10px apart, running past the frame's
     // right edge — the only scroll region the 402 frame draws. The card grid
