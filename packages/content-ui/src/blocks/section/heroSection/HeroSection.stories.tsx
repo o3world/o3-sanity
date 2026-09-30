@@ -6,8 +6,7 @@ import { HeroSection } from './HeroSection'
 
 /**
  * The hero's stories. `Playground` renders the fixture with every prop open to
- * the controls panel; `Matrix` draws each composition and alignment the knobs
- * offer in one frame; the rest are single states — content edge cases, the
+ * the controls panel; the rest are single states — content edge cases, the
  * entrance cadence, and the band compositions the frames draw.
  *
  * Every story here is also a test — the `stories` layer mounts each one in
@@ -49,39 +48,6 @@ type Story = StoryObj<typeof meta>
 
 /** The fixture as authored. Turn a control and the block redraws. */
 export const Playground: Story = { args: fixture }
-
-const MATRIX: { label: string; args: SectionProps<'heroSection'> }[] = [
-  { label: 'Composition: Orbital', args: fixture },
-  {
-    label: 'Composition: Band, Alignment: Left',
-    args: { ...fixture, variant: 'band', alignment: 'start' },
-  },
-  {
-    label: 'Composition: Band, Alignment: Centred',
-    args: { ...fixture, variant: 'band', alignment: 'center' },
-  },
-]
-
-/**
- * Composition against alignment. The orbital opener takes one cell: it is
- * centred by its own composition, so alignment is a band-only choice.
- */
-export const Matrix: Story = {
-  args: fixture,
-  parameters: { controls: { disable: true } },
-  // Stacked rather than side by side: a section block is full-bleed, and
-  // half-width columns would draw it at a width it never renders at.
-  render: () => (
-    <div className="flex flex-col">
-      {MATRIX.map(({ label, args }) => (
-        <div key={label}>
-          <div className="bg-bone text-fg-muted px-4 py-1 font-mono text-xs">{label}</div>
-          <HeroSection {...args} />
-        </div>
-      ))}
-    </div>
-  ),
-}
 
 /** A single headline line gets no set-back — the treatment needs two or more. */
 export const SingleLine: Story = {
