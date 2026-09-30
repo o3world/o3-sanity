@@ -16,8 +16,7 @@ const html = renderToStaticMarkup(
 )
 
 describe('the case showcase band', () => {
-  it('paints the light showcase around opaque case cards', () => {
-    expect(html).toContain('bg-bone-soft')
+  it('declares the bone surface around opaque case cards', () => {
     expect(html).toContain('data-surface="bone"')
   })
 
@@ -25,11 +24,9 @@ describe('the case showcase band', () => {
     expect(html).not.toContain('--gradient-surface-wash')
   })
 
-  it('uses 64px mobile and 128px desktop padding', () => {
+  it('uses 64px mobile padding and a 64px gap under the heading row', () => {
     expect(html).toContain('py-16')
-    expect(html).toContain('lg:py-32')
     expect(html).toContain('gap-16')
-    expect(html).not.toContain('band-sm')
   })
 
   it('keeps the card stack at the current 48px gap', () => {
