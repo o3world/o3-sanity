@@ -1,5 +1,7 @@
 # 0020. A block declares its knobs once, and the schema is derived from that
 
+Status: superseded in part 2026-09-30; Storybook stories are hand-written again, while the Sanity fields and the canvas toolbar still derive from the declaration.
+
 - **Status:** Accepted
 - **Date:** 2026-08-14
 - **Deciders:** NickO3 + Claude
