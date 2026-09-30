@@ -12,6 +12,7 @@
     "load": "tsx src/load.ts",
     "sync-docs": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/sync-docs.ts --with-user-token --",
     "stats-to-band": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/statsToBand.ts --with-user-token --",
+    "retire-unrendered-fields": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/retireUnrenderedFields.ts --with-user-token --",
     "dev-mirrors-prod": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/devMirrorsProduction.ts --with-user-token --",
     "drift": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/drift.ts --with-user-token --",
     "verify": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/verify.ts --with-user-token --",

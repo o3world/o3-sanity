@@ -109,8 +109,8 @@ function refuseDuplicatePaths(where: string, knobs: readonly Knob[]): void {
 
 /**
  * The knobs one block declares. This is the object an adapter reads: the
- * Sanity schema, the Storybook stories and the canvas toolbar are all
- * generated from it, so none of them can disagree about what a block offers.
+ * Sanity schema and the canvas toolbar are both generated from it, so neither
+ * can disagree about what a block offers.
  *
  * `items` carries the arrays whose MEMBERS declare knobs of their own, keyed
  * by the block-relative field name. A member is its own knob root (#122), so

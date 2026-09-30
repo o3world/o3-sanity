@@ -192,9 +192,9 @@ const SECTION_FIELDS = /* groq */ `
 export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings"][0]{
   title,
   ${
-    /* The strip's two member kinds. A `brandLogo`'s `logo` stays unexpanded —
-      it is a knocked-out mark, so it takes no LQIP, for the reason
-      `PHOTO_FIELDS` states above. */ ''
+    /* Both member kinds; the footer draws the `brandLogo` ones. A `logo`
+      stays unexpanded — it is a knocked-out mark, so it takes no LQIP, for the
+      reason `PHOTO_FIELDS` states above. */ ''
   }
   utilityNavItems[]{
     ...,

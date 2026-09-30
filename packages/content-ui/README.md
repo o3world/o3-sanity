@@ -14,7 +14,7 @@ builders and the dispatch loop that call into these.
 | Subpath           | What it is                                                                                             |
 | ----------------- | ------------------------------------------------------------------------------------------------------ |
 | `.`               | every section and base renderer, the base bindings, and the renderer support layer                     |
-| `./chrome`        | `SiteNav`, `UtilityNav`, `SiteFooter`, `MobileNavMenu`, `NavInk` — authored entirely in Site Settings  |
+| `./chrome`        | `SiteNav`, `SiteFooter`, `MobileNavMenu`, `NavInk` — authored entirely in Site Settings                |
 | `./cards`         | `getCard`, `CARD_PROJECTIONS` and the three cards; client-safe, because section blocks render one      |
 | `./portable-text` | `PortableTextBody` — a separate entry because it pulls `@portabletext/react`                           |
 | `./format-date`   | the two date formats an insight shows                                                                  |

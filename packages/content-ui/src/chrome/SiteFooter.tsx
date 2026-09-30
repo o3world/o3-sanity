@@ -5,7 +5,7 @@ import { SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { resolveButtonHref } from '../buttonDestination'
-import { UtilityNavLink } from './UtilityNav'
+import { SanityImage } from '../SanityImage'
 
 interface SiteFooterProps {
   settings: SITE_SETTINGS_QUERY_RESULT
@@ -22,6 +22,11 @@ interface SiteFooterProps {
   /** Render matching footer destinations with their authored property logos. */
   utilityNavItems?: NonNullable<SITE_SETTINGS_QUERY_RESULT>['utilityNavItems']
 }
+
+type PropertyLogo = Extract<
+  NonNullable<SiteFooterProps['utilityNavItems']>[number],
+  { _type: 'brandLogo' }
+>
 
 /**
  * Footer from the current Combined CTA + Footer (3720:62476), as instanced
@@ -217,9 +222,10 @@ function FooterLink({
   utilityNavItems?: SiteFooterProps['utilityNavItems']
 }) {
   const logo = utilityNavItems?.find(
-    (item) => item._type === 'brandLogo' && resolveButtonHref(item.button ?? {}) === href,
+    (item): item is PropertyLogo =>
+      item._type === 'brandLogo' && resolveButtonHref(item.button ?? {}) === href,
   )
-  if (logo) return <UtilityNavLink item={logo} />
+  if (logo) return <PropertyLogoLink logo={logo} />
 
   return (
     <Link
@@ -227,6 +233,31 @@ function FooterLink({
       className="text-nav duration-(--duration-hover) leading-[1.2] text-white transition-opacity ease-out hover:opacity-70"
     >
       {children}
+    </Link>
+  )
+}
+
+/**
+ * A footer destination drawn as its property's mark — the 1682 Conference and
+ * O3XO logos in "Everything else". The label is the alt text, so a screen
+ * reader still hears the property's name.
+ *
+ * The marks are 20px tall and nothing else is fixed about them: 1682 is drawn
+ * 55 × 20 and O3XO 76 × 20, each file's own proportion at that height. A mark
+ * has no text colour to hover to, so it fades to 70% over `--duration-hover`.
+ */
+function PropertyLogoLink({ logo }: { logo: PropertyLogo }) {
+  const label = logo.button?.label ?? ''
+  return (
+    <Link
+      href={resolveButtonHref(logo.button ?? {})}
+      className="duration-(--duration-hover) focus-visible:ring-brand block transition-opacity ease-out hover:opacity-70 focus-visible:outline-none focus-visible:ring-2"
+    >
+      {/*
+       * `width` is the CDN request, not the layout: 304 is the 76px the
+       * widest mark occupies at 4×, which is what a retina display asks for.
+       */}
+      <SanityImage source={logo.logo} alt={label} width={304} sizes="76px" className="h-5 w-auto" />
     </Link>
   )
 }

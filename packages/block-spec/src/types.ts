@@ -88,8 +88,8 @@ export type KnobOptionInput = string | (Omit<KnobOption, 'title'> & { title?: st
  * A gate that reads exactly one path, relative to the block root.
  *
  * `at` is a path, never a closure. A closure can only be evaluated by the
- * Studio form; a declaration is read by the form, the toolbar and Storybook
- * alike, which is the whole reason visibility is data here (ADR 0020). The
+ * Studio form; a declaration is read by the form and the toolbar alike,
+ * which is the whole reason visibility is data here (ADR 0020). The
  * prior art tried to recover intent from a predicate's serialised source and
  * the gate silently inverted — vitest and tsx stringify differently.
  */
@@ -343,8 +343,8 @@ export type KnobRoot = BlockKnobs | ItemKnobs | ObjectKnobs
 
 /**
  * Reads a path **relative to the knob root** out of whatever the consumer
- * has: a document snapshot in the preview, a fixture in Storybook, the form's
- * `parent` in the Studio. The root is the block for a `BlockKnobs`, the hovered
+ * has: a document snapshot in the preview, the form's `parent` in the
+ * Studio. The root is the block for a `BlockKnobs`, the hovered
  * member for an `ItemKnobs`, and the hovered instance for an `ObjectKnobs`.
  *
  * A reader rather than a value object, because a compound gate reads more than
