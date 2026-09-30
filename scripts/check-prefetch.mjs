@@ -20,9 +20,16 @@ try {
     )
       statuses.set(url.pathname, response.status())
   })
-  await page.goto(origin)
+  await page.goto(origin, { waitUntil: 'domcontentloaded' })
   const deadline = Date.now() + 20_000
-  while (statuses.size < paths.length && Date.now() < deadline) await page.waitForTimeout(100)
+  for (const path of paths) {
+    await page
+      .getByRole('navigation', { name: 'Primary', exact: true })
+      .locator(`a[href="${path}"]:visible`)
+      .first()
+      .hover()
+    while (!statuses.has(path) && Date.now() < deadline) await page.waitForTimeout(100)
+  }
   assert.deepEqual(
     Object.fromEntries(statuses),
     Object.fromEntries(paths.map((path) => [path, 200])),
