@@ -6,7 +6,6 @@ import {
   canvasSubject,
   CanvasToolbar,
   CanvasToolbarView,
-  KnobControl,
   KnobMenu,
   knobMenuModel,
 } from '@o3/editor-chrome/canvas'
@@ -39,14 +38,16 @@ import { canvasComponents } from './PresentationOverlay'
 vi.mock('next-sanity/visual-editing', () => ({ VisualEditing: () => null }))
 
 /**
- * The canvas toolbar (#108), from this app's side of the seam.
+ * The canvas toolbar (#108), from this app's side of the seam: the resolver
+ * `PresentationOverlay` mounts, every element #107 attributes on a real page,
+ * and the bar and knob menu drawn from this site's own declarations. The
+ * surfaces' markup from synthetic props is asserted in the package, in
+ * `packages/editor-chrome/src/canvas/CanvasToolbarView.render.test.tsx`.
  *
- * Two things are worth asserting here and nowhere else. The **view** renders
- * through `react-dom/server`, which is the only way this repo's render layer
- * can mount a client component — no DOM, no effects, no Presentation context —
- * so what it proves is what the markup says, not how it behaves under a
- * pointer. And the **wiring**: every element #107 attributes on a real page,
- * fed to the real resolver, has to come back with the enclosing band.
+ * The views render through `react-dom/server`, which is the only way this
+ * repo's render layer can mount a client component — no DOM, no effects, no
+ * Presentation context — so what they prove is what the markup says, not how
+ * it behaves under a pointer.
  *
  * What this cannot prove, and no test in this repo can: that the bar appears
  * where it should in a live Presentation session. Docking reads
@@ -157,10 +158,11 @@ describe('what the hero offers on the bar', () => {
   })
 
   it('renders one control per bar knob, on the bar, beside the component name', () => {
+    const knobs = heroKnobs({ variant: 'band' })
     const html = renderToStaticMarkup(
-      <CanvasToolbarView componentName="Hero section" knobs={heroKnobs({ variant: 'band' })} />,
+      <CanvasToolbarView componentName="Hero section" knobs={knobs} />,
     )
-    expect(html.match(/data-testid="canvas-knob"/g)).toHaveLength(2)
+    expect(html.match(/data-testid="canvas-knob"/g)).toHaveLength(knobs.length)
     expect(html).toContain('Hero section')
     expect(html).toContain('Composition')
     expect(html).toContain('Band')
@@ -174,113 +176,6 @@ describe('what the hero offers on the bar', () => {
     )
     expect(html).toContain('Orbital')
     expect(html).toContain('(inherited)')
-  })
-
-  it('renders no bar knobs for a block with no declaration yet', () => {
-    // ADR 0020 is a migration: a block absent from the registry declares its
-    // design options as plain fields, and the bar is silent about them rather
-    // than claiming the block has none.
-    const html = renderToStaticMarkup(<CanvasToolbarView componentName="Media section" />)
-    expect(html).toContain('Media section')
-    expect(html).not.toContain('data-testid="canvas-knob"')
-  })
-})
-
-describe('what one knob’s menu says', () => {
-  const variant = () =>
-    barKnobs({
-      spec: heroSectionKnobs,
-      read: blockKnobReader(
-        { sections: [{ _key: 'h', _type: 'heroSection', variant: 'band' }] },
-        'sections[_key=="h"]',
-      ),
-      nested: false,
-    }).find((resolved) => resolved.knob.name === 'variant')!
-
-  const menu = (open: boolean) =>
-    renderToStaticMarkup(
-      <KnobControl knob={variant()} open={open} onToggle={() => {}} onPick={() => {}} />,
-    )
-
-  it('offers every declared option, and only those', () => {
-    const html = menu(true)
-    expect(html).toContain('Orbital')
-    expect(html).toContain('Band')
-    expect(html.match(/role="menuitemradio"/g)).toHaveLength(2)
-  })
-
-  it('checks the option the trigger names — one resolution, every surface', () => {
-    // The trigger label and the check mark both read `resolveKnobValue`, which
-    // is what stops them from disagreeing about what is set.
-    const html = menu(true)
-    expect(html).toContain('aria-checked="true"')
-    expect(html.match(/aria-checked="true"/g)).toHaveLength(1)
-    expect(html).toContain('✓')
-  })
-
-  it('tags the declared default, so an editor can tell it from a choice', () => {
-    expect(menu(true)).toContain('default')
-  })
-
-  it('stays closed until it is opened', () => {
-    expect(menu(false)).not.toContain('role="menu"')
-  })
-
-  it('opens with padding and to the right, where the bar is docked', () => {
-    // A margin below the trigger is dead ground the pointer cannot cross, and
-    // a left-aligned menu on a bar docked at the band's right corner opens
-    // past the edge of the preview — both drop the overlay hover mid-reach.
-    const html = menu(true)
-    expect(html).toContain('pt-1')
-    expect(html).not.toContain('mt-1')
-    expect(html).toContain('right-0')
-  })
-})
-
-describe('what the two surfaces say', () => {
-  const view = (props: Parameters<typeof CanvasToolbarView>[0]) =>
-    renderToStaticMarkup(<CanvasToolbarView {...props} />)
-
-  it('names the component on the bar and the item on the chip', () => {
-    const html = view({ componentName: 'Rail panels section', subjectName: 'Panel' })
-    expect(html).toContain('Rail panels section')
-    expect(html).toContain('Panel')
-  })
-
-  it('renders no bar until something can name the component', () => {
-    // A bar naming nothing is worse than no bar. The chip still gives the
-    // editor an anchor while the draft snapshot settles.
-    const html = view({ subjectName: 'Panel' })
-    expect(html).not.toContain('canvas-toolbar')
-    expect(html).toContain('canvas-identity')
-  })
-
-  it('renders nothing at all when nothing is known', () => {
-    expect(view({})).toBe('')
-  })
-
-  it('spaces the bar with padding, never a margin', () => {
-    // The overlay drops the hover the moment the pointer crosses ground that
-    // is not chrome, so a margin below the bar is a strip the pointer cannot
-    // survive on its way down to the band.
-    const html = view({ componentName: 'Hero section' })
-    expect(html).toContain('pb-1')
-    expect(html).not.toContain('mb-1')
-  })
-
-  it('leaves the chip inert so it cannot swallow a click on what it names', () => {
-    const html = view({ componentName: 'Hero section', subjectName: 'Heading' })
-    expect(html).toContain('pointer-events-none')
-    // The bar is the half that takes the pointer — #109 puts knobs on it.
-    expect(html).toContain('pointer-events-auto')
-  })
-
-  it('pins the chip at the hovered element’s own corner by default', () => {
-    // Its class position IS the overlay wrapper's corner, which is the right
-    // answer whenever the item it wants is not attributed in this subtree.
-    const html = view({ subjectName: 'Heading' })
-    expect(html).toContain('right-0')
-    expect(html).toContain('top-0')
   })
 })
 
@@ -433,34 +328,6 @@ describe('what the knob menu can do to the subject', () => {
     // Six rows plus the jump, and not one `menuitemradio` among them.
     expect(html.match(/data-testid="canvas-menu-item-action"/g)).toHaveLength(6)
     expect(rolesIn(html, 'menuitem')).toHaveLength(7)
-  })
-})
-
-describe('at most one menu open, and none until asked', () => {
-  it('renders no knob menu until a right-click opens one', () => {
-    // The view is mounted through `react-dom/server`, which runs no effects —
-    // so this is the closed state by construction, which is also the state
-    // every first render is in.
-    const html = renderToStaticMarkup(
-      <CanvasToolbarView
-        componentName="Hero section"
-        menu={knobMenuModel({
-          spec: heroSectionKnobs,
-          read: () => undefined,
-          nested: false,
-          subject: { kind: 'block', title: 'Hero section' },
-          componentName: 'Hero section',
-        })}
-      />,
-    )
-    expect(html).not.toContain('data-testid="canvas-menu"')
-  })
-
-  it('marks the bar as chrome too, so a click on a trigger cannot dismiss its own menu', () => {
-    // The exemption sits on the BAR rather than on each trigger: one mark
-    // covers every opener and every dropdown it holds.
-    const html = renderToStaticMarkup(<CanvasToolbarView componentName="Hero section" />)
-    expect(html).toContain('data-canvas-chrome')
   })
 })
 
