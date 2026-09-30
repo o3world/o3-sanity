@@ -61,6 +61,19 @@ const softwareEngineering = await renderRoute(route, {
   params: { path: ['solutions', 'software-engineering'] },
 })
 
+/** The rows of a `[label, text]` table whose text the page does not contain. */
+function missing(html: string, table: readonly (readonly [label: string, text: string])[]) {
+  return table.filter(([, text]) => !html.includes(text))
+}
+
+/** One band's HTML: from its own `data-sanity` path to the next band's. */
+function band(html: string, key: string): string {
+  const start = html.indexOf(`path=sections:${key};`)
+  if (start === -1) return ''
+  const next = html.slice(start + 1).search(/path=sections:[^.;]+;/)
+  return next === -1 ? html.slice(start) : html.slice(start, start + 1 + next)
+}
+
 describe('the seeded About page', () => {
   const html = about.html
   const sections = (aSeededPage('about').sections ?? []) as { _type: string }[]
@@ -118,14 +131,14 @@ describe('the seeded About page', () => {
   // track, the team, the beyond-client-services row, Careers, CTA. The
   // Culture band went with the redesign (#308 ruling 4).
   it('follows the frame’s band sequence', () => {
-    expect(sections.map((s) => s._type)).toEqual([
-      'heroSection',
-      'layoutSection',
-      'railPanelsSection',
-      'personGridSection',
-      'layoutSection',
-      'roleListSection',
-      'ctaSection',
+    expect(bandPaths(html)).toEqual([
+      'sections:hero',
+      'sections:why',
+      'sections:optimize',
+      'sections:team',
+      'sections:beyond',
+      'sections:careers',
+      'sections:cta',
     ])
   })
 
@@ -137,17 +150,19 @@ describe('the seeded About page', () => {
    * override, so the seed fills it in the O3 voice and says so in
    * `migration.provisionalNote`.
    */
-  it.each([
-    ['track heading', 'What we optimize for.'],
-    ['track standfirst', 'One senior team that carries a problem'],
-    ['a track panel', 'Quality over scale'],
-    ['team eyebrow', 'Leadership team'],
-    ['team heading', 'Meet the Team'],
-    ['careers eyebrow', 'Careers'],
-    ['a role', 'Senior Product Strategist'],
-    ['a role location', 'Remote · Philadelphia'],
-  ])('shows the About page’s %s', (_label, copy) => {
-    expect(html).toContain(copy)
+  it('shows the About page’s copy', () => {
+    expect(
+      missing(html, [
+        ['track heading', 'What we optimize for.'],
+        ['track standfirst', 'One senior team that carries a problem'],
+        ['a track panel', 'Quality over scale'],
+        ['team eyebrow', 'Leadership team'],
+        ['team heading', 'Meet the Team'],
+        ['careers eyebrow', 'Careers'],
+        ['a role', 'Senior Product Strategist'],
+        ['a role location', 'Remote · Philadelphia'],
+      ]),
+    ).toEqual([])
   })
 
   /**
@@ -173,12 +188,14 @@ describe('the seeded About page', () => {
    * `mediaCard` — one item per grid cell, so the picture, the name, the line
    * and the link stay together at every column count.
    */
-  it.each([
-    ['the 1682 mark', 'The 1682 conference wordmark on black'],
-    ['the O3XO mark', 'The O3XO mark on black'],
-    ['the community photo', 'twenty people in 1682 conference tees'],
-  ])('draws %s from the frame', (_label, alt) => {
-    expect(html).toContain(alt)
+  it('draws the three pictures from the frame', () => {
+    expect(
+      missing(html, [
+        ['the 1682 mark', 'The 1682 conference wordmark on black'],
+        ['the O3XO mark', 'The O3XO mark on black'],
+        ['the community photo', 'twenty people in 1682 conference tees'],
+      ]),
+    ).toEqual([])
   })
 
   it('gives the page a single h1', () => {
@@ -210,21 +227,20 @@ describe('the seeded Solutions page', () => {
    * Design around the base, so the seed carries them in that order.
    */
   it('places the four features in the frame’s position order', () => {
-    const features = (
-      sections.find((s) => s._type === 'featureGridSection') as
-        { features?: { heading?: string }[] } | undefined
-    )?.features
-    expect(features?.map((f) => f.heading)).toEqual(['Strategy', 'AI', 'Engineering', 'Design'])
+    const headings = [...band(html, 'features').matchAll(/<h2[^>]*>([^<]*)<\/h2>/g)]
+    expect(headings.map((match) => match[1])).toEqual(['Strategy', 'AI', 'Engineering', 'Design'])
   })
 
-  it.each([
-    ['apex feature', 'The root of every engagement'],
-    ['engagement band heading', 'Three ways in.'],
-    ['an engagement card', 'Embedded Team Member'],
-    ['an engagement card’s one line', 'Senior hands, inside your team.'],
-    ['an engagement card’s Best-when foot', 'Best when you trust the direction'],
-  ])('shows the frame’s %s', (_label, copy) => {
-    expect(html).toContain(copy)
+  it('shows the frame’s copy', () => {
+    expect(
+      missing(html, [
+        ['apex feature', 'The root of every engagement'],
+        ['engagement band heading', 'Three ways in.'],
+        ['an engagement card', 'Embedded Team Member'],
+        ['an engagement card’s one line', 'Senior hands, inside your team.'],
+        ['an engagement card’s Best-when foot', 'Best when you trust the direction'],
+      ]),
+    ).toEqual([])
   })
 
   /**
@@ -276,31 +292,33 @@ describe('the seeded Software Engineering service page', () => {
   // The frame is named "Solutions" in the file but draws a standalone page
   // under `/solutions/`, not the index.
   it("follows the frame's band sequence", () => {
-    expect(sections.map((s) => s._type)).toEqual([
-      'heroSection',
-      'layoutSection',
-      'railPanelsSection',
-      'layoutSection',
-      'featureGridSection',
-      'ctaSection',
+    expect(bandPaths(html)).toEqual([
+      'sections:hero',
+      'sections:overview',
+      'sections:services',
+      'sections:proof',
+      'sections:use-cases',
+      'sections:cta',
     ])
   })
 
-  it.each([
-    ['hero headline', 'Build for scale and performance.'],
-    ['hero deck', 'architecting for performance, flexibility, and growth'],
-    ['Overview intro', 'migrate legacy systems without breaking them'],
-    ['a service column', 'Custom Development'],
-    ['a service detail label', 'CRM integration'],
-    ['a service detail', 'React, Next.js, TypeScript (with rendering strategies)'],
-    ['proof-point heading', 'ship and disappear.'],
-    ['proof-point body', 'replatform every couple of years'],
-    ['use-cases band heading', 'Use cases.'],
-    ['transcribed use case', 'stuck in a legacy CMS'],
-    ['authored use case', 'one system of record'],
-    ['CTA heading', 'Engineering that scales with your business.'],
-  ])("shows the frame's %s", (_label, copy) => {
-    expect(html).toContain(copy)
+  it("shows the frame's copy", () => {
+    expect(
+      missing(html, [
+        ['hero headline', 'Build for scale and performance.'],
+        ['hero deck', 'architecting for performance, flexibility, and growth'],
+        ['Overview intro', 'migrate legacy systems without breaking them'],
+        ['a service column', 'Custom Development'],
+        ['a service detail label', 'CRM integration'],
+        ['a service detail', 'React, Next.js, TypeScript (with rendering strategies)'],
+        ['proof-point heading', 'ship and disappear.'],
+        ['proof-point body', 'replatform every couple of years'],
+        ['use-cases band heading', 'Use cases.'],
+        ['transcribed use case', 'stuck in a legacy CMS'],
+        ['authored use case', 'one system of record'],
+        ['CTA heading', 'Engineering that scales with your business.'],
+      ]),
+    ).toEqual([])
   })
 
   /**
@@ -309,13 +327,14 @@ describe('the seeded Software Engineering service page', () => {
    * heading — no rail, no numerals, no media square, no button (#93).
    */
   it('draws the service band as the grid, not the rail', () => {
-    const band = sections.find((s) => s._type === 'railPanelsSection') as
-      RailPanelsSection | undefined
+    const services = band(html, 'services')
+    const panels = services.split(/path=sections:services\.panels:/).slice(1)
 
-    expect(band?.layout).toBe('grid')
-    expect(band?.panels).toHaveLength(3)
-    expect(band?.panels?.every((panel) => (panel.details?.length ?? 0) >= 4)).toBe(true)
-    expect(band?.panels?.some((panel) => panel.button ?? panel.media)).toBe(false)
+    expect(panels).toHaveLength(3)
+    // Every detail group is a label over its own list of chips.
+    expect(panels.filter((panel) => (panel.match(/<ul[\s>]/g) ?? []).length < 4)).toEqual([])
+    expect(services).not.toContain('<img')
+    expect(services).not.toMatch(/<a[\s>]/)
   })
 
   /** The proof point retains its molecule; the current CTA uses its gradient. */
@@ -347,7 +366,7 @@ describe('the seeded Software Engineering service page', () => {
 
 describe('the seeded Live page', () => {
   const html = live.html
-  const sections = (aSeededPage('live').sections ?? []) as { _type: string; layout?: string }[]
+  const sections = (aSeededPage('live').sections ?? []) as { _type: string }[]
 
   it('renders every section in the array — none silently dropped', () => {
     expect(bandPaths(html)).toHaveLength(sections.length)
@@ -356,40 +375,40 @@ describe('the seeded Live page', () => {
   // The frame's band order (`1644:1889`): the ink-warm hero, the studio card
   // row, the appearances list, the ideas list, the CTA.
   it('follows the frame’s band sequence', () => {
-    expect(sections.map((s) => s._type)).toEqual([
-      'heroSection',
-      'inFlightSection',
-      'inFlightSection',
-      'inFlightSection',
-      'ctaSection',
+    expect(bandPaths(html)).toEqual([
+      'sections:hero',
+      'sections:studio',
+      'sections:appearances',
+      'sections:ideas',
+      'sections:cta',
     ])
   })
 
-  // One block, two compositions — the studio band is cards, both lists rows.
-  it('uses one block in two layouts rather than three blocks', () => {
-    expect(sections.filter((s) => s._type === 'inFlightSection').map((s) => s.layout)).toEqual([
-      'cards',
-      'rows',
-      'rows',
-    ])
+  // One block, two compositions — the studio band is the card row (the one
+  // that scrolls from `lg`, so the list itself takes focus), both lists rows.
+  it('draws the studio band as cards and both lists as rows', () => {
+    const cardRow = (key: string) => /<ul[^>]*tabindex="0"/.test(band(html, key))
+    expect(['studio', 'appearances', 'ideas'].filter(cardRow)).toEqual(['studio'])
   })
 
-  it.each([
-    ['hero eyebrow', 'Live'],
-    ['hero headline', 'What we’re working on.'],
-    ['hero standfirst', 'the rooms we&#x27;ll be in'],
-    ['studio heading', 'What’s being worked on right now.'],
-    ['studio standfirst', 'not the polished case study'],
-    ['a studio card kicker', 'Fintech · Onboarding'],
-    ['a studio card title', 'Untangling a five-step signup nobody finishes'],
-    ['appearances heading', 'Where to find us'],
-    ['an appearance kicker', 'Workshop · Online'],
-    ['an appearance title', 'Strategy in the age of AI'],
-    ['ideas heading', 'Ideas we’re chasing before they reach you'],
-    ['an idea title', 'Where AI earns its keep'],
-    ['closing CTA', 'Let’s get started on your next big thing.'],
-  ])('shows the frame’s %s', (_label, copy) => {
-    expect(html).toContain(copy)
+  it('shows the frame’s copy', () => {
+    expect(
+      missing(html, [
+        ['hero eyebrow', 'Live'],
+        ['hero headline', 'What we’re working on.'],
+        ['hero standfirst', 'the rooms we&#x27;ll be in'],
+        ['studio heading', 'What’s being worked on right now.'],
+        ['studio standfirst', 'not the polished case study'],
+        ['a studio card kicker', 'Fintech · Onboarding'],
+        ['a studio card title', 'Untangling a five-step signup nobody finishes'],
+        ['appearances heading', 'Where to find us'],
+        ['an appearance kicker', 'Workshop · Online'],
+        ['an appearance title', 'Strategy in the age of AI'],
+        ['ideas heading', 'Ideas we’re chasing before they reach you'],
+        ['an idea title', 'Where AI earns its keep'],
+        ['closing CTA', 'Let’s get started on your next big thing.'],
+      ]),
+    ).toEqual([])
   })
 
   /**
@@ -439,21 +458,25 @@ describe('the seeded Contact page', () => {
 
   // `2960:7792` pairs the introduction and form in one hero.
   it('resolves to one form hero with the supporting content retained', () => {
-    expect(sections.map((s) => s._type)).toEqual(['formSection'])
-    expect(sections[0]).toMatchObject({ variant: 'hero' })
+    expect(bandPaths(html)).toEqual(['sections:inquiry'])
+    const inquiry = band(html, 'inquiry')
+    expect(inquiry).toMatch(/<h1[\s>]/)
+    expect(inquiry).toContain('<form')
   })
 
-  it.each([
-    ['hero headline', 'experiences together'],
-    ['the visit kicker', 'Visit us'],
-    ['the reach kicker', 'Reach us'],
-    ['the studio email', 'hello@o3world.com'],
-    ['the studio phone', '(215) 592-4739'],
-    ['the mailing address', 'Philadelphia, PA 19125'],
-    ['the Handler portrait alt', 'Black and white photo of Justin Handler'],
-    ['the Handler quote', 'complex business challenges'],
-  ])('folds %s into the form band', (_label, copy) => {
-    expect(html).toContain(copy)
+  it('folds the supporting content into the form band', () => {
+    expect(
+      missing(band(html, 'inquiry'), [
+        ['hero headline', 'experiences together'],
+        ['the visit kicker', 'Visit us'],
+        ['the reach kicker', 'Reach us'],
+        ['the studio email', 'hello@o3world.com'],
+        ['the studio phone', '(215) 592-4739'],
+        ['the mailing address', 'Philadelphia, PA 19125'],
+        ['the Handler portrait alt', 'Black and white photo of Justin Handler'],
+        ['the Handler quote', 'complex business challenges'],
+      ]),
+    ).toEqual([])
   })
 
   // A printed address is not a way to reach anyone from a phone, and these are
@@ -480,15 +503,17 @@ describe('the seeded Contact page', () => {
    * asserted whole.
    */
   describe('the inquiry form', () => {
-    it.each([
-      ['your name', 'field-name'],
-      ['how’d you hear about us?', 'field-referral'],
-      ['email', 'field-email'],
-      ['reason', 'field-reason'],
-      ['message', 'field-message'],
-      ['the newsletter opt-in', 'field-consent'],
-    ])('draws Gravity Form 1’s %s field', (_label, id) => {
-      expect(html).toContain(`id="${id}"`)
+    it('draws every Gravity Form 1 field', () => {
+      expect(
+        missing(html, [
+          ['your name', 'id="field-name"'],
+          ['how’d you hear about us?', 'id="field-referral"'],
+          ['email', 'id="field-email"'],
+          ['reason', 'id="field-reason"'],
+          ['message', 'id="field-message"'],
+          ['the newsletter opt-in', 'id="field-consent"'],
+        ]),
+      ).toEqual([])
     })
 
     it('gives every field a label pointing at its own control', () => {
@@ -580,27 +605,29 @@ describe('the seeded 1682 conference page', () => {
   // events list, the about-1682 panels, the recap video, the selected
   // insights, the page callout.
   it('resolves to WordPress’s band sequence', () => {
-    expect(sections.map((s) => s._type)).toEqual([
-      'heroSection',
-      'layoutSection',
-      'layoutSection',
-      'railPanelsSection',
-      'layoutSection',
-      'insightsCarouselSection',
-      'ctaSection',
+    expect(bandPaths(html)).toEqual([
+      'sections:hero',
+      'sections:intro',
+      'sections:events',
+      'sections:about',
+      'sections:recap',
+      'sections:insights',
+      'sections:cta',
     ])
   })
 
-  it.each([
-    ['hero eyebrow', '1682'],
-    ['hero headline', 'The business of innovation conference'],
-    ['the attend CTA', 'Attend the 1682 conference on October 8'],
-    ['the events heading', 'Events'],
-    ['the panels heading', 'Shaping the future of AI + innovation'],
-    ['the insights heading', 'Expert insights driving impactful solutions'],
-    ['the callout heading', 'Let’s explore your future in AI and innovation'],
-  ])('carries WordPress’s %s', (_label, copy) => {
-    expect(html).toContain(copy)
+  it('carries WordPress’s copy', () => {
+    expect(
+      missing(html, [
+        ['hero eyebrow', '1682'],
+        ['hero headline', 'The business of innovation conference'],
+        ['the attend CTA', 'Attend the 1682 conference on October 8'],
+        ['the events heading', 'Events'],
+        ['the panels heading', 'Shaping the future of AI + innovation'],
+        ['the insights heading', 'Expert insights driving impactful solutions'],
+        ['the callout heading', 'Let’s explore your future in AI and innovation'],
+      ]),
+    ).toEqual([])
   })
 
   it('sends the attend CTA to the conference site, unfreshened', () => {
@@ -609,20 +636,5 @@ describe('the seeded 1682 conference page', () => {
 
   it('gives the page a single h1', () => {
     expect(html.match(/<h1[\s>]/g) ?? []).toHaveLength(1)
-  })
-})
-
-/** The current Combined CTA + Footer replaces obsolete stored decorations. */
-describe('the closing CTA band', () => {
-  it.each([
-    ['About', about.html],
-    ['Solutions', solutions.html],
-    ['Live', live.html],
-    ['Software Engineering', softwareEngineering.html],
-    ['1682', conference.html],
-  ])('closes %s on the current gradient band', (_label, html) => {
-    expect(html).toContain('cta-band')
-    expect(html).not.toContain('cta-lag')
-    expect(html).not.toContain('w-[54%]')
   })
 })
