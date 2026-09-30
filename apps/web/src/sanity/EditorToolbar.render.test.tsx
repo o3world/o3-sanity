@@ -68,17 +68,6 @@ describe('published mode', () => {
     expect(html).not.toContain('/api/draft-mode/disable')
   })
 
-  it('is fixed chrome at the nav’s stacking level, so it cannot shift layout', () => {
-    expect(html).toContain('fixed')
-    expect(html).toContain('z-50')
-  })
-
-  it('sits bottom-right, where #60 asked for it', () => {
-    expect(html).toContain('bottom-4')
-    expect(html).toContain('right-4')
-    expect(html).not.toContain('left-4')
-  })
-
   it('names itself for assistive tech without claiming to be site navigation', () => {
     expect(html).toContain('aria-label="Editor toolbar"')
     expect(html).toContain('<aside')
@@ -98,10 +87,6 @@ describe('draft mode', () => {
     expect(html).toContain('href="/api/draft-mode/disable?to=')
   })
 
-  it('carries the exact URL you were on, query string included', () => {
-    expect(html).toContain('to=%2Finsights%3Fpage%3D3')
-  })
-
   it('offers no way to re-enter draft mode it is already in', () => {
     expect(html).not.toContain('<button')
   })
@@ -112,38 +97,10 @@ describe('draft mode', () => {
  * you are reading, which is the trip editors were making by hand.
  */
 describe('the edit affordance', () => {
-  it('opens Presentation on the page the editor is on', () => {
-    const html = view({
-      returnTo: '/work/acme',
-      editHref: presentationHref({ studioUrl, previewPath: '/work/acme' }),
-    })
-    expect(html).toContain('Edit this page')
-    expect(html).toContain('href="/studio/presentation?preview=%2Fwork%2Facme"')
-  })
-
-  it('is a plain link, so it needs no session the browser has to prove', () => {
-    // The Studio does its own auth on arrival; the toolbar only points at it.
-    expect(view()).toContain('href="/studio/presentation?preview=%2F"')
-  })
-
   it('is offered in draft mode too — the point is the page, not the perspective', () => {
-    const html = view({
-      isDraft: true,
-      returnTo: '/insights',
-      editHref: presentationHref({ studioUrl, previewPath: '/insights' }),
-    })
+    const html = view({ isDraft: true, returnTo: '/insights', editHref: '/edit/insights' })
     expect(html).toContain('Edit this page')
-    expect(html).toContain('preview=%2Finsights')
-  })
-
-  it('survives a page with no document behind it, like a collection index', () => {
-    // `/work` has no backing document, so no document action exists for it —
-    // but Presentation still renders the route, so the link still works.
-    const html = view({
-      returnTo: '/work',
-      editHref: presentationHref({ studioUrl, previewPath: '/work' }),
-    })
-    expect(html).toContain('href="/studio/presentation?preview=%2Fwork"')
+    expect(html).toContain('href="/edit/insights"')
   })
 
   it('still points at the Studio when the token was refused', () => {

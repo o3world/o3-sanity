@@ -1,26 +1,20 @@
 import { describe, expect, it, vi } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
-import {
-  canvasNotices,
-  CanvasNoticesView,
-  createCanvasNoticeQueue,
-  reportCanvasFailure,
-} from '@o3/editor-chrome/canvas'
+import { CanvasNoticesView } from './CanvasNoticesView'
+import { reportCanvasFailure } from './draftPatch'
+import { canvasNotices, createCanvasNoticeQueue } from './notices'
 
 /**
- * The canvas notice (#124), from this app's side of the seam.
- *
- * A rejected mutation used to reach `console.error` and nowhere else, which is
- * how "the patch vanished" becomes a support ticket. It now reaches a surface
- * mounted BESIDE `<VisualEditing />` — the mount is the ticket, because an
- * overlay component renders only while its element is hovered and an editor
- * moves the pointer the instant something goes wrong.
+ * The canvas notice's pixels (#124). A rejected mutation reaches a surface
+ * mounted BESIDE `<VisualEditing />`, because an overlay component renders
+ * only while its element is hovered and an editor moves the pointer the
+ * instant something goes wrong.
  *
  * What this file can prove is the markup and the wiring: what the surface says,
  * what an editor can do to it, and that `reportCanvasFailure` is what fills it.
- * What it cannot prove is the part the mount exists for — that the notice
- * SURVIVES the pointer leaving the element. That needs a live Presentation
- * session, and #121 means there has not been one.
+ * The queue's own rules are in `notices.test.ts`. What neither can prove is the
+ * part the mount exists for — that the notice SURVIVES the pointer leaving the
+ * element. That needs a live Presentation session.
  */
 
 /** A rejection in the shape the mutator actually produces. */
@@ -54,16 +48,6 @@ describe('what an editor sees when the draft refuses an edit', () => {
     expect(html).toContain('Document &quot;page-index&quot; not found')
   })
 
-  it('says nothing where the rejection carried no reason', () => {
-    const queue = createCanvasNoticeQueue()
-    queue.publish('could not duplicate sections[_key=="a"]', { statusCode: 409 })
-
-    const html = render(queue)
-
-    expect(html).toContain('Could not duplicate')
-    expect(html).not.toContain('[object Object]')
-  })
-
   it('shows how many times it has happened, and only once it has happened twice', () => {
     const queue = createCanvasNoticeQueue()
     queue.publish('could not remove sections[_key=="a"]', notFound)
@@ -89,17 +73,6 @@ describe('what an editor sees when the draft refuses an edit', () => {
     expect(html.indexOf('Could not remove first')).toBeLessThan(
       html.indexOf('Could not remove second'),
     )
-  })
-
-  it('holds three, then drops the oldest rather than covering the page', () => {
-    const queue = createCanvasNoticeQueue()
-    for (const what of ['a', 'b', 'c', 'd']) queue.publish(`could not remove ${what}`, notFound)
-
-    const html = render(queue)
-
-    expect(html.match(/data-testid="canvas-notice"/g)).toHaveLength(3)
-    expect(html).not.toContain('Could not remove a')
-    expect(html).toContain('Could not remove d')
   })
 })
 

@@ -57,7 +57,7 @@ import { BUTTON_ICONS } from '@o3/ui'
  * the page; the toolbar feeds it through a queue in the same package. It
  * renders nothing until something fails.
  */
-const canvasComponents = createCanvasComponents({
+export const canvasComponents = createCanvasComponents({
   blockKnobs: BLOCK_KNOBS,
   objectKnobs: OBJECT_KNOBS,
   blockArrays: BLOCK_ARRAYS,
