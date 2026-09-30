@@ -8,12 +8,7 @@
  */
 import { describe, expect, it } from 'vitest'
 
-import {
-  readDeclaredPairings,
-  readDesignFiles,
-  readInventory,
-  storyFilesByHost,
-} from './figma-inventory'
+import { readDeclaredPairings, readInventory, storyFilesByHost } from './figma-inventory'
 
 describe('storyFilesByHost', () => {
   const hosts = storyFilesByHost()
@@ -38,10 +33,6 @@ describe('readDeclaredPairings', () => {
     ])
   })
 
-  it('names the O3 file key on every pairing', () => {
-    expect(pairings.filter((p) => p.fileKeyRef !== 'FIGMA_FILE_KEY')).toEqual([])
-  })
-
   it('gives every pairing a story id — nothing in the repo autotitles', () => {
     expect(pairings.filter((p) => p.storyId === null)).toEqual([])
   })
@@ -51,7 +42,6 @@ describe('readInventory', () => {
   const inventory = readInventory()
 
   it('joins the stories against the tracked-nodes manifest', () => {
-    expect(readDesignFiles().map((file) => file.brand)).toEqual(['o3'])
     expect(inventory.coverage.map((row) => row.brand)).toEqual(['o3'])
     expect(
       inventory.pairings.find(
@@ -62,9 +52,5 @@ describe('readInventory', () => {
 
   it('flags the page-frame pairings the page mockups declare', () => {
     expect(inventory.pageLevel.map((row) => row.storyId)).toContain('pages-home--desktop')
-  })
-
-  it('resolves every pairing to the design file', () => {
-    expect(inventory.pairings.every((row) => row.designBrand === 'o3')).toBe(true)
   })
 })

@@ -20,7 +20,6 @@ function pairing(overrides: Partial<PairingRow> & { nodeId: string }): PairingRo
     storyId: `story--${overrides.nodeId}`,
     title: 'Content/Blocks/Thing',
     exportName: 'Desktop',
-    fileKeyRef: 'FIGMA_FILE_KEY',
     file: 'packages/content-ui/src/Thing.stories.tsx',
     declaredOn: 'story',
     hosts: ['o3'],
@@ -113,17 +112,6 @@ describe('planExports', () => {
     expect(plan.fetch).toEqual([])
     expect(plan.unknown).toEqual([
       { brand: 'o3', nodeId: '9:9', reason: 'not-in-baseline', stories: ['lost--one'] },
-    ])
-  })
-
-  it('names a pairing whose design file nothing owns', () => {
-    const plan = planExports(
-      [pairing({ nodeId: '9:9', designBrand: null, match: 'untracked', storyId: 'typo--one' })],
-      [o3],
-      [],
-    )
-    expect(plan.unknown).toEqual([
-      { brand: null, nodeId: '9:9', reason: 'no-design-file', stories: ['typo--one'] },
     ])
   })
 

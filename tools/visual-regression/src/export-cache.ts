@@ -58,15 +58,13 @@ export interface ExportRequest {
 
 /** Why the baseline could not place a paired node. */
 export type UnknownReason =
-  /** The story named a `figmaDesign` file key nothing in the repo owns. */
-  | 'no-design-file'
   /** That brand has no baseline — `pnpm figma:sync` has never run for it. */
   | 'no-baseline'
   /** The baseline is there and does not track this node. */
   | 'not-in-baseline'
 
 export interface UnknownNode {
-  readonly brand: Brand | null
+  readonly brand: Brand
   readonly nodeId: string
   readonly reason: UnknownReason
   readonly stories: readonly string[]
@@ -127,7 +125,7 @@ export function planExports(
   // (brand, node) → the stories waiting on it, in the inventory's own order.
   const wanted = new Map<string, { row: PairingRow; stories: string[] }>()
   for (const row of pairings) {
-    const key = `${row.designBrand ?? '?'}/${row.nodeId}`
+    const key = `${row.designBrand}/${row.nodeId}`
     const entry = wanted.get(key)
     if (entry) entry.stories.push(storyLabel(row))
     else wanted.set(key, { row, stories: [storyLabel(row)] })
@@ -142,17 +140,8 @@ export function planExports(
 
   for (const [key, { row, stories }] of wanted) {
     const brand = row.designBrand
-    const baseline = brand ? byBrand.get(brand) : undefined
-    if (!brand || !baseline) {
-      unknown.push({
-        brand,
-        nodeId: row.nodeId,
-        reason: brand ? 'no-baseline' : 'no-design-file',
-        stories,
-      })
-      continue
-    }
-    if (!baseline.hashes) {
+    const baseline = byBrand.get(brand)
+    if (!baseline?.hashes) {
       unknown.push({ brand, nodeId: row.nodeId, reason: 'no-baseline', stories })
       continue
     }
@@ -194,8 +183,7 @@ export function planExports(
  */
 export function exportReasons(plan: ExportPlan, outcome: ExportOutcome): Map<string, string> {
   const reasons = new Map<string, string>()
-  for (const node of plan.unknown)
-    reasons.set(`${node.brand ?? '?'}/${node.nodeId}`, REASON[node.reason])
+  for (const node of plan.unknown) reasons.set(`${node.brand}/${node.nodeId}`, REASON[node.reason])
   for (const node of outcome.missing) {
     reasons.set(`${node.brand}/${node.nodeId}`, 'the Figma file would not draw it')
   }
@@ -221,7 +209,6 @@ function table(header: readonly string[], rows: readonly (readonly string[])[]):
 }
 
 const REASON: Record<UnknownReason, string> = {
-  'no-design-file': 'names no known design file',
   'no-baseline': 'brand has no figma:sync baseline',
   'not-in-baseline': 'not tracked by figma:sync',
 }
@@ -245,7 +232,7 @@ export function formatExportReport(plan: ExportPlan, outcome: ExportOutcome): st
           ['node', 'brand', 'why', 'stories'],
           plan.unknown.map((node) => [
             node.nodeId,
-            node.brand ?? '?',
+            node.brand,
             REASON[node.reason],
             node.stories.join(', '),
           ]),

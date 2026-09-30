@@ -277,8 +277,8 @@ export function planVerdicts(input: VerdictInput): VerdictPlan {
   const passed: VerdictRow[] = []
   const listed: VerdictRow[] = []
 
-  const unpairableReason = (brand: Brand | null, nodeId: string): string | null =>
-    brand ? (input.ledger.unpairable[frameKey(brand, nodeId)]?.reason ?? null) : null
+  const unpairableReason = (brand: Brand, nodeId: string): string | null =>
+    input.ledger.unpairable[frameKey(brand, nodeId)]?.reason ?? null
 
   for (const score of input.scores) {
     const base = {
@@ -359,7 +359,7 @@ export function planVerdicts(input: VerdictInput): VerdictPlan {
       listed.push({ ...base, kind: 'unpairable', key: null, detail: debris })
       continue
     }
-    if (row.brand && missing.has(frameKey(row.brand, row.nodeId))) {
+    if (missing.has(frameKey(row.brand, row.nodeId))) {
       red.push({
         ...base,
         kind: 'orphaned',
@@ -372,7 +372,7 @@ export function planVerdicts(input: VerdictInput): VerdictPlan {
 
     // Nothing was accepted at a hash this run's baseline disagrees with, so
     // nothing says the node changed: the pairing is uncovered, not broken.
-    const current = row.brand ? (hashes.get(row.brand)?.[row.nodeId] ?? null) : null
+    const current = hashes.get(row.brand)?.[row.nodeId] ?? null
     const accepted = acceptedHashes(input, row)
     if (current !== null && accepted.length > 0 && accepted.every((hash) => hash !== current)) {
       red.push({
@@ -411,9 +411,8 @@ export function planVerdicts(input: VerdictInput): VerdictPlan {
  */
 function acceptedHashes(
   input: VerdictInput,
-  row: { readonly storyId: string; readonly nodeId: string; readonly brand: Brand | null },
+  row: { readonly storyId: string; readonly nodeId: string; readonly brand: Brand },
 ): string[] {
-  if (!row.brand) return []
   const prefix = `${input.host}/${row.storyId}/${row.brand}/${row.nodeId}/`
   return Object.entries(input.ledger.pairs)
     .filter(([key, entry]) => key.startsWith(prefix) && entry.nodeHash !== null)

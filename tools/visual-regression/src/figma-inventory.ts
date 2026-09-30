@@ -23,7 +23,7 @@ import {
   type Inventory,
   type TrackedEntry,
 } from './pairing'
-import { BRANDS, type Brand } from './storybook'
+import { BRANDS, DEFAULT_BRAND, type Brand } from './storybook'
 
 /** This package is `tools/visual-regression`. */
 export const REPO_ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
@@ -35,11 +35,6 @@ export const REPO_ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)),
  */
 const HOST_STORY_ROOTS: Record<Brand, readonly string[]> = {
   o3: ['apps/web/src', 'apps/storybook/prototypes'],
-}
-
-/** The `@o3/story-kit` export that names the design file `figmaDesign` links to. */
-const FILE_KEY_REF: Record<Brand, string> = {
-  o3: 'FIGMA_FILE_KEY',
 }
 
 /** `tools/figma-sync/data/` — the manifest is that package's committed data. */
@@ -93,21 +88,15 @@ interface ManifestFile {
   readonly entries: readonly TrackedEntry[]
 }
 
-export function readDesignFiles(brands: readonly Brand[] = BRANDS): BrandDesignFile[] {
-  return brands.map((brand) => {
-    const manifest = JSON.parse(
-      fs.readFileSync(path.join(REPO_ROOT, MANIFEST[brand]), 'utf8'),
-    ) as ManifestFile
-    return {
-      brand,
-      fileKeyRef: FILE_KEY_REF[brand],
-      fileKey: manifest.fileKey,
-      entries: manifest.entries,
-    }
-  })
+/** The design file `figmaDesign` links to, as its brand's manifest records it. */
+function readDesignFile(brand: Brand = DEFAULT_BRAND): BrandDesignFile {
+  const manifest = JSON.parse(
+    fs.readFileSync(path.join(REPO_ROOT, MANIFEST[brand]), 'utf8'),
+  ) as ManifestFile
+  return { brand, fileKey: manifest.fileKey, entries: manifest.entries }
 }
 
 /** The whole run: every story's pairing joined against the manifest. */
 export function readInventory(): Inventory {
-  return buildInventory(readDeclaredPairings(), readDesignFiles())
+  return buildInventory(readDeclaredPairings(), readDesignFile())
 }

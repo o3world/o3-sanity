@@ -68,7 +68,7 @@ export interface ScoreTarget {
 export interface UnkeyedPairing {
   readonly storyId: string
   readonly nodeId: string
-  readonly brand: Brand | null
+  readonly brand: Brand
   readonly why: string
 }
 
@@ -82,7 +82,7 @@ export interface UnkeyedPairing {
 export interface UnscorablePairing {
   readonly storyId: string
   readonly nodeId: string
-  readonly brand: Brand | null
+  readonly brand: Brand
   readonly why: string
 }
 
@@ -145,7 +145,7 @@ function isMobileStory(storyId: string): boolean {
 }
 
 /** How the export map and the reason map are keyed. */
-export function frameKey(brand: Brand | string, nodeId: string): string {
+export function frameKey(brand: Brand, nodeId: string): string {
   return `${brand}/${nodeId}`
 }
 
@@ -196,8 +196,8 @@ export function planFrameScoring(input: {
         })
         continue
       }
-      const key = frameKey(row.designBrand ?? '?', row.nodeId)
-      const found = row.designBrand ? input.exports.get(key) : undefined
+      const key = frameKey(row.designBrand, row.nodeId)
+      const found = input.exports.get(key)
       if (!found) {
         unkeyed.push({
           storyId: story.id,
