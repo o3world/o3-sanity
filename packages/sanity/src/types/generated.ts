@@ -553,26 +553,6 @@ export type FeatureGridSection = {
     heading?: string
     body?: string
     mark?: Mark
-    icon?:
-      | 'none'
-      | 'arrow-circle-right'
-      | 'chart-line-up'
-      | 'crosshair'
-      | 'file-magnifying-glass'
-      | 'gear'
-      | 'handshake'
-      | 'hard-drives'
-      | 'lightbulb-filament'
-      | 'line-segments'
-      | 'link'
-      | 'map-trifold'
-      | 'path'
-      | 'share-network'
-      | 'sparkle'
-      | 'sun-horizon'
-      | 'swap'
-      | 'user-gear'
-      | 'users'
     _type: 'feature'
     _key: string
   }>
@@ -627,7 +607,6 @@ export type Category = {
 
 export type QuoteSection = {
   _type: 'quoteSection'
-  eyebrow?: string
   quote?: string
   attribution?: string
   decoration?: 'orbs' | 'molecule' | 'none'
@@ -2096,26 +2075,6 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           heading?: string
           body?: string
           mark?: Mark
-          icon?:
-            | 'arrow-circle-right'
-            | 'chart-line-up'
-            | 'crosshair'
-            | 'file-magnifying-glass'
-            | 'gear'
-            | 'handshake'
-            | 'hard-drives'
-            | 'lightbulb-filament'
-            | 'line-segments'
-            | 'link'
-            | 'map-trifold'
-            | 'none'
-            | 'path'
-            | 'share-network'
-            | 'sparkle'
-            | 'sun-horizon'
-            | 'swap'
-            | 'user-gear'
-            | 'users'
           _type: 'feature'
           _key: string
         }>
@@ -2958,7 +2917,6 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
     | {
         _key: string
         _type: 'quoteSection'
-        eyebrow?: string
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
@@ -3364,26 +3322,6 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           heading?: string
           body?: string
           mark?: Mark
-          icon?:
-            | 'arrow-circle-right'
-            | 'chart-line-up'
-            | 'crosshair'
-            | 'file-magnifying-glass'
-            | 'gear'
-            | 'handshake'
-            | 'hard-drives'
-            | 'lightbulb-filament'
-            | 'line-segments'
-            | 'link'
-            | 'map-trifold'
-            | 'none'
-            | 'path'
-            | 'share-network'
-            | 'sparkle'
-            | 'sun-horizon'
-            | 'swap'
-            | 'user-gear'
-            | 'users'
           _type: 'feature'
           _key: string
         }>
@@ -4226,7 +4164,6 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
     | {
         _key: string
         _type: 'quoteSection'
-        eyebrow?: string
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
@@ -4769,26 +4706,6 @@ export type CASE_STUDY_QUERY_RESULT = {
           heading?: string
           body?: string
           mark?: Mark
-          icon?:
-            | 'arrow-circle-right'
-            | 'chart-line-up'
-            | 'crosshair'
-            | 'file-magnifying-glass'
-            | 'gear'
-            | 'handshake'
-            | 'hard-drives'
-            | 'lightbulb-filament'
-            | 'line-segments'
-            | 'link'
-            | 'map-trifold'
-            | 'none'
-            | 'path'
-            | 'share-network'
-            | 'sparkle'
-            | 'sun-horizon'
-            | 'swap'
-            | 'user-gear'
-            | 'users'
           _type: 'feature'
           _key: string
         }>
@@ -5631,7 +5548,6 @@ export type CASE_STUDY_QUERY_RESULT = {
     | {
         _key: string
         _type: 'quoteSection'
-        eyebrow?: string
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
@@ -6098,26 +6014,6 @@ export type PAGE_QUERY_RESULT = {
           heading?: string
           body?: string
           mark?: Mark
-          icon?:
-            | 'arrow-circle-right'
-            | 'chart-line-up'
-            | 'crosshair'
-            | 'file-magnifying-glass'
-            | 'gear'
-            | 'handshake'
-            | 'hard-drives'
-            | 'lightbulb-filament'
-            | 'line-segments'
-            | 'link'
-            | 'map-trifold'
-            | 'none'
-            | 'path'
-            | 'share-network'
-            | 'sparkle'
-            | 'sun-horizon'
-            | 'swap'
-            | 'user-gear'
-            | 'users'
           _type: 'feature'
           _key: string
         }>
@@ -6960,7 +6856,6 @@ export type PAGE_QUERY_RESULT = {
     | {
         _key: string
         _type: 'quoteSection'
-        eyebrow?: string
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'

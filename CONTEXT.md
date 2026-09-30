@@ -176,7 +176,7 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `framing`         | Whether a wide screen is a complete image or a raw screenshot on a plate                                                 | Inferring composition from asset dimensions               |
 | `bleed`           | Which edge a band's content runs past, or `none` (`layoutSection`)                                                       | `fullWidth`, `overflow`, `edge`                           |
 | `mark`            | A decorative glyph or illustration beside an item (type `mark`)                                                          | `icon`, `disc`, `orb` — `orb` is one of its `kind`s       |
-| `icon`            | A glyph from a curated set — trailing a button, or beside a feature (`button`, `feature`)                                | `glyph`, `symbol`, `arrow`                                |
+| `icon`            | A glyph from a curated set, trailing a button (`button`)                                                                 | `glyph`, `symbol`, `arrow`                                |
 | `date`            | When a leaf object's thing happens (the Live MON / DD marker)                                                            | `publishedAt` — that's a document's publication time      |
 | `name`            | A person's or organization's real-world name                                                                             | Anything that isn't a proper noun                         |
 | `bio`             | The few lines a person's card says about them (`person`)                                                                 | `body`, `excerpt`, `about`, `description`                 |
