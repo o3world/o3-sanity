@@ -91,6 +91,10 @@ export const WithPortrait: Story = {
     await expect(image.naturalWidth).toBe(790)
     await expect(getComputedStyle(image.parentElement!).filter).toBe('none')
     await expect(getComputedStyle(image.parentElement!.parentElement!).borderRadius).toBe('16px')
+    // Figma "Big Shadow": offset 0/32, blur 64, #00000033.
+    await expect(getComputedStyle(image.parentElement!.parentElement!).boxShadow).toContain(
+      'rgba(0, 0, 0, 0.2) 0px 32px 64px 0px',
+    )
   },
 }
 
