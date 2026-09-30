@@ -26,7 +26,8 @@
  */
 export const FULL_BLEED = '100vw'
 
-const FLUID_COLUMN = '(min-width: 402px) calc(84.58574vw + 29.96532px), calc(100vw - 32px)'
+/** The viewport minus two gutters: the structural column before it caps. */
+export const FLUID_COLUMN = '(min-width: 402px) calc(84.58574vw + 29.96532px), calc(100vw - 32px)'
 
 /**
  * The content column: `max-w-section` inside the page gutter. `CaseStudyCard`

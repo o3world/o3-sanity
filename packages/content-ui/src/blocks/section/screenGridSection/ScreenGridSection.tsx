@@ -4,7 +4,7 @@ import { itemAttr } from '@o3/content-runtime/data-attribute'
 import { stegaClean } from '@sanity/client/stega'
 
 import { SanityImage } from '../../../SanityImage'
-import { CONTENT_COLUMN } from '../../../imageSizes'
+import { CONTENT_COLUMN, FLUID_COLUMN } from '../../../imageSizes'
 import { resolveSurface } from '../../surface'
 
 type ScreenGridSectionProps = SectionProps<'screenGridSection'> & { sequence?: boolean }
@@ -115,17 +115,17 @@ export function ScreenGridSection({
                 sizes={
                   feature && (index < 3 || span === 'narrow')
                     ? index === 0
-                      ? `(min-width: 1920px) 1288px, (min-width: 1440px) calc(75vw - 152px), (min-width: 1024px) calc(63.439305vw + 14.47399px), ${CONTENT_COLUMN}`
+                      ? `(min-width: 1920px) 1288px, (min-width: 1440px) calc(75vw - 152px), (min-width: 1024px) calc(63.439305vw + 14.47399px), ${FLUID_COLUMN}`
                       : '(min-width: 1920px) 408px, (min-width: 1440px) calc(25vw - 72px), (min-width: 1024px) calc(21.146435vw - 16.50867px), (min-width: 402px) calc(42.29287vw - 1.01734px), calc(50vw - 32px)'
                     : !feature && span === 'twoThirds'
-                      ? `(min-width: 1920px) 1141.333333px, (min-width: 1440px) calc(66.666667vw - 138.666667px), (min-width: 1024px) calc(56.390493vw + 9.310213px), ${CONTENT_COLUMN}`
+                      ? `(min-width: 1920px) 1141.333333px, (min-width: 1440px) calc(66.666667vw - 138.666667px), (min-width: 1024px) calc(56.390493vw + 9.310213px), ${FLUID_COLUMN}`
                       : !feature && span === 'third'
-                        ? `(min-width: 1920px) 554.666667px, (min-width: 1440px) calc(33.333333vw - 85.333333px), (min-width: 1024px) calc(28.195247vw - 11.344893px), ${CONTENT_COLUMN}`
+                        ? `(min-width: 1920px) 554.666667px, (min-width: 1440px) calc(33.333333vw - 85.333333px), (min-width: 1024px) calc(28.195247vw - 11.344893px), ${FLUID_COLUMN}`
                         : span === 'wide' && fill
                           ? CONTENT_COLUMN
                           : span === 'wide'
                             ? '(min-width: 1920px) 1600px, (min-width: 1440px) calc(100vw - 320px), (min-width: 1024px) calc(84.58574vw - 98.03468px), (min-width: 402px) calc(84.58574vw - 34.03468px), calc(100vw - 96px)'
-                            : `(min-width: 1920px) 848px, (min-width: 1440px) calc(50vw - 112px), (min-width: 1024px) calc(42.29287vw - 1.01734px), ${CONTENT_COLUMN}`
+                            : `(min-width: 1920px) 848px, (min-width: 1440px) calc(50vw - 112px), (min-width: 1024px) calc(42.29287vw - 1.01734px), ${FLUID_COLUMN}`
                 }
               />
             </div>

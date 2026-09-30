@@ -93,7 +93,7 @@ describe('the screen grid band', () => {
       'sizes="(min-width: 1920px) 1600px, (min-width: 1440px) calc(100vw - 320px), (min-width: 1024px) calc(84.58574vw - 98.03468px), (min-width: 402px) calc(84.58574vw - 34.03468px), calc(100vw - 96px)"',
     )
     expect(illustratedHtml).toContain(
-      'sizes="(min-width: 1920px) 848px, (min-width: 1440px) calc(50vw - 112px), (min-width: 1024px) calc(42.29287vw - 1.01734px), (min-width: 1920px) 1728px, (min-width: 1440px) calc(100vw - 192px), (min-width: 402px) calc(84.58574vw + 29.96532px), calc(100vw - 32px)"',
+      'sizes="(min-width: 1920px) 848px, (min-width: 1440px) calc(50vw - 112px), (min-width: 1024px) calc(42.29287vw - 1.01734px), (min-width: 402px) calc(84.58574vw + 29.96532px), calc(100vw - 32px)"',
     )
   })
 

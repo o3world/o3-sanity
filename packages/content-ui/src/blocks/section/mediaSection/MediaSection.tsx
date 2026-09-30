@@ -127,15 +127,16 @@ export function MediaSection({
           <LayeredMediaReveal
             enabled={sequence}
             className="relative overflow-hidden"
-            foregroundClassName="w-full"
+            foregroundClassName="max-w-section mx-auto w-full"
             caption={media.caption}
             captionClassName="text-fg-subtle px-gutter mt-4 text-sm"
           >
+            {/* Edge to edge up to the 1728px structural column, then centred at it. */}
             <SanityImage
               source={media.image}
               alt={media.alt}
               width={2880}
-              sizes={FULL_BLEED}
+              sizes="(min-width: 1728px) 1728px, 100vw"
               className="w-full"
             />
           </LayeredMediaReveal>

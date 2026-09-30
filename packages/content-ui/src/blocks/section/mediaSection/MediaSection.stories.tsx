@@ -207,3 +207,19 @@ export const CompleteComposition: Story = {
     await expect(box.height / box.width).toBeCloseTo(1900 / 1440, 2)
   },
 }
+
+/** Past the 1728px structural column the composition stops growing and centres, like the bento grids. */
+export const CompleteCompositionWide: Story = {
+  args: CompleteComposition.args,
+  parameters: {
+    viewport: {
+      options: { wide: { name: 'Wide 2560', styles: { width: '2560px', height: '1440px' } } },
+    },
+  },
+  globals: { viewport: { value: 'wide' } },
+  play: async ({ canvasElement }) => {
+    const box = canvasElement.querySelector('img')!.getBoundingClientRect()
+    await expect(box.width).toBe(1728)
+    await expect(box.left).toBe(416)
+  },
+}
