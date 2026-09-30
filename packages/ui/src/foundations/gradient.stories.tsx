@@ -5,6 +5,8 @@ import { Callout, Mono, Page, Row, Section, SpecTable } from './spec-ui'
 
 const meta = {
   title: 'Foundations/Gradient',
+  // A reference page, not a component: shown in Storybook, not mounted by the stories run.
+  tags: ['!test'],
   parameters: {
     layout: 'fullscreen',
     docs: {
