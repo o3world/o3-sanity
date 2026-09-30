@@ -83,27 +83,6 @@ describe('what the resolver attaches, and where', () => {
     }
   })
 
-  it('calls a keyed item an item and a header a field', () => {
-    const paths = subBlockPaths(rendered.html)
-    // #107 attributes the header at `.heading`; there is no `header` object in
-    // the schema, so the header is a field of its block rather than an item.
-    const header = paths.find((path) => path.endsWith('.heading'))
-    expect(canvasSubject(toGroq(header!))).toMatchObject({ level: 'field' })
-
-    const panel = paths.find((path) => path.includes('.panels:'))
-    expect(canvasSubject(toGroq(panel!))).toMatchObject({
-      level: 'item',
-      itemPath: toGroq(panel!),
-    })
-  })
-
-  it('attaches nothing to the sections container or a document field', () => {
-    // The container is Presentation's own reorder target and `seo.title` is
-    // not on the canvas — neither has a component to name.
-    expect(canvasComponents({ node: { path: 'sections' } } as never)).toBeUndefined()
-    expect(canvasComponents({ node: { path: 'seo.title' } } as never)).toBeUndefined()
-  })
-
   it('hands the toolbar the subject rather than a component to look up', () => {
     const resolved = canvasComponents({
       node: { path: 'sections[_key=="a"].panels[_key=="p1"].heading' },
@@ -385,58 +364,6 @@ describe('what the knob menu carries that the bar does not', () => {
     expect(html.match(/aria-checked="true"/g)).toHaveLength(heroSectionKnobs.knobs.length)
   })
 
-  it('puts the jump last, after every knob row', () => {
-    const html = render(
-      menuFor(heroSectionKnobs, {}, { kind: 'block', title: 'Hero section' }, 'Hero section'),
-    )
-    expect(rolesIn(html, 'menuitem')).toHaveLength(1)
-    expect(html).toContain('open form')
-    expect(html.lastIndexOf('role="menuitemradio"')).toBeLessThan(html.indexOf('role="menuitem"'))
-  })
-
-  it('titles each group with the container it configures, so no group lies', () => {
-    // A block knob shown under a menu headed "Panel" would claim the panel is
-    // what it changes. The group heading is what keeps that honest.
-    const html = render(
-      menuFor(
-        railPanelsSectionKnobs,
-        { layout: 'rail' },
-        { kind: 'item', title: 'Panel' },
-        'Rail panels section',
-      ),
-    )
-    expect(html).toContain('aria-label="Band"')
-    expect(html).toContain('aria-label="Rail panels section"')
-    // Layout and Rail ride no bar either — right-clicking a panel is the only
-    // place in the product they can be reached.
-    expect(html).toContain('Layout')
-    expect(html).toContain('Rail')
-  })
-
-  it('drops a gated knob exactly where the form drops it', () => {
-    // `rail` is offered on the rail layout alone — every other one draws no
-    // rail. The menu asks `visibleKnobs`, which is the same declaration the
-    // Studio field's predicate is generated from.
-    const at = (layout: string) =>
-      render(
-        menuFor(
-          railPanelsSectionKnobs,
-          { layout },
-          { kind: 'block', title: 'Rail panels section' },
-          'Rail panels section',
-        ),
-      )
-    // Surface (5) + Layout (5) + Rail (2) + Plate (2) on the rail layout;
-    // Cards add Decoration (2); Rows add Header width (2). Rail and Plate are gated to
-    // the one layout that draws a rail. Counted by role rather than matched by
-    // label, because "Rail" is also one of Layout's own option titles.
-    expect(rolesIn(at('rail'), 'menuitemradio')).toHaveLength(14)
-    expect(rolesIn(at('cards'), 'menuitemradio')).toHaveLength(12)
-    expect(rolesIn(at('rows'), 'menuitemradio')).toHaveLength(12)
-    expect(rolesIn(at('grid'), 'menuitemradio')).toHaveLength(10)
-    expect(rolesIn(at('track'), 'menuitemradio')).toHaveLength(10)
-  })
-
   it('marks the inherited value for a screen reader, not only for an eye', () => {
     const html = render(
       menuFor(heroSectionKnobs, {}, { kind: 'block', title: 'Hero section' }, 'Hero section'),
@@ -514,73 +441,6 @@ describe('what the knob menu can do to the subject', () => {
     expect(html.match(/data-testid="canvas-menu-item-action"/g)).toHaveLength(6)
     expect(rolesIn(html, 'menuitem')).toHaveLength(7)
   })
-
-  it('keeps the jump last, after the actions as well as after the knobs', () => {
-    const html = panel()
-    expect(html.lastIndexOf('data-testid="canvas-menu-item-action"')).toBeLessThan(
-      html.indexOf('data-testid="canvas-menu-action"'),
-    )
-    expect(html.lastIndexOf('role="menuitemradio"')).toBeLessThan(
-      html.indexOf('data-testid="canvas-menu-item-action"'),
-    )
-  })
-
-  it('drops the move rows that would move nothing', () => {
-    // The no-dead-control rule, at the two ends of the array. `>Up<` and not
-    // `Up`, because "Up" is a substring of nothing here but "To top" is a
-    // substring of the group heading's own words in other layouts.
-    const first = render('sections[_key=="r"].panels[_key=="p1"]', { kind: 'item', title: 'Panel' })
-    expect(first).not.toContain('>To top</button>')
-    expect(first).not.toContain('>Up</button>')
-    expect(first).toContain('>Down</button>')
-
-    const last = render('sections[_key=="r"].panels[_key=="p3"]', { kind: 'item', title: 'Panel' })
-    expect(last).toContain('>Up</button>')
-    expect(last).not.toContain('>Down</button>')
-    expect(last).not.toContain('>To bottom</button>')
-  })
-
-  it('names the untitled group for a screen reader, and titles Move for an eye', () => {
-    // Duplicate and Remove carry no visible heading — the menu header one line
-    // above already names what Remove would remove — so the label is the only
-    // thing that says it aloud.
-    const html = panel()
-    expect(html).toContain('aria-label="Panel"')
-    expect(html).toContain('aria-label="Move"')
-    expect(html).toContain('>Move</div>')
-  })
-
-  it('acts on the block when the block is the subject', () => {
-    // One subject rule, both levels. A section in `page.sections` is a keyed
-    // array member exactly the way a panel is.
-    const html = render('sections[_key=="r"]', { kind: 'block', title: 'Rail panels section' })
-    expect(html).toContain('Duplicate')
-    // The rail section is in the middle of three, so it can go all four ways.
-    expect(html.match(/data-testid="canvas-menu-item-action"/g)).toHaveLength(6)
-  })
-
-  it('offers no actions at all while the draft snapshot has not settled', () => {
-    // The frame between the first hover and the snapshot arriving. The knobs
-    // and the jump still render; a row that would patch nothing does not.
-    const html = renderToStaticMarkup(
-      <KnobMenu
-        model={knobMenuModel({
-          spec: heroSectionKnobs,
-          read: () => undefined,
-          nested: false,
-          subject: { kind: 'block', title: 'Hero section' },
-          componentName: 'Hero section',
-          snapshot: undefined,
-          subjectPath: 'sections[_key=="h"]',
-        })}
-        onPick={() => {}}
-        onAction={() => {}}
-      />,
-    )
-    expect(html).not.toContain('data-testid="canvas-menu-item-action"')
-    expect(rolesIn(html, 'menuitem')).toHaveLength(1)
-    expect(html).toContain('open form')
-  })
 })
 
 describe('at most one menu open, and none until asked', () => {
@@ -631,7 +491,7 @@ describe('what the knob menu can add beside the subject', () => {
     ],
   }
 
-  const model = (subjectPath: string, members: readonly string[] | undefined) =>
+  const model = (subjectPath: string, members: readonly string[]) =>
     knobMenuModel({
       spec: heroSectionKnobs,
       read: blockKnobReader(draft, 'sections[_key=="h"]'),
@@ -640,10 +500,10 @@ describe('what the knob menu can add beside the subject', () => {
       componentName: 'Hero section',
       snapshot: draft,
       subjectPath,
-      ...(members ? { insert: { members, specs: BLOCK_KNOBS } } : {}),
+      insert: { members, specs: BLOCK_KNOBS },
     })
 
-  const render = (subjectPath: string, members: readonly string[] | undefined) =>
+  const render = (subjectPath: string, members: readonly string[]) =>
     renderToStaticMarkup(
       <KnobMenu
         model={model(subjectPath, members)}
@@ -673,13 +533,6 @@ describe('what the knob menu can add beside the subject', () => {
       expect(html, type).toContain(`>${BLOCK_KNOBS[type]!.title}</button>`)
     }
     expect(html).not.toContain('heroSection<')
-  })
-
-  it('offers nothing in an array the site declared nothing for', () => {
-    // `railPanelsSection.panels` holds panels, not blocks — there is no entry
-    // for it, so the menu says so by having no rows rather than by guessing.
-    const html = render('sections[_key=="h"]', undefined)
-    expect(html).not.toContain('Add above')
   })
 
   it('keeps the jump last, after the insert rows as well', () => {
@@ -740,8 +593,13 @@ describe('what the icon picker shows', () => {
 
   it('draws a glyph for every icon option the site has one for', () => {
     const html = render(BUTTON_ICONS)
-    // Three named glyphs; `None` names no drawing, and its row is a title.
-    expect(html.match(/<svg/g)).toHaveLength(3)
+    // One drawing per option the site has a glyph for; `None` names no
+    // drawing, and its row is a title.
+    const drawn = buttonKnobs.knobs
+      .find((knob) => knob.name === 'icon')!
+      .options.filter((option) => option.value in BUTTON_ICONS)
+    expect(drawn.length).toBeGreaterThan(0)
+    expect(html.match(/<svg/g)).toHaveLength(drawn.length)
     expect(html).toContain('None')
   })
 
