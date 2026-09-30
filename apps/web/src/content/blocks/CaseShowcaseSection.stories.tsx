@@ -55,6 +55,8 @@ export const AsSeeded: Story = {
     await expect(getComputedStyle(stack).gap).toBe('48px')
     for (const card of cards) {
       await expect(card.getBoundingClientRect().width).toBe(stack.getBoundingClientRect().width)
+      // Figma I3720:60502;3629:35573: the card container's `spacing-xl` padding.
+      await expect(getComputedStyle(card).padding).toBe('64px')
     }
     await expect(within(canvasElement).getByText('A selection of recent work.')).toBeVisible()
   },
@@ -97,7 +99,11 @@ export const ShortViewport: Story = {
   },
 }
 
-/** Current mobile frame keeps full-column cards with 48px gaps. */
+/**
+ * Full-column cards with 48px gaps (1814:1618). The mobile card instances in
+ * that frame are desktop-width and overflow, so the 24px side padding is the
+ * site's own value, not one read from Figma.
+ */
 export const Mobile: Story = {
   args: seededSectionArgs('index', 'caseShowcaseSection'),
   render: AsSeeded.render,
