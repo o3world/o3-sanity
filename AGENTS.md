@@ -312,43 +312,17 @@ wrong.
 
 The references tell an agent how to write anywhere; a **brief** is what one
 piece is written from
-([ADR 0027](./docs/adr/0027-the-brief-is-a-document.md)). It is the repo's one
-corpus — markdown registered by frontmatter in a globbed directory, synced to
-`brief` documents:
+([ADR 0027](./docs/adr/0027-the-brief-is-a-document.md)). It is a `brief`
+document in the dataset, id `brief-<key>`, created by the authoring skill's
+gather stage and patched by every stage after it. A piece points at its briefs
+through the weak `briefs` array, so a brief never publish-blocks or
+delete-locks the piece it belongs to.
 
-```bash
-pnpm brief:sync     # tools/guidance/briefs/*.md → brief documents
-pnpm brief:check    # fails if a file-backed brief has drifted
-pnpm brief:export   # a dataset-born brief becomes a file in the corpus
-```
-
-The commands are thin. The engine under them is `tools/guidance/src/corpus/` —
-one pure function from (sources, dataset snapshot) to a plan: what to write,
-what drifted, what no source claims. `brief-sync.ts` and `brief-check.ts`
-supply the client and nothing else, which is what lets the plan be unit-tested
-without a project or a token.
-
-Briefing a piece is three steps. Drop a markdown file in
-`tools/guidance/briefs/` with `key` and `title` in its frontmatter — the body
-becomes the brief's `background`. Run `pnpm brief:sync`. Then point the piece's
-seed JSON at `brief-<key>` through its weak `briefs` array. Load and sync in
-either order; the reference is weak for that reason.
-
-A brief also carries what an authoring run makes of it, one field per stage —
+A brief carries what an authoring run makes of it, one field per stage —
 `stage`, `nextStep`, `thesis`, `readerQuestions`, `outline`, `draft`,
 `verdict`, `decisions`, `gaps`, `pieceId` (#190). Each stage patches its own
 fields, so a resuming session reads `stage` instead of parsing prose and two
-stages cannot clobber each other. The markdown owns `background` and nothing
-else; a brief written before #190 keeps its old `record` value as an
-off-schema field that nothing reads.
-
-Two rules the corpus config carries and the commands do not restate. A brief
-syncs by **merge**, so everything a run patched survives a sync. And a
-brief with no `sourcePath` was **born in the dataset** — `check` ignores it and
-`sync` never deletes it. A file whose key a dataset-born brief already holds is
-**refused rather than merged**, and `pnpm brief:export <key>` is the way out: it
-writes that brief to `tools/guidance/briefs/` and makes the dataset copy
-file-backed, so the next sync has nothing to write.
+stages cannot clobber each other.
 
 ### Testing a skill in the o3sanity plugin
 
