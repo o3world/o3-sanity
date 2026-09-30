@@ -122,6 +122,33 @@ export const MobileInteraction: Story = {
   globals: { backgrounds: { value: 'bone' }, viewport: { value: 'mobile' } },
 }
 
+export const SplitLayoutBoundary: Story = {
+  ...Interaction,
+  globals: { ...Interaction.globals, viewport: { value: 'splitBoundary' } },
+  parameters: {
+    viewport: {
+      options: {
+        splitBoundary: {
+          name: 'Split layout boundary',
+          styles: { width: '1280px', height: '1000px' },
+        },
+      },
+    },
+  },
+  play: async (context) => {
+    await Interaction.play!(context)
+    const canvas = within(context.canvasElement)
+    const reason = canvas.getByLabelText(/Reason/)
+    const referral = canvas.getByLabelText<HTMLInputElement>(/How’d you hear about us/)
+    const label = referral.labels![0]!
+    await expect(label.getBoundingClientRect().height).toBe(
+      parseFloat(getComputedStyle(label).lineHeight),
+    )
+    await expect(referral.getBoundingClientRect().top).toBe(reason.getBoundingClientRect().top)
+    await expect(referral).not.toBeRequired()
+  },
+}
+
 /** Stack the introduction and fields before the desktop columns become cramped. */
 export const NarrowDesktopInteraction: Story = {
   args: seededSectionArgs('contact', 'formSection'),

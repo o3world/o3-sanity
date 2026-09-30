@@ -270,7 +270,7 @@ export function InquiryForm({
         </FormField>
         <FormField
           name="referral"
-          label="How’d you hear about us? (optional)"
+          label="How’d you hear about us?"
           className="[&>label]:font-normal"
         >
           {(control) => (
