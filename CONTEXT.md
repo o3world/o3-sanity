@@ -100,7 +100,7 @@ The component-system ontology, and it is deliberately Figma's — the design fil
   - **Not a component.** It fails the test above on both halves: no registered schema type, no knob spec of its own. Nothing about a card is authored — an editor writes the document, and the band drawing it decides that this is the compact form. What a card reads is a **projection** (`CARD_PROJECTIONS`), not the whole document, which is the same statement from the query side.
   - **The type it projects is the only axis it has.** `getCard(type)` looks the card up by that type alone; all three cards, `CaseStudyCard` included, live in `packages/content-ui/src/cards/`.
   - **`page.card` is the fieldset, not the card.** Three fields (short title, excerpt, icon) a service Page hands `PageCard`, gated on `pageType`. Named for what fills it, in the register `seo` and `migration` already use.
-  - **`Card` in `packages/ui` is the plate.** The shadcn primitive, translated to O3 tokens: surface, radius and the hover lift, with no idea what a document is. Nothing in the card layer draws it yet — the three cards each write the plate themselves — so the two nouns currently share only a word.
+  - **There is no plate component.** Each of the three cards writes its own surface and radius; `packages/ui` has no `Card`, so the word names the view mode and nothing else.
   - **`layout: cards` is an unrelated word.** `railPanelsSection` and `inFlightSection` both carry it as an arrangement — a row of ink panels — and neither draws the card layer. The same collision as "listing" and "index", and it is left alone for the same reason: the arrangement word is what the frames call it.
 
 ### Knobs

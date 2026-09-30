@@ -73,19 +73,6 @@ export {
 } from './components/ui/carousel'
 export type { CarouselApi } from './components/ui/carousel'
 
-// Card
-export {
-  Card,
-  CardMedia,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  cardVariants,
-} from './components/ui/card'
-export type { CardProps } from './components/ui/card'
-
 // DisplayHeading (+ the line stagger it composes)
 export { DisplayHeading, displayHeadingVariants } from './components/display-heading'
 export type { DisplayHeadingProps } from './components/display-heading'
