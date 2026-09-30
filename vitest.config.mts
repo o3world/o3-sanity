@@ -13,8 +13,8 @@ const appSrc = (app: string) => resolve(root, 'apps', app, 'src')
  * process. Each layer answers a different question, and the file-name suffix
  * tells you which layer you are in without opening the file:
  *
- *   unit     `*.test.ts`          — pure functions. Migration mappers, lib
- *                                   helpers, and invariants over the
+ *   unit     `*.test.ts`          — pure functions. Lib helpers, schema
+ *                                   gates, and invariants over the
  *                                   committed migration JSON. No React.
  *   render   `*.render.test.tsx`  — a document or route rendered from fixture
  *                                   data to HTML, with no network. Answers
@@ -84,7 +84,7 @@ export default defineConfig({
           // Collected by `shell` instead.
           exclude: [...configDefaults.exclude, 'tools/build-assert/src/assert.test.ts'],
           // Studio v6.8 added a top-level `import "@sanity-labs/ui-poc/styles.css"`
-          // to the `sanity` barrel. The migration mappers reach that barrel for
+          // to the `sanity` barrel. The migration tool's schema gates reach that barrel for
           // `defineField`/`defineType` via `@o3/sanity/schemas`, and an
           // externalised dep is loaded by Node itself — which has no idea what a
           // `.css` file is and throws `Unknown file extension ".css"` before a

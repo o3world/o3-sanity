@@ -4,7 +4,7 @@ import { migrationObject } from '../core/state'
 import { seoObject } from './seo'
 
 /**
- * The `siteSettings` singleton (#19): the nav, utility strip and footer Figma
+ * The `siteSettings` singleton (#19): the nav, footer and property logos Figma
  * draws (ADR 0007), plus the facts WordPress held about the business — social
  * profiles, legal pages, the registered entity and the Yoast SEO defaults.
  */

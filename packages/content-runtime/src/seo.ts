@@ -18,9 +18,9 @@ import { getBaseUrl } from './base-url'
  *
  * Canonical is the one field that is derived rather than defaulted: a page is
  * its own canonical at its own path unless a document explicitly points
- * elsewhere. The migration never writes one (`tools/migration/src/map/seo.ts`)
- * — a canonical carried over from WordPress would tell Google every new page
- * duplicates the old site.
+ * elsewhere. No committed document carries one (`converted.test.ts` refuses
+ * one pointing at the WordPress host) — a canonical carried over from WordPress
+ * would tell Google every new page duplicates the old site.
  */
 
 /** The `seo` object as every routable query projects it. */

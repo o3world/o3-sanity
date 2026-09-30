@@ -30,7 +30,7 @@ import { seoObject } from './seo'
  *   from the source, so they are written by an agent. A document that
  *   supplies them with no flag has quietly invented copy — the one failure
  *   mode this track exists to prevent.
- * - **Nothing is published.** Enforced in `load`, asserted here.
+ * - **Nothing is published.** Asserted here.
  */
 
 const flag = z.object({
@@ -124,7 +124,7 @@ const MODELLED = new Set(['chapter', 'mediaSection', 'screenGridSection'])
  *
  * The refusal is the point of the arm: without it, a `chapter` or a
  * `mediaSection` that failed the check above would fall through to this one
- * and load malformed.
+ * and sync malformed.
  */
 const unmodelledSection = z
   .object({ _type: z.string().min(1), _key: z.string() })
@@ -144,7 +144,7 @@ const storyMember = z.union([chapter, mediaSection, screenGridSection, unmodelle
  * The shared `migration` fragment, read as strictly as both tracks need it.
  * An agent writes these documents, so the gate refuses a lock — that flag is
  * an editor's to set, and one arriving pre-set would exempt the document from
- * the next load — and refuses a source that is not a WordPress work item.
+ * the next sync — and refuses a source that is not a WordPress work item.
  */
 const caseStudyMigration = migrationObject
   .extend({
@@ -224,7 +224,7 @@ function unsourcedRequiredFields(doc: CaseStudyDoc): string[] {
 
 /**
  * Check a translated file against the rules the pipeline can actually
- * enforce. Returns the reasons it should not load, or an empty list.
+ * enforce. Returns the reasons it should not sync, or an empty list.
  */
 export function checkTranslation(file: TranslatedCaseStudy): TranslationIssue[] {
   const issues: TranslationIssue[] = []

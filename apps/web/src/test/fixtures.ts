@@ -18,15 +18,15 @@ import { anInsight, type Insight } from '@o3/render-kit'
  */
 
 /**
- * Stand in for the asset upload `tools/migration/src/load.ts` performs, so a
- * converted document can be rendered without a dataset.
+ * Stand in for the asset references a dataset holds, so a converted document
+ * can be rendered without one.
  *
- * Converted JSON carries `_wpSrc` URL markers where an asset reference will
- * go; `load` uploads the binary and swaps in the ref. A renderer given the
- * raw marker throws inside `@sanity/image-url`, which would make the
- * migration→render bridge unusable for any document with an image in its
- * body — i.e. most of the 272 coming in #17. Seeds use `_localSrc` (a repo
- * path) instead of a URL and are resolved the same way. The ref is a sha1 of the source
+ * Converted JSON carries `_wpSrc` URL markers where the dataset holds an
+ * uploaded asset's reference. A renderer given the raw marker throws inside
+ * `@sanity/image-url`, which would make the migration→render bridge unusable
+ * for any document with an image in its body. Seeds use `_localSrc` (a repo
+ * path, which `sync-docs` uploads) instead of a URL and are resolved the same
+ * way. The ref is a sha1 of the source
  * URL, which is both deterministic and the shape `@sanity/image-url` parses
  * (`image-<40 hex>-<width>x<height>-<ext>`); anything looser is rejected.
  *
