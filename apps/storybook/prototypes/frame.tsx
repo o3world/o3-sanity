@@ -43,11 +43,12 @@ export function PrototypeFrame({ set, page, label, captured }: PrototypeFramePro
 /**
  * Shared `parameters` for every prototype story.
  *
- * `a11y.test` is off here and only here. The suite runs axe as an error on
- * every story (ADR 0004, .storybook/preview.ts) and axe traverses same-origin
- * iframes, so an un-suppressed prototype frame reports the artifact's
- * violations as failures of this repo. These are frozen captures we do not
- * edit — a red suite for them buys nothing, and fixing them would mean
+ * Prototype stories are not in the test run: each meta carries
+ * `tags: ['!test']`, because a story that mounts nothing but an iframe of a
+ * frozen capture has nothing of this repo's to fail. `a11y.test` is off for
+ * the same captures because axe traverses same-origin iframes, so a prototype
+ * story run as a test would report the artifact's own violations as this
+ * repo's. These are frozen captures we do not edit — fixing them would mean
  * editing a historical record. Components keep the rule.
  */
 export const prototypeParameters = {

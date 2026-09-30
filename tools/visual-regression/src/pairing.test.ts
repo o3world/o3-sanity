@@ -8,10 +8,8 @@ import {
   type DeclaredPairing,
 } from './pairing'
 
-const O3_REF = 'FIGMA_FILE_KEY'
-
 function o3File(entries: BrandDesignFile['entries']): BrandDesignFile {
-  return { brand: 'o3', fileKeyRef: O3_REF, fileKey: 'RvraLJaZ', entries }
+  return { brand: 'o3', fileKey: 'RvraLJaZ', entries }
 }
 
 function pairing(over: Partial<DeclaredPairing> = {}): DeclaredPairing {
@@ -20,7 +18,6 @@ function pairing(over: Partial<DeclaredPairing> = {}): DeclaredPairing {
     title: 'Content/Blocks/Section/QuoteSection',
     exportName: 'Desktop',
     nodeId: '2748:4767',
-    fileKeyRef: O3_REF,
     file: 'packages/content-ui/src/blocks/section/quoteSection/QuoteSection.stories.tsx',
     declaredOn: 'meta',
     hosts: ['o3'],
@@ -73,21 +70,6 @@ export const Mobile: Story = { parameters: { design: figmaDesign('2748:4804') } 
     ])
   })
 
-  it('records the design file a second argument names, and defaults to O3s', () => {
-    const source = `
-const meta = { title: 'Content/Pager' }
-export default meta
-
-export const Default: Story = { parameters: { design: figmaDesign('4404:1821', OTHER_FILE_KEY) } }
-export const O3Variant: Story = { parameters: { design: figmaDesign('136:14') } }
-`
-    const declared = extractPairings(file, source, ['o3'])
-    expect(declared.map((p) => [p.exportName, p.fileKeyRef])).toEqual([
-      ['Default', 'OTHER_FILE_KEY'],
-      ['O3Variant', O3_REF],
-    ])
-  })
-
   it('yields nothing for a story file that declares no pairing', () => {
     const source = `
 const meta = { title: 'Content/HeaderPill' }
@@ -134,7 +116,7 @@ describe('buildInventory', () => {
   it('lists every pairing with its story id, node id and brand', () => {
     const inventory = buildInventory(
       [pairing({ nodeId: '2748:4767' })],
-      [o3File([{ nodeId: '2748:4767', kind: 'componentSet', name: 'Quote band' }])],
+      o3File([{ nodeId: '2748:4767', kind: 'componentSet', name: 'Quote band' }]),
     )
     expect(inventory.pairings).toEqual([
       expect.objectContaining({
@@ -151,12 +133,10 @@ describe('buildInventory', () => {
   it('flags a pairing whose node is a page frame as page-level', () => {
     const inventory = buildInventory(
       [pairing({ nodeId: '1710:2609' }), pairing({ nodeId: '2748:4767', exportName: 'Other' })],
-      [
-        o3File([
-          { nodeId: '1710:2609', kind: 'pageFrame', name: 'Case Study detail', route: '/work/x' },
-          { nodeId: '2748:4767', kind: 'componentSet', name: 'Quote band' },
-        ]),
-      ],
+      o3File([
+        { nodeId: '1710:2609', kind: 'pageFrame', name: 'Case Study detail', route: '/work/x' },
+        { nodeId: '2748:4767', kind: 'componentSet', name: 'Quote band' },
+      ]),
     )
     expect(inventory.pageLevel.map((row) => row.nodeId)).toEqual(['1710:2609'])
     expect(inventory.pairings.find((row) => row.nodeId === '1710:2609')).toMatchObject({
@@ -166,26 +146,24 @@ describe('buildInventory', () => {
   })
 
   it('calls a pairing untracked when the manifest has never heard of its node', () => {
-    const inventory = buildInventory([pairing({ nodeId: '9999:1' })], [o3File([])])
+    const inventory = buildInventory([pairing({ nodeId: '9999:1' })], o3File([]))
     expect(inventory.pairings[0]).toMatchObject({ match: 'untracked', trackedName: null })
   })
 
   it('lists every component set no story pairs, and never a page frame', () => {
     const inventory = buildInventory(
       [pairing({ nodeId: '2748:4767' })],
-      [
-        o3File([
-          { nodeId: '2748:4767', kind: 'componentSet', name: 'Quote band' },
-          {
-            nodeId: '778:1862',
-            kind: 'componentSet',
-            name: 'Carousel control',
-            codeComponent: 'x',
-          },
-          { nodeId: '1680:2134', kind: 'pageFrame', name: 'Home', route: '/' },
-          { nodeId: '4212:374', kind: 'componentSet', name: 'Mark' },
-        ]),
-      ],
+      o3File([
+        { nodeId: '2748:4767', kind: 'componentSet', name: 'Quote band' },
+        {
+          nodeId: '778:1862',
+          kind: 'componentSet',
+          name: 'Carousel control',
+          codeComponent: 'x',
+        },
+        { nodeId: '1680:2134', kind: 'pageFrame', name: 'Home', route: '/' },
+        { nodeId: '4212:374', kind: 'componentSet', name: 'Mark' },
+      ]),
     )
     expect(inventory.uncovered).toEqual([
       { brand: 'o3', nodeId: '778:1862', name: 'Carousel control', codeComponent: 'x' },
@@ -193,20 +171,13 @@ describe('buildInventory', () => {
     ])
   })
 
-  it('keeps a pairing whose named design file is nothing it was given', () => {
-    const inventory = buildInventory([pairing({ fileKeyRef: 'TYPO_FILE_KEY' })], [o3File([])])
-    expect(inventory.pairings[0]).toMatchObject({ designBrand: null, match: 'untracked' })
-  })
-
   it('counts coverage against the manifest', () => {
     const inventory = buildInventory(
       [pairing({ nodeId: '2748:4767' })],
-      [
-        o3File([
-          { nodeId: '2748:4767', kind: 'componentSet', name: 'Quote band' },
-          { nodeId: '778:1862', kind: 'componentSet', name: 'Carousel control' },
-        ]),
-      ],
+      o3File([
+        { nodeId: '2748:4767', kind: 'componentSet', name: 'Quote band' },
+        { nodeId: '778:1862', kind: 'componentSet', name: 'Carousel control' },
+      ]),
     )
     expect(inventory.coverage).toEqual([{ brand: 'o3', tracked: 2, paired: 1 }])
   })
@@ -215,13 +186,11 @@ describe('buildInventory', () => {
 describe('formatInventory', () => {
   const inventory = buildInventory(
     [pairing({ nodeId: '1710:2609' }), pairing({ nodeId: '2748:4767', exportName: 'Mobile' })],
-    [
-      o3File([
-        { nodeId: '1710:2609', kind: 'pageFrame', name: 'Case Study detail', route: '/work/x' },
-        { nodeId: '2748:4767', kind: 'componentSet', name: 'Quote band' },
-        { nodeId: '778:1862', kind: 'componentSet', name: 'Carousel control' },
-      ]),
-    ],
+    o3File([
+      { nodeId: '1710:2609', kind: 'pageFrame', name: 'Case Study detail', route: '/work/x' },
+      { nodeId: '2748:4767', kind: 'componentSet', name: 'Quote band' },
+      { nodeId: '778:1862', kind: 'componentSet', name: 'Carousel control' },
+    ]),
   )
 
   it('prints a row per pairing with the story id, the node id and the brand', () => {

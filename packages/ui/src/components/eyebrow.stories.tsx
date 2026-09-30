@@ -23,17 +23,22 @@ export const Section: Story = {
 
 /** The card kicker at 16px, on a light band. */
 export const Card: Story = {
+  // `Card`, `Inverse` and `Brand` differ from `Section` only in size or tone;
+  // `Section` alone is mounted by the stories run.
+  tags: ['!test'],
   args: { children: 'Teams' },
 }
 
 /** White, over a card scrim or on an ink band (1883:3561). */
 export const Inverse: Story = {
+  tags: ['!test'],
   args: { tone: 'inverse', children: 'Healthcare · Pediatric Systems' },
   globals: { backgrounds: { value: 'ink' } },
 }
 
 /** Brand red — the exception. The frames use it for the footer link headers. */
 export const Brand: Story = {
+  tags: ['!test'],
   args: { tone: 'brand', children: 'Company' },
   globals: { backgrounds: { value: 'ink' } },
 }

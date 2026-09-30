@@ -1,20 +1,22 @@
 # Testing
 
-Three layers, one runner. Decisions and rationale: [ADR 0004](adr/0004-layered-test-approach.md).
+Three layers, one runner, plus a `shell` project for the tests that start a process. Decisions and
+rationale: [ADR 0004](adr/0004-layered-test-approach.md).
 
 **Tests are a checkpoint, not a loop.** Run them at milestones — before opening a PR, after a
-migration batch, after wiring a new block. There is no pre-commit or pre-push hook, and `pnpm verify`
-is unchanged. Don't leave a watcher running or re-run the suite after every edit.
+migration batch, after wiring a new block. The lefthook hooks lint, format and typecheck on commit
+and run `pnpm verify` on push; neither runs tests. Don't leave a watcher running or re-run the suite
+after every edit.
 
 ```bash
-pnpm test           # all three layers — the checkpoint  (~5s)
-pnpm test:fast      # unit + render, skips the browser   (~1.6s)
-pnpm test --project unit      # one layer
+pnpm test           # every project — the checkpoint              (~65s)
+pnpm test:fast      # unit + render, skips the browser and shell  (~20s)
+pnpm test --project unit      # one project
 ```
 
 There is deliberately no "test only what changed" script. `vitest --changed` resolved to
 "No test files found, exiting with code 0" here — it passes without running anything, which is
-the worst possible failure mode for a check. The full suite is ~5s; just run it.
+the worst possible failure mode for a check. The full suite takes about a minute; just run it.
 
 ## Which layer?
 
@@ -24,7 +26,10 @@ the worst possible failure mode for a check. The full suite is ~5s; just run it.
 | Does this page/document display its content? | `render`  | `thing.render.test.tsx` next to the entry     |
 | Does this component look and behave right?   | `stories` | `thing.stories.tsx` — **no test file needed** |
 
-The suffix is the layer. Nothing else configures which project a test lands in.
+The suffix is the layer, with one exception. A `.test.ts` that starts a process — the worktree
+scripts, the `build:assert` CLI — is listed by path in the `shell` project and excluded from `unit`,
+so `pnpm test:fast` can skip it. Test the exported function in process where you can, and keep a
+CLI test to what only the process shows: its exit code.
 
 ---
 
@@ -32,21 +37,22 @@ The suffix is the layer. Nothing else configures which project a test lands in.
 
 Node, no React, no filesystem beyond the committed migration JSON.
 
-Two kinds live here:
+Three kinds live here:
 
-- **Mappers and helpers.** `tools/migration/src/map/*.test.ts`, `packages/content-runtime/src/**`. Migration
-  mappers are pure `WpThing → Mapped<Doc>` functions, so a new ACF module type means one arm in the
-  mapper and one case in its test.
+- **Helpers and schema gates.** `packages/content-runtime/src/**`, `packages/editor-chrome/src/**`,
+  and the zod gates in `tools/migration/src/map/` that `verify` and the corpus tests share.
 - **Wiring a compiler cannot see.** `packages/content-ui/src/renderer-seam.test.ts` reads the
   source tree and asserts that every renderer is drawn exactly once, in `packages/content-ui` or in
   `apps/web` — a duplicate or a missing one would otherwise fail silently in a browser. Same shape
   as `packages/ui/src/components/ui/shadcn-seam.test.ts`: a filesystem lint, in the layer that
   needs no React.
-- **Corpus invariants.** `tools/migration/src/converted.test.ts` runs over everything actually
-  committed under `data/converted/` — every document validates against its zod gate, every author
-  and category reference resolves, no body block type the schema doesn't allow, no WP thumbnail
-  smuggled in as an asset. This is the check that scales as the corpus grows toward ~340 documents;
-  it costs nothing to keep and catches the class of error that survives a green build.
+- **Corpus invariants.** The committed JSON under `tools/migration/data/` is static and edited by
+  hand now that the WordPress import is frozen, so these are what catch a bad edit.
+  `converted.test.ts` runs over everything under `data/converted/` — every document validates
+  against its zod gate, every author and category reference resolves, no body block type the schema
+  doesn't allow, no WP thumbnail smuggled in as an asset. `seed.test.ts`, `translated.test.ts` and
+  `corpus.test.ts` do the same for the seeds, the translated case studies and document identity, and
+  `redirects.test.ts` holds the committed redirect table to the live site's sitemaps.
 
 ## `render` — pages and documents, no network
 
@@ -84,9 +90,10 @@ list, so a 404 is assertable on what it read rather than only on the fact that i
 the same guardrail the block registry uses. Pass only the field your assertion is about.
 
 **`aMigratedInsight(slug)` loads a real converted document** and shapes it into what the query
-returns. That is the migration → render bridge: a mapper change producing something the renderer
-can't display fails here rather than in Studio. `migratedInsightSlugs()` sweeps all of them. It is
-`apps/web`'s, like every fixture that reads a tree off disk.
+returns. That is the migration → render bridge: a hand edit to the converted JSON that the renderer
+can't display fails here rather than in Studio. `migratedInsightSlugs()` lists all of them, and one
+test renders every one and names the slugs that fail. It is `apps/web`'s, like every fixture that
+reads a tree off disk.
 
 **The 402 half of ADR 0006 is assertable** via the responsive helpers, exported from `@/test` in the
 app and from `@o3/content-ui/testing` in the package that now holds the renderers:
@@ -98,9 +105,15 @@ pins a utility to the widths that emitted it when the two frames disagree on a v
 one `@/` alias and carries one environment; `vitest.config.mts` builds the `render` project with
 one `renderProject()` call. Run it with `pnpm test --project render`.
 
-The `render` project also collects `packages/*/src/**`: the renderers moved to `@o3/content-ui`
-(#212) and their render tests moved with them, while an app keeps the route- and view-level ones.
-Those components take their tokens from CSS this layer never loads. A moved test reaches its helpers by package subpath; only app tests get the `@/` alias.
+The `render` project also collects `packages/*/src/**`: the renderers live in `@o3/content-ui`
+(#212) and the canvas views in `@o3/editor-chrome`, and their render tests sit beside them, while
+the app keeps the route- and view-level ones. Those components take their tokens from CSS this
+layer never loads. A package test reaches its helpers by package subpath; only app tests get the
+`@/` alias.
+
+**One test per sweep.** When a check runs over every seeded block, every migrated document or every
+manifest entry, write one test that collects the offenders and expects `[]`, not an `it.each` row
+per item. The failure message still names every offender, and the count stays a count of checks.
 
 Four modules are stubbed (see `@o3/render-kit`'s `project.ts` for why each):
 `@o3/content-runtime/live` is the network seam, `next/image` renders a plain `<img>`, `next/headers`
@@ -117,7 +130,8 @@ safety net for free.
 
 The `stories` project is the Storybook host in `apps/storybook`: the shared roots
 `packages/story-kit`'s `SHARED_STORY_ROOTS` names — `packages/ui/src` and `packages/content-ui/src`
-— plus `apps/web/src` and the captured prototypes.
+— plus `apps/web/src`. The captured prototypes are in the same Storybook but tagged out of the run
+(ADR 0010).
 
 `HeroSection.stories.tsx` is the pattern for section blocks: a story per state the prototype shows.
 
@@ -125,11 +139,18 @@ Structural a11y (roles, labels, alt text, heading order) fails the run. `color-c
 back — the 12 current violations are all muted-foreground tokens, which is a palette decision, not a
 component defect. See the note in `defineStorybookPreview`.
 
+**A story that asserts nothing new stays out of the run.** Tag it `tags: ['!test']` and it stays in
+Storybook and in `pnpm vr`, but the `stories` project does not mount it. That fits the Foundations
+reference pages, and variants that differ from a sibling only by colour, surface or size: with
+`color-contrast` held back, axe sees nothing new in them. Give a story a `play` when its point is a
+computed value or an interaction; a story without one is checked by axe alone. `vr:skip` is the
+other direction — it keeps a story out of `pnpm vr` only.
+
 > **Import `stegaClean` from `@sanity/client/stega`, never the `next-sanity` barrel.** The barrel is
 > heavy and the lint rule enforcing this stays. The old reason — that `@portabletext/react`'s
 > `react/compiler-runtime` import could not resolve under Storybook's Next preset — is fixed:
 > `defineStorybookConfig` now pins that entry for the dependency pre-bundle as well as the module
-> graph, on both hosts. Portable text renders in Storybook.
+> graph. Portable text renders in Storybook.
 
 ### `Pages` — whole pages, from the committed seeds
 
@@ -209,9 +230,11 @@ diagnosed rather than replaced by a fake route.
 
 ## What is deliberately not here
 
-- **No pixel-diff visual regression.** Baselines churn during an active redesign and drift across
-  platforms, and they answer "did this change" rather than "is this right". Wireframe fidelity is a
-  human call in Storybook, beside the `addon-designs` frame.
+- **No committed pixel baselines.** Baselines churn during an active redesign and drift across
+  platforms, and they answer "did this change" rather than "is this right". `pnpm vr` diffs your
+  tree against its merge base locally and keeps nothing
+  ([its README](../tools/visual-regression/README.md)); wireframe fidelity is a human call in
+  Storybook, beside the `addon-designs` frame.
 - **No coverage thresholds.** They reward volume over judgement. Add a test when it would have
   caught something.
 - **No general end-to-end browser suite.** The production navigation contract above is the narrow

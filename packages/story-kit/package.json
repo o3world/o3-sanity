@@ -10,7 +10,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@o3/block-spec": "workspace:*",
     "vite-tsconfig-paths": "^6.1.1"
   },
   "devDependencies": {

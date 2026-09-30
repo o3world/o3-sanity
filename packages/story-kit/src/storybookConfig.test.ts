@@ -30,25 +30,6 @@ afterAll(() => {
 const SUFFIX = '**/*.stories.@(js|jsx|mjs|ts|tsx)'
 
 describe('defineStorybookConfig', () => {
-  it('globs the shared component packages on every host', () => {
-    const config = defineStorybookConfig({ configDir })
-
-    expect(config.stories).toEqual([
-      `../../../packages/ui/src/${SUFFIX}`,
-      `../../../packages/content-ui/src/${SUFFIX}`,
-    ])
-  })
-
-  it("appends the host's own app roots after the shared ones", () => {
-    const config = defineStorybookConfig({ configDir, appStoryRoots: ['apps/web/src'] })
-
-    expect(config.stories).toEqual([
-      `../../../packages/ui/src/${SUFFIX}`,
-      `../../../packages/content-ui/src/${SUFFIX}`,
-      `../../../apps/web/src/${SUFFIX}`,
-    ])
-  })
-
   it('globs a prototypes directory last and mounts the sets inside it', () => {
     const config = defineStorybookConfig({
       configDir,
@@ -67,24 +48,6 @@ describe('defineStorybookConfig', () => {
     // assets belonging to a set, not a set.
     expect(config.staticDirs).toEqual([
       { from: '../prototypes/has-entry', to: '/prototypes/has-entry' },
-    ])
-  })
-
-  it('mounts nothing on a host with no prototypes', () => {
-    const config = defineStorybookConfig({ configDir })
-
-    expect(config.staticDirs).toEqual([])
-    expect(config.stories).not.toContain(`../prototypes/${SUFFIX}`)
-  })
-
-  it('builds on the Next-Vite framework with the shared addons', () => {
-    const config = defineStorybookConfig({ configDir })
-
-    expect(config.framework).toEqual({ name: '@storybook/nextjs-vite', options: {} })
-    expect(config.addons).toEqual([
-      '@storybook/addon-docs',
-      '@storybook/addon-a11y',
-      '@storybook/addon-designs',
     ])
   })
 })

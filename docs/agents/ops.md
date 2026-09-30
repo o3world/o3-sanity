@@ -82,6 +82,9 @@ pnpm dataset:drift      # which pipeline-owned documents an editor changed (exit
 no flag — `tools/migration/src/load.ts` carries the reasoning. There is no
 scratch dataset left to rebuild into: `development` mirrors `production` via
 `pnpm dataset:sync`, and both hold content no committed JSON knows about.
+Nor is there a source to rebuild the corpus from: the WordPress import is
+frozen, so `data/converted/` and `data/translated/` are edited by hand like the
+seeds, and nothing regenerates them.
 
 To get a `development` that matches the live site, sync it. To change documents
 in it, write a targeted migration under `tools/migration/src/migrations/`
@@ -94,18 +97,10 @@ pnpm --filter @o3/migration verify       # read-only: is the dataset what data/ 
 ```
 
 `pnpm dataset` with no argument prints which dataset each entry point is
-pointed at. It rewrites four gitignored `.env.local` files at once — web app,
-typegen, migration, guidance — because the loader resolves its dataset
+pointed at. It rewrites three gitignored `.env.local` files at once — web app,
+typegen, migration — because the migration commands resolve their dataset
 independently of the web app, and the two silently disagreeing is what once
 sent every load to production.
-
-The extract and convert halves still run — they write files, not documents —
-but the chain ends at the corpus rather than at the dataset:
-
-```bash
-pnpm --filter @o3/migration extract      # WordPress → data/extract/
-pnpm --filter @o3/migration convert      # → data/converted/ (Portable Text, refs)
-```
 
 **Then look at it in a browser.** A targeted migration that succeeds against
 the wrong dataset looks exactly like one that worked.
@@ -130,9 +125,6 @@ pnpm test                     # the full suite (checkpoint, not a loop)
 pnpm vr                       # pixel diff against the merge base
 pnpm typegen                  # schema.json + generated types, after a schema edit
 
-pnpm brief:sync               # brief markdown → brief documents
-pnpm brief:check              # fails if a file-backed brief drifted
-pnpm brief:export             # a dataset-born brief becomes a file in the repo
 pnpm schema:deploy            # deploy the schema so get_schema sees it
 pnpm schema:check             # fails if the deployed schema drifted (a CI gate — see below)
 pnpm figma:sync               # what changed in the design file since last sync

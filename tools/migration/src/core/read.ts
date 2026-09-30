@@ -1,13 +1,11 @@
 /**
  * What the committed corpus is: the three trees under `data/`, the documents
- * in them, and the id contract that says which of a dataset's documents this
- * pipeline owns.
+ * in them, and the document types a different tool owns.
  */
 import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 
 import { CONVERTED_DIR, SEED_DIR, TRANSLATED_DIR } from '../lib/paths'
-import { bareId } from './state'
 
 /** The committed corpus trees, in load order, each at its root under `data/`. */
 const CORPUS_TREES = {
@@ -129,12 +127,9 @@ export function slugsByType(
 }
 
 /**
- * The document types this pipeline does not own. `brief` is synced from repo
- * markdown by `tools/guidance`
- * ([ADR 0027](../../../../docs/adr/0027-the-brief-is-a-document.md)) and
- * outlives this pipeline, which is deleted post-migration. So a brief is never
- * committed under `data/`, `load` never writes or retires one, and `verify`
- * does not count one an orphan.
+ * The document types the committed corpus does not hold. A `brief` lives only
+ * in the dataset, so one is never committed under `data/`, and `verify` does
+ * not count one an orphan.
  *
  * `guidance` is a retired type with no schema and no writer (#192), named here
  * because the `production` dataset still holds six of its documents: without
@@ -148,32 +143,8 @@ export function isInternalType(type: string): boolean {
 }
 
 /**
- * Pipeline ownership is the deterministic id contract (CONTEXT.md →
- * Rebuild): `<type>-wp-<id>` for a WordPress document, `<type>-seed-<slug>`
- * for a greenfield one.
- * Everything else in the dataset — Studio-created documents, uuid drafts,
- * `siteSettings` — is outside the pipeline's authority and is never retired
- * by `load`.
- *
- * The source token is what makes the delete half of the rebuild promise true:
- * a document whose id this does not match is written on every load and removed
- * by none, so a renamed slug leaves the old document serving its old URL
- * forever.
- *
- * An internal type's documents are excluded by name, not by shape: a corpus
- * key is any kebab string, so `brief-wp-notes` is a legal brief id that the
- * bare pattern would otherwise claim.
- */
-export function isPipelineOwned(id: string): boolean {
-  const bare = bareId(id)
-  if (INTERNAL_TYPES.some((type) => bare.startsWith(`${type}-`))) return false
-  return /^[a-zA-Z]+-(wp|seed)-./.test(bare)
-}
-
-/**
- * A brief's deterministic id — `brief-<key>`, the id a `briefs` reference in
- * seed JSON points at. A matcher only: the id is constructed by `idFor` in
- * `tools/guidance/src/corpus/plan.ts`, which this tool does not import
- * because it is deleted post-migration and the corpus tool is not.
+ * A brief's id — `brief-<key>`, from the `key` field the brief schema defines,
+ * and the id a `briefs` reference in seed JSON points at. A matcher only:
+ * briefs are written in the dataset, never from here.
  */
 export const BRIEF_ID = /^brief-[a-z0-9]+(-[a-z0-9]+)*$/

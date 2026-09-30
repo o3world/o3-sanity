@@ -42,7 +42,10 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** As seeded on `/ventures/urvin` — the one seeded instance of this block. */
+/**
+ * As seeded on `/ventures/urvin` — the one seeded instance of this block, and
+ * `contained`: the 822px article measure, with the `0 0 64px rgba(0,0,0,0.1)` lift.
+ */
 export const AsSeeded: Story = {
   args: seededSectionArgs('ventures-urvin', 'mediaSection'),
 }
@@ -50,11 +53,6 @@ export const AsSeeded: Story = {
 /** Edge to edge — the treatment that has to escape `SectionShell`'s gutter. */
 export const FullBleed: Story = {
   args: { ...seededSectionArgs('ventures-urvin', 'mediaSection'), width: 'full-bleed' },
-}
-
-/** The 822px article measure, with the `0 0 64px rgba(0,0,0,0.1)` lift. */
-export const Contained: Story = {
-  args: { ...seededSectionArgs('ventures-urvin', 'mediaSection'), width: 'contained' },
 }
 
 /** `1906:900` — full-bleed at 402, where the box is 402 × 257. */

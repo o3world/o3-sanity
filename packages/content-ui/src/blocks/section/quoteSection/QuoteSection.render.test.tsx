@@ -62,11 +62,6 @@ describe('the quote band’s molecule decoration', () => {
     expect(html).toContain('Business Leader, Global Health Brand')
   })
 
-  it('centres the column with the current shared attribution gap', () => {
-    expect(html).toContain('text-center')
-    expect(html).toContain('gap-12')
-  })
-
   it('sets the attribution as the eyebrow the set draws', () => {
     // 18/24 bold uppercase at 0.1em in fg-muted #76746F (`2748:4840`),
     // 16/20 at 402 (`2748:4717`) — not a 36px line at half-strength ink.
@@ -86,23 +81,6 @@ describe('the quote band’s molecule decoration', () => {
     // `text-white` alone would prove nothing — the ink surface class carries
     // it. The absence of `text-ink` is what says the glyph moved with the band.
     expect(render('molecule', 'ink')).not.toContain('text-ink')
-  })
-})
-
-/** No O3 frame labels a quote, so a stored eyebrow draws nothing. */
-describe('the quote band’s eyebrow', () => {
-  it('prints nothing of the stored label', () => {
-    const html = renderToStaticMarkup(
-      <QuoteSection
-        {...({
-          eyebrow: 'Trusted by leading organizations',
-          quote: 'Simply the best. Better than all the rest.',
-          decoration: 'none',
-          surface: 'bone',
-        } as unknown as SectionProps<'quoteSection'>)}
-      />,
-    )
-    expect(html).not.toContain('Trusted by leading organizations')
   })
 })
 

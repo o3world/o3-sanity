@@ -137,7 +137,7 @@ forget it. Where the renderer itself belongs is the table below.
 ### o3xo is deleted
 
 The o3xo app and everything that served it were deleted in #490; `apps/web` is the only app. O3XO
-survives only as a brand name in content, such as the utility-nav mark and the links to o3xo.ai.
+survives only as a brand name in content, such as the footer's property logo and the links to o3xo.ai.
 
 ### Where a component lives
 
@@ -230,6 +230,13 @@ copy — it reports before it writes, refuses a dataset it was not told about ou
 loud, reruns as a no-op, and overwrites no field it did not come to change. Run
 it, then say on the ticket what it touched.
 
+**A migration is deleted once it has run.** When its production run is on its
+ticket, a follow-up removes the script, its plan, its test and its
+`package.json` entry; the ticket and git history keep the record. A migration
+whose dry run now refuses because the documents it targets have moved on is
+dead too. If its change is still wanted, write a new one against the content as
+it stands. `statsToBand.ts` stays as the pattern.
+
 `pnpm --filter @o3/migration verify` remains useful as a read-only check.
 
 The production protections still apply to targeted work there: ADR 0003 is
@@ -305,43 +312,17 @@ wrong.
 
 The references tell an agent how to write anywhere; a **brief** is what one
 piece is written from
-([ADR 0027](./docs/adr/0027-the-brief-is-a-document.md)). It is the repo's one
-corpus — markdown registered by frontmatter in a globbed directory, synced to
-`brief` documents:
+([ADR 0027](./docs/adr/0027-the-brief-is-a-document.md)). It is a `brief`
+document in the dataset, id `brief-<key>`, created by the authoring skill's
+gather stage and patched by every stage after it. A piece points at its briefs
+through the weak `briefs` array, so a brief never publish-blocks or
+delete-locks the piece it belongs to.
 
-```bash
-pnpm brief:sync     # tools/guidance/briefs/*.md → brief documents
-pnpm brief:check    # fails if a file-backed brief has drifted
-pnpm brief:export   # a dataset-born brief becomes a file in the corpus
-```
-
-The commands are thin. The engine under them is `tools/guidance/src/corpus/` —
-one pure function from (sources, dataset snapshot) to a plan: what to write,
-what drifted, what no source claims. `brief-sync.ts` and `brief-check.ts`
-supply the client and nothing else, which is what lets the plan be unit-tested
-without a project or a token.
-
-Briefing a piece is three steps. Drop a markdown file in
-`tools/guidance/briefs/` with `key` and `title` in its frontmatter — the body
-becomes the brief's `background`. Run `pnpm brief:sync`. Then point the piece's
-seed JSON at `brief-<key>` through its weak `briefs` array. Load and sync in
-either order; the reference is weak for that reason.
-
-A brief also carries what an authoring run makes of it, one field per stage —
+A brief carries what an authoring run makes of it, one field per stage —
 `stage`, `nextStep`, `thesis`, `readerQuestions`, `outline`, `draft`,
 `verdict`, `decisions`, `gaps`, `pieceId` (#190). Each stage patches its own
 fields, so a resuming session reads `stage` instead of parsing prose and two
-stages cannot clobber each other. The markdown owns `background` and nothing
-else; a brief written before #190 keeps its old `record` value as an
-off-schema field that nothing reads.
-
-Two rules the corpus config carries and the commands do not restate. A brief
-syncs by **merge**, so everything a run patched survives a sync. And a
-brief with no `sourcePath` was **born in the dataset** — `check` ignores it and
-`sync` never deletes it. A file whose key a dataset-born brief already holds is
-**refused rather than merged**, and `pnpm brief:export <key>` is the way out: it
-writes that brief to `tools/guidance/briefs/` and makes the dataset copy
-file-backed, so the next sync has nothing to write.
+stages cannot clobber each other.
 
 ### Testing a skill in the o3sanity plugin
 
@@ -369,12 +350,13 @@ cost more than a review on this repo returns. Run it before a merge, not after e
 
 ### Testing
 
-Three layers — `unit` (`*.test.ts`), `render` (`*.render.test.tsx`), `stories` (`*.stories.tsx`).
+Three layers — `unit` (`*.test.ts`), `render` (`*.render.test.tsx`), `stories` (`*.stories.tsx`) —
+plus a `shell` project for the tests that start a process, which `pnpm test:fast` skips.
 Read `docs/testing.md` before writing one; decisions are in `docs/adr/0004-layered-test-approach.md`.
 
 **Run tests as a checkpoint, not a loop.** `pnpm test` before opening a PR, and after a
 migration batch or a new block — not after every edit, and never in watch mode during agent work.
-There is no git hook; `pnpm verify` does not run tests. CI runs the suite as its own job.
+No git hook runs tests, and `pnpm verify` does not either. CI runs the suite as its own job.
 
 **`pnpm vr` answers a different question than the suite does** — not "did it break?" but "what does
 it look like now?". It builds Storybook for your working tree and for the merge base with `main`,

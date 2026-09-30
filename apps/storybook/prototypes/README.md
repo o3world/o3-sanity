@@ -109,7 +109,7 @@ the directory _is_ the registry.
    error. `ls -A` the source, and load the copy in a browser before you trust
    it.
 6. **Write the story file.** Copy an existing one. Give it
-   `parameters: prototypeParameters` and one story per page.
+   `tags: ['!test']`, `parameters: prototypeParameters` and one story per page.
 7. **Write down the question it answers** in the meta docblock — in one
    sentence, plus what decides it and what supersedes it. A prototype with no
    recorded question is a screenshot, and there are cheaper ways to store
@@ -141,10 +141,12 @@ rather than editing in place.
 
 ## Two things that are deliberately off
 
-**Accessibility checks.** The suite runs axe as an error on every story (ADR
-0004), and axe traverses same-origin iframes — so an unsuppressed prototype
-reports the artifact's violations as failures of this repo. `prototypeParameters`
-sets `a11y: { test: 'off' }`, on prototype stories only. Components keep the
+**Tests, accessibility included.** Every prototype meta carries
+`tags: ['!test']`, so the stories project leaves these out: a story that mounts
+nothing but an iframe of a frozen capture has nothing of this repo's to fail.
+They stay in the Storybook sidebar. `prototypeParameters` also sets
+`a11y: { test: 'off' }`, because axe traverses same-origin iframes and would
+report the artifact's violations as failures of this repo. Components keep the
 rule. Fixing a capture's a11y would mean editing a historical record to pass a
 test about code we don't ship.
 

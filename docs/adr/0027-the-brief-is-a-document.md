@@ -1,5 +1,7 @@
 # 0027. The brief is a document
 
+Status: superseded in part 2026-09-30; the brief stays a document, and the file-backed corpus and its `brief:*` commands are removed.
+
 - **Status:** Accepted; the one machine slot amended by [#190](https://github.com/o3world/o3-sanity/issues/190)
 - **Date:** 2026-08-16
 - **Deciders:** NickO3 + Claude

@@ -59,10 +59,9 @@ export const railPanelsSectionKnobs = defineBlockKnobs({
       // to draw it on the rail-less layouts, and a closure would tell it
       // nothing (ADR 0020). Stated as the one layout that HAS a rail rather
       // than the list that lack one, so a fifth layout never has to remember
-      // to join a negative list — and a single-value gate is the only shape
-      // `knobArgs` can map to a Storybook `if` condition. `emptyMatches`,
-      // because an unset `layout` falls back to the rail composition (the
-      // `ORB_ONLY` precedent in `mark.ts`).
+      // to join a negative list. `emptyMatches`, because an unset `layout`
+      // falls back to the rail composition (the `ORB_ONLY` precedent in
+      // `mark.ts`).
       showWhen: { at: 'layout', mode: 'oneOf', values: ['rail'], emptyMatches: true },
     }),
     knob({

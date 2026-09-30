@@ -134,7 +134,6 @@ function pairing(overrides: Partial<PairingRow> & { storyId: string; nodeId: str
   return {
     title: 'Content/Blocks/Section/Band',
     exportName: 'AsSeeded',
-    fileKeyRef: 'FIGMA_FILE_KEY',
     file: 'packages/content-ui/src/Band.stories.tsx',
     declaredOn: 'story',
     hosts: ['o3'],
@@ -271,16 +270,6 @@ describe('planFrameScoring', () => {
     })
     expect(plan.targets.map((target) => target.viewport.name)).toEqual(['frame-402'])
     expect(plan.unscorable).toEqual([])
-  })
-
-  it('does not score a pairing whose design file nothing in the repo owns', () => {
-    const plan = planFrameScoring({
-      stories: [story('band--seeded')],
-      pairings: [pairing({ storyId: 'band--seeded', nodeId: '1:1', designBrand: null })],
-      exports,
-    })
-    expect(plan.targets).toEqual([])
-    expect(plan.unkeyed.map((row) => row.brand)).toEqual([null])
   })
 })
 

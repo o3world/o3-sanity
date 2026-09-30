@@ -1,7 +1,7 @@
 import { evaluate, parse } from 'groq-js'
 import { describe, expect, it } from 'vitest'
 
-import { CASE_STUDIES_QUERY, LATEST_INSIGHTS_QUERY } from './queries'
+import { CASE_STUDIES_PAGE_QUERY, INSIGHTS_PAGE_QUERY } from './queries'
 
 /**
  * THE CARD-SIDE FALLBACK (#416).
@@ -17,10 +17,17 @@ import { CASE_STUDIES_QUERY, LATEST_INSIGHTS_QUERY } from './queries'
  * The hero side of the chain is the view's, and is asserted through a
  * rendered page in the app's detail render test.
  */
-async function cards(dataset: unknown[]) {
-  const result = await evaluate(parse(CASE_STUDIES_QUERY), { dataset })
-  return (await result.get()) as Array<{ cardMedia: { alt?: string } | null }>
+type Card = { cardMedia: { alt?: string } | null }
+
+/** The feed's cards. `parse` takes the params too, so the slice is numeric. */
+async function feed(query: string, dataset: unknown[], extra: Record<string, unknown> = {}) {
+  const params = { offset: 0, end: 10, ...extra }
+  const result = await evaluate(parse(query, { params }), { dataset, params })
+  return ((await result.get()) as { items: Card[] }).items
 }
+
+const cards = (dataset: unknown[]) => feed(CASE_STUDIES_PAGE_QUERY, dataset)
+const insightCards = (dataset: unknown[]) => feed(INSIGHTS_PAGE_QUERY, dataset, { category: null })
 
 function figure(alt: string) {
   return {
@@ -28,12 +35,6 @@ function figure(alt: string) {
     alt,
     image: { _type: 'image', asset: { _type: 'reference', _ref: `image-${alt}` } },
   }
-}
-
-async function insightCards(dataset: unknown[]) {
-  const params = { categoryId: null, limit: 10 }
-  const result = await evaluate(parse(LATEST_INSIGHTS_QUERY, { params }), { dataset, params })
-  return (await result.get()) as Array<{ cardMedia: { alt?: string } | null }>
 }
 
 function caseStudy(fields: Record<string, unknown>) {

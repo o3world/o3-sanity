@@ -194,7 +194,7 @@ describe('the four reds', () => {
       scores: [score()],
       unkeyed: [
         { storyId: 'a--b', nodeId: '7:7', brand: 'o3', why: 'not tracked by figma:sync' },
-        { storyId: 'c--d', nodeId: '8:8', brand: null, why: 'names no known design file' },
+        { storyId: 'c--d', nodeId: '8:8', brand: 'o3', why: 'brand has no figma:sync baseline' },
       ],
       unpaired: [story('e--f')],
     })

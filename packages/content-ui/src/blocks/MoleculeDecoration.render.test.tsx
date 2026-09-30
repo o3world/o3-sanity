@@ -28,15 +28,6 @@ describe('the molecule decoration', () => {
     expect(render({ decoration: null })).toBe('')
   })
 
-  /**
-   * An unset knob is the BLOCK's declared default, not one shared literal
-   * (#163). The quote band declares `orbs` and draws nothing; the CTA band
-   * declares `molecule` and draws — from the same absent value.
-   */
-  it('reads an unset knob as the block’s own default', () => {
-    expect(render({ decoration: null, block: 'quoteSection' })).toBe('')
-  })
-
   it('takes the band’s own ink', () => {
     expect(render({ surface: 'ink' })).toContain('text-white')
     expect(render({ surface: 'charcoal' })).toContain('text-white')

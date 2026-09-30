@@ -14,13 +14,6 @@ name: Nightly schema drift
 #
 # One issue, forever: found by exact title, reopened and re-commented rather
 # than filed again, and closed on the first clean night after a fix.
-#
-# `brief:check` is deliberately not here. Nothing deploys the brief corpus to
-# `production` — no workflow runs `brief:sync`, and `production` holds no
-# `brief` document — so a nightly check against it would report every
-# file-backed brief as missing, every night. A brief lives in the dataset the
-# authoring session works in; making `production` the brief of record is a
-# decision with a sync step behind it, not an assertion a schedule can make.
 
 on:
   schedule:

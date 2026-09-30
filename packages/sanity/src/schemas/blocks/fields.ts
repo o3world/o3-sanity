@@ -16,9 +16,8 @@ import { defineArrayMember, defineField } from 'sanity'
  * `caseStudy` carry (ADR 0027).
  *
  * **Weak, deliberately.** A brief is provenance, and provenance must never
- * publish-block or delete-lock the content it belongs to; weak also means the
- * order of `load` and `brief:sync` stops mattering, because neither has to
- * exist before the other.
+ * publish-block or delete-lock the content it belongs to; weak also means a
+ * piece can be written before its brief exists, or the other way round.
  *
  * Plural because it is an array (CONTEXT.md → shape conventions), and the
  * plural is real: one topic researched once feeds every piece drawn from it,

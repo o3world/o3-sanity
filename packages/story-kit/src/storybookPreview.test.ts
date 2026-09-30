@@ -11,8 +11,4 @@ describe('defineStorybookPreview', () => {
     // The shared parameters survive the merge.
     expect(preview.parameters?.a11y.test).toBe('error')
   })
-
-  it('offers no brand toolbar', () => {
-    expect(defineStorybookPreview().globalTypes?.brand).toBeUndefined()
-  })
 })

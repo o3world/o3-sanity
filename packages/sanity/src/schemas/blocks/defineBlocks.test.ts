@@ -39,22 +39,21 @@ describe('block descriptions (ADR 0025)', () => {
       }),
     ).toThrow(/description/)
   })
-
-  it('a missing description does not compile', () => {
-    const missing = () =>
-      // @ts-expect-error — description is required (ADR 0025)
-      defineSectionBlock({
-        name: 'quoteSection',
-        title: 'Quote',
-        knobs: quoteSectionKnobs,
-        fields: [quote()],
-      })
-    const missingBase = () =>
-      // @ts-expect-error — required on the base tier too
-      defineBaseBlock({ name: 'richText', title: 'Rich text', fields: [quote()] })
-    expect([missing, missingBase]).toHaveLength(2)
-  })
 })
+
+// A missing description does not compile (ADR 0025). The package's `tsc
+// --noEmit` enforces this, not the runner: neither arrow is ever called.
+void (() =>
+  // @ts-expect-error — description is required
+  defineSectionBlock({
+    name: 'quoteSection',
+    title: 'Quote',
+    knobs: quoteSectionKnobs,
+    fields: [quote()],
+  }))
+void (() =>
+  // @ts-expect-error — required on the base tier too
+  defineBaseBlock({ name: 'richText', title: 'Rich text', fields: [quote()] }))
 
 describe('the background media every section block carries (#239)', () => {
   const band = () =>

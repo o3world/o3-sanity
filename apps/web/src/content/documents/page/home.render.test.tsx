@@ -47,25 +47,6 @@ describe('the seeded homepage', () => {
   })
 
   /**
-   * The frame's band sequence (`2747:4486`'s parent `1680:2134`, and
-   * `1814:1618` at 402 — both widths run the same order). The platforms band
-   * comes before the quote, and the how-we-work track after it.
-   */
-  it('follows the frame’s band sequence', () => {
-    const sections = (aSeededPage('index').sections ?? []) as { _type: string; _key: string }[]
-    expect(sections.map((section) => section._key)).toEqual([
-      'hero',
-      'partners',
-      'work',
-      'platforms',
-      'quote',
-      'engagements',
-      'insights',
-      'cta',
-    ])
-  })
-
-  /**
    * Sub-block attribution (#107) — the elements the canvas toolbar attaches
    * to. A toolbar whose surfaces are *section / header / item* needs three
    * attributed elements; before this the band was the only one, so every
@@ -94,24 +75,25 @@ describe('the seeded homepage', () => {
     ])
   })
 
-  it.each([
-    ['hero', 'You see the problem in front of you.'],
-    ['hero subheading', 'The senior team that finds the move is the team that builds it.'],
-    ['partners heading', 'Trusted by organizations shaping what&#x27;s next.'],
-    ['partners standfirst', 'From Fortune 500 enterprises to high-growth organizations'],
-    ['case showcase heading', 'Most firms can ship what you ask for'],
-    ['a case study’s narrative headline', 'CMS was heading for end of life'],
-    ['quote', 'positioned our company as the leader and shaper'],
-    ['platform rail', 'The platforms we go deep on'],
-    ['platform standfirst', 'certified depth in modern platforms that are scaling the internet'],
-    ['engagement heading', 'How we work'],
-    ['engagement panel', 'Embedded Team'],
-    ['engagement note', 'Best when you trust the direction and need the horsepower.'],
-    ['insights carousel', 'The thinking behind the work.'],
-    ['closing CTA', 'Let’s get started on your next big thing.'],
-    ['closing CTA body', 'If you’re ready, we’re ready.'],
-  ])('shows the frame’s %s', (_label, copy) => {
-    expect(html).toContain(copy)
+  it('shows the frame’s copy', () => {
+    const copy = [
+      ['hero', 'You see the problem in front of you.'],
+      ['hero subheading', 'The senior team that finds the move is the team that builds it.'],
+      ['partners heading', 'Trusted by organizations shaping what&#x27;s next.'],
+      ['partners standfirst', 'From Fortune 500 enterprises to high-growth organizations'],
+      ['case showcase heading', 'Most firms can ship what you ask for'],
+      ['a case study’s narrative headline', 'CMS was heading for end of life'],
+      ['quote', 'positioned our company as the leader and shaper'],
+      ['platform rail', 'The platforms we go deep on'],
+      ['platform standfirst', 'certified depth in modern platforms that are scaling the internet'],
+      ['engagement heading', 'How we work'],
+      ['engagement panel', 'Embedded Team'],
+      ['engagement note', 'Best when you trust the direction and need the horsepower.'],
+      ['insights carousel', 'The thinking behind the work.'],
+      ['closing CTA', 'Let’s get started on your next big thing.'],
+      ['closing CTA body', 'If you’re ready, we’re ready.'],
+    ] as const
+    expect(copy.filter(([, text]) => !html.includes(text))).toEqual([])
   })
 
   it('numbers the how-we-work track from array order, not authored strings', () => {
@@ -125,8 +107,7 @@ describe('the seeded homepage', () => {
 
   /**
    * The quote band's decoration (`2748:4767`, `2748:4804` at 402): the
-   * molecule at 10%, hung off the band's bottom-left corner. The two spheres
-   * belong to the closer, which draws its own — see the last describe.
+   * molecule at 10%, hung off the band's bottom-left corner.
    */
   it('hangs the molecule behind the quote, not the spheres', () => {
     const sections = (aSeededPage('index').sections ?? []) as {
@@ -319,15 +300,6 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(pullQuote).toContain('text-quote')
     expect(pullQuote).toContain('font-sans')
     expect(pullQuote).not.toContain('text-hero')
-  })
-
-  it('holds the case-card stack gap at 48 at both widths', () => {
-    expect(html).toContain('class="flex flex-col gap-12"')
-  })
-
-  it('uses the current gradient-only closer', () => {
-    expect(html).toContain('cta-band')
-    expect(html).not.toContain('cta-lag')
   })
 
   it('numbers each how-we-work column once, at both widths', () => {

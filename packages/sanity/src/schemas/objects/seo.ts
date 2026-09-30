@@ -6,11 +6,9 @@ import { defineField, defineType } from 'sanity'
  * in `apps/web/src/lib/seo.ts`: document `seo` → document fields → Site
  * Settings `defaultSeo`.
  *
- * That override-only rule is what the WordPress extraction maps onto. Yoast
- * resolves site-wide templates and fallbacks into per-post values, and
- * `tools/migration/src/map/seo.ts` deliberately keeps only the parts a post
- * actually overrode — migrating the resolved values instead would freeze 272
- * copies of the site default into the dataset.
+ * The migrated documents follow the same rule: they carry only what a
+ * WordPress post overrode in Yoast, not Yoast's resolved per-post values, which
+ * would freeze 272 copies of the site default into the dataset.
  */
 export const seo = defineType({
   name: 'seo',

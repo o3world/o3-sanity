@@ -106,10 +106,11 @@ stays because 273 articles do not fit a canvas; that is recorded on
 `InsightIndexView` rather than as a provisional route, since a page is not
 provisional for keeping one control a frame had no reason to draw.
 
-Enforcement is `apps/web/src/content/documents/provisionalRoutes.render.test.tsx`,
-which applies `seed.test.ts`'s three rules to route entries. Both collection
-indexes now carry a `figmaNode` and no `provisional`, and both are pinned by
-name there, so a marker coming back is a deliberate act.
+Enforcement is the `RouteProvenance` union in
+`packages/content-runtime/src/routes/types.ts`: an entry that sets the flag
+without a note, or sets both the flag and a frame, does not compile. Both
+collection indexes carry a `figmaNode` and no `provisional`, so a marker coming
+back is a deliberate edit to the entry.
 
 **#48's gate covers both halves.** No document and no route may still be
 provisional at launch.

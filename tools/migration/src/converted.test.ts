@@ -1,6 +1,3 @@
-import { readFileSync, existsSync } from 'node:fs'
-import { join } from 'node:path'
-
 import { describe, expect, it } from 'vitest'
 
 import { offersSurface } from './lib/surfaceContract'
@@ -8,29 +5,24 @@ import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 import { SURFACES } from '@o3/sanity/constants'
 
 import { readCorpus, refsIn } from './core/read'
-import { EXTRACT_DIR } from './lib/paths'
-import type { WpSeo } from './lib/yoast'
 import { categoryDoc } from './map/category'
-import { checkPathParity } from './map/paths'
 import { pageDoc } from './map/page'
 import { personDoc } from './map/person'
 import { siteSettingsDoc } from './map/siteSettings'
 import { insightDoc } from './map/insight'
 
 /**
- * Invariants over the ACTUAL committed conversion output, not fixtures.
- *
- * The mapper tests prove one document converts correctly; these prove the
- * whole committed corpus holds together — which is the check that earns its
- * keep as the corpus grows from 18 documents to ~340 (#17, #18, #22). A
- * dangling author reference or a body block the renderer has never seen is
- * the kind of thing that survives a green build and fails in Studio.
+ * Invariants over the ACTUAL committed WordPress-converted corpus, not
+ * fixtures. The tree is static data now, edited by hand, and these prove it
+ * still holds together. A dangling author reference or a body block the
+ * renderer has never seen is the kind of thing that survives a green build and
+ * fails in Studio.
  *
  * Content is data reviewed in PRs (#25 agreement 1); this is the automated
  * half of that review.
  */
 
-/** The conversion output, read once — every check below filters this. */
+/** The converted tree, read once — every check below filters this. */
 const converted = readCorpus<Record<string, unknown>>('converted')
 
 function readType<T>(type: string): { file: string; doc: T }[] {
@@ -47,13 +39,13 @@ const pages = readType<Record<string, unknown>>('page')
 const all = [...insights, ...categories, ...persons, ...siteSettings, ...pages]
 
 /**
- * The closed set of block types the `bodyText` schema allows. A converter that
- * starts emitting something else has invented a schema type, which is a schema
- * conversation rather than a mapper change (#25 agreement 1).
+ * The closed set of block types the `bodyText` schema allows. A body holding
+ * something else has invented a schema type, which is a schema conversation
+ * rather than a content edit (#25 agreement 1).
  */
 const ALLOWED_BODY_TYPES = new Set(['block', 'figure', 'embed', 'pullQuote'])
 
-describe('committed conversion output', () => {
+describe('the committed converted corpus', () => {
   it('has documents to check (a silently empty corpus would pass everything below)', () => {
     expect(all.length).toBeGreaterThan(0)
   })
@@ -83,12 +75,10 @@ describe('committed conversion output', () => {
   })
 
   /**
-   * The committed half of the surface contract the mapper tests hold at the
-   * other end (`map/page.test.ts`). A section either offers the choice or has
-   * its colour fixed by its composition, and a document that stores a surface
-   * for the second kind stores content nothing reads. Asked of the
-   * declaration, so the day another band stops offering the choice this test
-   * already knows.
+   * The surface contract. A section either offers the choice or has its colour
+   * fixed by its composition, and a document that stores a surface for the
+   * second kind stores content nothing reads. Asked of the declaration, so the
+   * day another band stops offering the choice this test already knows.
    */
   it('stores a surface only on sections that offer the choice', () => {
     for (const { file, doc } of pages) {
@@ -130,8 +120,7 @@ describe('committed conversion output', () => {
    * editor set the ACF author, so most insights carry none. What must
    * still hold is the pair of invariants around the ones that do: the
    * reference resolves, and no person document is committed that nothing
-   * attributes (person emission is reference-driven in `convert.ts`, so a
-   * stray one means a stale file on disk).
+   * attributes (a stray one means a stale file on disk).
    */
   it('resolves every author reference to a committed person document', () => {
     const personIds = new Set(persons.map(({ doc }) => doc._id as string))
@@ -180,9 +169,8 @@ describe('committed conversion output', () => {
     }
   })
 
-  // The loader refuses to touch a locked document (ADR 0003). Anything the
-  // converter produced is by definition re-derivable from git, so it must
-  // never be born locked — that would freeze it against its own pipeline.
+  // The lock is how an editor takes a document over in the dataset (ADR 0003),
+  // so a committed copy is never born locked.
   it('leaves every converted document unlocked', () => {
     for (const { file, doc } of all) {
       expect((doc.migration as { locked: boolean }).locked, file).toBe(false)
@@ -203,38 +191,14 @@ describe('committed conversion output', () => {
 
   /**
    * `extractedAt` is a fact about the extract *run*, so it lives in
-   * `data/extract/_manifest.json` and `load.ts` stamps it onto the document on
-   * its way to Sanity. Storing it here made every `convert` rewrite all 272
-   * files whether or not WordPress had changed anything, which buried real
-   * content changes in timestamp noise. Studio still shows the field.
+   * `data/extract/_manifest.json` and `core/plan.ts` stamps it onto the
+   * documents `drift` compares. A copy stored here would be a second source for
+   * the same timestamp. Studio still shows the field.
    */
-  it('does not store the extract timestamp, so convert output is content-only', () => {
+  it('does not store the extract timestamp; drift stamps it from the manifest', () => {
     for (const { file, doc } of all) {
       expect(doc.migration, file).not.toHaveProperty('extractedAt')
     }
-  })
-
-  // Path parity (#26). The mapper gates this per document at convert time;
-  // this re-checks the committed corpus, so a hand-edited slug in
-  // data/converted/ is caught too.
-  it('serves every insight at the path WordPress serves it at, or a recorded move', () => {
-    // `extract/perspective/` — the extract tree keeps WordPress's vocabulary
-    // (ADR 0017). Reading the wrong directory here would make `existsSync`
-    // skip every document and the check would pass without testing anything,
-    // so the count is asserted below.
-    let checked = 0
-    for (const { file, doc } of insights) {
-      const extract = join(EXTRACT_DIR, 'perspective', file)
-      if (!existsSync(extract)) continue
-      const { seo } = JSON.parse(readFileSync(extract, 'utf8')) as { seo?: WpSeo }
-      const slug = (doc.slug as { current: string }).current
-      const issue = checkPathParity(seo?.canonicalRendered ?? '', `/insights/${slug}`)
-      expect(issue?.detail, file).toBeUndefined()
-      checked++
-    }
-    expect(checked, 'no migrated insight was checked — wrong extract directory?').toBeGreaterThan(
-      200,
-    )
   })
 
   // A canonical pointing back at www.o3world.com tells Google the new page is

@@ -45,7 +45,6 @@
     "MobileNavMenu": null,
     "SiteFooter": null,
     "SiteNav": null,
-    "UtilityNav": null,
     "Mobilemenu\u2014threeopenstates(Aug2026)": null,
     "Mobilemenu\u2014openstate(Aug2026)": null,
     "Overview": null,
@@ -68,13 +67,10 @@
     "SectionShell": {
       "cardMode": "column"
     },
-    "BrandLogo": {
+    "BrandMark": {
       "cardMode": "column"
     },
     "Button": {
-      "cardMode": "column"
-    },
-    "Card": {
       "cardMode": "column"
     },
     "PortraitTile": {

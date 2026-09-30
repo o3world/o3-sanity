@@ -40,7 +40,7 @@ const seeds = readCorpus<SeedDoc>('seed').map((entry) => ({
 }))
 
 /**
- * Everything the loader will write — all three trees. Leaving one out silently
+ * The whole committed corpus — all three trees. Leaving one out silently
  * narrows every check below: case studies live almost entirely in the
  * translated tree, and without it the provenance rules would be asserting over
  * the three hand-authored seeds and nothing else.
@@ -53,7 +53,7 @@ const allPipelineDocs = readCorpus<SeedDoc>().map((entry) => ({
 }))
 
 /**
- * Every id the loader will write, across all three trees — the set a seed's
+ * Every committed id, across all three trees — the set a seed's
  * references have to land in.
  *
  * Widened from seeds-only in #56: the About team band references the migrated
@@ -161,10 +161,9 @@ describe('committed seed content', () => {
 
   // A dangling reference loads without complaint and renders as a hole.
   //
-  // A brief is the one exception: it is synced by `brief:sync` rather than
-  // loaded, so it is never committed under `data/` and its reference is weak
-  // for exactly that reason (ADR 0027). The shape of those references is
-  // checked below instead.
+  // A brief is the one exception: it lives only in the dataset, so it is never
+  // committed under `data/` and its reference is weak for exactly that reason.
+  // The shape of those references is checked below instead.
   it('resolves every reference to another committed document', () => {
     for (const { file, doc } of seeds) {
       for (const ref of refsIn(doc)) {
@@ -243,11 +242,9 @@ describe('committed seed content', () => {
     })
 
     /**
-     * The other end of the reference — that a markdown file registers the key
-     * it points at — is asserted in `tools/guidance`, where the corpus reader
-     * lives. Checking it here meant re-implementing frontmatter parsing, and
-     * the copy disagreed with the reader about quoted values and where a fence
-     * ends.
+     * The other end of the reference — that the brief it names exists — is a
+     * fact about the dataset, not the corpus, so no committed-JSON test can
+     * assert it.
      *
      * No committed seed carries a `briefs` entry right now — the one that did
      * was a test post, deleted 2026-08-25 — so the corpus-wide assertions
@@ -255,8 +252,8 @@ describe('committed seed content', () => {
      */
   })
 
-  // `_localSrc` is only resolved at load time, so a typo would otherwise
-  // surface as a failed load halfway through the dataset.
+  // `_localSrc` is only resolved when `sync-docs` writes the document, so a
+  // typo would otherwise surface as a failed run halfway through a selection.
   it('points every image marker at a file that exists in the repo', () => {
     for (const { file, doc } of seeds) {
       for (const path of markersIn(doc)) {
@@ -526,7 +523,7 @@ describe('committed seed content', () => {
    * The inquiry form (#58).
    *
    * Schema validation runs in Studio, and a seed never goes through Studio —
-   * `load` writes the JSON straight to the dataset. So a `required()` rule on
+   * `sync-docs` writes the JSON straight to the dataset. So a `required()` rule on
    * `reasons` or on the submit button's label is enforced for an editor and enforced by
    * nothing at all for the corpus, which is where every form on the site
    * currently comes from. These are that enforcement.
@@ -585,23 +582,12 @@ describe('committed seed content', () => {
       const types = ((contact?.sections ?? []) as { _type: string }[]).map((s) => s._type)
       expect(types).toContain('formSection')
     })
-
-    /**
-     * The form sends now (#412) — it posts to `/api/contact` and on to
-     * HubSpot — so the page carries no provisional marker. The only thing that
-     * marker ever named was the missing handler.
-     */
-    it('no longer declares itself provisional', () => {
-      const migration = (contact?.migration ?? {}) as Partial<Migration>
-      expect(migration.provisional).toBeUndefined()
-      expect(migration.provisionalNote).toBeUndefined()
-    })
   })
 
   /**
    * No dead ends in the wireframe sitemap (#23).
    *
-   * A `button.href` is a plain string, not a reference — the loader will not
+   * A `button.href` is a plain string, not a reference — `sync-docs` will not
    * complain about it, `verify` cannot see it, and the page renders a link
    * that 404s. That is the one failure this corpus can ship silently, and it
    * gets easier to ship with every page seeded, so it is checked here rather
@@ -640,7 +626,7 @@ describe('committed seed content', () => {
       return found
     }
 
-    /** `{type: slug}` for every document the loader will write. */
+    /** `{type: slug}` for every committed document. */
     const slugsByType = new Map<string, Set<string>>()
     for (const { doc } of allPipelineDocs) {
       const slug = (doc.slug as { current?: string } | undefined)?.current

@@ -75,7 +75,7 @@ enum on section blocks survives, but the darks split three ways:
 | `ink`       | `#0A0A0B` | The dominant dark: headlines on light, dark buttons, card base |
 | `ink-warm`  | `#0F100B` | The Work / Live hero band only                                 |
 | `ink-deep`  | `#030303` | Gradient stops and the NavBar pill                             |
-| `utility`   | `#000000` | The black chrome: Utility Nav strip and the footer band        |
+| `utility`   | `#000000` | The black chrome: the footer band                              |
 
 The 2026-08 Figma token pass bound these to a proper variable collection and
 warmed two of them (`bone` was `#F0F0F0`, `ink` was `#0A0A0A`); variable ids

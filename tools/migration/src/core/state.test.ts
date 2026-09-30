@@ -1,11 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
 import {
-  LOCKED_BY_ID,
-  LOCKED_BY_TYPE,
-  LOCK_FETCH_OPTIONS,
-  ROUTABLE_SLUGS,
-  describeSlugCollision,
   isLocked,
   isProvisional,
   lockedIds,
@@ -16,11 +11,9 @@ import {
 } from './state'
 
 /**
- * The lock rule (ADR 0003) is what stops the loader deleting editor-owned
- * content, and it has already been half a rule once: read through the default
- * published perspective, a locked DRAFT came back unlocked and got
- * overwritten. These pin both halves — the query that can see a draft, and the
- * predicate that reads one as locked.
+ * The lock rule (ADR 0003) is what stops `sync-docs` replacing editor-owned
+ * content and what `drift` counts as already safe. A lock on either copy locks
+ * the document, so these pin that a locked DRAFT reads as locked.
  */
 describe('the locked predicate', () => {
   it('reads a locked draft as locked, under the id of the document it shadows', () => {
@@ -48,23 +41,13 @@ describe('the locked predicate', () => {
     expect(isLocked({ _id: 'insight-wp-1', locked: false })).toBe(false)
     expect(isLocked({ _id: 'insight-wp-1', locked: null })).toBe(false)
   })
-
-  it('asks for the raw perspective, the only one that can see a draft', () => {
-    expect(LOCK_FETCH_OPTIONS.perspective).toBe('raw')
-  })
-
-  it('projects the lock flag the same way whether it asks by id or by type', () => {
-    expect(LOCKED_BY_ID).toBe('*[_id in $ids]{_id, "locked": migration.locked}')
-    expect(LOCKED_BY_TYPE).toBe('*[_type in $types]{_id, "locked": migration.locked}')
-  })
 })
 
 /**
  * Routes resolve a document with `…[0]`, so two documents claiming one slug
  * make the served page a coin flip — which is how a leftover `page-home`
- * shadowed the homepage seed and served two sections instead of eight. `load`
- * reports collisions after it commits and `verify` checks for them; these pin
- * the one answer both get.
+ * shadowed the homepage seed and served two sections instead of eight.
+ * `verify` checks for them from whole documents; these pin the answer it gets.
  */
 describe('slug collisions', () => {
   it('names both documents claiming one type and slug', () => {
@@ -94,12 +77,6 @@ describe('slug collisions', () => {
     ).toEqual([])
   })
 
-  it('reads the collision out the same way for both entry points', () => {
-    expect(
-      describeSlugCollision({ key: 'page:index', ids: ['page-home', 'page-seed-index'] }),
-    ).toBe('page:index → page-home, page-seed-index')
-  })
-
   it('finds the same collision in whole documents as in projected rows', () => {
     const docs = [
       { _id: 'page-home', _type: 'page', slug: { _type: 'slug', current: 'index' } },
@@ -118,12 +95,6 @@ describe('slug collisions', () => {
         { _id: 'insight-wp-1', _type: 'insight', slug: { _type: 'slug', current: 'a-post' } },
       ]),
     ).toEqual([{ _id: 'insight-wp-1', _type: 'insight', slug: 'a-post' }])
-  })
-
-  it('asks the dataset for published routable slugs only', () => {
-    expect(ROUTABLE_SLUGS).toBe(
-      '*[_type in $types && defined(slug.current) && !(_id in path("drafts.**"))]{_id, _type, "slug": slug.current}',
-    )
   })
 })
 

@@ -24,12 +24,16 @@ export const Default: Story = {
 
 /** It follows `currentColor`, so it needs no inverse variant. */
 export const OnInk: Story = {
+  // `OnInk` and `Sizes` differ from `Default` only in colour or size; `Default`
+  // alone is mounted by the stories run.
+  tags: ['!test'],
   args: { className: 'text-white' },
   globals: { backgrounds: { value: 'ink' } },
 }
 
 /** The size prop is a plain px width/height — the glyph is scale-independent. */
 export const Sizes: Story = {
+  tags: ['!test'],
   args: { className: 'text-ink' },
   render: () => (
     <div className="text-ink flex items-center gap-6">

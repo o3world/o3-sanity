@@ -1,47 +1,21 @@
 /**
- * What a load run does: the committed corpus and a live lock snapshot in, the
- * writes, retirements, stale-draft clears and locked skips out.
+ * Which committed documents `drift` compares: the corpus and a live lock
+ * snapshot in, the provenance-stamped writes and the locked skips out.
  *
- * Pure — no client, no filesystem — so the destructive rules are pinned by
- * fixtures instead of by a dataset with no backups.
+ * Pure — no client, no filesystem — so the lock rule is pinned by fixtures
+ * instead of by a dataset with no backups.
  */
-import { isPipelineOwned, type CorpusDoc } from './read'
-import { bareId, lockedIds, type LockRow } from './state'
+import type { CorpusDoc } from './read'
+import { lockedIds, type LockRow } from './state'
 
-/** A document the corpus no longer contains, and the forms the dataset holds. */
-export interface Retirement {
-  readonly id: string
-  readonly draft: boolean
-  readonly published: boolean
-}
-
-/** Everything a load run will do, as a value that can be printed. */
+/** The committed corpus split by the lock rule, as a value that can be printed. */
 export interface LoadPlan {
   /**
    * Every unlocked committed document, provenance-stamped, in corpus order —
-   * created-or-replaced **published**, in all three trees (ADR 0016).
+   * the version `drift` compares the dataset's copy against.
    */
   readonly writes: readonly CorpusDoc[]
-  /**
-   * Bare ids whose live draft shadows a document this run writes. A draft
-   * shadows its published document everywhere draft mode is on — Studio opens
-   * the draft, the preview switcher serves it — so a stale one would keep
-   * showing the previous load's content while the site served the new one,
-   * with nothing to say the two disagreed. Only for documents the run writes:
-   * a locked document is skipped before it gets here, which is what protects
-   * an editor who took one over.
-   */
-  readonly staleDraftClears: readonly string[]
-  /**
-   * Retirement — the delete half of CONTEXT.md's Rebuild promise ("deletes
-   * and recreates every unlocked pipeline-owned document"). A document the
-   * corpus no longer contains is removed by the same run that stops writing
-   * it. Ownership is the deterministic id contract (`isPipelineOwned`), so a
-   * Studio-created document is never touched, and a locked one is skipped
-   * and left for `verify`'s orphan check to name.
-   */
-  readonly retirements: readonly Retirement[]
-  /** Ids the run leaves alone because an editor took them over (ADR 0003). */
+  /** Ids left alone because an editor took them over (ADR 0003). */
   readonly lockedSkips: readonly string[]
 }
 
@@ -135,27 +109,11 @@ export function plan(
   provenance: ProvenanceSources,
 ): LoadPlan {
   const locked = lockedIds(live)
-  const corpusIds = new Set(committed.map((doc) => doc._id))
-
-  const retiring = new Map<string, { draft: boolean; published: boolean }>()
-  for (const row of live) {
-    const bare = bareId(row._id)
-    if (!isPipelineOwned(bare) || corpusIds.has(bare)) continue
-    const entry = retiring.get(bare) ?? { draft: false, published: false }
-    if (row._id.startsWith('drafts.')) entry.draft = true
-    else entry.published = true
-    retiring.set(bare, entry)
-  }
-
-  const liveDrafts = new Set(
-    live.filter((row) => row._id.startsWith('drafts.')).map((row) => bareId(row._id)),
-  )
   const writes: CorpusDoc[] = []
-  const staleDraftClears: string[] = []
-  const writeSkips: string[] = []
+  const lockedSkips: string[] = []
   for (const doc of committed) {
     if (locked.has(doc._id)) {
-      writeSkips.push(doc._id)
+      lockedSkips.push(doc._id)
       continue
     }
     writes.push(
@@ -164,18 +122,6 @@ export function plan(
         provenance.runs,
       ),
     )
-    if (liveDrafts.has(doc._id)) staleDraftClears.push(doc._id)
   }
-
-  const retirementSkips: string[] = []
-  const retirements: Retirement[] = []
-  for (const [id, where] of retiring) {
-    if (locked.has(id)) {
-      retirementSkips.push(id)
-      continue
-    }
-    retirements.push({ id, ...where })
-  }
-
-  return { writes, staleDraftClears, retirements, lockedSkips: [...writeSkips, ...retirementSkips] }
+  return { writes, lockedSkips }
 }

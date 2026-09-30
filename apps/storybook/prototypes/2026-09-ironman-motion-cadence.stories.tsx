@@ -40,6 +40,7 @@ import { PrototypeFrame, prototypeParameters } from './frame'
 const meta = {
   title: 'Prototypes/IRONMAN — native narrative cadence (Sep 2026)',
   component: PrototypeFrame,
+  tags: ['!test'],
   parameters: prototypeParameters,
 } satisfies Meta<typeof PrototypeFrame>
 

@@ -35,7 +35,6 @@ TARGETS=(
   "apps/web/.env.local|web app + embedded Studio"
   "packages/sanity/.env.local|typegen, schema extract/deploy"
   "tools/migration/.env.local|migration load + verify"
-  "tools/guidance/.env.local|brief sync + check"
 )
 
 # The datasets o3's brand config declares (@o3/sanity/brand). This script

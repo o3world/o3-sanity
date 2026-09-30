@@ -15,7 +15,8 @@ describe('resolveDecoration', () => {
     expect(resolveDecoration(undefined, 'quoteSection')).toBe('orbs')
     expect(resolveDecoration('sphere', 'quoteSection')).toBe('orbs')
 
-    expect(resolveDecoration(null, 'quoteSection')).toBe('orbs')
+    // Per block, not one literal: the feature grid's knob declares `none` first.
+    expect(resolveDecoration(null, 'featureGridSection')).toBe('none')
     expect(resolveDecoration(undefined, 'heroSection')).toBe('orbs')
   })
 })

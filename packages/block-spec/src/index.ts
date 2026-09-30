@@ -3,9 +3,8 @@
  *
  * A **knob** is one design option on a block: a closed value set with a title,
  * an icon and a declared rule for when it applies. It is declared once, here,
- * and the Sanity field, the Storybook control and the canvas toolbar are all
- * derived from that declaration — so none of them can disagree about what a
- * block offers.
+ * and the Sanity field and the canvas toolbar are both derived from that
+ * declaration — so neither can disagree about what a block offers.
  *
  * **Zero runtime dependencies, and it stays that way.** The declaration has to
  * bundle into the Studio, into the site's Presentation overlay and into

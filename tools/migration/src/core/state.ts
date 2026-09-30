@@ -1,10 +1,10 @@
 /**
  * The migration-state vocabulary: locked, provisional, and slug collision.
  *
- * One home for the three things `load` and `verify` both have an opinion
- * about, so the two entry points cannot hold different opinions. Pure — no
- * client, no filesystem — which is what lets the destructive rules be pinned
- * by fixtures instead of by a live dataset.
+ * One home for the three things `verify`, `drift` and `sync-docs` have an
+ * opinion about, so the entry points cannot hold different opinions. Pure — no
+ * client, no filesystem — which is what lets the lock rule be pinned by
+ * fixtures instead of by a live dataset.
  */
 import { z } from 'zod'
 
@@ -34,19 +34,14 @@ export function bareId(id: string): string {
   return id.replace(/^drafts\./, '')
 }
 
-const LOCKED_PROJECTION = '{_id, "locked": migration.locked}'
-
 /** The lock flag for a known set of ids — what a run is about to write. */
-export const LOCKED_BY_ID = `*[_id in $ids]${LOCKED_PROJECTION}`
-
-/** The lock flag for every document of a type — the retirement candidates. */
-export const LOCKED_BY_TYPE = `*[_type in $types]${LOCKED_PROJECTION}`
+export const LOCKED_BY_ID = `*[_id in $ids]{_id, "locked": migration.locked}`
 
 /**
  * `perspective: 'raw'`, and it is load-bearing: the client defaults to the
  * published perspective, which cannot see a draft at all. Read that way the
- * lock rule was half a rule — a locked draft came back unlocked and was
- * overwritten — so both projections above are fetched with these options.
+ * lock rule is half a rule — a locked draft comes back unlocked and is
+ * overwritten — so the projection above is fetched with these options.
  */
 export const LOCK_FETCH_OPTIONS = { perspective: 'raw' } as const
 
@@ -109,18 +104,7 @@ export interface SlugCollision {
   readonly ids: readonly string[]
 }
 
-/**
- * Every routable slug in the dataset, published copies only — a draft cannot
- * be served, so it cannot collide.
- */
-export const ROUTABLE_SLUGS =
-  '*[_type in $types && defined(slug.current) && !(_id in path("drafts.**"))]' +
-  '{_id, _type, "slug": slug.current}'
-
-/**
- * The same rows out of whole documents, for the entry point that already holds
- * the dataset in memory and has no reason to fetch them again.
- */
+/** Every routable document's slug row, out of whole documents. */
 export function slugRowsOf(
   docs: readonly { _id: string; _type: string; slug?: unknown }[],
 ): SlugRow[] {
@@ -154,7 +138,7 @@ export function slugCollisions(rows: readonly SlugRow[]): SlugCollision[] {
     .map(([key, ids]) => ({ key, ids }) satisfies SlugCollision)
 }
 
-/** The one line both entry points print for a collision. */
+/** The line `verify` prints for a collision. */
 export function describeSlugCollision(collision: SlugCollision): string {
   return `${collision.key} → ${collision.ids.join(', ')}`
 }

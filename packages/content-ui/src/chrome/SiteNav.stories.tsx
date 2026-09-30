@@ -220,7 +220,7 @@ export const WithoutNavItems: Story = {
   ),
 }
 
-/** Related brands belong in the footer; header interaction never reveals them. */
+/** Hovered and focused, the home link keeps its 80px box, clear of the primary links. */
 export const HeaderBrand: Story = {
   ...OverInk,
   play: async ({ canvasElement }) => {
@@ -228,8 +228,6 @@ export const HeaderBrand: Story = {
     const home = canvas.getByRole('link', { name: / home$/ })
     await userEvent.hover(home)
     home.focus()
-    await expect(canvas.queryByRole('link', { name: 'O3XO' })).not.toBeInTheDocument()
-    await expect(canvas.queryByRole('link', { name: '1682 Conference' })).not.toBeInTheDocument()
     await expect(home.getBoundingClientRect().width).toBe(80)
     const primary = canvas.getByRole('navigation', { name: 'Primary' }).getBoundingClientRect()
     await expect(home.getBoundingClientRect().right).toBeLessThan(primary.left)

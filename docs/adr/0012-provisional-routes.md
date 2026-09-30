@@ -1,5 +1,9 @@
 # 0012. A route with no document carries the provisional marker itself
 
+Amended 2026-09-30: the enforcement is the `RouteProvenance` union in
+`packages/content-runtime/src/routes/types.ts`; the render test named under
+"Enforcement is a test" is deleted.
+
 - **Status:** Accepted
 - **Date:** 2026-08-02
 - **Deciders:** NickO3 + Claude

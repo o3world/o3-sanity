@@ -131,9 +131,9 @@ const navGroup = {
 }
 
 /**
- * A link the utility strip draws as its property's mark instead of its name —
- * the 1682 and O3XO logos the Home instance (`2250:1453`) places beside "O3
- * Family of Brands".
+ * A property drawn as its mark instead of its name — the 1682 and O3XO logos.
+ * The footer draws one in place of the footer link that goes to the same
+ * destination.
  *
  * Inline in `utilityNavItems` like `navGroup` is inline in `navItems`: it has
  * no identity outside that array and no design options to declare, so it is an
@@ -161,7 +161,7 @@ const brandLogo = {
     defineField({
       name: 'logo',
       type: 'image',
-      description: 'The property’s mark, knocked out for a black bar.',
+      description: 'The property’s mark, knocked out for the black footer.',
       validation: (rule) => rule.required(),
     }),
   ],
@@ -179,24 +179,18 @@ export const siteSettings = defineType({
     // `insight`, it translated a word into itself (ADR 0017). A nav item's own
     // `label` still overrides per link, like every other entry.
     /**
-     * The brand-property strip above the nav pill (Figma `Utility Nav`,
-     * `2250:1445`): a line of text naming the family, then one mark per
-     * property. Its own field rather than a second `footerGroup` — the group's
-     * label has nowhere to go on a bar that shows only its links, and the
-     * strip's membership is the set of properties O3 runs, which is not the
-     * nav's concern.
-     *
-     * A member is either a `button` — a word — or a `brandLogo`, which is the
-     * same destination drawn as its mark. Additive, the way `navGroup` is
-     * additive to `navItems`: a brand whose strip is three words authors no
-     * logo, and the Home instance's own three members are one of each kind.
+     * The properties O3 runs (Figma `Utility Nav`, `2250:1445`). Nothing draws
+     * them as a strip: the footer reads the `brandLogo` members and draws each
+     * one's mark in place of the footer link that goes to the same
+     * destination. A `button` member — a word — draws nothing.
      */
     defineField({
       name: 'utilityNavItems',
-      title: 'Utility nav',
+      title: 'Property logos',
       type: 'array',
       of: [defineArrayMember({ type: 'button' }), defineArrayMember(brandLogo)],
-      description: 'The brand-property strip above the nav. Desktop only.',
+      description:
+        'The footer draws each brand logo here in place of the footer link that goes to the same destination. Plain links here are not drawn.',
     }),
     /**
      * The nav's own row. A member is either a plain link or a `navGroup` — a

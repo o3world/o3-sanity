@@ -25,6 +25,12 @@ export const AsSeeded: Story = {
     await assertStrip(canvasElement)
     const body = canvasElement.querySelector('section > div p.text-lead')!
     await expect(body.getBoundingClientRect().width).toBe(900)
+    // `text-lead` is 24/34 at 1440; its fluid clamp lands a hair under 24.
+    await expect(parseFloat(getComputedStyle(body).fontSize)).toBeCloseTo(24, 0)
+    const section = canvasElement.querySelector('section')!
+    await expect(section).toHaveAttribute('data-surface', 'ink')
+    await expect(getComputedStyle(section).backgroundImage).toBe('none')
+    await expect(getComputedStyle(body).color).toBe('rgb(170, 166, 158)')
   },
 }
 
@@ -76,9 +82,11 @@ export const Bar: Story = {
   play: async ({ canvasElement }) => {
     await assertStrip(canvasElement)
     const section = canvasElement.querySelector('section')!
+    await expect(section).toHaveAttribute('data-surface', 'ink')
     await expect(getComputedStyle(section).backgroundImage).toContain('partner-texture')
     const heading = within(canvasElement).getByRole('heading', { level: 2 })
     await expect(getComputedStyle(heading).fontSize).toBe('48px')
+    await expect(getComputedStyle(heading).color).toBe('rgb(255, 255, 255)')
   },
   globals: { backgrounds: { value: 'bone' }, viewport: { value: 'desktop' } },
 }
@@ -103,30 +111,6 @@ async function assertStrip(canvasElement: HTMLElement) {
   const copyWidth = firstCopy.reduce((width, mark) => width + mark.getBoundingClientRect().width, 0)
   await expect(track.getBoundingClientRect().width / copies).toBeCloseTo(copyWidth, 1)
   await expect(document.documentElement.scrollWidth).toBe(document.documentElement.clientWidth)
-}
-
-/** The authored ink surface is honored by both current logo-wall layouts. */
-export const SavedInkSurface: Story = {
-  ...AsSeeded,
-  args: { ...AsSeeded.args, surface: 'ink' },
-  play: async ({ canvasElement }) => {
-    const section = canvasElement.querySelector('section')!
-    const body = section.querySelector('p.text-lead')!
-    await expect(section).toHaveAttribute('data-surface', 'ink')
-    await expect(getComputedStyle(body).color).toBe('rgb(170, 166, 158)')
-  },
-}
-
-export const BarOnInk: Story = {
-  ...Bar,
-  args: { ...Bar.args, surface: 'ink' },
-  play: async ({ canvasElement }) => {
-    const section = canvasElement.querySelector('section')!
-    const heading = within(canvasElement).getByRole('heading', { level: 2 })
-    await expect(section).toHaveAttribute('data-surface', 'ink')
-    await expect(getComputedStyle(section).backgroundImage).toContain('partner-texture')
-    await expect(getComputedStyle(heading).color).toBe('rgb(255, 255, 255)')
-  },
 }
 
 export const AuthoredLightSurface: Story = {

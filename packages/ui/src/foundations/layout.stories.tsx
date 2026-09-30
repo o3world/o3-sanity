@@ -98,6 +98,8 @@ async function expectGeometry(
  * which is that there isn't one. The exploration is square.
  */
 export const Layout: Story = {
+  // A reference page; the Geometry stories below carry this file's assertions.
+  tags: ['!test'],
   render: () => (
     <Page
       title="Layout"

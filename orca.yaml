@@ -29,6 +29,5 @@ issueCommand: |
 #     command: pnpm dev
 #
 # Other keys Orca reads here, unused for now: worktree.sharedDirectories
-# (git-ignored dirs symlinked in from the main checkout — `prototype/` is
-# handled by the setup hook instead, alongside the env files it belongs with),
-# environmentRecipes.
+# (git-ignored dirs symlinked in from the main checkout — the setup hook
+# carries the env files instead), environmentRecipes.

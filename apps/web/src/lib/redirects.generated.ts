@@ -1,9 +1,10 @@
 /**
- * GENERATED — do not edit. `pnpm --filter @o3/migration redirects` rewrites it.
- *
- * Every URL the WordPress site redirects today, resolved to where it ends up
- * (#24). Source: o3-world.live — the Redirection plugin's table plus Yoast
- * Premium's own redirect store, merged and collapsed so nothing chains.
+ * Maintained by hand: every URL the WordPress site redirected, resolved to
+ * where it ends up (#24) — the Redirection plugin's table plus Yoast Premium's
+ * own redirect store, merged and collapsed so nothing chains.
+ * `tools/migration/src/redirects.test.ts` checks every edit: no chains, no
+ * self-redirects, and every URL the live sitemaps advertised still served or
+ * redirected.
  *
  * Two consumers, and they have to agree: `next.config.ts` serves these as
  * permanent redirects, and `app/sitemap.ts` refuses to advertise any path

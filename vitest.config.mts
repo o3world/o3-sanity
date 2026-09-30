@@ -1,7 +1,7 @@
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { defineConfig } from 'vitest/config'
+import { configDefaults, defineConfig } from 'vitest/config'
 
 import { renderProject } from '@o3/render-kit/project'
 
@@ -9,11 +9,12 @@ const root = dirname(fileURLToPath(import.meta.url))
 const appSrc = (app: string) => resolve(root, 'apps', app, 'src')
 
 /**
- * Three test layers (ADR 0004). Each answers a different question, and the
- * file-name suffix tells you which layer you are in without opening the file:
+ * Three test layers (ADR 0004), plus one project for tests that spawn a
+ * process. Each layer answers a different question, and the file-name suffix
+ * tells you which layer you are in without opening the file:
  *
- *   unit     `*.test.ts`          — pure functions. Migration mappers, lib
- *                                   helpers, and invariants over the
+ *   unit     `*.test.ts`          — pure functions. Lib helpers, schema
+ *                                   gates, and invariants over the
  *                                   committed migration JSON. No React.
  *   render   `*.render.test.tsx`  — a document or route rendered from fixture
  *                                   data to HTML, with no network. Answers
@@ -26,7 +27,14 @@ const appSrc = (app: string) => resolve(root, 'apps', app, 'src')
  *                                   Storybook host so its addon resolves from
  *                                   that package.
  *
- * Run one layer with `pnpm test --project unit`.
+ *   shell    `*.test.ts`, by path  — tests that shell out to a script or a CLI
+ *                                   the way a session does, so they pay a
+ *                                   process start per case. Same suffix as
+ *                                   `unit`; the include list below is what
+ *                                   puts a file here instead.
+ *
+ * Run one project with `pnpm test --project unit`. `pnpm test:fast` runs
+ * `unit` and `render` only; `pnpm test` and CI run all four.
  *
  * **The suite pins its own port** (#116). Vitest loads the repo-root `.env`
  * into `process.env`, and provisioning writes a unique `WEB_PORT` into every
@@ -64,7 +72,6 @@ export default defineConfig({
             'tools/perf-probe/src/**/*.test.ts',
             'tools/visual-regression/src/**/*.test.ts',
             'tools/migration/src/**/*.test.ts',
-            'tools/guidance/src/**/*.test.ts',
             // The plugin's eval cases are data, and the grader engine that
             // reads them is the one part of the harness a machine can check.
             'tools/authoring-skill/evals/*.test.ts',
@@ -73,20 +80,34 @@ export default defineConfig({
             'tools/authoring-skill/scripts/*.test.ts',
             'apps/web/src/**/*.test.ts',
             'packages/*/src/**/*.test.ts',
-            // The worktree scripts are shell, and their seams are subcommands.
-            // A test here shells out to the script the same way a session does,
-            // so `pnpm test` stays the one checkpoint rather than growing a
-            // second runner for the half of the toolchain written in bash.
-            'scripts/*.test.ts',
           ],
+          // Collected by `shell` instead.
+          exclude: [...configDefaults.exclude, 'tools/build-assert/src/assert.test.ts'],
           // Studio v6.8 added a top-level `import "@sanity-labs/ui-poc/styles.css"`
-          // to the `sanity` barrel. The migration mappers reach that barrel for
+          // to the `sanity` barrel. The migration tool's schema gates reach that barrel for
           // `defineField`/`defineType` via `@o3/sanity/schemas`, and an
           // externalised dep is loaded by Node itself — which has no idea what a
           // `.css` file is and throws `Unknown file extension ".css"` before a
           // single test collects. Inlining routes the barrel through Vite, whose
           // CSS handling is a no-op here (`test.css` defaults to false).
           server: { deps: { inline: ['sanity'] } },
+        },
+      },
+      {
+        test: {
+          name: 'shell',
+          environment: 'node',
+          env: TEST_ENV,
+          include: [
+            // The worktree scripts are shell, and their seams are subcommands.
+            // A test here shells out to the script the same way a session
+            // does, so `pnpm test` stays the one checkpoint rather than
+            // growing a second runner for the half of the toolchain written
+            // in bash.
+            'scripts/*.test.ts',
+            // `build:assert`'s exit codes, through the CLI CI runs.
+            'tools/build-assert/src/assert.test.ts',
+          ],
         },
       },
       /** The app, plus the shared renderers' own render tests (#212). */

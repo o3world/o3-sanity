@@ -64,20 +64,3 @@ export const MobileNavMenu: Story = {
     await expect(trigger).toHaveFocus()
   },
 }
-
-/** The untranslated default surface, for anything that isn't the nav. */
-export const LightPanel: Story = {
-  render: () => (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button>Open</Button>
-      </SheetTrigger>
-      <SheetContent side="right">
-        <SheetTitle className="px-6 pt-6">Panel</SheetTitle>
-        <p className="text-fg-muted px-6">
-          `SheetContent` defaults to the light band; callers pass a surface.
-        </p>
-      </SheetContent>
-    </Sheet>
-  ),
-}

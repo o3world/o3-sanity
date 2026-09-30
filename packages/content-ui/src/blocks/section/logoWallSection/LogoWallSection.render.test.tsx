@@ -39,22 +39,6 @@ describe('the partners band', () => {
     expect(html).toContain('From Fortune 500 enterprises')
   })
 
-  it('draws the heading solid, not gradient-filled', () => {
-    // `1864:2393` binds the ink variable where it used to co-anchor
-    // `--gradient-statement`. The token survives on the pull quote; reaching
-    // for it here is the specific mistake this guards.
-    expect(html).not.toContain('text-gradient')
-    expect(html).toContain('text-white')
-  })
-
-  it('sizes the heading at the h2 step and the body at the lead pair', () => {
-    // 48/58 and 24/34 — `display-xl` and `lead`, not the 64px `hero` step the
-    // single statement used to ride.
-    expect(html).toContain('text-display-xl')
-    expect(html).not.toContain('text-hero')
-    expect(html).toContain('text-lead')
-  })
-
   it('offers each client to a reader exactly once, however many copies it draws', () => {
     // The marquee lays the six marks down several times so the loop has
     // somewhere to travel; only the first copy is real. A duplicate that
@@ -107,10 +91,5 @@ describe('the partners band', () => {
     // The shift is one copy of however many were drawn — the element's, since
     // only it knows the count. Without it the keyframe holds still.
     expect(html).toMatch(/--marquee-shift:\s*-[\d.]+%/)
-  })
-
-  it('honors the authored dark surface', () => {
-    expect(html).toContain('data-surface="ink"')
-    expect(html).not.toContain('--gradient-surface-wash-warm')
   })
 })

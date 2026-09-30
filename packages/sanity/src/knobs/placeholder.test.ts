@@ -1,4 +1,3 @@
-import { newBlockContent, placeholderReferences } from '@o3/block-spec'
 import { describe, expect, it } from 'vitest'
 
 import { SECTION_BLOCKS } from '../schemas/blocks/registry'
@@ -26,27 +25,10 @@ import { BLOCK_KNOBS } from './index'
 
 const SPECS = SECTION_BLOCKS.map((type) => [type, BLOCK_KNOBS[type]!] as const)
 
-describe('every section block declares a placeholder', () => {
-  it.each(SPECS)('%s', (type, spec) => {
-    expect(
-      spec.placeholder,
-      `${type} declares no placeholder — the insert menu cannot offer it`,
-    ).toBeDefined()
-  })
-})
+it('every section block declares a placeholder', () => {
+  const missing = SPECS.filter(([, spec]) => spec.placeholder === undefined).map(([type]) => type)
 
-describe('a placeholder is commit-safe', () => {
-  // Restating the refusal `defineBlockKnobs` already makes, at the one scale
-  // that matters: all sixteen at once. The constructor answers for the block in
-  // front of it; this answers for the set, so a seventeenth cannot arrive
-  // through some future path that skips the constructor.
-  it.each(SPECS)('%s references no document', (type, spec) => {
-    const found = placeholderReferences(spec.placeholder)
-    expect(
-      found.document,
-      `${type}'s placeholder points at a document — leave the field empty and let the editor pick`,
-    ).toEqual([])
-  })
+  expect(missing, 'these declare no placeholder — the insert menu cannot offer them').toEqual([])
 })
 
 describe('a placeholder declares content, never design options', () => {
@@ -60,40 +42,20 @@ describe('a placeholder declares content, never design options', () => {
    * whose starting look is deliberately not its default. What it may not do is
    * agree, because agreement is what nothing checks.
    */
-  it.each(SPECS)('%s restates no knob default', (type, spec) => {
-    const restated = spec.knobs
-      .filter((knob) => knob.initialValue !== undefined)
-      .filter((knob) => {
-        const declared = (spec.placeholder as Record<string, unknown>)[knob.name]
-        return declared !== undefined && String(declared) === knob.initialValue
-      })
-      .map((knob) => knob.name)
+  it('restates no knob default', () => {
+    const restated = SPECS.flatMap(([type, spec]) =>
+      spec.knobs
+        .filter((knob) => knob.initialValue !== undefined)
+        .filter((knob) => {
+          const declared = (spec.placeholder as Record<string, unknown>)[knob.name]
+          return declared !== undefined && String(declared) === knob.initialValue
+        })
+        .map((knob) => `${type}.${knob.name}`),
+    )
 
     expect(
       restated,
-      `${type}'s placeholder repeats the initialValue of ${restated.join(', ')} — the knob already answers for it`,
+      'these placeholders repeat a knob initialValue — the knob already answers for it',
     ).toEqual([])
-  })
-})
-
-describe('newBlockContent', () => {
-  // The knob defaults are what a form-created block would have been given, and
-  // an insert patch goes nowhere near the form. Asserted per block rather than
-  // in the abstract, because the failure — a hero inserted with no `variant`
-  // beside one created with `orbital` — is invisible until two editors compare
-  // two bands that should be the same.
-  it.each(SPECS)('%s arrives with its knob defaults applied', (type, spec) => {
-    const content = newBlockContent({ spec, newKey: () => 'key' })!
-    const expected = Object.fromEntries(
-      spec.knobs
-        .filter((knob) => knob.initialValue !== undefined)
-        .map((knob) => [
-          knob.name,
-          knob.valueType === 'number' ? Number(knob.initialValue) : knob.initialValue,
-        ]),
-    )
-
-    expect(content._type).toBe(type)
-    expect(content).toMatchObject(expected)
   })
 })

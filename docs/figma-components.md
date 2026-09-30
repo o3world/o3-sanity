@@ -52,42 +52,29 @@ generations, so **a low node id does not mean archived**: `Button / Ghost` is
 Verified by direct reads of the canonical frames, or recorded in
 `packages/ui/src/foundations/figma-home-spec.ts`.
 
-| Figma set                         | Node        | Variant axes                                       | Code target                                                          | Status                                                                                                          |
-| --------------------------------- | ----------- | -------------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `Button` (the 2026-08 rebuild)    | `2134:1785` | Theme = Black \| White \| Red; State ×5            | `Button` (`ui/button.tsx`), `FilterChip` (`filter-chip.tsx`)         | ✅ #150, #299 — geometry and states below                                                                       |
-| `Button / Ghost`                  | `264:260`   | Size = Base; State = Default                       | `Button variant="ghost"`                                             | The one fill the 2026-08 set does not draw                                                                      |
-| `Button / Solid`                  | `136:754`   | Size = Base \| Large; State = Default \| Hover     | **Superseded** by `2134:1785`                                        | Nothing follows it                                                                                              |
-| `Brand / Logo`                    | `264:50`    | Color = Black \| Red \| White                      | `BrandLogo` (`brand-logo.tsx`)                                       | ✅ #41 — `White` unbuilt, below                                                                                 |
-| `Icon` (the 2026-08 set)          | `2177:1556` | Icon = 29 named glyphs                             | `BUTTON_ICONS` (`button-icons.tsx`)                                  | ✅ #151 — three curated for the button's icon knob; the rest route nowhere                                      |
-| `Icon / Surface`                  | `778:1862`  | Size = Base; State = Hover                         | `CarouselControl` — **to build**                                     | The insights prev/next (#42)                                                                                    |
-| `Icon / Soft`                     | `1203:1227` | Size = Base; State = Default                       | Inner chip of `Icon / Surface`                                       | Not standalone — a part                                                                                         |
-| `.building block Icon_text`       | `136:14`    | prop: `Icon name` (Material Symbols)               | **No component** — ADR 0009                                          | `<ArrowIcon />`, `<CloseIcon />`                                                                                |
-| `NavBar` (component, not a set)   | `2225:2920` | —                                                  | `SiteNav` (`content-ui/chrome`)                                      | ✅ #41 — rebuilt 2026-08; the old `1710:2271` was emptied to a bare pill. Labels unchanged                      |
-| `Utility Nav` (component)         | `2250:1445` | —                                                  | `UtilityNav` (`content-ui/chrome`)                                   | ✅ #88 — "O3 Family of Brands" then the 1682 and O3XO marks (`2250:1453`), in flow above the pill, desktop only |
-| `Footer` (component, not a set)   | `1280:1885` | —                                                  | `SiteFooter` (`content-ui/chrome`)                                   | ⚠️ **Became canonical 2026-08** — Home's footer is now an override-free instance of it; see below               |
-| `CTA`                             | `2177:1354` | Device = Desktop \| Mobile                         | `CtaSection` (`blocks/section/ctaSection`)                           | ✅ #163 — the band-level sets, below                                                                            |
-| `Interior Hero`                   | `2107:1051` | Device = Desktop \| Mobile; Surface = Ink \| White | `CollectionHero variant="interior"` (`ui/collection-hero.tsx`)       | ✅ #311 — surface axis, optional rail, picture slot; below                                                      |
-| `Blog`                            | `2205:1146` | Property 1 = Default \| Mobile                     | `InsightsCarouselSection` (`blocks/section/insightsCarouselSection`) | ✅ #163                                                                                                         |
-| `Case Study Card`                 | `2089:4169` | Variant = Caron \| Ironman \| Vertex               | `CaseStudyCard` (`content-ui/cards`)                                 | ✅ #302, tree confirmed #314 — the axis is **content, not design**: no `cva` key, below                         |
-| `Services` (component, not a set) | `2846:5637` | —                                                  | `PanelTrack` (`blocks/section/railPanelsSection`)                    | ✅ #305 — one column of the sideways track; two bands instance it, below                                        |
-| `Quote`                           | `2748:4672` | Device = Device3 \| Mobile                         | `QuoteSection` (`blocks/section/quoteSection`)                       | ✅ #323 — a fourth band-level set; `Device3` is the desktop value under a default name, below                   |
+| Figma set                         | Node        | Variant axes                                       | Code target                                                           | Status                                                                                            |
+| --------------------------------- | ----------- | -------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `Button` (the 2026-08 rebuild)    | `2134:1785` | Theme = Black \| White \| Red; State ×5            | `Button` (`ui/button.tsx`), `FilterChip` (`filter-chip.tsx`)          | ✅ #150, #299 — geometry and states below                                                         |
+| `Button / Ghost`                  | `264:260`   | Size = Base; State = Default                       | `Button variant="ghost"`                                              | The one fill the 2026-08 set does not draw                                                        |
+| `Button / Solid`                  | `136:754`   | Size = Base \| Large; State = Default \| Hover     | **Superseded** by `2134:1785`                                         | Nothing follows it                                                                                |
+| `Brand / Logo`                    | `264:50`    | Color = Black \| Red \| White                      | **No component** — `BrandMark` (`brand-logo.tsx`) draws its two paths | No page draws the plate, below                                                                    |
+| `Icon` (the 2026-08 set)          | `2177:1556` | Icon = 29 named glyphs                             | `BUTTON_ICONS` (`button-icons.tsx`)                                   | ✅ #151 — three curated for the button's icon knob; the rest route nowhere                        |
+| `Icon / Surface`                  | `778:1862`  | Size = Base; State = Hover                         | `CarouselControl` — **to build**                                      | The insights prev/next (#42)                                                                      |
+| `Icon / Soft`                     | `1203:1227` | Size = Base; State = Default                       | Inner chip of `Icon / Surface`                                        | Not standalone — a part                                                                           |
+| `.building block Icon_text`       | `136:14`    | prop: `Icon name` (Material Symbols)               | **No component** — ADR 0009                                           | `<ArrowIcon />`, `<CloseIcon />`                                                                  |
+| `NavBar` (component, not a set)   | `2225:2920` | —                                                  | `SiteNav` (`content-ui/chrome`)                                       | ✅ #41 — rebuilt 2026-08; the old `1710:2271` was emptied to a bare pill. Labels unchanged        |
+| `Utility Nav` (component)         | `2250:1445` | —                                                  | **No component** — nothing draws the strip                            | `SiteFooter` draws its 1682 and O3XO marks from `utilityNavItems` in place of the matching links  |
+| `Footer` (component, not a set)   | `1280:1885` | —                                                  | `SiteFooter` (`content-ui/chrome`)                                    | ⚠️ **Became canonical 2026-08** — Home's footer is now an override-free instance of it; see below |
+| `CTA`                             | `2177:1354` | Device = Desktop \| Mobile                         | `CtaSection` (`blocks/section/ctaSection`)                            | ✅ #163 — the band-level sets, below                                                              |
+| `Interior Hero`                   | `2107:1051` | Device = Desktop \| Mobile; Surface = Ink \| White | `CollectionHero variant="interior"` (`ui/collection-hero.tsx`)        | ✅ #311 — surface axis, optional rail, picture slot; below                                        |
+| `Blog`                            | `2205:1146` | Property 1 = Default \| Mobile                     | `InsightsCarouselSection` (`blocks/section/insightsCarouselSection`)  | ✅ #163                                                                                           |
+| `Case Study Card`                 | `2089:4169` | Variant = Caron \| Ironman \| Vertex               | `CaseStudyCard` (`content-ui/cards`)                                  | ✅ #302, tree confirmed #314 — the axis is **content, not design**: no `cva` key, below           |
+| `Services` (component, not a set) | `2846:5637` | —                                                  | `PanelTrack` (`blocks/section/railPanelsSection`)                     | ✅ #305 — one column of the sideways track; two bands instance it, below                          |
+| `Quote`                           | `2748:4672` | Device = Device3 \| Mobile                         | `QuoteSection` (`blocks/section/quoteSection`)                        | ✅ #323 — a fourth band-level set; `Device3` is the desktop value under a default name, below     |
 
-`BrandLogo` ships `Color=Black` and `Color=Red` only. No canonical Design
-Concept frame instances `Color=White`, so its knockout colour would be a guess;
-it is added when a frame calls for it rather than invented now.
-
-The 2026-08 `Footer` looked like that caller and is not one (#87). Its logo is
-white, but it is a tight-bounded vector of the two mark paths with no plate at
-all (`1280:1856`) — `BrandMark`, not a white tile. `White` stays unbuilt.
-
-`Color=White` briefly shipped, on 2026-08-02, and was removed the same day. The
-direction it was built from — the nav's mark should change colour so it stays
-visible on either surface — turned out to mean the mark **without its square
-plate**, not an inverted plate. An inverted plate had no caller left, and an
-orphaned variant is exactly what the rule above is for. Worth keeping as a
-worked example: a variant needs a frame or an equally explicit direction, and a
-direction that has been _interpreted_ is neither until the interpretation is
-confirmed.
+No page draws `Brand / Logo`'s square plate, so the set has no component. The
+nav and the `Footer` (`1280:1856`, #87) both draw the mark without it, which is
+`BrandMark`, below.
 
 ### The three band-level sets were unwatched until #163
 
@@ -252,20 +239,20 @@ left gutter with the globe on the right.
 
 ### `BrandMark` has no component set
 
-`BrandMark` (same file) draws the ring and the superscript on their own, in
-`currentColor`, with no plate. **No component set contains it** — `Brand / Logo`
-is a square in all three variants. It is anchored on Nick's direction of
-2026-08-02 ("the color of o3 changes so it's visible, without the square box",
-plus a reference of the nav in both states) and on the prototype's nav, which
-draws precisely this and flips it between `#fff` and `#232323`.
+`BrandMark` (`brand-logo.tsx`) draws the ring and the superscript on their
+own, in `currentColor`, with no plate. **No component set contains it** —
+`Brand / Logo` is a square in all three variants. It is anchored on Nick's
+direction of 2026-08-02 ("the color of o3 changes so it's visible, without the
+square box", plus a reference of the nav in both states) and on the
+prototype's nav, which draws precisely this and flips it between `#fff` and
+`#232323`.
 
 A canonical node draws it since 2026-08: the `Footer`'s logo (`1280:1856`) is
 these two paths, white, with no tile — which is the direction landing on a
 Figma node rather than on an interpretation of one (#87).
 
-Same two path `d` strings as the tile, shared in the file rather than copied,
-and the same 64 viewBox by default — so `BrandLogo` → `BrandMark` at a given
-`size` removes the plate and moves nothing else. `trim` crops that box to the
+Same two path `d` strings as the tile, and the same 64 viewBox by default, so
+the mark sits where it sits inside the tile. `trim` crops that box to the
 mark's own bounds, for callers whose Figma node is bounded the same way the
 footer's vector is. It has no `color` axis on purpose: the surface decides the
 ink, which is what lets `SiteNav` flip it by inheritance alone.
@@ -362,28 +349,28 @@ table has rows.
 
 Every component in the package, against the Figma library.
 
-| Component        | Classification                                       | Notes                                                                                                                                                                        |
-| ---------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Button`         | **Has counterpart** — `Button` (`2134:1785`)         | Realigned to the 2026-08 set in #150. `ghost` is `Button / Ghost` (`264:260`), which that set does not draw                                                                  |
-| `FilterChip`     | **Has counterpart** — `Button` (`2134:1785`)         | Added #61 for the Insights filter bar. Same set as `Button`; a chip is a link with `aria-current`, which is why it is not a `Button` prop                                    |
-| `BrandLogo`      | **Has counterpart** — `Brand / Logo`                 | Added #41. `Color` is the one axis; `White` unbuilt                                                                                                                          |
-| `BrandMark`      | **Code-only** — no set draws a box-less mark         | Added 2026-08-02 by direction; the `Footer`'s logo (`1280:1856`) draws it too, #87                                                                                           |
-| `MenuIcon`       | **Has counterpart** — `1814:1636` (drawn, not a set) | Added #41. Two bars, per the frame                                                                                                                                           |
-| `CloseIcon`      | **Has counterpart** — `close` glyph                  | Added #41 (ADR 0009)                                                                                                                                                         |
-| `Sheet`          | **Code-only** — shadcn                               | Added #41 for the 402 nav; the panel has no frame (ADR 0006)                                                                                                                 |
-| `Card`           | **Code-only**                                        | shadcn's box. The case-study card is its own set (`2089:4169`), drawn by `CaseStudyCard` in `packages/content-ui`                                                            |
-| `SectionShell`   | **Code-only**                                        | The three-surface organism; ADR 0008 — shadcn cannot model it                                                                                                                |
-| `ArrowIcon`      | **Has counterpart** — `.building block Icon_text`    | Glyph becomes a component, not a string prop (ADR 0009)                                                                                                                      |
-| `ArrowLink`      | **Retired** in #55                                   | No Figma equivalent; the frames use `Button / Ghost` for this job, and #42 built every text CTA that way — so it ended with no call site and was deleted                     |
-| `Eyebrow`        | **Code-only**                                        | A type style, not a component. ⚠️ still defaults to `tone="brand"`; canonical eyebrows are neutral `#636363`                                                                 |
-| `DisplayHeading` | **Code-only**                                        | A type style                                                                                                                                                                 |
-| `HalftoneDisc`   | **Drawn, not a component set**                       | Added #56 from `1925:5922` / `1925:6068`. Both export as the SAME dot pattern — a halftone, not four icons                                                                   |
-| `OrbitalDiagram` | **Drawn, not a component set**                       | Added #56 from `1928:6526`. **Not `OrbitalSphere`** — six straight dashed paths, no arc anywhere in it                                                                       |
-| `PortraitTile`   | **Code-only**                                        | Added #56. Renders finished portrait compositions with 16px corners and BigShadow, following current About `3754:78274`; the old layered cutout treatment is retired         |
-| `StaggeredLines` | **Code-only**                                        | Motion, which the static frames cannot express (#33)                                                                                                                         |
-| `Reveal`         | **Code-only**                                        | ”                                                                                                                                                                            |
-| `LogoTile`       | **Code-only** — superseded                           | ⚠️ Unused since #89: the partners plate is a 280 × 280 hairlined frame (`1864:2395`) that `LogoWallSection` draws inline. This 110px row is prototype-era — retire it in #38 |
-| `Stat`           | **Code-only**                                        | The card's stat row is drawn inside the card, not instanced — the `Data` row of `2089:4169`                                                                                  |
+| Component        | Classification                                       | Notes                                                                                                                                                                          |
+| ---------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Button`         | **Has counterpart** — `Button` (`2134:1785`)         | Realigned to the 2026-08 set in #150. `ghost` is `Button / Ghost` (`264:260`), which that set does not draw                                                                    |
+| `FilterChip`     | **Has counterpart** — `Button` (`2134:1785`)         | Added #61 for the Insights filter bar. Same set as `Button`; a chip is a link with `aria-current`, which is why it is not a `Button` prop                                      |
+| `BrandLogo`      | **Retired**                                          | No call site: the site draws the plate-less `BrandMark` wherever the mark appears; deleted                                                                                     |
+| `BrandMark`      | **Code-only** — no set draws a box-less mark         | Added 2026-08-02 by direction; the `Footer`'s logo (`1280:1856`) draws it too, #87                                                                                             |
+| `MenuIcon`       | **Has counterpart** — `1814:1636` (drawn, not a set) | Added #41. Two bars, per the frame                                                                                                                                             |
+| `CloseIcon`      | **Has counterpart** — `close` glyph                  | Added #41 (ADR 0009)                                                                                                                                                           |
+| `Sheet`          | **Code-only** — shadcn                               | Added #41 for the 402 nav; the panel has no frame (ADR 0006)                                                                                                                   |
+| `Card`           | **Retired**                                          | shadcn's box, never adopted: the case-study card is its own set (`2089:4169`), drawn by `CaseStudyCard` in `packages/content-ui`, and every card writes its own plate; deleted |
+| `SectionShell`   | **Code-only**                                        | The three-surface organism; ADR 0008 — shadcn cannot model it                                                                                                                  |
+| `ArrowIcon`      | **Has counterpart** — `.building block Icon_text`    | Glyph becomes a component, not a string prop (ADR 0009)                                                                                                                        |
+| `ArrowLink`      | **Retired** in #55                                   | No Figma equivalent; the frames use `Button / Ghost` for this job, and #42 built every text CTA that way — so it ended with no call site and was deleted                       |
+| `Eyebrow`        | **Code-only**                                        | A type style, not a component. ⚠️ still defaults to `tone="brand"`; canonical eyebrows are neutral `#636363`                                                                   |
+| `DisplayHeading` | **Code-only**                                        | A type style                                                                                                                                                                   |
+| `HalftoneDisc`   | **Drawn, not a component set**                       | Added #56 from `1925:5922` / `1925:6068`. Both export as the SAME dot pattern — a halftone, not four icons                                                                     |
+| `OrbitalDiagram` | **Drawn, not a component set**                       | Added #56 from `1928:6526`. **Not `OrbitalSphere`** — six straight dashed paths, no arc anywhere in it                                                                         |
+| `PortraitTile`   | **Code-only**                                        | Added #56. Renders finished portrait compositions with 16px corners and BigShadow, following current About `3754:78274`; the old layered cutout treatment is retired           |
+| `StaggeredLines` | **Code-only**                                        | Motion, which the static frames cannot express (#33)                                                                                                                           |
+| `Reveal`         | **Code-only**                                        | ”                                                                                                                                                                              |
+| `LogoTile`       | **Retired**                                          | The partners plate is a 280 × 280 hairlined frame (`1864:2395`) that `LogoWallSection` draws inline, which left the prototype-era 110px row with no call site; deleted         |
+| `Stat`           | **Code-only**                                        | The card's stat row is drawn inside the card, not instanced — the `Data` row of `2089:4169`                                                                                    |
 
 **Nothing is to-be-replaced.** `ArrowLink` was the one open question, and #55
 answered it: #42 reached for `Button variant="ghost"` at every text CTA the

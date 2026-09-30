@@ -28,9 +28,9 @@ describe('tracked-nodes.json', () => {
     expect(manifest.probeNodeTypes).toBeUndefined()
   })
 
-  it('tracks at least the ten canonical page layers', () => {
+  it('tracks at least the canonical page layers', () => {
     const names = new Set(pageFrames.map((entry) => entry.name))
-    expect([...names].sort()).toEqual([
+    const missing = [
       'About',
       'Case Study detail',
       'Contact',
@@ -42,13 +42,17 @@ describe('tracked-nodes.json', () => {
       'Software Engineering service page',
       'Solutions',
       'Work index',
-    ])
+    ].filter((name) => !names.has(name))
+    expect(missing).toEqual([])
   })
 
-  it.each(entries)('$name ($variant) is a `:`-separated node id', (entry) => {
+  it('writes every node id `:`-separated', () => {
     // Share URLs use `-`; the API takes `:`. Committing the URL form is the
     // easy mistake and produces a "node not found" run.
-    expect(entry.nodeId).toMatch(/^\d+:\d+$/)
+    const offenders = entries
+      .filter((entry) => !/^\d+:\d+$/.test(entry.nodeId))
+      .map((entry) => `${entry.name} (${entry.variant ?? entry.kind}): ${entry.nodeId}`)
+    expect(offenders).toEqual([])
   })
 
   it('lists no node id twice', () => {

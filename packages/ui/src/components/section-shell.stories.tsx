@@ -61,8 +61,13 @@ function PlaceholderContent({ surface }: { surface: Surface }) {
   )
 }
 
+/**
+ * One surface each. `AllSurfaces` mounts every surface in the run, so `White`,
+ * and `Bone` and `Ink` through the spread, stay in the sidebar only.
+ */
 export const White: Story = {
   args: { surface: 'white' },
+  tags: ['!test'],
   render: (args) => (
     <SectionShell {...args}>
       <PlaceholderContent surface={args.surface ?? 'white'} />
@@ -82,7 +87,7 @@ export const Ink: Story = {
 
 /** About's Neutral-900 band keeps the dark-surface copy roles. */
 export const Charcoal: Story = {
-  ...White,
+  render: White.render,
   args: { surface: 'charcoal' },
   play: async ({ canvasElement }) => {
     const section = canvasElement.querySelector('section')!
@@ -235,6 +240,8 @@ function Photograph() {
  */
 export const OnPhotograph: Story = {
   args: { surface: 'ink' },
+  // `TintPerSurface` mounts this band among the five in the run.
+  tags: ['!test'],
   render: (args) => (
     <SectionShell
       {...args}

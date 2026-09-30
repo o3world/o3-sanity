@@ -43,7 +43,7 @@ export type ResolveRef = (ref: unknown) => SeedDoc | null
 const MARKERS = ['_wpSrc', '_srcUrl', '_localSrc'] as const
 
 /**
- * Stand in for the asset upload `tools/migration/src/load.ts` performs.
+ * Stand in for the asset references a dataset holds.
  *
  * A renderer handed a raw marker throws inside `@sanity/image-url`, so every
  * marker is swapped for the reference shape the image pipeline expects before

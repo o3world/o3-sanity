@@ -1,31 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import { heroSectionKnobs } from '@o3/sanity/knobs'
-import { defineKnobStories } from '@o3/story-kit'
-
 import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { HeroSection } from './HeroSection'
 
 /**
- * The hero's stories, half of them derived (#106).
- *
- * `Playground` and `Matrix` come out of `heroSectionKnobs` — the same
- * declaration the Sanity fields and the canvas toolbar read (ADR 0020). Adding
- * a knob to that file adds a control here and an axis to the matrix; nobody
- * edits this file to make that happen, and a knob the form gates cannot be set
- * from a control the form would have hidden.
- *
- * The stories below them are the other half, and they stay hand-written on
- * purpose: one headline line, no subheading, no CTA are facts about the
- * *content*, not about the block's design options, so there is no declaration
- * to derive them from.
+ * The hero's stories. `Playground` renders the fixture with every prop open to
+ * the controls panel; the rest are single states — content edge cases, the
+ * entrance cadence, and the band compositions the frames draw.
  *
  * Every story here is also a test — the `stories` layer mounts each one in
  * real Chromium and axe-scans it (ADR 0004), so a block with stories needs no
- * separate test file. The fixture is typed as `SectionProps<'heroSection'>`
- * through `defineKnobStories`, so a schema change that alters the block's shape
- * still breaks this file at compile time.
+ * separate test file. The fixture is typed as `SectionProps<'heroSection'>`,
+ * so a schema change that alters the block's shape breaks this file at
+ * compile time.
  *
  * Band stories cover current ink interiors and the bone About composition.
  * The orbital Home composition retains its independent ink surface.
@@ -47,42 +35,19 @@ const fixture: SectionProps<'heroSection'> = {
   decoration: 'orbs',
 }
 
-const kit = defineKnobStories({
-  spec: heroSectionKnobs,
+const meta: Meta<typeof HeroSection> = {
+  title: 'Content/Blocks/Section/HeroSection',
   component: HeroSection,
-  fixture,
+  parameters: { layout: 'fullscreen' },
   // Every story in this file is an ink band, so the surface is pinned once on
   // the meta rather than repeated on each story.
   globals: { backgrounds: { value: 'ink' } },
-})
-
-// Re-typed against the component, and the two derived stories re-cast to
-// match. The annotations are not decoration: an exported const whose type is
-// inferred through a workspace package cannot name Storybook's internal CSF
-// types across pnpm's nested copies (TS2742). Same shape as
-// `packages/ui/.../button.stories.tsx`.
-// The title is spelled out rather than left to `kit.meta`'s spread. Storybook's
-// indexer reads this file statically, so a title arriving through a spread is
-// invisible to it and the sidebar entry — and the story id every screenshot is
-// keyed by — falls back to the file's path instead. Every sibling block spells
-// it out for the same reason; the string is what `titleForSpec` produces.
-const meta: Meta<typeof HeroSection> = {
-  ...kit.meta,
-  title: 'Content/Blocks/Section/HeroSection',
-  component: HeroSection,
 }
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** Every knob the hero declares, as a control. Turn one, the block redraws. */
-export const Playground = kit.Playground as Story
-
-/**
- * Composition against alignment — the block's first two knobs, gridded. The
- * orbital opener collapses to one cell: it is centred by its own composition
- * and the gate hides the axis.
- */
-export const Matrix = kit.Matrix as Story
+/** The fixture as authored. Turn a control and the block redraws. */
+export const Playground: Story = { args: fixture }
 
 /** A single headline line gets no set-back — the treatment needs two or more. */
 export const SingleLine: Story = {

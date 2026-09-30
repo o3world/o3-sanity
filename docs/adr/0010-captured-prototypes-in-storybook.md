@@ -1,5 +1,8 @@
 # 0010. Captured prototypes live in Storybook, as dated read-only snapshots
 
+Amended 2026-09-30: prototype stories carry `tags: ['!test']`, so the `stories`
+test run no longer mounts them; they stay in the Storybook UI.
+
 - **Status:** Accepted
 - **Date:** 2026-08-01
 - **Deciders:** NickO3 + Claude

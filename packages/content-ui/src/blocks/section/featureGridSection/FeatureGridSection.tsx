@@ -48,10 +48,7 @@ export function FeatureGridSection({
   /** The disc's ink. On ink, white is the only honest inversion. */
   const markTone = onInk && !cards ? 'text-white' : 'text-ink'
 
-  /**
-   * WHAT STANDS BESIDE THE COPY — the dotted mark. A stored `icon` draws
-   * nothing: the site has no icon set.
-   */
+  /** WHAT STANDS BESIDE THE COPY — the dotted mark. */
   const beside = (feature: (typeof items)[number], className: string) => (
     <Mark
       {...markProps(feature.mark)}
