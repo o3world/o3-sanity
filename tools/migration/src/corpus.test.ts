@@ -1,12 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import {
-  corpusPath,
-  corpusTypeDirs,
-  isInternalType,
-  isPipelineOwned,
-  readCorpus,
-} from './core/read'
+import { corpusPath, corpusTypeDirs, isInternalType, readCorpus } from './core/read'
 
 /**
  * Invariants over the whole committed corpus — converted, seed and translated
@@ -31,36 +25,6 @@ describe('the committed corpus', () => {
   })
 
   /**
-   * The ownership contract `load` retires against. A drift here silently
-   * turns retirement off (nothing deleted) or on for documents the pipeline
-   * does not own — both are dataset damage, so the boundary is pinned.
-   */
-  it('recognizes pipeline-owned ids and nothing else', () => {
-    expect(isPipelineOwned('caseStudy-wp-10028')).toBe(true)
-    expect(isPipelineOwned('page-seed-contact')).toBe(true)
-    expect(isPipelineOwned('drafts.insight-wp-123')).toBe(true)
-    expect(isPipelineOwned('siteSettings')).toBe(false)
-    expect(isPipelineOwned('64cd37cf-1a2b-4c3d-8e9f-000000000000')).toBe(false)
-    expect(isPipelineOwned('drafts.64cd37cf-1a2b-4c3d-8e9f-000000000000')).toBe(false)
-  })
-
-  /**
-   * The other half of the same contract, for the two types a different tool
-   * owns (ADR 0027, ADR 0024). Internal types are excluded by name rather
-   * than by id shape: a corpus key is any kebab string, so `brief-wp-notes`
-   * is a legal brief id that the bare `<type>-(wp|seed)-` pattern would
-   * claim — and a claimed id is one `load` may retire.
-   */
-  it('leaves guidance and brief ids outside the ownership contract', () => {
-    expect(isPipelineOwned('guidance-o3-voice')).toBe(false)
-    expect(isPipelineOwned('brief-sanity-partner-page')).toBe(false)
-    expect(isPipelineOwned('drafts.brief-sanity-partner-page')).toBe(false)
-    expect(isPipelineOwned('brief-wp-migration-notes')).toBe(false)
-    expect(isPipelineOwned('brief-seed-notes')).toBe(false)
-    expect(isPipelineOwned('guidance-wp-era-style')).toBe(false)
-  })
-
-  /**
    * `verify` reads the whole dataset, so a document this pipeline never wrote
    * would be reported as an orphan — a finding that exits non-zero and is
    * wrong. Briefs are exactly that: written by `brief:sync`, and outliving the
@@ -77,8 +41,9 @@ describe('the committed corpus', () => {
 
   /**
    * And the corpus is the other side of it: a `brief` or `guidance` document
-   * committed under `data/` would be written by `load` and then retired by the
-   * next sync, with the two tools overwriting each other every run.
+   * committed under `data/` would give that document a second writer —
+   * `sync-docs` could replace what `brief:sync` wrote, and `verify` would
+   * expect the corpus copy.
    */
   it('commits no document of a type a different tool owns', () => {
     // Directories, not documents: a `brief/` holding nothing but markdown

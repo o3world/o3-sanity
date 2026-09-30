@@ -25,7 +25,7 @@ import { getCliClient } from 'sanity/cli'
 import { driftBetween, type AnyDoc, type AssetMap } from './core/drift'
 import { plan } from './core/plan'
 import { readCorpus } from './core/read'
-import { LOCKED_BY_ID, LOCKED_BY_TYPE, LOCK_FETCH_OPTIONS, type LockRow } from './core/state'
+import { LOCKED_BY_ID, LOCK_FETCH_OPTIONS, type LockRow } from './core/state'
 import { readManifest } from './lib/manifest'
 import { ASSET_MAP, EXTRACT_DIR, MISSING_MEDIA } from './lib/paths'
 
@@ -39,17 +39,12 @@ async function main() {
     return
   }
 
-  // The same plan `load` would execute, so drift reports on exactly the set a
-  // load would write — locked documents are already safe and are counted, not
-  // compared.
+  // Both forms of every committed id, so a lock on either copy counts —
+  // locked documents are already safe and are counted, not compared.
   const ids = all.flatMap((d) => [d._id, `drafts.${d._id}`])
-  const types = [...new Set(all.map((d) => d._type))]
-  const [current, owned] = await Promise.all([
-    client.fetch<LockRow[]>(LOCKED_BY_ID, { ids }, LOCK_FETCH_OPTIONS),
-    client.fetch<LockRow[]>(LOCKED_BY_TYPE, { types }, LOCK_FETCH_OPTIONS),
-  ])
+  const locks = await client.fetch<LockRow[]>(LOCKED_BY_ID, { ids }, LOCK_FETCH_OPTIONS)
   const { runs } = readManifest()
-  const loadPlan = plan(all, [...current, ...owned], {
+  const loadPlan = plan(all, locks, {
     runs,
     extractSource: (sourceFile) => {
       const path = join(EXTRACT_DIR, sourceFile)

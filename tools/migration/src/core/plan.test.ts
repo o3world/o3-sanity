@@ -15,8 +15,8 @@ function live(id: string, locked: boolean | null = false) {
 const NO_PROVENANCE = { runs: {}, extractSource: () => undefined }
 
 /**
- * Every committed document is written published, in all three trees (ADR
- * 0016), unless an editor holds the lock on it (ADR 0003).
+ * Every committed document is in the plan unless an editor holds the lock on
+ * it (ADR 0003).
  */
 describe('writes', () => {
   it('writes every committed document, in the order the corpus gives them', () => {
@@ -62,96 +62,6 @@ describe('writes', () => {
     const result = plan([committed('insight-wp-1')], [live('insight-wp-1', null)], NO_PROVENANCE)
 
     expect(result.writes.map((doc) => doc._id)).toEqual(['insight-wp-1'])
-  })
-})
-
-/**
- * Retirement is the delete half of CONTEXT.md's Rebuild promise: the run that
- * stops writing a document removes it, in both the forms the dataset holds it.
- */
-describe('retirement', () => {
-  it('retires a document absent from the corpus, in both its forms', () => {
-    const result = plan(
-      [committed('insight-wp-1')],
-      [live('insight-wp-1'), live('insight-wp-9'), live('drafts.insight-wp-9')],
-      NO_PROVENANCE,
-    )
-
-    expect(result.retirements).toEqual([{ id: 'insight-wp-9', draft: true, published: true }])
-  })
-
-  it('retires a document the dataset holds only as a published copy', () => {
-    const result = plan([committed('insight-wp-1')], [live('insight-wp-9')], NO_PROVENANCE)
-
-    expect(result.retirements).toEqual([{ id: 'insight-wp-9', draft: false, published: true }])
-  })
-
-  it('skips a document whose published copy an editor locked', () => {
-    const result = plan(
-      [committed('insight-wp-1')],
-      [live('insight-wp-9', true), live('drafts.insight-wp-9')],
-      NO_PROVENANCE,
-    )
-
-    expect(result.retirements).toEqual([])
-    expect(result.lockedSkips).toEqual(['insight-wp-9'])
-  })
-
-  it('skips a document whose draft an editor locked, published copy and all', () => {
-    const result = plan(
-      [committed('insight-wp-1')],
-      [live('insight-wp-9'), live('drafts.insight-wp-9', true)],
-      NO_PROVENANCE,
-    )
-
-    expect(result.retirements).toEqual([])
-    expect(result.lockedSkips).toEqual(['insight-wp-9'])
-  })
-
-  it('never retires a Studio-created document, whose id is outside the contract', () => {
-    const result = plan(
-      [committed('insight-wp-1')],
-      [live('a1b2c3d4-0000-4000-8000-000000000000'), live('siteSettings')],
-      NO_PROVENANCE,
-    )
-
-    expect(result.retirements).toEqual([])
-    expect(result.lockedSkips).toEqual([])
-  })
-})
-
-/**
- * A draft shadows its published document everywhere draft mode is on, so a
- * stale one is cleared by the same run that rewrites the published copy — and
- * only by that run.
- */
-describe('stale-draft clears', () => {
-  it('clears the draft shadowing a document the run writes', () => {
-    const result = plan(
-      [committed('insight-wp-1')],
-      [live('insight-wp-1'), live('drafts.insight-wp-1')],
-      NO_PROVENANCE,
-    )
-
-    expect(result.staleDraftClears).toEqual(['insight-wp-1'])
-  })
-
-  it('leaves the draft of a locked document alone', () => {
-    const result = plan(
-      [committed('insight-wp-1')],
-      [live('insight-wp-1', true), live('drafts.insight-wp-1')],
-      NO_PROVENANCE,
-    )
-
-    expect(result.staleDraftClears).toEqual([])
-    expect(result.lockedSkips).toEqual(['insight-wp-1'])
-  })
-
-  it('does not clear the draft of a document the run is not writing', () => {
-    const result = plan([committed('insight-wp-1')], [live('drafts.insight-wp-9')], NO_PROVENANCE)
-
-    expect(result.staleDraftClears).toEqual([])
-    expect(result.retirements).toEqual([{ id: 'insight-wp-9', draft: true, published: false }])
   })
 })
 
