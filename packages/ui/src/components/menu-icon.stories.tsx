@@ -21,6 +21,8 @@ export const Default: Story = {
 }
 
 export const Flipped: Story = {
+  // Colour only; `Default` alone is mounted by the stories run.
+  tags: ['!test'],
   args: { className: 'text-fg' },
   globals: { backgrounds: { value: 'bone' } },
 }

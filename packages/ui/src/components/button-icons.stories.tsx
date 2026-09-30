@@ -37,6 +37,8 @@ export const Set: Story = {
 
 /** They follow `currentColor`, so no glyph needs an inverse of itself. */
 export const OnInk: Story = {
+  // Colour only; `Set` alone is mounted by the stories run.
+  tags: ['!test'],
   globals: { backgrounds: { value: 'ink' } },
   render: () => (
     <div className="flex items-center gap-8 text-white">

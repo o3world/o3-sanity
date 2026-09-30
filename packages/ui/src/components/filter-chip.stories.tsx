@@ -16,11 +16,15 @@ type Story = StoryObj<typeof meta>
 
 /** Theme=White (`2337:4551`) — a category the index is not filtered to. */
 export const Default: Story = {
+  // `Default`, `Selected` and `Bar` are the chips and the row `BarScrolling`
+  // mounts at 402 with its scroll region; it alone carries the stories run.
+  tags: ['!test'],
   args: { children: 'Design' },
 }
 
 /** Theme=Black (`2337:4542`) — the chip for the feed on screen. */
 export const Selected: Story = {
+  tags: ['!test'],
   args: { children: 'All', selected: true },
 }
 
@@ -51,6 +55,7 @@ function Row() {
  * row.
  */
 export const Bar: Story = {
+  tags: ['!test'],
   args: { children: 'All' },
   render: () => <Row />,
 }
