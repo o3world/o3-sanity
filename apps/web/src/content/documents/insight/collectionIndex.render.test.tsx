@@ -357,7 +357,8 @@ describe('insights index composition', () => {
     // `3771:80361` — the heading, body and button label the frame writes.
     // Authored since #347: the seed's `ctaSection` in `sectionsBelow`. The nav
     // links to /contact too, so the href is read off the button itself.
-    expect(page.html).toContain('Let’s put some of this thinking to work.')
+    // The editor's line break (U+2028) arrives as a newline.
+    expect(page.html).toContain('Let’s put some of\nthis thinking to work.')
     expect(page.html).toMatch(/href="\/contact"[^>]*>(?:(?!<\/a>)[\s\S])*Start the conversation/)
   })
 
@@ -497,7 +498,7 @@ describe('insights index authored bands', () => {
     const { html } = await renderRoute(route, { data: withIndexChrome(feed(), null) })
 
     expect(html).not.toContain('Looking past')
-    expect(html).not.toContain('Let’s put some of this thinking to work.')
+    expect(html).not.toContain('this thinking to work.')
   })
 })
 
