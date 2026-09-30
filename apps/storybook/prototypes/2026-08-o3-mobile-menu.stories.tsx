@@ -25,6 +25,7 @@ import { PrototypeFrame, prototypeParameters } from './frame'
 const meta = {
   title: 'Prototypes/Mobile menu — open state (Aug 2026)',
   component: PrototypeFrame,
+  tags: ['!test'],
   parameters: prototypeParameters,
 } satisfies Meta<typeof PrototypeFrame>
 

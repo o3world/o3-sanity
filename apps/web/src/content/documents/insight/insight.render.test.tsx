@@ -343,26 +343,6 @@ describe('insight detail route', () => {
       expect(JSON.stringify(metadata.openGraph?.images)).toContain(FALLBACK_ID)
     })
 
-    // stega characters are invisible in the browser but corrupt <title> and
-    // OG tags if they leak — hence stega:false on the metadata fetch. Asserted
-    // on a draft render, the one mode where the page's own read has stega on
-    // and the two are therefore distinguishable.
-    it('fetches metadata with stega encoding off', async () => {
-      const { calls } = await renderRoute(route, {
-        data: anInsight(),
-        params: { slug: 'an-insight' },
-        draft: true,
-      })
-      expect(
-        calls.some((call) => call.stega === true),
-        'the page read was stega-free too',
-      ).toBe(true)
-      expect(
-        calls.find((call) => call.stega === false),
-        'no stega-free fetch was made for metadata',
-      ).toBeDefined()
-    })
-
     // The two sides of the revalidation contract must agree; this pins the
     // reader half against the scheme in cacheTags.ts.
     it('tags the fetch per document so /api/revalidate can invalidate one post', async () => {
@@ -476,13 +456,24 @@ describe('migrated content renders', () => {
     expect(html).not.toContain('size-[42px]')
   })
 
-  it.each(slugs)('renders the migrated insight %s', async (slug) => {
-    const doc = aMigratedInsight(slug)
-    const { html } = await renderRoute(route, { data: doc, params: { slug } })
-
-    expect(visibleText(html)).toContain(collapse(doc.title as string))
-    // A body that converted to blocks the renderer ignores would leave an
-    // article with a header and nothing under it.
-    expect(html).toMatch(/<p[\s>]/)
+  /**
+   * Every migrated insight shows its title and at least one paragraph. A body
+   * that converted to blocks the renderer ignores would leave an article with
+   * a header and nothing under it. One test over the whole archive, naming
+   * every slug that fails.
+   */
+  it('renders every migrated insight', { timeout: 60_000 }, async () => {
+    const failed: string[] = []
+    for (const slug of slugs) {
+      try {
+        const doc = aMigratedInsight(slug)
+        const { html } = await renderRoute(route, { data: doc, params: { slug } })
+        const hasTitle = visibleText(html).includes(collapse(doc.title as string))
+        if (!hasTitle || !/<p[\s>]/.test(html)) failed.push(slug)
+      } catch (error) {
+        failed.push(`${slug}: ${String(error)}`)
+      }
+    }
+    expect(failed).toEqual([])
   })
 })

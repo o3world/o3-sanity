@@ -163,15 +163,15 @@ export type IndexRendererProps<Q extends string> = NonNullable<QueryResult<Q>> &
  * same rule: **the note is required whenever the flag is set**, because "no
  * frame was ever drawn" and "waiting on #22" call for opposite actions.
  *
- * Full reasoning — including why enforcement lives in
- * `provisionalRoutes.render.test.tsx` rather than `verify`, and the
- * human-facing inventory in `docs/content-sourcing.md` — is ADR 0012.
+ * Full reasoning, and the human-facing inventory in `docs/content-sourcing.md`,
+ * is ADR 0012.
  *
  * A union rather than three optionals: a marker is either the flag with its
  * required note, or a frame reference — `figmaNode` says the composition was
  * transcribed from a canonical frame, `provisional` says no frame exists, and
- * a route claiming both is describing two different pages. The test still
- * asserts the same invariants at the value level.
+ * a route claiming both is describing two different pages. The union is the
+ * enforcement: an entry that sets the flag without a note, or sets both the
+ * flag and a frame, does not compile.
  */
 export type RouteProvenance =
   | {
