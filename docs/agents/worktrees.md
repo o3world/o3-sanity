@@ -75,22 +75,19 @@ env.
 
 `git worktree add` alone leaves you with a checkout that cannot build.
 `scripts/worktree-provision.sh` is the shared body both paths call, and it
-does four things:
+does three things:
 
 1. **Carry the gitignored env across** — `.env.local`, `apps/web/.env.local`,
    `.vercel/project.json`. Without these a worktree can't reach Sanity or
    Vercel, and the failure looks like a code bug rather than a missing file.
-2. **Symlink `prototype/`** — 22 MB of seed image assets, gitignored, that the
-   migration seed test asserts against. Without it that suite fails in every
-   worktree for reasons that have nothing to do with the ticket being worked.
-3. **Allocate dev ports**, written to the worktree's own `.env`: `WEB_PORT`
+2. **Allocate dev ports**, written to the worktree's own `.env`: `WEB_PORT`
    from 3600-3609 and `STORYBOOK_PORT` from 6600-6609, skipping anything a
    sibling worktree has already claimed or that is currently listening. Two checkouts both booting on 3600 is the first thing
    that breaks when a second session starts.
-4. **`pnpm install`.** node_modules is not shared between worktrees.
+3. **`pnpm install`.** node_modules is not shared between worktrees.
 
-It is safe to re-run and will not overwrite an env file, a symlink, or a `.env`
-that is already there.
+It is safe to re-run and will not overwrite an env file or a `.env` that is
+already there.
 
 ### Draft mode did not engage, and the canvas never appeared
 
