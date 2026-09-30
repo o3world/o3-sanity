@@ -1,26 +1,20 @@
 import { describe, expect, it, vi } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
-import {
-  canvasNotices,
-  CanvasNoticesView,
-  createCanvasNoticeQueue,
-  reportCanvasFailure,
-} from '@o3/editor-chrome/canvas'
+import { CanvasNoticesView } from './CanvasNoticesView'
+import { reportCanvasFailure } from './draftPatch'
+import { canvasNotices, createCanvasNoticeQueue } from './notices'
 
 /**
- * The canvas notice (#124), from this app's side of the seam.
- *
- * A rejected mutation used to reach `console.error` and nowhere else, which is
- * how "the patch vanished" becomes a support ticket. It now reaches a surface
- * mounted BESIDE `<VisualEditing />` — the mount is the ticket, because an
- * overlay component renders only while its element is hovered and an editor
- * moves the pointer the instant something goes wrong.
+ * The canvas notice's pixels (#124). A rejected mutation reaches a surface
+ * mounted BESIDE `<VisualEditing />`, because an overlay component renders
+ * only while its element is hovered and an editor moves the pointer the
+ * instant something goes wrong.
  *
  * What this file can prove is the markup and the wiring: what the surface says,
  * what an editor can do to it, and that `reportCanvasFailure` is what fills it.
- * What it cannot prove is the part the mount exists for — that the notice
- * SURVIVES the pointer leaving the element. That needs a live Presentation
- * session, and #121 means there has not been one.
+ * The queue's own rules are in `notices.test.ts`. What neither can prove is the
+ * part the mount exists for — that the notice SURVIVES the pointer leaving the
+ * element. That needs a live Presentation session.
  */
 
 /** A rejection in the shape the mutator actually produces. */
