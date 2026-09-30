@@ -1,5 +1,5 @@
 /**
- * Site chrome — the nav, the utility bar and the footer every page wears.
+ * Site chrome — the nav and the footer every page wears.
  * Authored entirely in Site Settings, so an app mounts these in its layout and
  * passes the document.
  *
@@ -12,4 +12,3 @@ export { NavInk, NAV_INK_TARGET } from './NavInk'
 export { NavInkFirstPaint, NAV_INK_FIRST_PAINT_SCRIPT } from './NavInkFirstPaint'
 export { SiteFooter } from './SiteFooter'
 export { SiteNav } from './SiteNav'
-export { UtilityNav } from './UtilityNav'

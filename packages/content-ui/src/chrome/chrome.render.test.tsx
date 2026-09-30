@@ -12,7 +12,6 @@ import { resolveAssetMarkers } from '../testing'
 
 import { SiteFooter } from './SiteFooter'
 import { SiteNav } from './SiteNav'
-import { UtilityNav } from './UtilityNav'
 
 /**
  * The site chrome (#19), rendered from the **committed** Site Settings
@@ -37,9 +36,10 @@ const settingsDoc = JSON.parse(
 
 /**
  * The committed document carries `_localSrc` where `load` puts an asset
- * reference — the utility strip's two marks are the only ones in this file —
- * and a renderer handed a raw marker draws nothing. Ids are faked from the
- * path: nothing here asserts on a URL, only that the mark reached the strip.
+ * reference — the two property marks in `utilityNavItems` are the only ones in
+ * this file — and a renderer handed a raw marker draws nothing. Ids are faked
+ * from the path: nothing here asserts on a URL, only that the mark reached the
+ * footer.
  */
 const settings = resolveAssetMarkers(
   settingsDoc,
@@ -53,7 +53,6 @@ const O3_FOOTER_MARK = <BrandMark trim size={128} className="lg:size-[148px]" />
 const HANDED_YEAR = 2026
 
 const navHtml = renderToStaticMarkup(<SiteNav settings={settings} brandMark={O3_NAV_MARK} />)
-const utilityHtml = renderToStaticMarkup(<UtilityNav settings={settings} />)
 const footerHtml = renderToStaticMarkup(
   <SiteFooter settings={settings} brandMark={O3_FOOTER_MARK} year={HANDED_YEAR} />,
 )
@@ -220,85 +219,6 @@ describe('the nav bar’s pinned, dark-ink default', () => {
   })
 })
 
-/**
- * The brand-property strip (#88). It is the only piece of chrome that is NOT
- * pinned — the Home frame draws it in flow, above everything, with the pill
- * fixed 55px under it — so the assertions worth having are the ones that break
- * if someone folds it into the nav's fixed header or gives one property a state
- * the frame does not draw.
- */
-describe('utility nav', () => {
-  it('renders the three brand properties, in the frame’s order', () => {
-    const items = settings.utilityNavItems ?? []
-    expect(
-      items.map((item) => (item._type === 'brandLogo' ? item.button?.label : item.label)),
-    ).toEqual(['O3 Family of Brands', '1682 Conference', 'O3XO'])
-  })
-
-  it('draws a property with a mark as that mark, and its name as the alt text', () => {
-    // `2250:1453` replaces the last two words with the properties' logos. The
-    // label is what survives for a screen reader — losing it would leave two
-    // unnamed links on a bar whose whole content is names.
-    expect(utilityHtml).toContain('O3 Family of Brands')
-    expect(utilityHtml).toContain('alt="1682 Conference"')
-    expect(utilityHtml).toContain('alt="O3XO"')
-    // 20px tall, width from the file's own proportions (55 × 20, 76 × 20).
-    expect((utilityHtml.match(/h-5 w-auto/g) ?? []).length).toBe(2)
-  })
-
-  it('points each property at the destination the site already publishes', () => {
-    // Nothing invented: `/` is this site, and the other two are the URLs the
-    // footer's "Everything else" column has carried since #19.
-    expect(utilityHtml).toContain('href="/"')
-    expect(utilityHtml).toContain('href="/1682-conference-ai-innovation"')
-    expect(utilityHtml).toContain('href="https://www.o3xo.ai/"')
-  })
-
-  it('scrolls with the page instead of pinning like the pill', () => {
-    // `2250:1453` is an in-flow child of the Home frame (`scrollBehavior:
-    // SCROLLS`) where `NavBar` is `ABSOLUTE` + `FIXED`. A `fixed` here would
-    // also cover the top 69px of every hero for the length of the page.
-    expect(utilityHtml).not.toContain('fixed')
-  })
-
-  it('is desktop-only, because mobile Home has no strip above the bar', () => {
-    // `1814:1618` opens on the nav bar at y:0. Hidden rather than restyled —
-    // and hidden costs no height, so the 402 chrome is untouched.
-    expect(utilityHtml).toContain('hidden')
-    expect(utilityHtml).toContain('lg:flex')
-  })
-
-  it('highlights no property, because the frame highlights none', () => {
-    // Every member is State=Default at the same fill, so the strip is a
-    // switcher, not a breadcrumb. `aria-current` would be a claim the design
-    // does not make, and a second colour class would be one you could see.
-    // Two kinds of member, so two classes: the words and the marks. Within a
-    // kind they match, which is what "no property is highlighted" means here.
-    expect(utilityHtml).not.toContain('aria-current')
-    const links = utilityHtml.match(/<a [^>]*class="[^"]*"/g) ?? []
-    expect(links.length).toBe(3)
-    const classes = new Set(links.map((link) => link.match(/class="([^"]*)"/)?.[1]))
-    expect(classes.size, 'one property is styled differently from its kind').toBe(2)
-  })
-
-  it('takes the strip’s own tokens, not the pill’s scrim', () => {
-    // The bar is opaque black with a solid hairline; the pill is two alphas
-    // that flip. Reaching for `bg-scrim` here would make it flip with them.
-    expect(utilityHtml).toContain('bg-utility')
-    expect(utilityHtml).toContain('text-on-utility')
-    expect(utilityHtml).toContain('border-on-utility-line')
-    expect(utilityHtml).not.toContain('bg-scrim')
-    expect(utilityHtml).not.toContain('group-data-[ink=dark]')
-  })
-
-  it('hovers to brand red — a read state, not a house habit', () => {
-    // `2225:2893`, and the design's one canonical red-on-dark anchor. A mark
-    // has no text colour to take it to, so it fades over the same duration.
-    expect(utilityHtml).toContain('hover:text-brand')
-    expect(utilityHtml).toContain('hover:opacity-70')
-  })
-})
-
 describe('site footer', () => {
   it('renders the tagline', () => {
     expect(footerHtml).toContain(settings.footerTagline as string)
@@ -355,6 +275,23 @@ describe('site footer', () => {
     // only state is `State=Hover` — Eagles green, `#339C5E`.
     expect(footerHtml).toContain('hover:text-[#339c5e]')
   })
+
+  it('draws a property’s mark in place of the footer link to the same place', () => {
+    const html = renderToStaticMarkup(
+      <SiteFooter
+        settings={settings}
+        brandMark={O3_FOOTER_MARK}
+        year={HANDED_YEAR}
+        utilityNavItems={settings.utilityNavItems}
+      />,
+    )
+    // The label survives as the alt text, so the link keeps its name.
+    expect(html).toContain('alt="1682 Conference"')
+    expect(html).toContain('alt="O3XO"')
+    // 20px tall, width from each file's own proportions.
+    expect((html.match(/h-5 w-auto/g) ?? []).length).toBe(2)
+    expect(footerHtml).not.toContain('h-5 w-auto')
+  })
 })
 
 describe('every chrome destination is a route the build-out lands (#48)', () => {
@@ -380,7 +317,7 @@ describe('every chrome destination is a route the build-out lands (#48)', () => 
   }
 
   const chromeHrefs = [
-    // The strip is a union too: a member drawn as its mark keeps its
+    // `utilityNavItems` is a union too: a member drawn as its mark keeps its
     // destination one level in, on the `button` the `brandLogo` wraps.
     ...(settings.utilityNavItems ?? []).map((item) =>
       item._type === 'brandLogo' ? item.button : item,
