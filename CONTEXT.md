@@ -148,6 +148,8 @@ Three rules that are easy to get wrong:
 
 ### Field lexicon
 
+`mediaCard.fit` controls image framing: `crop` fills the slot; `contain` preserves the whole artwork on black. Like other shared objects in a layout column, its picker is available in the Studio form; the canvas limitation in ADR 0022 still applies.
+
 Closed vocabulary. If the field you want isn't here and isn't obviously domain-specific (`industryDetail`, `narrativeHeadline`, `railLabel`), you're probably reaching for a synonym of something that is.
 
 | Field             | Meaning                                                                                             | Don't use for it                                          |

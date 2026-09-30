@@ -748,6 +748,7 @@ export type StatGroup = {
 export type MediaCard = {
   _type: 'mediaCard'
   media?: Figure
+  fit?: 'crop' | 'contain'
   heading?: string
   body?: string
   button?: Button
@@ -2622,6 +2623,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
                 alt?: string
                 caption?: string
               } | null
+              fit?: 'contain' | 'crop'
               heading?: string
               body?: string
               button: {
@@ -3889,6 +3891,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
                 alt?: string
                 caption?: string
               } | null
+              fit?: 'contain' | 'crop'
               heading?: string
               body?: string
               button: {
@@ -5345,6 +5348,7 @@ export type CASE_STUDY_QUERY_RESULT = {
                 alt?: string
                 caption?: string
               } | null
+              fit?: 'contain' | 'crop'
               heading?: string
               body?: string
               button: {
@@ -6769,6 +6773,7 @@ export type PAGE_QUERY_RESULT = {
                 alt?: string
                 caption?: string
               } | null
+              fit?: 'contain' | 'crop'
               heading?: string
               body?: string
               button: {

@@ -20,7 +20,7 @@ export function CarouselControl({ direction, className, ...rest }: CarouselContr
       type="button"
       aria-label={direction === 'prev' ? 'Previous' : 'Next'}
       className={cn(
-        'bg-surface-muted duration-(--duration-hover) focus-visible:ring-brand text-ink rounded-btn flex size-12 shrink-0 items-center justify-center transition-opacity ease-out hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 disabled:opacity-40',
+        'bg-surface-muted duration-(--duration-hover) focus-visible:ring-brand text-ink rounded-btn flex size-12 shrink-0 cursor-pointer items-center justify-center transition-opacity ease-out hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 disabled:cursor-default disabled:opacity-40',
         className,
       )}
       {...rest}

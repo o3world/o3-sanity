@@ -192,7 +192,10 @@ export const RailBleed: Story = {
   play: async ({ canvasElement }) => {
     const rail = canvasElement.querySelector('ol')!
     const plate = canvasElement.querySelector('article > div:last-child')!
-    await expect(getComputedStyle(plate).borderRadius).toBe('32px')
+    await expect(getComputedStyle(plate).borderTopLeftRadius).toBe('32px')
+    await expect(getComputedStyle(plate).borderBottomLeftRadius).toBe('32px')
+    await expect(getComputedStyle(plate).borderTopRightRadius).toBe('0px')
+    await expect(getComputedStyle(plate).borderBottomRightRadius).toBe('0px')
     await expect(getComputedStyle(plate).boxShadow).not.toBe('none')
     const link = canvasElement.querySelector('article a')!
     await expect(getComputedStyle(link).color).toBe('rgb(235, 16, 0)')

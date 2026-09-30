@@ -7,12 +7,13 @@ import {
   embed,
   figure,
   mark,
+  mediaCard,
   migration,
   pullQuote,
   seo,
   stat,
 } from './objects'
-import { mediaCard, richText, statGroup } from './blocks/base'
+import { richText, statGroup } from './blocks/base'
 import { BLOCK_ARRAYS, SECTION_BLOCKS, type SectionBlockName } from './blocks/registry'
 import {
   heroSection,

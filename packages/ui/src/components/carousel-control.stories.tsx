@@ -12,7 +12,7 @@ const meta = {
   component: CarouselControl,
   parameters: {
     layout: 'centered',
-    design: figmaDesign('2134:1352'),
+    design: figmaDesign('3754:73422'),
   },
 } satisfies Meta<typeof CarouselControl>
 
