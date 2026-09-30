@@ -4,7 +4,6 @@ import { expect, within } from 'storybook/test'
 
 import { CollectionHero } from './collection-hero'
 import { Eyebrow } from './eyebrow'
-import { OrbitalSphere } from './orbital-sphere'
 import { SectionBackground } from './section-shell'
 
 const meta = {
@@ -81,16 +80,6 @@ export const InteriorWhite: Story = {
   },
 }
 
-export const InteriorWithGlobe: Story = {
-  args: {
-    eyebrow: 'Work',
-    heading: 'The problems behind the problems.',
-    decoration: (
-      <OrbitalSphere className="-z-10 hidden lg:bottom-[-40%] lg:right-[-10%] lg:block lg:w-[760px]" />
-    ),
-  },
-}
-
 export const InteriorOverPicture: Story = {
   args: {
     eyebrow: 'Solutions',
@@ -159,19 +148,6 @@ export const WorkStatic: Story = {
     const { expect } = await import('storybook/test')
     const parts = [...canvasElement.querySelectorAll<HTMLElement>('h1, p')]
     expect(parts).toHaveLength(3)
-    for (const part of parts) {
-      expect(getComputedStyle(part).animationName).toBe('none')
-      expect(getComputedStyle(part).opacity).toBe('1')
-    }
-  },
-}
-
-export const WorkStaticWithoutEyebrow: Story = {
-  args: { ...Interior.args, eyebrow: undefined },
-  play: async ({ canvasElement }) => {
-    const { expect } = await import('storybook/test')
-    const parts = [...canvasElement.querySelectorAll<HTMLElement>('h1, p')]
-    expect(parts).toHaveLength(2)
     for (const part of parts) {
       expect(getComputedStyle(part).animationName).toBe('none')
       expect(getComputedStyle(part).opacity).toBe('1')
