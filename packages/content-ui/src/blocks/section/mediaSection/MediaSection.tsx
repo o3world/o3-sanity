@@ -207,7 +207,7 @@ export function MediaSection({
             source={media.image}
             alt={media.alt}
             width={1650}
-            className="w-full shadow-[0_0_64px_0_rgba(0,0,0,0.1)]"
+            className="w-full drop-shadow-[0_0_32px_rgba(0,0,0,0.1)]"
             sizes={stegaClean(width) === 'section' ? CONTENT_COLUMN : ARTICLE_COLUMN}
           />
           {media.caption ? (

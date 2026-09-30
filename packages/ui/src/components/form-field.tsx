@@ -113,9 +113,7 @@ export function FormField({
         'aria-describedby': describedBy,
       })}
 
-      {/* Out of flow, in the 24px gap below every field, so an error never
-          moves the layout. The gap holds one 14px line, so messages must fit
-          on one line at the narrowest column. */}
+      {/* Validation uses the row gap so showing an error does not move the layout. */}
       <p id={errorId} role="alert" className="text-legal text-brand absolute left-0 top-full mt-1">
         {error}
       </p>

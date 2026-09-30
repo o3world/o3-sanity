@@ -122,6 +122,54 @@ export const MobileInteraction: Story = {
   globals: { backgrounds: { value: 'bone' }, viewport: { value: 'mobile' } },
 }
 
+/** Stack the introduction and fields before the desktop columns become cramped. */
+export const NarrowDesktopInteraction: Story = {
+  args: seededSectionArgs('contact', 'formSection'),
+  globals: { viewport: { value: 'narrowDesktop' } },
+  parameters: {
+    viewport: {
+      options: {
+        narrowDesktop: { name: 'Narrow desktop', styles: { width: '1024px', height: '1000px' } },
+      },
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const email = canvas.getByLabelText(/Email/)
+    const name = canvas.getByLabelText(/Your name/)
+    const reasonLabel = canvas.getByLabelText<HTMLSelectElement>(/Reason/).labels![0]!
+    const form = email.closest('form')!
+    const heading = canvas.getByRole('heading', { level: 1 })
+    await expect(form.getBoundingClientRect().top).toBeGreaterThan(
+      heading.closest('header')!.getBoundingClientRect().bottom,
+    )
+    await expect(email.getBoundingClientRect().top).toBeGreaterThan(
+      name.getBoundingClientRect().bottom,
+    )
+    await expect(email.getBoundingClientRect().width).toBe(form.getBoundingClientRect().width)
+    const geometry = () =>
+      [form, form.parentElement!, heading].map((element) => {
+        const rect = element.getBoundingClientRect()
+        return { top: rect.top + window.scrollY, height: rect.height }
+      })
+    const before = geometry()
+
+    await userEvent.type(email, 'invalid')
+    await userEvent.click(name)
+    await expect(email).toHaveAccessibleDescription('That email address doesn’t look right.')
+    const error = canvas.getByText('That email address doesn’t look right.')
+    await expect(error.getBoundingClientRect().bottom).toBeLessThan(
+      reasonLabel.getBoundingClientRect().top,
+    )
+    await expect(geometry()).toEqual(before)
+
+    await userEvent.clear(email)
+    await userEvent.type(email, 'preview@example.com')
+    await expect(email).toHaveAttribute('aria-invalid', 'false')
+    await expect(geometry()).toEqual(before)
+  },
+}
+
 /** The answer a person gets once the submission is HubSpot's. */
 export const Sent: Story = {
   args: { ...seededSectionArgs('contact', 'formSection'), initialStatus: 'sent' },

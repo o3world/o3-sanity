@@ -23,16 +23,8 @@ const TONE_CLASS = {
   bone: 'bg-bone',
 } as const
 
-const SPAN_CLASS = {
-  standard: 'self-start',
-  narrow: 'self-start',
-  third: 'self-start',
-  twoThirds: 'self-start',
-  wide: 'aspect-4/3 lg:aspect-[1248/700]',
-} as const
-
 type Tone = keyof typeof TONE_CLASS
-type Span = keyof typeof SPAN_CLASS
+type Span = 'standard' | 'narrow' | 'third' | 'twoThirds' | 'wide'
 
 function toneOf(value: string | null | undefined): Tone {
   const clean = stegaClean(value)
@@ -89,7 +81,7 @@ export function ScreenGridSection({
             // The tile's own path. This band has no header to attribute —
             // it is screens and nothing else.
             data-sanity={itemAttr(loc, 'screens', screen._key)}
-            className={`relative overflow-hidden rounded-[32px] ${fill ? '' : TONE_CLASS[toneOf(screen.tone)]} ${placement} ${fill ? 'self-start' : feature && index === 0 ? 'aspect-4/3 lg:aspect-[928/700]' : SPAN_CLASS[span]}`}
+            className={`relative overflow-hidden rounded-[32px] ${fill ? '' : TONE_CLASS[toneOf(screen.tone)]} ${placement} ${fill ? 'self-start' : feature && index === 0 ? 'aspect-4/3 lg:aspect-[928/700]' : 'aspect-4/3 lg:aspect-[1248/700]'}`}
           >
             <div
               data-reveal-step={sequence ? 'screen' : undefined}
