@@ -86,7 +86,7 @@ export function FormField({
   const describedBy = [noteId, errorId].filter(Boolean).join(' ') || undefined
 
   return (
-    <div className={cn('flex flex-col gap-2', className)}>
+    <div className={cn('relative flex flex-col gap-2', className)}>
       {/* Figma 2960:7798: Figtree 600 14/20, 8px above the control. */}
       <label htmlFor={id} className="text-fg text-[14px]/5 font-semibold">
         {label}
@@ -113,8 +113,10 @@ export function FormField({
         'aria-describedby': describedBy,
       })}
 
-      {/* Reserve two lines for validation, allowing longer messages to wrap. */}
-      <p id={errorId} role="alert" className="text-legal text-brand min-h-[2lh]">
+      {/* Out of flow, in the 24px gap below every field, so an error never
+          moves the layout. The gap holds one 14px line, so messages must fit
+          on one line at the narrowest column. */}
+      <p id={errorId} role="alert" className="text-legal text-brand absolute left-0 top-full mt-1">
         {error}
       </p>
     </div>

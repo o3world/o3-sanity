@@ -84,16 +84,31 @@ export const Interaction: Story = {
         const rect = element.getBoundingClientRect()
         return { top: rect.top + window.scrollY, height: rect.height }
       })
+    // Each field's error sits in the 24px gap below it, so it must stay one line.
+    const errorsFitTheirGap = () => {
+      const shown = canvas.getAllByRole('alert').filter((alert) => alert.textContent)
+      for (const alert of shown) {
+        expect(alert.getBoundingClientRect().height).toBeLessThanOrEqual(
+          parseFloat(getComputedStyle(alert).lineHeight),
+        )
+      }
+      return shown.length
+    }
     const before = geometry()
+    // Figma 2960:7794 (desktop) and 3754:78228 (mobile): the idle card height.
+    const figmaCardHeight = window.innerWidth >= 1024 ? 546 : 738
+    await expect(Math.abs(before[1]!.height - figmaCardHeight)).toBeLessThanOrEqual(1)
 
     await userEvent.click(canvas.getByRole('button', { name: /Send message/i }))
     await expect(name).toHaveFocus()
     await expect(name).toHaveAccessibleDescription('Add your name.')
     await expect(geometry()).toEqual(before)
+    await expect(errorsFitTheirGap()).toBeGreaterThan(0)
 
     await userEvent.type(email, 'invalid')
     await expect(email).toHaveAccessibleDescription('That email address doesn’t look right.')
     await expect(geometry()).toEqual(before)
+    errorsFitTheirGap()
 
     await userEvent.clear(email)
     await userEvent.type(email, 'preview@example.com')
