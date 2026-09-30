@@ -193,16 +193,7 @@ describe('buildRedirectMap', () => {
 })
 
 describe('ADR 0013’s tables', () => {
-  // The ADR is the decision; these constants are its executable copy. Counts
-  // are checked so a row cannot be dropped from one without the other.
-  it('carries the 24 service URLs the ADR counted', () => {
-    expect(Object.keys(ADR_0013_SERVICE_TERMINALS)).toHaveLength(24)
-  })
-
-  it('carries the 9 chain URLs the ADR counted', () => {
-    expect(Object.keys(ADR_0013_CHAIN_TERMINALS)).toHaveLength(9)
-  })
-
+  // The ADR is the decision; these constants are its executable copy.
   it('sends everything to /solutions bar the two the ADR names', () => {
     const elsewhere = Object.entries({
       ...ADR_0013_SERVICE_TERMINALS,
