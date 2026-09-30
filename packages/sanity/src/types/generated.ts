@@ -47,7 +47,6 @@ export type Brief = {
   instructions?: string
   links?: Array<string>
   key?: string
-  sourcePath?: string
   stage?: 'gather' | 'brief' | 'draft' | 'review' | 'typeset' | 'handed-off'
   nextStep?: string
   thesis?: string

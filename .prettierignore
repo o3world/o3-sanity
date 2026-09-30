@@ -42,12 +42,6 @@ apps/web/next-env.d.ts
 # Only the scripts; the README beside them is formatted normally.
 tools/authoring-skill/scenarios/scenario-*.md
 
-# Corpus-reader fixtures. These test how the frontmatter parser treats
-# byte-exact edge cases — a dash run, an unmatched quote — and prettier
-# rewrites exactly those bytes into the well-formed shape the test needs
-# them not to be.
-tools/guidance/src/corpus/__fixtures__/
-
 # Generated calibration copy (#143). `scripts/fixtures/extract-approved-copy.mjs`
 # writes these from the seed JSON, verbatim, so the linter scores the copy the
 # site actually publishes. Prettier rewrites emphasis markers and dash runs
