@@ -541,9 +541,6 @@ importers:
 
   packages/story-kit:
     dependencies:
-      '@o3/block-spec':
-        specifier: workspace:*
-        version: link:../block-spec
       vite-tsconfig-paths:
         specifier: ^6.1.1
         version: 6.1.1(typescript@5.9.3)(vite@7.3.6(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.33.0)(tsx@4.23.1)(yaml@2.9.0))
