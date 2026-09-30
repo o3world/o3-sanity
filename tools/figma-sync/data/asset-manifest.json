@@ -39,7 +39,7 @@
       "scale": 1,
       "export": "imageFill",
       "locked": true,
-      "note": "About `1924:5344` → Frame 2611346 `1925:5914` → Team Card. High, not exact, and **locked because the source moved**: the committed bytes hash to `652581511bdf545d62b32795182f824bea2f5257`, which is still in the file's image library (`/v1/files/:key/images`) but is referenced by no node any more. The fill this node carries today is the same portrait re-uploaded at 790×796 (mean absolute difference 3.05/255 against the committed 2500×2500 downscaled to match). Re-exporting would replace a 2500px original with a 790px one. Committed unwired — see #46: it is a flattened comp, not the cut-out `PortraitTile` needs. The same two fills sit on all six team cards (`2032:577`, `582`, `590`, `600`, `607`, `614`); this entry names the first."
+      "note": "About `1924:5344` → Frame 2611346 `1925:5914` → Team Card. High, not exact, and **locked because the source moved**: the committed bytes hash to `652581511bdf545d62b32795182f824bea2f5257`, which is still in the file's image library (`/v1/files/:key/images`) but is referenced by no node any more. The fill this node carries today is the same portrait re-uploaded at 790×796 (mean absolute difference 3.05/255 against the committed 2500×2500 downscaled to match). Re-exporting would replace a 2500px original with a 790px one. Historically committed unwired (#46). PortraitTile now accepts finished compositions; preserve this original and its lock rather than re-exporting from the moved source. The same two fills sit on all six team cards (`2032:577`, `582`, `590`, `600`, `607`, `614`); this entry names the first."
     },
     {
       "path": "tools/migration/data/seed/assets/eng-embedded.svg",
