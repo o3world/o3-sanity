@@ -6,18 +6,20 @@ import { Embed } from './Embed'
  * A pasted video URL, rendered as a 16:9 iframe.
  *
  * The block's real work is `toEmbedSrc` — a YouTube or Vimeo **page** URL is
- * what an editor actually pastes, and neither is embeddable as-is. The three
- * URL stories below are the shapes that rewrite differs on, so a change to
- * that function shows up here as a black box rather than a video.
+ * what an editor actually pastes, and neither is embeddable as-is. The rewrite
+ * is unit-tested in `portable-text/embedSrc.test.ts`; the URL stories below
+ * are its shapes to look at, and a change to it shows up here as a black box
+ * rather than a video.
  *
  * The iframe's `title` falls back to "Embedded media" when there is no
  * caption. That fallback is an accessibility requirement, not a nicety — an
  * untitled iframe is an axe violation, so `NoCaption` is the story that keeps
  * it honest.
  *
- * These stories hit the network. A blocked or offline run leaves an empty
- * player box, which is fine: what is under test is the frame and the title,
- * not YouTube.
+ * These stories hit the network, so `NoCaption` is the only iframe story the
+ * test run mounts; the rest are tagged `!test` and stay for viewing. A blocked
+ * or offline run leaves an empty player box, which is fine: what is under test
+ * is the frame and the title, not YouTube.
  */
 const meta = {
   title: 'Content/Blocks/Base/Embed',
@@ -30,6 +32,7 @@ type Story = StoryObj<typeof meta>
 
 /** A `youtube.com/watch?v=` page URL — rewritten to `/embed/<id>`. */
 export const YouTube: Story = {
+  tags: ['!test'],
   args: {
     url: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ',
     caption: 'Big Buck Bunny, standing in for a case-study film.',
@@ -38,11 +41,13 @@ export const YouTube: Story = {
 
 /** The `youtu.be/<id>` short form — the same rewrite by a different path. */
 export const YouTubeShortLink: Story = {
+  tags: ['!test'],
   args: { url: 'https://youtu.be/aqz-KE-bpKQ', caption: 'The short-link form.' },
 }
 
 /** A Vimeo page URL — rewritten to `player.vimeo.com/video/<id>`. */
 export const Vimeo: Story = {
+  tags: ['!test'],
   args: { url: 'https://vimeo.com/76979871', caption: 'Vimeo’s own demo reel.' },
 }
 
@@ -56,6 +61,7 @@ export const NoCaption: Story = {
  * provider `toEmbedSrc` has never heard of.
  */
 export const PassThrough: Story = {
+  tags: ['!test'],
   args: {
     url: 'https://player.vimeo.com/video/76979871',
     caption: 'Already a player URL; nothing to rewrite.',
