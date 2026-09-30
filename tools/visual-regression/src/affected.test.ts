@@ -74,6 +74,23 @@ describe('affectedStoryFiles', () => {
     expect(affectedStoryFiles(modules, ['packages/ui/src/lib/unused.ts']).storyFiles).toEqual([])
   })
 
+  it('resolves a graph module and an index entry to the same host-relative file', () => {
+    // The stats file writes `./../../apps/web/…`, the index `../../apps/web/…`;
+    // both are relative to `apps/storybook`, and every entry point has to agree.
+    const entry: StoryEntry = {
+      id: 'ui-sitenav--default',
+      name: 'Default',
+      title: 'UI/SiteNav',
+      importPath: '../../apps/web/src/ui/SiteNav.stories.tsx',
+      type: 'story',
+    }
+    const affected = affectedStoryFiles(modules, ['packages/ui/src/index.ts'])
+    expect(affected.storyFiles).toEqual([NAV_STORY])
+    expect(entryPath(entry)).toBe(NAV_STORY)
+    expect(storiesFor([entry], affected)).toHaveLength(1)
+    expect(removedStories([entry], new Set(), new Set([NAV_STORY]), affected)).toHaveLength(1)
+  })
+
   it('reaches every story from the builder the host’s preview shells over', () => {
     // The host is a ~15-line shell over `@o3/story-kit` (#240). The builder
     // is a plain import of `preview.ts`, so the climb reaches a global module
@@ -88,80 +105,6 @@ describe('affectedStoryFiles', () => {
     expect(
       affectedStoryFiles(shell, ['packages/story-kit/src/storybookPreview.ts']).everything,
     ).toBe(true)
-  })
-})
-
-/**
- * Storybook writes module ids relative to the host that built them, so the
- * same `./globals.css` means a different file in each host directory — and a
- * run must read its own. A synthetic second host proves every entry point
- * honours the directory it is given rather than assuming `apps/storybook`.
- */
-describe('affectedStoryFiles, against another host directory', () => {
-  const HOST = 'apps/storybook-other'
-  const APP_STORY = 'apps/other/src/components/Mark.stories.tsx'
-
-  const hostModules: StatsModule[] = [
-    { id: './globals.css', reasons: [{ moduleName: './.storybook/preview.ts' }] },
-    {
-      id: './.storybook/preview.ts',
-      reasons: [{ moduleName: '/virtual:/@storybook/builder-vite/storybook-config-entry.js' }],
-    },
-    {
-      id: './../../apps/other/src/components/Mark.tsx',
-      reasons: [{ moduleName: `./../../${APP_STORY}` }],
-    },
-    {
-      id: `./../../${APP_STORY}`,
-      reasons: [{ moduleName: '/virtual:/@storybook/builder-vite/storybook-stories.js' }],
-    },
-  ]
-
-  it('climbs to a story that host owns', () => {
-    expect(affectedStoryFiles(hostModules, ['apps/other/src/components/Mark.tsx'], HOST)).toEqual({
-      storyFiles: [APP_STORY],
-      everything: false,
-    })
-  })
-
-  it('reads this host’s globals as global', () => {
-    expect(affectedStoryFiles(hostModules, [`${HOST}/globals.css`], HOST).everything).toBe(true)
-    expect(
-      affectedStoryFiles(hostModules, [`${HOST}/.storybook/preview.ts`], HOST).everything,
-    ).toBe(true)
-  })
-
-  it('leaves another directory’s globals alone', () => {
-    expect(affectedStoryFiles(hostModules, ['apps/storybook/globals.css'], HOST)).toEqual({
-      storyFiles: [],
-      everything: false,
-    })
-  })
-
-  it('resolves an index entry against the host that indexed it', () => {
-    const entry: StoryEntry = {
-      id: 'other-mark--default',
-      name: 'Default',
-      title: 'Other/Mark',
-      importPath: '../../apps/other/src/components/Mark.stories.tsx',
-      type: 'story',
-    }
-    expect(entryPath(entry, HOST)).toBe(APP_STORY)
-    expect(storiesFor([entry], { storyFiles: [APP_STORY], everything: false }, HOST)).toHaveLength(
-      1,
-    )
-    expect(
-      removedStories(
-        [entry],
-        new Set(),
-        new Set([APP_STORY]),
-        {
-          storyFiles: [APP_STORY],
-          everything: false,
-        },
-        HOST,
-      ),
-    ).toHaveLength(1)
   })
 })
 

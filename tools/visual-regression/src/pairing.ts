@@ -33,13 +33,11 @@ export interface TrackedEntry {
 }
 
 /**
- * A design file: the manifest that watches it, and the `@o3/story-kit` export
- * that names its key. The join runs on that identifier rather than on the key
- * itself, so no file key is spelled out twice.
+ * The design file `figmaDesign` links to — `@o3/story-kit`'s
+ * `FIGMA_FILE_KEY` — and the manifest entries that watch it.
  */
 export interface BrandDesignFile {
   readonly brand: Brand
-  readonly fileKeyRef: string
   readonly fileKey: string
   readonly entries: readonly TrackedEntry[]
 }
@@ -55,7 +53,6 @@ export interface DeclaredPairing {
   readonly exportName: string
   /** Colon form, the one the manifest and `docs/figma-*.md` write. */
   readonly nodeId: string
-  readonly fileKeyRef: string
   /** Repo-relative path of the story file. */
   readonly file: string
   readonly declaredOn: DeclaredOn
@@ -66,8 +63,8 @@ export interface DeclaredPairing {
 export type PairingMatch = TrackedKind | 'untracked'
 
 export interface PairingRow extends DeclaredPairing {
-  /** The brand whose design file the story named, `null` if nothing owns it. */
-  readonly designBrand: Brand | null
+  /** The brand whose design file the node is in. */
+  readonly designBrand: Brand
   readonly match: PairingMatch
   /** The manifest's name for the node, when it tracks it. */
   readonly trackedName: string | null
@@ -97,16 +94,11 @@ export interface Inventory {
   readonly coverage: readonly BrandCoverage[]
 }
 
-/** The `@o3/story-kit` export whose key `figmaDesign` links to. */
-const DEFAULT_FILE_KEY_REF = 'FIGMA_FILE_KEY'
-
 /**
  * `figmaDesign('1710:2609')`. The node id is a string literal in every call,
  * which is what makes the declaration readable without evaluating the module.
- * A trailing identifier argument is recorded as the file it names, so a call
- * pointing anywhere but the tracked file surfaces as untracked.
  */
-const CALL = /figmaDesign\(\s*['"]([^'"]+)['"]\s*(?:,\s*([A-Za-z_$][\w$]*)\s*)?\)/g
+const CALL = /figmaDesign\(\s*['"]([^'"]+)['"]\s*\)/g
 
 /** `title: 'Content/Blocks/…'` — a host's own `main.ts` never autotitles here. */
 const TITLE = /(^|[\s{,])title:\s*['"]([^'"]+)['"]/
@@ -178,7 +170,6 @@ export function extractPairings(
         title,
         exportName,
         nodeId: normalizeNodeId(call.match[1]!),
-        fileKeyRef: call.match[2] ?? DEFAULT_FILE_KEY_REF,
         file,
         declaredOn: own ? ('story' as const) : ('meta' as const),
         hosts,
@@ -188,30 +179,24 @@ export function extractPairings(
 }
 
 /**
- * The inventory: every pairing joined to the manifest that watches the file it
- * names, every component set nobody paired, and the page-frame pairings.
+ * The inventory: every pairing joined to the manifest that watches the design
+ * file, every component set nobody paired, and the page-frame pairings.
  *
  * Coverage is reported, never gated (spec #326) — an uncovered set is a row,
  * not a failure, and the list is never capped.
  */
 export function buildInventory(
   pairings: readonly DeclaredPairing[],
-  files: readonly BrandDesignFile[],
+  file: BrandDesignFile,
 ): Inventory {
-  const byRef = new Map(files.map((file) => [file.fileKeyRef, file]))
-  const entriesByRef = new Map(
-    files.map((file) => [file.fileKeyRef, new Map(file.entries.map((e) => [e.nodeId, e]))]),
-  )
+  const entries = new Map(file.entries.map((e) => [e.nodeId, e]))
 
-  // A pairing that names no known file is kept: a mistyped identifier is
-  // exactly the thing an inventory should surface.
   const rows: PairingRow[] = pairings
     .map((pairing) => {
-      const file = byRef.get(pairing.fileKeyRef) ?? null
-      const entry = entriesByRef.get(pairing.fileKeyRef)?.get(pairing.nodeId) ?? null
+      const entry = entries.get(pairing.nodeId) ?? null
       return {
         ...pairing,
-        designBrand: file?.brand ?? null,
+        designBrand: file.brand,
         match: entry?.kind ?? ('untracked' as const),
         trackedName: entry?.name ?? null,
         route: entry?.route ?? null,
@@ -223,40 +208,28 @@ export function buildInventory(
         a.nodeId.localeCompare(b.nodeId),
     )
 
-  const pairedNodes = new Map<Brand, Set<string>>()
-  for (const row of rows) {
-    if (!row.designBrand) continue
-    const seen = pairedNodes.get(row.designBrand) ?? new Set<string>()
-    seen.add(row.nodeId)
-    pairedNodes.set(row.designBrand, seen)
-  }
-
-  const uncovered: UncoveredEntry[] = []
-  const coverage: BrandCoverage[] = []
-  for (const file of files) {
-    const paired = pairedNodes.get(file.brand) ?? new Set<string>()
-    const sets = file.entries.filter((entry) => entry.kind === 'componentSet')
-    for (const entry of sets) {
-      if (paired.has(entry.nodeId)) continue
-      uncovered.push({
-        brand: file.brand,
-        nodeId: entry.nodeId,
-        name: entry.name,
-        codeComponent: entry.codeComponent ?? null,
-      })
-    }
-    coverage.push({
+  const paired = new Set(rows.map((row) => row.nodeId))
+  const sets = file.entries.filter((entry) => entry.kind === 'componentSet')
+  const uncovered: UncoveredEntry[] = sets
+    .filter((entry) => !paired.has(entry.nodeId))
+    .map((entry) => ({
       brand: file.brand,
-      tracked: sets.length,
-      paired: sets.filter((entry) => paired.has(entry.nodeId)).length,
-    })
-  }
+      nodeId: entry.nodeId,
+      name: entry.name,
+      codeComponent: entry.codeComponent ?? null,
+    }))
 
   return {
     pairings: rows,
     pageLevel: rows.filter((row) => row.match === 'pageFrame'),
     uncovered,
-    coverage,
+    coverage: [
+      {
+        brand: file.brand,
+        tracked: sets.length,
+        paired: sets.filter((entry) => paired.has(entry.nodeId)).length,
+      },
+    ],
   }
 }
 
@@ -294,7 +267,7 @@ export function formatInventory(inventory: Inventory): string {
           row.storyId ?? `${row.file} · ${row.exportName}`,
           row.nodeId,
           row.hosts.join('+'),
-          row.designBrand ?? '?',
+          row.designBrand,
           row.match === 'pageFrame' ? 'page-level' : row.match,
           row.trackedName ? `${row.trackedName}${row.route ? ` (${row.route})` : ''}` : '',
         ]),

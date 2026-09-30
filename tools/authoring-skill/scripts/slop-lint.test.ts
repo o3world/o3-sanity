@@ -1,13 +1,10 @@
-import { readFileSync } from 'node:fs'
-import { join, resolve } from 'node:path'
+import { resolve } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
 import { collect } from './fixtures/extract-approved-copy.mjs'
 import { RULES, compare, lint, wordCount } from './slop-lint.mjs'
 
-const fixtures = resolve(import.meta.dirname, 'fixtures')
-const read = (name: string) => readFileSync(join(fixtures, name), 'utf8')
 const seedDir = resolve(import.meta.dirname, '../../migration/data/seed')
 
 /** Every hit of one rule, as the excerpts that produced them. */
@@ -24,53 +21,47 @@ describe('calibration against approved copy', () => {
   // the house has already published is worse than no linter: the reviser
   // learns to scroll past it, and the one real finding goes with the rest.
   //
-  // Both fixtures are generated from tools/migration/data/seed/ by
-  // fixtures/extract-approved-copy.mjs. A failure here is a question about
-  // which of the two is wrong — the rule or the copy — and it is answered on a
-  // ticket, never by editing the fixture.
+  // The copy is every approved string in tools/migration/data/seed/, read by
+  // fixtures/extract-approved-copy.mjs as the seeds stand now. A failure here
+  // is a question about which of the two is wrong — the rule or the copy — and
+  // it is answered on a ticket.
+  //
+  // Short strings keep one per line and body strings one per paragraph, so the
+  // block-shaped rules — the recap ending — see one field as one paragraph.
+  const approved = collect(seedDir)
+  const short = `${approved.short.join('\n')}\n`
+  const body = `${approved.body.join('\n\n')}\n`
+
   // The word floors are sample size, not quality: a zero measured over a
   // paragraph is not a calibration. Body prose sits near this floor because the
   // seed corpus holds almost no long-form copy — the insight seeds are the only
   // documents that carry any, and the feed currently seeds one. #351 asks
   // whether the corpus should reach past `seed/` for it.
   it('scores zero tells over approved body prose', () => {
-    const score = lint(read('approved-body.md'))
+    const score = lint(body)
     expect(score.tells).toEqual([])
     expect(score.perHundred).toBe(0)
     expect(score.words).toBeGreaterThan(3500)
   })
 
   it('scores zero tells over approved short copy', () => {
-    const score = lint(read('approved-short.md'), { surface: 'short' })
+    const score = lint(short, { surface: 'short' })
     expect(score.tells).toEqual([])
     expect(score.perHundred).toBe(0)
     expect(score.words).toBeGreaterThan(1000)
   })
 
-  // The candidates are recorded rather than tuned away, because both are real
-  // matches: one of a phrase slop.md lists conditionally, one of a rule
-  // slop.md states categorically and a heading in page/live.json breaks.
-  // fixtures/README.md says what to do when this list changes.
-  it('records the two candidates the approved copy carries', () => {
-    const short = lint(read('approved-short.md'), { surface: 'short' })
-    expect(short.filler.map((hit) => [hit.rule, hit.excerpt])).toEqual([
-      ['empty-phrase', 'in the age of'],
-      ['em-dash-short-copy', '—'],
-    ])
-    expect(lint(read('approved-body.md')).filler).toEqual([])
-  })
-
-  // A calibration nobody can reproduce is a claim, not a measurement. The
-  // fixtures are generated, so the test that matters is whether they still
-  // match the seeds they were generated from — otherwise the zero above is
-  // about copy the site stopped publishing months ago.
-  //
-  // A failure here is fixed by running the extractor, not by editing the
-  // fixture. If a rule then starts firing, that is the finding.
-  it('holds the copy the seeds currently carry', () => {
-    const { short, body } = collect(seedDir)
-    expect(read('approved-short.md')).toBe(`${short.join('\n')}\n`)
-    expect(read('approved-body.md')).toBe(`${body.join('\n\n')}\n`)
+  // The candidates are recorded rather than tuned away, because they are real
+  // matches: a phrase slop.md lists conditionally, and an em dash in a heading
+  // where slop.md is categorical. Pinned by rule rather than by excerpt, so a
+  // copy edit moves the hits without breaking the record; another candidate
+  // rule firing over approved copy is the finding fixtures/README.md covers.
+  it('records which candidate rules the approved copy trips', () => {
+    const recorded = new Set(['empty-phrase', 'em-dash-short-copy'])
+    const unrecorded = [...lint(short, { surface: 'short' }).filler, ...lint(body).filler].filter(
+      (hit) => !recorded.has(hit.rule),
+    )
+    expect(unrecorded.map((hit) => `${hit.rule}: ${hit.excerpt}`)).toEqual([])
   })
 })
 

@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 
 import { describe, expect, it } from 'vitest'
 
-import { readDeclaredSources, readGlobbedSources, renderGlobbedSource } from './read'
+import { readGlobbedSources, renderGlobbedSource } from './read'
 
 import type { CorpusSource } from './plan'
 
@@ -39,6 +39,12 @@ describe('readGlobbedSources', () => {
    */
   it('reads a directory that is not there as no sources at all', () => {
     expect(readGlobbedSources(FIXTURE_ROOT, 'briefs-that-were-deleted')).toEqual([])
+  })
+
+  it('refuses a file that is nothing but frontmatter', () => {
+    expect(() => readGlobbedSources(FIXTURE_ROOT, 'hollow')).toThrow(
+      'hollow/hollow.md is empty after stripping frontmatter',
+    )
   })
 
   it('refuses a markdown file that registers nothing', () => {
@@ -125,30 +131,5 @@ describe('renderGlobbedSource', () => {
     expect(() =>
       renderGlobbedSource({ key: 'wrapped', title: 'Two\nlines', body: 'Notes.' }),
     ).toThrow('title spans more than one line')
-  })
-})
-
-describe('readDeclaredSources', () => {
-  it('takes key and title from the row and the body from the file, without its frontmatter', () => {
-    expect(
-      readDeclaredSources(FIXTURE_ROOT, [
-        { key: 'o3-voice', title: 'O3 voice guide', sourcePath: 'declared/docs/voice.md' },
-      ]),
-    ).toEqual([
-      {
-        key: 'o3-voice',
-        title: 'O3 voice guide',
-        body: '# O3 World copy\n\nSay the specific thing.',
-        sourcePath: 'declared/docs/voice.md',
-      },
-    ])
-  })
-
-  it('refuses a file that is nothing but frontmatter', () => {
-    expect(() =>
-      readDeclaredSources(FIXTURE_ROOT, [
-        { key: 'hollow', title: 'Hollow', sourcePath: 'declared/docs/hollow.md' },
-      ]),
-    ).toThrow('declared/docs/hollow.md is empty after stripping frontmatter')
   })
 })

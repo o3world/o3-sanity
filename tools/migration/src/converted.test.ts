@@ -180,9 +180,10 @@ describe('committed conversion output', () => {
     }
   })
 
-  // The loader refuses to touch a locked document (ADR 0003). Anything the
-  // converter produced is by definition re-derivable from git, so it must
-  // never be born locked — that would freeze it against its own pipeline.
+  // The pipeline never replaces a locked document from outside it (ADR 0003).
+  // Anything the converter produced is by definition re-derivable from git, so
+  // it must never be born locked — that would freeze it against its own
+  // pipeline.
   it('leaves every converted document unlocked', () => {
     for (const { file, doc } of all) {
       expect((doc.migration as { locked: boolean }).locked, file).toBe(false)
@@ -203,8 +204,8 @@ describe('committed conversion output', () => {
 
   /**
    * `extractedAt` is a fact about the extract *run*, so it lives in
-   * `data/extract/_manifest.json` and `load.ts` stamps it onto the document on
-   * its way to Sanity. Storing it here made every `convert` rewrite all 272
+   * `data/extract/_manifest.json` and `core/plan.ts` stamps it onto the
+   * documents `drift` compares. Storing it here made every `convert` rewrite all 272
    * files whether or not WordPress had changed anything, which buried real
    * content changes in timestamp noise. Studio still shows the field.
    */

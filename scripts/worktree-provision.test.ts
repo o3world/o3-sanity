@@ -66,7 +66,6 @@ function repoWithWorktree(name: string): { main: string; worktree: string } {
   writeFileSync(join(main, '.env.local'), 'VERCEL_OIDC_TOKEN="carried"\n')
   mkdirSync(join(main, 'apps/web'), { recursive: true })
   writeFileSync(join(main, 'apps/web/.env.local'), 'SANITY_API_READ_TOKEN="carried"\n')
-  mkdirSync(join(main, 'prototype'), { recursive: true })
 
   const worktree = join(scratch, `${name}-wt`)
   git(main, 'worktree', 'add', '--quiet', '--detach', worktree)
@@ -96,14 +95,6 @@ describe('worktree provisioning', () => {
     const env = readFileSync(join(worktree, '.env'), 'utf8')
     expect(env).toMatch(/^WEB_PORT=36\d\d$/m)
     expect(env).toMatch(/^STORYBOOK_PORT=66\d\d$/m)
-  })
-
-  it('symlinks the prototype assets rather than copying 22MB per worktree', () => {
-    const { main, worktree } = repoWithWorktree('proto')
-    provision(worktree, '--no-install')
-
-    expect(existsSync(join(worktree, 'prototype'))).toBe(true)
-    expect(resolve(worktree, 'prototype')).not.toBe(resolve(main, 'prototype'))
   })
 
   /**

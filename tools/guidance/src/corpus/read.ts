@@ -1,7 +1,6 @@
 /**
- * Reading a corpus off disk. Two registrations, one source shape: a declared
- * list (each row names its file) and a globbed directory (each file names
- * itself in frontmatter).
+ * Reading a corpus off disk: a globbed directory, each file naming itself in
+ * frontmatter.
  */
 import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
@@ -18,8 +17,7 @@ const FRONTMATTER = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n+|$)/
 type Frontmatter = { data: Record<string, string>; body: string }
 
 /**
- * Frontmatter is registration for the globbed corpus and packaging metadata for
- * the skill loader in the declared one. Either way it is not the document, so
+ * Frontmatter is the globbed corpus's registration. It is not the document, so
  * it never reaches the body.
  */
 function parseFrontmatter(markdown: string): Frontmatter {
@@ -63,22 +61,6 @@ function sourceFrom(root: string, sourcePath: string): Frontmatter {
   const parsed = parseFrontmatter(readFileSync(join(root, sourcePath), 'utf8'))
   if (!parsed.body) throw new Error(`${sourcePath} is empty after stripping frontmatter`)
   return parsed
-}
-
-/** A declared corpus row: the file is named here rather than naming itself. */
-export type SourceDeclaration = { key: string; title: string; sourcePath: string }
-
-/** A declared corpus: one row per document, the file supplying only the body. */
-export function readDeclaredSources(
-  root: string,
-  declarations: readonly SourceDeclaration[],
-): CorpusSource[] {
-  return declarations.map((declaration) => ({
-    key: declaration.key,
-    title: declaration.title,
-    body: sourceFrom(root, declaration.sourcePath).body,
-    sourcePath: declaration.sourcePath,
-  }))
 }
 
 /**

@@ -19,8 +19,8 @@
 // voice uses on purpose — the tension → turn, the flat delivery of a
 // remarkable fact — so borrowing it would mark approved copy as slop. Every
 // rule below is pinned to a named section of that document, and every rule
-// scores zero over the approved seed copy in `fixtures/` (see the calibration
-// note in that directory).
+// scores zero over the approved seed copy (see the calibration note in
+// `fixtures/`).
 //
 // A pattern slop.md names that no regex can decide is **out of the rule
 // table**, not approximated in it. The tool is a floor under a human judgement
@@ -57,7 +57,7 @@ function stripCode(text) {
  *
  * A **tell** is an absolute. slop.md's checks 1 to 8 read "zero binary
  * contrasts", "no summary-recap ending" — a hit is a defect, and the approved
- * seed copy in `fixtures/` scores zero of them. That zero is the calibration,
+ * seed copy scores zero of them. That zero is the calibration,
  * and it is what makes a tell worth acting on without reading around it.
  *
  * A **candidate** is counted and never failed on, for one of two reasons.

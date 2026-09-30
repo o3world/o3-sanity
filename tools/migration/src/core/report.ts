@@ -200,10 +200,8 @@ export function report(
       .map((doc) => `${doc._id} has unknown _type "${doc._type}"`),
   })
 
-  // 7. One slug, one document. The same implementation `load` reports from,
-  //    so the two cannot disagree about whether a URL is a coin flip — and
-  //    the offender is usually a document the pipeline does not own, which no
-  //    check over committed JSON can see.
+  // 7. One slug, one document. The offender is usually a document the
+  //    pipeline does not own, which no check over committed JSON can see.
   checks.push({
     check: 'no two documents claim the same slug',
     lines: slugCollisions(slugRowsOf(live)).map(describeSlugCollision),

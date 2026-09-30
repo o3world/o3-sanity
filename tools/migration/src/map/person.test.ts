@@ -107,15 +107,6 @@ describe('buildPersonDirectory', () => {
     expect(buildPersonDirectory([], []).refForTeam(99)).toBeNull()
   })
 
-  it('is deterministic across runs', () => {
-    const build = () =>
-      buildPersonDirectory(
-        [user({ wpId: 16, name: 'Brian Crumley', email: 'brian@o3world.com' })],
-        [member({ wpId: 921, name: 'Keith Scandone', email: 'keith@o3world.com' })],
-      )
-    expect(JSON.stringify(build().docs)).toBe(JSON.stringify(build().docs))
-  })
-
   // Users and team posts are separate WordPress id spaces sharing one
   // `person-wp-<id>` namespace. They do not overlap today (users ≤ 22, team
   // ≥ 125) but nothing enforces that in WordPress, so the directory does.

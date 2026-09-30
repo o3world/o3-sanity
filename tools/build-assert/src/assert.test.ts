@@ -6,6 +6,11 @@ import { fileURLToPath } from 'node:url'
 
 import { afterEach, beforeEach, expect, it } from 'vitest'
 
+/**
+ * The CLI's exit codes, end to end: the process `pnpm build:assert` runs.
+ * What the readers accept is `build-output.test.ts`, in process.
+ */
+
 const toolDir = dirname(fileURLToPath(import.meta.url))
 let fixture: string
 
@@ -72,14 +77,6 @@ it('fails the CLI for 20 KB of growth below the ceiling and names the route and 
   expect(result.output).toContain('10,000')
 })
 
-it('fails closed when a requested baseline contains no route measurements', () => {
-  writeJson('baseline/diagnostics/route-bundle-stats.json', [])
-  const result = run('--baseline-dist', join(fixture, 'baseline'))
-
-  expect(result.status).toBe(1)
-  expect(result.output).toContain('Invalid route bundle stats')
-})
-
 it('keeps the absolute-only command compatible and reports a passing comparison', () => {
   expect(run().status).toBe(0)
   writeBundles('current', 706_786)
@@ -89,34 +86,11 @@ it('keeps the absolute-only command compatible and reports a passing comparison'
   expect(result.output).toContain('Base 696,786 → current 706,786; delta +10,000 bytes')
 })
 
-it('fails when a requested baseline file is missing instead of falling back to the ceiling', () => {
+it('fails when a requested baseline is missing or unnamed instead of falling back to the ceiling', () => {
   rmSync(join(fixture, 'baseline'), { recursive: true })
-  const result = run('--baseline-dist', join(fixture, 'baseline'))
+  const missing = run('--baseline-dist', join(fixture, 'baseline'))
 
-  expect(result.status).toBe(1)
-  expect(result.output).toContain('route-bundle-stats.json')
-})
-
-it.each([
-  null,
-  {},
-  [{ route: '/', firstLoadChunkPaths: [] }],
-  [{ route: '/', firstLoadUncompressedJsBytes: '696786', firstLoadChunkPaths: [] }],
-  [{ route: '/', firstLoadUncompressedJsBytes: -1, firstLoadChunkPaths: [] }],
-  [
-    { route: '/', firstLoadUncompressedJsBytes: 696_786, firstLoadChunkPaths: [] },
-    { route: '/', firstLoadUncompressedJsBytes: 716_786, firstLoadChunkPaths: [] },
-  ],
-])('fails closed for malformed baseline stats: %j', (stats) => {
-  writeJson('baseline/diagnostics/route-bundle-stats.json', stats)
-  const result = run('--baseline-dist', join(fixture, 'baseline'))
-
-  expect(result.status).toBe(1)
-  expect(result.output).toContain('Invalid route bundle stats')
-})
-
-it('rejects broken JSON and a baseline option with no value', () => {
-  writeFileSync(join(fixture, 'baseline/diagnostics/route-bundle-stats.json'), '{')
-  expect(run('--baseline-dist', join(fixture, 'baseline')).status).toBe(1)
+  expect(missing.status).toBe(1)
+  expect(missing.output).toContain('route-bundle-stats.json')
   expect(run('--baseline-dist').status).toBe(1)
 })

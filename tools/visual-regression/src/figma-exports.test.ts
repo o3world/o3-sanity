@@ -53,7 +53,6 @@ function pairing(nodeId: string, storyId: string): PairingRow {
     title: 'Content/Blocks/Thing',
     exportName: 'Desktop',
     nodeId,
-    fileKeyRef: 'FIGMA_FILE_KEY',
     file: 'packages/content-ui/src/Thing.stories.tsx',
     declaredOn: 'story',
     hosts: ['o3'],

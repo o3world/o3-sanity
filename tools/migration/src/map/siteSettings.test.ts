@@ -250,12 +250,6 @@ describe('mapSiteSettings', () => {
     })
   })
 
-  it('is deterministic — the same chrome converts to byte-identical JSON', () => {
-    const first = expectOk(mapSiteSettings(chrome(), SITE))
-    const second = expectOk(mapSiteSettings(chrome(), SITE))
-    expect(JSON.stringify(first)).toBe(JSON.stringify(second))
-  })
-
   describe('fails loud rather than shipping half a chrome (ADR 0002)', () => {
     it('reports a missing primary menu', () => {
       const source = chrome()

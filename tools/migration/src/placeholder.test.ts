@@ -29,7 +29,7 @@ import { ASSET_MAP } from './lib/paths'
  * fail, rather than discovering the rule after it shipped.
  */
 
-/** Every asset id `load` has uploaded, from the committed manifest. */
+/** Every asset id the committed manifest records as uploaded. */
 function seededAssetIds(): Set<string> {
   if (!existsSync(ASSET_MAP)) return new Set()
   const manifest = JSON.parse(readFileSync(ASSET_MAP, 'utf8')) as Record<
@@ -39,20 +39,19 @@ function seededAssetIds(): Set<string> {
   return new Set(Object.values(manifest).map((entry) => entry.assetId))
 }
 
-const SPECS = Object.entries(BLOCK_KNOBS)
-
 describe('a placeholder’s asset references are seeded', () => {
-  const seeded = seededAssetIds()
-
-  it.each(SPECS)('%s', (type, spec) => {
-    const unseeded = placeholderReferences(spec.placeholder)
-      .asset.filter((found) => !seeded.has(found.ref))
-      .map((found) => `${found.path} → ${found.ref}`)
+  it('points every placeholder asset at one data/assets.json carries', () => {
+    const seeded = seededAssetIds()
+    const unseeded = Object.entries(BLOCK_KNOBS).flatMap(([type, spec]) =>
+      placeholderReferences(spec.placeholder)
+        .asset.filter((found) => !seeded.has(found.ref))
+        .map((found) => `${type}: ${found.path} → ${found.ref}`),
+    )
 
     expect(
       unseeded,
-      `${type}'s placeholder points at an asset data/assets.json does not carry — ` +
-        `seed it, or leave the image empty and let the editor pick`,
+      'a placeholder points at an asset data/assets.json does not carry — ' +
+        'seed it, or leave the image empty and let the editor pick',
     ).toEqual([])
   })
 })
