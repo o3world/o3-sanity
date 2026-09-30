@@ -25,8 +25,11 @@ export const AsSeeded: Story = {
     await assertStrip(canvasElement)
     const body = canvasElement.querySelector('section > div p.text-lead')!
     await expect(body.getBoundingClientRect().width).toBe(900)
+    // `text-lead` is 24/34 at 1440; its fluid clamp lands a hair under 24.
+    await expect(parseFloat(getComputedStyle(body).fontSize)).toBeCloseTo(24, 0)
     const section = canvasElement.querySelector('section')!
     await expect(section).toHaveAttribute('data-surface', 'ink')
+    await expect(getComputedStyle(section).backgroundImage).toBe('none')
     await expect(getComputedStyle(body).color).toBe('rgb(170, 166, 158)')
   },
 }
