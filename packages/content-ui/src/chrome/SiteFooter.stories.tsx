@@ -34,6 +34,9 @@ export const AsAuthored: Story = {
     const footer = canvasElement.querySelector('footer')!
     await expect(getComputedStyle(footer).paddingTop).toBe('128px')
     await expect(getComputedStyle(footer).paddingBottom).toBe('64px')
+    await expect(getComputedStyle(footer).paddingLeft).toBe('96px')
+    // `1280:1885` is pure black, not the ink band's #030303.
+    await expect(getComputedStyle(footer).backgroundColor).toBe('rgb(0, 0, 0)')
     const nav = within(canvasElement).getByRole('navigation', { name: 'Footer' })
     const copy = nav.parentElement!
     await expect(copy.getBoundingClientRect().width).toBe(628)
@@ -76,6 +79,7 @@ export const Mobile: Story = {
     await expect(getComputedStyle(container).gap).toBe('64px')
     await expect(getComputedStyle(nav).paddingBottom).toBe('32px')
     const footer = nav.closest('footer')!
+    await expect(getComputedStyle(footer).paddingLeft).toBe('16px')
     const watermarks = footer.querySelectorAll(':scope > svg')
     await expect(
       watermarks[0]!.getBoundingClientRect().left - footer.getBoundingClientRect().left,
