@@ -108,6 +108,15 @@ function absolute(path: string): string {
   return path === '/' ? `${base}/` : `${base}${path}`
 }
 
+/**
+ * The brand every title is suffixed with: Site Settings' title. The layout's
+ * title template and the OpenGraph title both read it here, so the tab and a
+ * share card cannot name the site differently.
+ */
+export function siteNameOf(settings?: SiteSeoDefaults | null): string {
+  return firstString(settings?.title) ?? 'O3'
+}
+
 export interface BuildDocumentMetadataInput {
   /** The document's `seo` object, if it has one. */
   readonly seo?: SeoOverrides | null
@@ -141,14 +150,16 @@ export function buildDocumentMetadata({
   const noIndex = seo?.noIndex === true
   const noFollow = seo?.noFollow === true
 
-  // The site name is appended by the root layout's `title.template`, so the
+  // The site name is appended by the layout's `title.template`, so the
   // OpenGraph title has to append it itself — social scrapers read og:title
-  // literally and never see the template.
-  const siteName = firstString(settings?.title) ?? 'O3'
-  const ogTitle = title ? `${title} | ${siteName}` : siteName
+  // literally and never see the template. A title that already is the site
+  // name gets neither suffix: "O3 | O3" is a doubled brand, not a title.
+  const siteName = siteNameOf(settings)
+  const isSiteName = title?.toLowerCase() === siteName.toLowerCase()
+  const ogTitle = title && !isSiteName ? `${title} | ${siteName}` : siteName
 
   return {
-    ...(title ? { title } : {}),
+    ...(title ? { title: isSiteName ? { absolute: siteName } : title } : {}),
     ...(description ? { description } : {}),
     alternates: { canonical },
     robots: {
