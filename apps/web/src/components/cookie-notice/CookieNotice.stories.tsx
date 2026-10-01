@@ -82,3 +82,35 @@ export const AlreadyAccepted: Story = {
     ).not.toBeInTheDocument()
   },
 }
+
+/**
+ * While the notice is up, a keyboard user tabbing down the page never lands on
+ * a control hidden underneath it (WCAG 2.4.11) — down to the last link on the
+ * page, which has nowhere further to scroll.
+ */
+export const FocusStaysAboveTheNotice: Story = {
+  render: () => (
+    <>
+      <main>
+        <div style={{ height: '150vh' }}>Page content</div>
+        <footer>
+          <a href="#privacy">Privacy policy</a> <a href="#accessibility">Accessibility statement</a>
+        </footer>
+      </main>
+      <CookieNotice />
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const notice = await canvas.findByRole('region', { name: 'Cookie notice' })
+    for (const name of ['Privacy policy', 'Accessibility statement']) {
+      const link = canvas.getByRole('link', { name })
+      link.focus()
+      await waitFor(() =>
+        expect(link.getBoundingClientRect().bottom).toBeLessThanOrEqual(
+          notice.getBoundingClientRect().top,
+        ),
+      )
+    }
+  },
+}

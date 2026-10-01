@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useSyncExternalStore } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { Button, CloseIcon } from '@o3/ui'
 
 /**
@@ -34,8 +34,40 @@ export function CookieNotice() {
     setDismissed(true)
   }
 
+  return <NoticeBar onAccept={accept} />
+}
+
+/**
+ * The bar itself. While it is mounted it reserves its own height at the foot
+ * of the page — as scroll padding, so the browser scrolls a newly focused
+ * control clear of it, and as body padding, so the last link on the page has
+ * room to scroll that far (WCAG 2.4.11). Both go when the bar does.
+ */
+function NoticeBar({ onAccept }: { onAccept: () => void }) {
+  const bar = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const element = bar.current
+    if (!element) return
+    const root = document.documentElement
+    const reserve = () => {
+      const height = `${element.offsetHeight}px`
+      root.style.scrollPaddingBottom = height
+      document.body.style.paddingBottom = height
+    }
+    reserve()
+    const observer = new ResizeObserver(reserve)
+    observer.observe(element)
+    return () => {
+      observer.disconnect()
+      root.style.scrollPaddingBottom = ''
+      document.body.style.paddingBottom = ''
+    }
+  }, [])
+
   return (
     <section
+      ref={bar}
       aria-label="Cookie notice"
       className="text-ink px-gutter fixed inset-x-0 bottom-0 z-40 bg-white py-4 shadow-[0_-1px_0_var(--color-line)]"
     >
@@ -44,10 +76,16 @@ export function CookieNotice() {
           We use cookies to enhance your experience with our site and to analyze the performance of
           our marketing efforts.
         </p>
-        <Button type="button" onClick={accept}>
+        <Button type="button" onClick={onAccept}>
           Accept
         </Button>
-        <Button type="button" variant="ghost" aria-label="Close" onClick={accept} className="p-2">
+        <Button
+          type="button"
+          variant="ghost"
+          aria-label="Close"
+          onClick={onAccept}
+          className="hover:bg-ink p-2 hover:text-white hover:opacity-100"
+        >
           <CloseIcon />
         </Button>
       </div>
