@@ -16,7 +16,7 @@
     "@sanity/client": "^7.26.0",
     "@sanity/visual-editing": "^5.7.3",
     "@types/react": "^19.2.18",
-    "next": "^16.3.4",
+    "next": "^16.3.6",
     "next-sanity": "^13.2.3",
     "react": "^19.2.8",
     "typescript": "^5.7.0"
