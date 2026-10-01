@@ -2,6 +2,7 @@ import { withBotId } from 'botid/next/config'
 import type { NextConfig } from 'next'
 import { sanity } from 'next-sanity/live/cache-life'
 
+import { noindexHeaders } from './src/lib/indexing'
 import { indexRedirects } from './src/lib/indexRedirects'
 import { GENERATED_REDIRECTS } from './src/lib/redirects.generated'
 
@@ -16,6 +17,9 @@ const nextConfig: NextConfig = {
     // transformation) is bypassed entirely. See the loader for the mechanics.
     loader: 'custom',
     loaderFile: './src/lib/sanity-image-loader.ts',
+  },
+  async headers() {
+    return noindexHeaders(process.env.VERCEL_ENV)
   },
   /**
    * Two maps, in one list.
