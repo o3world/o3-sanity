@@ -6,14 +6,12 @@
   "description": "The committed content corpus for o3world.com and the scripts that compare or change the dataset against it. See docs/adr/0002, 0003.",
   "scripts": {
     "brand-assets": "tsx src/brand-assets.ts",
-    "load": "tsx src/load.ts",
     "sync-docs": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/sync-docs.ts --with-user-token --",
     "stats-to-band": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/statsToBand.ts --with-user-token --",
     "dev-mirrors-prod": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/devMirrorsProduction.ts --with-user-token --",
     "drift": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/drift.ts --with-user-token --",
     "verify": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/verify.ts --with-user-token --",
-    "typecheck": "tsc --noEmit",
-    "ironman-grid-spans": "NODE_OPTIONS=\"--import ./css-stub-loader.mjs\" sanity exec src/migrations/ironmanGridSpans.ts --with-user-token --"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@o3/block-spec": "workspace:*",

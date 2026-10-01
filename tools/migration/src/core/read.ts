@@ -127,14 +127,9 @@ export function slugsByType(
 }
 
 /**
- * The document types the committed corpus does not hold. A `brief` lives only
- * in the dataset, so one is never committed under `data/`, and `verify` does
- * not count one an orphan.
- *
- * `guidance` is a retired type with no schema and no writer (#192), named here
- * because the `production` dataset still holds six of its documents: without
- * the name, `verify` reports them as orphans and exits non-zero over documents
- * nothing is going to rewrite.
+ * The document types the committed corpus never holds. A `brief` lives only in
+ * the dataset, and `guidance` is a retired type with no schema and no writer
+ * (#192), so neither is ever committed under `data/`.
  */
 const INTERNAL_TYPES: readonly string[] = ['guidance', 'brief']
 

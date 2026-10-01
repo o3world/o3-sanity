@@ -217,11 +217,11 @@ Single-context layout — `CONTEXT.md` and `docs/adr/` at the repo root. See `do
 
 ### Changing a dataset
 
-**The blanket `load` is GONE — the command only prints a refusal, in every
-dataset, and there is no flag** (`tools/migration/src/load.ts`, 2026-09-03). Editors and content population own the datasets, `development`
-mirrors `production` via `pnpm dataset:sync`, and a load reverts whatever the
-seed files do not know about — so there is no longer a dataset where it is the
-harmless operation it once was.
+**There is no blanket load, and no command that rebuilds a dataset from the
+seed files.** Editors and content population own the datasets, `development`
+mirrors `production` via `pnpm dataset:sync`, and a rebuild would revert
+whatever the seed files do not know about. Production is the content of record;
+the committed JSON is fixtures for the tests and stories.
 
 A dataset change ships as a **targeted migration**: a script under
 `tools/migration/src/migrations/`, scoped to exactly the documents or assets
@@ -259,7 +259,7 @@ development-only document exists nowhere else. See `docs/agents/ops.md` →
 **What `migration.locked` guards is a document's content being REPLACED FROM
 OUTSIDE IT** — the pipeline overwriting an editor's version with the committed
 JSON. That is the scope ADR 0003 gives it ("the pipeline never touches a locked
-document, in any mode") and the scope `load` implements.
+document, in any mode") and the scope `sync-docs` enforces.
 
 It is not a freeze on the document. A **transformation** — a script whose only
 input is the document's own fields, moving or reshaping what is already there

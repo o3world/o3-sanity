@@ -12,19 +12,17 @@ read: the case-study sources the translations hash against, the run manifest
 `drift` stamps `extractedAt` from, and the live Yoast sitemap list
 `redirects.test.ts` checks the app's redirect table against.
 
-**The blanket `load` is retired.** `pnpm --filter @o3/migration load` refuses
-and exits non-zero: it would delete and recreate every unlocked pipeline-owned
-document, and editors author in `production` while `development` mirrors it,
-so no dataset is left where that is harmless. A dataset change is a targeted
-script under `src/migrations/`. `statsToBand.ts` is the worked example: it
+**There is no blanket load.** Recreating every unlocked pipeline-owned document
+from `data/` would destroy editors' work: they author in `production`, and
+`development` mirrors it. A dataset change is a targeted script under
+`src/migrations/`, or `sync-docs` for named committed documents. `statsToBand.ts` is the worked example: it
 reports before it writes, refuses a dataset it was not named, reruns as a
 no-op, and overwrites no field it did not come to change.
 
 ```sh
-pnpm --filter @o3/migration verify                       # read-only: is the dataset what data/ says it is?
+pnpm --filter @o3/migration verify                       # read-only: references, image fields, types, slugs
 pnpm --filter @o3/migration drift                        # read-only: which committed documents an editor changed
 pnpm --filter @o3/migration sync-docs -- 'client/*'      # named committed documents → the dataset (dry run without --apply)
-pnpm --filter @o3/migration load                         # refuses; prints the targeted-migration route
 
 pnpm --filter @o3/migration stats-to-band                # targeted: stats field → a statsSection at story[0]
 pnpm --filter @o3/migration dev-mirrors-prod             # targeted: delete development documents production lacks

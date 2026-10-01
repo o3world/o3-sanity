@@ -25,25 +25,9 @@ describe('the committed corpus', () => {
   })
 
   /**
-   * `verify` reads the whole dataset, so a document the corpus never held
-   * would be reported as an orphan — a finding that exits non-zero and is
-   * wrong. Briefs are exactly that: they live only in the dataset. `guidance`
-   * is named alongside them because `production` still holds documents of a
-   * retired type (#192).
-   */
-  it('names the types a different tool owns, so verify can stay quiet about them', () => {
-    expect(isInternalType('guidance')).toBe(true)
-    expect(isInternalType('brief')).toBe(true)
-    expect(isInternalType('page')).toBe(false)
-    expect(isInternalType('insight')).toBe(false)
-    expect(isInternalType('siteSettings')).toBe(false)
-  })
-
-  /**
-   * And the corpus is the other side of it: a `brief` or `guidance` document
-   * committed under `data/` would give that document a second writer —
-   * `sync-docs` could replace what was written in the dataset, and `verify`
-   * would expect the corpus copy.
+   * A `brief` or `guidance` document committed under `data/` would give that
+   * document a second writer: `sync-docs` could replace what was written in
+   * the dataset.
    */
   it('commits no document of a type a different tool owns', () => {
     // Directories, not documents: a `brief/` holding nothing but markdown

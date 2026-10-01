@@ -15,8 +15,7 @@
  * schedule, and `data/missing-media.json` already records what that costs when
  * the URL rots: a load that fails on a network condition instead of a diff. So
  * the download is a separate, deliberate step whose output is reviewed in git,
- * and `load` stays offline and reproducible — which is the promise ADR 0003
- * makes about rebuilding a dataset from this repo.
+ * and `sync-docs` stays offline and reproducible.
  *
  *     pnpm --filter @o3/migration brand-assets          # re-fetch, report drift
  *     pnpm --filter @o3/migration brand-assets --write  # accept what changed

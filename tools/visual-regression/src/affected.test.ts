@@ -67,7 +67,7 @@ describe('affectedStoryFiles', () => {
   })
 
   it('selects nothing for a file no story imports', () => {
-    expect(affectedStoryFiles(modules, ['tools/migration/src/load.ts', 'README.md'])).toEqual({
+    expect(affectedStoryFiles(modules, ['tools/migration/src/verify.ts', 'README.md'])).toEqual({
       storyFiles: [],
       everything: false,
     })

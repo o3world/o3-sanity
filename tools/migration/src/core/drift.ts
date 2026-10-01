@@ -1,7 +1,6 @@
 /**
  * Drift: which pipeline-owned documents an editor changed in the dataset since
- * the corpus was committed — the documents the next `load` would silently
- * revert.
+ * the corpus was committed — the documents a `sync-docs` run would revert.
  *
  * Pure — expected documents, live documents and the committed asset map in,
  * findings out — so the comparison rules are pinned by fixtures.
@@ -26,11 +25,11 @@ const REMOTE_MARKERS = ['_wpSrc', '_srcUrl'] as const
 const MARKERS = [...REMOTE_MARKERS, '_localSrc'] as const
 
 /**
- * A committed document as `load` would write it: markers resolved to asset
+ * A committed document as the dataset holds it: markers resolved to asset
  * references through the committed map, known-missing media dropped, a
  * dropped image taking its figure with it. A marker the map has no entry for
- * is left in place — `load` would upload it, so the document genuinely
- * differs from what the dataset holds.
+ * is left in place, so the document genuinely differs from what the dataset
+ * holds.
  */
 export function resolveMarkers(
   node: unknown,
@@ -124,12 +123,12 @@ export interface DriftFinding {
   readonly id: string
   /** Top-level fields the published copy changed; empty when only a draft is at risk. */
   readonly fields: readonly string[]
-  /** A live draft shadows this document — `load` deletes it unseen. */
+  /** A live draft shadows this document. */
   readonly draft: boolean
 }
 
 /**
- * Every unlocked document `load` would write, compared with what the dataset
+ * Every unlocked committed document, compared with what the dataset
  * holds. `expected` is the load plan's writes with markers resolved; `live`
  * is a raw fetch of those ids in both forms. A missing published copy is not
  * drift — it is a document nobody has loaded yet.
