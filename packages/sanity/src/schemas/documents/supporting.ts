@@ -173,7 +173,13 @@ export const siteSettings = defineType({
   title: 'Site Settings',
   type: 'document',
   fields: [
-    defineField({ name: 'title', type: 'string', initialValue: 'O3' }),
+    defineField({
+      name: 'title',
+      type: 'string',
+      initialValue: 'O3',
+      description:
+        'The brand name, not a tagline. It ends every page title and share title, it is og:site_name, and it is how the nav logo is announced to screen readers.',
+    }),
     // No collection-label field. It existed to render the collection as
     // "Insights" while the type was called `perspective`; now that the type is
     // `insight`, it translated a word into itself (ADR 0017). A nav item's own

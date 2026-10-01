@@ -5,6 +5,8 @@ import { Figtree, Newsreader } from 'next/font/google'
 import { AnchorGlide } from '@o3/ui'
 import { HeroStartup } from '@/components/globe/HeroStarfield'
 import { getBaseUrl } from '@o3/content-runtime/base-url'
+import { siteNameOf } from '@o3/content-runtime/seo'
+import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
 import '@/app/globals.css'
 // Side-effect import: validates env vars at build/boot (see src/env.ts).
@@ -25,13 +27,20 @@ const newsreader = Newsreader({
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1 }
 
-export const metadata: Metadata = {
-  // Every relative URL a route emits (canonical, og:url, og:image) resolves
-  // against this. Without it Next drops relative canonicals silently, which
-  // is the failure mode #26 exists to prevent.
-  metadataBase: new URL(getBaseUrl()),
-  title: { default: 'O3', template: '%s | O3' },
-  description: 'O3 — digital products, platforms, and ventures.',
+export async function generateMetadata(): Promise<Metadata> {
+  // The " | brand" suffix every page title gets, named from Site Settings — the
+  // source the OpenGraph title and site name read too. It lives here, not in
+  // the (site) layout: a template only reaches child segments, and the
+  // homepage is a page of that layout's own segment.
+  const siteName = siteNameOf(await getSiteSettings())
+  return {
+    // Every relative URL a route emits (canonical, og:url, og:image) resolves
+    // against this. Without it Next drops relative canonicals silently, which
+    // is the failure mode #26 exists to prevent.
+    metadataBase: new URL(getBaseUrl()),
+    title: { default: siteName, template: `%s | ${siteName}` },
+    description: 'O3 — digital products, platforms, and ventures.',
+  }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
