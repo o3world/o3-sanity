@@ -19,10 +19,10 @@ export function SkipLink({ target }: { target: string }) {
     <a
       href={`#${target}`}
       onClick={(event) => {
-        const main = document.getElementById(target)
-        if (!main) return
+        const destination = document.getElementById(target)
+        if (!destination) return
         event.preventDefault()
-        main.focus()
+        destination.focus()
       }}
       className={cn(
         buttonVariants({ variant: 'brand' }),
