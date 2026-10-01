@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import Link from 'next/link'
 
-import { SurfaceProvider, surfaceAttrs } from '@o3/ui'
+import { SurfaceProvider, cn, surfaceAttrs } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { resolveButtonHref } from '../buttonDestination'
@@ -22,6 +22,12 @@ interface SiteFooterProps {
   /** Render matching footer destinations with their authored property logos. */
   utilityNavItems?: NonNullable<SITE_SETTINGS_QUERY_RESULT>['utilityNavItems']
 }
+
+/**
+ * The nav's focus ring, on every footer link: 2px of brand red. Without it the
+ * browser draws its own thin blue ring, which all but vanishes on the black.
+ */
+const FOOTER_LINK_FOCUS = 'focus-visible:ring-brand focus-visible:outline-none focus-visible:ring-2'
 
 type PropertyLogo = Extract<
   NonNullable<SiteFooterProps['utilityNavItems']>[number],
@@ -121,7 +127,10 @@ export function SiteFooter({
                         {/* External profiles, so a plain anchor, not next/link. */}
                         <a
                           href={social.url ?? '#'}
-                          className="text-nav duration-(--duration-hover) leading-[1.2] text-white transition-opacity ease-out hover:opacity-70"
+                          className={cn(
+                            'text-nav duration-(--duration-hover) leading-[1.2] text-white transition-opacity ease-out hover:opacity-70',
+                            FOOTER_LINK_FOCUS,
+                          )}
                           rel="noreferrer"
                           target="_blank"
                         >
@@ -161,7 +170,10 @@ export function SiteFooter({
                 <li key={link._key}>
                   <Link
                     href={resolveButtonHref(link)}
-                    className="duration-(--duration-hover) transition-colors ease-out hover:text-white"
+                    className={cn(
+                      'duration-(--duration-hover) transition-colors ease-out hover:text-white',
+                      FOOTER_LINK_FOCUS,
+                    )}
                   >
                     {link.label}
                   </Link>
@@ -230,7 +242,10 @@ function FooterLink({
   return (
     <Link
       href={href}
-      className="text-nav duration-(--duration-hover) leading-[1.2] text-white transition-opacity ease-out hover:opacity-70"
+      className={cn(
+        'text-nav duration-(--duration-hover) leading-[1.2] text-white transition-opacity ease-out hover:opacity-70',
+        FOOTER_LINK_FOCUS,
+      )}
     >
       {children}
     </Link>
@@ -251,7 +266,10 @@ function PropertyLogoLink({ logo }: { logo: PropertyLogo }) {
   return (
     <Link
       href={resolveButtonHref(logo.button ?? {})}
-      className="duration-(--duration-hover) focus-visible:ring-brand block transition-opacity ease-out hover:opacity-70 focus-visible:outline-none focus-visible:ring-2"
+      className={cn(
+        'duration-(--duration-hover) block transition-opacity ease-out hover:opacity-70',
+        FOOTER_LINK_FOCUS,
+      )}
     >
       {/*
        * `width` is the CDN request, not the layout: 304 is the 76px the

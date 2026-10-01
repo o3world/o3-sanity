@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useId } from 'react'
 
 import { CARD_LINK_FOCUS, CARD_MEDIA_ZOOM, CARD_TITLE_FADE, cn } from '@o3/ui'
 
@@ -43,10 +44,14 @@ export function InsightCard({
   ]
     .filter(Boolean)
     .join(' · ')
+  // The whole card is the link, so its title names it rather than the
+  // picture's alt and the date line as well.
+  const titleId = useId()
 
   return (
     <Link
       href={hrefForDoc({ _type, slug })}
+      aria-labelledby={titleId}
       // The offset is transparent because the band under this card is
       // authored: `insightsCarouselSection` resolves its own surface, so the
       // gap has to show whatever the band paints rather than a white notch on
@@ -76,7 +81,9 @@ export function InsightCard({
 
       <div className="flex flex-col gap-2">
         {meta ? <p className="text-meta text-fg-muted uppercase">{meta}</p> : null}
-        <h3 className={cn('text-fg text-body', CARD_TITLE_FADE)}>{title}</h3>
+        <h3 id={titleId} className={cn('text-fg text-body', CARD_TITLE_FADE)}>
+          {title}
+        </h3>
       </div>
     </Link>
   )

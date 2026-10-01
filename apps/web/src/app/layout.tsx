@@ -25,7 +25,12 @@ const newsreader = Newsreader({
   axes: ['opsz'],
 })
 
-export const viewport: Viewport = { width: 'device-width', initialScale: 1 }
+// `themeColor` tints the mobile browser's own bar to the black every page opens on.
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#000000',
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   // The " | brand" suffix every page title gets, named from Site Settings — the

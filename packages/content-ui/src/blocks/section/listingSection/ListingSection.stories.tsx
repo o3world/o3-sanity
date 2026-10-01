@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, within } from 'storybook/test'
 
 import type { SectionProps } from '@o3/content-runtime/blocks'
 
@@ -52,6 +53,15 @@ const PAGES: SectionProps<'listingSection'>['pages'] = [
 
 export const AsAuthored: Story = {
   args: { heading: 'What we do', pages: PAGES },
+  play: async ({ canvasElement }) => {
+    // Each card link is named by its title, not its excerpt and "Learn more".
+    // The card is a `next/dynamic` chunk, compiled on first request under a full run.
+    const links = await within(canvasElement).findAllByRole('link', {}, { timeout: 5000 })
+    await expect(links).toHaveLength(PAGES.length)
+    for (const [i, link] of links.entries()) {
+      await expect(link).toHaveAccessibleName(PAGES[i]!.card!.shortTitle!)
+    }
+  },
 }
 
 /** Three across from `lg`, two from `md`, one below — the grid's whole rule. */
