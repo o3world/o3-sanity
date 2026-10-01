@@ -1,8 +1,10 @@
 import type React from 'react'
 import { Suspense } from 'react'
 import { draftMode } from 'next/headers'
+import { GoogleTagManager } from '@next/third-parties/google'
 import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
+import { clientEnv } from '@/env'
 import { currentYear } from '@/lib/currentYear'
 import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
 import { NavInkFirstPaint, SiteFooter, SiteNav } from '@o3/content-ui/chrome'
@@ -46,6 +48,7 @@ async function Shell({ children }: ShellProps) {
 
   return (
     <GlobeProvider>
+      {clientEnv.NEXT_PUBLIC_GTM_ID && <GoogleTagManager gtmId={clientEnv.NEXT_PUBLIC_GTM_ID} />}
       {/* The chrome draws no mark of its own (#228); these are this app's. */}
       <SiteNav settings={settings} brandMark={NAV_MARK} menuUtilities={<SpatialMotionControl />} />
       {/* Bands paint their own surfaces over the document ground. Matching the
