@@ -48,7 +48,7 @@ export const FirstVisit: Story = {
   },
 }
 
-/** The × accepts too, as it does on the WordPress site — but says so as "Close", not "No". */
+/** The × accepts too, and is labelled Close. */
 export const CloseAccepts: Story = {
   play: async ({ canvasElement }) => {
     const notice = await within(canvasElement).findByRole('region', { name: 'Cookie notice' })
