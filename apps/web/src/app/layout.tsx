@@ -25,7 +25,9 @@ const newsreader = Newsreader({
   axes: ['opsz'],
 })
 
-// `themeColor` tints the mobile browser's own bar to the black every page opens on.
+// `themeColor` tints the mobile browser's own bar black: the chrome's colour and
+// the document ground before the opening band sets its tone (globals.css). A
+// page that opens on a light band still gets a black bar above it.
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,

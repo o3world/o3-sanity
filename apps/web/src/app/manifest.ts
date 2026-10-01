@@ -2,8 +2,8 @@ import type { MetadataRoute } from 'next'
 
 /**
  * What a phone shows when the site is saved to its home screen. The icons are
- * the file-convention ones beside this file, and black is the chrome every
- * page opens on.
+ * the file-convention ones beside this file; black is the chrome's colour,
+ * matching the viewport's `themeColor`.
  *
  * The name is a literal rather than Site Settings' title: reading settings
  * reads the draft-mode cookie, which would render this route on demand.
