@@ -1,10 +1,7 @@
 /**
- * Verify → is the dataset actually what the committed JSON says it is?
- *
- * Runs after every load (#17, reused by #24 for parity checks). The tests
- * check the committed corpus; this checks the thing the corpus was supposed
- * to produce. They catch different failures — a document can be perfect on
- * disk and missing, half-loaded, or shadowed in the dataset.
+ * Verify → is the dataset healthy? References resolve, image fields hold
+ * images, every type is in the schema, slugs are unique. Read-only. The tests
+ * check the committed JSON; this checks what the site actually reads.
  *
  *   pnpm --filter @o3/migration verify
  *
@@ -14,9 +11,7 @@
  */
 import { getCliClient } from 'sanity/cli'
 
-import { readCorpus } from './core/read'
 import { report, type CheckResult } from './core/report'
-import { LOCKED_BY_ID, LOCK_FETCH_OPTIONS, type LockRow } from './core/state'
 
 const client = getCliClient({ apiVersion: '2026-07-01' })
 
@@ -35,10 +30,6 @@ function printCheck({ check, lines }: CheckResult) {
 }
 
 async function main() {
-  // The whole committed corpus — all three trees, or a tree's documents
-  // report as orphans.
-  const committed = readCorpus<AnyDoc>().map((entry) => entry.document)
-
   // Sanity keeps its own bookkeeping in the dataset — ACL groups, the
   // deployed schema, retention config — under `_.`-prefixed ids. They are not
   // content and every check below would flag them.
@@ -46,30 +37,15 @@ async function main() {
     '*[!(_id in path("drafts.**")) && !(_id in path("_.**")) && !(_type match "sanity.*") && !(_type match "system.*")]',
   )
 
-  // The lock flag for every live document in both its forms, read raw
-  // (`LOCK_FETCH_OPTIONS`) — a lock on a draft is invisible to the published
-  // perspective, and the orphan check has to see it the way `sync-docs` does.
-  const ids = live.flatMap((d) => [d._id, `drafts.${d._id}`])
-  const locks = await client.fetch<LockRow[]>(LOCKED_BY_ID, { ids }, LOCK_FETCH_OPTIONS)
+  const result = report(live)
 
-  const result = report(committed, live, locks)
-
-  console.log(
-    `committed: ${committed.length} documents · ` +
-      `dataset: ${live.length} documents · ` +
-      `${client.config().projectId}/${client.config().dataset}\n`,
-  )
-
-  const [inDataset, ...others] = result.checks
-  printCheck(inDataset!)
-
-  console.log('  per type (committed → dataset):')
-  for (const [type, { committed: c, live: l }] of result.counts) {
-    console.log(`    ${type.padEnd(16)} ${String(c).padStart(4)} → ${String(l).padStart(4)}`)
+  console.log(`${client.config().projectId}/${client.config().dataset}: ${live.length} documents`)
+  for (const [type, count] of result.counts) {
+    console.log(`    ${type.padEnd(16)} ${String(count).padStart(4)}`)
   }
   console.log()
 
-  for (const check of others) printCheck(check)
+  for (const check of result.checks) printCheck(check)
 
   if (result.provisional.length > 0) {
     console.log(

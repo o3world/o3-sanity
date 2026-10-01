@@ -20,7 +20,7 @@ reports before it writes, refuses a dataset it was not named, reruns as a
 no-op, and overwrites no field it did not come to change.
 
 ```sh
-pnpm --filter @o3/migration verify                       # read-only: is the dataset what data/ says it is?
+pnpm --filter @o3/migration verify                       # read-only: references, image fields, types, slugs
 pnpm --filter @o3/migration drift                        # read-only: which committed documents an editor changed
 pnpm --filter @o3/migration sync-docs -- 'client/*'      # named committed documents → the dataset (dry run without --apply)
 

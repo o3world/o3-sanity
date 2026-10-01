@@ -93,7 +93,7 @@ in it, write a targeted migration under `tools/migration/src/migrations/`
 ```bash
 pnpm dataset development                 # point THIS CHECKOUT at development
 pnpm dataset:sync                        # production → development
-pnpm --filter @o3/migration verify       # read-only: is the dataset what data/ says it is?
+pnpm --filter @o3/migration verify       # read-only: is the dataset healthy?
 ```
 
 `pnpm dataset` with no argument prints which dataset each entry point is
