@@ -8,7 +8,7 @@ import { clientEnv } from '@/env'
 import { currentYear } from '@/lib/currentYear'
 import { gtmContainerFor } from '@/lib/gtmContainer'
 import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
-import { NavInkFirstPaint, SiteFooter, SiteNav } from '@o3/content-ui/chrome'
+import { NavInkFirstPaint, SiteFooter, SiteNav, SkipLink } from '@o3/content-ui/chrome'
 
 import { DraftTools } from './DraftTools'
 import { RouteArrival } from './RouteArrival'
@@ -52,14 +52,17 @@ async function Shell({ children, gtmId }: ShellProps) {
   return (
     <GlobeProvider>
       {gtmId && <GoogleTagManager gtmId={gtmId} />}
+      {/* First focusable element on the page, ahead of the nav it skips. */}
+      <SkipLink target="site-content" />
       {/* The chrome draws no mark of its own (#228); these are this app's. */}
       <SiteNav settings={settings} brandMark={NAV_MARK} menuUtilities={<SpatialMotionControl />} />
       {/* Bands paint their own surfaces over the document ground. Matching the
           opening band also covers space around streamed loading content. */}
       <main
         id="site-content"
+        tabIndex={-1}
         data-spatial-layout="true"
-        className="bg-(--page-background) min-h-screen [--spacing-nav-offset:32px]"
+        className="bg-(--page-background) min-h-screen outline-none [--spacing-nav-offset:32px]"
       >
         {children}
       </main>
