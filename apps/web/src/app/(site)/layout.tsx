@@ -9,6 +9,7 @@ import { NavInkFirstPaint, SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
 import { DraftTools } from './DraftTools'
 import { RouteArrival } from './RouteArrival'
+import { CookieNotice } from '@/components/cookie-notice/CookieNotice'
 import { GlobeProvider } from '@/components/globe/GlobeProvider'
 import { SpatialMotionControl } from '@/components/globe/SpatialMotionProvider'
 import '@/components/globe/scene.css'
@@ -69,6 +70,7 @@ async function Shell({ children }: ShellProps) {
         utilityNavItems={settings?.utilityNavItems}
         utilities={<SpatialMotionControl />}
       />
+      <CookieNotice />
       {/* Nothing visible renders here for a published visitor, so `null` is an
           honest fallback; the boundary exists so `DraftTools`' request-time
           read cannot block the shell. */}
