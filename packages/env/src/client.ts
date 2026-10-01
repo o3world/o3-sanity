@@ -1,6 +1,8 @@
 import { createEnv } from '@t3-oss/env-nextjs'
 import { z } from 'zod'
 
+import { blankAsUnset } from './blankAsUnset'
+
 export const clientEnv = createEnv({
   client: {
     NEXT_PUBLIC_SANITY_PROJECT_ID: z.string().min(1).optional(),
@@ -10,8 +12,7 @@ export const clientEnv = createEnv({
     NEXT_PUBLIC_BASE_URL: z.string().url().optional(),
     // Set in Vercel's Production environment only: unset, no page loads GTM, so
     // preview and QA traffic stays out of the container's tags.
-    NEXT_PUBLIC_GTM_ID: z.preprocess(
-      (v) => (v === '' ? undefined : v),
+    NEXT_PUBLIC_GTM_ID: blankAsUnset(
       z
         .string()
         .regex(/^GTM-[A-Z0-9]+$/)

@@ -66,8 +66,7 @@ const SUBMIT_LABEL = 'Send message'
 const ENDPOINT = '/api/contact'
 
 /**
- * Tells GTM a lead was sent. The container's contact-form tags (GA4's
- * `form_submission_contact`, LinkedIn's conversion) fire on `formSubmission`
+ * Tells GTM a lead was sent: its contact-form tags fire on `formSubmission`
  * and read `formID`. Without GTM on the page the push lands in an array no one
  * reads.
  */
