@@ -1,14 +1,9 @@
 import { createEnv } from '@t3-oss/env-nextjs'
 import { z } from 'zod'
 
-// Treat an empty-string env var the same as "unset". Vercel's `.env.*.local`
-// files materialize an env-key-without-value as `KEY=`, which lands in the
-// process as `process.env.KEY === ''` — defined enough to defeat
-// `.optional()` but blank enough to fail validation.
-const optionalNonEmpty = z.preprocess(
-  (v) => (v === '' ? undefined : v),
-  z.string().min(1).optional(),
-)
+import { blankAsUnset } from './blankAsUnset'
+
+const optionalNonEmpty = blankAsUnset(z.string().min(1).optional())
 
 export const serverEnv = createEnv({
   server: {

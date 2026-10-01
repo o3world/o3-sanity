@@ -66,6 +66,16 @@ const SUBMIT_LABEL = 'Send message'
 const ENDPOINT = '/api/contact'
 
 /**
+ * Tells GTM a lead was sent: its contact-form tags fire on `formSubmission`
+ * and read `formID`. Without GTM on the page the push lands in an array no one
+ * reads.
+ */
+function reportSent() {
+  const page = window as Window & { dataLayer?: Record<string, unknown>[] }
+  ;(page.dataLayer ??= []).push({ event: 'formSubmission', formID: 'contact' })
+}
+
+/**
  * What an option posts: the editor's words, stega-cleaned and trimmed, which
  * is exactly what the route compares the submitted reason against.
  */
@@ -174,6 +184,7 @@ export function InquiryForm({
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(submission),
       })
+      if (response.ok) reportSent()
       setStatus(response.ok ? 'sent' : 'error')
     } catch {
       setStatus('error')

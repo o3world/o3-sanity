@@ -211,6 +211,59 @@ export const Failed: Story = {
   globals: { backgrounds: { value: 'bone' } },
 }
 
+type DataLayerWindow = Window & { dataLayer?: Record<string, unknown>[] }
+
+/** Answers `/api/contact` with `status`, and clears the dataLayer, for one story. */
+function contactRouteAnswers(status: number) {
+  return () => {
+    const realFetch = window.fetch
+    window.fetch = async () => new Response(null, { status })
+    delete (window as DataLayerWindow).dataLayer
+    return () => {
+      window.fetch = realFetch
+      delete (window as DataLayerWindow).dataLayer
+    }
+  }
+}
+
+async function fillAndSend(canvasElement: HTMLElement) {
+  const canvas = within(canvasElement)
+  await userEvent.type(canvas.getByLabelText(/Your name/), 'Preview Person')
+  await userEvent.type(canvas.getByLabelText(/Email/), 'preview@example.com')
+  const reason = canvas.getByLabelText(/Reason/) as HTMLSelectElement
+  await userEvent.selectOptions(reason, reason.options[1]!.value)
+  await userEvent.type(canvas.getByLabelText(/Message/), 'A message long enough to send.')
+  await userEvent.click(canvas.getByRole('button', { name: /Send message/i }))
+}
+
+/** A send the route accepts tells GTM, whose contact-form tags listen for `formSubmission`. */
+export const SentReportsToDataLayer: Story = {
+  args: seededSectionArgs('contact', 'formSection'),
+  globals: { backgrounds: { value: 'bone' } },
+  beforeEach: contactRouteAnswers(200),
+  play: async ({ canvasElement }) => {
+    await fillAndSend(canvasElement)
+    await within(canvasElement).findByRole('status')
+    await expect((window as DataLayerWindow).dataLayer).toEqual([
+      { event: 'formSubmission', formID: 'contact' },
+    ])
+  },
+}
+
+/** A send the route refuses is not a lead, so nothing reaches the dataLayer. */
+export const FailedSendReportsNothing: Story = {
+  args: seededSectionArgs('contact', 'formSection'),
+  globals: { backgrounds: { value: 'bone' } },
+  beforeEach: contactRouteAnswers(500),
+  play: async ({ canvasElement }) => {
+    await fillAndSend(canvasElement)
+    await expect(
+      await within(canvasElement).findByRole('button', { name: /Send message/i }),
+    ).toBeEnabled()
+    await expect((window as DataLayerWindow).dataLayer).toBeUndefined()
+  },
+}
+
 /** No consent checkbox — the field is optional and its absence must close up. */
 export const WithoutConsent: Story = {
   args: { ...seededSectionArgs('contact', 'formSection'), consentLabel: undefined },

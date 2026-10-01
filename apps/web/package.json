@@ -12,6 +12,7 @@
     "preview": "pnpm build && pnpm --filter @o3/build-assert assert && next start --port 3612"
   },
   "dependencies": {
+    "@next/third-parties": "^16.3.8",
     "@o3/block-spec": "workspace:*",
     "@o3/content-runtime": "workspace:*",
     "@o3/content-ui": "workspace:*",
