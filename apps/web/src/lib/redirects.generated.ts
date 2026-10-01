@@ -892,6 +892,10 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
     destination: '/insights/you-monitor-your-kids-behavior-why-wouldnt-you-monitor-your-customers',
   },
   {
+    source: '/partnerships',
+    destination: '/about',
+  },
+  {
     source: '/perspectives/6-tips-for-running-a-successful-innovation-workshop',
     destination: '/insights/innovation-workshops-o3',
   },
@@ -916,16 +920,8 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
     destination: 'https://www.o3xo.ai/insights/ai-project-strategy-essential-considerations/',
   },
   {
-    source: '/perspectives/ai-roi-beyond-efficiency',
-    destination: 'https://www.o3xo.ai/insights/ai-roi-beyond-efficiency/',
-  },
-  {
     source: '/perspectives/codeday-philly-at-o3-world',
     destination: '/insights',
-  },
-  {
-    source: '/perspectives/decoding-openai-turmoil-o3-insights-ai-governance-industry-implications',
-    destination: 'https://www.o3xo.ai/insights/decoding-openai-turmoil-o3-insights-ai-governance-industry-implications/',
   },
   {
     source: '/perspectives/from-ai-to-empathy-redefining-customer-care-for-the-future',
@@ -956,10 +952,6 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
     destination: '/insights',
   },
   {
-    source: '/perspectives/mike-gadsby-on-pacts-digital-phorum-podcast',
-    destination: 'https://www.o3xo.ai/insights/mike-gadsby-on-pacts-digital-phorum-podcast/',
-  },
-  {
     source: '/perspectives/moving-beyond-the-initial-buzz-of-generative-ai-navigating-the-challenges-from-pilot-to-scale',
     destination: 'https://www.o3xo.ai/insights/moving-beyond-the-initial-buzz-of-generative-ai-navigating-the-challenges-from-pilot-to-scale/',
   },
@@ -970,10 +962,6 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
   {
     source: '/perspectives/navigating-generative-ai-black-box-transparency-control',
     destination: 'https://www.o3xo.ai/insights/navigating-generative-ai-black-box-transparency-control/',
-  },
-  {
-    source: '/perspectives/navigating-the-ai-revolution-a-recap-of-pact-tech-series-on-ai-in-fintech',
-    destination: 'https://www.o3xo.ai/insights/navigating-the-ai-revolution-a-recap-of-pact-tech-series-on-ai-in-fintech/',
   },
   {
     source: '/perspectives/not-all-ai-is-safe-for-fintech',
@@ -1008,20 +996,12 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
     destination: '/insights/chatgpt-improving-cx',
   },
   {
-    source: '/perspectives/revolutionizing-healthcare-a-deep-dive-into-o3s-ai-webinar',
-    destination: 'https://www.o3xo.ai/insights/revolutionizing-healthcare-a-deep-dive-into-o3s-ai-webinar/',
-  },
-  {
     source: '/perspectives/revolutionizing-music-creation-suno-udio',
     destination: 'https://www.o3xo.ai/insights/revolutionizing-music-creation-suno-udio/',
   },
   {
     source: '/perspectives/revolutionizing-recall-how-ais-new-frontier-with-gemini-1-5-transforms-data-retention',
     destination: 'https://www.o3xo.ai/insights/revolutionizing-recall-how-ais-new-frontier-with-gemini-1-5-transforms-data-retention/',
-  },
-  {
-    source: '/perspectives/rfp-automation-case-study',
-    destination: 'https://www.o3xo.ai/insights/rfp-automation-case-study/',
   },
   {
     source: '/perspectives/suno-and-udio-the-latest-ai-for-creating-music',
@@ -1038,10 +1018,6 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
   {
     source: '/perspectives/the-build-vs-buy-dilemma-making-smart-ai-investment-choices',
     destination: 'https://www.o3xo.ai/insights/the-build-vs-buy-dilemma-making-smart-ai-investment-choices/',
-  },
-  {
-    source: '/perspectives/the-ceos-guide-to-ai-integration-10-common-questions-to-consider',
-    destination: 'https://www.o3xo.ai/insights/the-ceos-guide-to-ai-integration-10-common-questions-to-consider/',
   },
   {
     source: '/perspectives/unleashing-the-power-of-data-and-ai-o3s-transformative-webinar',
@@ -1267,13 +1243,24 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
     destination: '/work',
   },
   {
-    // via /work/personalized-video → /work/ai-powered-personalization
+    source: '/work/ai-powered-personalization',
+    destination: '/work',
+  },
+  {
     source: '/work/allied-pixel',
-    destination: '/work/ai-powered-personalization',
+    destination: '/work',
+  },
+  {
+    source: '/work/amerigas',
+    destination: '/work',
   },
   {
     source: '/work/case-studies-ai-electrical-safety-e-hazard',
     destination: 'https://www.o3xo.ai/case-studies/e-hazard/',
+  },
+  {
+    source: '/work/college-hunks',
+    destination: '/work',
   },
   {
     source: '/work/crane',
@@ -1284,8 +1271,32 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
     destination: 'https://www.o3xo.ai/case-studies/fortune-500-insurance-provider/',
   },
   {
+    source: '/work/eseo-sports',
+    destination: '/work',
+  },
+  {
+    source: '/work/fimc',
+    destination: '/work',
+  },
+  {
+    source: '/work/gettacar',
+    destination: '/work',
+  },
+  {
+    source: '/work/healthcare-innovation',
+    destination: '/work',
+  },
+  {
+    source: '/work/la-colombe',
+    destination: '/work',
+  },
+  {
+    source: '/work/linode',
+    destination: '/work',
+  },
+  {
     source: '/work/personalized-video',
-    destination: '/work/ai-powered-personalization',
+    destination: '/work',
   },
   {
     source: '/work/rfp-automation-3',
@@ -1294,6 +1305,22 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
   {
     source: '/work/rfp-automation-o3',
     destination: 'https://www.o3xo.ai/case-studies/global-tech-firm/',
+  },
+  {
+    source: '/work/scarlet-ai-hyper-personalizing-creative-gig-economy',
+    destination: '/work',
+  },
+  {
+    source: '/work/sei-advice',
+    destination: '/work',
+  },
+  {
+    source: '/work/sei-ampere',
+    destination: '/work',
+  },
+  {
+    source: '/work/the-institutes',
+    destination: '/work',
   },
   {
     source: '/wp-content/uploads/2023/01/BestEgg-casestudy3-6-1280x741',
