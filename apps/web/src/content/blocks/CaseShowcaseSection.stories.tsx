@@ -39,6 +39,10 @@ export const AsSeeded: Story = {
       await expect(getComputedStyle(card).clipPath).toBe('none')
       await expect(getComputedStyle(card).boxShadow).not.toBe('none')
       await expect(getComputedStyle(card.querySelector('h3')!).maxWidth).toBe('472px')
+      // The card's name is its client and headline, not every line of copy on it.
+      const mark = card.querySelector(':scope > span')!
+      const client = mark.querySelector('img')?.alt ?? mark.textContent
+      await expect(card).toHaveAccessibleName(`${client} ${card.querySelector('h3')!.textContent}`)
     }
     await expect(canvasElement.querySelector('.work-organic-card')).toBeNull()
     await expect(canvasElement.querySelector('canvas')).toBeNull()

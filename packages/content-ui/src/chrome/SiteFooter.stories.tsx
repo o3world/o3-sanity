@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { expect, within } from 'storybook/test'
+import { expect, userEvent, within } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 import { BrandMark } from '@o3/ui'
 
@@ -52,6 +52,26 @@ export const AsAuthored: Story = {
     await expect(
       watermarks[1]!.getBoundingClientRect().left - footer.getBoundingClientRect().left,
     ).toBe(931)
+  },
+}
+
+/**
+ * Every footer link draws the brand ring the nav draws, not the browser's thin
+ * blue default, which all but vanishes on the black ground (WCAG 2.4.7).
+ */
+export const KeyboardFocus: Story = {
+  args: { utilityNavItems: SITE_SETTINGS?.utilityNavItems },
+  globals: { backgrounds: { value: 'ink' }, viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const links = within(canvasElement).getAllByRole('link')
+    await expect(links.length).toBeGreaterThan(5)
+    for (const link of links) {
+      await userEvent.tab()
+      await expect(link).toHaveFocus()
+      const style = getComputedStyle(link)
+      await expect(style.outlineStyle).toBe('none')
+      await expect(style.boxShadow).toContain('rgb(235, 16, 0) 0px 0px 0px 2px')
+    }
   },
 }
 

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useId } from 'react'
 
 import {
   ArrowIcon,
@@ -47,6 +48,9 @@ function caseEyebrow(card: Pick<CaseStudyCardData, 'industries' | 'industryDetai
  * The trailing CTA is a styled `<span>`, not a `Button` — the whole card is
  * already the anchor, and a nested control would be a second tab stop to the
  * same href.
+ *
+ * Wrapping the whole card makes every line of copy the link's name, so the
+ * link names itself by the client and the headline through `aria-labelledby`.
  */
 export function CaseStudyCard(
   card: CaseStudyCardData & {
@@ -61,10 +65,12 @@ export function CaseStudyCard(
 ) {
   const { _type, title, slug, narrativeHeadline, headlineStat, cardMedia, client, priority } = card
   const eyebrow = caseEyebrow(card)
+  const id = useId()
 
   return (
     <Link
       href={hrefForDoc({ _type, slug })}
+      aria-labelledby={`${id}-client ${id}-title`}
       // The photograph and its scrim ARE the card's ground, so the card
       // declares the surface it paints (tokens/color.css: whatever paints a
       // dark background sets `data-surface="ink"`). Nothing here names a role
@@ -101,6 +107,8 @@ export function CaseStudyCard(
       <div className="absolute inset-0 -z-20">
         <SanityImage
           source={cardMedia?.image}
+          // Decorative: the photograph is the card's ground under the scrim,
+          // and the copy over it is what the card says.
           alt=""
           ratio="fill"
           width={1600}
@@ -146,6 +154,7 @@ export function CaseStudyCard(
        */}
       {client?.logo ? (
         <LogoKnockout
+          id={`${id}-client`}
           source={client.logo}
           alt={client.name}
           width={180}
@@ -153,7 +162,10 @@ export function CaseStudyCard(
           className="drop-shadow-[0_1px_10px_rgba(3,3,3,0.55)]"
         />
       ) : (
-        <span className="eyebrow font-bold [text-shadow:0_1px_12px_rgba(3,3,3,0.5)]">
+        <span
+          id={`${id}-client`}
+          className="eyebrow font-bold [text-shadow:0_1px_12px_rgba(3,3,3,0.5)]"
+        >
           {client?.name}
         </span>
       )}
@@ -186,7 +198,10 @@ export function CaseStudyCard(
               {eyebrow}
             </Eyebrow>
           ) : null}
-          <h3 className="text-display-sm text-balance font-sans lg:max-w-[472px]">
+          <h3
+            id={`${id}-title`}
+            className="text-display-sm text-balance font-sans lg:max-w-[472px]"
+          >
             {narrativeHeadline ?? title}
           </h3>
         </div>

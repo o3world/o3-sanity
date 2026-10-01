@@ -58,6 +58,8 @@ export const LatestFeed: Story = {
     await expect(card.querySelector('.text-meta')!).toHaveTextContent(
       /^[A-Za-z]+ \d{1,2}, \d{4} · \d+ mins?$/,
     )
+    // The link is named by its title alone, not its picture's alt and the date.
+    await expect(card).toHaveAccessibleName(card.querySelector('h3')!.textContent!)
   },
 }
 

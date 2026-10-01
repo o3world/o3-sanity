@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useId } from 'react'
 
 import {
   CARD_ARROW_NUDGE,
@@ -20,6 +21,9 @@ import { SanityImage } from '../SanityImage'
 export type PageCardData = NonNullable<SectionProps<'listingSection'>['pages']>[number]
 
 export function PageCard({ _type, title, slug, card }: PageCardData) {
+  // The whole card is the link, so its title names it rather than the excerpt
+  // and "Learn more" as well.
+  const titleId = useId()
   return (
     // THE CARD PAINTS WHITE, SO IT DECLARES WHITE — both halves, because a
     // `listingSection` on ink puts this card on a dark band and the card is
@@ -30,6 +34,7 @@ export function PageCard({ _type, title, slug, card }: PageCardData) {
     <SurfaceProvider surface="white">
       <Link
         href={hrefForDoc({ _type, slug })}
+        aria-labelledby={titleId}
         {...surfaceAttrs('white')}
         // The offset is transparent because a `listingSection` on ink puts this
         // white card on a dark band, and the gap has to show the band rather
@@ -50,7 +55,7 @@ export function PageCard({ _type, title, slug, card }: PageCardData) {
             sizes="40px"
           />
         ) : null}
-        <h3 className={cn('text-fg text-lg font-medium', CARD_TITLE_FADE)}>
+        <h3 id={titleId} className={cn('text-fg text-lg font-medium', CARD_TITLE_FADE)}>
           {card?.shortTitle ?? title}
         </h3>
         {card?.excerpt ? <p className="text-fg-muted text-sm">{card.excerpt}</p> : null}

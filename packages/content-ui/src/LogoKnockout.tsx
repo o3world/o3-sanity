@@ -15,6 +15,8 @@ interface LogoKnockoutProps {
   /** Rendered height in px. The frame sizes each logo to its own artwork. */
   height?: number
   className?: string
+  /** Lets a wrapping link name itself by the logo, through `aria-labelledby`. */
+  id?: string
 }
 
 /**
@@ -38,7 +40,14 @@ interface LogoKnockoutProps {
  * and a height in px and the artwork fits inside them flush left, which is
  * neither an intrinsic image nor one of the ratio boxes that wrapper offers.
  */
-export function LogoKnockout({ source, alt, width = 185, height, className }: LogoKnockoutProps) {
+export function LogoKnockout({
+  source,
+  alt,
+  width = 185,
+  height,
+  className,
+  id,
+}: LogoKnockoutProps) {
   if (!source) return null
   if (typeof source === 'object' && 'asset' in source && !(source as { asset?: unknown }).asset) {
     return null
@@ -55,7 +64,7 @@ export function LogoKnockout({ source, alt, width = 185, height, className }: Lo
     // The caller's className lands on the box rather than the artwork, because
     // what it carries is the drop shadow — and a filter on the <img> itself
     // would replace the whitening one rather than compose with it.
-    <span className={cn('block', className)} style={{ width, height }}>
+    <span id={id} className={cn('block', className)} style={{ width, height }}>
       {/* eslint-disable-next-line @next/next/no-img-element -- next/image
           rewrites the src through the optimiser, and the knockout wants the
           uploaded artwork; same trade SanityImage's vector branch makes. */}

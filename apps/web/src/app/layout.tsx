@@ -25,7 +25,14 @@ const newsreader = Newsreader({
   axes: ['opsz'],
 })
 
-export const viewport: Viewport = { width: 'device-width', initialScale: 1 }
+// `themeColor` tints the mobile browser's own bar black: the chrome's colour and
+// the document ground before the opening band sets its tone (globals.css). A
+// page that opens on a light band still gets a black bar above it.
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#000000',
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   // The " | brand" suffix every page title gets, named from Site Settings — the
