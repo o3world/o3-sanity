@@ -80,6 +80,58 @@ describe('the committed redirect table', () => {
     }
   })
 
+  /**
+   * o3xo.ai is where O3's AI writing lives, and a post that moved there keeps
+   * its rule permanently. These seven never made it to o3xo.ai, so a rule
+   * sending them there lands on its 404. With no rule of their own they take
+   * the `/perspectives/:slug` move to the copy this site publishes (OWSW-39).
+   */
+  it('keeps the posts o3xo.ai never took on this site', () => {
+    const kept = [
+      'ai-roi-beyond-efficiency',
+      'decoding-openai-turmoil-o3-insights-ai-governance-industry-implications',
+      'mike-gadsby-on-pacts-digital-phorum-podcast',
+      'navigating-the-ai-revolution-a-recap-of-pact-tech-series-on-ai-in-fintech',
+      'revolutionizing-healthcare-a-deep-dive-into-o3s-ai-webinar',
+      'rfp-automation-case-study',
+      'the-ceos-guide-to-ai-integration-10-common-questions-to-consider',
+    ]
+    for (const slug of kept) {
+      expect(destinationBySource.has(`/perspectives/${slug}`), slug).toBe(false)
+      expect(movedPath(`/perspectives/${slug}`)).toBe(`/insights/${slug}`)
+    }
+  })
+
+  /**
+   * Case studies the redesign did not carry over, and the old partnerships
+   * page, which has no successor. Their fixtures stay committed under
+   * `data/translated/`, so `sitePaths()` counts them as served; production does
+   * not publish them, and without these rules each is a 404 (OWSW-39).
+   */
+  it('retires the unmigrated case studies to the work index and partnerships to about', () => {
+    const retired = [
+      'ai-powered-personalization',
+      'allied-pixel',
+      'amerigas',
+      'college-hunks',
+      'eseo-sports',
+      'fimc',
+      'gettacar',
+      'healthcare-innovation',
+      'la-colombe',
+      'linode',
+      'personalized-video',
+      'scarlet-ai-hyper-personalizing-creative-gig-economy',
+      'sei-advice',
+      'sei-ampere',
+      'the-institutes',
+    ]
+    for (const slug of retired) {
+      expect(destinationBySource.get(`/work/${slug}`), `/work/${slug}`).toBe('/work')
+    }
+    expect(destinationBySource.get('/partnerships')).toBe('/about')
+  })
+
   // A self-redirect is an infinite loop in production.
   it('holds no rule that redirects a path to itself', () => {
     for (const { source, destination } of redirects) {
@@ -122,17 +174,17 @@ describe('the committed redirect table', () => {
      * not as a quiet re-tabulation.
      */
     it('moves exactly the URLs ADR 0017 said it would', () => {
-      // 273 live URLs sit under the old prefix; 30 of them redirect somewhere
-      // explicit — 27 to o3xo.ai, which shadows those posts, and 3 to the index
-      // because the article is no longer published. The other 243 take the
+      // 273 live URLs sit under the old prefix; 23 of them redirect somewhere
+      // explicit — 20 to o3xo.ai, which shadows those posts, and 3 to the index
+      // because the article is no longer published. The other 250 take the
       // collection's 301 to their new address, which is the figure
       // docs/seo-parity.md reports and the whole cost of the rename.
       const underOldPrefix = live.filter((url) => !paths.has(url) && movedPath(url) !== null)
       expect(underOldPrefix.every((url) => url.startsWith('/perspectives'))).toBe(true)
 
       const alreadyRedirected = underOldPrefix.filter((url) => destinationBySource.has(url))
-      expect(alreadyRedirected).toHaveLength(30)
-      expect(underOldPrefix.length - alreadyRedirected.length).toBe(243)
+      expect(alreadyRedirected).toHaveLength(23)
+      expect(underOldPrefix.length - alreadyRedirected.length).toBe(250)
     })
 
     /**

@@ -24,15 +24,24 @@ resolves at the same path on the new site or redirects. There are no gaps.
 | ------------- | ---: | ----------------------: | ---------: | ---: |
 | `post`        |  272 |                       0 |        272 |    0 |
 | `page`        |   21 |                      10 |         11 |    0 |
-| `work`        |   20 |                      17 |          3 |    0 |
+| `work`        |   20 |                       4 |         16 |    0 |
 | `services`    |   24 |                       0 |         24 |    0 |
 | `ventures`    |    2 |                       2 |          0 |    0 |
-| **Total**     |  339 |                      29 |        310 |    0 |
+| **Total**     |  339 |                      16 |        323 |    0 |
 
 `work`'s "Redirected" column is the o3xo.ai-shadowed URLs described below —
 WordPress still lists those documents in its sitemaps while 301ing their URLs
-away, and the app mirrors both halves. A row here counts what the URL _does_,
-not whether the document is loaded.
+away, and the app mirrors both halves — plus the 13 case studies the redesign
+did not carry over, which redirect to `/work`. A row here counts what the URL
+_does_, not whether the document is loaded.
+
+**What this check cannot see.** "Served" here means the committed corpus holds
+the document, and the corpus is fixtures: it keeps the 13 retired case studies
+under `data/translated/caseStudy/` and every o3xo.ai post under
+`data/converted/insight/`, whether or not production publishes them. A URL can
+pass `redirects.test.ts` and still 404 on the deployed site. OWSW-39 caught 21
+that way by tracing every live sitemap URL against staging. That trace, not
+this file, is what answers "does it resolve in production".
 
 ## What ADR 0017 cost
 
@@ -40,7 +49,8 @@ not whether the document is loaded.
 this table read `243 served at the same path, 29 redirected`: the collection
 lived at `/perspectives/*` on both sites, so all but the o3xo-shadowed posts
 resolved at their own address. Renaming the collection to `/insights/*` moved
-243 of them behind a 301.
+243 of them behind a 301. Seven posts o3xo.ai never published now take that
+same 301 instead of an off-site rule, so the test asserts 250.
 
 That is a real cost, not a re-tabulation. A 301 preserves most but not all
 link equity, and 243 URLs have to be recrawled before the new address is the
