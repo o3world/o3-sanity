@@ -165,8 +165,10 @@ export { SurfaceProvider, useSurface } from './components/surface-context'
 export { Stat, statLabelVariants } from './components/stat'
 export type { StatProps } from './components/stat'
 
-export { OrbitalRendererContext, OrbitalMotionContext } from './components/orbital-sphere-renderer'
+export { OrbitalRendererContext } from './components/orbital-sphere-renderer'
 export type { OrbitalRendererProps } from './components/orbital-sphere-renderer'
+export { OrbitalMotionContext, useOrbitalMotion } from './components/motion-clock'
+export type { OrbitalMotionClock } from './components/motion-clock'
 
 export { RevealSequence } from './components/reveal-sequence'
 

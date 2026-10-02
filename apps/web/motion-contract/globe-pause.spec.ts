@@ -263,3 +263,52 @@ for (const renderer of ['SVG', 'GPU'] as const) {
     await expect.poll(pose).not.toEqual(restored)
   })
 }
+
+test('Reduce motion brings the partners marquee to rest and resumes it', async ({ page }, info) => {
+  test.skip(
+    info.project.use.contextOptions?.reducedMotion === 'reduce',
+    'Static preference keeps Reduce motion on and disabled',
+  )
+  await page.goto('/')
+  const strip = page.locator('ul[style*="--marquee-shift"]').first()
+  // Playwright's own scroll waits for the element to stop moving, which a marquee never does.
+  await strip.evaluate((element) => element.scrollIntoView({ block: 'center' }))
+  const x = () => strip.evaluate((element) => (element as HTMLElement).style.transform)
+  await expect.poll(x).toMatch(/translate3d/)
+  const moving = await x()
+  await expect.poll(x).not.toBe(moving)
+  await setReducedMotion(page, true)
+  // The drive brakes on an exponential curve, then stops asking for frames.
+  const holds = async () => {
+    const before = await x()
+    await page.waitForTimeout(400)
+    return (await x()) === before
+  }
+  await expect.poll(holds, { timeout: 8000 }).toBe(true)
+  const rested = await x()
+  await page.waitForTimeout(700)
+  expect(await x()).toBe(rested)
+  await setReducedMotion(page, false)
+  await expect.poll(x).not.toBe(rested)
+})
+
+test('Reduce motion holds the Lovable orbs still and resumes them', async ({ page }, info) => {
+  test.skip(
+    info.project.use.contextOptions?.reducedMotion === 'reduce',
+    'Static preference keeps Reduce motion on and disabled',
+  )
+  await page.goto('/partners/lovable')
+  const orbs = page.locator('section:has-text("Why Lovable") canvas')
+  await orbs.first().scrollIntoViewIfNeeded()
+  await expect.poll(() => orbs.count()).toBeGreaterThan(0)
+  const pixels = () =>
+    orbs.evaluateAll((elements) => elements.map((c) => (c as HTMLCanvasElement).toDataURL()))
+  const initial = await pixels()
+  await expect.poll(pixels).not.toEqual(initial)
+  await setReducedMotion(page, true)
+  const frozen = await pixels()
+  await page.waitForTimeout(700)
+  expect(await pixels()).toEqual(frozen)
+  await setReducedMotion(page, false)
+  await expect.poll(pixels).not.toEqual(frozen)
+})

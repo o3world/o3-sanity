@@ -4,6 +4,8 @@ import { act, createElement } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
+import { OrbitalMotionContext, type OrbitalMotionClock } from '@o3/ui'
+
 import { MarqueeTrack, type MarqueeTrackProps } from './MarqueeTrack'
 
 /**
@@ -116,6 +118,51 @@ describe('MarqueeTrack', () => {
     // Most of the way back after 800ms, all the way after a couple of seconds.
     expect(steps[7]).toBeGreaterThan(10)
     for (let i = 0; i < 20; i++) frame(100)
+    expect(frame(100)).toBeCloseTo(12, 0)
+  })
+
+  it("rests while the site's motion clock is paused, and picks up when it resumes", async () => {
+    let paused = false
+    const listeners = new Set<() => void>()
+    const clock: OrbitalMotionClock = {
+      getSnapshot: () => paused,
+      now: (timestamp) => timestamp,
+      subscribe: (listener) => {
+        listeners.add(listener)
+        return () => listeners.delete(listener)
+      },
+    }
+    const setPaused = (next: boolean) => {
+      paused = next
+      listeners.forEach((listener) => listener())
+    }
+    // A fresh mount under the clock; the stubbed cancel can't stop the first strip's loop.
+    await act(async () => root.unmount())
+    queued = []
+    root = createRoot(host)
+    await act(async () => {
+      root.render(
+        createElement(
+          OrbitalMotionContext.Provider,
+          { value: clock },
+          createElement(
+            MarqueeTrack,
+            { copies: 2 } as MarqueeTrackProps,
+            createElement('li', null, 'one'),
+          ),
+        ),
+      )
+    })
+    frame(0)
+    for (let i = 0; i < 60; i++) frame(16)
+
+    setPaused(true)
+    for (let i = 0; i < 30; i++) frame(100)
+    expect(queued).toHaveLength(0)
+    expect(frame(100)).toBe(0)
+
+    setPaused(false)
+    for (let i = 0; i < 30; i++) frame(100)
     expect(frame(100)).toBeCloseTo(12, 0)
   })
 })

@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { HTMLAttributes } from 'react'
 
-import { useOrbitalRenderer, useOrbitalMotion } from './orbital-sphere-renderer'
+import { useOrbitalMotion } from './motion-clock'
+import { useOrbitalRenderer } from './orbital-sphere-renderer'
 
 import { cn } from '../lib/utils'
 

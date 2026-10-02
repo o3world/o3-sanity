@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 
+import { useOrbitalMotion } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
 
 export interface MarqueeTrackProps {
@@ -77,6 +78,10 @@ function translateX(transform: string): number {
  * asking it to move the loop stops scheduling frames, so a still strip costs
  * nothing; the next pointer-leave restarts it.
  *
+ * The site's motion clock brakes it the same way: while the footer's Reduce
+ * motion is on, the strip comes to rest as if under a pointer, and resumes
+ * when it goes off. Without a clock in context, only the pointer stops it.
+ *
  * `prefers-reduced-motion` never mounts the drive at all: the keyframe is
  * already off under `motion-reduce:animate-none`, and the copies are
  * identical and centred, so the still strip is the frame's own composition.
@@ -84,6 +89,7 @@ function translateX(transform: string): number {
 export function MarqueeTrack({ copies, className, children }: MarqueeTrackProps) {
   const ref = useRef<HTMLUListElement>(null)
   const [driven, setDriven] = useState(false)
+  const clock = useOrbitalMotion()
 
   useEffect(() => {
     const track = ref.current
@@ -102,7 +108,9 @@ export function MarqueeTrack({ copies, className, children }: MarqueeTrackProps)
 
     let x = translateX(style.transform)
     let velocity = 0
-    let target = track.matches(':hover') ? 0 : 1
+    let hovered = track.matches(':hover')
+    const wanted = () => (hovered || clock?.getSnapshot() ? 0 : 1)
+    let target = wanted()
     let frame = 0
     let last = 0
 
@@ -135,28 +143,34 @@ export function MarqueeTrack({ copies, className, children }: MarqueeTrackProps)
     const run = () => {
       if (!frame) frame = requestAnimationFrame(step)
     }
-    const halt = () => {
-      target = 0
+    const retarget = () => {
+      target = wanted()
       run()
     }
+    const halt = () => {
+      hovered = true
+      retarget()
+    }
     const resume = () => {
-      target = 1
-      run()
+      hovered = false
+      retarget()
     }
 
     track.style.animation = 'none'
     track.addEventListener('pointerenter', halt)
     track.addEventListener('pointerleave', resume)
+    const unsubscribe = clock?.subscribe(retarget)
     run()
 
     return () => {
       if (frame) cancelAnimationFrame(frame)
       track.removeEventListener('pointerenter', halt)
       track.removeEventListener('pointerleave', resume)
+      unsubscribe?.()
       track.style.animation = ''
       track.style.transform = ''
     }
-  }, [copies])
+  }, [copies, clock])
 
   return (
     <ul

@@ -229,6 +229,11 @@
           "why": "A thin wrapper over the thinking-orbs npm package."
         },
         {
+          "path": "src/components/motion-clock.ts",
+          "verdict": "engine",
+          "why": "A pause-aware clock interface and its context; the app supplies the clock."
+        },
+        {
           "path": "src/components/surface-context.tsx",
           "verdict": "engine",
           "why": "SurfaceProvider/useSurface, parameterized over Surface only."
