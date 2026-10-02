@@ -92,7 +92,7 @@ async function expectGlass(canvasElement: HTMLElement, fill: string, rim: string
   }
 }
 
-/** The default skin: white copy on the `bg-scrim` pill, over an ink band. */
+/** The default skin: white copy on the `bg-glass` pill, over an ink band. */
 export const OverInk: Story = {
   parameters: { nextjs: { appDirectory: true, navigation: { pathname: '/' } } },
   globals: { backgrounds: { value: 'ink' } },

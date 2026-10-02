@@ -1,0 +1,15 @@
+/*
+ * Shadow — the canonical design draws no drop shadows.
+ *
+ * The one edge light in it is the rim of Figma's Glass effect on the nav's
+ * pill (3271:17013) and the logo's circle (3726:68984). Figma lights it from
+ * 135°, so it is bright on the top and left edges and faint on the bottom and
+ * right. It pairs with `--color-glass` and `--color-glass-light` in color.css.
+ */
+
+@theme {
+  --shadow-glass-rim:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.16), inset -1px -1px 0 rgba(255, 255, 255, 0.06);
+  --shadow-glass-rim-light:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.85), inset -1px -1px 0 rgba(255, 255, 255, 0.4);
+}
