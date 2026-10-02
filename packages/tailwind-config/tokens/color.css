@@ -159,9 +159,15 @@
   /* rgba(3,3,3,0.2) — the 402 bar's dark skin (`Links` 1814:1630). Sits over
    * whatever the hero is showing, so it must stay an alpha. */
   --color-scrim: rgba(3, 3, 3, 0.2);
-  /* Main Navigation (3271:17013), dark and light fills. */
-  --color-scrim-pill: rgba(3, 3, 3, 0.6);
-  --color-scrim-light: rgba(255, 255, 255, 0.8);
+  /* The nav's glass: Main Navigation (3271:17013) and the logo's circle in
+   * Brand Navigation (3726:68984). Figma draws both with its Glass effect
+   * (light 135° at 100%, refraction 80, depth 40, dispersion 40, frost 5,
+   * splay 10), which CSS has no form for. These fills, with the frost in
+   * SiteNav and the rims in shadow.css, reproduce its rendered tone over the
+   * components' demo photographs: rgb(25,25,28) dark and rgb(217,222,226)
+   * light. Both stay below NavInk's 0.9 opaque cut-off. */
+  --color-glass: rgba(24, 24, 27, 0.7);
+  --color-glass-light: rgba(232, 233, 236, 0.86);
   /* rgba(0,0,0,0.10) — the hairline on the flipped pill; --color-on-ink-line's
    * opposite number, and the same NO CANONICAL ANCHOR note applies. */
   --color-on-light-line: rgba(0, 0, 0, 0.1);
