@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import {
   MODE_DRAWS,
   resolvePreset,
@@ -11,6 +11,7 @@ import {
 } from 'thinking-orbs'
 
 import { cn } from '../lib/utils'
+import { useOrbitalMotion } from './motion-clock'
 
 export type { OrbSize, OrbState, OrbTheme }
 
@@ -32,7 +33,7 @@ export interface ThinkingOrbProps {
   fill?: boolean
   /** Multiplier on the preset's baked speed. */
   speed?: number
-  /** Freeze on the current frame. */
+  /** Freeze on the current frame. A paused motion clock in context freezes it too. */
   paused?: boolean
   /** `auto` reads the host's `data-theme`/`dark` class, then the OS. */
   theme?: OrbTheme
@@ -40,6 +41,9 @@ export interface ThinkingOrbProps {
   label?: string
   className?: string
 }
+
+const notPaused = () => false
+const noSubscription = () => () => {}
 
 /** Matches the library: cap the backing store at 2× so a 3× phone is not 9× the pixels. */
 const dpr = () => Math.min(2, (typeof devicePixelRatio !== 'undefined' && devicePixelRatio) || 1)
@@ -76,6 +80,13 @@ export function ThinkingOrb({
   label,
   className,
 }: ThinkingOrbProps) {
+  const clock = useOrbitalMotion()
+  const clockPaused = useSyncExternalStore(
+    clock?.subscribe ?? noSubscription,
+    clock?.getSnapshot ?? notPaused,
+    notPaused,
+  )
+  const frozen = paused || clockPaused
   return (
     <div className={cn('flex shrink-0 items-center justify-center', className)}>
       {fill ? (
@@ -83,7 +94,7 @@ export function ThinkingOrb({
           state={state}
           size={size}
           speed={speed}
-          paused={paused}
+          paused={frozen}
           theme={theme}
           label={label}
         />
@@ -92,7 +103,7 @@ export function ThinkingOrb({
           state={state}
           size={size}
           speed={speed}
-          paused={paused}
+          paused={frozen}
           theme={theme}
           aria-label={label}
         />

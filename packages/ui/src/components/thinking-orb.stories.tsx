@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, waitFor } from 'storybook/test'
 
+import { OrbitalMotionContext, type OrbitalMotionClock } from './motion-clock'
 import { ThinkingOrb } from './thinking-orb'
 
 /**
@@ -68,6 +70,34 @@ export const Fill: Story = {
       <ThinkingOrb state="weaving" theme="light" />
     </div>
   ),
+}
+
+const pausedClock: OrbitalMotionClock = {
+  getSnapshot: () => true,
+  now: (timestamp) => timestamp,
+  subscribe: () => () => {},
+}
+
+/**
+ * Under a paused motion clock — the site's Reduce motion — both arms hold
+ * still: the `fill` painter and the library's own orb.
+ */
+export const PausedByMotionClock: Story = {
+  render: () => (
+    <OrbitalMotionContext.Provider value={pausedClock}>
+      <div className="flex items-center gap-8">
+        <ThinkingOrb state="weaving" theme="light" fill className="aspect-square w-[138px]" />
+        <ThinkingOrb state="weaving" theme="light" />
+      </div>
+    </OrbitalMotionContext.Provider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvases = () => [...canvasElement.querySelectorAll('canvas')]
+    await waitFor(() => expect(canvases()).toHaveLength(2))
+    const before = canvases().map((canvas) => canvas.toDataURL())
+    await new Promise((resolve) => setTimeout(resolve, 500))
+    await expect(canvases().map((canvas) => canvas.toDataURL())).toEqual(before)
+  },
 }
 
 /** The 20px preset — the inline-status drawing, beside its 64px sibling. */
