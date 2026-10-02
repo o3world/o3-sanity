@@ -194,21 +194,31 @@
   --color-on-utility-line: #242321;
 
   /* ── Button states ─────────────────────────────────────────────────────── */
-  /* Legacy roles remain for other controls; Button uses the theme-specific ramps below. */
+  /* No Button call site; kept for other controls. */
   --color-btn-focus: #242321;
-  /* #E5E3DE — the Inverse press fill and the Neutral secondary press wash
-   * (2134:1785, variables `3837:6882`, `3837:6879`). */
-  --color-btn-press: #e5e3de;
-  /* #D6D3CC — Disabled (2134:1810, 2134:2038, 2205:1322). */
+  /* #D6D3CC — Disabled (2134:1810, 2134:2038, 2205:1322). No Button call site. */
   --color-btn-disabled: #d6d3cc;
-  /* Button Theme/State values, Figma 2134:1785; each names its variable. */
+
+  /* Button Theme/State values, Figma 2134:1785, one role per variable.
+   * `btn-{theme}-{state}` paints the Primary fill; `btn-{theme}-wash-{state}`
+   * paints the Secondary style's wash inside its outline. A Button state never
+   * borrows a surface or chrome token, so those can change on their own. */
   --color-btn-neutral-hover: #242321; /* 3837:6875 */
-  --color-btn-inverse-press: #55524e; /* 3837:6884 */
+  --color-btn-neutral-press: #000000; /* 3837:6876 */
+  --color-btn-neutral-focus: #d6d3cc; /* 3837:6894 */
+  --color-btn-neutral-wash-hover: #f1f0ec; /* 3837:6878 */
+  --color-btn-neutral-wash-press: #e5e3de; /* 3837:6879 */
+  --color-btn-inverse-hover: #f1f0ec; /* 3837:6881 */
+  --color-btn-inverse-press: #e5e3de; /* 3837:6882 */
+  --color-btn-inverse-wash-hover: #393633; /* 3837:6883 */
+  --color-btn-inverse-wash-press: #55524e; /* 3837:6884 */
   --color-btn-brand-hover: #a80b00; /* 3837:6886 */
   --color-btn-brand-press: #840900; /* 3837:6887 */
   --color-btn-brand-focus: #ff958c; /* 3837:6896 */
   --color-btn-brand-wash-hover: #ffe0dd; /* 3837:6888 */
   --color-btn-brand-wash-press: #ffc2bd; /* 3837:6889 */
+  --color-btn-subtle: #e5e3de; /* 3858:7951 */
+  --color-btn-subtle-hover: #aaa69e; /* 3858:7952 */
   --color-btn-disabled-dark: #393633; /* 3837:6890 */
   --color-btn-disabled-light: #e5e3de; /* 3837:6892 */
   /* #6F6D68 — `neutral-500`, solid: the Inverse and Subtle focus rings
@@ -216,9 +226,9 @@
   --color-btn-muted: #6f6d68;
   /* #6F6D68 — the disabled label (3837:6891). Its own role rather than
    * --color-fg-muted, which carries the same value but INVERTS on a dark band:
-   * the disabled fill (--color-btn-disabled) does not, so the pair has to move
-   * together or a disabled button on the CTA band wears white at 65% on light
-   * grey. */
+   * the disabled fills (--color-btn-disabled-dark, -light) do not, so the pair
+   * has to move together or a disabled button on the CTA band wears white at
+   * 65% on light grey. */
   --color-btn-disabled-fg: #6f6d68;
 
   /* ── Borders / placeholders ────────────────────────────────────────────── */

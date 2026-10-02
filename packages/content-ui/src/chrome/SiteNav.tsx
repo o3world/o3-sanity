@@ -18,7 +18,7 @@ interface SiteNavProps {
 }
 
 const NAV_BUTTON_INK =
-  'group-data-[ink=dark]:[--button-bg:var(--color-ink)] group-data-[ink=dark]:[--button-fg:var(--color-white)] group-data-[ink=dark]:[--button-hover:var(--color-btn-neutral-hover)] group-data-[ink=dark]:[--button-press:var(--color-utility)] group-data-[ink=dark]:[--button-focus:var(--color-line)]'
+  'group-data-[ink=dark]:[--button-bg:var(--color-ink)] group-data-[ink=dark]:[--button-fg:var(--color-white)] group-data-[ink=dark]:[--button-hover:var(--color-btn-neutral-hover)] group-data-[ink=dark]:[--button-press:var(--color-btn-neutral-press)] group-data-[ink=dark]:[--button-focus:var(--color-btn-neutral-focus)]'
 
 /** Homepage chrome: desktop 3720:60473 and mobile 1814:1618. */
 export function SiteNav({ settings, brandMark, menuUtilities }: SiteNavProps) {
