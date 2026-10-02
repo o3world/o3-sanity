@@ -4,7 +4,11 @@ test('tabbing into an embed below the fold shows its band at once', async ({
   page,
   context,
   baseURL,
-}) => {
+}, info) => {
+  test.skip(
+    info.project.use.contextOptions?.reducedMotion === 'reduce',
+    'Reduced motion never arms a reveal',
+  )
   // A returning visitor: the cookie notice would otherwise add its own stops.
   await context.addCookies([{ name: 'cookie_notice_accepted', value: 'true', url: baseURL! }])
   await page.goto('/1682-conference-ai-innovation')
@@ -19,7 +23,12 @@ test('tabbing into an embed below the fold shows its band at once', async ({
       }
       return product
     })
-  test.skip((await opacity()) === 1, 'The band is already in view, so it never arms')
+  const startsInView = await embed.evaluate(
+    (frame) => frame.closest('[data-reveal]')!.getBoundingClientRect().top < innerHeight,
+  )
+  test.skip(startsInView, 'The band is already in view, so it never arms')
+  // Reveal arms after hydration, which can land after `load`.
+  await expect.poll(opacity).toBe(0)
   for (let i = 0; i < 30; i++) {
     await page.keyboard.press('Tab')
     if (await page.evaluate(() => document.activeElement?.tagName === 'IFRAME')) break
