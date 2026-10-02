@@ -11,7 +11,7 @@ import { cn } from '../lib/utils'
  * ```
  * 12px 16px, gap 12, radius 5 (`--radius-btn`), label 18/24 Figtree Medium
  *   selected   #0A0A0B fill, white label          Theme=Black
- *   default    white fill, 1px #76746F, #55524E   Theme=White
+ *   default    white fill, 1px #6F6D68, #55524E   Theme=White
  * ```
  *
  * ## Why this is not `Button`

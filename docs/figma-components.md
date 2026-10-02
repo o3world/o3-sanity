@@ -127,7 +127,7 @@ Device=Mobile  (`2748:4686`)      402, bone #F1F0EC, side padding 16
   gap          48 between quote and attribution (24 at 402)
   quote        64/76 Light, tracking -1px, #232323, CENTRED
                (36/44 at 402; the 402 node fills #000000)
-  attribution  18/24 bold, 0.1em, UPPER, fg-muted #76746F, centred
+  attribution  18/24 bold, 0.1em, UPPER, fg-muted #6F6D68, centred
                (16/20 at 402)
   molecule     776px at 10%, rotated -30°, absolutely positioned off the
                bottom-left corner: -128/-374 at 1440, -167/-546 at 402

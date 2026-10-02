@@ -10,13 +10,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        dark: '[--button-bg:var(--color-ink)] [--button-fg:var(--color-white)] [--button-hover:var(--color-btn-neutral-hover)] [--button-press:var(--color-utility)] [--button-focus:var(--color-line)] [--button-disabled:var(--color-btn-disabled-dark)] [--button-wash-hover:var(--color-bone-soft)] [--button-wash-press:var(--color-bone)]',
+        dark: '[--button-bg:var(--color-ink)] [--button-fg:var(--color-white)] [--button-hover:var(--color-btn-neutral-hover)] [--button-press:var(--color-utility)] [--button-focus:var(--color-line)] [--button-disabled:var(--color-btn-disabled-dark)] [--button-wash-hover:var(--color-bone)] [--button-wash-press:var(--color-btn-press)]',
         light:
-          '[--button-bg:var(--color-white)] [--button-fg:var(--color-ink)] [--button-hover:var(--color-bone-soft)] [--button-press:var(--color-bone)] [--button-focus:var(--color-on-utility)] [--button-disabled:var(--color-btn-disabled-light)] [--button-wash-hover:var(--color-btn-disabled-dark)] [--button-wash-press:var(--color-btn-inverse-press)]',
+          '[--button-bg:var(--color-white)] [--button-fg:var(--color-ink)] [--button-hover:var(--color-bone)] [--button-press:var(--color-btn-press)] [--button-focus:var(--color-btn-muted)] [--button-disabled:var(--color-btn-disabled-light)] [--button-wash-hover:var(--color-btn-disabled-dark)] [--button-wash-press:var(--color-btn-inverse-press)]',
         brand:
-          '[--button-bg:var(--color-brand)] [--button-fg:var(--color-white)] [--button-hover:var(--color-brand-deep)] [--button-press:var(--color-btn-brand-press)] [--button-focus:var(--color-btn-brand-focus)] [--button-disabled:var(--color-btn-disabled-dark)] [--button-wash-hover:var(--color-btn-brand-wash-hover)] [--button-wash-press:var(--color-btn-brand-wash-press)]',
+          '[--button-bg:var(--color-brand)] [--button-fg:var(--color-white)] [--button-hover:var(--color-btn-brand-hover)] [--button-press:var(--color-btn-brand-press)] [--button-focus:var(--color-btn-brand-focus)] [--button-disabled:var(--color-btn-disabled-dark)] [--button-wash-hover:var(--color-btn-brand-wash-hover)] [--button-wash-press:var(--color-btn-brand-wash-press)]',
         subtle:
-          '[--button-bg:var(--color-btn-disabled-light)] [--button-fg:var(--color-ink)] [--button-hover:var(--color-line)] [--button-press:var(--color-on-utility)] [--button-focus:var(--color-on-utility)] [--button-disabled:var(--color-btn-disabled-light)]',
+          '[--button-bg:var(--color-btn-disabled-light)] [--button-fg:var(--color-ink)] [--button-hover:var(--color-on-utility)] [--button-press:var(--color-btn-muted)] [--button-focus:var(--color-btn-muted)] [--button-disabled:var(--color-btn-disabled-light)]',
         ghost:
           'bg-transparent text-current hover:opacity-70 disabled:opacity-50 aria-disabled:opacity-50 [--button-focus:var(--color-brand)]',
       },

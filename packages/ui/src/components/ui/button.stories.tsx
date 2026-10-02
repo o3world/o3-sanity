@@ -54,7 +54,7 @@ export const Light: Story = {
     await expect(getComputedStyle(button).backgroundColor).toBe('rgb(255, 255, 255)')
     await userEvent.tab()
     await expect(button).toHaveFocus()
-    await waitFor(() => expect(getComputedStyle(button).boxShadow).toContain('rgb(170, 166, 158)'))
+    await waitFor(() => expect(getComputedStyle(button).boxShadow).toContain('rgb(111, 109, 104)'))
   },
 }
 
@@ -105,10 +105,75 @@ export const DownIcon: Story = {
   tags: ['!test'],
 }
 
-/** `#D6D3CC` under a `#76746F` label (`2134:1810`). */
+/** `#D6D3CC` under a `#6F6D68` label (`2134:1810`). */
 export const Disabled: Story = {
   args: { children: 'Disabled', disabled: true },
   tags: ['!test'],
+}
+
+/**
+ * Each theme's state colours against the Figma set (`2134:1785`), read off the
+ * custom properties the state rules paint with. Hover and press can't be
+ * triggered from a story, so the values are checked where they're declared.
+ */
+const FIGMA_STATES = {
+  dark: {
+    hover: '#242321',
+    press: '#000000',
+    focus: '#d6d3cc',
+    'wash-hover': '#f1f0ec',
+    'wash-press': '#e5e3de',
+  },
+  light: {
+    hover: '#f1f0ec',
+    press: '#e5e3de',
+    focus: '#6f6d68',
+    'wash-hover': '#393633',
+    'wash-press': '#55524e',
+  },
+  brand: {
+    hover: '#a80b00',
+    press: '#840900',
+    focus: '#ff958c',
+    'wash-hover': '#ffe0dd',
+    'wash-press': '#ffc2bd',
+  },
+  subtle: { hover: '#aaa69e', press: '#6f6d68', focus: '#6f6d68' },
+} as const
+
+export const MatchesFigmaStates: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-4">
+      {(Object.keys(FIGMA_STATES) as Array<keyof typeof FIGMA_STATES>).map((variant) => (
+        <Button key={variant} variant={variant} data-variant={variant}>
+          {variant}
+        </Button>
+      ))}
+      <Button disabled data-variant="disabled">
+        Disabled
+      </Button>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    for (const [variant, states] of Object.entries(FIGMA_STATES)) {
+      const button = canvasElement.querySelector<HTMLElement>(`[data-variant="${variant}"]`)!
+      const style = getComputedStyle(button)
+      for (const [state, hex] of Object.entries(states)) {
+        await expect({
+          variant,
+          state,
+          value: style.getPropertyValue(`--button-${state}`).trim(),
+        }).toEqual({
+          variant,
+          state,
+          value: hex,
+        })
+      }
+    }
+    // The disabled label, Figma `3837:6891`.
+    const disabled = canvasElement.querySelector<HTMLElement>('[data-variant="disabled"]')!
+    await expect(getComputedStyle(disabled).color).toBe('rgb(111, 109, 104)')
+  },
 }
 
 /** Real pseudo-classes keep this gallery aligned with the component's state rules. */
