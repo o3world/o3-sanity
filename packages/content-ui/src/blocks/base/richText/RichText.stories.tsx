@@ -166,6 +166,43 @@ export const Everything: Story = {
   },
 }
 
+/**
+ * The `:hover` declarations that apply to `element`, read off the stylesheets.
+ * A synthetic pointer event never sets `:hover`, so a play function cannot
+ * hover for real; this is the rule the browser would apply if it did.
+ */
+function hoverDeclarations(element: Element): CSSStyleDeclaration[] {
+  const walk = (rules: CSSRuleList): CSSStyleDeclaration[] =>
+    [...rules].flatMap((rule) => {
+      if (rule instanceof CSSStyleRule && rule.selectorText.includes(':hover')) {
+        return element.matches(rule.selectorText.replaceAll(':hover', '')) ? [rule.style] : []
+      }
+      return 'cssRules' in rule ? walk((rule as CSSGroupingRule).cssRules) : []
+    })
+  return [...document.styleSheets].flatMap((sheet) => {
+    // A cross-origin sheet (a webfont's) refuses to list its rules.
+    try {
+      return walk(sheet.cssRules)
+    } catch {
+      return []
+    }
+  })
+}
+
+/** A link in prose turns brand red on hover, at the pace of every other text link. */
+export const LinkHover: Story = {
+  args: Everything.args,
+  play: async ({ canvasElement }) => {
+    const link = within(canvasElement).getByRole('link', { name: 'a link' })
+    const hover = hoverDeclarations(link).map((style) => style.getPropertyValue('color'))
+    await expect(hover).toContain('var(--color-brand)')
+    const style = getComputedStyle(link)
+    await expect(style.transitionProperty).toContain('color')
+    // `--duration-hover`, 220ms.
+    await expect(style.transitionDuration).toBe('0.22s')
+  },
+}
+
 /** Empty. An absent body renders nothing rather than an empty measure. */
 export const Empty: Story = {
   args: { body: [] as unknown as Body },
