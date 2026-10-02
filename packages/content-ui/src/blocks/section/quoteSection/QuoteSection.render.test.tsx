@@ -63,7 +63,7 @@ describe('the quote band’s molecule decoration', () => {
   })
 
   it('sets the attribution as the eyebrow the set draws', () => {
-    // 18/24 bold uppercase at 0.1em in fg-muted #76746F (`2748:4840`),
+    // 18/24 bold uppercase at 0.1em in fg-muted #6F6D68 (`2748:4840`),
     // 16/20 at 402 (`2748:4717`) — not a 36px line at half-strength ink.
     expect(html).toMatch(/eyebrow-lg[^"]*text-fg-muted/)
     expect(html).not.toContain('text-display-lg')

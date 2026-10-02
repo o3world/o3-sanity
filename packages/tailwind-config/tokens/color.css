@@ -104,18 +104,18 @@
   /* #232323 — Figma `text/default`. Body copy and card titles on light bands;
    * also `icons/default`. */
   --color-fg: #232323;
-  /* #76746F — the NEUTRAL eyebrow ("OUR PARTNERS", 1864:2392) and
-   * insights-card meta ("3 MINS · 7/27/26", 2134:1191). Note the eyebrow is
-   * this grey, not brand red — see the Eyebrow default-tone note in #38.
+  /* #6F6D68 — Figma `neutral-500` (variable `2083:1073`): the NEUTRAL eyebrow
+   * ("OUR PARTNERS") and insights-card meta ("3 MINS · 7/27/26"). 4.53:1 on
+   * bone, so it holds AA for small text on every light surface. Note the
+   * eyebrow is this grey, not brand red — see the Eyebrow default-tone note
+   * in #38.
    *
-   * WAS #636363 (`text/tertiary`) until the 2026-08 token pass warmed it:
-   * variable `2083:1073` binds #76746F on both of this token's anchor nodes.
    * Two stragglers on un-migrated content: raw #636363 (Live's section
    * eyebrows, About's role lines) and the old-generation variable `1065:4403`
-   * #757575 (About's OUR TEAM / CULTURE / CAREERS eyebrows). The same #76746F
-   * also strokes the Insight-index filter pills (`2050:1227`, a border-role
-   * variable) — #61's build can reach for border-fg-muted. */
-  --color-fg-muted: #76746f;
+   * #757575 (About's OUR TEAM / CULTURE / CAREERS eyebrows). The Insight-index
+   * filter pills stroke a border-role variable of the same grey (`2050:1227`)
+   * — #61's build can reach for border-fg-muted. */
+  --color-fg-muted: #6f6d68;
   /* #55524E — the colour the 2026-08 frames set `Body/Default` in: the
    * partners standfirst (`2250:1307`) and the Solutions overview paragraph
    * (`2360:2869`), two frames, one value. Warmer and a shade lighter than
@@ -194,26 +194,42 @@
   --color-on-utility-line: #242321;
 
   /* ── Button states ─────────────────────────────────────────────────────── */
-  /* Legacy roles remain for other controls; Button uses the theme-specific ramps below. */
+  /* No Button call site; kept for other controls. */
   --color-btn-focus: #242321;
-  /* #E5E3DE — Press (2205:1310). The set's own value; no other role reads it. */
-  --color-btn-press: #e5e3de;
-  /* #D6D3CC — Disabled (2134:1810, 2134:2038, 2205:1322). */
+  /* #D6D3CC — Disabled (2134:1810, 2134:2038, 2205:1322). No Button call site. */
   --color-btn-disabled: #d6d3cc;
-  /* #76746F — the label over that fill (2205:1322). Its own role rather than
+
+  /* Button Theme/State values, Figma 2134:1785, one role per variable.
+   * `btn-{theme}-{state}` paints the Primary fill; `btn-{theme}-wash-{state}`
+   * paints the Secondary style's wash inside its outline. A Button state never
+   * borrows a surface or chrome token, so those can change on their own. */
+  --color-btn-neutral-hover: #242321; /* 3837:6875 */
+  --color-btn-neutral-press: #000000; /* 3837:6876 */
+  --color-btn-neutral-focus: #d6d3cc; /* 3837:6894 */
+  --color-btn-neutral-wash-hover: #f1f0ec; /* 3837:6878 */
+  --color-btn-neutral-wash-press: #e5e3de; /* 3837:6879 */
+  --color-btn-inverse-hover: #f1f0ec; /* 3837:6881 */
+  --color-btn-inverse-press: #e5e3de; /* 3837:6882 */
+  --color-btn-inverse-wash-hover: #393633; /* 3837:6883 */
+  --color-btn-inverse-wash-press: #55524e; /* 3837:6884 */
+  --color-btn-brand-hover: #a80b00; /* 3837:6886 */
+  --color-btn-brand-press: #840900; /* 3837:6887 */
+  --color-btn-brand-focus: #ff958c; /* 3837:6896 */
+  --color-btn-brand-wash-hover: #ffe0dd; /* 3837:6888 */
+  --color-btn-brand-wash-press: #ffc2bd; /* 3837:6889 */
+  --color-btn-subtle: #e5e3de; /* 3858:7951 */
+  --color-btn-subtle-hover: #aaa69e; /* 3858:7952 */
+  --color-btn-disabled-dark: #393633; /* 3837:6890 */
+  --color-btn-disabled-light: #e5e3de; /* 3837:6892 */
+  /* #6F6D68 — `neutral-500`, solid: the Inverse and Subtle focus rings
+   * (3837:6895, 3858:7954) and the Subtle press fill (3858:7953). */
+  --color-btn-muted: #6f6d68;
+  /* #6F6D68 — the disabled label (3837:6891). Its own role rather than
    * --color-fg-muted, which carries the same value but INVERTS on a dark band:
-   * the fill above does not, so the pair has to move together or a disabled
-   * button on the CTA band wears white at 65% on light grey. */
-  /* Button Theme/State values, Figma 2134:1785 (September 2026). */
-  --color-btn-neutral-hover: #171615;
-  --color-btn-inverse-press: #55524e;
-  --color-btn-brand-press: #a80b00;
-  --color-btn-brand-focus: #ff958c;
-  --color-btn-brand-wash-hover: #fff1f0;
-  --color-btn-brand-wash-press: #ffe0dd;
-  --color-btn-disabled-dark: #393633;
-  --color-btn-disabled-light: #e5e3de;
-  --color-btn-disabled-fg: #76746f;
+   * the disabled fills (--color-btn-disabled-dark, -light) do not, so the pair
+   * has to move together or a disabled button on the CTA band wears white at
+   * 65% on light grey. */
+  --color-btn-disabled-fg: #6f6d68;
 
   /* ── Borders / placeholders ────────────────────────────────────────────── */
   /* #D6D3CC — the hairline, and since the 2026-08 partners restructure it
@@ -293,7 +309,7 @@
 [data-surface='bone'] {
   --color-fg: #232323;
   --color-fg-body: #55524e;
-  --color-fg-muted: #76746f;
+  --color-fg-muted: #6f6d68;
   --color-fg-quiet: rgba(10, 10, 10, 0.5);
   --color-fg-subtle: #a3a3a3;
 }
