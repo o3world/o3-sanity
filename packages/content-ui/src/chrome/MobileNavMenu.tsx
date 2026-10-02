@@ -62,6 +62,16 @@ export function MobileNavMenu({ items, button, utilities }: MobileNavMenuProps) 
             side="right"
             {...surfaceAttrs('ink')}
             className="bg-ink-deep w-full text-white sm:max-w-sm"
+            // Radix's first focus skips links, which would land on the last
+            // control in the panel; a menu opens on its first entry.
+            onOpenAutoFocus={(event) => {
+              const first = (event.currentTarget as HTMLElement).querySelector<HTMLElement>(
+                'nav a[href]',
+              )
+              if (!first) return
+              event.preventDefault()
+              first.focus()
+            }}
           >
             <SheetTitle className="sr-only">Menu</SheetTitle>
             <nav aria-label="Menu" className="flex flex-col gap-8 overflow-y-auto px-5 pb-8 pt-24">

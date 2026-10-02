@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, waitFor } from 'storybook/test'
 
 import { SectionShell } from './section-shell'
 import { DisplayHeading } from './display-heading'
@@ -105,4 +106,85 @@ export const StaggeredBand: Story = {
       </div>
     </SectionShell>
   ),
+}
+
+/** What the reader sees of an element: its opacity times every ancestor's. */
+const seenOpacity = (element: Element) => {
+  let product = 1
+  for (let node: Element | null = element; node; node = node.parentElement)
+    product *= Number(getComputedStyle(node).opacity)
+  return product
+}
+const twoFrames = () =>
+  new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+
+/**
+ * Focus reaching an armed block shows it at once. A keyboard reader who tabs
+ * to a link below the fold must never be focused on something still faded
+ * out.
+ */
+export const RevealsOnFocus: Story = {
+  render: () => (
+    <div className="bg-bone px-6 py-16">
+      <div className="h-[200vh]" />
+      <Reveal>
+        <a href="#reveal-target" className="text-body-heading">
+          Focusable inside the reveal
+        </a>
+      </Reveal>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const link = canvasElement.querySelector<HTMLAnchorElement>('a[href="#reveal-target"]')!
+    await waitFor(() => expect(seenOpacity(link)).toBe(0))
+    link.focus({ preventScroll: true })
+    await twoFrames()
+    await expect(seenOpacity(link)).toBe(1)
+  },
+}
+
+/**
+ * Focus from a pointer leaves the entrance alone: the block rises on its own
+ * schedule, so a tap or click that lands on it mid-rise isn't moved out from
+ * under the pointer between press and release.
+ */
+export const PointerFocusKeepsTheEntrance: Story = {
+  render: RevealsOnFocus.render,
+  play: async ({ canvasElement }) => {
+    const link = canvasElement.querySelector<HTMLAnchorElement>('a[href="#reveal-target"]')!
+    await waitFor(() => expect(seenOpacity(link)).toBe(0))
+    link.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }))
+    link.focus({ preventScroll: true })
+    await twoFrames()
+    await expect(seenOpacity(link)).toBe(0)
+  },
+}
+
+/**
+ * Focus moving into a cross-origin frame — an embed — sends the page no
+ * `focusin`, only a window `blur`, and doesn't scroll the page. The block
+ * still shows at once. A `data:` URL is an opaque origin, so it stands in for
+ * YouTube.
+ */
+export const RevealsOnFocusIntoAnEmbed: Story = {
+  render: () => (
+    <div className="bg-bone px-6 py-16">
+      <div className="h-[200vh]" />
+      <Reveal>
+        <iframe
+          title="Embedded frame"
+          src="data:text/html,<button>Inside the frame</button>"
+          className="h-24 w-64"
+        />
+      </Reveal>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const frame = canvasElement.querySelector('iframe')!
+    await waitFor(() => expect(seenOpacity(frame)).toBe(0))
+    frame.contentWindow!.focus()
+    await waitFor(() => expect(document.activeElement).toBe(frame))
+    await twoFrames()
+    await expect(seenOpacity(frame)).toBe(1)
+  },
 }
