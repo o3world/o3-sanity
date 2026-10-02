@@ -139,10 +139,11 @@ describe('the nav bar’s pinned, dark-ink default', () => {
   })
 
   it('blurs whatever it is floating over', () => {
-    // The Case Study frame's glass (`1710:2300`): the photograph under the
-    // pill is a tone, not a shape.
-    expect(navHtml).toContain('backdrop-blur-[16px]')
-    expect(navHtml).toContain('backdrop-saturate-[1.25]')
+    // The Glass effect's frost and rim (`3271:17013`): the photograph under
+    // the pill is a tone, not a shape.
+    expect(navHtml).toContain('backdrop-blur-[10px]')
+    expect(navHtml).toContain('backdrop-saturate-[1.1]')
+    expect(navHtml).toContain('shadow-glass-rim')
   })
 
   it('server-renders the dark skin, with no ink attribute at all', () => {
