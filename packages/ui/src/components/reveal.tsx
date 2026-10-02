@@ -25,7 +25,9 @@ type Phase = 'static' | 'armed' | 'entered'
  * taller than the viewport — while it fades, the page's ground reads through
  * its half-opaque paint, the rise leaves that ground as a seam above it, and
  * the in-flight translate makes it a containing block under any sticky
- * machinery it holds; and everything under prefers-reduced-motion. With no
+ * machinery it holds; and everything under prefers-reduced-motion. Keyboard
+ * focus entering an armed element shows it the same way, at once; pointer
+ * focus waits for the observer. With no
  * JavaScript the effect never runs and the page is simply the server's, so no
  * `noscript` rule is needed.
  *
@@ -59,7 +61,41 @@ export function Reveal({ delay = 0, className, style, children, ...rest }: Revea
       { threshold: 0, rootMargin: '0px 0px -40px 0px' },
     )
     io.observe(el)
-    return () => io.disconnect()
+    // Focus never lands on faded-out content: a reader who tabs in sees it at
+    // once, unanimated. Focus moving into a cross-origin iframe fires no
+    // `focusin` here, only a window `blur` with the iframe already active, and
+    // doesn't scroll the page, so that is checked too. Focus from a pointer is
+    // left to the observer, so a press mid-rise isn't moved out from under the
+    // pointer before it's released.
+    let pressing = false
+    const press = () => {
+      pressing = true
+    }
+    const release = () => {
+      pressing = false
+    }
+    const show = () => {
+      if (pressing) return
+      setPhase('static')
+      stop()
+    }
+    const showIfFramed = () => {
+      if (el.contains(document.activeElement)) show()
+    }
+    const stop = () => {
+      io.disconnect()
+      el.removeEventListener('pointerdown', press)
+      window.removeEventListener('pointerup', release)
+      window.removeEventListener('pointercancel', release)
+      el.removeEventListener('focusin', show)
+      window.removeEventListener('blur', showIfFramed)
+    }
+    el.addEventListener('pointerdown', press)
+    window.addEventListener('pointerup', release)
+    window.addEventListener('pointercancel', release)
+    el.addEventListener('focusin', show)
+    window.addEventListener('blur', showIfFramed)
+    return stop
   }, [])
 
   return (

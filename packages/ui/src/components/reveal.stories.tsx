@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, waitFor } from 'storybook/test'
 
 import { SectionShell } from './section-shell'
 import { DisplayHeading } from './display-heading'
@@ -105,4 +106,48 @@ export const StaggeredBand: Story = {
       </div>
     </SectionShell>
   ),
+}
+
+/**
+ * Focus reaching an armed block shows it at once. A keyboard reader who tabs
+ * to a link below the fold must never be focused on something still faded
+ * out, and focus inside an embed's iframe doesn't scroll the page to reveal it.
+ */
+export const RevealsOnFocus: Story = {
+  render: () => (
+    <div className="bg-bone px-6 py-16">
+      <div className="h-[200vh]" />
+      <Reveal>
+        <a href="#reveal-target" className="text-body-heading">
+          Focusable inside the reveal
+        </a>
+      </Reveal>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const link = canvasElement.querySelector<HTMLAnchorElement>('a[href="#reveal-target"]')!
+    const fading = link.parentElement!
+    await waitFor(() => expect(getComputedStyle(fading).opacity).toBe('0'))
+    link.focus({ preventScroll: true })
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+    await expect(getComputedStyle(fading).opacity).toBe('1')
+  },
+}
+
+/**
+ * Focus from a pointer leaves the entrance alone: the block rises on its own
+ * schedule, so a tap or click that lands on it mid-rise isn't moved out from
+ * under the pointer between press and release.
+ */
+export const PointerFocusKeepsTheEntrance: Story = {
+  render: RevealsOnFocus.render,
+  play: async ({ canvasElement }) => {
+    const link = canvasElement.querySelector<HTMLAnchorElement>('a[href="#reveal-target"]')!
+    const fading = link.parentElement!
+    await waitFor(() => expect(getComputedStyle(fading).opacity).toBe('0'))
+    link.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }))
+    link.focus({ preventScroll: true })
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+    await expect(getComputedStyle(fading).opacity).toBe('0')
+  },
 }

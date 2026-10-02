@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 
 import { SITE_SETTINGS } from '../testing/seedContent'
 
@@ -68,4 +69,22 @@ export const WithoutButton: Story = {
 /** No nav items: the trigger still has to open onto something, not a void. */
 export const WithoutItems: Story = {
   args: { items: [] },
+}
+
+/**
+ * Opened from the keyboard, focus lands on the first link. Radix's own first
+ * focus skips links, which would put it on the first button instead — here,
+ * Close.
+ */
+export const OpensOnFirstLink: Story = {
+  play: async ({ canvasElement }) => {
+    const trigger = within(canvasElement).getByRole('button', { name: 'Open menu' })
+    trigger.focus()
+    await userEvent.keyboard('{Enter}')
+    const menu = await within(document.body).findByRole('dialog', { name: 'Menu' })
+    const first = within(menu).getAllByRole('link')[0]!
+    await waitFor(() => expect(document.activeElement).toBe(first))
+    await userEvent.keyboard('{Escape}')
+    await waitFor(() => expect(document.activeElement).toBe(trigger))
+  },
 }
