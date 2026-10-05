@@ -161,8 +161,8 @@ describe('the translated La Colombe case study', () => {
 /**
  * The band that closes the frame (`1710:2609`). `aTranslatedCaseStudy` leaves
  * `next` null — nothing else is loaded beside it — so the neighbour is
- * supplied here, which is also what pins the `client->{name}` the projection
- * had to grow for the "NEXT PROJECT - IRONMAN" kicker.
+ * supplied here, which is also what pins the `client->{name}` the card names
+ * itself by.
  *
  * The slug is IRONMAN's real one. `/work/ironman` was a seed placeholder until
  * ADR 0016 deleted it, and a fixture that keeps using a URL the site no longer
@@ -175,6 +175,7 @@ describe('the next-project band', () => {
         {
           ...doc,
           next: {
+            _type: 'caseStudy',
             title: 'Built for the long run.',
             slug: 'case-studies-ironman-digital-experience-drupal-acquia',
             cardMedia: (doc as { heroMedia?: unknown }).heroMedia,
@@ -186,12 +187,13 @@ describe('the next-project band', () => {
       params: { slug: 'la-colombe' },
     })
 
-    expect(html).toContain('Next project — IRONMAN')
+    expect(html).toContain('>IRONMAN<')
     expect(html).toContain('Built for the long run.')
+    expect(html).toContain('View the work')
     expect(html).toContain('href="/work/case-studies-ironman-digital-experience-drupal-acquia"')
   })
 
   it('renders nothing when there is no neighbour', () => {
-    expect(html).not.toContain('Next project')
+    expect(html).not.toContain('There’s more where that came from.')
   })
 })
