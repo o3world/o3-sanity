@@ -42,12 +42,13 @@ export interface PanelBandProps {
 export function PanelBand({ railItems, panelIds, mode, surface, children }: PanelBandProps) {
   const [active, setActive] = useState<number | null>(null)
   const band = useRef<HTMLDivElement>(null)
+  const railRef = useRef<HTMLOListElement>(null)
 
   // The stuck tab row is as tall as its labels wrap to, so its height is
   // measured onto `--rail-height` for the panels' scroll margin to clear.
   useEffect(() => {
     const root = band.current
-    const rail = root?.querySelector<HTMLElement>(':scope > ol')
+    const rail = railRef.current
     if (!root || !rail) return
     const observer = new ResizeObserver(() => {
       root.style.setProperty('--rail-height', `${rail.offsetHeight}px`)
@@ -98,7 +99,13 @@ export function PanelBand({ railItems, panelIds, mode, surface, children }: Pane
       ref={band}
       className="flex w-full flex-col gap-16 lg:flex-row lg:justify-between lg:gap-16"
     >
-      <PanelRail mode={mode} items={railItems} active={active ?? 0} surface={surface} />
+      <PanelRail
+        ref={railRef}
+        mode={mode}
+        items={railItems}
+        active={active ?? 0}
+        surface={surface}
+      />
 
       <div
         className={cn(

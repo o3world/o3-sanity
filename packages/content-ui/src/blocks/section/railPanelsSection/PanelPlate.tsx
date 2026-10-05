@@ -64,9 +64,9 @@ export function PanelPlate({
       // `panels` has exactly one member type, so it serialises as an
       // `arrayItem` and resolves natively at this depth (#104).
       data-sanity={dataSanity}
-      // A rail stop's jump lands here clear of the chrome: under the 80px nav
-      // and the stuck tab row below lg, level with the sticky rail at lg.
-      className="flex scroll-mt-[calc(5rem+var(--rail-height,0px))] flex-col gap-[33px] lg:scroll-mt-[calc(var(--spacing-nav-pinned)+96px)] lg:flex-row lg:items-center"
+      // A rail stop's jump lands here clear of the chrome: under the nav and
+      // the stuck tab row below lg, level with the sticky rail at lg.
+      className="flex scroll-mt-[calc(var(--spacing-nav-height)+var(--rail-height,0px))] flex-col gap-[33px] lg:scroll-mt-[calc(var(--spacing-nav-pinned)+96px)] lg:flex-row lg:items-center"
     >
       {/* 500 is a ceiling, not a floor: the plate is the rigid half of the
           row, so between 1024 and 1440 the copy column is what gives. */}

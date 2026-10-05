@@ -1,3 +1,5 @@
+import type { Ref } from 'react'
+
 import type { Surface } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
 
@@ -17,6 +19,8 @@ export interface PanelRailProps {
   mode: 'label' | 'number'
   /** The band's surface — the stuck tab row paints it so panels pass under. */
   surface: Surface
+  /** The label row, which `PanelBand` measures for the panels' scroll margin. */
+  ref?: Ref<HTMLOListElement>
 }
 
 /** The tab row's ground below lg, one per surface so Tailwind sees each class. */
@@ -48,7 +52,7 @@ const STUCK_GROUND: Record<Surface, string> = {
  * has nowhere to stand at 402, so the stops lay out as a row over the panels
  * instead of beside them, and the marker moves from the word's left edge to
  * under it. Both frames name it `Fixed Navigation`, so the row holds under the
- * 80px nav while its panels scroll beneath it, on the band's own ground, just
+ * nav while its panels scroll beneath it, on the band's own ground, just
  * as the column holds at 1440. **The stops are links**, which is what the frame calls them and
  * what a row of underlined words at 24px promises: each one jumps to its panel,
  * and the observer then marks it. The row spreads its stops edge to edge, as
@@ -60,7 +64,7 @@ const STUCK_GROUND: Record<Surface, string> = {
  * The number rail keeps the column and nothing else: its 402 composition is
  * the numeral inlined into each row, which the section draws, not this.
  */
-export function PanelRail({ items, active, mode, surface }: PanelRailProps) {
+export function PanelRail({ items, active, mode, surface, ref }: PanelRailProps) {
   if (mode === 'number') {
     return (
       <ol className="hidden w-[82px] shrink-0 flex-col gap-4 self-start lg:sticky lg:top-[calc(var(--spacing-nav-pinned)+96px)] lg:flex">
@@ -84,12 +88,13 @@ export function PanelRail({ items, active, mode, surface }: PanelRailProps) {
     <ol
       // `items-start` so the active stop's rule hangs below its own word
       // rather than stretching every stop to the tallest.
-      // Below lg the row bleeds over the band's 24px gutter and pads 16 above
-      // and below the stops, all cancelled by margin so the resting layout
-      // keeps the frame's spacing; the padding only shows once it sticks.
+      ref={ref}
+      // Below lg the row bleeds over the band's gutter and pads 16 above and
+      // below the stops, all cancelled by margin so the resting layout keeps
+      // the frame's spacing; the padding only shows once it sticks.
       className={cn(
         'flex flex-wrap items-start justify-between gap-x-6 gap-y-3 lg:sticky lg:top-[calc(var(--spacing-nav-pinned)+96px)] lg:w-[82px] lg:shrink-0 lg:flex-col lg:flex-nowrap lg:gap-8 lg:self-start',
-        'max-lg:sticky max-lg:top-20 max-lg:z-10 max-lg:-mx-6 max-lg:-my-4 max-lg:px-6 max-lg:py-4',
+        'max-lg:top-(--spacing-nav-height) max-lg:-mx-(--rail-gutter) max-lg:px-(--rail-gutter) max-lg:sticky max-lg:z-10 max-lg:-my-4 max-lg:py-4',
         STUCK_GROUND[surface],
       )}
     >
