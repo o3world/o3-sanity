@@ -12,6 +12,7 @@
  *   typography.css  Figtree at the canonical px ramp
  *   layout.css      page gutter, containers, band rhythm
  *   radius.css      the square-corner story
+ *   shadow.css      the nav glass's rim light
  *   motion.css      easing curves + durations
  *   gradient.css    the load-bearing gradient fills
  *
@@ -61,5 +62,6 @@
 @import './tokens/typography.css';
 @import './tokens/layout.css';
 @import './tokens/radius.css';
+@import './tokens/shadow.css';
 @import './tokens/motion.css';
 @import './tokens/gradient.css';

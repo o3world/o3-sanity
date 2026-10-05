@@ -221,7 +221,7 @@ test('browsers without animation APIs still navigate completely', async ({ page 
   )
   expect(light.readyNav).toMatchObject({
     color: 'rgb(35, 35, 35)',
-    background: 'rgba(255, 255, 255, 0.8)',
+    background: 'rgba(232, 233, 236, 0.86)',
     button: 'rgb(255, 255, 255)',
     buttonBackground: 'rgb(10, 10, 11)',
   })
@@ -347,7 +347,7 @@ test('the destination nav skin is complete on the first arriving frame', async (
   const desktop = info.project.use.viewport!.width >= 1024
   const lightSkin = {
     color: 'rgb(35, 35, 35)',
-    background: 'rgba(255, 255, 255, 0.8)',
+    background: 'rgba(232, 233, 236, 0.86)',
     link: 'rgb(35, 35, 35)',
     inactiveLink: desktop ? 'rgb(35, 35, 35)' : null,
     button: 'rgb(255, 255, 255)',
@@ -355,7 +355,7 @@ test('the destination nav skin is complete on the first arriving frame', async (
   }
   const darkSkin = {
     color: 'rgb(255, 255, 255)',
-    background: 'rgba(3, 3, 3, 0.6)',
+    background: 'rgba(24, 24, 27, 0.7)',
     link: 'rgb(255, 255, 255)',
     inactiveLink: desktop ? 'rgb(255, 255, 255)' : null,
     button: 'rgb(10, 10, 11)',

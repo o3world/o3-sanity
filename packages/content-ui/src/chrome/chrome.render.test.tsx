@@ -139,26 +139,28 @@ describe('the nav bar’s pinned, dark-ink default', () => {
   })
 
   it('blurs whatever it is floating over', () => {
-    // The Case Study frame's glass (`1710:2300`): the photograph under the
-    // pill is a tone, not a shape.
-    expect(navHtml).toContain('backdrop-blur-[16px]')
-    expect(navHtml).toContain('backdrop-saturate-[1.25]')
+    // The Glass effect's frost and rim (`3271:17013`): the photograph under
+    // the pill is a tone, not a shape.
+    expect(navHtml).toContain('backdrop-blur-[10px]')
+    expect(navHtml).toContain('backdrop-saturate-[1.1]')
+    expect(navHtml).toContain('shadow-glass-rim')
   })
 
   it('server-renders the dark skin, with no ink attribute at all', () => {
     // No JS and no scroll position: the bar starts over the hero, which is
     // dark on every route. This is also what jsdom and a no-JS reader get.
     expect(navHtml).not.toContain('data-ink')
-    expect(navHtml).toContain('bg-scrim')
+    expect(navHtml).toContain('bg-glass')
     expect(navHtml).toContain('text-white')
   })
 
   it('keeps the flipped skin one attribute away, not a second component', () => {
     // Fill, hairline and copy all hang off `data-ink="dark"` on the header,
     // which is the whole contract between NavInk and this file.
-    // The flipped fill is a WHITE scrim: an alpha, so the bar's blur still
-    // reads through it, but never the grey a dark scrim makes of a pale band.
-    expect(navHtml).toContain('group-data-[ink=dark]:bg-scrim-light')
+    // The flipped fill is the light glass: an alpha, so the bar's blur still
+    // reads through it, but pale, never the grey a dark glass makes of a pale
+    // band.
+    expect(navHtml).toContain('group-data-[ink=dark]:bg-glass-light')
     expect(navHtml).toContain('group-data-[ink=dark]:text-fg')
     expect(navHtml).toContain('duration-(--duration-ink)')
   })
@@ -181,7 +183,7 @@ describe('the nav bar’s pinned, dark-ink default', () => {
       expect(button).toContain('[--button-bg:var(--color-white)]')
       expect(button).toContain('[--button-fg:var(--color-ink)]')
       // Flipped, it inverts with the links and the hairline. White on the
-      // white scrim keeps the label and loses the button.
+      // light glass keeps the label and loses the button.
       expect(button).toContain('group-data-[ink=dark]:[--button-bg:var(--color-ink)]')
       expect(button).toContain('group-data-[ink=dark]:[--button-fg:var(--color-white)]')
     }
