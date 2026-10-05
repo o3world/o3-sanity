@@ -214,7 +214,7 @@
   --color-btn-inverse-wash-press: #55524e; /* 3837:6884 */
   --color-btn-brand-hover: #a80b00; /* 3837:6886 */
   --color-btn-brand-press: #840900; /* 3837:6887 */
-  --color-btn-brand-focus: #ff958c; /* 3837:6896 */
+  --color-btn-brand-focus: #ff5a4c; /* red-400, from design; 3837:6896 still binds #FF958C */
   --color-btn-brand-wash-hover: #ffe0dd; /* 3837:6888 */
   --color-btn-brand-wash-press: #ffc2bd; /* 3837:6889 */
   --color-btn-subtle: #e5e3de; /* 3858:7951 */
