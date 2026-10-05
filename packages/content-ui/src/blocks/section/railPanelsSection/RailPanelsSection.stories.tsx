@@ -164,9 +164,8 @@ export const Cards: Story = {
 }
 
 /**
- * The rail at 402 (`2975:8188`): the rail is a tab row over the panels, each
- * panel stacks its plate under its copy, and the underline replaces the 3 × 20
- * indicator on the active stop. The header stacks, and panel copy sets at 20/26.
+ * The band at 402 (`2975:8188`): no rail, each panel stacks its plate under its
+ * copy, the header stacks, and panel copy sets at 20/26.
  */
 export const RailMobile: Story = {
   args: seededSectionArgs('index', 'railPanelsSection', 0),

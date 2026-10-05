@@ -228,9 +228,8 @@ describe('the homepage at 402 (ADR 0006)', () => {
     // both widths (Nick, 2026-08-25), which is why the wrap is gone rather
     // than sitting alongside it.
     //
-    // Matched on the row's own class attribute, because the platforms tab row
-    // (`PanelRail`) also wraps below `lg` and would answer for this one in a
-    // document-wide probe.
+    // Matched on the row's own class attribute, so a `flex-wrap` anywhere else
+    // on the page can't answer for this one in a document-wide probe.
     const row = html.match(/<ul[^>]*class="([^"]*animate-marquee[^"]*)"/)?.[1] ?? ''
     expect(row, 'the partner strip was not rendered').not.toBe('')
     expect(row).toContain('flex-nowrap')
