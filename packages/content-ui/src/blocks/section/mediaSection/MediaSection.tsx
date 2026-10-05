@@ -127,16 +127,18 @@ export function MediaSection({
           <LayeredMediaReveal
             enabled={sequence}
             className="relative overflow-hidden"
-            foregroundClassName="max-w-section mx-auto w-full"
+            foregroundClassName="w-full"
             caption={media.caption}
             captionClassName="text-fg-subtle px-gutter mt-4 text-sm"
           >
-            {/* Edge to edge up to the 1728px structural column, then centred at it. */}
+            {/* Edge to edge at every width: the composition's ground is baked into
+                the picture, so capping it would leave that ground short of the
+                viewport. The bento grids are what stop at the structural column. */}
             <SanityImage
               source={media.image}
               alt={media.alt}
               width={2880}
-              sizes="(min-width: 1728px) 1728px, 100vw"
+              sizes="100vw"
               className="w-full"
             />
           </LayeredMediaReveal>

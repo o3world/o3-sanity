@@ -208,7 +208,11 @@ export const CompleteComposition: Story = {
   },
 }
 
-/** Past the 1728px structural column the composition stops growing and centres, like the bento grids. */
+/**
+ * Past the 1728px structural column the composition still runs edge to edge:
+ * its ground is baked into the picture, so a cap would leave it ending short
+ * of the viewport. The bento grids are what stop at the column.
+ */
 export const CompleteCompositionWide: Story = {
   args: CompleteComposition.args,
   parameters: {
@@ -219,7 +223,7 @@ export const CompleteCompositionWide: Story = {
   globals: { viewport: { value: 'wide' } },
   play: async ({ canvasElement }) => {
     const box = canvasElement.querySelector('img')!.getBoundingClientRect()
-    await expect(box.width).toBe(1728)
-    await expect(box.left).toBe(416)
+    await expect(box.width).toBe(window.innerWidth)
+    await expect(box.left).toBe(0)
   },
 }
