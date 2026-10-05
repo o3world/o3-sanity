@@ -1,6 +1,8 @@
 'use client'
 
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
+
+import type { Surface } from '@o3/ui'
 
 import { cn } from '@o3/ui/lib/utils'
 
@@ -13,6 +15,8 @@ export interface PanelBandProps {
   panelIds: readonly string[]
   /** `number` draws the active rail item as a reversed ink chip (`1744:1786`). */
   mode: 'label' | 'number'
+  /** The band's surface, which the stuck tab row paints. */
+  surface: Surface
   /** The panel articles, one per `panelIds` entry, in the same order. */
   children: ReactNode
 }
@@ -22,8 +26,8 @@ export interface PanelBandProps {
  * section's one client boundary.
  *
  * ```
- * 1440   row, gap 238    rail 82px sticky    |  panels, 128 apart
- *  402   column, gap 64  rail as a tab row   |  panels, 128 apart
+ * 1440   row, gap 238    rail 82px sticky          |  panels, 128 apart
+ *  402   column, gap 64  rail as a sticky tab row  |  panels, 128 apart
  * ```
  *
  * What it owns is the one thing the frames cannot draw (#33): which panel the
@@ -35,8 +39,23 @@ export interface PanelBandProps {
  * Until the observer first fires — no JS, jsdom, print — `active` is `null`
  * and the rail marks the first stop, which is what both frames draw.
  */
-export function PanelBand({ railItems, panelIds, mode, children }: PanelBandProps) {
+export function PanelBand({ railItems, panelIds, mode, surface, children }: PanelBandProps) {
   const [active, setActive] = useState<number | null>(null)
+  const band = useRef<HTMLDivElement>(null)
+  const railRef = useRef<HTMLOListElement>(null)
+
+  // The stuck tab row is as tall as its labels wrap to, so its height is
+  // measured onto `--rail-height` for the panels' scroll margin to clear.
+  useEffect(() => {
+    const root = band.current
+    const rail = railRef.current
+    if (!root || !rail) return
+    const observer = new ResizeObserver(() => {
+      root.style.setProperty('--rail-height', `${rail.offsetHeight}px`)
+    })
+    observer.observe(rail)
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const nodes = panelIds
@@ -76,8 +95,17 @@ export function PanelBand({ railItems, panelIds, mode, children }: PanelBandProp
     // exactly at the full content column and compresses it first as the
     // column narrows, so the 1024–1440 range shrinks whitespace before it
     // clips a panel.
-    <div className="flex w-full flex-col gap-16 lg:flex-row lg:justify-between lg:gap-16">
-      <PanelRail mode={mode} items={railItems} active={active ?? 0} />
+    <div
+      ref={band}
+      className="flex w-full flex-col gap-16 lg:flex-row lg:justify-between lg:gap-16"
+    >
+      <PanelRail
+        ref={railRef}
+        mode={mode}
+        items={railItems}
+        active={active ?? 0}
+        surface={surface}
+      />
 
       <div
         className={cn(

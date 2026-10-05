@@ -41,6 +41,9 @@
   /* Fixed desktop header offset. Sticky content and scroll targets add
    * their own clearance to this value. */
   --spacing-nav-pinned: 32px;
+  /* The nav bar's own height. Below lg it is the whole clearance under the
+   * fixed header; at lg it sits below `--spacing-nav-pinned`. */
+  --spacing-nav-height: 80px;
 
   /* ── Containers ────────────────────────────────────────────────────────── */
   /* section — the structural stage. It fills the 1248px canvas between the
