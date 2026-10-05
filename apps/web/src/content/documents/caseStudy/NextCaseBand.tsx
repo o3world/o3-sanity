@@ -19,8 +19,11 @@ export function NextCaseBand({ next }: { next: NextCase }) {
           <h2 className="font-display text-ink text-display-xl text-balance lg:max-w-[571px]">
             There’s more where that came from.
           </h2>
+          {/* Desktop only: below lg the card's copy is this same line, directly underneath. */}
           {next.narrativeHeadline ? (
-            <p className="text-lead text-fg-body lg:w-[385px]">{next.narrativeHeadline}</p>
+            <p className="text-lead text-fg-body hidden lg:block lg:w-[385px]">
+              {next.narrativeHeadline}
+            </p>
           ) : null}
         </div>
 

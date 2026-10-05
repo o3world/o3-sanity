@@ -33,6 +33,8 @@ export const Desktop: Story = {
   },
 }
 
+const line = firstCase!.narrativeHeadline
+
 export const Mobile: Story = {
   args: { next: firstCase! },
   globals: { viewport: { value: 'mobile' } },
@@ -40,7 +42,14 @@ export const Mobile: Story = {
     const canvas = within(canvasElement)
     const link = canvas.getByRole('link')
     await expect(link).toBeVisible()
+    await expect(link).toHaveAccessibleName(
+      `${firstCase!.client?.name} ${line ?? firstCase!.title}`,
+    )
     await expect(within(link).getByText('View the work')).toBeVisible()
+    // The card carries the narrative line below lg, so the band's copy of it stands down.
+    await expect(line).toBeTruthy()
+    const visible = canvas.getAllByText(line!).filter((el) => el.checkVisibility())
+    await expect(visible).toHaveLength(1)
     await expect(canvasElement.scrollWidth).toBeLessThanOrEqual(window.innerWidth)
   },
 }
