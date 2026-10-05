@@ -222,9 +222,7 @@ export function RailPanelsSection({
       // Clip the bleeding artwork without creating a scroll container that
       // prevents the rail from sticking to the viewport.
       className={cn(
-        // The gutter is a variable so the stuck tab row can bleed over it.
-        mode === 'label' &&
-          'max-lg:px-(--rail-gutter) max-lg:pb-16 max-lg:pt-16 max-lg:[--rail-gutter:24px]',
+        mode === 'label' && 'max-lg:px-6 max-lg:pb-16 max-lg:pt-16',
         bleeding && 'relative isolate overflow-clip',
       )}
     >
@@ -233,7 +231,6 @@ export function RailPanelsSection({
 
         <PanelBand
           mode={mode}
-          surface={resolved}
           panelIds={items.map((panel, index) => panelId(panel._key, index))}
           railItems={items.map((panel, index) => ({
             key: panel._key ?? String(index),
