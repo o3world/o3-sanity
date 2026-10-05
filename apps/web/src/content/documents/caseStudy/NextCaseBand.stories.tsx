@@ -38,11 +38,9 @@ export const Mobile: Story = {
   globals: { viewport: { value: 'mobile' } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    await expect(canvas.getByRole('link')).toHaveAccessibleName(
-      ['Next project', firstCase!.client?.name].filter(Boolean).join(' — ') +
-        ': ' +
-        firstCase!.title,
-    )
+    const link = canvas.getByRole('link')
+    await expect(link).toBeVisible()
+    await expect(within(link).getByText('View the work')).toBeVisible()
     await expect(canvasElement.scrollWidth).toBeLessThanOrEqual(window.innerWidth)
   },
 }

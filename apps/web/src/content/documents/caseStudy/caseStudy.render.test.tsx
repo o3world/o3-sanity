@@ -38,9 +38,12 @@ function render(overrides: Parameters<typeof aCaseStudy>[0]) {
   })
 }
 
+/** Where the next-case band starts: its heading. */
+const NEXT_BAND = 'There’s more where that came from.'
+
 /** The page down to the next-case band, which draws a picture of its own. */
 function heroBand(html: string) {
-  const foot = html.indexOf('Next project')
+  const foot = html.indexOf(NEXT_BAND)
   return foot === -1 ? html : html.slice(0, foot)
 }
 
@@ -80,7 +83,8 @@ describe('the next-case band', () => {
         cardMedia: figure(CARD_ID, 'The tile') as never,
       }),
     })
-    expect(html.slice(html.indexOf('Next project'))).toContain(CARD_ID)
+    expect(html).toContain(NEXT_BAND)
+    expect(html.slice(html.indexOf(NEXT_BAND))).toContain(CARD_ID)
   })
 })
 
