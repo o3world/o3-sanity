@@ -354,7 +354,7 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
   },
   {
     source: '/lunch-and-learn-with-o3-empower-your-team-with-ai-insights',
-    destination: '/live',
+    destination: '/insights',
   },
   {
     source: '/mike-gadsby-chief-innovation-officer',
