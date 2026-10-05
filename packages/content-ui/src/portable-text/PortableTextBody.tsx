@@ -72,7 +72,7 @@ function componentsFor(figureSizes: string, leadKey?: string): PortableTextCompo
       link: ({ children, value }) => (
         <a
           href={(value as { href?: string } | undefined)?.href ?? '#'}
-          className="decoration-brand underline underline-offset-4 [overflow-wrap:anywhere]"
+          className="text-fg-link hover:text-fg-link-hover decoration-fg-link-underline duration-(--duration-hover) focus-visible:ring-brand underline underline-offset-4 transition-colors ease-out [overflow-wrap:anywhere] focus-visible:outline-none focus-visible:ring-2"
         >
           {children}
         </a>

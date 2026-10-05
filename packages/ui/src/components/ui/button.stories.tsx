@@ -134,7 +134,8 @@ const FIGMA_STATES = {
   brand: {
     hover: '#a80b00',
     press: '#840900',
-    focus: '#ff958c',
+    // red-400, from design: the set's focus variable still binds #ff958c.
+    focus: '#ff5a4c',
     'wash-hover': '#ffe0dd',
     'wash-press': '#ffc2bd',
   },

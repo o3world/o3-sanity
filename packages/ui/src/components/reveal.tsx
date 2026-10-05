@@ -11,13 +11,19 @@ export interface RevealProps extends HTMLAttributes<HTMLDivElement> {
 
 type Phase = 'static' | 'armed' | 'entered'
 
+/** How far inside the viewport's bottom edge an armed element must reach to enter. */
+const ENTRY_INSET = 40
+
 /**
  * The prototype's `[data-reveal]` treatment, inverted so the server HTML is
  * complete: content ships visible, and the entrance is a client enhancement
  * applied only to elements the reader has not seen yet. After hydration, an
  * element still below the viewport is hidden (24px down, faded) and fades up
  * over 700ms on the house curve when it scrolls into view
- * (IntersectionObserver, -40px bottom margin).
+ * (IntersectionObserver, -40px bottom margin). The observer is the trigger,
+ * not the only one: a scroll, resize or back-forward restore that leaves the
+ * element across that line enters it too, so a notification the browser never
+ * delivers cannot leave content invisible over its band's ground.
  *
  * Everything else keeps the server's paint, untransitioned: an element in or
  * above the first viewport — the reader is already looking at it, and blanking
@@ -49,18 +55,27 @@ export function Reveal({ delay = 0, className, style, children, ...rest }: Revea
     if (el.offsetHeight > window.innerHeight) return
     if (el.getBoundingClientRect().top < window.innerHeight) return
     setPhase('armed')
+    const enter = () => {
+      setPhase('entered')
+      stop()
+    }
     const io = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setPhase('entered')
-            io.disconnect()
-          }
-        }
+        if (entries.some((entry) => entry.isIntersecting)) enter()
       },
-      { threshold: 0, rootMargin: '0px 0px -40px 0px' },
+      { threshold: 0, rootMargin: `0px 0px -${ENTRY_INSET}px 0px` },
     )
     io.observe(el)
+    // The same line, read on the frame after a scroll, resize or restore.
+    let frame = 0
+    const check = () => {
+      frame = 0
+      const box = el.getBoundingClientRect()
+      if (box.top < window.innerHeight - ENTRY_INSET && box.bottom > 0) enter()
+    }
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(check)
+    }
     // Focus never lands on faded-out content: a reader who tabs in sees it at
     // once, unanimated. Focus moving into a cross-origin iframe fires no
     // `focusin` here, only a window `blur` with the iframe already active, and
@@ -84,12 +99,19 @@ export function Reveal({ delay = 0, className, style, children, ...rest }: Revea
     }
     const stop = () => {
       io.disconnect()
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      window.removeEventListener('pageshow', schedule)
       el.removeEventListener('pointerdown', press)
       window.removeEventListener('pointerup', release)
       window.removeEventListener('pointercancel', release)
       el.removeEventListener('focusin', show)
       window.removeEventListener('blur', showIfFramed)
     }
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    window.addEventListener('pageshow', schedule)
     el.addEventListener('pointerdown', press)
     window.addEventListener('pointerup', release)
     window.addEventListener('pointercancel', release)

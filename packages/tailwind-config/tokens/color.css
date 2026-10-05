@@ -136,6 +136,14 @@
   /* rgba(10,10,10,0.5) — the pull-quote attribution (1683:2144). The one place
    * the design tints ink instead of reaching for a grey. */
   --color-fg-quiet: rgba(10, 10, 10, 0.5);
+  /* A link in prose: brand red at rest, red-700 (#A80B00, the brand Button's
+   * hover, `3837:6886`) on hover — the Button's own pattern, so the red reads
+   * as a link rather than a mark under the word. At body sizes #EB1000 holds
+   * AA on white (4.56:1) and not on paper or bone. */
+  --color-fg-link: #eb1000;
+  --color-fg-link-hover: #a80b00;
+  /* The link's underline: the text's own colour, so it follows the hover. */
+  --color-fg-link-underline: currentColor;
 
   /* ── Text on dark surfaces ─────────────────────────────────────────────── */
   /* Figma `color/white/ 92%` — the CTA band headline (Home's band 1680:2088,
@@ -220,7 +228,7 @@
   --color-btn-inverse-wash-press: #55524e; /* 3837:6884 */
   --color-btn-brand-hover: #a80b00; /* 3837:6886 */
   --color-btn-brand-press: #840900; /* 3837:6887 */
-  --color-btn-brand-focus: #ff958c; /* 3837:6896 */
+  --color-btn-brand-focus: #ff5a4c; /* red-400, from design; 3837:6896 still binds #FF958C */
   --color-btn-brand-wash-hover: #ffe0dd; /* 3837:6888 */
   --color-btn-brand-wash-press: #ffc2bd; /* 3837:6889 */
   --color-btn-subtle: #e5e3de; /* 3858:7951 */
@@ -305,6 +313,11 @@
    * what the on-ink set exists to avoid. Same step as fg-muted; the design
    * draws no quieter caption on dark. */
   --color-fg-subtle: rgba(255, 255, 255, 0.65);
+  /* Neither red reads as text on ink, so a prose link keeps the body white
+   * and turns brand red only on hover. */
+  --color-fg-link: rgba(255, 255, 255, 0.92);
+  --color-fg-link-hover: #eb1000;
+  --color-fg-link-underline: #eb1000;
 }
 
 /* The way back. Every role the block above moves, at the value `@theme`
@@ -318,4 +331,7 @@
   --color-fg-muted: #6f6d68;
   --color-fg-quiet: rgba(10, 10, 10, 0.5);
   --color-fg-subtle: #a3a3a3;
+  --color-fg-link: #eb1000;
+  --color-fg-link-hover: #a80b00;
+  --color-fg-link-underline: currentColor;
 }

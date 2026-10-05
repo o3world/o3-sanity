@@ -35,7 +35,7 @@ export function SiteNav({ settings, brandMark, menuUtilities }: SiteNavProps) {
         <NavInk />
         <nav
           aria-label="Primary"
-          className="bg-glass group-data-[ink=dark]:bg-glass-light group-data-[ink=dark]:text-fg duration-(--duration-ink) lg:rounded-nav shadow-glass-rim group-data-[ink=dark]:shadow-glass-rim-light relative flex min-h-20 items-center justify-between gap-4 p-4 text-white backdrop-blur-[10px] backdrop-saturate-[1.1] transition-[background-color,color,box-shadow] ease-out [view-transition-name:site-nav] lg:mx-auto lg:w-fit lg:pl-12"
+          className="bg-glass group-data-[ink=dark]:bg-glass-light group-data-[ink=dark]:text-fg duration-(--duration-ink) lg:rounded-nav shadow-glass-rim group-data-[ink=dark]:shadow-glass-rim-light min-h-(--spacing-nav-height) relative flex items-center justify-between gap-4 p-4 text-white backdrop-blur-[10px] backdrop-saturate-[1.1] transition-[background-color,color,box-shadow] ease-out [view-transition-name:site-nav] lg:mx-auto lg:w-fit lg:pl-12"
         >
           <NavHomeLink
             aria-label={`${settings?.title ?? 'O3'} home`}
