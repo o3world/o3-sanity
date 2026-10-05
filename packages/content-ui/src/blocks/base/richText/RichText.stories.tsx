@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { expect, within } from 'storybook/test'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 
 import type { BaseProps } from '@o3/content-runtime/blocks'
 import { seedImage } from '../../../testing/seedContent'
@@ -163,6 +163,96 @@ export const Everything: Story = {
       },
       block('normal', 'And prose after it, which must not inherit the figure’s spacing.'),
     ] as unknown as Body,
+  },
+}
+
+/**
+ * The `:hover` declarations that apply to `element`, read off the stylesheets.
+ * A synthetic pointer event never sets `:hover`, so a play function cannot
+ * hover for real; this is the rule the browser would apply if it did.
+ */
+function hoverDeclarations(element: Element): CSSStyleDeclaration[] {
+  const walk = (rules: CSSRuleList): CSSStyleDeclaration[] =>
+    [...rules].flatMap((rule) => {
+      if (rule instanceof CSSStyleRule && rule.selectorText.includes(':hover')) {
+        return element.matches(rule.selectorText.replaceAll(':hover', '')) ? [rule.style] : []
+      }
+      return 'cssRules' in rule ? walk((rule as CSSGroupingRule).cssRules) : []
+    })
+  return [...document.styleSheets].flatMap((sheet) => {
+    // A cross-origin sheet (a webfont's) refuses to list its rules.
+    try {
+      return walk(sheet.cssRules)
+    } catch {
+      return []
+    }
+  })
+}
+
+/**
+ * A link in prose is brand red and deepens to red-700 on hover, the brand
+ * Button's pattern; keyboard focus draws the brand ring every other text link
+ * draws, never the browser's own.
+ */
+export const LinkHover: Story = {
+  args: Everything.args,
+  play: async ({ canvasElement }) => {
+    const link = within(canvasElement).getByRole('link', { name: 'a link' })
+    const style = getComputedStyle(link)
+    await expect(style.color).toBe('rgb(235, 16, 0)')
+    await expect(style.textDecorationColor).toBe('rgb(235, 16, 0)')
+    const hover = hoverDeclarations(link).map((rule) => rule.getPropertyValue('color'))
+    await expect(hover).toContain('var(--color-fg-link-hover)')
+    await expect(
+      getComputedStyle(document.documentElement).getPropertyValue('--color-fg-link-hover').trim(),
+    ).toBe('#a80b00')
+    await expect(style.transitionProperty).toContain('color')
+    // `--duration-hover`, 220ms.
+    await expect(style.transitionDuration).toBe('0.22s')
+    for (let i = 0; i < 20 && document.activeElement !== link; i++) await userEvent.tab()
+    await expect(document.activeElement).toBe(link)
+    const focused = getComputedStyle(link)
+    await expect(focused.outlineStyle).toBe('none')
+    await expect(focused.boxShadow).toContain('rgb(235, 16, 0)')
+  },
+}
+
+/** On a dark band a prose link keeps the band's body white, ruled in brand red. */
+export const LinkOnInk: Story = {
+  args: Everything.args,
+  render: (args) => (
+    <div data-surface="ink" className="bg-ink p-8">
+      <RichText {...args} />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const link = within(canvasElement).getByRole('link', { name: 'a link' })
+    const style = getComputedStyle(link)
+    await expect(style.color).toBe('rgba(255, 255, 255, 0.92)')
+    await expect(style.textDecorationColor).toBe('rgb(235, 16, 0)')
+  },
+}
+
+/**
+ * A light card on a dark band takes the light link back whole: the underline
+ * follows the text through the hover, rather than keeping the dark band's
+ * brand rule. The link's colour is set to red-700 to stand in for `:hover`.
+ */
+export const LinkInLightCardOnInk: Story = {
+  args: Everything.args,
+  render: (args) => (
+    <div data-surface="ink" className="bg-ink p-8">
+      <div data-surface="white" className="bg-white p-8">
+        <RichText {...args} />
+      </div>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const link = within(canvasElement).getByRole('link', { name: 'a link' })
+    await expect(getComputedStyle(link).textDecorationColor).toBe('rgb(235, 16, 0)')
+    link.style.color = 'rgb(168, 11, 0)'
+    // The rule eases with the colour (`transition-colors`), so it is read settled.
+    await waitFor(() => expect(getComputedStyle(link).textDecorationColor).toBe('rgb(168, 11, 0)'))
   },
 }
 
