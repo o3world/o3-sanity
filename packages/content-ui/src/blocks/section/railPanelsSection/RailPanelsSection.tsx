@@ -231,6 +231,7 @@ export function RailPanelsSection({
 
         <PanelBand
           mode={mode}
+          surface={resolved}
           panelIds={items.map((panel, index) => panelId(panel._key, index))}
           railItems={items.map((panel, index) => ({
             key: panel._key ?? String(index),

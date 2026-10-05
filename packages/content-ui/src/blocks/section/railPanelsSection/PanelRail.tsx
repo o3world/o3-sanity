@@ -1,3 +1,4 @@
+import type { Surface } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
 
 export interface PanelRailItem {
@@ -14,6 +15,17 @@ export interface PanelRailProps {
   active: number
   /** `number` draws the active item as a reversed ink chip (`1744:1786`). */
   mode: 'label' | 'number'
+  /** The band's surface — the stuck tab row paints it so panels pass under. */
+  surface: Surface
+}
+
+/** The tab row's ground below lg, one per surface so Tailwind sees each class. */
+const STUCK_GROUND: Record<Surface, string> = {
+  white: 'max-lg:bg-white',
+  paper: 'max-lg:bg-paper',
+  bone: 'max-lg:bg-bone',
+  ink: 'max-lg:bg-ink',
+  charcoal: 'max-lg:bg-charcoal',
 }
 
 /**
@@ -35,17 +47,20 @@ export interface PanelRailProps {
  * The label rail's two drawings are one state read twice: a sticky 82px column
  * has nowhere to stand at 402, so the stops lay out as a row over the panels
  * instead of beside them, and the marker moves from the word's left edge to
- * under it. **The stops are links**, which is what the frame calls them and
+ * under it. Both frames name it `Fixed Navigation`, so the row holds under the
+ * 80px nav while its panels scroll beneath it, on the band's own ground, just
+ * as the column holds at 1440. **The stops are links**, which is what the frame calls them and
  * what a row of underlined words at 24px promises: each one jumps to its panel,
- * and the observer then marks it. The row wraps rather than scrolls — Home's
- * three stops fit the 354px column and a five-stop band (`/ventures`) does
- * not, and a rail that runs off the side of a phone is worse than one on two
- * lines.
+ * and the observer then marks it. The row spreads its stops edge to edge, as
+ * the frame's space-between does, over a 24px floor, so Home's three hold one
+ * row down to a 320 phone. It wraps rather than scrolls when they don't fit —
+ * a five-stop band (`/ventures`) does not — because a rail that runs off the
+ * side of a phone is worse than one on two lines.
  *
  * The number rail keeps the column and nothing else: its 402 composition is
  * the numeral inlined into each row, which the section draws, not this.
  */
-export function PanelRail({ items, active, mode }: PanelRailProps) {
+export function PanelRail({ items, active, mode, surface }: PanelRailProps) {
   if (mode === 'number') {
     return (
       <ol className="hidden w-[82px] shrink-0 flex-col gap-4 self-start lg:sticky lg:top-[calc(var(--spacing-nav-pinned)+96px)] lg:flex">
@@ -69,7 +84,14 @@ export function PanelRail({ items, active, mode }: PanelRailProps) {
     <ol
       // `items-start` so the active stop's rule hangs below its own word
       // rather than stretching every stop to the tallest.
-      className="flex flex-wrap items-start gap-x-16 gap-y-3 lg:sticky lg:top-[calc(var(--spacing-nav-pinned)+96px)] lg:w-[82px] lg:shrink-0 lg:flex-col lg:flex-nowrap lg:gap-8 lg:self-start"
+      // Below lg the row bleeds over the band's 24px gutter and pads 16 above
+      // and below the stops, all cancelled by margin so the resting layout
+      // keeps the frame's spacing; the padding only shows once it sticks.
+      className={cn(
+        'flex flex-wrap items-start justify-between gap-x-6 gap-y-3 lg:sticky lg:top-[calc(var(--spacing-nav-pinned)+96px)] lg:w-[82px] lg:shrink-0 lg:flex-col lg:flex-nowrap lg:gap-8 lg:self-start',
+        'max-lg:sticky max-lg:top-20 max-lg:z-10 max-lg:-mx-6 max-lg:-my-4 max-lg:px-6 max-lg:py-4',
+        STUCK_GROUND[surface],
+      )}
     >
       {items.map((item, index) => {
         const isActive = index === active

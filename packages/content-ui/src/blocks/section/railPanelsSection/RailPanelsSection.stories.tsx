@@ -186,6 +186,63 @@ export const RailMobile: Story = {
     await expect(getComputedStyle(body).fontSize).toBe('20px')
     await expect(getComputedStyle(body).lineHeight).toBe('26px')
     await expect(getComputedStyle(panel.parentElement!).gap).toBe('64px')
+    // One row, spread edge to edge (`2975:8193`, space-between), at 375 as at 402.
+    const rail = canvasElement.querySelector('ol')!
+    const stops = [...rail.querySelectorAll('a')].map((stop) => stop.getBoundingClientRect())
+    const row = rail.getBoundingClientRect()
+    const inset = parseFloat(getComputedStyle(rail).paddingLeft)
+    await expect(new Set(stops.map((stop) => Math.round(stop.top))).size).toBe(1)
+    await expect(stops[0]!.left).toBeCloseTo(row.left + inset, 0)
+    await expect(stops.at(-1)!.right).toBeCloseTo(row.right - inset, 0)
+    await expect(row.left).toBeCloseTo(0, 0)
+    // A stop's jump lands its panel under the row, and the row holds under the
+    // 80px nav while the panels scroll beneath it.
+    const win = canvasElement.ownerDocument.defaultView!
+    const target = canvasElement.querySelector<HTMLElement>(
+      rail.querySelectorAll('a')[1]!.getAttribute('href')!,
+    )!
+    try {
+      target.scrollIntoView({ block: 'start', behavior: 'instant' })
+      await waitFor(() => expect(rail.getBoundingClientRect().top).toBeCloseTo(80, 0))
+      // The band ends the story, so the jump itself can't reach the top; the
+      // margin it would land on is the stuck row's bottom edge.
+      await expect(parseFloat(getComputedStyle(target).scrollMarginTop)).toBeCloseTo(
+        rail.getBoundingClientRect().bottom,
+        0,
+      )
+      await expect(getComputedStyle(rail).backgroundColor).toBe('rgb(255, 255, 255)')
+    } finally {
+      win.scrollTo(0, 0)
+    }
+  },
+}
+
+/**
+ * A stop's jump at 1440: the panel lands level with the sticky rail, clear of
+ * the nav. The spacer after the band is room for the last panel to reach it.
+ */
+export const RailJump: Story = {
+  args: seededSectionArgs('index', 'railPanelsSection', 0),
+  globals: { viewport: { value: 'desktop' } },
+  render: (args) => (
+    <>
+      <RailPanelsSection {...args} />
+      <div className="h-screen" />
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const rail = canvasElement.querySelector('ol')!
+    const win = canvasElement.ownerDocument.defaultView!
+    const target = canvasElement.querySelector<HTMLElement>(
+      rail.querySelectorAll('a')[2]!.getAttribute('href')!,
+    )!
+    try {
+      target.scrollIntoView({ block: 'start', behavior: 'instant' })
+      await waitFor(() => expect(target.getBoundingClientRect().top).toBeCloseTo(128, 0))
+      await expect(rail.getBoundingClientRect().top).toBeCloseTo(128, 0)
+    } finally {
+      win.scrollTo(0, 0)
+    }
   },
 }
 
