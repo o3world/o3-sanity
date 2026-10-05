@@ -89,8 +89,8 @@ are in each token's comment in `tokens/color.css`.
 | `fg`              | `#232323`               | Body copy and card titles on light bands (`text/default`)               |
 | `fg-muted`        | `#6F6D68`               | The **neutral** eyebrow and card meta (`neutral-500`)                   |
 | `fg-body`         | `#55524E`               | `Body/Default` on the redesigned frames — partners, Solutions           |
-| `fg-subtle`       | `#A3A3A3`               | ⚠️ No canonical anchor — legal row moved to `on-utility`, #38           |
-| `fg-quiet`        | `rgba(10,10,10,.5)`     | Pull-quote attribution — tinted ink, not a grey                         |
+| `fg-subtle`       | `rgba(10,10,10,.6)`     | Captions and counters — no canonical anchor; the AA floor on light      |
+| `fg-quiet`        | `rgba(10,10,10,.6)`     | Pull-quote attribution — tinted ink, at the AA floor on light           |
 | `on-ink`          | `rgba(255,255,255,.92)` | CTA band headline (`color/white/ 92%`)                                  |
 | `on-ink-muted`    | `rgba(255,255,255,.65)` | Stat labels beside the 48px figure                                      |
 | `on-ink-subtle`   | `rgba(255,255,255,.6)`  | CTA band subhead (`color/white/ 60%`)                                   |
