@@ -188,3 +188,46 @@ export const RevealsOnFocusIntoAnEmbed: Story = {
     await expect(seenOpacity(frame)).toBe(1)
   },
 }
+
+/**
+ * The observer is the trigger, not the only one. If it never reports — a
+ * browser that drops the notification — a block the reader has scrolled onto
+ * still enters, rather than sitting invisible over its band's ground.
+ */
+export const RevealsWhenTheObserverMisses: Story = {
+  beforeEach: () => {
+    const real = window.IntersectionObserver
+    window.IntersectionObserver = class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+      takeRecords() {
+        return []
+      }
+    } as unknown as typeof IntersectionObserver
+    return () => {
+      window.IntersectionObserver = real
+    }
+  },
+  render: () => (
+    <div className="bg-bone px-6 py-16">
+      <div className="h-[200vh]" />
+      <Reveal>
+        <p id="reveal-missed" className="text-body-heading">
+          Scrolled onto, observer or not
+        </p>
+      </Reveal>
+      <div className="h-screen" />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const block = canvasElement.querySelector('#reveal-missed')!
+    await waitFor(() => expect(seenOpacity(block)).toBe(0))
+    try {
+      block.scrollIntoView({ block: 'center', behavior: 'instant' })
+      await waitFor(() => expect(seenOpacity(block)).toBe(1), { timeout: 3000 })
+    } finally {
+      window.scrollTo(0, 0)
+    }
+  },
+}
