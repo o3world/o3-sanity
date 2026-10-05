@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { expect, within } from 'storybook/test'
+import { expect, userEvent, within } from 'storybook/test'
 
 import type { BaseProps } from '@o3/content-runtime/blocks'
 import { seedImage } from '../../../testing/seedContent'
@@ -189,17 +189,47 @@ function hoverDeclarations(element: Element): CSSStyleDeclaration[] {
   })
 }
 
-/** A link in prose turns brand red on hover, at the pace of every other text link. */
+/**
+ * A link in prose is brand red and deepens to red-700 on hover, the brand
+ * Button's pattern; keyboard focus draws the brand ring every other text link
+ * draws, never the browser's own.
+ */
 export const LinkHover: Story = {
   args: Everything.args,
   play: async ({ canvasElement }) => {
     const link = within(canvasElement).getByRole('link', { name: 'a link' })
-    const hover = hoverDeclarations(link).map((style) => style.getPropertyValue('color'))
-    await expect(hover).toContain('var(--color-brand)')
     const style = getComputedStyle(link)
+    await expect(style.color).toBe('rgb(235, 16, 0)')
+    await expect(style.textDecorationColor).toBe('rgb(235, 16, 0)')
+    const hover = hoverDeclarations(link).map((rule) => rule.getPropertyValue('color'))
+    await expect(hover).toContain('var(--color-fg-link-hover)')
+    await expect(
+      getComputedStyle(document.documentElement).getPropertyValue('--color-fg-link-hover').trim(),
+    ).toBe('#a80b00')
     await expect(style.transitionProperty).toContain('color')
     // `--duration-hover`, 220ms.
     await expect(style.transitionDuration).toBe('0.22s')
+    await userEvent.tab()
+    while (document.activeElement !== link) await userEvent.tab()
+    const focused = getComputedStyle(link)
+    await expect(focused.outlineStyle).toBe('none')
+    await expect(focused.boxShadow).toContain('rgb(235, 16, 0)')
+  },
+}
+
+/** On a dark band a prose link keeps the band's body white, ruled in brand red. */
+export const LinkOnInk: Story = {
+  args: Everything.args,
+  render: (args) => (
+    <div data-surface="ink" className="bg-ink p-8">
+      <RichText {...args} />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const link = within(canvasElement).getByRole('link', { name: 'a link' })
+    const style = getComputedStyle(link)
+    await expect(style.color).toBe('rgba(255, 255, 255, 0.92)')
+    await expect(style.textDecorationColor).toBe('rgb(235, 16, 0)')
   },
 }
 
