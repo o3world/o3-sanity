@@ -142,6 +142,8 @@
    * AA on white (4.56:1) and not on paper or bone. */
   --color-fg-link: #eb1000;
   --color-fg-link-hover: #a80b00;
+  /* The link's underline: the text's own colour, so it follows the hover. */
+  --color-fg-link-underline: currentColor;
 
   /* ── Text on dark surfaces ─────────────────────────────────────────────── */
   /* Figma `color/white/ 92%` — the CTA band headline (Home's band 1680:2088,
@@ -309,6 +311,7 @@
    * and turns brand red only on hover. */
   --color-fg-link: rgba(255, 255, 255, 0.92);
   --color-fg-link-hover: #eb1000;
+  --color-fg-link-underline: #eb1000;
 }
 
 /* The way back. Every role the block above moves, at the value `@theme`
@@ -324,4 +327,5 @@
   --color-fg-subtle: #a3a3a3;
   --color-fg-link: #eb1000;
   --color-fg-link-hover: #a80b00;
+  --color-fg-link-underline: currentColor;
 }

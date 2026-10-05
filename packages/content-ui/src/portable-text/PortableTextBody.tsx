@@ -72,9 +72,7 @@ function componentsFor(figureSizes: string, leadKey?: string): PortableTextCompo
       link: ({ children, value }) => (
         <a
           href={(value as { href?: string } | undefined)?.href ?? '#'}
-          // The rule follows the text on light bands and stays brand red on
-          // dark ones, where the text is the band's white.
-          className="text-fg-link hover:text-fg-link-hover duration-(--duration-hover) focus-visible:ring-brand [[data-surface=charcoal]_&]:decoration-brand [[data-surface=ink]_&]:decoration-brand underline decoration-current underline-offset-4 transition-colors ease-out [overflow-wrap:anywhere] focus-visible:outline-none focus-visible:ring-2"
+          className="text-fg-link hover:text-fg-link-hover decoration-fg-link-underline duration-(--duration-hover) focus-visible:ring-brand underline underline-offset-4 transition-colors ease-out [overflow-wrap:anywhere] focus-visible:outline-none focus-visible:ring-2"
         >
           {children}
         </a>

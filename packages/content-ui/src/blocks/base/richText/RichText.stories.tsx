@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { expect, userEvent, within } from 'storybook/test'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 
 import type { BaseProps } from '@o3/content-runtime/blocks'
 import { seedImage } from '../../../testing/seedContent'
@@ -209,8 +209,8 @@ export const LinkHover: Story = {
     await expect(style.transitionProperty).toContain('color')
     // `--duration-hover`, 220ms.
     await expect(style.transitionDuration).toBe('0.22s')
-    await userEvent.tab()
-    while (document.activeElement !== link) await userEvent.tab()
+    for (let i = 0; i < 20 && document.activeElement !== link; i++) await userEvent.tab()
+    await expect(document.activeElement).toBe(link)
     const focused = getComputedStyle(link)
     await expect(focused.outlineStyle).toBe('none')
     await expect(focused.boxShadow).toContain('rgb(235, 16, 0)')
@@ -230,6 +230,29 @@ export const LinkOnInk: Story = {
     const style = getComputedStyle(link)
     await expect(style.color).toBe('rgba(255, 255, 255, 0.92)')
     await expect(style.textDecorationColor).toBe('rgb(235, 16, 0)')
+  },
+}
+
+/**
+ * A light card on a dark band takes the light link back whole: the underline
+ * follows the text through the hover, rather than keeping the dark band's
+ * brand rule. The link's colour is set to red-700 to stand in for `:hover`.
+ */
+export const LinkInLightCardOnInk: Story = {
+  args: Everything.args,
+  render: (args) => (
+    <div data-surface="ink" className="bg-ink p-8">
+      <div data-surface="white" className="bg-white p-8">
+        <RichText {...args} />
+      </div>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const link = within(canvasElement).getByRole('link', { name: 'a link' })
+    await expect(getComputedStyle(link).textDecorationColor).toBe('rgb(235, 16, 0)')
+    link.style.color = 'rgb(168, 11, 0)'
+    // The rule eases with the colour (`transition-colors`), so it is read settled.
+    await waitFor(() => expect(getComputedStyle(link).textDecorationColor).toBe('rgb(168, 11, 0)'))
   },
 }
 
