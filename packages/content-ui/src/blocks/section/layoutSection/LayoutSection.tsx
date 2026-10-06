@@ -58,17 +58,17 @@ const BLEED_MEDIA_CLASS =
  * The overview band's picture (`4043:49765`), which runs off the right edge at
  * every width, as the homepage's bleeding plates do (`plateBleed.ts`).
  *
- * The frame rounds all four corners, but its box overruns the 1440 canvas by
- * 189px, so only the left two are ever on screen. Here the box stops at the
- * viewport's edge, so its right corners are squared rather than drawn there.
- * The margin is `BLEED_MEDIA_CLASS`'s from `lg`; below it the stacked picture
- * crosses the one gutter. The image is squared as well, because its own
- * `rounded-card` would otherwise round the corners the box no longer does.
+ * The frame rounds all four corners, but its box overruns the 1440 canvas, so
+ * only the left two are ever on screen. Here the box stops at the viewport's
+ * edge, so only its left corners are rounded. The margin is
+ * `BLEED_MEDIA_CLASS`'s from `lg`; below it the stacked picture crosses the
+ * one gutter. The box does not clip, so the image carries the same left
+ * radius itself.
  */
 const OVERVIEW_MEDIA_CLASS =
   '-mr-gutter rounded-l-[32px] shadow-[-32px_32px_64px_rgba(0,0,0,0.2)] ' +
   'lg:mr-[min(calc(-1*var(--spacing-gutter)),calc(var(--container-section-half)-50vw))] lg:h-[502px] ' +
-  '[&_img]:rounded-l-[32px] [&_img]:rounded-r-none lg:[&_figure]:h-full lg:[&_img]:h-full lg:[&_img]:object-cover'
+  '[&_img]:rounded-l-[32px] lg:[&_figure]:h-full lg:[&_img]:h-full lg:[&_img]:object-cover'
 
 function resolveColumns(value: number | null | undefined): 1 | 2 | 3 {
   const clean = typeof value === 'number' ? value : Number(stegaClean(String(value ?? '')))
