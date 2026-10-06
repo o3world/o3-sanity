@@ -136,13 +136,24 @@ function Carousel({
   )
 }
 
-/** The clipping viewport and the flex track it clips. The consumer's
-    `className` lands on the track: a `gap-*` there is the slide spacing. */
-function CarouselContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+/**
+ * The clipping viewport and the flex track it clips. The consumer's
+ * `className` lands on the track: a `gap-*` there is the slide spacing.
+ *
+ * `viewportClassName` lands on the clip itself. Padding there widens what the
+ * clip shows without moving a snap: Embla measures the track, not the
+ * viewport, so a padded viewport offset by an equal negative margin keeps
+ * every slide where it was and gives a slide's shadow room to render.
+ */
+function CarouselContent({
+  className,
+  viewportClassName,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement> & { viewportClassName?: string }) {
   const { carouselRef } = useCarousel()
 
   return (
-    <div ref={carouselRef} className="overflow-hidden">
+    <div ref={carouselRef} className={cn('overflow-hidden', viewportClassName)}>
       <div className={cn('flex', className)} {...props} />
     </div>
   )

@@ -58,6 +58,26 @@ const BLEED_VIEWPORT_CLASS =
   'sm:mr-[min(calc(-1*var(--spacing-gutter)),calc(var(--container-section-half)-50vw))]'
 
 /**
+ * THE LAST CARD STOPS ON THE GUTTER THE FIRST ONE STARTS ON.
+ *
+ * Embla ends the scroll at the last slide's right margin, so that margin is
+ * the end gutter: the same distance the bleed above reaches past the column,
+ * which is also the distance from the screen's left edge to the first card.
+ * Below `sm` the viewport ends on the column and the gutter is already there.
+ */
+const END_GUTTER_SLIDE_CLASS =
+  'sm:last:mr-[max(var(--spacing-gutter),calc(50vw-var(--container-section-half)))]'
+
+/**
+ * Room for the card's shadow (`0 32px 64px`) inside the clip, on an equal
+ * negative margin so nothing moves. Sideways it is the slide gap, so a track
+ * resting on a snap shows the gap beside the column and never a sliver of the
+ * card before it; above, it stays inside the header's 48px margin so the clip
+ * never covers the controls. Below the media the card's own text is the room.
+ */
+const SHADOW_ROOM_CLASS = '-mx-8 -mt-8 px-8 pt-8'
+
+/**
  * The prev/next pair in the header row, hidden entirely when everything
  * already fits — a dead pair on a three-card row is worse than none. Its own
  * component because the visibility reads Embla's state, which only exists
@@ -136,9 +156,9 @@ export function CarouselTrack({
           rather than on the track. */}
         <div data-reveal-step={sequence ? 'cards' : undefined} className={BLEED_VIEWPORT_CLASS}>
           {/* The frame's 32px gap at both widths; each step is one card. */}
-          <CarouselContent className="gap-8">
+          <CarouselContent className="gap-8" viewportClassName={SHADOW_ROOM_CLASS}>
             {cards.map((card, index) => (
-              <CarouselItem key={index} className="sm:basis-[394px]">
+              <CarouselItem key={index} className={cn('sm:basis-[394px]', END_GUTTER_SLIDE_CLASS)}>
                 {card}
               </CarouselItem>
             ))}
