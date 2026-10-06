@@ -107,8 +107,10 @@ export function FormField({
       {/*
         The control's own box, gapless, and the error's anchor. A password
         manager injects its fill icon as the input's next sibling (LastPass: a
-        zero-size div); in here it adds no gap, and the error stays 4px under
-        the control whatever else grows the field or its grid row.
+        zero-size div); in here it adds no gap, and the error stays at its
+        `mt-1` under the control whatever else grows the field or its grid row.
+        It is a flex column, not a block, so an inline-block input or textarea
+        sits on no line box and gains no baseline strut beneath it.
       */}
       <div className="relative flex flex-col">
         {children({
