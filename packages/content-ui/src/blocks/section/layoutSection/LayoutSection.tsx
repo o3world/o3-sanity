@@ -54,6 +54,22 @@ const BLEED_MEDIA_CLASS =
   'lg:aspect-[918/575] lg:overflow-hidden ' +
   'lg:[&_figure]:h-full lg:[&_img]:h-full lg:[&_img]:rounded-none lg:[&_img]:object-cover'
 
+/**
+ * The overview band's picture (`4043:49765`), which runs off the right edge at
+ * every width, as the homepage's bleeding plates do (`plateBleed.ts`).
+ *
+ * The frame rounds all four corners, but its box overruns the 1440 canvas by
+ * 189px, so only the left two are ever on screen. Here the box stops at the
+ * viewport's edge, so its right corners are squared rather than drawn there.
+ * The margin is `BLEED_MEDIA_CLASS`'s from `lg`; below it the stacked picture
+ * crosses the one gutter. The image is squared as well, because its own
+ * `rounded-card` would otherwise round the corners the box no longer does.
+ */
+const OVERVIEW_MEDIA_CLASS =
+  '-mr-gutter rounded-l-[32px] shadow-[-32px_32px_64px_rgba(0,0,0,0.2)] ' +
+  'lg:mr-[min(calc(-1*var(--spacing-gutter)),calc(var(--container-section-half)-50vw))] lg:h-[502px] ' +
+  '[&_img]:rounded-l-[32px] [&_img]:rounded-r-none lg:[&_figure]:h-full lg:[&_img]:h-full lg:[&_img]:object-cover'
+
 function resolveColumns(value: number | null | undefined): 1 | 2 | 3 {
   const clean = typeof value === 'number' ? value : Number(stegaClean(String(value ?? '')))
   return clean === 2 || clean === 3 ? clean : 1
@@ -269,20 +285,14 @@ export function LayoutSection({
                     already written down for that width. */}
                 {entries.slice(0, -1).map((item) => renderItem(item, LAYOUT_COLUMN[3]))}
               </div>
-              <div
-                className={
-                  overview
-                    ? 'rounded-[32px] shadow-[-32px_32px_64px_rgba(0,0,0,0.2)] lg:mr-[min(calc(-1*var(--spacing-gutter)),calc(var(--container-section-half)-50vw))] lg:h-[502px] lg:[&_figure]:h-full [&_img]:rounded-[32px] lg:[&_img]:h-full lg:[&_img]:object-cover'
-                    : BLEED_MEDIA_CLASS
-                }
-              >
+              <div className={overview ? OVERVIEW_MEDIA_CLASS : BLEED_MEDIA_CLASS}>
                 {entries
                   .slice(-1)
                   .map((item) =>
                     renderItem(
                       item,
                       overview
-                        ? '(min-width: 1920px) calc(50vw + 224px), (min-width: 1440px) calc(100vw - 736px), (min-width: 1024px) calc(92.29287vw - 625.01734px), (min-width: 402px) calc(84.58574vw + 29.96532px), calc(100vw - 32px)'
+                        ? '(min-width: 1920px) calc(50vw + 224px), (min-width: 1440px) calc(100vw - 736px), (min-width: 1024px) calc(92.29287vw - 625.01734px), (min-width: 402px) calc(92.29287vw + 14.98266px), calc(100vw - 16px)'
                         : LAYOUT_BLEED_COLUMN,
                     ),
                   )}
