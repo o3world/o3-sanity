@@ -169,11 +169,12 @@
    * (light 135° at 100%, refraction 80, depth 40, dispersion 40, frost 5,
    * splay 10), which CSS has no form for. With the light frost in SiteNav
    * and the rims in shadow.css, these fills keep what passes under the bar
-   * readable, as Figma's render does: the dark is the frame's own fill, the
-   * light is thinner than the frame's 0.8 because Glass renders it clearer.
+   * readable, as Figma's render does: the dark is the frame's own fill; the
+   * light is thinner than the frame's 0.8, matched by eye to how clear Glass
+   * renders it, and signed off by design.
    * 0.6 is also near the floor for the nav's own links: below about 0.54
    * neither holds WCAG AA (4.5:1) over the opposite extreme — white copy over
-   * a white ground, `#232323` over black — and both stay below NavInk's 0.9
+   * a white ground, `#232323` over black. Both fills stay below NavInk's 0.9
    * opaque cut-off. */
   --color-glass: rgba(3, 3, 3, 0.6);
   --color-glass-light: rgba(255, 255, 255, 0.6);

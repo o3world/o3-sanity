@@ -21,9 +21,10 @@ export { NAV_INK_TARGET }
  *
  * Read off the palette rather than picked: every background alpha this design
  * uses is below it — `--color-glass` and `--color-glass-light`, the densest,
- * are 0.6. The only 0.9+ alpha anywhere in color.css is `--color-on-ink` at
- * 0.92, which is a text colour and never a fill. So 0.9 separates "a band" from "a veil over a
- * band", while still accepting the near-opaque values `color-mix` rounding
+ * are 0.6. The only 0.9+ alphas in color.css are text colours at 0.92
+ * (`--color-on-ink`, and `--color-fg`, `--color-fg-body` and `--color-fg-link`
+ * in the dark scope), never fills. So 0.9 separates "a band" from "a veil over
+ * a band", while still accepting the near-opaque values `color-mix` rounding
  * produces.
  */
 const OPAQUE_ALPHA = 0.9
