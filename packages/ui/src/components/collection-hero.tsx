@@ -45,14 +45,18 @@ export function CollectionHero({
       <section
         data-collection-hero="interior"
         {...surfaceAttrs(surface)}
+        // Each designed `lg` height is capped at the screen's (`100svh`, which
+        // holds still as mobile browser chrome collapses), so bottom-aligned
+        // copy stays above the fold on a short laptop. A minimum, not a
+        // maximum: copy that needs more grows the band rather than clipping.
         className={cn(
           'relative isolate flex flex-col overflow-hidden px-4 pb-16 lg:px-24',
           centred
             ? surface === 'ink'
-              ? 'pt-48 lg:min-h-[660px] lg:pb-[119px] lg:pt-[231px]'
+              ? 'pt-48 lg:min-h-[min(660px,100svh)] lg:pb-[119px] lg:pt-[231px]'
               : 'min-h-[658px] pt-48 lg:min-h-[864px] lg:pb-[239px] lg:pt-[239px]'
-            : 'pt-[208px] lg:min-h-[660px] lg:justify-end lg:pt-[240px]',
-          !centred && lockup && 'lg:min-h-[640px]',
+            : 'pt-[208px] lg:min-h-[min(660px,100svh)] lg:justify-end lg:pt-[240px]',
+          !centred && lockup && 'lg:min-h-[min(640px,100svh)]',
           SURFACE_CLASS[surface],
           className,
         )}
