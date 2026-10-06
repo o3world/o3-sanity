@@ -124,21 +124,23 @@ export function MediaSection({
     return (
       <SurfaceProvider surface={resolved}>
         <section {...surfaceAttrs(resolved)} className={bandClass}>
+          {picture}
+          {/* With its ground in `backgroundMedia`, the ground runs edge to edge
+              and the composition stops at the 1728px column like the bento
+              grids. Without one the ground is baked into the image, so the
+              image itself has to run edge to edge. */}
           <LayeredMediaReveal
             enabled={sequence}
             className="relative overflow-hidden"
-            foregroundClassName="w-full"
+            foregroundClassName={picture ? 'max-w-section mx-auto w-full' : 'w-full'}
             caption={media.caption}
             captionClassName="text-fg-subtle px-gutter mt-4 text-sm"
           >
-            {/* Edge to edge at every width: the composition's ground is baked into
-                the picture, so capping it would leave that ground short of the
-                viewport. The bento grids are what stop at the structural column. */}
             <SanityImage
               source={media.image}
               alt={media.alt}
               width={2880}
-              sizes="100vw"
+              sizes={picture ? '(min-width: 1728px) 1728px, 100vw' : '100vw'}
               className="w-full"
             />
           </LayeredMediaReveal>
