@@ -74,7 +74,25 @@ export const AlignedOnWideScreens: Story = {
   },
 }
 
-/** The default skin: white copy on the `bg-scrim` pill, over an ink band. */
+/**
+ * Both glass surfaces, the pill and the logo's circle, in one skin. Figma's Glass
+ * effect (`3271:17013`, `3726:68984`) has no CSS form, so the fill, frost and
+ * 135° rim are what reproduce its rendered tone.
+ */
+async function expectGlass(canvasElement: HTMLElement, fill: string, rim: string) {
+  const pill = within(canvasElement).getByRole('navigation', { name: 'Primary' })
+  const circle = within(canvasElement)
+    .getAllByRole('link', { name: / home$/ })
+    .at(-1)!
+  for (const surface of [pill, circle]) {
+    await waitFor(() => expect(getComputedStyle(surface).backgroundColor).toBe(fill))
+    const style = getComputedStyle(surface)
+    await expect(style.backdropFilter).toBe('blur(10px) saturate(1.1)')
+    await expect(style.boxShadow).toContain(`${rim} 1px 1px 0px 0px inset`)
+  }
+}
+
+/** The default skin: white copy on the `bg-glass` pill, over an ink band. */
 export const OverInk: Story = {
   parameters: { nextjs: { appDirectory: true, navigation: { pathname: '/' } } },
   globals: { backgrounds: { value: 'ink' } },
@@ -87,6 +105,7 @@ export const OverInk: Story = {
     const home = within(canvasElement).getByRole('link', { name: / home$/ })
     await expect(home).not.toHaveAttribute('aria-current')
     await expect(getComputedStyle(home).color).toBe('rgb(255, 255, 255)')
+    await expectGlass(canvasElement, 'rgba(24, 24, 27, 0.7)', 'rgba(255, 255, 255, 0.16)')
   },
 }
 
@@ -111,6 +130,7 @@ export const OverBone: Story = {
       'aria-current',
       'page',
     )
+    await expectGlass(canvasElement, 'rgba(232, 233, 236, 0.86)', 'rgba(255, 255, 255, 0.85)')
   },
 }
 
