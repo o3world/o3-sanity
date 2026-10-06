@@ -20,10 +20,11 @@ export { NAV_INK_TARGET }
  * as something to see through.
  *
  * Read off the palette rather than picked: every background alpha this design
- * uses is below it — `--color-glass-light`, the densest, is 0.86. The only
- * 0.9+ alpha anywhere in color.css is `--color-on-ink` at 0.92, which is a
- * text colour and never a fill. So 0.9 separates "a band" from "a veil over a
- * band", while still accepting the near-opaque values `color-mix` rounding
+ * uses is below it — `--color-glass` and `--color-glass-light`, the densest,
+ * are 0.6. The only 0.9+ alphas in color.css are text colours at 0.92
+ * (`--color-on-ink`, and `--color-fg`, `--color-fg-body` and `--color-fg-link`
+ * in the dark scope), never fills. So 0.9 separates "a band" from "a veil over
+ * a band", while still accepting the near-opaque values `color-mix` rounding
  * produces.
  */
 const OPAQUE_ALPHA = 0.9
@@ -84,9 +85,9 @@ function declaredGround(element: Element): boolean | null {
  * ── A PICTURE IS A DARK GROUND, WHATEVER ITS PIXELS AVERAGE ────────────────
  *
  * The bar has two skins and they fail asymmetrically. White copy on
- * `--color-glass` (near-black at 70%) survives almost any ground, because the
- * glass darkens whatever is behind it. `#232323` on `--color-glass-light` (a
- * light grey at 86%) needs the ground to be pale AND even: the glass lifts a
+ * `--color-glass` (near-black at 60%) survives almost any ground, because the
+ * glass darkens whatever is behind it. `#232323` on `--color-glass-light`
+ * (white at 60%) needs the ground to be pale AND even: the glass lifts a
  * dark ground a long way, but not to white, and the hairline that shapes the
  * pill needs an even band around it to read as chrome at all. A photograph is that second
  * thing's enemy even when it is bright: measured on one article's picture, the

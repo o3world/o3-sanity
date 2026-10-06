@@ -85,10 +85,12 @@ async function expectGlass(canvasElement: HTMLElement, fill: string, rim: string
     .getAllByRole('link', { name: / home$/ })
     .at(-1)!
   for (const surface of [pill, circle]) {
+    // The skin transitions its fill and its rim, so both are read once settled.
     await waitFor(() => expect(getComputedStyle(surface).backgroundColor).toBe(fill))
-    const style = getComputedStyle(surface)
-    await expect(style.backdropFilter).toBe('blur(10px) saturate(1.1)')
-    await expect(style.boxShadow).toContain(`${rim} 1px 1px 0px 0px inset`)
+    await waitFor(() =>
+      expect(getComputedStyle(surface).boxShadow).toContain(`${rim} 1px 1px 0px 0px inset`),
+    )
+    await expect(getComputedStyle(surface).backdropFilter).toBe('blur(3px) saturate(1.1)')
   }
 }
 
@@ -105,7 +107,7 @@ export const OverInk: Story = {
     const home = within(canvasElement).getByRole('link', { name: / home$/ })
     await expect(home).not.toHaveAttribute('aria-current')
     await expect(getComputedStyle(home).color).toBe('rgb(255, 255, 255)')
-    await expectGlass(canvasElement, 'rgba(24, 24, 27, 0.7)', 'rgba(255, 255, 255, 0.16)')
+    await expectGlass(canvasElement, 'rgba(3, 3, 3, 0.6)', 'rgba(255, 255, 255, 0.3)')
   },
 }
 
@@ -130,7 +132,7 @@ export const OverBone: Story = {
       'aria-current',
       'page',
     )
-    await expectGlass(canvasElement, 'rgba(232, 233, 236, 0.86)', 'rgba(255, 255, 255, 0.85)')
+    await expectGlass(canvasElement, 'rgba(255, 255, 255, 0.6)', 'rgb(255, 255, 255)')
   },
 }
 
