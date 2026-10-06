@@ -171,6 +171,10 @@ export const Rows: Story = {
  */
 export const RowsWide: Story = {
   args: seededSectionArgs('partners-sanity', 'featureGridSection', 1),
+  parameters: { design: figmaDesign('4043:49741') },
+  // At `lg` or wider, where the rows sit side by side; below it they stack and
+  // the edge assertions would hold either way.
+  globals: { viewport: { value: 'desktop' } },
   render: (args) => (
     <div style={{ width: 1920 }}>
       <FeatureGridSection {...args} />
