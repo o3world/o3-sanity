@@ -401,3 +401,34 @@ O3XO is retired under the current repository instructions, so no new runtime
 or visual-regression work is performed for it. Its existing 96px/1248px
 geometry is mechanically isolated by the brand token overlay so importing the
 shared base theme does not apply this O3 product override.
+
+---
+
+## Amendment 2026-10-05 — the platforms rail is absent below `lg`
+
+**Below `lg` the label rail is not drawn at all.** Everything above stands
+except the rail half of the 2026-08-24 amendment.
+
+### The decision this amends
+
+The 2026-08-24 amendment read `2975:8188` as a reflow: the rail becomes a tab row
+over the panels, its active stop marked by a 2px red rule. Design reversed that
+on [OWSW-104](https://o3world.atlassian.net/browse/OWSW-104) (Alex, 2026-10-05):
+"Yes, we can hide the tab row on mobile everywhere." On Home each panel opens
+with its platform's logo, so on a phone a row of stops only repeated what the
+reader was about to scroll past.
+
+The frame still draws the tab row. This is a deliberate departure from it, in
+the same spirit as the 2026-09-04 exception: a product call, not a new reading
+of Figma. The column at `lg` is unchanged, and the `number` rail, which already
+had no 402 rail, is untouched.
+
+### What it costs
+
+The rule applies to every label rail, not only the bands whose panels carry a
+heading or logo. On `/ventures` (the five-stop rail), REC Philly and Urvin the
+rail labels are the panels' only titles, so on a phone those panels lose them.
+Design accepted that for launch, with a fix in a later release.
+
+A rail stop's jump still lands its panel clear of the chrome: under the nav
+below `lg`, level with the sticky column at `lg`.
