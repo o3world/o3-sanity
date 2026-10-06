@@ -218,7 +218,8 @@ export const CurrentOverview: Story = {
   parameters: { design: figmaDesign('2360:2861') },
   play: async ({ canvasElement }) => {
     const image = canvasElement.querySelector('figure img')!
-    await expect(getComputedStyle(image).borderRadius).toBe('32px')
+    // Squared on the right, where the picture meets the viewport's edge.
+    await expect(getComputedStyle(image).borderRadius).toBe('32px 0px 0px 32px')
     await expect(image.getBoundingClientRect().height).toBe(502)
     const plate = image.closest('figure')!.parentElement!
     await expect(getComputedStyle(plate).boxShadow).not.toBe('none')
