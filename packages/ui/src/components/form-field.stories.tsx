@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect } from 'storybook/test'
 
 import { FIELD_CONTROL_CLASS, FormField } from './form-field'
 
@@ -46,6 +47,41 @@ export const Invalid: Story = {
     required: true,
     error: 'That email address doesn’t look right.',
     children: () => null,
+  },
+}
+
+/**
+ * A password manager's fill icon, in the shape LastPass injects: a zero-size
+ * element after the input. The error still sits 4px under the control,
+ * where it sits without one.
+ */
+export const InvalidWithInjectedSibling: Story = {
+  args: {
+    name: 'email',
+    label: 'Email',
+    required: true,
+    error: 'That email address doesn’t look right.',
+    children: () => null,
+  },
+  render: (args) => (
+    <div className="max-w-100">
+      <FormField {...args}>
+        {(control) => (
+          <>
+            <input {...control} type="email" className={FIELD_CONTROL_CLASS} />
+            <div
+              data-lastpass-icon-root=""
+              style={{ position: 'relative', height: 0, width: 0, float: 'left' }}
+            />
+          </>
+        )}
+      </FormField>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const control = canvasElement.querySelector('input')!.getBoundingClientRect()
+    const error = canvasElement.querySelector('[role=alert]')!.getBoundingClientRect()
+    await expect(error.top - control.bottom).toBe(4)
   },
 }
 

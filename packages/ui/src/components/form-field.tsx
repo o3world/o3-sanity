@@ -86,7 +86,7 @@ export function FormField({
   const describedBy = [noteId, errorId].filter(Boolean).join(' ') || undefined
 
   return (
-    <div className={cn('relative flex flex-col gap-2', className)}>
+    <div className={cn('flex flex-col gap-2', className)}>
       {/* Figma 2960:7798: Figtree 600 14/20, 8px above the control. */}
       <label htmlFor={id} className="text-fg text-[14px]/5 font-semibold">
         {label}
@@ -104,19 +104,33 @@ export function FormField({
         </p>
       ) : null}
 
-      {children({
-        id,
-        name,
-        required,
-        'aria-required': required,
-        'aria-invalid': Boolean(error),
-        'aria-describedby': describedBy,
-      })}
+      {/*
+        The control's own box, gapless, and the error's anchor. A password
+        manager injects its fill icon as the input's next sibling (LastPass: a
+        zero-size div); in here it adds no gap, and the error stays at its
+        `mt-1` under the control whatever else grows the field or its grid row.
+        It is a flex column, not a block, so an inline-block input or textarea
+        sits on no line box and gains no baseline strut beneath it.
+      */}
+      <div className="relative flex flex-col">
+        {children({
+          id,
+          name,
+          required,
+          'aria-required': required,
+          'aria-invalid': Boolean(error),
+          'aria-describedby': describedBy,
+        })}
 
-      {/* Validation uses the row gap so showing an error does not move the layout. */}
-      <p id={errorId} role="alert" className="text-legal text-brand absolute left-0 top-full mt-1">
-        {error}
-      </p>
+        {/* Validation uses the row gap so showing an error does not move the layout. */}
+        <p
+          id={errorId}
+          role="alert"
+          className="text-legal text-brand absolute left-0 top-full mt-1"
+        >
+          {error}
+        </p>
+      </div>
     </div>
   )
 }
