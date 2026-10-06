@@ -29,9 +29,10 @@ export function CaseStudyHero({
   return (
     <section
       className={cn(
-        // 819 at 1440, but never taller than the screen, so the bottom-aligned
-        // copy stays above the fold on a short laptop. The 402 frame hugs its
-        // content: the 164px pill clearance plus the copy.
+        // 819 at 1440, but at most the screen's height unless the copy needs
+        // more, so the bottom-aligned copy stays above the fold on a short
+        // laptop. The 402 frame hugs its content: the 164px pill clearance
+        // plus the copy.
         'px-gutter bg-ink-deep relative isolate flex flex-col justify-end pb-16 pt-[164px] text-white lg:min-h-[min(819px,100svh)] lg:pt-[calc(var(--spacing-nav-offset)+100px)]',
         className,
       )}
