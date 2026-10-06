@@ -61,9 +61,10 @@ const BLEED_VIEWPORT_CLASS =
  * THE LAST CARD STOPS ON THE GUTTER THE FIRST ONE STARTS ON.
  *
  * Embla ends the scroll at the last slide's right margin, so that margin is
- * the end gutter: the same distance the bleed above reaches past the column,
- * which is also the distance from the screen's left edge to the first card.
- * Below `sm` the viewport ends on the column and the gutter is already there.
+ * the end gutter: `BLEED_VIEWPORT_CLASS`'s distance, negated, which is also the
+ * distance from the screen's left edge to the first card. The two expressions
+ * change together. Below `sm` the viewport ends on the column and the gutter
+ * is already there.
  */
 const END_GUTTER_SLIDE_CLASS =
   'sm:last:mr-[max(var(--spacing-gutter),calc(50vw-var(--container-section-half)))]'
@@ -71,9 +72,11 @@ const END_GUTTER_SLIDE_CLASS =
 /**
  * Room for the card's shadow (`0 32px 64px`) inside the clip, on an equal
  * negative margin so nothing moves. Sideways it is the slide gap, so a track
- * resting on a snap shows the gap beside the column and never a sliver of the
- * card before it; above, it stays inside the header's 48px margin so the clip
- * never covers the controls. Below the media the card's own text is the room.
+ * resting on a card-aligned snap shows only the gap beside the column. The last
+ * snap is the scroll's end bound, not a card edge, so there the card before can
+ * show in the gutter: a 2px sliver at 1440, a cut card at narrower widths.
+ * Above, it stays inside the header's 48px margin so the clip never covers the
+ * controls. Below the media the card's own text is the room.
  */
 const SHADOW_ROOM_CLASS = '-mx-8 -mt-8 px-8 pt-8'
 

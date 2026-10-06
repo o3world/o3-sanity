@@ -42,7 +42,7 @@ function useCarousel() {
 }
 
 /**
- * shadcn's Carousel — Embla underneath — with two deliberate departures
+ * shadcn's Carousel — Embla underneath — with three deliberate departures
  * (ADR 0008: shadcn's anatomy, O3's tokens):
  *
  * - **The arrows are `CarouselControl`**, the Home Blog's `Icon Button`
@@ -53,6 +53,8 @@ function useCarousel() {
  *   the frames here give each track its own gap, so the consumer sets `gap-*`
  *   on `CarouselContent` and a width on each `CarouselItem`. Embla reads the
  *   slides' real offsets, so flex gap positions snap points correctly.
+ * - **`CarouselContent` takes a `viewportClassName`** for the clipping
+ *   viewport, so a consumer can pad the clip to let slide shadows render.
  *
  * Horizontal only — no frame draws a vertical track, so the axis prop shadcn
  * carries is not reproduced here.
