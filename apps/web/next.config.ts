@@ -22,6 +22,17 @@ const nextConfig: NextConfig = {
     return noindexHeaders(process.env.VERCEL_ENV)
   },
   /**
+   * iOS and some crawlers request the touch icon at its conventional paths
+   * whatever the `<link>` tag says. They get the 180×180 `app/apple-icon.png`
+   * with a 200, not the catch-all's 404.
+   */
+  async rewrites() {
+    return ['/apple-touch-icon.png', '/apple-touch-icon-precomposed.png'].map((source) => ({
+      source,
+      destination: '/apple-icon.png',
+    }))
+  },
+  /**
    * Two maps, in one list.
    *
    * The collection indexes' retired query-string URLs come first — they are
