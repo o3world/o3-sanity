@@ -141,6 +141,15 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
     destination: '/about',
   },
   {
+    // every team member's page the rows above do not name
+    source: '/about/team/:slug',
+    destination: '/about',
+  },
+  {
+    source: '/about/people/:slug',
+    destination: '/about',
+  },
+  {
     // via /solutions/web-digital-product → /solutions/conversion-rate-optimization-consultant
     source: '/accessibility-solutions',
     destination: '/solutions',
@@ -269,6 +278,10 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
   {
     source: '/enterprise-digital-products',
     destination: '/solutions',
+  },
+  {
+    source: '/feed',
+    destination: '/insights',
   },
   {
     source: '/include',
@@ -892,6 +905,10 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
     destination: '/insights/you-monitor-your-kids-behavior-why-wouldnt-you-monitor-your-customers',
   },
   {
+    source: '/page-sitemap.xml',
+    destination: '/sitemap.xml',
+  },
+  {
     source: '/partnerships',
     destination: '/about',
   },
@@ -1036,8 +1053,16 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
     destination: 'https://www.o3xo.ai/insights/young-smart-local-mike-gadsby-ai-panel-talent/',
   },
   {
+    source: '/post-sitemap.xml',
+    destination: '/sitemap.xml',
+  },
+  {
     source: '/service/content-strategy-copywriting',
     destination: '/solutions',
+  },
+  {
+    source: '/services-sitemap.xml',
+    destination: '/sitemap.xml',
   },
   {
     // via /solutions-2 → /solutions
@@ -1182,6 +1207,10 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
     destination: '/solutions',
   },
   {
+    source: '/sitemap_index.xml',
+    destination: '/sitemap.xml',
+  },
+  {
     source: '/solutions-2',
     destination: '/solutions',
   },
@@ -1235,8 +1264,16 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
     destination: 'https://www.o3xo.ai/',
   },
   {
+    source: '/ventures-sitemap.xml',
+    destination: '/sitemap.xml',
+  },
+  {
     source: '/ventures/fanup',
     destination: '/ventures',
+  },
+  {
+    source: '/work-sitemap.xml',
+    destination: '/sitemap.xml',
   },
   {
     source: '/work/3bl-media',
@@ -1297,6 +1334,10 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
   {
     source: '/work/personalized-video',
     destination: '/work',
+  },
+  {
+    source: '/work/rfp-automation',
+    destination: 'https://www.o3xo.ai/case-studies/global-tech-firm/',
   },
   {
     source: '/work/rfp-automation-3',

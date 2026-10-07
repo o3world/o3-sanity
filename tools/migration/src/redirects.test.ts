@@ -33,6 +33,25 @@ const redirects = GENERATED_REDIRECTS
 const destinationBySource = new Map(redirects.map((r) => [r.source, r.destination]))
 const paths = sitePaths()
 
+/**
+ * Where a request for `path` is sent: the first rule whose source matches,
+ * taking a `:param` segment as any one segment, which is how Next.js reads
+ * these sources. `undefined` when no rule claims the path.
+ */
+function resolve(path: string): string | undefined {
+  const segments = path.split('/')
+  const rule = redirects.find(({ source }) => {
+    const pattern = source.split('/')
+    return (
+      pattern.length === segments.length &&
+      pattern.every(
+        (part, i) => part === segments[i] || (part.startsWith(':') && segments[i] !== ''),
+      )
+    )
+  })
+  return rule?.destination
+}
+
 describe('the committed redirect table', () => {
   it('holds the WordPress redirect map', () => {
     expect(redirects.length).toBeGreaterThan(200)
@@ -41,7 +60,7 @@ describe('the committed redirect table', () => {
   // "Redirect to the terminal, never to a redirect" (ADR 0013). A chain costs
   // a round trip and leaks the link equity it was built to keep.
   it('never points one redirect at another', () => {
-    const chained = redirects.filter((r) => destinationBySource.has(r.destination))
+    const chained = redirects.filter((r) => resolve(r.destination) !== undefined)
     expect(chained).toEqual([])
   })
 
@@ -130,6 +149,38 @@ describe('the committed redirect table', () => {
       expect(destinationBySource.get(`/work/${slug}`), `/work/${slug}`).toBe('/work')
     }
     expect(destinationBySource.get('/partnerships')).toBe('/about')
+  })
+
+  /**
+   * Old WordPress URLs that drew requests after launch with no rule to catch
+   * them (#536): Yoast's sitemaps, the RSS feed, team pages the map never
+   * named one by one, and a case-study slug the production insight
+   * `rfp-automation-case-study` still links to.
+   */
+  it('catches the old URLs that 404ed after launch', () => {
+    const expected = {
+      '/sitemap_index.xml': '/sitemap.xml',
+      '/page-sitemap.xml': '/sitemap.xml',
+      '/post-sitemap.xml': '/sitemap.xml',
+      '/services-sitemap.xml': '/sitemap.xml',
+      '/ventures-sitemap.xml': '/sitemap.xml',
+      '/work-sitemap.xml': '/sitemap.xml',
+      '/feed': '/insights',
+      '/about/team': '/about',
+      '/about/team/alan-cho': '/about',
+      '/about/team/matt-schaff': '/about',
+      '/about/people/jamie-reutzel': '/about',
+      '/work/rfp-automation': resolve('/work/rfp-automation-o3'),
+    }
+    const actual = Object.fromEntries(Object.keys(expected).map((path) => [path, resolve(path)]))
+    expect(actual).toEqual(expected)
+    expect(expected['/work/rfp-automation']).toMatch(/^https:\/\//)
+  })
+
+  it('leaves the pages those rules send people to alone', () => {
+    for (const path of ['/sitemap.xml', '/about', '/insights', '/about/people']) {
+      expect(resolve(path), path).toBeUndefined()
+    }
   })
 
   // A self-redirect is an infinite loop in production.
