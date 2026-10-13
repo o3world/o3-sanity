@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { expect } from 'storybook/test'
 import { figmaDesign } from '@o3/story-kit'
 
-import { seededSectionArgs } from '../../../testing/seedContent'
+import { seedImage, seededSectionArgs } from '../../../testing/seedContent'
 
 import { MediaSection } from './MediaSection'
 
@@ -208,7 +208,11 @@ export const CompleteComposition: Story = {
   },
 }
 
-/** Past the 1728px structural column the composition stops growing and centres, like the bento grids. */
+/**
+ * A composition whose ground is baked into the image runs edge to edge past
+ * the 1728px structural column, since a cap would end that ground short of
+ * the viewport.
+ */
 export const CompleteCompositionWide: Story = {
   args: CompleteComposition.args,
   parameters: {
@@ -219,7 +223,34 @@ export const CompleteCompositionWide: Story = {
   globals: { viewport: { value: 'wide' } },
   play: async ({ canvasElement }) => {
     const box = canvasElement.querySelector('img')!.getBoundingClientRect()
+    await expect(box.width).toBe(window.innerWidth)
+    await expect(box.left).toBe(0)
+  },
+}
+
+/**
+ * With its ground in `backgroundMedia`, the ground spans the 2560 viewport and
+ * the composition stops at the 1728px column, centred like the bento grids
+ * (Best Egg `3503:10892`: the ground and the screenshot are separate layers).
+ */
+export const CompositionOnGroundWide: Story = {
+  args: {
+    ...CompleteComposition.args,
+    backgroundMedia: {
+      _type: 'backgroundMedia',
+      image: seedImage('tools/migration/data/seed/assets/work-city.png'),
+      tint: 'none',
+    },
+  },
+  parameters: CompleteCompositionWide.parameters,
+  globals: { viewport: { value: 'wide' } },
+  play: async ({ canvasElement }) => {
+    const ground = canvasElement.querySelector('[aria-hidden]')!.getBoundingClientRect()
+    await expect(ground.width).toBe(window.innerWidth)
+    await expect(ground.left).toBe(0)
+    const composition = canvasElement.querySelector('img:not([aria-hidden] img)')!
+    const box = composition.getBoundingClientRect()
     await expect(box.width).toBe(1728)
-    await expect(box.left).toBe(416)
+    await expect(box.left).toBe((window.innerWidth - 1728) / 2)
   },
 }
