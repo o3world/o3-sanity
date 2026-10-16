@@ -42,7 +42,7 @@ function useCarousel() {
 }
 
 /**
- * shadcn's Carousel — Embla underneath — with two deliberate departures
+ * shadcn's Carousel — Embla underneath — with three deliberate departures
  * (ADR 0008: shadcn's anatomy, O3's tokens):
  *
  * - **The arrows are `CarouselControl`**, the Home Blog's `Icon Button`
@@ -53,6 +53,8 @@ function useCarousel() {
  *   the frames here give each track its own gap, so the consumer sets `gap-*`
  *   on `CarouselContent` and a width on each `CarouselItem`. Embla reads the
  *   slides' real offsets, so flex gap positions snap points correctly.
+ * - **`CarouselContent` takes a `viewportClassName`** for the clipping
+ *   viewport, so a consumer can pad the clip to let slide shadows render.
  *
  * Horizontal only — no frame draws a vertical track, so the axis prop shadcn
  * carries is not reproduced here.
@@ -136,13 +138,24 @@ function Carousel({
   )
 }
 
-/** The clipping viewport and the flex track it clips. The consumer's
-    `className` lands on the track: a `gap-*` there is the slide spacing. */
-function CarouselContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+/**
+ * The clipping viewport and the flex track it clips. The consumer's
+ * `className` lands on the track: a `gap-*` there is the slide spacing.
+ *
+ * `viewportClassName` lands on the clip itself. Padding there widens what the
+ * clip shows without moving a snap: Embla measures the track, not the
+ * viewport, so a padded viewport offset by an equal negative margin keeps
+ * every slide where it was and gives a slide's shadow room to render.
+ */
+function CarouselContent({
+  className,
+  viewportClassName,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement> & { viewportClassName?: string }) {
   const { carouselRef } = useCarousel()
 
   return (
-    <div ref={carouselRef} className="overflow-hidden">
+    <div ref={carouselRef} className={cn('overflow-hidden', viewportClassName)}>
       <div className={cn('flex', className)} {...props} />
     </div>
   )

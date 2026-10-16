@@ -60,6 +60,18 @@ export const LatestFeed: Story = {
     )
     // The link is named by its title alone, not its picture's alt and the date.
     await expect(card).toHaveAccessibleName(card.querySelector('h3')!.textContent!)
+
+    // The clip leaves the shadow room beside and above the first card, and the
+    // last card ends the scroll on the gutter the first one starts on.
+    const slides = canvasElement.querySelectorAll('[aria-roledescription="slide"]')
+    const clip = slides[0]!.parentElement!.parentElement!.getBoundingClientRect()
+    const mediaRect = media.getBoundingClientRect()
+    await expect(mediaRect.left - clip.left).toBeGreaterThanOrEqual(32)
+    await expect(mediaRect.top - clip.top).toBeGreaterThanOrEqual(32)
+    await expect(parseFloat(getComputedStyle(slides[slides.length - 1]!).marginRight)).toBeCloseTo(
+      slides[0]!.getBoundingClientRect().left,
+      0,
+    )
   },
 }
 
