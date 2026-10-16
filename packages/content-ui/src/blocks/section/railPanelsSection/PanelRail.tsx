@@ -1,6 +1,3 @@
-import type { Ref } from 'react'
-
-import type { Surface } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
 
 export interface PanelRailItem {
@@ -17,24 +14,11 @@ export interface PanelRailProps {
   active: number
   /** `number` draws the active item as a reversed ink chip (`1744:1786`). */
   mode: 'label' | 'number'
-  /** The band's surface — the stuck tab row paints it so panels pass under. */
-  surface: Surface
-  /** The label row, which `PanelBand` measures for the panels' scroll margin. */
-  ref?: Ref<HTMLOListElement>
-}
-
-/** The tab row's ground below lg, one per surface so Tailwind sees each class. */
-const STUCK_GROUND: Record<Surface, string> = {
-  white: 'max-lg:bg-white',
-  paper: 'max-lg:bg-paper',
-  bone: 'max-lg:bg-bone',
-  ink: 'max-lg:bg-ink',
-  charcoal: 'max-lg:bg-charcoal',
 }
 
 /**
- * The rail that counts the panels off — `2747:4491` at 1440, `2975:8193` at
- * 402, both named `Fixed Navigation` on the frame.
+ * The rail that counts the panels off — `2747:4491` at 1440, named
+ * `Fixed Navigation` on the frame. It is a column at `lg` and absent below it.
  *
  * The frame can only draw one state, so it shows the first stop active and
  * everything else set back; what it is describing is a **scroll-linked**
@@ -42,29 +26,20 @@ const STUCK_GROUND: Record<Surface, string> = {
  * scroll tracking lives in `PanelBand`; this component draws the state it is
  * handed and sends a reader the other way.
  *
- * | Mode     | Where              | Active                              | Inactive      |
- * | -------- | ------------------ | ----------------------------------- | ------------- |
- * | `label`  | column at 1440     | 3 × 20 red bar, 8 clear of the word | bar unpainted |
- * | `label`  | **tab row** at 402 | 2px red rule under the word         | no rule       |
- * | `number` | column at 1440     | white numeral in a 48px ink chip    | plain numeral |
+ * | Mode     | Active                              | Inactive      |
+ * | -------- | ----------------------------------- | ------------- |
+ * | `label`  | 3 × 20 red bar, 8 clear of the word | bar unpainted |
+ * | `number` | white numeral in a 48px ink chip    | plain numeral |
  *
- * The label rail's two drawings are one state read twice: a sticky 82px column
- * has nowhere to stand at 402, so the stops lay out as a row over the panels
- * instead of beside them, and the marker moves from the word's left edge to
- * under it. Both frames name it `Fixed Navigation`, so the row holds under the
- * nav while its panels scroll beneath it, on the band's own ground, just
- * as the column holds at 1440. **The stops are links**, which is what the frame calls them and
- * what a row of underlined words at 24px promises: each one jumps to its panel,
- * and the observer then marks it. The row spreads its stops edge to edge, as
- * the frame's space-between does, over a 24px floor, so Home's three hold one
- * row down to a 320 phone. It wraps rather than scrolls when they don't fit —
- * a five-stop band (`/ventures`) does not — because a rail that runs off the
- * side of a phone is worse than one on two lines.
+ * **The stops are links**: each one jumps to its panel, and the observer then
+ * marks it. Below `lg` there is no label rail. The 402 frame (`2975:8193`)
+ * draws a tab row there, but design dropped it: each panel carries its own
+ * title, so a row of stops would only repeat what the reader scrolls past.
  *
  * The number rail keeps the column and nothing else: its 402 composition is
  * the numeral inlined into each row, which the section draws, not this.
  */
-export function PanelRail({ items, active, mode, surface, ref }: PanelRailProps) {
+export function PanelRail({ items, active, mode }: PanelRailProps) {
   if (mode === 'number') {
     return (
       <ol className="hidden w-[82px] shrink-0 flex-col gap-4 self-start lg:sticky lg:top-[calc(var(--spacing-nav-pinned)+96px)] lg:flex">
@@ -85,19 +60,8 @@ export function PanelRail({ items, active, mode, surface, ref }: PanelRailProps)
   }
 
   return (
-    <ol
-      // `items-start` so the active stop's rule hangs below its own word
-      // rather than stretching every stop to the tallest.
-      ref={ref}
-      // Below lg the row bleeds over the band's gutter and pads 16 above and
-      // below the stops, all cancelled by margin so the resting layout keeps
-      // the frame's spacing; the padding only shows once it sticks.
-      className={cn(
-        'flex flex-wrap items-start justify-between gap-x-6 gap-y-3 lg:sticky lg:top-[calc(var(--spacing-nav-pinned)+96px)] lg:w-[82px] lg:shrink-0 lg:flex-col lg:flex-nowrap lg:gap-8 lg:self-start',
-        'max-lg:top-(--spacing-nav-height) max-lg:-mx-(--rail-gutter) max-lg:px-(--rail-gutter) max-lg:sticky max-lg:z-10 max-lg:-my-4 max-lg:py-4',
-        STUCK_GROUND[surface],
-      )}
-    >
+    // `items-start` keeps each stop, and its focus ring, the width of its word.
+    <ol className="hidden w-[82px] shrink-0 flex-col items-start gap-8 self-start lg:sticky lg:top-[calc(var(--spacing-nav-pinned)+96px)] lg:flex">
       {items.map((item, index) => {
         const isActive = index === active
         return (
@@ -106,20 +70,18 @@ export function PanelRail({ items, active, mode, surface, ref }: PanelRailProps)
               href={`#${item.panelId}`}
               aria-current={isActive ? 'true' : undefined}
               className={cn(
-                // 24/28.8 Medium at −0.8px, the same label on both frames.
+                // 24/28.8 Medium at −0.8px.
                 'duration-(--duration-hover) focus-visible:ring-brand flex items-center gap-2 text-[24px] font-medium leading-[1.2] tracking-[-0.0333em] transition-colors ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-4',
-                'border-b-2 lg:border-b-0 lg:pb-0',
                 isActive
-                  ? 'border-brand text-ink pb-3 [[data-surface=charcoal]_&]:text-white [[data-surface=ink]_&]:text-white'
-                  : 'text-fg-body border-transparent',
+                  ? 'text-ink [[data-surface=charcoal]_&]:text-white [[data-surface=ink]_&]:text-white'
+                  : 'text-fg-body',
               )}
             >
-              {/* The column's marker, and the one part of the row the 402
-                  frame leaves unpainted — it rules under the word instead. */}
+              {/* The column's marker. */}
               <span
                 aria-hidden="true"
                 className={cn(
-                  'duration-(--duration-hover) hidden h-5 w-[3px] shrink-0 transition-colors ease-out lg:block',
+                  'duration-(--duration-hover) h-5 w-[3px] shrink-0 transition-colors ease-out',
                   isActive ? 'bg-brand' : 'bg-transparent',
                 )}
               />

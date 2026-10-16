@@ -203,17 +203,13 @@ describe('the homepage at 402 (ADR 0006)', () => {
   })
 
   /**
-   * The platforms rail at 402 (`2975:8193`): the same three stops, laid as a
-   * tab row over the panels instead of a sticky column beside them. The
-   * column measure is what carries the `lg:`, and the row must not scroll —
-   * the three labels fit the 354px column.
+   * The platforms rail below lg: absent. The 402 frame (`2975:8193`) draws a
+   * tab row, but each panel opens with its platform's logo, so design dropped
+   * it; the rail is the sticky 82px column at lg and nothing below it.
    */
-  it('lays the platforms rail as a tab row until lg', () => {
-    expect(variantsOf(html, 'w-[82px]')).toEqual(['lg:w-[82px]'])
-    expect(variantsOf(html, 'flex-col')).toContain('lg:flex-col')
-    // The active stop is underlined in brand red at 402 and marked by the
-    // 3 × 20 indicator at 1440 — two drawings of one state.
-    expect(html).toContain('border-brand')
+  it('hides the platforms rail until lg', () => {
+    expect(html).toMatch(/<ol class="hidden w-\[82px\][^"]*\blg:flex\b/)
+    expect(html).toMatch(/<ol class="hidden w-\[82px\][^"]*\blg:sticky\b/)
   })
 
   it('gives the insights carousel one card per view until sm', () => {
@@ -232,9 +228,8 @@ describe('the homepage at 402 (ADR 0006)', () => {
     // both widths (Nick, 2026-08-25), which is why the wrap is gone rather
     // than sitting alongside it.
     //
-    // Matched on the row's own class attribute, because the platforms tab row
-    // (`PanelRail`) also wraps below `lg` and would answer for this one in a
-    // document-wide probe.
+    // Matched on the row's own class attribute, so a `flex-wrap` anywhere else
+    // on the page can't answer for this one in a document-wide probe.
     const row = html.match(/<ul[^>]*class="([^"]*animate-marquee[^"]*)"/)?.[1] ?? ''
     expect(row, 'the partner strip was not rendered').not.toBe('')
     expect(row).toContain('flex-nowrap')
