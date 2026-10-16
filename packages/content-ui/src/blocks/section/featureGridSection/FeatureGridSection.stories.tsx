@@ -165,6 +165,31 @@ export const Rows: Story = {
   },
 }
 
+/**
+ * The rows past the design width: the container grows to the section cap, and
+ * each row still spans it, heading on the left edge and body on the right.
+ */
+export const RowsWide: Story = {
+  args: seededSectionArgs('partners-sanity', 'featureGridSection', 1),
+  parameters: { design: figmaDesign('4043:49741') },
+  // At `lg` or wider, where the rows sit side by side; below it they stack and
+  // the edge assertions would hold either way.
+  globals: { viewport: { value: 'desktop' } },
+  render: (args) => (
+    <div style={{ width: 1920 }}>
+      <FeatureGridSection {...args} />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const list = canvasElement.querySelector('ul')!.getBoundingClientRect()
+    await expect(list.width).toBeGreaterThan(1248)
+    for (const row of canvasElement.querySelectorAll('li')) {
+      await expect(row.firstElementChild!.getBoundingClientRect().left).toBeCloseTo(list.left, 0)
+      await expect(row.lastElementChild!.getBoundingClientRect().right).toBeCloseTo(list.right, 0)
+    }
+  },
+}
+
 /** The rows composition below `lg`, where the two columns stack. */
 export const RowsMobile: Story = {
   args: seededSectionArgs('partners-sanity', 'featureGridSection', 1),

@@ -139,7 +139,9 @@ export function FeatureGridSection({
       {items.map((feature) => (
         <li
           key={feature._key}
-          className="flex flex-col gap-6 py-8 first:pt-0 last:pb-0 lg:flex-row lg:items-start lg:gap-[139px] lg:py-12"
+          // Heading on the column's left edge, body on its right: the frame's
+          // 139 is what that leaves at 1440 (1248 − 609 − 500), not a fixed gap.
+          className="flex flex-col gap-6 py-8 first:pt-0 last:pb-0 lg:flex-row lg:items-start lg:justify-between lg:gap-16 lg:py-12"
         >
           <div className="min-w-0 lg:w-[609px] lg:shrink-0">
             {feature.heading ? (
