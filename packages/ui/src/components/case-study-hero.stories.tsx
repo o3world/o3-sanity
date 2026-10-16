@@ -60,3 +60,26 @@ export const NoMedia: Story = {
       'La Colombe’s cafes and wholesale blends had built an outstanding brand experience that its digital storefront did not yet express.',
   },
 }
+
+/**
+ * A screen shorter than the frame's 819: the band condenses to the viewport
+ * rather than pushing its copy below the fold. The copy is bottom-aligned, so
+ * the room it gives up is the space above it.
+ */
+export const ShortScreen: Story = {
+  args: Default.args,
+  parameters: {
+    viewport: {
+      options: {
+        short: { name: 'Short 1440 × 700', styles: { width: '1440px', height: '700px' } },
+      },
+    },
+  },
+  globals: { viewport: { value: 'short' } },
+  play: async ({ canvasElement }) => {
+    const hero = canvasElement.querySelector('section')!
+    const title = within(canvasElement).getByRole('heading', { level: 1 })
+    await expect(hero.getBoundingClientRect().height).toBeLessThanOrEqual(window.innerHeight)
+    await expect(title.getBoundingClientRect().bottom).toBeLessThanOrEqual(window.innerHeight)
+  },
+}
