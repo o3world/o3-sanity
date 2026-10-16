@@ -4,12 +4,17 @@
  * The one edge light in it is the rim of Figma's Glass effect on the nav's
  * pill (3271:17013) and the logo's circle (3726:68984). Figma lights it from
  * 135°, so it is bright on the top and left edges and faint on the bottom and
- * right. It pairs with `--color-glass` and `--color-glass-light` in color.css.
+ * right, and an inner glow thickens the edge so the rim, not the fill, is
+ * what reads as glass. The light skin adds a 5% hairline, which is what draws
+ * its edge over a white page. It pairs with `--color-glass` and
+ * `--color-glass-light` in color.css.
  */
 
 @theme {
   --shadow-glass-rim:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.16), inset -1px -1px 0 rgba(255, 255, 255, 0.06);
+    inset 1px 1px 0 rgba(255, 255, 255, 0.3), inset -1px -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 16px rgba(255, 255, 255, 0.08);
   --shadow-glass-rim-light:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.85), inset -1px -1px 0 rgba(255, 255, 255, 0.4);
+    inset 1px 1px 0 rgba(255, 255, 255, 1), inset -1px -1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 0 16px rgba(255, 255, 255, 0.7), 0 0 0 1px rgba(0, 0, 0, 0.05);
 }

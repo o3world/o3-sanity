@@ -139,9 +139,9 @@ describe('the nav bar’s pinned, dark-ink default', () => {
   })
 
   it('blurs whatever it is floating over', () => {
-    // The Glass effect's frost and rim (`3271:17013`): the photograph under
-    // the pill is a tone, not a shape.
-    expect(navHtml).toContain('backdrop-blur-[10px]')
+    // The Glass effect's frost and rim (`3271:17013`): what passes under the
+    // pill is softened, not smeared, so text and pictures stay recognisable.
+    expect(navHtml).toContain('backdrop-blur-[3px]')
     expect(navHtml).toContain('backdrop-saturate-[1.1]')
     expect(navHtml).toContain('shadow-glass-rim')
   })
