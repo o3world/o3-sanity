@@ -1,6 +1,6 @@
 ---
 name: content-naming
-description: Naming and wiring rules for Sanity content in this repo. Use when adding, renaming, or removing a section block, base block, shared object, document type, schema field, or block renderer — anything under packages/sanity/src/schemas/, packages/content-ui/src/ or apps/web/src/content/. Also use when reviewing a diff that touches those paths.
+description: Use when adding, renaming, or removing a section block, base block, shared object, document type, schema field, or block renderer — anything under packages/sanity/src/schemas/, packages/content-ui/src/ or apps/web/src/content/ — or reviewing a diff that touches those paths.
 ---
 
 # Content naming
@@ -21,7 +21,7 @@ Ask in this order — each "yes" stops you from adding a type that shouldn't exi
 
 1. Check the **field lexicon** in `CONTEXT.md`. If your concept is in the table, use that exact name. If it isn't, check that you aren't reaching for a synonym of one that is (`content`/`copy` → `body`, `summary`/`intro` → `excerpt`, `image` on a block → `media`).
 2. Genuinely new domain concept? Use it, and add a row to the lexicon in the same commit. A field name that isn't in the table and isn't obviously domain-specific is the thing that starts drift.
-3. If you're about to copy a field definition from another block, that's the signal to add a factory instead — `packages/sanity/src/schemas/blocks/fields.ts` for an editorial field (the module is empty right now; re-create it), `packages/sanity/src/knobs/` for a design option, beside `surfaceKnob()` and `decorationKnob()`.
+3. If you're about to copy a field definition from another block, that's the signal to add a factory instead — `packages/sanity/src/schemas/blocks/fields.ts` for an editorial field, `packages/sanity/src/knobs/` for a design option, beside `surfaceKnob()` and `decorationKnob()`.
 4. **Is it a design option or a content field?** A closed set an editor picks a _look_ from is a knob, declared in `packages/sanity/src/knobs/<block>.ts` — never a hand-written `defineField` with an `options.list`, which is invisible to everything but the Studio form (CONTEXT.md → Knobs). A closed set naming a content category is not (`listingSection.pageType`, `formSection.reasons`); write down why, because `knobGuard.test.ts` asks.
 5. Enums that are not knobs: bare noun, `options.list` from a `constants.ts` const array where the values are shared, always an `initialValue`.
 6. Required fields get `validation: (rule) => rule.required()`. Anything an editor could plausibly leave blank should stay optional — the renderer handles absence.
@@ -32,7 +32,7 @@ Name it `<thing>Section`. Never `<thing>Block`.
 
 1. `packages/sanity/src/schemas/blocks/registry.ts` — add to `SECTION_BLOCKS`. The factory throws until you do.
 2. `packages/sanity/src/knobs/<name>Section.ts` — the block's design options, at minimum `surfaceKnob({ initialValue: … })`; export it from `knobs/index.ts` and add it to `BLOCK_KNOBS`. Required, not optional (ADR 0020). Add a `placeholder` in the same file, typed `satisfies <Name>Section` — it is what the canvas insert menu writes, and `knobs/placeholder.test.ts` fails without one. It must be **commit-safe**: fill every required field, never reference a document, and leave design options to the knobs (CONTEXT.md → Placeholder).
-3. `packages/sanity/src/schemas/blocks/section.ts` — `defineSectionBlock({ name, title, description, knobs, fields, preview })`. Don't add a `surface` field; the factory generates it from the knob. `description` is required and has a standard (below).
+3. `packages/sanity/src/schemas/blocks/section.ts` — `defineSectionBlock({ name, title, description, knobs, fields, preview })`. Don't add a `surface` field, and don't add a per-page surface; the factory generates the field from the knob (`docs/specs/schema.md`). `description` is required and has a standard (below).
 4. `packages/sanity/src/schemas/index.ts` — import and add to the keyed `SECTION_SCHEMAS` record; `schemaTypes` loads every block the roster (step 1) names.
 5. `packages/sanity/src/queries.ts` — add a `_type == "<name>Section" => { … }` arm to `SECTION_FIELDS` **only if** the block needs query-time expansion (dereferenced `button` targets, reference→card projections, a subquery). Renderers must stay pure components: resolve data here, not in the component.
 6. `packages/content-ui/src/blocks/section/<name>Section/<Name>Section.tsx` — folder name === schema name exactly. Type props with `SectionProps<'<name>Section'>` from `@o3/content-runtime/blocks`; never hand-write the prop shape. That is the default home; a renderer goes in `apps/web/src/content/` only when it needs something only the app has — see `AGENTS.md` → Where a component lives.
@@ -76,8 +76,6 @@ Rename in one commit, all of it: registry → schema → `index.ts` → `queries
 
 ## What not to do
 
-- Don't add a `surface` field by hand, or a per-page surface — surface is a section-block field (`docs/specs/schema.md`).
-- Don't fetch inside a block renderer. Expand in `SECTION_FIELDS`.
 - Don't write a schema-parity test. ADR 0001 chose the `satisfies` guardrail instead of test suites, deliberately.
 - Don't widen a `satisfies` clause to make an error go away — it is load-bearing. Fix the binding.
 - Don't imitate the **Known drift** entries in `CONTEXT.md`. Fix them when you're already in the file.
