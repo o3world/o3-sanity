@@ -30,7 +30,7 @@
     "next-sanity": "^13.2.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "storybook": "^10.4.1",
+    "storybook": "^10.6.2",
     "tailwindcss": "^4.2.4",
     "typescript": "^5.7.0",
     "vitest": "^4.1.10"
