@@ -1,6 +1,6 @@
 ---
 name: figma-sync
-description: Run the Figma change-detection pipeline and turn its report into action — file tickets for real design changes, group them sanely, ask the user about untracked frames, reconcile locked assets, and commit the sync. Use when asked to "sync figma", "check figma updates", "run the figma pipeline", "did the design change", "figma changed", or before building a page layer that the design file may have moved under.
+description: Use when asked to sync Figma or to check whether the design file changed, or before building a page layer the design file may have moved under.
 ---
 
 # Figma sync
@@ -20,14 +20,14 @@ Read it when a key surprises you; do not re-derive it here.
 
 Facts you will need repeatedly:
 
-|                     |                                                                                |
-| ------------------- | ------------------------------------------------------------------------------ |
-| File key            | `RvraLJaZ0zWm8UaD5AJf43` — _2026 O3DX Website_                                 |
-| Canonical canvases  | Designs `1126:1100` and Case Studies `1238:557`                                |
-| Frame/set manifest  | `tools/figma-sync/data/tracked-nodes.json`                                     |
-| Asset provenance    | `tools/figma-sync/data/asset-manifest.json`                                    |
-| Report              | `tools/figma-sync/data/report.json` (`report.md` is the same run for a human)  |
-| ↳ what it describes | the last run that **fetched** something — a short-circuited run writes nothing |
+|                     |                                                                               |
+| ------------------- | ----------------------------------------------------------------------------- |
+| File key            | `RvraLJaZ0zWm8UaD5AJf43` — _2026 O3DX Website_                                |
+| Canonical canvases  | Designs `1126:1100` and Case Studies `1238:557`                               |
+| Frame/set manifest  | `tools/figma-sync/data/tracked-nodes.json`                                    |
+| Asset provenance    | `tools/figma-sync/data/asset-manifest.json`                                   |
+| Report              | `tools/figma-sync/data/report.json` (`report.md` is the same run for a human) |
+| ↳ what it describes | the last run that **fetched** something (step 1)                              |
 
 ---
 
@@ -219,24 +219,13 @@ review surface. Look at the diff. If a regenerated asset is visibly wrong — bl
 downscaled — _that_ is a ticket, and the fix is often a `locked` entry in
 `asset-manifest.json` with a note saying why.
 
-### Quick reference
-
-| Report section           | Default                                                                                |
-| ------------------------ | -------------------------------------------------------------------------------------- |
-| `changedFrames`          | ticket per page layer (desktop + mobile together), unless it folds into a set's ticket |
-| `changedComponentSets`   | one ticket at `codeComponent`; `null` target → note, no ticket                         |
-| `untrackedFrames`        | question to the user; never a ticket, never a manifest edit                            |
-| `assets.regenerated`     | no ticket — read the git diff                                                          |
-| `assets.lockedConflicts` | `firstSeen` → reconcile ticket, quoting the note; `stillOpen` → find the existing one  |
-| `assets.failures`        | re-run once; persistent → one ticket                                                   |
-| `errors`                 | fix the machinery first, before any design triage                                      |
-
 ---
 
 ## 4. File the tickets
 
 Conventions are in [`docs/agents/issue-tracker.md`](../../../docs/agents/issue-tracker.md);
-this is that procedure with the Figma specifics filled in.
+this is that procedure with the Figma specifics filled in. Before filing, read
+[`filing.md`](filing.md) for the project board's IDs and commands.
 
 ```sh
 gh issue create --label wayfinder:task --title "..." --body "$(cat <<'EOF'
@@ -262,53 +251,14 @@ CHILD=$(gh api repos/o3world/o3-sanity/issues/<new-number> --jq .id)
 gh api --method POST repos/o3world/o3-sanity/issues/33/sub_issues -F sub_issue_id=$CHILD
 ```
 
-### The project board
-
-Org **o3world**, project **5** (`PVT_kwDOAE6UPc4BfG9l`). Add the item, then set two fields:
-
-```sh
-ITEM=$(gh project item-add 5 --owner o3world --url <issue-url> --format json --jq .id)
-
-# Track
-gh project item-edit --id "$ITEM" --project-id PVT_kwDOAE6UPc4BfG9l \
-  --field-id PVTSSF_lADOAE6UPc4BfG9lzhZcO3Q --single-select-option-id <track-option>
-
-# Kind = task
-gh project item-edit --id "$ITEM" --project-id PVT_kwDOAE6UPc4BfG9l \
-  --field-id PVTSSF_lADOAE6UPc4BfG9lzhZcO3U --single-select-option-id c4e021dd
-```
-
-`item-add` on an issue already on the board returns the existing item, so it is safe to run
-either way.
-
-**Track** — pick by what the change touches, not by where it was spotted:
-
-| Option        | Id         | For                                                                                   |
-| ------------- | ---------- | ------------------------------------------------------------------------------------- |
-| Page layer    | `debb6e8c` | a page frame changed: content, section layout, a route's composition                  |
-| Design system | `efec90f4` | a component set or token changed: the shared UI, wherever it shows                    |
-| Migration     | `ff81609b` | seed data or a seed asset needs regenerating/reconciling                              |
-| Infra         | `a4b16e47` | the pipeline itself — a manifest pointing at a dead node, a persistent export failure |
-
-**Kind** is always `task` (`c4e021dd`) for anything this skill files.
-
-### ⚠️ Set values on items. Never touch the fields themselves.
-
-`gh project item-edit --single-select-option-id` sets **one item's** value. That is the only
-board write this skill makes.
-
-**Never** edit a field's options — `gh project field-*`, or the `updateProjectV2Field`
-GraphQL mutation. Saving a single-select field's options **wipes that field's value on every
-item on the board**, silently, and there is no undo. If an option you want does not exist,
-stop and ask the user; do not create it.
+Then put it on the project board and set its Track and Kind, per [`filing.md`](filing.md).
 
 ---
 
 ## 5. Commit, then report
 
 A sync is a commit — `data/baseline.json` is what makes the next run's short-circuit
-possible, and any asset the run rewrote belongs in the same diff. (A short-circuited run has
-nothing to commit: it wrote nothing. Confirm with `git status tools/figma-sync/data`.)
+possible, and any asset the run rewrote belongs in the same diff.
 
 ```sh
 git add tools/figma-sync/data tools/migration/data/seed/assets
