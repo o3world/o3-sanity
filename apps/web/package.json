@@ -12,7 +12,7 @@
     "preview": "pnpm build && pnpm --filter @o3/build-assert assert && next start --port 3612"
   },
   "dependencies": {
-    "@next/third-parties": "^16.3.8",
+    "@next/third-parties": "^16.4.2",
     "@o3/block-spec": "workspace:*",
     "@o3/content-runtime": "workspace:*",
     "@o3/content-ui": "workspace:*",
@@ -25,7 +25,7 @@
     "@sanity/image-url": "^2.1.1",
     "@sanity/visual-editing": "^5.7.3",
     "botid": "^1.5.11",
-    "next": "^16.3.4",
+    "next": "^16.4.2",
     "next-sanity": "^13.2.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

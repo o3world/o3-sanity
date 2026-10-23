@@ -70,6 +70,12 @@
     "onlyBuiltDependencies": [
       "esbuild",
       "sharp"
-    ]
+    ],
+    "overrides": {
+      "dompurify@<3.4.17": "^3.4.17"
+    },
+    "patchedDependencies": {
+      "@storybook/nextjs-vite@10.5.5": "patches/@storybook__nextjs-vite@10.5.5.patch"
+    }
   }
 }
