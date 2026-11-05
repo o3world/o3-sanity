@@ -134,7 +134,7 @@
     {
       "_type": "featureGridSection",
       "_key": "why",
-      "surface": "ink",
+      "surface": "charcoal",
       "layout": "stack",
       "decoration": "molecule",
       "heading": "Why Vercel + O3",

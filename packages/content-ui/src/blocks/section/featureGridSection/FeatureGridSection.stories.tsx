@@ -128,13 +128,17 @@ export const OnInk: Story = {
 
 /**
  * `/partners/sanity` — the stacked composition (`2354:2530`): the mark above a
- * 28px lead over a quieter paragraph, three across, on ink with the molecule
- * hung off the right.
+ * 28px lead over a quieter paragraph, three across, on charcoal (neutral-900,
+ * variable `2050:1231`) with the molecule hung off the right.
  */
 export const Stack: Story = {
   args: seededSectionArgs('partners-sanity', 'featureGridSection'),
   parameters: { design: figmaDesign('2354:2530') },
   globals: { backgrounds: { value: 'ink' } },
+  play: async ({ canvasElement }) => {
+    const band = canvasElement.querySelector('section')!
+    await expect(getComputedStyle(band).backgroundColor).toBe('rgb(23, 22, 21)')
+  },
 }
 
 /**
