@@ -1,7 +1,13 @@
 import { defineArrayMember, defineField } from 'sanity'
 import { defineArrayItem } from './defineArrayItem'
 import { defineSectionBlock } from './defineBlocks'
-import { detailsField, eyebrowField, bodyField, validateAnchorName } from './fields'
+import {
+  detailsField,
+  eyebrowField,
+  bodyField,
+  panelAnchorNeedsBand,
+  validateAnchorName,
+} from './fields'
 import { hiddenUnless } from './knobFields'
 import { blockArrayMembers, BLOCK_ARRAYS } from './registry'
 import { PAGE_TYPES } from '../../constants'
@@ -202,8 +208,14 @@ export const railPanelsSection = defineSectionBlock({
               type: 'string',
               description:
                 'Rail layout only. A name for this panel’s tab link, written without the #. It joins the band’s anchor — band "tech-platforms" and panel "sanity" link as #tech-platforms-sanity. Keep it once people are sharing the link.',
-              validation: (rule) =>
+              validation: (rule) => [
                 rule.custom((value: string | undefined) => validateAnchorName(value)),
+                rule
+                  .custom((value: string | undefined, context) =>
+                    panelAnchorNeedsBand(value, context.document, context.path),
+                  )
+                  .warning(),
+              ],
             }),
             defineField({ name: 'heading', type: 'string' }),
             defineField({

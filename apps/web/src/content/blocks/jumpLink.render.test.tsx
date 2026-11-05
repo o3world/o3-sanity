@@ -128,4 +128,14 @@ describe("a rail band's tabs", () => {
     expect(html.match(/id="tech-platforms-sanity"/g)).toHaveLength(1)
     expect(html).toContain('id="rail-panel-platforms-copy-sanity"')
   })
+
+  it('leave a band its anchor when a joined name lands on it', () => {
+    const html = page([
+      railBand('platforms', 'tech-platforms'),
+      band('later', 'tech-platforms-sanity'),
+    ])
+
+    expect(html.match(/id="tech-platforms-sanity"/g)).toHaveLength(1)
+    expect(html).toContain('href="#rail-panel-platforms-plat-sanity"')
+  })
 })

@@ -1,6 +1,6 @@
 import { Eyebrow, SectionShell } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
-import type { SectionProps } from '@o3/content-runtime/blocks'
+import { panelIds as bandPanelIds, type SectionProps } from '@o3/content-runtime/blocks'
 import { fieldAttr, itemAttr } from '@o3/content-runtime/data-attribute'
 import { stegaClean } from '@sanity/client/stega'
 
@@ -16,7 +16,6 @@ import { MoleculeDecoration } from '../../MoleculeDecoration'
 import { DECORATED_BAND_CLASS } from '../../decoration'
 import { PanelRows } from './PanelRows'
 import { PanelTrack } from './PanelTrack'
-import { panelIds } from './panelIds'
 import { PLATE_BLEED_CLASS, PLATE_BLEED_SIZES } from './plateBleed'
 
 /** Current stacked lockups: Home 3720:62626, Solutions 4018:37996,
@@ -45,7 +44,10 @@ const HEADER_SHAPE = {
   },
 } as const
 
-type RailPanelsSectionProps = SectionProps<'railPanelsSection'>
+type RailPanelsSectionProps = SectionProps<'railPanelsSection'> & {
+  /** The panel ids the dispatch seam settled for the whole page (`pagePanelIds`). */
+  panelIds?: readonly string[]
+}
 
 /** Parallel offers arranged as rails, service rows, columns, or a scrolling track. */
 export function RailPanelsSection({
@@ -61,6 +63,7 @@ export function RailPanelsSection({
   backgroundMedia,
   decoration,
   anchor,
+  panelIds,
   loc,
 }: RailPanelsSectionProps) {
   const items = panels ?? []
@@ -76,9 +79,14 @@ export function RailPanelsSection({
   const isTrack = chosenLayout === 'track'
   const mode = stegaClean(rail) === 'number' ? 'number' : 'label'
   const bleeding = stegaClean(plate) === 'bleed'
-  // SectionProps strips `_key` from the section itself, so it is read out of `loc`.
-  const sectionKey = loc?.path.match(/_key=="([A-Za-z0-9_-]+)"/)?.[1]
-  const ids = panelIds(items, { sectionKey, sectionAnchor: anchor })
+  // A band rendered outside the dispatch seam — a story — resolves its own,
+  // reading its `_key` out of `loc` since SectionProps strips it.
+  const ids =
+    panelIds ??
+    bandPanelIds(items, {
+      sectionKey: loc?.path.match(/_key=="([A-Za-z0-9_-]+)"/)?.[1],
+      sectionAnchor: anchor,
+    })
 
   const isRail = !isCards && !isRows && !isGrid && !isTrack
   const shape =

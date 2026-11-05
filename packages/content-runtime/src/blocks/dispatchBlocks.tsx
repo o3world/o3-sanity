@@ -5,6 +5,7 @@ import type { SanityBlock } from '@o3/sanity/types'
 import { arrayItemLoc, dataAttr } from '../dataAttribute'
 
 import { ANCHOR_OFFSET_CLASS, sectionAnchors } from './anchors'
+import { pagePanelIds } from './panelIds'
 
 /**
  * The per-block dispatch loop shared by `BlockRenderer` (server, published)
@@ -83,6 +84,7 @@ export function renderDispatchedBlocks(opts: {
   // bands and silently miss five. Resolved for the array rather than per block
   // because two bands claiming one name is only visible from here (#149).
   const anchors = sectionAnchors(blocks)
+  const panelIdsByKey = pagePanelIds(blocks, anchors)
   return blocks.map((block) => {
     // The one cast on the dispatch seam: registry values are heterogeneous
     // component types; each block's props are validated where the registry
@@ -101,11 +103,13 @@ export function renderDispatchedBlocks(opts: {
     // name would otherwise shadow the location and take the sub-block
     // attribution down with it, silently. `loc` is not in the field lexicon
     // (CONTEXT.md → Naming), so the collision is a rule rather than a hope.
-    // `anchor` follows it for the same reason: the block sees the name it
-    // actually holds, which is none when an earlier band claimed it — a rail
-    // band builds its panel ids from it, and two bands may not mint the same.
+    // `anchor` and `panelIds` follow it for the same reason: the block draws
+    // the ids it actually holds, which only the whole array can settle.
     const anchor = anchors.get(block._key)
-    const rendered = <Component {...props} anchor={anchor} loc={loc} />
+    const panelIds = panelIdsByKey.get(block._key)
+    const rendered = (
+      <Component {...props} anchor={anchor} {...(panelIds ? { panelIds } : {})} loc={loc} />
+    )
     const wrapperProps = {
       ...(loc ? { 'data-sanity': dataAttr(loc) } : {}),
       ...(anchor ? { id: anchor, className: ANCHOR_OFFSET_CLASS } : {}),

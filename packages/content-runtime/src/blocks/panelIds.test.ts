@@ -1,6 +1,55 @@
 import { describe, expect, it } from 'vitest'
 
-import { panelIds } from './panelIds'
+import type { SanityBlock } from '@o3/sanity/types'
+
+import { sectionAnchors } from './anchors'
+import { pagePanelIds, panelIds } from './panelIds'
+
+const railBand = (key: string, anchor: string | undefined, ...panelAnchors: string[]) =>
+  ({
+    _key: key,
+    _type: 'railPanelsSection',
+    anchor,
+    panels: panelAnchors.map((panelAnchor, index) => ({ _key: `p${index}`, anchor: panelAnchor })),
+  }) as unknown as SanityBlock
+
+const page = (...blocks: SanityBlock[]) => pagePanelIds(blocks, sectionAnchors(blocks))
+
+describe('pagePanelIds', () => {
+  it('namespaces every band by its own key', () => {
+    const ids = page(
+      railBand('platforms', 'tech-platforms', 'sanity'),
+      railBand('more', undefined, 'x'),
+    )
+    expect(ids.get('platforms')).toEqual(['tech-platforms-sanity'])
+    expect(ids.get('more')).toEqual(['rail-panel-more-x'])
+  })
+
+  it('skips a block with no panels', () => {
+    const quote = { _key: 'q', _type: 'quoteSection' } as unknown as SanityBlock
+    expect(page(quote).has('q')).toBe(false)
+  })
+
+  it('yields a joined name another band holds as its own anchor', () => {
+    // The band anchor is what buttons jump to, so it keeps the name wherever it
+    // sits on the page; the panel takes its key-based id.
+    const ids = page(railBand('platforms', 'tech-platforms', 'sanity'), {
+      _key: 'later',
+      _type: 'quoteSection',
+      anchor: 'tech-platforms-sanity',
+    } as unknown as SanityBlock)
+    expect(ids.get('platforms')).toEqual(['rail-panel-platforms-p0'])
+  })
+
+  it('gives a joined name two bands both reach to the first', () => {
+    const ids = page(
+      railBand('a', 'tech-platforms', 'sanity'),
+      railBand('b', 'tech', 'platforms-sanity'),
+    )
+    expect(ids.get('a')).toEqual(['tech-platforms-sanity'])
+    expect(ids.get('b')).toEqual(['rail-panel-b-p0'])
+  })
+})
 
 describe('panelIds', () => {
   it('joins the band anchor and the panel anchor', () => {
