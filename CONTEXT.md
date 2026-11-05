@@ -171,7 +171,7 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `cardMedia`       | The `figure` a document shows on cards and in feeds                                                                      | `featuredImage`, `thumbnail`, `cardImage`, `featureMedia` |
 | `backgroundMedia` | The full-bleed picture a band sits on; injected by `defineSectionBlock`                                                  | `backgroundImage`, `bgImage`, `backdrop`, `photo`         |
 | `button`          | A single button (type `button`), the form's submit included                                                              | `cta`, `link`, `action`, `submitLabel`                    |
-| `anchor`          | The name a band is given, and the name a button jumps to; no `#`                                                         | `id`, `hash`, `fragment`, `jumpTo`                        |
+| `anchor`          | The name a band or a rail panel is given, and the name a button jumps to; no `#`                                         | `id`, `hash`, `fragment`, `jumpTo`                        |
 | `alignment`       | Where a row or a column sits in the space it was given (`buttonGroup`, `heroSection`)                                    | `align`, `justify`, `position`, `float`                   |
 | `framing`         | Whether a wide screen is a complete image or a raw screenshot on a plate                                                 | Inferring composition from asset dimensions               |
 | `bleed`           | Which edge a band's content runs past, or `none` (`layoutSection`)                                                       | `fullWidth`, `overflow`, `edge`                           |

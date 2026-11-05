@@ -624,6 +624,7 @@ export type RailPanelsSection = {
   rail?: 'label' | 'number'
   panels?: Array<{
     railLabel?: string
+    anchor?: string
     heading?: string
     logo?: Logo
     body?: string
@@ -2950,6 +2951,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         rail?: 'label' | 'number'
         panels: Array<{
           railLabel?: string
+          anchor?: string
           heading?: string
           logo?: Logo
           body?: string
@@ -4197,6 +4199,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         rail?: 'label' | 'number'
         panels: Array<{
           railLabel?: string
+          anchor?: string
           heading?: string
           logo?: Logo
           body?: string
@@ -5581,6 +5584,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         rail?: 'label' | 'number'
         panels: Array<{
           railLabel?: string
+          anchor?: string
           heading?: string
           logo?: Logo
           body?: string
@@ -6889,6 +6893,7 @@ export type PAGE_QUERY_RESULT = {
         rail?: 'label' | 'number'
         panels: Array<{
           railLabel?: string
+          anchor?: string
           heading?: string
           logo?: Logo
           body?: string

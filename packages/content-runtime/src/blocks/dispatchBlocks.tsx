@@ -101,8 +101,11 @@ export function renderDispatchedBlocks(opts: {
     // name would otherwise shadow the location and take the sub-block
     // attribution down with it, silently. `loc` is not in the field lexicon
     // (CONTEXT.md → Naming), so the collision is a rule rather than a hope.
-    const rendered = <Component {...props} loc={loc} />
+    // `anchor` follows it for the same reason: the block sees the name it
+    // actually holds, which is none when an earlier band claimed it — a rail
+    // band builds its panel ids from it, and two bands may not mint the same.
     const anchor = anchors.get(block._key)
+    const rendered = <Component {...props} anchor={anchor} loc={loc} />
     const wrapperProps = {
       ...(loc ? { 'data-sanity': dataAttr(loc) } : {}),
       ...(anchor ? { id: anchor, className: ANCHOR_OFFSET_CLASS } : {}),

@@ -82,3 +82,50 @@ describe('a quick-jump row', () => {
     expect(html).not.toContain('<button')
   })
 })
+
+const railBand = (key: string, anchor?: string) => ({
+  _key: key,
+  _type: 'railPanelsSection',
+  surface: 'white',
+  layout: 'rail',
+  rail: 'label',
+  heading: 'The platforms we go deep on',
+  ...(anchor ? { anchor } : {}),
+  panels: [
+    { _key: 'plat-sanity', railLabel: 'Sanity', heading: 'Sanity', anchor: 'sanity' },
+    { _key: '7721a22e1c0a', railLabel: 'Vercel', heading: 'Vercel', anchor: 'vercel' },
+  ],
+})
+
+describe("a rail band's tabs", () => {
+  it('link to the panel under the band name joined to the panel name', () => {
+    const html = page([railBand('platforms', 'tech-platforms')])
+
+    for (const name of ['tech-platforms-sanity', 'tech-platforms-vercel']) {
+      expect(html).toContain(`href="#${name}"`)
+      expect(html).toContain(`id="${name}"`)
+    }
+    expect(html).not.toContain('rail-panel-')
+  })
+
+  it('keep a duplicated band off the first band’s names', () => {
+    // A band duplicated in the Studio carries its anchor and its panels'
+    // anchors with it; only the first band gets to answer to them. The second
+    // falls back to its section key, which only a document's `loc` supplies.
+    const html = renderToStaticMarkup(
+      <BlockRenderer
+        documentId="home"
+        documentType="page"
+        blocks={
+          [
+            railBand('platforms', 'tech-platforms'),
+            railBand('platforms-copy', 'tech-platforms'),
+          ] as SanityBlock[]
+        }
+      />,
+    )
+
+    expect(html.match(/id="tech-platforms-sanity"/g)).toHaveLength(1)
+    expect(html).toContain('id="rail-panel-platforms-copy-sanity"')
+  })
+})

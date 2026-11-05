@@ -16,6 +16,7 @@ import { MoleculeDecoration } from '../../MoleculeDecoration'
 import { DECORATED_BAND_CLASS } from '../../decoration'
 import { PanelRows } from './PanelRows'
 import { PanelTrack } from './PanelTrack'
+import { panelIds } from './panelIds'
 import { PLATE_BLEED_CLASS, PLATE_BLEED_SIZES } from './plateBleed'
 
 /** Current stacked lockups: Home 3720:62626, Solutions 4018:37996,
@@ -59,6 +60,7 @@ export function RailPanelsSection({
   surface,
   backgroundMedia,
   decoration,
+  anchor,
   loc,
 }: RailPanelsSectionProps) {
   const items = panels ?? []
@@ -74,15 +76,9 @@ export function RailPanelsSection({
   const isTrack = chosenLayout === 'track'
   const mode = stegaClean(rail) === 'number' ? 'number' : 'label'
   const bleeding = stegaClean(plate) === 'bleed'
-  // Panel ids are namespaced by the section's own `_key`, read out of `loc`
-  // (SectionProps strips `_key` from the section itself). Panel keys alone are
-  // NOT unique on a page: duplicating a rail band in the Studio copies its
-  // panels' keys verbatim, and with two bands minting the same DOM ids every
-  // `getElementById` — both rails' observers and every anchor link — resolves
-  // to the first band and cross-wires the second.
+  // SectionProps strips `_key` from the section itself, so it is read out of `loc`.
   const sectionKey = loc?.path.match(/_key=="([A-Za-z0-9_-]+)"/)?.[1]
-  const panelId = (key: string | undefined, index: number) =>
-    `rail-panel-${sectionKey ? `${sectionKey}-` : ''}${key ?? index}`
+  const ids = panelIds(items, { sectionKey, sectionAnchor: anchor })
 
   const isRail = !isCards && !isRows && !isGrid && !isTrack
   const shape =
@@ -231,10 +227,10 @@ export function RailPanelsSection({
 
         <PanelBand
           mode={mode}
-          panelIds={items.map((panel, index) => panelId(panel._key, index))}
+          panelIds={ids}
           railItems={items.map((panel, index) => ({
             key: panel._key ?? String(index),
-            panelId: panelId(panel._key, index),
+            panelId: ids[index]!,
             label:
               mode === 'number'
                 ? String(index + 1).padStart(2, '0')
@@ -245,7 +241,7 @@ export function RailPanelsSection({
             ? items.map((panel, index) => (
                 <PanelPlate
                   key={panel._key}
-                  id={panelId(panel._key, index)}
+                  id={ids[index]!}
                   logo={panel.logo}
                   heading={panel.heading}
                   railLabel={panel.railLabel}
@@ -260,7 +256,7 @@ export function RailPanelsSection({
             : items.map((panel, index) => (
                 <article
                   key={panel._key}
-                  id={panelId(panel._key, index)}
+                  id={ids[index]}
                   // The panel's own path — `sections[_key=="…"].panels[_key=="…"]`.
                   // `panels` has exactly one member type, so it serialises as
                   // an `arrayItem` and resolves natively at this depth (#104).
