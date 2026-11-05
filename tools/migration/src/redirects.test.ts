@@ -7,7 +7,7 @@ import { collectionPrefixes } from '@o3/sanity/brand'
 
 import { GENERATED_REDIRECTS } from '../../../apps/web/src/lib/redirects.generated'
 import { slugsByType } from './core/read'
-import { EXTRACT_DIR } from './lib/paths'
+import { ASSET_MAP, EXTRACT_DIR } from './lib/paths'
 import { movedPath } from './map/paths'
 
 /**
@@ -83,11 +83,12 @@ describe('the committed redirect table', () => {
   // rule that either fails to build or matches nothing. `:param` segments are
   // Next's own syntax and are how a moved collection ships as one rule instead
   // of 272 (ADR 0017). A `*` is allowed only on a final `:param`, the catch-all
-  // form `resolve` reads.
+  // form `resolve` reads. An `@` is a literal to Next's matcher, and WordPress
+  // put one in every retina upload's name (`…@2x.webp`).
   it('holds only sources Next.js can match on', () => {
     for (const { source } of redirects) {
       expect(source, `${source} is not a plain path`).toMatch(
-        /^\/[A-Za-z0-9/_.:-]*(\/:[A-Za-z]+\*)?$/,
+        /^\/[A-Za-z0-9/_.:@-]*(\/:[A-Za-z]+\*)?$/,
       )
     }
   })
@@ -97,15 +98,21 @@ describe('the committed redirect table', () => {
    * specific has to be declared before it — Next.js takes the first match.
    * Three retired articles redirect to the index rather than to their own new
    * path, and if the wildcard outranked them those visitors would land on a
-   * 404 instead.
+   * 404 instead. A catch-all (`:param*`) matches zero segments too, so it also
+   * swallows a row for its bare prefix.
    */
   it('declares every specific row before the wildcard that would swallow it', () => {
     for (const [i, { source }] of redirects.entries()) {
       if (!source.includes(':')) continue
       const prefix = source.slice(0, source.indexOf('/:'))
+      const catchAll = source.endsWith('*')
       const shadowed = redirects
         .slice(i + 1)
-        .filter((r) => r.source !== source && r.source.startsWith(`${prefix}/`))
+        .filter(
+          (r) =>
+            r.source !== source &&
+            (r.source.startsWith(`${prefix}/`) || (catchAll && r.source === prefix)),
+        )
       expect(
         shadowed.map((r) => r.source),
         `${source} shadows rows declared after it`,
@@ -192,12 +199,37 @@ describe('the committed redirect table', () => {
   })
 
   /**
-   * WordPress media the redesign did not carry over (OWSW-115). Production
-   * content no longer links any of it, so what still asks for it is external
-   * backlinks and the search index — and they get the homepage, not a 404.
-   * Next.js matches on the pathname, so a `?_=1` cache-buster changes nothing.
+   * What still asks for a WordPress upload is external backlinks and the
+   * search index (OWSW-115). An upload the migration carried into Sanity —
+   * every one `data/assets.json` records — answers with that same file on the
+   * CDN, so a hotlinked image keeps rendering.
    */
-  it('sends every legacy WordPress upload to the homepage', () => {
+  it('sends every migrated WordPress upload to its own file on the Sanity CDN', () => {
+    const manifest = JSON.parse(readFileSync(ASSET_MAP, 'utf8')) as Record<
+      string,
+      { assetId: string }
+    >
+    const migrated = Object.entries(manifest).filter(([url]) =>
+      URL.canParse(url) ? new URL(url).pathname.startsWith('/wp-content/uploads/') : false,
+    )
+    expect(migrated.length).toBeGreaterThan(300)
+    for (const [url, { assetId }] of migrated) {
+      const path = new URL(url).pathname
+      const [, hash, dimensions, extension] = /^image-([a-f0-9]+)-(\d+x\d+)-(\w+)$/.exec(assetId)!
+      expect(resolve(path), path).toMatch(
+        new RegExp(
+          `^https://cdn\\.sanity\\.io/images/[^/]+/[^/]+/${hash}-${dimensions}\\.${extension}$`,
+        ),
+      )
+    }
+  })
+
+  /**
+   * The rest — the PDFs and videos the migration never took — land on the
+   * homepage rather than a 404. Next.js matches on the pathname, so a `?_=1`
+   * cache-buster changes nothing.
+   */
+  it('sends every other legacy WordPress upload to the homepage', () => {
     for (const path of [
       '/wp-content/uploads',
       '/wp-content/uploads/2023/01/Making-Sense-of-Accessibility-eBook-1.pdf',
