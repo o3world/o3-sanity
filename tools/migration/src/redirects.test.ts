@@ -7,7 +7,7 @@ import { collectionPrefixes } from '@o3/sanity/brand'
 
 import { GENERATED_REDIRECTS } from '../../../apps/web/src/lib/redirects.generated'
 import { slugsByType } from './core/read'
-import { EXTRACT_DIR } from './lib/paths'
+import { ASSET_MAP, EXTRACT_DIR } from './lib/paths'
 import { movedPath } from './map/paths'
 
 /**
@@ -33,20 +33,31 @@ const redirects = GENERATED_REDIRECTS
 const destinationBySource = new Map(redirects.map((r) => [r.source, r.destination]))
 const paths = sitePaths()
 
+/** One source segment against one path segment: literal, or a `:param` taking any one. */
+function segmentMatches(part: string, segment: string | undefined): boolean {
+  return part === segment || (part.startsWith(':') && segment !== undefined && segment !== '')
+}
+
 /**
  * Where a request for `path` is sent: the first rule whose source matches,
- * taking a `:param` segment as any one segment, which is how Next.js reads
- * these sources. `undefined` when no rule claims the path.
+ * read the way Next.js reads these sources — a `:param` segment is any one
+ * segment, and a trailing `:param*` is zero or more. `undefined` when no rule
+ * claims the path.
  */
 function resolve(path: string): string | undefined {
   const segments = path.split('/')
   const rule = redirects.find(({ source }) => {
     const pattern = source.split('/')
+    if (pattern.at(-1)?.endsWith('*')) {
+      const prefix = pattern.slice(0, -1)
+      return (
+        segments.length >= prefix.length &&
+        prefix.every((part, i) => segmentMatches(part, segments[i]))
+      )
+    }
     return (
       pattern.length === segments.length &&
-      pattern.every(
-        (part, i) => part === segments[i] || (part.startsWith(':') && segments[i] !== ''),
-      )
+      pattern.every((part, i) => segmentMatches(part, segments[i]))
     )
   })
   return rule?.destination
@@ -71,10 +82,14 @@ describe('the committed redirect table', () => {
   // Next.js compiles `source` as a path pattern; a space or a `%` in one is a
   // rule that either fails to build or matches nothing. `:param` segments are
   // Next's own syntax and are how a moved collection ships as one rule instead
-  // of 272 (ADR 0017).
+  // of 272 (ADR 0017). A `*` is allowed only on a final `:param`, the catch-all
+  // form `resolve` reads. An `@` is a literal to Next's matcher, and WordPress
+  // put one in every retina upload's name (`…@2x.webp`).
   it('holds only sources Next.js can match on', () => {
     for (const { source } of redirects) {
-      expect(source, `${source} is not a plain path`).toMatch(/^\/[A-Za-z0-9/_.:-]*$/)
+      expect(source, `${source} is not a plain path`).toMatch(
+        /^\/[A-Za-z0-9/_.:@-]*(\/:[A-Za-z]+\*)?$/,
+      )
     }
   })
 
@@ -83,15 +98,21 @@ describe('the committed redirect table', () => {
    * specific has to be declared before it — Next.js takes the first match.
    * Three retired articles redirect to the index rather than to their own new
    * path, and if the wildcard outranked them those visitors would land on a
-   * 404 instead.
+   * 404 instead. A catch-all (`:param*`) matches zero segments too, so it also
+   * swallows a row for its bare prefix.
    */
   it('declares every specific row before the wildcard that would swallow it', () => {
     for (const [i, { source }] of redirects.entries()) {
       if (!source.includes(':')) continue
       const prefix = source.slice(0, source.indexOf('/:'))
+      const catchAll = source.endsWith('*')
       const shadowed = redirects
         .slice(i + 1)
-        .filter((r) => r.source !== source && r.source.startsWith(`${prefix}/`))
+        .filter(
+          (r) =>
+            r.source !== source &&
+            (r.source.startsWith(`${prefix}/`) || (catchAll && r.source === prefix)),
+        )
       expect(
         shadowed.map((r) => r.source),
         `${source} shadows rows declared after it`,
@@ -175,6 +196,49 @@ describe('the committed redirect table', () => {
     const actual = Object.fromEntries(Object.keys(expected).map((path) => [path, resolve(path)]))
     expect(actual).toEqual(expected)
     expect(expected['/work/rfp-automation']).toMatch(/^https:\/\//)
+  })
+
+  /**
+   * What still asks for a WordPress upload is external backlinks and the
+   * search index (OWSW-115). An upload the migration carried into Sanity —
+   * every one `data/assets.json` records — answers with that same file on the
+   * CDN, so a hotlinked image keeps rendering.
+   */
+  it('sends every migrated WordPress upload to its own file on the Sanity CDN', () => {
+    const manifest = JSON.parse(readFileSync(ASSET_MAP, 'utf8')) as Record<
+      string,
+      { assetId: string }
+    >
+    const migrated = Object.entries(manifest).filter(([url]) =>
+      URL.canParse(url) ? new URL(url).pathname.startsWith('/wp-content/uploads/') : false,
+    )
+    expect(migrated.length).toBeGreaterThan(300)
+    for (const [url, { assetId }] of migrated) {
+      const path = new URL(url).pathname
+      const [, hash, dimensions, extension] = /^image-([a-f0-9]+)-(\d+x\d+)-(\w+)$/.exec(assetId)!
+      expect(resolve(path), path).toMatch(
+        new RegExp(
+          `^https://cdn\\.sanity\\.io/images/[^/]+/[^/]+/${hash}-${dimensions}\\.${extension}$`,
+        ),
+      )
+    }
+  })
+
+  /**
+   * The rest — the PDFs and videos the migration never took — land on the
+   * homepage rather than a 404. Next.js matches on the pathname, so a `?_=1`
+   * cache-buster changes nothing.
+   */
+  it('sends every other legacy WordPress upload to the homepage', () => {
+    for (const path of [
+      '/wp-content/uploads',
+      '/wp-content/uploads/2023/01/Making-Sense-of-Accessibility-eBook-1.pdf',
+      '/wp-content/uploads/2024/10/o3_recap_v2-720p.mp4',
+      '/wp-content/uploads/2023/01/BestEgg-casestudy3-6-1280x741',
+    ]) {
+      expect(resolve(path), path).toBe('/')
+    }
+    expect(resolve('/wp-content/themes/o3/style.css')).toBeUndefined()
   })
 
   it('leaves the pages those rules send people to alone', () => {

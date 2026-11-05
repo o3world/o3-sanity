@@ -12,9 +12,22 @@
  * contradiction search engines are entitled to punish.
  */
 
+import { rawImageUrl } from '@o3/sanity/image'
+
+import { MIGRATED_UPLOADS } from './wpUploads.generated'
+
 export interface GeneratedRedirect {
   readonly source: string
   readonly destination: string
+}
+
+/** A migrated WordPress upload answers with the same image on the Sanity CDN. */
+function migratedUploadRedirects(): GeneratedRedirect[] {
+  return Object.entries(MIGRATED_UPLOADS).map(([source, assetId]) => {
+    const destination = rawImageUrl(assetId)
+    if (!destination) throw new Error(`${source}: ${assetId} is not an image asset id`)
+    return { source, destination }
+  })
 }
 
 export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
@@ -1363,8 +1376,11 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
     source: '/work/the-institutes',
     destination: '/work',
   },
+  ...migratedUploadRedirects(),
   {
-    source: '/wp-content/uploads/2023/01/BestEgg-casestudy3-6-1280x741',
+    // Every other WordPress upload — the PDFs and videos the migration never
+    // took. Backlinks and indexed URLs land on the homepage, not a 404.
+    source: '/wp-content/uploads/:path*',
     destination: '/',
   },
   {
