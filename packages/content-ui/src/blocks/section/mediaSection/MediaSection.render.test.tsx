@@ -118,6 +118,21 @@ describe('the picture the media band sits on', () => {
     expect(html).toContain('lg:h-[700px]')
   })
 
+  it('runs a composition on a picture edge to edge and caps the composition at the column', () => {
+    const html = render({ variant: 'composition', backgroundMedia: { ...PICTURE, tint: 'none' } })
+    expect(html).toContain('1440x790')
+    expect(html).toContain('isolate')
+    expect(html).toContain('max-w-section mx-auto w-full')
+    expect(html).toContain('sizes="(min-width: 1728px) 1728px, 100vw"')
+  })
+
+  it('leaves a composition with no picture uncapped, since its ground is in the image', () => {
+    const html = render({ variant: 'composition' })
+    expect(html).not.toContain('aria-hidden')
+    expect(html).not.toContain('max-w-section')
+    expect(html).toContain('sizes="100vw"')
+  })
+
   it('tints the picture by default and leaves it alone when told to', () => {
     expect(render({ variant: 'plain', backgroundMedia: PICTURE })).toContain('bg-white/70')
     expect(

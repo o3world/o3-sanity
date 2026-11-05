@@ -19,7 +19,7 @@ export const mediaSectionKnobs = defineBlockKnobs({
       name: 'variant',
       title: 'Variant',
       description:
-        'Plain draws the figure itself. Composition preserves an exported image’s complete edge-to-edge artwork and proportions. Capture floats a tall page screenshot on a dark stage and crops it at the band’s floor — the frame’s "here is the whole page" moment. Overlap lifts a section-width photograph over the preceding band. Feature places a wordmark and supporting copy over a photograph.',
+        'Plain draws the figure itself. Composition preserves an exported image’s complete edge-to-edge artwork and proportions; give it its ground as a separate Background, with Tint set to None, and the ground runs edge to edge while the image stops at the section width. Capture floats a tall page screenshot on a dark stage and crops it at the band’s floor — the frame’s "here is the whole page" moment. Overlap lifts a section-width photograph over the preceding band. Feature places a wordmark and supporting copy over a photograph.',
       // `1647:1720` (#97): the same block, a different treatment — a 700px
       // dark band the capture is CROPPED by, rather than a figure sized to
       // its own aspect. A variant on the block instead of a second block,
