@@ -33,20 +33,31 @@ const redirects = GENERATED_REDIRECTS
 const destinationBySource = new Map(redirects.map((r) => [r.source, r.destination]))
 const paths = sitePaths()
 
+/** One source segment against one path segment: literal, or a `:param` taking any one. */
+function segmentMatches(part: string, segment: string | undefined): boolean {
+  return part === segment || (part.startsWith(':') && segment !== undefined && segment !== '')
+}
+
 /**
  * Where a request for `path` is sent: the first rule whose source matches,
- * taking a `:param` segment as any one segment, which is how Next.js reads
- * these sources. `undefined` when no rule claims the path.
+ * read the way Next.js reads these sources — a `:param` segment is any one
+ * segment, and a trailing `:param*` is zero or more. `undefined` when no rule
+ * claims the path.
  */
 function resolve(path: string): string | undefined {
   const segments = path.split('/')
   const rule = redirects.find(({ source }) => {
     const pattern = source.split('/')
+    if (pattern.at(-1)?.endsWith('*')) {
+      const prefix = pattern.slice(0, -1)
+      return (
+        segments.length >= prefix.length &&
+        prefix.every((part, i) => segmentMatches(part, segments[i]))
+      )
+    }
     return (
       pattern.length === segments.length &&
-      pattern.every(
-        (part, i) => part === segments[i] || (part.startsWith(':') && segments[i] !== ''),
-      )
+      pattern.every((part, i) => segmentMatches(part, segments[i]))
     )
   })
   return rule?.destination
@@ -71,10 +82,13 @@ describe('the committed redirect table', () => {
   // Next.js compiles `source` as a path pattern; a space or a `%` in one is a
   // rule that either fails to build or matches nothing. `:param` segments are
   // Next's own syntax and are how a moved collection ships as one rule instead
-  // of 272 (ADR 0017).
+  // of 272 (ADR 0017). A `*` is allowed only on a final `:param`, the catch-all
+  // form `resolve` reads.
   it('holds only sources Next.js can match on', () => {
     for (const { source } of redirects) {
-      expect(source, `${source} is not a plain path`).toMatch(/^\/[A-Za-z0-9/_.:-]*$/)
+      expect(source, `${source} is not a plain path`).toMatch(
+        /^\/[A-Za-z0-9/_.:-]*(\/:[A-Za-z]+\*)?$/,
+      )
     }
   })
 
@@ -175,6 +189,24 @@ describe('the committed redirect table', () => {
     const actual = Object.fromEntries(Object.keys(expected).map((path) => [path, resolve(path)]))
     expect(actual).toEqual(expected)
     expect(expected['/work/rfp-automation']).toMatch(/^https:\/\//)
+  })
+
+  /**
+   * WordPress media the redesign did not carry over (OWSW-115). Production
+   * content no longer links any of it, so what still asks for it is external
+   * backlinks and the search index — and they get the homepage, not a 404.
+   * Next.js matches on the pathname, so a `?_=1` cache-buster changes nothing.
+   */
+  it('sends every legacy WordPress upload to the homepage', () => {
+    for (const path of [
+      '/wp-content/uploads',
+      '/wp-content/uploads/2023/01/Making-Sense-of-Accessibility-eBook-1.pdf',
+      '/wp-content/uploads/2024/10/o3_recap_v2-720p.mp4',
+      '/wp-content/uploads/2023/01/BestEgg-casestudy3-6-1280x741',
+    ]) {
+      expect(resolve(path), path).toBe('/')
+    }
+    expect(resolve('/wp-content/themes/o3/style.css')).toBeUndefined()
   })
 
   it('leaves the pages those rules send people to alone', () => {

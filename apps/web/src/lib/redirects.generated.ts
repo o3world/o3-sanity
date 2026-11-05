@@ -1364,7 +1364,8 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
     destination: '/work',
   },
   {
-    source: '/wp-content/uploads/2023/01/BestEgg-casestudy3-6-1280x741',
+    // WordPress media, none of which migrated: backlinks and indexed URLs.
+    source: '/wp-content/uploads/:path*',
     destination: '/',
   },
   {
