@@ -101,6 +101,7 @@
     {
       "_type": "railPanelsSection",
       "_key": "platforms",
+      "anchor": "tech-platforms",
       "surface": "white",
       "layout": "rail",
       "heading": "The platforms we go deep on",
@@ -110,6 +111,7 @@
           "_type": "panel",
           "_key": "plat-sanity",
           "railLabel": "Sanity",
+          "anchor": "sanity",
           "logo": {
             "_type": "image",
             "_localSrc": "tools/migration/data/seed/assets/plat-sanity-logo.png"
@@ -134,6 +136,7 @@
           "_type": "panel",
           "_key": "plat-vercel",
           "railLabel": "Vercel",
+          "anchor": "vercel",
           "logo": {
             "_type": "image",
             "_localSrc": "tools/migration/data/seed/assets/plat-vercel-logo.png"
@@ -158,6 +161,7 @@
           "_type": "panel",
           "_key": "plat-lovable",
           "railLabel": "Lovable",
+          "anchor": "lovable",
           "logo": {
             "_type": "image",
             "_localSrc": "tools/migration/data/seed/assets/plat-lovable-logo.png"

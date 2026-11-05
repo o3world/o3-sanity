@@ -5,6 +5,7 @@
  * is compile-checked against.
  */
 export { ANCHOR_OFFSET_CLASS, sectionAnchors } from './anchors'
+export { pagePanelIds, panelIds } from './panelIds'
 export {
   bindingsToRecord,
   defineBlockRender,

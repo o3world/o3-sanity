@@ -67,6 +67,35 @@ export function validateAnchorName(value: string | undefined): true | string {
     : 'Write the anchor’s name on its own — no # and no spaces.'
 }
 
+type PathSegment = string | number | { _key: string } | [number | '', number | '']
+
+/**
+ * The warning on a rail panel's anchor whose band has none.
+ *
+ * The panel's link is the band's anchor joined to its own, so without the
+ * band's it falls back to an id built from the section key — readable to
+ * nobody, and with no sign in the form that anything is missing. The band is
+ * three segments up the panel field's path: `…, {_key}, 'panels', {_key}, 'anchor'`.
+ */
+export function panelAnchorNeedsBand(
+  value: string | undefined,
+  document: unknown,
+  path: readonly PathSegment[] | undefined,
+): true | string {
+  if (!value?.trim() || !path || path.length < 3) return true
+  let band: unknown = document
+  for (const segment of path.slice(0, -3)) {
+    if (typeof segment === 'string') band = (band as Record<string, unknown> | undefined)?.[segment]
+    else if (typeof segment === 'object' && '_key' in segment)
+      band = (band as { _key?: string }[] | undefined)?.find?.((item) => item._key === segment._key)
+    else return true
+  }
+  if (!band) return true
+  return (band as { anchor?: string }).anchor?.trim()
+    ? true
+    : 'This link stays an id built from the section key until the band’s own Anchor is set — it joins as #<band>-<panel>.'
+}
+
 /**
  * THE ANCHOR EVERY SECTION BLOCK CARRIES — injected by `defineSectionBlock`,
  * beside the surface knob's generated field (#149).
