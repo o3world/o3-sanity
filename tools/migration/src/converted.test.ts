@@ -221,4 +221,28 @@ describe('the committed converted corpus', () => {
       }
     }
   })
+
+  // WordPress kept a few links whose href is an email address with no
+  // `mailto:` (#537). A bare address resolves against the page it sits on —
+  // `/insights/<address>`, a 404 — and an `http://` one opens the home page
+  // with the mailbox name taken as a login. An href holding an `@` is either a
+  // `mailto:` or a real web URL with nothing before its host.
+  it('links every email address with mailto:', () => {
+    for (const { file, doc } of all) {
+      for (const href of linkHrefs(doc).filter((h) => h.includes('@'))) {
+        if (href.startsWith('mailto:')) continue
+        expect(href, `${file}: "${href}" is an address without mailto:`).toMatch(/^https?:\/\//)
+        expect(new URL(href).username, `${file}: "${href}" is an address, not a URL`).toBe('')
+      }
+    }
+  })
 })
+
+/** Every `href` on a `link` annotation anywhere in a document. */
+function linkHrefs(node: unknown): string[] {
+  if (Array.isArray(node)) return node.flatMap(linkHrefs)
+  if (!node || typeof node !== 'object') return []
+  const record = node as Record<string, unknown>
+  const own = record._type === 'link' && typeof record.href === 'string' ? [record.href] : []
+  return [...own, ...Object.values(record).flatMap(linkHrefs)]
+}
