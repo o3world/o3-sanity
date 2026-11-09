@@ -59,12 +59,13 @@ export function organization({
   baseUrl: string
   settings: SITE_SETTINGS_QUERY_RESULT
 }) {
+  const siteTitle = settings?.title?.trim()
   return compact({
     '@context': CONTEXT,
     '@type': 'Organization',
     '@id': organizationId(baseUrl),
     name: ORGANIZATION.name,
-    alternateName: settings?.title?.trim(),
+    alternateName: siteTitle?.toLowerCase() === ORGANIZATION.name.toLowerCase() ? null : siteTitle,
     legalName: settings?.legalName?.trim(),
     url: absoluteUrl('/', baseUrl),
     logo: absoluteUrl('/apple-icon.png', baseUrl),

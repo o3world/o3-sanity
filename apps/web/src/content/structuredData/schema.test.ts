@@ -75,6 +75,11 @@ describe('organization', () => {
     })
   })
 
+  it('gives no alternateName when the site title is already the name', () => {
+    const same = organization({ baseUrl: BASE, settings: siteSettings({ title: 'O3 World' }) })
+    expect(same).not.toHaveProperty('alternateName')
+  })
+
   it('omits what Site Settings leaves empty rather than emitting nulls', () => {
     const bare = organization({
       baseUrl: BASE,
