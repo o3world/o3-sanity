@@ -89,6 +89,15 @@ function ogImageUrl(source: SanityImageSource | null): string | null {
   }
 }
 
+/**
+ * The social-card URL for a document image or `figure`, at the size `og:image`
+ * uses, or null when there is none or its asset is unresolved. Exported so
+ * structured data names the same image the share card does.
+ */
+export function socialImageUrl(input: DocumentSeo['image']): string | null {
+  return ogImageUrl(toImageSource(input))
+}
+
 function firstString(...values: (string | null | undefined)[]): string | undefined {
   for (const value of values) {
     const trimmed = value?.trim()

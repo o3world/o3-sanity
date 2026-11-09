@@ -2,19 +2,44 @@ import { INSIGHT_QUERY } from '@o3/sanity/queries'
 import { collectionPrefixes } from '@o3/sanity/brand'
 import type { INSIGHT_QUERY_RESULT } from '@o3/sanity/types/generated'
 
+import { getBaseUrl } from '@o3/content-runtime/base-url'
 import { defineDetailType, type RendererProps } from '@o3/content-runtime/routes'
-import type { DocumentSeo } from '@o3/content-runtime/seo'
+import { socialImageUrl, type DocumentSeo } from '@o3/content-runtime/seo'
 
 import { getView } from '@/content/documents/registry'
+import { JsonLd } from '@/content/structuredData/JsonLd'
+import { blogPosting, breadcrumbs } from '@/content/structuredData/schema'
+
+import { insightIndex } from './collectionIndex'
 
 type InsightRendererProps = RendererProps<typeof INSIGHT_QUERY>
 
-function InsightRenderer({ slug: _slug, ...rest }: InsightRendererProps) {
+/** The share card's image: the `seo` override, then the card picture, as `og:image` resolves it. */
+function leadImageUrl(doc: NonNullable<INSIGHT_QUERY_RESULT>): string | null {
+  return socialImageUrl(doc.seo?.ogImage) ?? socialImageUrl(doc.cardMedia)
+}
+
+function InsightRenderer({ slug, ...rest }: InsightRendererProps) {
   // The cast bridges the Q-widening gap (see `@o3/content-runtime/routes`) — the
   // runtime shape is always the typed query result.
   const doc = rest as NonNullable<INSIGHT_QUERY_RESULT>
   const View = getView('insight')
-  return <View {...doc} />
+  const baseUrl = getBaseUrl()
+  const prefix = collectionPrefixes().insight
+  return (
+    <>
+      <JsonLd
+        data={blogPosting({ baseUrl, insight: { ...doc, slug }, imageUrl: leadImageUrl(doc) })}
+      />
+      <JsonLd
+        data={breadcrumbs(baseUrl, [
+          { name: insightIndex.seo?.title ?? 'Insights', path: prefix },
+          { name: doc.title ?? '', path: `${prefix}/${slug}` },
+        ])}
+      />
+      <View {...doc} />
+    </>
+  )
 }
 
 export const insight = defineDetailType({
