@@ -7,6 +7,7 @@ import {
   type RendererProps,
 } from '@o3/content-runtime/routes'
 import { getBaseUrl } from '@o3/content-runtime/base-url'
+import { stegaClean } from '@sanity/client/stega'
 import type { DocumentSeo } from '@o3/content-runtime/seo'
 import { hrefForDoc } from '@o3/content-runtime/urls'
 
@@ -16,9 +17,13 @@ import { breadcrumbs, service } from '@/content/structuredData/schema'
 
 type PageRendererProps = RendererProps<typeof PAGE_QUERY>
 
-/** The pages that describe a service O3 sells: /solutions, its children, and each partner page. */
-function isServicePage(slug: string): boolean {
-  return slug === 'solutions' || slug.startsWith('solutions/') || slug.startsWith('partners/')
+/**
+ * A page that sells a service: the editor typed it `service` or `partner`.
+ * Cleaned first, because a draft read stega-encodes the value.
+ */
+function isServicePage(doc: NonNullable<PAGE_QUERY_RESULT>): boolean {
+  const type = stegaClean(doc.pageType)
+  return type === 'service' || type === 'partner'
 }
 
 /**
@@ -32,14 +37,15 @@ function PageStructuredData({ doc, slug }: { doc: NonNullable<PAGE_QUERY_RESULT>
   const baseUrl = getBaseUrl()
   const path = hrefForDoc({ _type: 'page', slug })
   const title = doc.title ?? ''
-  const parent = doc.parent?.slug
-    ? [{ name: doc.parent.title ?? '', path: hrefForDoc({ _type: 'page', slug: doc.parent.slug }) }]
+  const parentSlug = stegaClean(doc.parent?.slug)
+  const parent = parentSlug
+    ? [{ name: doc.parent?.title ?? '', path: hrefForDoc({ _type: 'page', slug: parentSlug }) }]
     : []
 
   return (
     <>
       <JsonLd data={breadcrumbs(baseUrl, [...parent, { name: title, path }])} />
-      {isServicePage(slug) ? (
+      {isServicePage(doc) ? (
         <JsonLd data={service({ baseUrl, name: title, description: doc.seo?.description, path })} />
       ) : null}
     </>

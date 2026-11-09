@@ -96,18 +96,19 @@ describe('blogPosting', () => {
     author: { name: 'Pat Example', title: 'Director' },
   }
 
-  it('describes the article from its own fields', () => {
+  const url = `${BASE}/insights/why-sanity`
+
+  it('describes the article from its own fields, at the URL it is given', () => {
     expect(
-      blogPosting({ baseUrl: BASE, insight, imageUrl: 'https://cdn.example/hero.jpg' }),
+      blogPosting({ baseUrl: BASE, insight, url, imageUrl: 'https://cdn.example/hero.jpg' }),
     ).toEqual({
       '@context': 'https://schema.org',
       '@type': 'BlogPosting',
       headline: 'Why we build in Sanity',
       description: 'Notes on structured content.',
-      url: `${BASE}/insights/why-sanity`,
-      mainEntityOfPage: `${BASE}/insights/why-sanity`,
+      url,
+      mainEntityOfPage: url,
       datePublished: '2026-06-01T12:00:00Z',
-      dateModified: '2026-06-03T09:00:00Z',
       image: ['https://cdn.example/hero.jpg'],
       author: { '@type': 'Person', name: 'Pat Example', jobTitle: 'Director' },
       publisher: {
@@ -123,6 +124,7 @@ describe('blogPosting', () => {
     const post = blogPosting({
       baseUrl: BASE,
       insight: { ...insight, author: null },
+      url,
       imageUrl: null,
     })
     expect(post.author).toEqual({
@@ -134,13 +136,9 @@ describe('blogPosting', () => {
     expect(post).not.toHaveProperty('image')
   })
 
-  it('falls back to the publish date when the document has no edit time', () => {
-    const post = blogPosting({
-      baseUrl: BASE,
-      insight: { ...insight, _updatedAt: null },
-      imageUrl: null,
-    })
-    expect(post.dateModified).toBe('2026-06-01T12:00:00Z')
+  it('claims no dateModified: _updatedAt moves on migration writes, not only edits', () => {
+    const post = blogPosting({ baseUrl: BASE, insight, url, imageUrl: null })
+    expect(post).not.toHaveProperty('dateModified')
   })
 })
 
@@ -165,6 +163,19 @@ describe('breadcrumbs', () => {
         },
       ],
     })
+  })
+})
+
+describe('breadcrumbs with an untitled crumb', () => {
+  it('drops the crumb rather than emit a ListItem with no name', () => {
+    const list = breadcrumbs(BASE, [
+      { name: '  ', path: '/solutions' },
+      { name: 'Design', path: '/solutions/design' },
+    ])
+    expect(list.itemListElement.map((item) => [item.position, item.name])).toEqual([
+      [1, 'Home'],
+      [2, 'Design'],
+    ])
   })
 })
 
@@ -199,5 +210,11 @@ describe('serializeJsonLd', () => {
     const out = serializeJsonLd({ headline: '</script><script>alert(1)</script>' })
     expect(out).not.toContain('</script>')
     expect(JSON.parse(out)).toEqual({ headline: '</script><script>alert(1)</script>' })
+  })
+
+  it('strips the stega markers a draft read embeds in every string', () => {
+    const marker = '​‌‍﻿'.repeat(6)
+    const out = serializeJsonLd({ headline: `Hello${marker}`, crumbs: [{ name: `Home${marker}` }] })
+    expect(JSON.parse(out)).toEqual({ headline: 'Hello', crumbs: [{ name: 'Home' }] })
   })
 })

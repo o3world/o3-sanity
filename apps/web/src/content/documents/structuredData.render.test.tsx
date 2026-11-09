@@ -95,6 +95,19 @@ describe('an insight', async () => {
     expect(crumbNames(html)).toEqual(['Home', 'Insights', doc.title])
     expect(crumbUrls(html).at(-1)).toMatch(new RegExp(`/insights/${doc.slug}$`))
   })
+
+  it('names the canonical URL when the editor overrode it, as the canonical tag does', async () => {
+    const canonical = 'https://www.o3world.com/insights/the-original'
+    const overridden = { ...doc, seo: { ...(doc.seo as object), canonical } }
+    const { html: withCanonical, metadata } = await renderRoute(buildDetailRoute(insight), {
+      data: withSettings(overridden, siteSettings()),
+      params: { slug: doc.slug as string },
+    })
+    expect(metadata.alternates?.canonical).toBe(canonical)
+    expect(ofType(withCanonical, 'BlogPosting')).toEqual([
+      expect.objectContaining({ url: canonical, mainEntityOfPage: canonical }),
+    ])
+  })
 })
 
 describe('a case study', async () => {
@@ -112,8 +125,11 @@ describe('a case study', async () => {
 })
 
 describe('a page', () => {
-  it('describes /solutions as a Service O3 World provides', async () => {
-    const html = await renderPage(aSeededPage('solutions'), 'solutions')
+  it('describes a service page as a Service O3 World provides', async () => {
+    const html = await renderPage(
+      aSeededPage('solutions-software-engineering'),
+      'solutions/software-engineering',
+    )
     expect(ofType(html, 'Service')).toEqual([
       expect.objectContaining({ provider: expect.objectContaining({ name: 'O3 World' }) }),
     ])
@@ -121,6 +137,20 @@ describe('a page', () => {
 
   it('describes each partner page as a Service', async () => {
     const html = await renderPage(aSeededPage('partners-sanity'), 'partners/sanity')
+    expect(ofType(html, 'Service')).toHaveLength(1)
+  })
+
+  it('reads the page type, not the URL: an overview under /solutions is no Service', async () => {
+    const html = await renderPage(aSeededPage('solutions'), 'solutions')
+    expect(ofType(html, 'Service')).toEqual([])
+  })
+
+  it('still recognises a service page whose type a draft read stega-encoded', async () => {
+    const doc = {
+      ...aSeededPage('solutions-software-engineering'),
+      pageType: `service${'​‌‍﻿'.repeat(6)}`,
+    }
+    const html = await renderPage(doc, 'solutions/software-engineering')
     expect(ofType(html, 'Service')).toHaveLength(1)
   })
 

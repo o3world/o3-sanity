@@ -250,8 +250,6 @@ export const INSIGHT_QUERY = defineQuery(`*[_type == "insight" && slug.current =
   heroMedia{${PHOTO_OBJECT_FIELDS}},
   body[]{${BODY_FIELDS}},
   seo,
-  ${/* The BlogPosting's dateModified (OWSW-78). */ ''}
-  _updatedAt,
   "related": ${RELATED_INSIGHTS} | order(publishedAt desc)[0...8]{${INSIGHT_CARD}},
   ${
     /* THE FALLBACK IS FETCHED ONLY WHEN IT IS THE ANSWER. `select` evaluates
@@ -467,12 +465,13 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && slug.current == $slu
   ${
     /* The page one segment up, for the breadcrumb trail (OWSW-78): the
       parent of "solutions/software-engineering" is "solutions". Null for a
-      top-level page, and for a prefix with no page of its own ("partners"). */ ''
+      top-level page, and for a prefix with no page of its own ("partners").
+      Only a nested slug pays for the lookup. */ ''
   }
-  "parent": *[_type == "page" && slug.current == array::join(string::split(^.slug.current, "/")[0...-1], "/")][0]{
+  "parent": select(count(string::split(slug.current, "/")) > 1 => *[_type == "page" && slug.current == array::join(string::split(^.slug.current, "/")[0...-1], "/")][0]{
     title,
     "slug": slug.current
-  }
+  })
 }`)
 
 export const PAGE_SLUGS_QUERY = defineQuery(

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 import { urlForImage, type SanityImageSource } from '@o3/sanity/image'
 
-import { getBaseUrl } from './base-url'
+import { absoluteUrl } from './base-url'
 
 /**
  * One resolution chain for per-document SEO, shared by every routable type
@@ -107,17 +107,6 @@ function firstString(...values: (string | null | undefined)[]): string | undefin
 }
 
 /**
- * Absolute URL for a route path. OpenGraph requires absolute URLs, and
- * `alternates.canonical` is only relative-safe when `metadataBase` is set —
- * which it is, in the root layout, but being explicit here keeps the tag
- * correct even if a route renders outside that layout.
- */
-function absolute(path: string): string {
-  const base = getBaseUrl()
-  return path === '/' ? `${base}/` : `${base}${path}`
-}
-
-/**
  * The brand every title is suffixed with: Site Settings' title. The layout's
  * title template and the OpenGraph title both read it here, so the tab and a
  * share card cannot name the site differently.
@@ -154,7 +143,9 @@ export function buildDocumentMetadata({
     ogImageUrl(toImageSource(doc.image)) ??
     ogImageUrl(toImageSource(defaults?.ogImage))
 
-  const url = absolute(doc.path)
+  // Absolute even though the root layout sets `metadataBase`: OpenGraph
+  // requires it, and the tag stays right for a route outside that layout.
+  const url = absoluteUrl(doc.path)
   const canonical = firstString(seo?.canonical) ?? url
   const noIndex = seo?.noIndex === true
   const noFollow = seo?.noFollow === true

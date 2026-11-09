@@ -1,3 +1,6 @@
+import { stegaClean } from '@sanity/client/stega'
+
+import { absoluteUrl } from '@o3/content-runtime/base-url'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 /**
@@ -26,14 +29,6 @@ const CONTEXT = 'https://schema.org'
 
 type JsonLd = Record<string, unknown>
 
-function home(baseUrl: string): string {
-  return `${baseUrl}/`
-}
-
-function absolute(baseUrl: string, path: string): string {
-  return path === '/' ? home(baseUrl) : `${baseUrl}${path}`
-}
-
 /** Drops empty values so a missing field is absent, never `null` or `[]`. */
 function compact<T extends JsonLd>(value: T): T {
   return Object.fromEntries(
@@ -53,7 +48,7 @@ function organizationRef(baseUrl: string) {
     '@type': 'Organization',
     '@id': organizationId(baseUrl),
     name: ORGANIZATION.name,
-    url: home(baseUrl),
+    url: absoluteUrl('/', baseUrl),
   }
 }
 
@@ -71,7 +66,7 @@ export function organization({
     name: ORGANIZATION.name,
     alternateName: settings?.title?.trim(),
     legalName: settings?.legalName?.trim(),
-    url: home(baseUrl),
+    url: absoluteUrl('/', baseUrl),
     logo: `${baseUrl}/apple-icon.png`,
     description: settings?.defaultSeo?.description?.trim(),
     address: ORGANIZATION.address,
@@ -87,20 +82,25 @@ export interface BlogPostingSource {
   readonly slug?: string | null
   readonly excerpt?: string | null
   readonly publishedAt?: string | null
-  readonly _updatedAt?: string | null
   readonly author?: { readonly name?: string | null; readonly title?: string | null } | null
 }
 
+/**
+ * The article as a BlogPosting, at `url`: the canonical URL its meta tags
+ * name. No `dateModified`, because `_updatedAt` also moves when a migration
+ * writes the document, and no field records the last editorial change.
+ */
 export function blogPosting({
   baseUrl,
   insight,
+  url,
   imageUrl,
 }: {
   baseUrl: string
   insight: BlogPostingSource
+  url: string
   imageUrl: string | null
 }) {
-  const url = absolute(baseUrl, `/insights/${insight.slug}`)
   const author = insight.author?.name
     ? compact({ '@type': 'Person', name: insight.author.name, jobTitle: insight.author.title })
     : organizationRef(baseUrl)
@@ -113,7 +113,6 @@ export function blogPosting({
     url,
     mainEntityOfPage: url,
     datePublished: insight.publishedAt,
-    dateModified: insight._updatedAt ?? insight.publishedAt,
     image: imageUrl ? [imageUrl] : null,
     author,
     publisher: organizationRef(baseUrl),
@@ -126,17 +125,22 @@ export interface Crumb {
   readonly path: string
 }
 
-/** The trail from Home to the page; Home is added here, not by callers. */
+/**
+ * The trail from Home to the page; Home is added here, not by callers. A
+ * crumb with a blank name is dropped, since a ListItem without one is invalid.
+ */
 export function breadcrumbs(baseUrl: string, crumbs: readonly Crumb[]) {
   return {
     '@context': CONTEXT,
     '@type': 'BreadcrumbList',
-    itemListElement: [{ name: 'Home', path: '/' }, ...crumbs].map((crumb, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: crumb.name,
-      item: absolute(baseUrl, crumb.path),
-    })),
+    itemListElement: [{ name: 'Home', path: '/' }, ...crumbs]
+      .filter((crumb) => crumb.name.trim() !== '')
+      .map((crumb, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: crumb.name.trim(),
+        item: absoluteUrl(crumb.path, baseUrl),
+      })),
   }
 }
 
@@ -156,16 +160,17 @@ export function service({
     '@type': 'Service',
     name,
     description,
-    url: absolute(baseUrl, path),
+    url: absoluteUrl(path, baseUrl),
     provider: organizationRef(baseUrl),
     areaServed: 'US',
   })
 }
 
 /**
- * JSON for an inline `<script>`. `<` becomes `<`, which JSON reads back
- * as the same character, so no value can close the tag it sits in.
+ * JSON for an inline `<script>`. Stega markers a draft read embeds are
+ * stripped, and every `<` is written as its JSON unicode escape, which reads
+ * back as the same character, so no value can close the tag it sits in.
  */
 export function serializeJsonLd(data: unknown): string {
-  return JSON.stringify(data).replace(/</g, '\\u003c')
+  return JSON.stringify(stegaClean(data)).replace(/</g, '\\u003c')
 }

@@ -2,7 +2,9 @@ import { INSIGHT_QUERY } from '@o3/sanity/queries'
 import { collectionPrefixes } from '@o3/sanity/brand'
 import type { INSIGHT_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { getBaseUrl } from '@o3/content-runtime/base-url'
+import { stegaClean } from '@sanity/client/stega'
+
+import { absoluteUrl, getBaseUrl } from '@o3/content-runtime/base-url'
 import { defineDetailType, type RendererProps } from '@o3/content-runtime/routes'
 import { socialImageUrl, type DocumentSeo } from '@o3/content-runtime/seo'
 
@@ -26,11 +28,11 @@ function InsightRenderer({ slug, ...rest }: InsightRendererProps) {
   const View = getView('insight')
   const baseUrl = getBaseUrl()
   const prefix = collectionPrefixes().insight
+  // The canonical tag's URL: an editor's override, else this route.
+  const url = stegaClean(doc.seo?.canonical)?.trim() || absoluteUrl(`${prefix}/${slug}`, baseUrl)
   return (
     <>
-      <JsonLd
-        data={blogPosting({ baseUrl, insight: { ...doc, slug }, imageUrl: leadImageUrl(doc) })}
-      />
+      <JsonLd data={blogPosting({ baseUrl, insight: doc, url, imageUrl: leadImageUrl(doc) })} />
       <JsonLd
         data={breadcrumbs(baseUrl, [
           { name: insightIndex.seo?.title ?? 'Insights', path: prefix },
