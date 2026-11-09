@@ -20,3 +20,12 @@ export function getBaseUrl(): string {
   // NEXT_PUBLIC_BASE_URL if a client caller needs the moved port.
   return `http://localhost:${process.env.WEB_PORT ?? process.env.PORT ?? '3000'}`
 }
+
+/**
+ * The absolute URL for a route path (leading slash). The homepage keeps its
+ * trailing slash; every other path is joined as given. Canonicals, OpenGraph
+ * URLs and structured data all build their URLs here.
+ */
+export function absoluteUrl(path: string, base: string = getBaseUrl()): string {
+  return path === '/' ? `${base}/` : `${base}${path}`
+}

@@ -172,7 +172,7 @@ describe('insight detail route', () => {
           cardMedia: figure(CARD_ID, 'The tile') as never,
         }),
       )
-      const header = html.slice(0, html.indexOf('</header>'))
+      const header = html.slice(html.indexOf('<header'), html.indexOf('</header>'))
       expect(header).toContain(HERO_ID)
       expect(header).not.toContain(CARD_ID)
     })
@@ -181,12 +181,12 @@ describe('insight detail route', () => {
       const { html } = await render(
         anInsight({ heroMedia: null, cardMedia: figure(CARD_ID, 'The tile') as never }),
       )
-      expect(html.slice(0, html.indexOf('</header>'))).toContain(CARD_ID)
+      expect(html.slice(html.indexOf('<header'), html.indexOf('</header>'))).toContain(CARD_ID)
     })
 
     it('draws the picture once, in the band, under the scrim', async () => {
       const { html } = await render(withHero())
-      const header = html.slice(0, html.indexOf('</header>'))
+      const header = html.slice(html.indexOf('<header'), html.indexOf('</header>'))
       expect(header).toContain(HERO_ID)
       // The body used to repeat it at the top of the 822px column, which is
       // the same photograph twice on one screen.
@@ -204,7 +204,7 @@ describe('insight detail route', () => {
      */
     it('falls back to the flat ink band, scrim and all, when there is no image', async () => {
       const { html } = await render(anInsight({ heroMedia: null, cardMedia: null }))
-      const header = html.slice(0, html.indexOf('</header>'))
+      const header = html.slice(html.indexOf('<header'), html.indexOf('</header>'))
       expect(header).toContain('bg-ink-warm')
       expect(header).not.toContain('linear-gradient')
       expect(header).not.toContain('<img')
@@ -213,7 +213,9 @@ describe('insight detail route', () => {
     /** The sphere is gone from the new hero subtree — no node replaces it. */
     it('draws no orbital sphere', async () => {
       const { html } = await render(withHero())
-      expect(html.slice(0, html.indexOf('</header>'))).not.toContain('w-[1278px]')
+      expect(html.slice(html.indexOf('<header'), html.indexOf('</header>'))).not.toContain(
+        'w-[1278px]',
+      )
     })
   })
 

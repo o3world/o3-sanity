@@ -9,9 +9,13 @@ import type {
   INSIGHTS_PAGE_QUERY_RESULT,
 } from '@o3/sanity/types/generated'
 
+import { getBaseUrl } from '@o3/content-runtime/base-url'
 import { defineIndexType, type IndexRendererProps } from '@o3/content-runtime/routes'
+import type { DocumentSeo } from '@o3/content-runtime/seo'
 
 import { Blocks } from '@/content/blocks/Blocks'
+import { JsonLd } from '@/content/structuredData/JsonLd'
+import { breadcrumbs } from '@/content/structuredData/schema'
 
 import { InsightIndexSkeleton } from './InsightIndexSkeleton'
 import { insightCatalog } from './insightCatalog'
@@ -19,6 +23,15 @@ import { InsightFeed } from './InsightFeed'
 import { feedPath, INSIGHTS_PAGE_SIZE } from './feedPath'
 
 type Props = IndexRendererProps<typeof INSIGHTS_PAGE_QUERY>
+
+const SEO = {
+  title: 'Insights',
+  description: 'Notes from inside the work — what we tried, and what broke.',
+  // Paginated and filtered pages canonicalize to the unpaginated index:
+  // `/insights/page/2` and `/insights/category/design` are the same
+  // collection, not further documents. The breadcrumb follows the canonical.
+  path: collectionPrefixes().insight,
+} satisfies DocumentSeo
 
 /**
  * One slot's worth of authored bands, or nothing where the array is empty —
@@ -52,12 +65,15 @@ async function InsightIndexRenderer({ pagination, facets, ...rest }: Props) {
   const data = rest as unknown as NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 
   return (
-    <InsightFeed
-      path={feedPath(facets.category ?? null, pagination.page)}
-      catalog={await insightCatalog()}
-      initial={{ items: data.items, pagination }}
-      categories={data.categories}
-    />
+    <>
+      <JsonLd data={breadcrumbs(getBaseUrl(), [{ name: SEO.title, path: SEO.path }])} />
+      <InsightFeed
+        path={feedPath(facets.category ?? null, pagination.page)}
+        catalog={await insightCatalog()}
+        initial={{ items: data.items, pagination }}
+        categories={data.categories}
+      />
+    </>
   )
 }
 
@@ -87,14 +103,7 @@ export const insightIndex = defineIndexType({
   chrome: InsightIndexChrome,
   renderer: InsightIndexRenderer,
   fallback: <InsightIndexSkeleton />,
-  seo: {
-    title: 'Insights',
-    description: 'Notes from inside the work — what we tried, and what broke.',
-    // Paginated and filtered pages canonicalize to the unpaginated index:
-    // `/insights/page/2` and `/insights/category/design` are the same
-    // collection, not further documents.
-    path: collectionPrefixes().insight,
-  },
+  seo: SEO,
   // The Insights frame — hero `3739:71309`, filter bar `3739:71110`, grid
   // `3739:71118`, CTA `3771:80361`.
   migration: { figmaNode: '3739:71101' },

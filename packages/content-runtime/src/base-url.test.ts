@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { getBaseUrl } from './base-url'
+import { absoluteUrl, getBaseUrl } from './base-url'
 
 function env(vars: Record<string, string | undefined>) {
   for (const key of [
@@ -31,5 +31,19 @@ describe('getBaseUrl', () => {
   it('falls back to localhost outside production', () => {
     env({ VERCEL_ENV: 'preview' })
     expect(getBaseUrl()).toMatch(/^http:\/\/localhost:\d+$/)
+  })
+})
+
+describe('absoluteUrl', () => {
+  it('joins a path to the origin, and gives the homepage its trailing slash', () => {
+    expect(absoluteUrl('/insights/foo', 'https://www.example.com')).toBe(
+      'https://www.example.com/insights/foo',
+    )
+    expect(absoluteUrl('/', 'https://www.example.com')).toBe('https://www.example.com/')
+  })
+
+  it('defaults to the configured origin', () => {
+    env({ NEXT_PUBLIC_BASE_URL: 'https://www.example.com' })
+    expect(absoluteUrl('/work')).toBe('https://www.example.com/work')
   })
 })

@@ -461,7 +461,17 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && slug.current == $slu
   "slug": slug.current,
   pageType,
   "sections": sections[]{${SECTION_FIELDS}},
-  seo
+  seo,
+  ${
+    /* The page one segment up, for the breadcrumb trail (OWSW-78): the
+      parent of "solutions/software-engineering" is "solutions". Null for a
+      top-level page, and for a prefix with no page of its own ("partners").
+      Only a nested slug pays for the lookup. */ ''
+  }
+  "parent": select(count(string::split(slug.current, "/")) > 1 => *[_type == "page" && slug.current == array::join(string::split(^.slug.current, "/")[0...-1], "/")][0]{
+    title,
+    "slug": slug.current
+  })
 }`)
 
 export const PAGE_SLUGS_QUERY = defineQuery(
