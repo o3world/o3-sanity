@@ -7,6 +7,7 @@ import { stegaClean } from '@sanity/client/stega'
 import { absoluteUrl, getBaseUrl } from '@o3/content-runtime/base-url'
 import { defineDetailType, type RendererProps } from '@o3/content-runtime/routes'
 import { socialImageUrl, type DocumentSeo } from '@o3/content-runtime/seo'
+import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
 import { getView } from '@/content/documents/registry'
 import { JsonLd } from '@/content/structuredData/JsonLd'
@@ -16,15 +17,25 @@ import { insightIndex } from './collectionIndex'
 
 type InsightRendererProps = RendererProps<typeof INSIGHT_QUERY>
 
-/** The share card's image: the `seo` override, then the card picture, as `og:image` resolves it. */
-function leadImageUrl(doc: NonNullable<INSIGHT_QUERY_RESULT>): string | null {
-  return socialImageUrl(doc.seo?.ogImage) ?? socialImageUrl(doc.cardMedia)
+type Insight = NonNullable<INSIGHT_QUERY_RESULT>
+
+/**
+ * The BlogPosting, with the share card's image resolved as `og:image` is: the
+ * `seo` override, then the card picture, then the Site Settings default.
+ */
+async function BlogPostingJsonLd({ doc, url }: { doc: Insight; url: string }) {
+  const settings = await getSiteSettings()
+  const imageUrl =
+    socialImageUrl(doc.seo?.ogImage) ??
+    socialImageUrl(doc.cardMedia) ??
+    socialImageUrl(settings?.defaultSeo?.ogImage)
+  return <JsonLd data={blogPosting({ baseUrl: getBaseUrl(), insight: doc, url, imageUrl })} />
 }
 
 function InsightRenderer({ slug, ...rest }: InsightRendererProps) {
   // The cast bridges the Q-widening gap (see `@o3/content-runtime/routes`) — the
   // runtime shape is always the typed query result.
-  const doc = rest as NonNullable<INSIGHT_QUERY_RESULT>
+  const doc = rest as Insight
   const View = getView('insight')
   const baseUrl = getBaseUrl()
   const prefix = collectionPrefixes().insight
@@ -32,7 +43,7 @@ function InsightRenderer({ slug, ...rest }: InsightRendererProps) {
   const url = stegaClean(doc.seo?.canonical)?.trim() || absoluteUrl(`${prefix}/${slug}`, baseUrl)
   return (
     <>
-      <JsonLd data={blogPosting({ baseUrl, insight: doc, url, imageUrl: leadImageUrl(doc) })} />
+      <BlogPostingJsonLd doc={doc} url={url} />
       <JsonLd
         data={breadcrumbs(baseUrl, [
           { name: insightIndex.seo?.title ?? 'Insights', path: prefix },

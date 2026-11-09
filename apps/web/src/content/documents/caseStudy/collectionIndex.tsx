@@ -5,14 +5,26 @@ import type {
   COLLECTION_INDEX_QUERY_RESULT,
 } from '@o3/sanity/types/generated'
 
+import { getBaseUrl } from '@o3/content-runtime/base-url'
 import { defineIndexType, type IndexRendererProps } from '@o3/content-runtime/routes'
+import type { DocumentSeo } from '@o3/content-runtime/seo'
 
 import { Blocks } from '@/content/blocks/Blocks'
+import { JsonLd } from '@/content/structuredData/JsonLd'
+import { breadcrumbs } from '@/content/structuredData/schema'
 
 import { CaseStudyIndexSkeleton } from './CaseStudyIndexSkeleton'
 import { CaseStudyIndexView } from './CaseStudyIndexView'
 
 type Props = IndexRendererProps<typeof CASE_STUDIES_PAGE_QUERY>
+
+const SEO = {
+  title: 'Work',
+  description:
+    'The work, framed around the second problem — the deeper one we found, not the deliverable.',
+  // Paginated pages canonicalize to the unpaginated index, and the breadcrumb follows.
+  path: collectionPrefixes().caseStudy,
+} satisfies DocumentSeo
 
 /**
  * One slot's worth of authored bands — the same shape as `InsightIndexChrome`
@@ -40,7 +52,12 @@ function CaseStudyIndexRenderer({ pagination, ...rest }: Props) {
   // query result for the view.
   const data = rest as unknown as NonNullable<CASE_STUDIES_PAGE_QUERY_RESULT>
 
-  return <CaseStudyIndexView items={data.items} pagination={pagination} />
+  return (
+    <>
+      <JsonLd data={breadcrumbs(getBaseUrl(), [{ name: SEO.title, path: SEO.path }])} />
+      <CaseStudyIndexView items={data.items} pagination={pagination} />
+    </>
+  )
 }
 
 /**
@@ -63,13 +80,7 @@ export const caseStudyIndex = defineIndexType({
   chrome: CaseStudyIndexChrome,
   renderer: CaseStudyIndexRenderer,
   fallback: <CaseStudyIndexSkeleton />,
-  seo: {
-    title: 'Work',
-    description:
-      'The work, framed around the second problem — the deeper one we found, not the deliverable.',
-    // Paginated pages canonicalize to the unpaginated index.
-    path: collectionPrefixes().caseStudy,
-  },
+  seo: SEO,
   // The Work frame — hero `1634:1181`, grid `1634:1186`, mobile `1906:851`.
   // Recorded here so the two collection indexes state their provenance the
   // same way, and so "/insights is provisional" reads as a difference

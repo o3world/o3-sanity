@@ -67,7 +67,7 @@ export function organization({
     alternateName: settings?.title?.trim(),
     legalName: settings?.legalName?.trim(),
     url: absoluteUrl('/', baseUrl),
-    logo: `${baseUrl}/apple-icon.png`,
+    logo: absoluteUrl('/apple-icon.png', baseUrl),
     description: settings?.defaultSeo?.description?.trim(),
     address: ORGANIZATION.address,
     sameAs: (settings?.socialLinks ?? [])
@@ -79,7 +79,6 @@ export function organization({
 
 export interface BlogPostingSource {
   readonly title?: string | null
-  readonly slug?: string | null
   readonly excerpt?: string | null
   readonly publishedAt?: string | null
   readonly author?: { readonly name?: string | null; readonly title?: string | null } | null

@@ -5,20 +5,26 @@ import { PAGE_QUERY } from '@o3/sanity/queries'
 import {
   buildCatchAllRoute,
   buildDetailRoute,
+  buildIndexRoute,
   buildSingletonRoute,
 } from '@o3/content-runtime/routes'
 import { CATCH_ALL_TYPES } from '@/content/documents'
 import {
+  aCaseStudiesPage,
   aMigratedInsight,
   aMigratedPage,
+  anInsightsPage,
   aSeededPage,
   aTranslatedCaseStudy,
   renderRoute,
   siteSettings,
+  withIndexChrome,
   withSettings,
 } from '@/test'
 
+import { caseStudyIndex } from './caseStudy/collectionIndex'
 import { caseStudy } from './caseStudy/entry'
+import { insightIndex } from './insight/collectionIndex'
 import { insight } from './insight/entry'
 import { home } from './page/entry'
 
@@ -107,6 +113,58 @@ describe('an insight', async () => {
     expect(ofType(withCanonical, 'BlogPosting')).toEqual([
       expect.objectContaining({ url: canonical, mainEntityOfPage: canonical }),
     ])
+  })
+})
+
+describe('an insight with no image of its own', () => {
+  it('takes the Site Settings default image, as og:image does', async () => {
+    const doc = aMigratedInsight()
+    const bare = { ...doc, cardMedia: null, heroMedia: null, seo: null }
+    const settings = siteSettings({
+      defaultSeo: {
+        _type: 'seo',
+        ogImage: {
+          _type: 'image',
+          asset: {
+            _type: 'reference',
+            _ref: 'image-7777777777777777777777777777777777777777-1200x630-jpg',
+          },
+        },
+      },
+    })
+    const { html, metadata } = await renderRoute(buildDetailRoute(insight), {
+      data: withSettings(bare, settings),
+      params: { slug: doc.slug as string },
+    })
+    const ogImage = (metadata.openGraph?.images as { url: string }[] | undefined)?.[0]?.url
+    expect(ogImage).toContain('7777777777777777777777777777777777777777')
+    expect(ofType(html, 'BlogPosting')).toEqual([expect.objectContaining({ image: [ogImage] })])
+  })
+})
+
+describe('the collection indexes', () => {
+  it('put /insights under Home', async () => {
+    const { html } = await renderRoute(buildIndexRoute(insightIndex), {
+      data: withIndexChrome(anInsightsPage()),
+    })
+    expect(crumbNames(html)).toEqual(['Home', 'Insights'])
+    expect(crumbUrls(html).at(-1)).toMatch(/\/insights$/)
+  })
+
+  it('give a filtered page the trail of the index it canonicalizes to', async () => {
+    const { html } = await renderRoute(buildIndexRoute(insightIndex), {
+      data: withIndexChrome(anInsightsPage()),
+      params: { category: 'design' },
+    })
+    expect(crumbNames(html)).toEqual(['Home', 'Insights'])
+  })
+
+  it('put /work under Home', async () => {
+    const { html } = await renderRoute(buildIndexRoute(caseStudyIndex), {
+      data: withIndexChrome(aCaseStudiesPage()),
+    })
+    expect(crumbNames(html)).toEqual(['Home', 'Work'])
+    expect(crumbUrls(html).at(-1)).toMatch(/\/work$/)
   })
 })
 
