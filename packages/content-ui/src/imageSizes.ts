@@ -37,6 +37,12 @@ export const FLUID_COLUMN = '(min-width: 402px) calc(84.58574vw + 29.96532px), c
 export const CONTENT_COLUMN = `(min-width: 1920px) 1728px, (min-width: 1440px) calc(100vw - 192px), ${FLUID_COLUMN}`
 
 /**
+ * The canvas column: `max-w-canvas` (1248px) inside the page gutter. The fluid
+ * column reaches 1248px at a 1440 viewport, so it is flat from there.
+ */
+export const CANVAS_COLUMN = `(min-width: 1440px) 1248px, ${FLUID_COLUMN}`
+
+/**
  * The prose measure: `max-w-article` (822px) inside the page gutter. The new
  * gutter curve gives the structural column 822px at a 936.37px viewport, so it is
  * flat from there rather than declaring a larger candidate until `lg`.
