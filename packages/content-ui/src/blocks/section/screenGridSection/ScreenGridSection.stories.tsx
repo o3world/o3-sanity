@@ -301,7 +301,7 @@ export const NarrowFeatureRowMobile: Story = {
   },
 }
 
-/** Wide browser windows retain the site's centered 1728px structural column. */
+/** Wide browser windows stop the grid at the centred 1248px canvas (OWSW-71). */
 export const WideViewport: Story = {
   args: NarrowFeatureRow.args,
   parameters: {
@@ -315,11 +315,11 @@ export const WideViewport: Story = {
     const tiles = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
       tile.getBoundingClientRect(),
     )
-    await expect(grid.width).toBe(1728)
-    await expect(grid.left).toBe(416)
-    await expect(tiles[0]!.width).toBe(1288)
-    await expect(tiles[1]!.width).toBe(408)
-    await expect(tiles[5]!.width).toBe(848)
+    await expect(grid.width).toBe(1248)
+    await expect(grid.left).toBe(656)
+    await expect(tiles[0]!.width).toBe(928)
+    await expect(tiles[1]!.width).toBe(288)
+    await expect(tiles[5]!.width).toBe(608)
   },
 }
 
@@ -399,9 +399,9 @@ export const ThirdsWideViewport: Story = {
     const [ctas, icons] = Array.from(canvasElement.querySelectorAll('li')).map((tile) =>
       tile.getBoundingClientRect(),
     )
-    await expect(grid.width).toBe(1728)
-    await expect(Math.abs(ctas!.width - 1141.333333)).toBeLessThan(1)
-    await expect(Math.abs(icons!.width - 554.666667)).toBeLessThan(1)
+    await expect(grid.width).toBe(1248)
+    await expect(Math.abs(ctas!.width - 821.333333)).toBeLessThan(1)
+    await expect(Math.abs(icons!.width - 394.666667)).toBeLessThan(1)
     await expect(Math.abs(icons!.left - ctas!.right - 32)).toBeLessThan(1)
   },
 }
