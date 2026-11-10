@@ -413,7 +413,7 @@ export type MediaSection = {
     _type: 'image'
   }
   variant?: 'plain' | 'capture' | 'composition' | 'overlap' | 'feature'
-  width?: 'contained' | 'section' | 'full-bleed'
+  width?: 'contained' | 'wide' | 'section' | 'full-bleed'
   surface?: 'white' | 'paper' | 'bone' | 'ink' | 'charcoal'
   backgroundMedia?: BackgroundMedia
   anchor?: string
@@ -2848,7 +2848,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'image'
         }
         variant?: 'capture' | 'composition' | 'feature' | 'overlap' | 'plain'
-        width?: 'contained' | 'full-bleed' | 'section'
+        width?: 'contained' | 'full-bleed' | 'section' | 'wide'
         surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -4096,7 +4096,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'image'
         }
         variant?: 'capture' | 'composition' | 'feature' | 'overlap' | 'plain'
-        width?: 'contained' | 'full-bleed' | 'section'
+        width?: 'contained' | 'full-bleed' | 'section' | 'wide'
         surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -5481,7 +5481,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _type: 'image'
         }
         variant?: 'capture' | 'composition' | 'feature' | 'overlap' | 'plain'
-        width?: 'contained' | 'full-bleed' | 'section'
+        width?: 'contained' | 'full-bleed' | 'section' | 'wide'
         surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
@@ -6790,7 +6790,7 @@ export type PAGE_QUERY_RESULT = {
           _type: 'image'
         }
         variant?: 'capture' | 'composition' | 'feature' | 'overlap' | 'plain'
-        width?: 'contained' | 'full-bleed' | 'section'
+        width?: 'contained' | 'full-bleed' | 'section' | 'wide'
         surface?: 'bone' | 'charcoal' | 'ink' | 'paper' | 'white'
         backgroundMedia: {
           _type: 'backgroundMedia'
