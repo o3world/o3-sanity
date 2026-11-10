@@ -1,6 +1,6 @@
 ---
 name: o3world-copy
-description: Write, rewrite, or review copy in the O3 World voice — headlines, subheads, CTAs, section text, case-study narratives, stats, bios, proposals, or any user-facing words for o3world.com. Use whenever generating or editing copy in seed JSON (tools/migration/data/seed/), Sanity documents, or drafts, and when asked to "write copy", "punch up", "make this sound like us", review tone, or check whether writing reads as AI-generated. This skill owns o3world.com site copy and is the one to use for it; use no-slop instead for engineering prose — READMEs, commits, ADRs, docs — whose register is plainer than the brand voice.
+description: Use when writing, editing or reviewing user-facing words for o3world.com — headlines, CTAs, section text, case studies, stats, bios — in seed JSON, Sanity documents or drafts; including "punch up", "make this sound like us", or checking for AI tells. For engineering prose (READMEs, commits, ADRs) use no-slop.
 ---
 
 # O3 World copy
@@ -30,11 +30,9 @@ restate them here; a rule in two homes drifts in one of them.
 
 ## The register
 
-Calibrated twice: variant takes on one essay (2026-08-02), then a survey of
-the full decade of published content (2026-08-03). The essay calibration
-picked the restrained register; the corpus survey showed that register
-belongs to _one surface_, not all of them. The house default across ten years
-of real writing is **warm-assured teaching** — a company that celebrates
+The restrained register belongs to _one surface_, not all of them. The house
+default across ten years of real writing is **warm-assured teaching** — a
+company that celebrates
 people by name, shares what it knows, and invites readers in.
 
 - **A really big dog that doesn't feel it needs to act like a big dog.**
@@ -93,11 +91,8 @@ writing a word:
    delve, foster, utilize, facilitate, streamline, harness, supercharge,
    embark, paradigm shift, game changer, tapestry, realm, beacon,
    multifaceted, meticulous, intricate, paramount, ever-evolving, "this
-   changes everything". (The old site leaned on the first list hard — the ban
-   is the correction, and the strongest recent pieces prove it works. The
-   second list is what a draft picks up when nobody is watching.) The
-   conditional cuts — empty adverbs and filler phrases — are in
-   `docs/guidance/slop.md`.
+   changes everything". The conditional cuts — empty adverbs and filler
+   phrases — are in `docs/guidance/slop.md`.
 8. **Person:** "you/your" for the client's world, "we" for O3 — and "we" is
    the team and its community, not a vendor. Never "users will be able to" —
    say what people can do.
@@ -106,8 +101,7 @@ writing a word:
    marketing pages, case studies, or essays.
 10. **US English.** O3 is a Philadelphia company writing for a mostly American
     audience, and a British spelling in an American sentence reads as
-    borrowed — which is the one thing our copy cannot afford right now.
-    Spelling: `-ize`/`-ization` not `-ise`/`-isation` (organize, recognize,
+    borrowed. Spelling: `-ize`/`-ization` not `-ise`/`-isation` (organize, recognize,
     penalize, prioritize), `-or` not `-our` (behavior, favor), `-er` not `-re`
     (center, meter), `-led`/`-ing` with one `l` (traveled, modeling), plus
     license and practice as both noun and verb, defense, gray, program.
@@ -166,17 +160,15 @@ Draft, then:
    ("utilize" → "use", "facilitate" → "help", "methodology" → "how we work").
 4. Check every claim for a specific: could a competitor paste this sentence
    into their site? If yes, it isn't done.
-5. Check the banned list (rule 7) — and check for the competitor-foil
-   ("most firms…") and the repeated "X, not Y". One antithesis per page,
-   zero foils.
+5. Apply rule 7's banned list, the no-foil rule (The register) and the
+   one-antithesis cap (Structures by surface).
 6. Run the checks at the end of `docs/guidance/slop.md`. They catch the shapes
    this list doesn't: colon reveals, puffery, `-ing` analysis, fake kickers,
    recap endings, em-dash clutter, robotic symmetry.
 7. Check the register against the surface table. A case study is not a
    birthday post; a birthday post is not a case study.
-8. Grep the draft for British spellings and vocabulary (rule 10). A model
-   drafting about European subjects picks them up from its sources, and one
-   `-ise` next to an American sentence is the tell.
+8. Grep the draft against rule 10, spellings and vocabulary both. Drafts
+   about European subjects pick them up from their sources.
 9. Check the warmth: does culture/community copy contain actual people? Does
    the reader leave invited and equipped, or merely impressed?
 10. Read it aloud. Anywhere you'd breathe wrong, break or cut.
@@ -209,13 +201,9 @@ On-brand rewrite:
 ## Where the copy lives
 
 - Seed pages: `tools/migration/data/seed/page/*.json`; translated case
-  studies: `tools/migration/data/translated/caseStudy/*.json`. **Editing these
-  no longer reaches the dataset.** The blanket load that carried them there is
-  retired (AGENTS.md → Changing a dataset), and production holds editor content
-  that outranks the committed JSON (ADR 0003, inverted). Copy that has to land
-  in the dataset goes through MCP `patch_documents` or a targeted script under
-  `tools/migration/src/migrations/`; the files stay the record of what the
-  migration produced.
+  studies: `tools/migration/data/translated/caseStudy/*.json`. Editing these
+  does not reach the dataset — see `AGENTS.md` → Changing a dataset. Copy that
+  has to land goes through MCP `patch_documents` or a targeted migration.
 - Live content: Sanity project `naorcr6k`, editable in the embedded studio at
   `/studio` or via MCP `patch_documents`.
 - Schema/field naming is governed by the `content-naming` skill — this skill
