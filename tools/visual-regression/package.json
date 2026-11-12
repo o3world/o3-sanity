@@ -20,7 +20,7 @@
     "pixelmatch": "^7.2.0",
     "playwright": "^1.62.1",
     "pngjs": "^7.0.0",
-    "storybook": "^10.4.1",
+    "storybook": "^10.6.2",
     "tsx": "^4.19.0",
     "typescript": "^5.7.0"
   }
