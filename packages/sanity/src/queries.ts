@@ -482,9 +482,43 @@ export const PAGE_SLUGS_QUERY = defineQuery(
  * Every routable type filters `seo.noIndex` identically: listing a page in
  * the sitemap while its own `<meta robots>` says noindex is the kind of
  * contradiction that costs crawl budget and trust (#26, verified by #24).
+ * A `serviceOffer` is listed at the coded route its slug names.
  */
 export const SITEMAP_QUERY = defineQuery(`{
   "insights": *[_type == "insight" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt},
   "caseStudies": *[_type == "caseStudy" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt},
-  "pages": *[_type == "page" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt}
+  "pages": *[_type == "page" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt},
+  "serviceOffers": *[_type == "serviceOffer" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt}
+}`)
+
+/**
+ * A coded service landing page's editable half (`serviceOffer`), by the slug
+ * of the route that renders it.
+ *
+ * `answerText` is the answer flattened to plain text for the FAQPage
+ * structured data, which takes a string; the page itself draws `answer`.
+ * Ordered for the same reason `COLLECTION_INDEX_QUERY` is: Studio's slug
+ * uniqueness does not bind an import or an API write.
+ */
+export const SERVICE_OFFER_QUERY =
+  defineQuery(`*[_type == "serviceOffer" && slug.current == $slug] | order(_id)[0]{
+  _id,
+  _type,
+  title,
+  "slug": slug.current,
+  bookingUrl,
+  packages[]{
+    _key,
+    heading,
+    subheading,
+    price,
+    priceAmount,
+    featuredLabel,
+    note,
+    features,
+    button{..., ${BUTTON_TARGET}}
+  },
+  addOns[]{_key, label, price},
+  faqs[]{_key, question, answer, "answerText": pt::text(answer)},
+  seo
 }`)

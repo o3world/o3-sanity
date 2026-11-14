@@ -40,6 +40,7 @@ import { page } from './documents/page'
 import { collectionIndex } from './documents/collectionIndex'
 import { person, client, category, industry, siteSettings } from './documents/supporting'
 import { brief } from './documents/brief'
+import { serviceOffer } from './documents/serviceOffer'
 
 /**
  * Every section block's schema, by name. Keyed rather than listed so
@@ -104,4 +105,5 @@ export const schemaTypes = [
   industry,
   siteSettings,
   brief,
+  serviceOffer,
 ]
