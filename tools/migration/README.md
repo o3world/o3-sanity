@@ -26,6 +26,7 @@ pnpm --filter @o3/migration sync-docs -- 'client/*'      # named committed docum
 
 pnpm --filter @o3/migration stats-to-band                # targeted: stats field → a statsSection at story[0]
 pnpm --filter @o3/migration dev-mirrors-prod             # targeted: delete development documents production lacks
+pnpm --filter @o3/migration service-offer-seed -- --dataset development  # targeted: create the AI Visibility Review offer if absent
 ```
 
 **Which dataset?** Every `sanity exec` command resolves it through

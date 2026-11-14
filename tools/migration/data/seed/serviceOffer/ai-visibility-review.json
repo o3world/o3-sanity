@@ -1,0 +1,317 @@
+{
+  "_id": "serviceOffer-seed-ai-visibility-review",
+  "_type": "serviceOffer",
+  "title": "AI Visibility Review",
+  "slug": {
+    "_type": "slug",
+    "current": "ai-visibility-review"
+  },
+  "packages": [
+    {
+      "_type": "servicePackage",
+      "_key": "check",
+      "heading": "AI Visibility Check",
+      "subheading": "A fast read on where you stand.",
+      "price": "$2,500",
+      "priceAmount": 2500,
+      "features": [
+        "See how 6 AI tools answer 15–20 real customer questions",
+        "Find out which competitors show up instead of you",
+        "Spot-check your business info on key listings",
+        "Confirm AI tools can access your site",
+        "Check eligibility for OpenAI’s Business Hub and Business Agents",
+        "A scorecard, your top 5 quick wins and a 30-minute walkthrough"
+      ],
+      "button": {
+        "_type": "button",
+        "label": "Start with a Check"
+      }
+    },
+    {
+      "_type": "servicePackage",
+      "_key": "review",
+      "heading": "AI Visibility Review",
+      "subheading": "The full picture and a clear plan.",
+      "price": "$6,500",
+      "priceAmount": 6500,
+      "featuredLabel": "Most popular",
+      "note": "Everything in the Check, plus:",
+      "features": [
+        "40–50 questions tested, benchmarked against 3 competitors",
+        "A full brand and business-info audit across the web",
+        "A review of your site’s content and structure for AI discoverability",
+        "The questions your customers ask that your site doesn’t answer",
+        "Setup guidance for OpenAI’s Business Hub and Business Agents",
+        "A prioritized action plan and a 60-minute strategy session"
+      ],
+      "button": {
+        "_type": "button",
+        "label": "Get the Review"
+      }
+    },
+    {
+      "_type": "servicePackage",
+      "_key": "boost",
+      "heading": "AI Visibility Boost",
+      "subheading": "We do the work for you.",
+      "price": "$11,000",
+      "priceAmount": 11000,
+      "note": "Everything in the Review, plus:",
+      "features": [
+        "10 hours of hands-on fixes from our team",
+        "Content briefs for 3–5 priority pages",
+        "A before-and-after re-test to show what changed",
+        "A 90-day roadmap"
+      ],
+      "button": {
+        "_type": "button",
+        "label": "Get the Boost"
+      }
+    }
+  ],
+  "addOns": [
+    {
+      "_type": "addOn",
+      "_key": "hours",
+      "label": "Extra execution hours",
+      "price": "5-hour blocks · $1,000"
+    },
+    {
+      "_type": "addOn",
+      "_key": "recheck",
+      "label": "Quarterly re-check",
+      "price": "$1,500 per quarter"
+    },
+    {
+      "_type": "addOn",
+      "_key": "competitors",
+      "label": "Extra competitors or locations",
+      "price": "$800 each"
+    }
+  ],
+  "faqs": [
+    {
+      "_type": "faq",
+      "_key": "what-is",
+      "question": "What is an AI Visibility Review?",
+      "answer": [
+        {
+          "_type": "block",
+          "_key": "what-is-p0",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "what-is-p0-s0",
+              "text": "It’s an assessment of how AI tools like ChatGPT, Gemini and Perplexity find, describe and recommend your business, plus a plan to improve it.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "faq",
+      "_key": "seo",
+      "question": "How is this different from SEO?",
+      "answer": [
+        {
+          "_type": "block",
+          "_key": "seo-p0",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "seo-p0-s0",
+              "text": "SEO helps you rank in search results. AI visibility is about whether AI tools understand your business well enough to mention and recommend it in their answers. The two overlap, and we cover both where they meet.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "faq",
+      "_key": "guarantee",
+      "question": "Can you guarantee we’ll show up in ChatGPT?",
+      "answer": [
+        {
+          "_type": "block",
+          "_key": "guarantee-p0",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "guarantee-p0-s0",
+              "text": "No, and anyone who promises that is guessing. We make sure you follow every known best practice so you’re set up to succeed.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "faq",
+      "_key": "tools",
+      "question": "Which AI tools do you review?",
+      "answer": [
+        {
+          "_type": "block",
+          "_key": "tools-p0",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "tools-p0-s0",
+              "text": "ChatGPT, Google Gemini and AI Overviews, Perplexity, Microsoft Copilot and Claude.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "faq",
+      "_key": "business-hub",
+      "question": "What are OpenAI’s Business Hub and Business Agents?",
+      "answer": [
+        {
+          "_type": "block",
+          "_key": "business-hub-p0",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "business-hub-p0-s0",
+              "text": "Business Hub:",
+              "marks": [
+                "strong"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "business-hub-p0-s1",
+              "text": " A central place for businesses to manage their presence and information on ChatGPT, monitor engagement and manage their business profile.",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "business-hub-p1",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "business-hub-p1-s0",
+              "text": "Business Agents:",
+              "marks": [
+                "strong"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "business-hub-p1-s1",
+              "text": " AI-powered assistants that help businesses interact with potential customers, answer questions and support customer enquiries directly through ChatGPT.",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "business-hub-p2",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "business-hub-p2-s0",
+              "text": "We’ll review whether your business is eligible and help you get set up correctly.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "faq",
+      "_key": "new-website",
+      "question": "Do we need a new website?",
+      "answer": [
+        {
+          "_type": "block",
+          "_key": "new-website-p0",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "new-website-p0-s0",
+              "text": "Usually not. Most improvements are content, structure and listing updates to the site you already have.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "faq",
+      "_key": "upgrade",
+      "question": "Can we upgrade later?",
+      "answer": [
+        {
+          "_type": "block",
+          "_key": "upgrade-p0",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "upgrade-p0-s0",
+              "text": "Yes. Every package builds on the one before, and you can add execution hours or quarterly re-checks at any time.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "faq",
+      "_key": "recheck",
+      "question": "How often should we re-check?",
+      "answer": [
+        {
+          "_type": "block",
+          "_key": "recheck-p0",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "recheck-p0-s0",
+              "text": "AI tools change quickly. We recommend a check every quarter to keep track of how you’re showing up.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "seo": {
+    "_type": "seo",
+    "title": "AI Visibility Review: See How Your Brand Shows Up in ChatGPT",
+    "description": "Find out how ChatGPT, Gemini and Perplexity describe your business, and get a clear plan to improve it. Packages from $2,500."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:ai-visibility-review",
+    "extractedAt": "2026-11-13T00:00:00Z",
+    "provisional": false
+  }
+}

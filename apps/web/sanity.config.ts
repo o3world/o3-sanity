@@ -15,6 +15,7 @@ import {
 } from '@o3/editor-chrome/studio'
 import { collectionPrefixes, resolveDataset, resolveProjectId } from '@o3/sanity/brand'
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
+import { isReservedPageSlug } from '@o3/sanity/schemas/reserved-slugs'
 import { schemaTypes } from '@o3/sanity/schemas'
 
 import { previewPathForDoc } from '@o3/content-runtime/urls'
@@ -26,7 +27,8 @@ const prefixes = collectionPrefixes()
 
 /**
  * Desk structure: the siteSettings singleton pinned first, then the three
- * routable collections, then supporting types. `documentTypeListItems()`
+ * routable collections, the collection indexes, the service offers, then
+ * supporting types. `documentTypeListItems()`
  * would also surface siteSettings as a list — the explicit item list keeps
  * it a single pinned document.
  */
@@ -71,6 +73,13 @@ const structure: StructureResolver = (S) =>
             .documentId('collectionIndex-seed-work')
             .title('Work index'),
         ),
+      S.divider(),
+      /*
+       * What the coded landing pages sell — packages, add-ons, FAQ. A type
+       * list rather than pinned documents: each offer belongs to its own
+       * landing route, and the next landing page adds one.
+       */
+      S.documentTypeListItem('serviceOffer').title('Service offers'),
       S.divider(),
       S.documentTypeListItem('person').title('People'),
       S.documentTypeListItem('client').title('Clients'),
@@ -135,6 +144,20 @@ const resolve: PresentationPluginOptions['resolve'] = {
         const href = doc?.collection === 'caseStudy' ? prefixes.caseStudy : prefixes.insight
         return { locations: [{ title: doc?.title || 'Collection index', href }] }
       },
+    }),
+    /*
+     * The coded landing page an offer fills: the route named by its slug,
+     * when a route reserves that slug. Any other slug renders nowhere.
+     */
+    serviceOffer: defineLocations({
+      select: { title: 'title', slug: 'slug.current' },
+      resolve: (doc) =>
+        doc?.slug && isReservedPageSlug(doc.slug)
+          ? { locations: [{ title: doc.title || 'Service offer', href: `/${doc.slug}` }] }
+          : {
+              message: 'No landing page is built for this slug, so the offer shows nowhere',
+              tone: 'caution',
+            },
     }),
     siteSettings: defineLocations({
       message: 'Site settings are used on every page',

@@ -1,0 +1,136 @@
+/*
+ * The chrome a landing page wears in place of the site's nav and footer: a
+ * pinned glass pill of in-page anchors beside the O3 mark, and a one-line
+ * footer. Breakpoints are the landing pages' own (1080 / 860 / 640).
+ */
+
+.navbar {
+  position: sticky;
+  top: 16px;
+  z-index: 50;
+  height: 0;
+}
+
+.navRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 clamp(16px, 2.5vw, 32px);
+}
+
+/* The mark's circle: the site nav's own glass and rim. */
+.logo {
+  flex: 0 0 auto;
+}
+
+.logo svg {
+  width: 80%;
+  height: 80%;
+}
+
+.logoBalance {
+  flex: 0 0 auto;
+  width: 80px;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  border-radius: var(--radius-nav);
+  background: rgba(10, 10, 11, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.links {
+  display: flex;
+  gap: 2px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  color: var(--color-white);
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color var(--duration-hover) var(--ease-out);
+}
+
+.link:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.link:focus-visible,
+.footerLink:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
+}
+
+.talk {
+  min-height: 44px;
+  padding: 10px 16px;
+  font-size: 16px;
+}
+
+.footer {
+  background: var(--color-ink);
+  color: var(--color-on-utility);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 32px 0;
+}
+
+.footerRow {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 56px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-size: 15px;
+}
+
+.footerLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--color-on-utility);
+  text-decoration: none;
+}
+
+.footerLink:hover {
+  color: var(--color-white);
+}
+
+@media (max-width: 860px) {
+  .links {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .logo {
+    width: 52px;
+    height: 52px;
+  }
+
+  .logoBalance {
+    width: 52px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+  }
+}

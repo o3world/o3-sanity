@@ -5,6 +5,7 @@ import { siteSettings } from '@o3/render-kit'
 import {
   blogPosting,
   breadcrumbs,
+  faqPage,
   organization,
   organizationId,
   serializeJsonLd,
@@ -207,6 +208,69 @@ describe('service', () => {
       },
       areaServed: 'US',
     })
+  })
+})
+
+describe('service with offers', () => {
+  const node = service({
+    baseUrl: BASE,
+    name: 'AI Visibility Review',
+    path: '/ai-visibility-review',
+    offers: [
+      { name: 'AI Visibility Check', price: 2500 },
+      { name: 'AI Visibility Review', price: 6500 },
+      { name: 'Unpriced', price: null },
+    ],
+  })
+
+  it('lists each priced package as a USD Offer at the page’s URL', () => {
+    expect(node.offers).toEqual([
+      {
+        '@type': 'Offer',
+        name: 'AI Visibility Check',
+        price: 2500,
+        priceCurrency: 'USD',
+        url: `${BASE}/ai-visibility-review`,
+      },
+      {
+        '@type': 'Offer',
+        name: 'AI Visibility Review',
+        price: 6500,
+        priceCurrency: 'USD',
+        url: `${BASE}/ai-visibility-review`,
+      },
+    ])
+  })
+
+  it('has no offers key when nothing is priced', () => {
+    const bare = service({ baseUrl: BASE, name: 'Sanity', path: '/partners/sanity', offers: [] })
+    expect(bare).not.toHaveProperty('offers')
+  })
+})
+
+describe('faqPage', () => {
+  it('pairs each question with its plain-text answer', () => {
+    expect(
+      faqPage([
+        { question: 'Do we need a new website?', answerText: 'Usually not.' },
+        { question: '  ', answerText: 'Dropped: no question.' },
+        { question: 'Dropped: no answer.', answerText: '' },
+      ]),
+    ).toEqual({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Do we need a new website?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Usually not.' },
+        },
+      ],
+    })
+  })
+
+  it('is nothing at all when no question survives', () => {
+    expect(faqPage([])).toBeNull()
   })
 })
 
