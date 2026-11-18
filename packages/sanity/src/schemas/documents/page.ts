@@ -2,6 +2,7 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 import { PAGE_TYPES } from '../../constants'
 import { briefsField } from '../blocks/fields'
 import { blockArrayMembers, type BlockArrays } from '../blocks/registry'
+import { isReservedPageSlug, RESERVED_PAGE_SLUG_MESSAGE } from './reservedSlugs'
 
 /**
  * A page, built from the registry's block arrays, so `sections`' members
@@ -20,7 +21,12 @@ export const page = (arrays: BlockArrays) =>
         options: { source: 'title' },
         description:
           'Multi-segment slugs carry the URL prefix: "services/ux-audit", "ventures/rec-philly". The homepage slug is "index".',
-        validation: (rule) => rule.required(),
+        validation: (rule) =>
+          rule
+            .required()
+            .custom((slug) =>
+              isReservedPageSlug(slug?.current) ? RESERVED_PAGE_SLUG_MESSAGE : true,
+            ),
       }),
       defineField({
         name: 'pageType',

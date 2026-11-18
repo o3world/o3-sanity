@@ -22,3 +22,21 @@ export function isReservedCollectionSlug(slug: string | undefined): boolean {
 export const RESERVED_SLUG_MESSAGE = `The collection index owns ${RESERVED_COLLECTION_SLUGS.map(
   (segment) => `"${segment}"`,
 ).join(' and ')} as URL segments — pick another slug.`
+
+/**
+ * Page slugs a coded route in `apps/web` owns. A static segment beats the
+ * catch-all, so a `page` slugged one of these would be unreachable — the
+ * coded page answers at its URL whatever the dataset holds.
+ *
+ * Each is also the `slug` of the `serviceOffer` that route renders, which is
+ * why a service offer may carry one and a page may not.
+ */
+export const RESERVED_PAGE_SLUGS = ['ai-visibility-review'] as const
+
+export function isReservedPageSlug(slug: string | undefined): boolean {
+  return RESERVED_PAGE_SLUGS.includes(slug as (typeof RESERVED_PAGE_SLUGS)[number])
+}
+
+export const RESERVED_PAGE_SLUG_MESSAGE = `A coded landing page owns ${RESERVED_PAGE_SLUGS.map(
+  (slug) => `"${slug}"`,
+).join(' and ')} — pick another slug.`

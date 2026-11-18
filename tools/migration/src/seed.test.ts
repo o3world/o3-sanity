@@ -7,6 +7,7 @@ import { collectionPrefixes } from '@o3/sanity/brand'
 import { SURFACES } from '@o3/sanity/constants'
 import { offersSurface } from './lib/surfaceContract'
 import { BLOCK_ARRAYS, SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
+import { isReservedPageSlug } from '@o3/sanity/schemas/reserved-slugs'
 
 import type { Migration } from '@o3/sanity/types/generated'
 
@@ -669,6 +670,32 @@ describe('committed seed content', () => {
         )
       }
     })
+  })
+
+  /**
+   * A coded landing page owns its URL, and a static segment beats the
+   * catch-all — so a page committed at that slug would never be served. The
+   * Studio rule stops an editor; a seed reaches the dataset without it.
+   */
+  it('lets no committed page claim a slug a coded route owns', () => {
+    const claimed = allPipelineDocs
+      .filter(({ doc }) => doc._type === 'page')
+      .filter(({ doc }) => isReservedPageSlug((doc.slug as { current?: string })?.current))
+      .map(({ file }) => file)
+    expect(claimed).toEqual([])
+  })
+
+  /**
+   * Every `serviceOffer` is addressed by the slug of the coded route that
+   * renders it, so one whose slug no route reserves renders nowhere.
+   */
+  it('gives every committed service offer the slug of a coded route', () => {
+    const offers = allPipelineDocs.filter(({ doc }) => doc._type === 'serviceOffer')
+    expect(offers.length).toBeGreaterThan(0)
+    const strays = offers
+      .filter(({ doc }) => !isReservedPageSlug((doc.slug as { current?: string })?.current))
+      .map(({ file }) => file)
+    expect(strays).toEqual([])
   })
 
   describe('the homepage', () => {

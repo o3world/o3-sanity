@@ -1,6 +1,7 @@
 import type { DocumentResolver } from 'sanity/presentation'
 
 import { collectionPrefixes } from '@o3/sanity/brand'
+import { RESERVED_PAGE_SLUGS } from '@o3/sanity/schemas/reserved-slugs'
 
 /**
  * Presentation's route <-> document wiring, lifted out of `sanity.config.ts`
@@ -46,6 +47,15 @@ export const mainDocumentRoutes: DocumentResolver[] = [
     route: collectionPrefixes().caseStudy,
     filter: `_type == "collectionIndex" && collection == "caseStudy"`,
   },
+  /*
+   * The coded landing pages. Each is a static route the catch-all below would
+   * otherwise claim, asking for a `page` no one may author at that slug; the
+   * document behind it is the `serviceOffer` slugged after the route.
+   */
+  ...RESERVED_PAGE_SLUGS.map((slug) => ({
+    route: `/${slug}`,
+    filter: `_type == "serviceOffer" && slug.current == "${slug}"`,
+  })),
   {
     route: `${collectionPrefixes().caseStudy}/:slug`,
     filter: `_type == "caseStudy" && slug.current == $slug`,

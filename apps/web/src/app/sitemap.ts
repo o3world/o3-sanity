@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next'
 
 import { SITEMAP_QUERY } from '@o3/sanity/queries'
 import { collectionPrefixes } from '@o3/sanity/brand'
+import { isReservedPageSlug } from '@o3/sanity/schemas/reserved-slugs'
 import { getBaseUrl } from '@o3/content-runtime/base-url'
 import { sanityFetch } from '@o3/content-runtime/live'
 import { typeTag } from '@o3/content-runtime/routes'
@@ -53,7 +54,7 @@ async function readSitemapRows() {
     query: SITEMAP_QUERY,
     perspective: 'published',
     stega: false,
-    tags: ['page', 'insight', 'caseStudy'].map(typeTag),
+    tags: ['page', 'insight', 'caseStudy', 'serviceOffer'].map(typeTag),
   })
   return data
 }
@@ -86,13 +87,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       if (!row.slug) continue
       // The homepage slug is "index" and is already covered by the root entry.
       if (row.slug === 'index') continue
+      // A reserved slug belongs to a coded landing page; its offer below
+      // decides the entry, so an unpublished or noIndex offer lists nothing.
+      if (isReservedPageSlug(row.slug)) continue
       const path = `/${row.slug}`
       if (isRedirected(path)) continue
       entries.push(entry(base, path, row._updatedAt, 0.8))
+    }
+    // A service offer is served at the coded landing page its slug names, and
+    // only there; an offer whose slug no route reserves renders nowhere.
+    for (const row of (data?.serviceOffers ?? []) as SitemapRow[]) {
+      if (!row.slug || !isReservedPageSlug(row.slug)) continue
+      entries.push(entry(base, `/${row.slug}`, row._updatedAt, 0.8))
     }
   } catch {
     // Serve the static entries when the dataset is unreachable.
   }
 
-  return entries
+  return firstPerUrl(entries)
+}
+
+/** One entry per URL, the first listed — a crawler reads a repeat as a duplicate page. */
+function firstPerUrl(entries: MetadataRoute.Sitemap): MetadataRoute.Sitemap {
+  const seen = new Set<string>()
+  return entries.filter(({ url }) => !seen.has(url) && Boolean(seen.add(url)))
 }

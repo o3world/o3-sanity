@@ -129,3 +129,27 @@ describe('the collection indexes in Presentation', () => {
     expect(filterFor('/work/acme-rebrand')).toContain('_type == "caseStudy"')
   })
 })
+
+/**
+ * A coded landing page is a static route the catch-all would otherwise claim,
+ * asking for a `page` that `RESERVED_PAGE_SLUGS` forbids. Its document is the
+ * `serviceOffer` slugged after it.
+ */
+describe('a coded landing page in Presentation', () => {
+  const hitFor = (url: string) =>
+    mainDocumentRoutes.find((resolver) =>
+      match(String(resolver.route), { decode: decodeURIComponent })(url),
+    )
+
+  it('resolves /ai-visibility-review to its service offer, not the catch-all', () => {
+    const hit = hitFor('/ai-visibility-review')
+    expect(hit?.route).toBe('/ai-visibility-review')
+    expect(hit && 'filter' in hit ? hit.filter : undefined).toBe(
+      '_type == "serviceOffer" && slug.current == "ai-visibility-review"',
+    )
+  })
+
+  it('leaves a page nested under the same word to the catch-all', () => {
+    expect(hitFor('/solutions/ai-visibility-review')?.route).toBe('/*slug')
+  })
+})

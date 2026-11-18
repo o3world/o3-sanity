@@ -159,7 +159,7 @@ production site. Its GROQ **filter names the document types by hand**:
 
 ```
 _type in ["page","insight","caseStudy","collectionIndex","siteSettings",
-          "person","client","category","industry"]
+          "person","client","category","industry","serviceOffer"]
 ```
 
 A routed type missing from that list publishes to silence. The route handler is

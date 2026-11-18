@@ -144,26 +144,74 @@ export function breadcrumbs(baseUrl: string, crumbs: readonly Crumb[]) {
   }
 }
 
+/** One priced tier of a service. A tier with no number is left out of `offers`. */
+export interface ServiceOfferSource {
+  readonly name?: string | null
+  /** In USD. */
+  readonly price?: number | null
+}
+
+/**
+ * The service, at `path`. Each priced tier becomes an Offer at the same URL,
+ * since the page is where every tier is sold.
+ */
 export function service({
   baseUrl,
   name,
   description,
   path,
+  offers = [],
 }: {
   baseUrl: string
   name: string
   description?: string | null
   path: string
+  offers?: readonly ServiceOfferSource[]
 }) {
+  const url = absoluteUrl(path, baseUrl)
   return compact({
     '@context': CONTEXT,
     '@type': 'Service',
     name,
     description,
-    url: absoluteUrl(path, baseUrl),
+    url,
     provider: organizationRef(baseUrl),
     areaServed: 'US',
+    offers: offers
+      .filter((offer) => typeof offer.price === 'number')
+      .map((offer) =>
+        compact({
+          '@type': 'Offer',
+          name: offer.name?.trim(),
+          price: offer.price,
+          priceCurrency: 'USD',
+          url,
+        }),
+      ),
   })
+}
+
+export interface FaqSource {
+  readonly question?: string | null
+  /** The answer as plain text; Answer.text takes a string. */
+  readonly answerText?: string | null
+}
+
+/**
+ * The questions as a FAQPage, or `null` when none has both a question and an
+ * answer — an empty `mainEntity` is invalid.
+ */
+export function faqPage(faqs: readonly FaqSource[]) {
+  const mainEntity = faqs
+    .map((faq) => ({ name: faq.question?.trim() ?? '', text: faq.answerText?.trim() ?? '' }))
+    .filter(({ name, text }) => name !== '' && text !== '')
+    .map(({ name, text }) => ({
+      '@type': 'Question',
+      name,
+      acceptedAnswer: { '@type': 'Answer', text },
+    }))
+  if (mainEntity.length === 0) return null
+  return { '@context': CONTEXT, '@type': 'FAQPage', mainEntity }
 }
 
 /**
