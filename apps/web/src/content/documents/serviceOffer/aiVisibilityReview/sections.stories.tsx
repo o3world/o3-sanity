@@ -13,7 +13,7 @@ import { WhatWeReview } from './WhatWeReview'
 import styles from './aiVisibilityReview.module.css'
 
 const offer = aSeededServiceOffer()
-const bookingHref = '#contact'
+const bookingHref = '/contact'
 
 /** Each band of the AI Visibility Review page alone, from the committed seed. */
 const meta = {

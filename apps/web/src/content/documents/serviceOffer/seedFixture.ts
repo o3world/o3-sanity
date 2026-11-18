@@ -31,6 +31,7 @@ export function aSeededServiceOffer(overrides: Partial<ServiceOffer> = {}): Serv
     packages: seed.packages.map((pkg) => ({
       _key: pkg._key,
       heading: pkg.heading,
+      analyticsId: pkg.analyticsId,
       subheading: pkg.subheading,
       price: pkg.price,
       priceAmount: pkg.priceAmount,

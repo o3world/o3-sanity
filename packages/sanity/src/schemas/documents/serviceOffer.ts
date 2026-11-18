@@ -38,7 +38,7 @@ export const serviceOffer = defineType({
       title: 'Booking URL',
       type: 'url',
       description:
-        'Where every "Book a call", "Let’s talk" and package button goes — a scheduling link. Leave it empty and they jump to the contact band at the foot of the page.',
+        'Where every "Book a call", "Let’s talk" and package button goes — a scheduling link. Leave it empty and they go to the site’s contact form.',
       validation: (rule) => rule.uri({ scheme: ['http', 'https', 'mailto'], allowRelative: true }),
     }),
     defineField({
@@ -57,6 +57,27 @@ export const serviceOffer = defineType({
               type: 'string',
               description: 'The package’s name — "AI Visibility Check".',
               validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'analyticsId',
+              title: 'Analytics ID',
+              type: 'string',
+              description:
+                'The name analytics reports give this package — "check", "review". Lowercase words joined by hyphens; change it and the reports split in two. "check" marks the entry tier, whose button counts as starting a Check.',
+              validation: (rule) => [
+                rule.regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
+                  name: 'lowercase words joined by hyphens',
+                }),
+                rule
+                  .custom((value, context) => {
+                    if (value) return true
+                    const key = (context.parent as { _key?: string } | undefined)?._key ?? ''
+                    return /^[a-z]+(?:-[a-z]+)*$/.test(key)
+                      ? true
+                      : 'Empty, so analytics reports this package by a random internal key.'
+                  })
+                  .warning(),
+              ],
             }),
             defineField({
               name: 'subheading',
@@ -107,7 +128,12 @@ export const serviceOffer = defineType({
           preview: { select: { title: 'heading', subtitle: 'price' } },
         }),
       ],
-      validation: (rule) => rule.min(1),
+      validation: (rule) =>
+        rule.min(1).custom((packages: { _key?: string; analyticsId?: string }[] | undefined) => {
+          const ids = (packages ?? []).map((pkg) => pkg.analyticsId?.trim() || pkg._key)
+          const repeated = ids.find((id, index) => id && ids.indexOf(id) !== index)
+          return repeated ? `Two packages share the analytics ID "${repeated}".` : true
+        }),
     }),
     defineField({
       name: 'addOns',

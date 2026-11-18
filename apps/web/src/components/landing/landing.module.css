@@ -40,8 +40,8 @@
   gap: 6px;
   padding: 8px;
   border-radius: var(--radius-nav);
-  background: rgba(10, 10, 11, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: color-mix(in srgb, var(--color-ink) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-white) 12%, transparent);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
@@ -65,7 +65,7 @@
 }
 
 .link:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: color-mix(in srgb, var(--color-white) 8%, transparent);
 }
 
 .link:focus-visible,
@@ -83,7 +83,7 @@
 .footer {
   background: var(--color-ink);
   color: var(--color-on-utility);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid color-mix(in srgb, var(--color-white) 8%, transparent);
   padding: 32px 0;
 }
 

@@ -4,10 +4,7 @@ import { TrackedLink } from '@/components/landing/TrackedLink'
 
 import styles from './aiVisibilityReview.module.css'
 
-/**
- * The closing band, `#contact` — where every booking button lands while the
- * offer has no booking URL.
- */
+/** The closing band: one more chance to book, or to go back to the packages. */
 export function FinalCta({ bookingHref }: { readonly bookingHref: string }) {
   return (
     <section id="contact" className={styles.cta}>

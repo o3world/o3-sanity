@@ -51,6 +51,16 @@ describe('the sitemap', () => {
     expect(urls.filter((url) => url.endsWith('/ai-visibility-review'))).toHaveLength(1)
   })
 
+  it('leaves a reserved URL out when only a page claims it', async () => {
+    const urls = await sitemapUrls({
+      insights: [],
+      caseStudies: [],
+      pages: [{ slug: 'ai-visibility-review', _updatedAt: '2026-11-01T00:00:00Z' }],
+      serviceOffers: [],
+    })
+    expect(urls.some((url) => url.endsWith('/ai-visibility-review'))).toBe(false)
+  })
+
   it('never lists one URL twice', async () => {
     const urls = await sitemapUrls({
       insights: [],

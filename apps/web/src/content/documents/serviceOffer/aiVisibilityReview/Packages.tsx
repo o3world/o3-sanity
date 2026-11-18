@@ -11,6 +11,21 @@ import styles from './aiVisibilityReview.module.css'
 type ServicePackage = NonNullable<ServiceOffer['packages']>[number]
 type AddOn = NonNullable<ServiceOffer['addOns']>[number]
 
+/**
+ * The analytics ID of the entry tier. Its button counts as starting a Check
+ * (`start_check_click`); every other package's counts as booking a call.
+ */
+const ENTRY_PACKAGE_ID = 'check'
+
+/**
+ * The name analytics reports give a package: its `analyticsId`, or its `_key`
+ * when that is empty (the seeded packages' keys are already `check`, `review`
+ * and `boost`). It travels with the package, so reordering moves no report.
+ */
+function analyticsIdOf(pkg: ServicePackage): string {
+  return stegaClean(pkg.analyticsId)?.trim() || stegaClean(pkg._key)
+}
+
 export interface PackagesProps {
   readonly packages: readonly ServicePackage[]
   readonly addOns: readonly AddOn[]
@@ -70,7 +85,8 @@ function PackageCard({
   const featured = Boolean(stegaClean(pkg.featuredLabel)?.trim())
   const destination = pkg.button ? buttonDestination(pkg.button) : { kind: 'none' as const }
   const href = destination.kind === 'none' ? bookingHref : destination.href
-  const location = `package-${stegaClean(pkg._key)}`
+  const analyticsId = analyticsIdOf(pkg)
+  const location = `package-${analyticsId}`
   const packageName = stegaClean(pkg.heading)?.trim() || undefined
 
   return (
@@ -113,9 +129,7 @@ function PackageCard({
       {pkg.button?.label ? (
         <TrackedLink
           href={href}
-          // Every package builds on the one before, so the first is the entry
-          // tier — the "Check" a visitor starts with — whatever it is called.
-          event={number === 1 ? 'start_check_click' : 'book_call_click'}
+          event={analyticsId === ENTRY_PACKAGE_ID ? 'start_check_click' : 'book_call_click'}
           location={location}
           package={packageName}
           className={cn(

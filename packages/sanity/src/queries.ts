@@ -510,6 +510,7 @@ export const SERVICE_OFFER_QUERY =
   packages[]{
     _key,
     heading,
+    analyticsId,
     subheading,
     price,
     priceAmount,

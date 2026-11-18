@@ -87,13 +87,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       if (!row.slug) continue
       // The homepage slug is "index" and is already covered by the root entry.
       if (row.slug === 'index') continue
+      // A reserved slug belongs to a coded landing page; its offer below
+      // decides the entry, so an unpublished or noIndex offer lists nothing.
+      if (isReservedPageSlug(row.slug)) continue
       const path = `/${row.slug}`
       if (isRedirected(path)) continue
       entries.push(entry(base, path, row._updatedAt, 0.8))
     }
     // A service offer is served at the coded landing page its slug names, and
-    // only there; an offer whose slug no route reserves renders nowhere. A
-    // page already listed at that URL keeps its entry.
+    // only there; an offer whose slug no route reserves renders nowhere.
     for (const row of (data?.serviceOffers ?? []) as SitemapRow[]) {
       if (!row.slug || !isReservedPageSlug(row.slug)) continue
       entries.push(entry(base, `/${row.slug}`, row._updatedAt, 0.8))

@@ -10,6 +10,7 @@
     {
       "_type": "servicePackage",
       "_key": "check",
+      "analyticsId": "check",
       "heading": "AI Visibility Check",
       "subheading": "A fast read on where you stand.",
       "price": "$2,500",
@@ -30,6 +31,7 @@
     {
       "_type": "servicePackage",
       "_key": "review",
+      "analyticsId": "review",
       "heading": "AI Visibility Review",
       "subheading": "The full picture and a clear plan.",
       "price": "$6,500",
@@ -52,6 +54,7 @@
     {
       "_type": "servicePackage",
       "_key": "boost",
+      "analyticsId": "boost",
       "heading": "AI Visibility Boost",
       "subheading": "We do the work for you.",
       "price": "$11,000",

@@ -57,14 +57,14 @@ describe('the AI Visibility Review landing page', async () => {
     expect(html).toContain('<strong>Business Hub:</strong>')
   })
 
-  it('sends every booking button to the contact band when no booking URL is set', () => {
+  it('sends every booking button to the contact form when no booking URL is set', () => {
     const booking = [
       ...linksLabelled(html, 'Let’s talk'),
       ...linksLabelled(html, 'Book a free 20-minute call'),
       ...linksLabelled(html, 'Get the Review'),
     ]
     expect(booking.length).toBeGreaterThanOrEqual(5)
-    for (const tag of booking) expect(tag).toContain('href="#contact"')
+    for (const tag of booking) expect(tag).toContain('href="/contact"')
   })
 
   it('marks each booking button with the conversion event GTM listens for', () => {
@@ -97,8 +97,32 @@ describe('the AI Visibility Review landing page', async () => {
     }
   })
 
+  it('keeps each package’s event when an editor reorders the packages', async () => {
+    const offer = aSeededServiceOffer()
+    // No analytics IDs, as on an offer seeded before the field: the keys stand in.
+    const packages = [...offer.packages!].reverse().map((pkg) => ({ ...pkg, analyticsId: null }))
+    const { html: reordered } = await render({ ...offer, packages })
+    const [check] = linksLabelled(reordered, 'Start with a Check').filter((tag) =>
+      tag.includes('data-package='),
+    )
+    expect(check).toContain('data-event="start_check_click"')
+    expect(check).toContain('data-location="package-check"')
+    const [review] = linksLabelled(reordered, 'Get the Review')
+    expect(review).toContain('data-event="book_call_click"')
+  })
+
+  it('reports a package by its analytics ID over its internal key', async () => {
+    const offer = aSeededServiceOffer()
+    const packages = offer.packages!.map((pkg) =>
+      pkg._key === 'boost' ? { ...pkg, _key: '8f3a1c9e2b0d', analyticsId: 'boost' } : pkg,
+    )
+    const { html: keyed } = await render({ ...offer, packages })
+    const [boost] = linksLabelled(keyed, 'Get the Boost')
+    expect(boost).toContain('data-location="package-boost"')
+  })
+
   it('anchors the sections the nav links to', () => {
-    for (const id of ['review', 'packages', 'how', 'faq', 'contact']) {
+    for (const id of ['review', 'packages', 'how', 'faq']) {
       expect(html).toContain(`id="${id}"`)
       expect(html).toContain(`href="#${id}"`)
     }

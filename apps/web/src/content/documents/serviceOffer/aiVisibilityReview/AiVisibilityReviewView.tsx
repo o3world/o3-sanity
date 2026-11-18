@@ -21,9 +21,15 @@ const SECTION_LINKS = [
   { label: 'FAQ', href: '#faq' },
 ] as const
 
-/** Where a booking button goes: the offer's booking URL, or the page's own contact band. */
+/**
+ * The site's contact form: where a booking button goes while the offer has no
+ * booking URL, so every button still reaches a way to get in touch.
+ */
+const CONTACT_PAGE = '/contact'
+
+/** Where a booking button goes: the offer's booking URL, or the contact form. */
 function bookingHrefOf(offer: Pick<ServiceOffer, 'bookingUrl'>): string {
-  return stegaClean(offer.bookingUrl)?.trim() || '#contact'
+  return stegaClean(offer.bookingUrl)?.trim() || CONTACT_PAGE
 }
 
 /**

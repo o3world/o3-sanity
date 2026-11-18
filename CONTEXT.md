@@ -194,7 +194,8 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `background`      | A brief's raw material — research, notes, transcripts                                                                    | `research`, `context`, `notes`                            |
 | `instructions`    | A brief's directives for how to write the piece                                                                          | `prompt`, `directions`, `guidelines`                      |
 | `links`           | A brief's external source URLs                                                                                           | `sources`, `urls`, a second `references`                  |
-| `bookingUrl`      | Where every "book a call" button on a service offer's page goes; empty = the page's own `#contact` band (`serviceOffer`) | `ctaUrl`, `calendarLink`, a `button` per call site        |
+| `bookingUrl`      | Where every "book a call" button on a service offer's page goes; empty = the site's `/contact` form (`serviceOffer`)     | `ctaUrl`, `calendarLink`, a `button` per call site        |
+| `analyticsId`     | The stable name analytics reports give an item, independent of its order and its heading (`servicePackage`)              | `trackingId`, `slug`, `eventName`, the item's `_key`      |
 | `packages`        | A service offer's priced tiers, in shown order (`serviceOffer`)                                                          | `tiers`, `plans`, `products`                              |
 | `addOns`          | Extras sold beside any package, each a `label` and a `price` (`serviceOffer`)                                            | `extras`, `upsells`                                       |
 | `price`           | A price as the page prints it — "$2,500", "$800 each"                                                                    | `cost`, `amount`, a number                                |
