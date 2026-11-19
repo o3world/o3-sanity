@@ -15,6 +15,11 @@ const TOOLS = [
     width: 620,
   },
   { name: 'Claude', src: '/images/ai-visibility-review/claude.webp', width: 587 },
+  {
+    name: 'Google AI Overviews',
+    src: '/images/ai-visibility-review/google-ai-overviews.webp',
+    width: 632,
+  },
 ] as const
 
 const LOGO_HEIGHT = 129
