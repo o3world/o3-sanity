@@ -121,7 +121,9 @@
   position: relative;
   background: var(--color-ink);
   color: var(--color-white);
-  overflow: hidden;
+  /* clip, not hidden: the sphere's canvas runs far below the band, and a
+     hidden box can still be scrolled by focus or scrollIntoView. */
+  overflow: clip;
   padding-top: 150px;
 }
 
@@ -247,82 +249,11 @@
   animation-delay: 0.9s;
 }
 
-/* The glowing planet and its rotating orbits. */
+/* The seat for the homepage's orbital sphere; the sphere positions itself. */
 .planetZone {
   position: relative;
   height: 340px;
-  margin-top: 40px;
-}
-
-.planet {
-  position: absolute;
-  left: 50%;
-  top: 120px;
-  width: 1500px;
-  height: 1500px;
-  margin-left: -750px;
-  border-radius: 50%;
-  border: 2px solid color-mix(in srgb, var(--color-white) 60%, transparent);
-  background:
-    radial-gradient(
-      circle at 50% 0%,
-      color-mix(in srgb, var(--color-brand) 22%, transparent),
-      color-mix(in srgb, var(--color-ink) 0%, transparent) 30%
-    ),
-    var(--color-ink);
-  box-shadow:
-    0 -10px 90px color-mix(in srgb, var(--color-brand) 55%, transparent),
-    0 -2px 24px color-mix(in srgb, var(--color-brand) 60%, transparent),
-    inset 0 40px 90px color-mix(in srgb, var(--color-brand) 18%, transparent);
-  animation: glow 6s ease-in-out infinite;
-}
-
-.orbit {
-  position: absolute;
-  left: 50%;
-  top: 200px;
-  border-radius: 50%;
-  border: 1.5px solid color-mix(in srgb, var(--color-white) 28%, transparent);
-}
-
-.orbitWide {
-  width: 1100px;
-  height: 300px;
-  margin-left: -550px;
-  animation: spinForward 40s linear infinite;
-}
-
-.orbitRed {
-  width: 760px;
-  height: 520px;
-  margin-left: -380px;
-  top: 230px;
-  border-color: color-mix(in srgb, var(--color-brand) 55%, transparent);
-  animation: spinBack 55s linear infinite;
-}
-
-.orbitTall {
-  width: 320px;
-  height: 440px;
-  margin-left: -160px;
-  top: 250px;
-  animation: spinForward 70s linear infinite reverse;
-}
-
-.satellite {
-  position: absolute;
-  top: -5px;
-  left: 50%;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--color-brand);
-  box-shadow: 0 0 14px var(--color-brand);
-}
-
-.satelliteWhite {
-  background: var(--color-white);
-  box-shadow: 0 0 12px var(--color-white);
+  margin-top: 80px;
 }
 
 /* ── The AI answer card ──────────────────────────────────────────────── */
@@ -530,10 +461,6 @@
   display: flex;
   width: max-content;
   padding: 26px 0;
-  font-family: var(--font-display);
-  font-size: clamp(22px, 2.6vw, 32px);
-  font-weight: 300;
-  color: var(--lp-copy-on-ink);
   animation: scroll 32s linear infinite;
 }
 
@@ -547,12 +474,26 @@
 
 .trackSet li {
   display: flex;
-  gap: 64px;
-  white-space: nowrap;
+  align-items: center;
+  justify-content: center;
+  width: 175px;
+  height: 43px;
 }
 
-.trackDot {
-  color: var(--color-brand);
+/* The homepage partner strip's treatment on ink: each mark flattened to
+   white at 40%, lifting to 60% on hover. */
+.toolLogo {
+  width: 100%;
+  height: auto;
+  max-height: 43px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.4;
+  transition: opacity 500ms var(--ease-soft);
+}
+
+.toolLogo:hover {
+  opacity: 0.6;
 }
 
 /* ── The shift ───────────────────────────────────────────────────────── */
@@ -1108,26 +1049,11 @@
 
 .cta {
   position: relative;
-  overflow: hidden;
+  overflow: clip;
   background: var(--color-ink);
   color: var(--color-white);
   padding: clamp(100px, 13vw, 170px) 0 clamp(160px, 18vw, 240px);
   scroll-margin-top: 16px;
-}
-
-.ctaGlow {
-  position: absolute;
-  left: 50%;
-  bottom: -520px;
-  width: 1100px;
-  height: 700px;
-  margin-left: -550px;
-  border-radius: 50%;
-  border: 2px solid color-mix(in srgb, var(--color-white) 50%, transparent);
-  box-shadow:
-    0 -10px 100px color-mix(in srgb, var(--color-brand) 55%, transparent),
-    inset 0 30px 90px color-mix(in srgb, var(--color-brand) 20%, transparent);
-  animation: glow 6s ease-in-out infinite;
 }
 
 .ctaInner {
@@ -1208,22 +1134,6 @@
   }
 }
 
-@keyframes glow {
-  0%,
-  100% {
-    box-shadow:
-      0 -10px 90px color-mix(in srgb, var(--color-brand) 50%, transparent),
-      0 -2px 24px color-mix(in srgb, var(--color-brand) 55%, transparent),
-      inset 0 40px 90px color-mix(in srgb, var(--color-brand) 16%, transparent);
-  }
-  50% {
-    box-shadow:
-      0 -14px 130px color-mix(in srgb, var(--color-brand) 70%, transparent),
-      0 -2px 30px color-mix(in srgb, var(--color-brand) 70%, transparent),
-      inset 0 40px 110px color-mix(in srgb, var(--color-brand) 24%, transparent);
-  }
-}
-
 @keyframes glowSoft {
   0%,
   100% {
@@ -1231,24 +1141,6 @@
   }
   50% {
     opacity: 1;
-  }
-}
-
-@keyframes spinForward {
-  from {
-    transform: rotate(-8deg);
-  }
-  to {
-    transform: rotate(352deg);
-  }
-}
-
-@keyframes spinBack {
-  from {
-    transform: rotate(14deg);
-  }
-  to {
-    transform: rotate(-346deg);
   }
 }
 
@@ -1373,31 +1265,6 @@
 
   .planetZone {
     height: 240px;
-  }
-
-  .planet {
-    width: 900px;
-    height: 900px;
-    margin-left: -450px;
-    top: 90px;
-  }
-
-  .orbitWide {
-    width: 640px;
-    height: 200px;
-    margin-left: -320px;
-    top: 150px;
-  }
-
-  .orbitRed {
-    width: 460px;
-    height: 340px;
-    margin-left: -230px;
-    top: 160px;
-  }
-
-  .orbitTall {
-    display: none;
   }
 
   .btn {

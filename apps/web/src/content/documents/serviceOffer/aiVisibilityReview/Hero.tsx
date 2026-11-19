@@ -1,22 +1,28 @@
-import { ArrowIcon, buttonVariants, cn } from '@o3/ui'
+import { ArrowIcon, OrbitalSphere, buttonVariants, cn } from '@o3/ui'
 
 import { TrackedLink } from '@/components/landing/TrackedLink'
 
 import styles from './aiVisibilityReview.module.css'
 
+/** Each tool's wordmark, trimmed to its ink and 129px tall (3× the strip's 43px). */
 const TOOLS = [
-  'ChatGPT',
-  'Google Gemini',
-  'Perplexity',
-  'Microsoft Copilot',
-  'Claude',
-  'Google AI Overviews',
+  { name: 'ChatGPT', src: '/images/ai-visibility-review/chatgpt.webp', width: 534 },
+  { name: 'Google Gemini', src: '/images/ai-visibility-review/gemini.webp', width: 557 },
+  { name: 'Perplexity', src: '/images/ai-visibility-review/perplexity.webp', width: 525 },
+  {
+    name: 'Microsoft Copilot',
+    src: '/images/ai-visibility-review/microsoft-copilot.webp',
+    width: 620,
+  },
+  { name: 'Claude', src: '/images/ai-visibility-review/claude.webp', width: 587 },
 ] as const
+
+const LOGO_HEIGHT = 129
 
 /**
  * The opener on ink: starfield, sequenced copy, the floating AI answer card
- * (hidden once the hero stacks at 1080px), the glowing planet with its
- * orbits, and the marquee of the tools a review covers.
+ * (hidden once the hero stacks at 1080px), the homepage's orbital sphere
+ * rising from the foot, and the marquee of the tools a review covers.
  */
 export function Hero({ bookingHref }: { readonly bookingHref: string }) {
   return (
@@ -59,15 +65,14 @@ export function Hero({ bookingHref }: { readonly bookingHref: string }) {
         </div>
       </div>
 
+      {/* The homepage hero's sphere and seat: 120vw across with its apex 20vw
+          above the zone's foot, 148vw and hanging lower on phones. */}
       <div className={styles.planetZone} aria-hidden="true">
-        <div className={styles.planet} />
-        <div className={cn(styles.orbit, styles.orbitWide)}>
-          <span className={styles.satellite} />
-        </div>
-        <div className={cn(styles.orbit, styles.orbitRed)}>
-          <span className={cn(styles.satellite, styles.satelliteWhite)} />
-        </div>
-        <div className={cn(styles.orbit, styles.orbitTall)} />
+        <OrbitalSphere
+          preset="hero"
+          motion="orbit"
+          className="bottom-[-111vw] left-1/2 w-[148vw] -translate-x-1/2 lg:bottom-[-100vw] lg:w-[120vw]"
+        />
       </div>
 
       <ToolMarquee />
@@ -157,11 +162,17 @@ function ToolList({ hidden = false }: { readonly hidden?: boolean }) {
   return (
     <ul className={styles.trackSet} aria-hidden={hidden || undefined}>
       {TOOLS.map((tool) => (
-        <li key={tool}>
-          {tool}
-          <span className={styles.trackDot} aria-hidden="true">
-            ·
-          </span>
+        <li key={tool.name}>
+          {/* eslint-disable-next-line @next/next/no-img-element -- static marks in
+              `public/`, 22–25 KB and already sized; next/image is restricted here
+              and SanityImage needs a Sanity asset. */}
+          <img
+            src={tool.src}
+            alt={hidden ? '' : tool.name}
+            width={tool.width}
+            height={LOGO_HEIGHT}
+            className={styles.toolLogo}
+          />
         </li>
       ))}
     </ul>
