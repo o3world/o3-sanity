@@ -8,6 +8,7 @@ import { clientEnv } from '@/env'
 import { currentYear } from '@/lib/currentYear'
 import { gtmContainerFor } from '@/lib/gtmContainer'
 import { CookieNotice } from '@/components/cookie-notice/CookieNotice'
+import { GlobeProvider } from '@/components/globe/GlobeProvider'
 import { LandingFooter } from '@/components/landing/LandingFooter'
 import { LANDING_CONTENT_ID } from '@/components/landing/landingContent'
 
@@ -16,8 +17,8 @@ import { DraftTools } from '../(site)/DraftTools'
 /**
  * The shell for landing pages: no site nav, no site footer. Each page draws
  * its own nav and `<main>`; this keeps what every page on the domain needs —
- * GTM, the skip link, the cookie notice, the draft tools — and a one-line
- * footer. Fonts and globals come from the root layout, as they do for (site).
+ * GTM, the skip link, the cookie notice, the draft tools, the GPU globe
+ * renderer the site's spheres draw with — and a one-line footer. Fonts and globals come from the root layout, as they do for (site).
  */
 export default async function LandingLayout({ children }: { children: React.ReactNode }) {
   // Readable while prerendering, and the only request API the shell reads —
@@ -40,7 +41,7 @@ export default async function LandingLayout({ children }: { children: React.Reac
 async function Shell({ children, gtmId }: { children: React.ReactNode; gtmId?: string }) {
   const year = await currentYear()
   return (
-    <>
+    <GlobeProvider>
       {gtmId && <GoogleTagManager gtmId={gtmId} />}
       <SkipLink target={LANDING_CONTENT_ID} />
       {children}
@@ -49,6 +50,6 @@ async function Shell({ children, gtmId }: { children: React.ReactNode; gtmId?: s
       <Suspense fallback={null}>
         <DraftTools />
       </Suspense>
-    </>
+    </GlobeProvider>
   )
 }

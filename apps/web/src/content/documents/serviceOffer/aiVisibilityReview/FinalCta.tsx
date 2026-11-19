@@ -1,4 +1,4 @@
-import { ArrowIcon, buttonVariants, cn } from '@o3/ui'
+import { ArrowIcon, OrbitalSphere, buttonVariants, cn } from '@o3/ui'
 
 import { TrackedLink } from '@/components/landing/TrackedLink'
 
@@ -9,7 +9,12 @@ export function FinalCta({ bookingHref }: { readonly bookingHref: string }) {
   return (
     <section id="contact" className={styles.cta}>
       <div className={styles.stars} aria-hidden="true" />
-      <div className={styles.ctaGlow} aria-hidden="true" />
+      {/* The hero's sphere again, its cap low behind the buttons. */}
+      <OrbitalSphere
+        preset="hero"
+        motion="orbit"
+        className="bottom-[-130vw] left-1/2 w-[148vw] -translate-x-1/2 lg:bottom-[-70vw] lg:w-[80vw]"
+      />
       <div className={cn(styles.wrap, styles.reveal, styles.ctaInner)}>
         <p className={cn(styles.eyebrow, styles.eyebrowOnInk)}>Get started</p>
         <h2 className={styles.ctaHeading}>
