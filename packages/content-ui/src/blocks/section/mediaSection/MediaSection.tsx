@@ -3,13 +3,24 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 import { stegaClean } from '@sanity/client/stega'
 
 import { SanityImage } from '../../../SanityImage'
-import { ARTICLE_COLUMN, CONTENT_COLUMN, FULL_BLEED } from '../../../imageSizes'
+import { ARTICLE_COLUMN, CANVAS_COLUMN, CONTENT_COLUMN, FULL_BLEED } from '../../../imageSizes'
 import { sectionBackground } from '../../sectionBackground'
 import { resolveSurface } from '../../surface'
 
 type MediaSectionProps = SectionProps<'mediaSection'> & { sequence?: boolean }
 
 /** Case-study media plus About's inset photograph (3754:78276) and feature (4061:50283). */
+/**
+ * The plain figure's measure per `width`. `wide` stops at the 1248px canvas,
+ * the bento grids' cap, so a case-study screenshot on its own background
+ * lines up with the grids around it (OWSW-71).
+ */
+const PLAIN_WIDTH: Record<string, { measure: string; sizes: string }> = {
+  contained: { measure: 'max-w-article', sizes: ARTICLE_COLUMN },
+  wide: { measure: 'max-w-canvas', sizes: CANVAS_COLUMN },
+  section: { measure: 'max-w-section', sizes: CONTENT_COLUMN },
+}
+
 export function MediaSection({
   media,
   variant,
@@ -201,14 +212,14 @@ export function MediaSection({
       <section {...surfaceAttrs(resolved)} className={`${bandClass} px-gutter pb-band-article`}>
         {picture}
         <figure
-          className={`${stegaClean(width) === 'section' ? 'max-w-section' : 'max-w-article'} mx-auto w-full`}
+          className={`${PLAIN_WIDTH[stegaClean(width) ?? 'contained']?.measure ?? 'max-w-article'} mx-auto w-full`}
         >
           <SanityImage
             source={media.image}
             alt={media.alt}
             width={1650}
             className="w-full drop-shadow-[0_0_32px_rgba(0,0,0,0.1)]"
-            sizes={stegaClean(width) === 'section' ? CONTENT_COLUMN : ARTICLE_COLUMN}
+            sizes={PLAIN_WIDTH[stegaClean(width) ?? 'contained']?.sizes ?? ARTICLE_COLUMN}
           />
           {media.caption ? (
             <figcaption className="text-fg-subtle mt-4 text-sm">{media.caption}</figcaption>

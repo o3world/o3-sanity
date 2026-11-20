@@ -30,7 +30,8 @@ export const mediaSectionKnobs = defineBlockKnobs({
     knob({
       name: 'width',
       title: 'Width',
-      options: ['contained', 'section', 'full-bleed'],
+      // `wide` stops at the 1248px canvas, the bento grids' cap (OWSW-71).
+      options: ['contained', 'wide', 'section', 'full-bleed'],
       initialValue: 'contained',
       // A capture is a full-bleed stage by construction, so the axis has
       // nothing left to choose. Was `({parent}) => parent?.variant ===
