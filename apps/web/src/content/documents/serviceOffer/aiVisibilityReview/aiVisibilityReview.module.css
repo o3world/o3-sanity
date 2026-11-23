@@ -1288,11 +1288,10 @@
   }
 }
 
-/* ── The site's reduce-motion control. Every looping animation on the page is
-   listed in both rules below, so a new infinite loop joins both. Paused holds
-   each loop where it is, as the globe holds; `?spatial-still` removes them,
-   leaving each element at its resting style, as it removes the globe's.
-   Entrances still play once, so no content is left hidden mid-fade. ── */
+/* ── The site's reduce-motion control holds every looping animation where it
+   is, as it holds the globe. The loops are listed by name: entrances and the
+   scroll reveals must keep playing, or a pause mid-fade would leave content
+   half-shown. A new infinite loop joins this list. ── */
 :global(html[data-spatial-paused]) .stars,
 :global(html[data-spatial-paused]) .starsNear,
 :global(html[data-spatial-paused]) .card,
@@ -1301,16 +1300,6 @@
 :global(html[data-spatial-paused]) .track,
 :global(html[data-spatial-paused]) .featured::before {
   animation-play-state: paused;
-}
-
-:global(html[data-spatial-still]) .stars,
-:global(html[data-spatial-still]) .starsNear,
-:global(html[data-spatial-still]) .card,
-:global(html[data-spatial-still]) .typing span,
-:global(html[data-spatial-still]) .answerYou::after,
-:global(html[data-spatial-still]) .track,
-:global(html[data-spatial-still]) .featured::before {
-  animation: none;
 }
 
 /* ── Reduced motion: every animation and transition off, entrances shown ── */
@@ -1331,4 +1320,21 @@
   .stepsLine span {
     transform: none;
   }
+}
+
+/* `?spatial-still` asks for the same page as reduced motion, for still captures. */
+:global(html[data-spatial-still]) .page *,
+:global(html[data-spatial-still]) .page *::before,
+:global(html[data-spatial-still]) .page *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+:global(html[data-spatial-still]) .fade,
+:global(html[data-spatial-still]) .rowIn {
+  opacity: 1;
+}
+
+:global(html[data-spatial-still]) .stepsLine span {
+  transform: none;
 }

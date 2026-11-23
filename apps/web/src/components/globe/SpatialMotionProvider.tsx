@@ -23,6 +23,14 @@ type MotionContext = {
   blocked: boolean | null
 }
 const SpatialMotionContext = createContext<MotionContext | null>(null)
+
+/**
+ * The visitor's Reduce motion choice for this document. Each route group's
+ * layout mounts its own provider, so client navigation between (site) and
+ * (landing) replaces the provider; the choice lives here so the next one
+ * starts from it. A reload starts unpaused, as before.
+ */
+const documentChoice = { paused: false }
 const unpaused = () => false
 const noSubscription = () => () => {}
 
@@ -46,7 +54,11 @@ export function SpatialMotionControl() {
       className="spatial-motion-setting cursor-pointer"
       aria-pressed={reduced}
       disabled={context.blocked !== false}
-      onClick={() => context.motion.setPaused(!context.motion.getSnapshot())}
+      onClick={() => {
+        const next = !context.motion.getSnapshot()
+        documentChoice.paused = next
+        context.motion.setPaused(next)
+      }}
     >
       Reduce motion
       <span aria-hidden="true">{reduced ? 'On' : 'Off'}</span>
@@ -71,6 +83,7 @@ export function SpatialMotionProvider({ children }: { children: ReactNode }) {
     // Publish only after hydration; the server-owned attributes stay untouched before it.
     const root = document.documentElement as SpatialMotionRoot
     root.__o3SpatialMotion = motion
+    if (documentChoice.paused) motion.setPaused(true)
     const publish = () => {
       if (motion.getSnapshot()) root.dataset.spatialPaused = 'true'
       else delete root.dataset.spatialPaused

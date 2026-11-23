@@ -71,34 +71,51 @@ export const PausedByMotionControl: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    // The stars, the answer card and the logo marquee: three of the loops the
-    // paused and still rules hold.
-    const loops = [styles.stars, styles.card, styles.track].map((name) => {
-      const loop = canvasElement.querySelector<HTMLElement>(`.${name}`)
-      if (!loop) throw new Error(`No element carries the page's ${name} class`)
-      return loop
-    })
+    // Every looping animation the paused rule names, pseudo-elements included.
+    const find = (name: string, selector = `.${name}`) => {
+      const element = canvasElement.querySelector<HTMLElement>(selector)
+      if (!element) throw new Error(`No element matches the page's ${name} loop`)
+      return element
+    }
+    const loops: [HTMLElement, string?][] = [
+      [find(styles.stars!)],
+      [find(styles.starsNear!)],
+      [find(styles.card!)],
+      [find(styles.typing!, `.${styles.typing} span`)],
+      [find(styles.answerYou!), '::after'],
+      [find(styles.track!)],
+      [find(styles.featured!), '::before'],
+    ]
+    const style = ([element, pseudo]: [HTMLElement, string?]) =>
+      getComputedStyle(element, pseudo ?? null)
+    // One entry per animation: `.starsNear` runs two, so the value is a list.
+    const playStates = (loop: [HTMLElement, string?]) =>
+      new Set(style(loop).animationPlayState.split(', '))
+
     for (const loop of loops) {
-      await expect(getComputedStyle(loop).animationName).not.toBe('none')
-      await expect(getComputedStyle(loop).animationPlayState).toBe('running')
+      await expect(style(loop).animationName).not.toBe('none')
+      await expect(playStates(loop)).toEqual(new Set(['running']))
     }
     const control = canvas.getByRole('button', { name: /Reduce motion/ })
     await waitFor(() => expect(control).toBeEnabled())
     await userEvent.click(control)
     for (const loop of loops) {
-      await expect(getComputedStyle(loop).animationPlayState).toBe('paused')
+      await expect(playStates(loop)).toEqual(new Set(['paused']))
     }
     await userEvent.click(control)
     for (const loop of loops) {
-      await expect(getComputedStyle(loop).animationPlayState).toBe('running')
+      await expect(playStates(loop)).toEqual(new Set(['running']))
     }
-    // `?spatial-still` sets this attribute; the loops drop their animation.
+
+    // `?spatial-still` sets this attribute: the page drops every animation, as
+    // under reduced motion, and the hero entrances show.
     const root = document.documentElement
     root.toggleAttribute('data-spatial-still', true)
     try {
       for (const loop of loops) {
-        await expect(getComputedStyle(loop).animationName).toBe('none')
+        await expect(style(loop).animationName).toBe('none')
       }
+      await expect(getComputedStyle(find(styles.fade!)).opacity).toBe('1')
     } finally {
       root.removeAttribute('data-spatial-still')
     }
