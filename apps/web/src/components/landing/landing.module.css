@@ -112,6 +112,22 @@
   color: var(--color-white);
 }
 
+.footerEnd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 32px;
+}
+
+.footerEnd :global(.spatial-motion-setting) {
+  min-height: 44px;
+  color: var(--color-on-utility);
+}
+
+.footerEnd :global(.spatial-motion-setting):hover {
+  color: var(--color-white);
+}
+
 @media (max-width: 860px) {
   .links {
     display: none;
