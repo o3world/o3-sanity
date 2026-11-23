@@ -25,12 +25,16 @@ type MotionContext = {
 const SpatialMotionContext = createContext<MotionContext | null>(null)
 
 /**
- * The visitor's Reduce motion choice for this document. Each route group's
- * layout mounts its own provider, so client navigation between (site) and
- * (landing) replaces the provider; the choice lives here so the next one
- * starts from it. A reload starts unpaused, as before.
+ * One clock per document. Each route group's layout mounts its own provider,
+ * so client navigation between (site) and (landing) replaces the provider;
+ * sharing the clock keeps the visitor's choice and the globe's pose across
+ * that swap. The server gets a fresh clock per render, never this one.
  */
-const documentChoice = { paused: false }
+let documentMotion: SpatialMotion | null = null
+function motionForDocument(): SpatialMotion {
+  if (typeof window === 'undefined') return createSpatialMotion()
+  return (documentMotion ??= createSpatialMotion())
+}
 const unpaused = () => false
 const noSubscription = () => () => {}
 
@@ -54,11 +58,7 @@ export function SpatialMotionControl() {
       className="spatial-motion-setting cursor-pointer"
       aria-pressed={reduced}
       disabled={context.blocked !== false}
-      onClick={() => {
-        const next = !context.motion.getSnapshot()
-        documentChoice.paused = next
-        context.motion.setPaused(next)
-      }}
+      onClick={() => context.motion.setPaused(!context.motion.getSnapshot())}
     >
       Reduce motion
       <span aria-hidden="true">{reduced ? 'On' : 'Off'}</span>
@@ -73,7 +73,7 @@ function MotionQuerySync({ refresh }: { refresh: () => void }) {
 }
 
 export function SpatialMotionProvider({ children }: { children: ReactNode }) {
-  const [motion] = useState(createSpatialMotion)
+  const [motion] = useState(motionForDocument)
   const [blocked, setBlocked] = useState<boolean | null>(null)
   const refreshPreferences = useRef<(() => void) | null>(null)
   const refresh = useCallback(() => refreshPreferences.current?.(), [])
@@ -83,7 +83,6 @@ export function SpatialMotionProvider({ children }: { children: ReactNode }) {
     // Publish only after hydration; the server-owned attributes stay untouched before it.
     const root = document.documentElement as SpatialMotionRoot
     root.__o3SpatialMotion = motion
-    if (documentChoice.paused) motion.setPaused(true)
     const publish = () => {
       if (motion.getSnapshot()) root.dataset.spatialPaused = 'true'
       else delete root.dataset.spatialPaused
