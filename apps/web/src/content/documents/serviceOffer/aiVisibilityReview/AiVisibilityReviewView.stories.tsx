@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { expect, userEvent, within } from 'storybook/test'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 
+import {
+  SpatialMotionControl,
+  SpatialMotionProvider,
+} from '@/components/globe/SpatialMotionProvider'
 import { LandingFooter } from '@/components/landing/LandingFooter'
 
 import { aSeededServiceOffer } from '../seedFixture'
@@ -53,20 +57,39 @@ export const Mobile: Story = {
   },
 }
 
-/** The site's reduce-motion control holds the page's looping motion, as it holds the globe. */
+/** The footer's reduce-motion control holds the page's looping motion, as it holds the globe. */
 export const PausedByMotionControl: Story = {
   globals: { viewport: { value: 'desktop' } },
+  parameters: { nextjs: { appDirectory: true } },
   tags: ['vr:skip'],
+  render: (args) => (
+    <SpatialMotionProvider>
+      <AiVisibilityReviewView {...args} />
+      <LandingFooter year={2026} utilities={<SpatialMotionControl />} />
+    </SpatialMotionProvider>
+  ),
   play: async ({ canvasElement }) => {
-    const root = document.documentElement
-    // The logo strip's marquee: the module class compiles to `_track_<hash>`.
-    const track = canvasElement.querySelector<HTMLElement>('[class*="_track_"]')!
-    await expect(getComputedStyle(track).animationPlayState).toBe('running')
-    root.dataset.spatialPaused = 'true'
-    try {
-      await expect(getComputedStyle(track).animationPlayState).toBe('paused')
-    } finally {
-      delete root.dataset.spatialPaused
+    const canvas = within(canvasElement)
+    // Module classes compile to `_<name>_<hash>`: the stars, the answer card
+    // and the logo marquee, three of the loops the paused rule holds.
+    const loops = ['stars', 'card', 'track'].map((name) => {
+      const loop = canvasElement.querySelector<HTMLElement>(`[class*="_${name}_"]`)
+      if (!loop) throw new Error(`No element carries the page's "${name}" class`)
+      return loop
+    })
+    for (const loop of loops) {
+      await expect(getComputedStyle(loop).animationName).not.toBe('none')
+      await expect(getComputedStyle(loop).animationPlayState).toBe('running')
+    }
+    const control = canvas.getByRole('button', { name: /Reduce motion/ })
+    await waitFor(() => expect(control).toBeEnabled())
+    await userEvent.click(control)
+    for (const loop of loops) {
+      await expect(getComputedStyle(loop).animationPlayState).toBe('paused')
+    }
+    await userEvent.click(control)
+    for (const loop of loops) {
+      await expect(getComputedStyle(loop).animationPlayState).toBe('running')
     }
   },
 }

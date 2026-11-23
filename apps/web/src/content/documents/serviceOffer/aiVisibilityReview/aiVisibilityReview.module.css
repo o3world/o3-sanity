@@ -1288,9 +1288,11 @@
   }
 }
 
-/* ── The site's reduce-motion control: the page's looping motion holds where
-   it is, as the globe does. Entrances still play once, so no content is left
-   hidden mid-fade. ── */
+/* ── The site's reduce-motion control: every looping animation on the page is
+   listed here, so a new infinite loop joins both lists. Paused holds each loop
+   where it is, as the globe holds; `?spatial-still` drops them to their first
+   frame, as it does the globe's. Entrances still play once, so no content is
+   left hidden mid-fade. ── */
 :global(html[data-spatial-paused]) .stars,
 :global(html[data-spatial-paused]) .starsNear,
 :global(html[data-spatial-paused]) .card,
@@ -1299,6 +1301,16 @@
 :global(html[data-spatial-paused]) .track,
 :global(html[data-spatial-paused]) .featured::before {
   animation-play-state: paused;
+}
+
+:global(html[data-spatial-still]) .stars,
+:global(html[data-spatial-still]) .starsNear,
+:global(html[data-spatial-still]) .card,
+:global(html[data-spatial-still]) .typing span,
+:global(html[data-spatial-still]) .answerYou::after,
+:global(html[data-spatial-still]) .track,
+:global(html[data-spatial-still]) .featured::before {
+  animation: none;
 }
 
 /* ── Reduced motion: every animation and transition off, entrances shown ── */
