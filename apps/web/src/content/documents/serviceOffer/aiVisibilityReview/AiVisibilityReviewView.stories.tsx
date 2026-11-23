@@ -9,6 +9,7 @@ import { LandingFooter } from '@/components/landing/LandingFooter'
 
 import { aSeededServiceOffer } from '../seedFixture'
 import { AiVisibilityReviewView } from './AiVisibilityReviewView'
+import styles from './aiVisibilityReview.module.css'
 
 type DataLayerWindow = Window & { dataLayer?: Record<string, unknown>[] }
 
@@ -70,11 +71,11 @@ export const PausedByMotionControl: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    // Module classes compile to `_<name>_<hash>`: the stars, the answer card
-    // and the logo marquee, three of the loops the paused rule holds.
-    const loops = ['stars', 'card', 'track'].map((name) => {
-      const loop = canvasElement.querySelector<HTMLElement>(`[class*="_${name}_"]`)
-      if (!loop) throw new Error(`No element carries the page's "${name}" class`)
+    // The stars, the answer card and the logo marquee: three of the loops the
+    // paused and still rules hold.
+    const loops = [styles.stars, styles.card, styles.track].map((name) => {
+      const loop = canvasElement.querySelector<HTMLElement>(`.${name}`)
+      if (!loop) throw new Error(`No element carries the page's ${name} class`)
       return loop
     })
     for (const loop of loops) {
@@ -90,6 +91,16 @@ export const PausedByMotionControl: Story = {
     await userEvent.click(control)
     for (const loop of loops) {
       await expect(getComputedStyle(loop).animationPlayState).toBe('running')
+    }
+    // `?spatial-still` sets this attribute; the loops drop their animation.
+    const root = document.documentElement
+    root.toggleAttribute('data-spatial-still', true)
+    try {
+      for (const loop of loops) {
+        await expect(getComputedStyle(loop).animationName).toBe('none')
+      }
+    } finally {
+      root.removeAttribute('data-spatial-still')
     }
   },
 }

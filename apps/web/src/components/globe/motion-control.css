@@ -11,7 +11,7 @@
   text-align: left;
 }
 
-footer .spatial-motion-setting:hover {
+:is(.site-footer, .landing-footer) .spatial-motion-setting:hover {
   color: var(--color-white);
   opacity: 1;
 }

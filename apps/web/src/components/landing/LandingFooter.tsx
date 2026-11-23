@@ -14,7 +14,7 @@ type LandingFooterProps = {
 /** A landing page's footer: the copyright line, the privacy policy, and any utilities. */
 export function LandingFooter({ year, utilities }: LandingFooterProps) {
   return (
-    <footer className={styles.footer}>
+    <footer className={`landing-footer ${styles.footer}`}>
       <div className={styles.footerRow}>
         <span>© {year} O3 World</span>
         <div className={styles.footerEnd}>

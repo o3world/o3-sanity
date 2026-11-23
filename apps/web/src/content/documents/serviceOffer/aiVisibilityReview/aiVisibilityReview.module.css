@@ -1288,11 +1288,11 @@
   }
 }
 
-/* ── The site's reduce-motion control: every looping animation on the page is
-   listed here, so a new infinite loop joins both lists. Paused holds each loop
-   where it is, as the globe holds; `?spatial-still` drops them to their first
-   frame, as it does the globe's. Entrances still play once, so no content is
-   left hidden mid-fade. ── */
+/* ── The site's reduce-motion control. Every looping animation on the page is
+   listed in both rules below, so a new infinite loop joins both. Paused holds
+   each loop where it is, as the globe holds; `?spatial-still` removes them,
+   leaving each element at its resting style, as it removes the globe's.
+   Entrances still play once, so no content is left hidden mid-fade. ── */
 :global(html[data-spatial-paused]) .stars,
 :global(html[data-spatial-paused]) .starsNear,
 :global(html[data-spatial-paused]) .card,
