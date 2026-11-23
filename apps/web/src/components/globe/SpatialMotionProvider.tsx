@@ -31,6 +31,8 @@ const SpatialMotionContext = createContext<MotionContext | null>(null)
  * that swap. The server gets a fresh clock per render, never this one.
  */
 let documentMotion: SpatialMotion | null = null
+/** Providers currently publishing the clock; the last one out clears the root. */
+let publishingProviders = 0
 function motionForDocument(): SpatialMotion {
   if (typeof window === 'undefined') return createSpatialMotion()
   return (documentMotion ??= createSpatialMotion())
@@ -89,9 +91,11 @@ export function SpatialMotionProvider({ children }: { children: ReactNode }) {
     }
     publish()
     const unsubscribe = motion.subscribe(publish)
+    publishingProviders++
     return () => {
       unsubscribe()
-      if (root.__o3SpatialMotion !== motion) return
+      publishingProviders--
+      if (publishingProviders > 0 || root.__o3SpatialMotion !== motion) return
       delete root.__o3SpatialMotion
       delete root.dataset.spatialPaused
     }
