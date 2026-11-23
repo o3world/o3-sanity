@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { expect, within } from 'storybook/test'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 
 import { SpatialMotionControl, SpatialMotionProvider } from '../globe/SpatialMotionProvider'
 import { LandingFooter } from './LandingFooter'
@@ -60,6 +60,7 @@ export const Footer: Story = {
 
 /** The landing layout hands the footer the site's reduce-motion control. */
 export const FooterWithMotionControl: Story = {
+  parameters: { nextjs: { appDirectory: true } },
   render: () => (
     <SpatialMotionProvider>
       <LandingFooter year={2026} utilities={<SpatialMotionControl />} />
@@ -67,7 +68,13 @@ export const FooterWithMotionControl: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    await expect(canvas.getByRole('button', { name: /Reduce motion/ })).toBeInTheDocument()
-    await expect(canvas.getByRole('link', { name: 'Privacy policy' })).toBeVisible()
+    const control = canvas.getByRole('button', { name: /Reduce motion/ })
+    await waitFor(() => expect(control).toBeEnabled())
+    await expect(control).toHaveAttribute('aria-pressed', 'false')
+    await userEvent.click(control)
+    await expect(control).toHaveAttribute('aria-pressed', 'true')
+    await expect(document.documentElement).toHaveAttribute('data-spatial-paused', 'true')
+    await userEvent.click(control)
+    await expect(control).toHaveAttribute('aria-pressed', 'false')
   },
 }

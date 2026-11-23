@@ -53,6 +53,24 @@ export const Mobile: Story = {
   },
 }
 
+/** The site's reduce-motion control holds the page's looping motion, as it holds the globe. */
+export const PausedByMotionControl: Story = {
+  globals: { viewport: { value: 'desktop' } },
+  tags: ['vr:skip'],
+  play: async ({ canvasElement }) => {
+    const root = document.documentElement
+    // The logo strip's marquee: the module class compiles to `_track_<hash>`.
+    const track = canvasElement.querySelector<HTMLElement>('[class*="_track_"]')!
+    await expect(getComputedStyle(track).animationPlayState).toBe('running')
+    root.dataset.spatialPaused = 'true'
+    try {
+      await expect(getComputedStyle(track).animationPlayState).toBe('paused')
+    } finally {
+      delete root.dataset.spatialPaused
+    }
+  },
+}
+
 /** A booking click reaches GTM's dataLayer under the event and placement GA4 counts. */
 export const BookingClick: Story = {
   globals: { viewport: { value: 'desktop' } },

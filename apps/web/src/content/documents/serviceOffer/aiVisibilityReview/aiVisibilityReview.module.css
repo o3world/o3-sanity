@@ -1288,6 +1288,19 @@
   }
 }
 
+/* ── The site's reduce-motion control: the page's looping motion holds where
+   it is, as the globe does. Entrances still play once, so no content is left
+   hidden mid-fade. ── */
+:global(html[data-spatial-paused]) .stars,
+:global(html[data-spatial-paused]) .starsNear,
+:global(html[data-spatial-paused]) .card,
+:global(html[data-spatial-paused]) .typing span,
+:global(html[data-spatial-paused]) .answerYou::after,
+:global(html[data-spatial-paused]) .track,
+:global(html[data-spatial-paused]) .featured::before {
+  animation-play-state: paused;
+}
+
 /* ── Reduced motion: every animation and transition off, entrances shown ── */
 
 @media (prefers-reduced-motion: reduce) {

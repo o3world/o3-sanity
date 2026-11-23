@@ -121,11 +121,11 @@
 
 .footerEnd :global(.spatial-motion-setting) {
   min-height: 44px;
-  color: var(--color-on-utility);
 }
 
 .footerEnd :global(.spatial-motion-setting):hover {
   color: var(--color-white);
+  opacity: 1;
 }
 
 @media (max-width: 860px) {
