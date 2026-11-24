@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { expect, within } from 'storybook/test'
+import { expect, waitFor, within } from 'storybook/test'
 
+import { SpatialMotionControl, SpatialMotionProvider } from '../globe/SpatialMotionProvider'
 import { LandingFooter } from './LandingFooter'
 import { LandingNav } from './LandingNav'
 
@@ -54,5 +55,22 @@ export const Footer: Story = {
       'href',
       '/privacy-policy',
     )
+  },
+}
+
+/** The landing layout hands the footer the site's reduce-motion control, after the privacy link. */
+export const FooterWithMotionControl: Story = {
+  parameters: { nextjs: { appDirectory: true } },
+  render: () => (
+    <SpatialMotionProvider>
+      <LandingFooter year={2026} utilities={<SpatialMotionControl />} />
+    </SpatialMotionProvider>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const privacy = canvas.getByRole('link', { name: 'Privacy policy' })
+    const control = canvas.getByRole('button', { name: /Reduce motion/ })
+    await expect(privacy.compareDocumentPosition(control)).toBe(Node.DOCUMENT_POSITION_FOLLOWING)
+    await waitFor(() => expect(control).toBeEnabled())
   },
 }

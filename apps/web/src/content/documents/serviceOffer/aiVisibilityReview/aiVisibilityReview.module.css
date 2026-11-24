@@ -1288,6 +1288,20 @@
   }
 }
 
+/* ── The site's reduce-motion control holds every looping animation where it
+   is, as it holds the globe. The loops are listed by name: entrances and the
+   scroll reveals must keep playing, or a pause mid-fade would leave content
+   half-shown. A new infinite loop joins this list. ── */
+:global(html[data-spatial-paused]) .stars,
+:global(html[data-spatial-paused]) .starsNear,
+:global(html[data-spatial-paused]) .card,
+:global(html[data-spatial-paused]) .typing span,
+:global(html[data-spatial-paused]) .answerYou::after,
+:global(html[data-spatial-paused]) .track,
+:global(html[data-spatial-paused]) .featured::before {
+  animation-play-state: paused;
+}
+
 /* ── Reduced motion: every animation and transition off, entrances shown ── */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1306,4 +1320,21 @@
   .stepsLine span {
     transform: none;
   }
+}
+
+/* `?spatial-still` asks for the same page as reduced motion, for still captures. */
+:global(html[data-spatial-still]) .page *,
+:global(html[data-spatial-still]) .page *::before,
+:global(html[data-spatial-still]) .page *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+:global(html[data-spatial-still]) .fade,
+:global(html[data-spatial-still]) .rowIn {
+  opacity: 1;
+}
+
+:global(html[data-spatial-still]) .stepsLine span {
+  transform: none;
 }

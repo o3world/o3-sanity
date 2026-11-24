@@ -165,3 +165,42 @@ export const PreferencesSurvivePlacementChanges: Story = {
     await expect(preference.subscriptions).toBe(subscriptions)
   },
 }
+
+function RouteGroupSwap() {
+  const [group, setGroup] = useState(0)
+  return (
+    <>
+      <button type="button" onClick={() => setGroup((value) => value + 1)}>
+        Change route group
+      </button>
+      <SpatialMotionProvider key={group}>
+        <footer>
+          <SpatialMotionControl />
+        </footer>
+      </SpatialMotionProvider>
+    </>
+  )
+}
+
+/** A route group's layout mounts its own provider; the next one keeps the choice. */
+export const ChoiceSurvivesProviderSwap: Story = {
+  render: () => <RouteGroupSwap />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const control = () => canvas.getByRole('button', { name: 'Reduce motion' })
+    await waitFor(() => expect(control()).toBeEnabled())
+    await userEvent.click(control())
+    await expect(control()).toHaveAttribute('aria-pressed', 'true')
+
+    await userEvent.click(canvas.getByRole('button', { name: 'Change route group' }))
+    await waitFor(() => expect(control()).toBeEnabled())
+    await expect(control()).toHaveAttribute('aria-pressed', 'true')
+    await expect(document.documentElement).toHaveAttribute('data-spatial-paused', 'true')
+
+    await userEvent.click(control())
+    await userEvent.click(canvas.getByRole('button', { name: 'Change route group' }))
+    await waitFor(() => expect(control()).toBeEnabled())
+    await expect(control()).toHaveAttribute('aria-pressed', 'false')
+    await expect(document.documentElement).not.toHaveAttribute('data-spatial-paused')
+  },
+}

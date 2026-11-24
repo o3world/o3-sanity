@@ -23,6 +23,20 @@ type MotionContext = {
   blocked: boolean | null
 }
 const SpatialMotionContext = createContext<MotionContext | null>(null)
+
+/**
+ * One clock per document. Each route group's layout mounts its own provider,
+ * so client navigation between (site) and (landing) replaces the provider;
+ * sharing the clock keeps the visitor's choice and the globe's pose across
+ * that swap. The server gets a fresh clock per render, never this one.
+ */
+let documentMotion: SpatialMotion | null = null
+/** Providers currently publishing the clock; the last one out clears the root. */
+let publishingProviders = 0
+function motionForDocument(): SpatialMotion {
+  if (typeof window === 'undefined') return createSpatialMotion()
+  return (documentMotion ??= createSpatialMotion())
+}
 const unpaused = () => false
 const noSubscription = () => () => {}
 
@@ -61,7 +75,7 @@ function MotionQuerySync({ refresh }: { refresh: () => void }) {
 }
 
 export function SpatialMotionProvider({ children }: { children: ReactNode }) {
-  const [motion] = useState(createSpatialMotion)
+  const [motion] = useState(motionForDocument)
   const [blocked, setBlocked] = useState<boolean | null>(null)
   const refreshPreferences = useRef<(() => void) | null>(null)
   const refresh = useCallback(() => refreshPreferences.current?.(), [])
@@ -77,9 +91,11 @@ export function SpatialMotionProvider({ children }: { children: ReactNode }) {
     }
     publish()
     const unsubscribe = motion.subscribe(publish)
+    publishingProviders++
     return () => {
       unsubscribe()
-      if (root.__o3SpatialMotion !== motion) return
+      publishingProviders--
+      if (publishingProviders > 0 || root.__o3SpatialMotion !== motion) return
       delete root.__o3SpatialMotion
       delete root.dataset.spatialPaused
     }
