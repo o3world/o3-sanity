@@ -8,19 +8,23 @@ import { sectionBackground } from '../../sectionBackground'
 import { resolveSurface } from '../../surface'
 
 type MediaSectionProps = SectionProps<'mediaSection'> & { sequence?: boolean }
+type MediaWidth = NonNullable<MediaSectionProps['width']>
 
-/** Case-study media plus About's inset photograph (3754:78276) and feature (4061:50283). */
 /**
  * The plain figure's measure per `width`. `wide` stops at the 1248px canvas,
  * the bento grids' cap, so a case-study screenshot on its own background
- * lines up with the grids around it (OWSW-71).
+ * lines up with the grids around it. `full-bleed` has its own branch.
  */
-const PLAIN_WIDTH: Record<string, { measure: string; sizes: string }> = {
+const PLAIN_WIDTH: Record<
+  Exclude<MediaWidth, 'full-bleed'>,
+  { readonly measure: string; readonly sizes: string }
+> = {
   contained: { measure: 'max-w-article', sizes: ARTICLE_COLUMN },
   wide: { measure: 'max-w-canvas', sizes: CANVAS_COLUMN },
   section: { measure: 'max-w-section', sizes: CONTENT_COLUMN },
 }
 
+/** Case-study media plus About's inset photograph (3754:78276) and feature (4061:50283). */
 export function MediaSection({
   media,
   variant,
@@ -34,7 +38,7 @@ export function MediaSection({
   sequence = false,
 }: MediaSectionProps) {
   if (!media) return null
-  const fullBleed = stegaClean(width) === 'full-bleed'
+  const mediaWidth = stegaClean(width) ?? 'contained'
   const resolved = resolveSurface(surface, 'mediaSection')
   const surfaceClass = SURFACE_CLASS[resolved]
   // `null` on every band that carries no picture — the same question
@@ -181,7 +185,7 @@ export function MediaSection({
     )
   }
 
-  if (fullBleed) {
+  if (mediaWidth === 'full-bleed') {
     return (
       <SurfaceProvider surface={resolved}>
         <section {...surfaceAttrs(resolved)} className={bandClass}>
@@ -211,15 +215,13 @@ export function MediaSection({
     <SurfaceProvider surface={resolved}>
       <section {...surfaceAttrs(resolved)} className={`${bandClass} px-gutter pb-band-article`}>
         {picture}
-        <figure
-          className={`${PLAIN_WIDTH[stegaClean(width) ?? 'contained']?.measure ?? 'max-w-article'} mx-auto w-full`}
-        >
+        <figure className={`${PLAIN_WIDTH[mediaWidth].measure} mx-auto w-full`}>
           <SanityImage
             source={media.image}
             alt={media.alt}
             width={1650}
             className="w-full drop-shadow-[0_0_32px_rgba(0,0,0,0.1)]"
-            sizes={PLAIN_WIDTH[stegaClean(width) ?? 'contained']?.sizes ?? ARTICLE_COLUMN}
+            sizes={PLAIN_WIDTH[mediaWidth].sizes}
           />
           {media.caption ? (
             <figcaption className="text-fg-subtle mt-4 text-sm">{media.caption}</figcaption>

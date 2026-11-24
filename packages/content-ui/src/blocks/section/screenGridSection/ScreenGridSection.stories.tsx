@@ -301,7 +301,7 @@ export const NarrowFeatureRowMobile: Story = {
   },
 }
 
-/** Wide browser windows stop the grid at the centred 1248px canvas (OWSW-71). */
+/** Wide browser windows stop the grid at the centred 1248px canvas. */
 export const WideViewport: Story = {
   args: NarrowFeatureRow.args,
   parameters: {

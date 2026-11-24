@@ -52,7 +52,7 @@
   --container-section: 108rem; /* 1728px */
   /* canvas — the 1248px canvas itself, for bands that stop growing at the
    * 1440 frame's width instead of following section to 1728px: the
-   * case-study bento grids and the composition foreground (OWSW-71).
+   * case-study bento grids and the plain media figure at `wide`.
    * Class-accessible via max-w-canvas. */
   --container-canvas: 78rem; /* 1248px */
   /* #446 aligns the desktop nav cap with the hero's inner content measure. */
