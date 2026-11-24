@@ -100,8 +100,8 @@ export function ScreenGridSection({
                     ? 'h-auto w-full'
                     : 'w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.25)]'
                 }
-                // The 1248px canvas (OWSW-71) and 32px gaps cap the full,
-                // half, quarter and three-quarter slots at 1248, 608, 288 and
+                // The 1248px canvas and 32px gaps cap the full, half,
+                // quarter and three-quarter slots at 1248, 608, 288 and
                 // 928px, reached at a 1440 viewport. A two-thirds/third row
                 // takes 821⅓/394⅔px with the same gap. Framed wide images also
                 // lose 64px/128px to plate padding.

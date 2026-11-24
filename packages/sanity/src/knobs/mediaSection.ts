@@ -30,7 +30,7 @@ export const mediaSectionKnobs = defineBlockKnobs({
     knob({
       name: 'width',
       title: 'Width',
-      // `wide` stops at the 1248px canvas, the bento grids' cap (OWSW-71).
+      // `wide` stops at the 1248px canvas, the bento grids' cap.
       options: ['contained', 'wide', 'section', 'full-bleed'],
       initialValue: 'contained',
       // A capture is a full-bleed stage by construction, so the axis has
