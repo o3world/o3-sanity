@@ -50,6 +50,11 @@
    * 96px gutters at 1440 and keeps growing to 1728px on wider viewports.
    * Class-accessible via max-w-section. */
   --container-section: 108rem; /* 1728px */
+  /* canvas — the 1248px canvas itself, for bands that stop growing at the
+   * 1440 frame's width instead of following section to 1728px: the
+   * case-study bento grids and the composition foreground (OWSW-71).
+   * Class-accessible via max-w-canvas. */
+  --container-canvas: 78rem; /* 1248px */
   /* #446 aligns the desktop nav cap with the hero's inner content measure. */
   --container-nav: var(--container-content);
   /* Named half-stage for one-sided viewport bleeds. Keeping the half beside

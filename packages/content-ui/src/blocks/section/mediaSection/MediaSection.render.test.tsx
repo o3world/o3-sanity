@@ -65,6 +65,18 @@ describe('the media band’s plain variant', () => {
     expect(html).not.toContain('--gradient-screen-stage')
   })
 
+  it('stops a wide figure at the 1248px canvas, the bento grids’ cap', () => {
+    const html = render({ variant: 'plain', width: 'wide' })
+    expect(html).toContain('max-w-canvas')
+    expect(html).toContain('(min-width: 1440px) 1248px')
+  })
+
+  it('keeps the section figure on the 1728px column', () => {
+    const html = render({ variant: 'plain', width: 'section' })
+    expect(html).toContain('max-w-section')
+    expect(html).toContain('(min-width: 1920px) 1728px')
+  })
+
   it('still bleeds edge to edge at the frame’s two aspects', () => {
     const html = render({ variant: 'plain', width: 'full-bleed' })
     expect(html).toContain('aspect-[402/257]')
